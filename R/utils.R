@@ -27,6 +27,22 @@ baseUrl <- function(
     }
   }
 
+
+  if (grepl(pattern = 'kucoin', x = source, ignore.case = TRUE)) {
+
+    if (futures) {
+
+      baseUrl <- 'https://fapi.binance.com'
+
+    } else {
+
+      baseUrl <- 'https://api.kucoin.com'
+
+    }
+  }
+
+
+
   return(
     baseUrl
   )
