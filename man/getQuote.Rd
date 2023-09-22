@@ -14,19 +14,51 @@ getQuote(
 )
 }
 \arguments{
-\item{ticker}{A character vector of length 1.}
+\item{ticker}{A character vector of length 1. Uppercase.}
 
-\item{source}{A character vector of length 1.}
+\item{source}{A character vector of length 1. Currently only binance is supported.}
 
 \item{futures}{A logical value. TRUE by default. If FALSE, the function will return spot prices.}
 
-\item{interval}{A character vector of length 1.}
+\item{interval}{A character vector of length 1. See \code{\link[=availableItnervals]{availableItnervals()}} for a full list.}
 
-\item{from}{A character vector of length 1.}
+\item{from}{A character vector of length 1. Given in \%Y-\%m-\%d format.}
 
-\item{to}{A character vector of length 1.}
+\item{to}{A character vector of length 1.Given in \%Y-\%m-\%d format.}
 }
 \description{
 This function returns
 a crypto quote
+}
+\examples{
+# script: scr_getQuote
+# date: 2023-09-22
+# author: Serkan Korkmaz, serkor1@duck.com
+# objective: demonstrate how to use
+# the getQuote in conjunction with quantmod
+# script start;
+
+# gc
+rm(list = ls()); invisible(gc())
+
+# 1) load perpetual
+# futures
+perpAtom <- cryptoQuotes::getQuote(
+  ticker  = 'ATOMUSDT',
+  source = 'binance',
+  interval = '15m',
+  futures = TRUE
+)
+
+# 2) chart the series
+# using chartSeries
+quantmod::chartSeries(
+  x = perpAtom
+)
+
+# 3) add Bollinger Bands
+# to the chart
+quantmod::addBBands()
+
+# script end;
 }
