@@ -14,11 +14,17 @@ getQuote(
 )
 }
 \arguments{
-\item{ticker}{A character vector of length 1. Has to be denominated in some currency}
+\item{ticker}{A character vector of length 1.}
 
-\item{source}{A character vector of length 1, of the specific}
+\item{source}{A character vector of length 1.}
 
-\item{interval}{A character vector of length 1, of desired intervals.}
+\item{futures}{A logical value. TRUE by default. If FALSE, the function will return spot prices.}
+
+\item{interval}{A character vector of length 1.}
+
+\item{from}{A character vector of length 1.}
+
+\item{to}{A character vector of length 1.}
 }
 \description{
 This function returns
