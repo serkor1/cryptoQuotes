@@ -2,9 +2,9 @@ Package: cryptoQuotes
 Title: Access Market Data From Major Cryptocurrency Exchanges
 Version: 1.0.0
 Authors@R: c(
-    person("Serkan", "Korkmaz", role = c("cre", "aut"))
+    person("Serkan", "Korkmaz", role = c("cre", "aut", "ctb"), email = 'serkor1@duck.com')
   )
-Description: What the package does (one paragraph).
+Description: Access spot and futures markets from major cryptocurrency exchanges
 License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
