@@ -5,10 +5,12 @@
 #' a crypto quote
 #'
 #'
-#' @param ticker A character vector of length 1. Has to be denominated in some currency
-#' @param source A character vector of length 1, of the specific
-#' @param interval A character vector of length 1, of desired intervals.
-#'
+#' @param ticker A character vector of length 1.
+#' @param source A character vector of length 1.
+#' @param interval A character vector of length 1.
+#' @param futures A logical value. TRUE by default. If FALSE, the function will return spot prices.
+#' @param from A character vector of length 1.
+#' @param to A character vector of length 1.
 #'
 #' @export
 
