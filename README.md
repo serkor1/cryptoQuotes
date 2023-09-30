@@ -7,6 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of cryptoQuotes is to create a unified API access to all known
@@ -36,6 +37,9 @@ spotPrice <- cryptoQuotes::getQuote(
   futures = FALSE,
   interval = '30m'
 )
+#> Registered S3 method overwritten by 'quantmod':
+#>   method            from
+#>   as.zoo.data.frame zoo
 ```
 
 This `spotPrice` can be passed to the `chartSeries` from `quantmod`
