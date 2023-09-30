@@ -201,7 +201,6 @@ fetchQuote <- function(
       source = source,
       futures = futures
       ),
-    httr::timeout(10),
     # NOTE: Cant connect
     # to Binance with this
     # httr::use_proxy(
