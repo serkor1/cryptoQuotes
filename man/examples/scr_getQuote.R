@@ -2,7 +2,7 @@
 # date: 2023-09-22
 # author: Serkan Korkmaz, serkor1@duck.com
 # objective: demonstrate how to use
-# the getQuote in conjunction with quantmod
+# the getQuote
 # script start;
 
 # gc
@@ -17,14 +17,8 @@ perpAtom <- cryptoQuotes::getQuote(
   futures = TRUE
 )
 
-# 2) chart the series
-# using chartSeries
-quantmod::chartSeries(
-  x = perpAtom
-)
+# 2) head data;
+head(perpAtom)
 
-# 3) add Bollinger Bands
-# to the chart
-quantmod::addBBands()
 
 # script end;

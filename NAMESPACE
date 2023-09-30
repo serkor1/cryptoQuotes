@@ -3,4 +3,3 @@
 export(availableIntervals)
 export(availableTickers)
 export(getQuote)
-importFrom(quantmod,chartSeries)
