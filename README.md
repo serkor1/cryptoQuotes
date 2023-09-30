@@ -16,6 +16,15 @@ libraries such as `quantmod` and `TTR`.
 
 ## Installation
 
+You can install the latest stabl version of cryptoQuotes like so:
+
+``` r
+devtools::install_github(
+  repo = 'https://github.com/serkor1/cryptoQuotes/',
+  ref = 'main'
+)
+```
+
 You can install the development version of cryptoQuotes like so:
 
 ``` r
