@@ -20,7 +20,7 @@ getQuote(
 
 \item{futures}{A logical value. TRUE by default. If FALSE, the function will return spot prices.}
 
-\item{interval}{A character vector of length 1. See \code{\link[=availableItnervals]{availableItnervals()}} for a full list.}
+\item{interval}{A character vector of length 1. See \code{\link[=availableIntervals]{availableIntervals()}} for a full list.}
 
 \item{from}{A character vector of length 1. Given in \%Y-\%m-\%d format.}
 

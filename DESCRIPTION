@@ -4,7 +4,7 @@ Version: 1.0.0
 Authors@R: c(
     person("Serkan", "Korkmaz", role = c("cre", "aut", "ctb"), email = 'serkor1@duck.com')
   )
-Description: Access spot and futures markets from major cryptocurrency exchanges
+Description: Access spot and futures markets from major cryptocurrency exchanges.
 License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -12,3 +12,11 @@ RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Imports: 
+    curl (>= 5.0.2),
+    httr (>= 1.4.7),
+    jsonlite (>= 1.8.7),
+    quantmod (>= 0.4.25),
+    rlang (>= 1.1.1),
+    xts (>= 0.13.1),
+    zoo (>= 1.8-12)

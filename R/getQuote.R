@@ -7,7 +7,7 @@
 #'
 #' @param ticker A character vector of length 1. Uppercase.
 #' @param source A character vector of length 1. Currently only binance is supported.
-#' @param interval A character vector of length 1. See [availableItnervals()] for a full list.
+#' @param interval A character vector of length 1. See [availableIntervals()] for a full list.
 #' @param futures A logical value. TRUE by default. If FALSE, the function will return spot prices.
 #' @param from A character vector of length 1. Given in %Y-%m-%d format.
 #' @param to A character vector of length 1.Given in %Y-%m-%d format.
@@ -62,3 +62,6 @@ getQuote <- function(
 
 
 }
+
+
+
