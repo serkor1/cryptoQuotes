@@ -37,11 +37,11 @@ devtools::install_github(
 To get the latest prices on a desired cryptocurrency pair,
 
 ``` r
-## get spotprice on USDT denominated ATOM
+## get perpetual contracts on USDT denominated ATOM
 spotPrice <- cryptoQuotes::getQuote(
   ticker = 'ATOMUSDT',
   source = 'binance',
-  futures = FALSE,
+  futures = TRUE,
   interval = '30m'
 )
 #> Registered S3 method overwritten by 'quantmod':
