@@ -12,7 +12,7 @@ RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Imports: 
+Imports:
     curl (>= 5.0.2),
     httr (>= 1.4.7),
     jsonlite (>= 1.8.7),
