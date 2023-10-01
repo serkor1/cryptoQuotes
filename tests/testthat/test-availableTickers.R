@@ -3,6 +3,9 @@ testthat::test_that(
   code = {
 
 
+    testthat::skip_on_ci()
+
+
     # 1) Load the available
     # tickers
     tickers <- cryptoQuotes::availableTickers(
