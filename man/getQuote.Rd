@@ -43,15 +43,26 @@ rm(list = ls()); invisible(gc())
 
 # 1) load perpetual
 # futures
-perpAtom <- cryptoQuotes::getQuote(
+#
+# NOTE: The function is wrapped
+# in try to avoid failing
+# the R-CMD-CHECK on Github
+perpAtom <- try(
+  cryptoQuotes::getQuote(
   ticker  = 'ATOMUSDT',
   source = 'binance',
   interval = '15m',
   futures = TRUE
 )
+)
+
 
 # 2) head data;
-head(perpAtom)
+if (!inherits(perpAtom, 'try-error')) {
+
+  head(perpAtom)
+
+}
 
 
 # script end;
