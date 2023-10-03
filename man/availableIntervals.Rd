@@ -4,7 +4,7 @@
 \alias{availableIntervals}
 \title{availableIntervals}
 \usage{
-availableIntervals()
+availableIntervals(source = "binance")
 }
 \description{
 This function shows all

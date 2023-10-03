@@ -43,9 +43,9 @@ getQuote <- function(
 
   # 1) check if the chosen
   # interval is valid
-  check_interval(
-    interval = interval
-  )
+  # check_interval(
+  #   interval = interval
+  # )
 
   # 2) fetch and format
   # the quote and return

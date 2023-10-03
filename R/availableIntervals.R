@@ -7,12 +7,13 @@
 #'
 #' @export
 
-availableIntervals <- function() {
+availableIntervals <- function(source = 'binance') {
+
 
   rlang::inform(
     message = c(
-      'Available Intervals',
-      available_intervals()
+      paste0('Available Intervals at ', source),
+      get(paste0(source, 'Intervals'))()
     )
   )
 
