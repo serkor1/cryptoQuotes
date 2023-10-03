@@ -47,6 +47,3 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
-
-# ignore playground
-playground/
