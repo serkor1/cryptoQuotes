@@ -172,7 +172,7 @@ kucoinEndpoint <- function(
   endPoint <- base::ifelse(
     test = futures,
     yes   =  '/api/v1/kline/query',
-    no  = '/api/v1/market/candles'
+    no    = '/api/v1/market/candles'
 
   )
 
@@ -304,7 +304,7 @@ kucoinQuote <- function(
     )
   )
 
-  # 2) parse response
+  # # 2) parse response
   response <- jsonlite::fromJSON(
     txt = httr::content(
       x = response,
@@ -329,10 +329,30 @@ kucoinQuote <- function(
   # 3.2) format
   # dates
   index <- as.POSIXct(
-    as.numeric(response[,1])/1e3,
+    as.numeric(response[,1])/ifelse(futures, yes = 1e3, no = 1),
     origin = '1970-01-01',
     tz = 'UTC'
   )
+
+  if (!futures) {
+
+    # The spot-market
+    # is returned in reverse order
+    # ie. latest data comes first
+    #
+    # this is not compatible with zoo
+    # as of October 3rd, 2023
+
+    # 1) reverse the
+    # respinse as according to the
+    # index
+    response <- response[order(index, decreasing = FALSE),]
+
+    # 2) reverse the index
+    # as well.
+    index <- sort(index, decreasing = FALSE)
+
+  }
 
   # 3.3) extract needed
   # columns from the response
