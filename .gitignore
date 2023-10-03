@@ -49,4 +49,4 @@ po/*~
 rsconnect/
 
 # ignore playground
-playground/
+playground/*
