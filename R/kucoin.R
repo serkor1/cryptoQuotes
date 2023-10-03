@@ -35,11 +35,12 @@ kucoinIntervals <- function(interval, futures) {
   # using grepl
   indicator <- grepl(
     pattern = paste0('^', interval),
-    ignore.case = FALSE,
+    ignore.case = TRUE,
     x = intervalKeys
   )
 
   if (futures) {
+
     intervalKeys <- c(
       1,
       3,
@@ -49,6 +50,7 @@ kucoinIntervals <- function(interval, futures) {
       60,
       120,
       240,
+      360,
       480,
       720,
       1440,
@@ -207,6 +209,40 @@ kucoinParams <- function(
       )
     )
 
+    # 2) add startTime and endTime
+    # on the parameter list if not
+    # null
+    #
+    # NOT: Its all UTC, in a future
+    # update this should be depending on
+    # choice, and user system.
+    if (!is.null(from) & !is.null(to)) {
+
+      getParams$from <- (format(
+        as.numeric(
+          as.POSIXct(
+            from,
+            tz = 'UTC',
+            origin = "1970-01-01"
+          )
+        ) * 1e3,
+        scientific = FALSE
+      ))
+
+
+      getParams$to <-  (format(
+        as.numeric(
+          as.POSIXct(
+            to,
+            tz = 'UTC',
+            origin = "1970-01-01"
+          )
+        ) * 1e3,
+        scientific = FALSE
+      ))
+
+    }
+
   } else {
 
     getParams <- list(
@@ -218,39 +254,41 @@ kucoinParams <- function(
       )
     )
 
+    # 2) add startTime and endTime
+    # on the parameter list if not
+    # null
+    #
+    # NOT: Its all UTC, in a future
+    # update this should be depending on
+    # choice, and user system.
+    if (!is.null(from) & !is.null(to)) {
+
+      getParams$startAt <- as.numeric(format(
+        as.numeric(
+          as.POSIXct(
+            from,
+            tz = 'UTC'
+          )
+        ),
+        scientific = FALSE
+      ))
+
+
+
+      getParams$endAt <- as.numeric(format(
+        as.numeric(
+          as.POSIXct(
+            to,
+            tz = 'UTC'
+          )
+        ) , scientific = FALSE
+      ))
+
+    }
+
   }
 
-  # 2) add startTime and endTime
-  # on the parameter list if not
-  # null
-  #
-  # NOT: Its all UTC, in a future
-  # update this should be depending on
-  # choice, and user system.
-  if (!is.null(from) & !is.null(to)) {
 
-    getParams$startTime <- format(
-      as.numeric(
-        as.POSIXct(
-          from,
-          tz = 'UTC'
-        )
-      ) * 1e3,
-      scientific = FALSE
-    )
-
-
-
-    getParams$endTime <- format(
-      as.numeric(
-        as.POSIXct(
-          to,
-          tz = 'UTC'
-        )
-      ) * 1e3, scientific = FALSE
-    )
-
-  }
 
   # 3) return parameters
   return(
@@ -304,7 +342,8 @@ kucoinQuote <- function(
     )
   )
 
-  # # 2) parse response
+
+  # 2) parse response
   response <- jsonlite::fromJSON(
     txt = httr::content(
       x = response,

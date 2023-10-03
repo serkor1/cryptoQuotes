@@ -19,3 +19,6 @@ Imports:
     rlang (>= 1.1.1),
     xts (>= 0.13.1),
     zoo (>= 1.8-12)
+Depends: 
+    R (>= 2.10)
+LazyData: true

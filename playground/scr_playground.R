@@ -12,63 +12,81 @@ rm(list = ls()); invisible(gc())
 library(cryptoQuotes)
 
 
-
-fromBinance <- getQuote(
-  ticker = 'BTCUSDT',
+dailyAtomBinanceSpot <- getQuote(
+  ticker = 'ATOMUSDT',
   source = 'binance',
   futures = FALSE,
-  interval = '1h'
+  interval = '1d',
+  from = '2023-01-01',
+  to   = '2023-01-07'
 )
 
+dailyAtomBinanceSpot$market <- 1
 
 
-fromKucoin <- cryptoQuotes::getQuote(
-  ticker = 'XBTUSDTM',
+dailyAtomBinanceFutures <- getQuote(
+  ticker = 'ATOMUSDT',
+  source = 'binance',
+  futures = TRUE,
+  interval = '1d',
+  from = '2023-01-01',
+  to   = '2023-01-07'
+)
+
+dailyAtomBinanceFutures$market <- 0
+
+
+
+DT <- rbind(
+  dailyAtomBinanceFutures,
+  dailyAtomBinanceSpot
+)
+
+DT$exchange <- 1
+
+
+dailyAtomKucoinFutures <- cryptoQuotes::getQuote(
+  ticker = 'ATOMUSDTM',
   source = 'kucoin',
   futures = TRUE,
-  interval = '1h'
+  interval = '1d',
+  from = '2023-01-01',
+  to   = '2023-01-07'
 )
 
+dailyAtomKucoinFutures$market <- 0
 
 
-response <- cryptoQuotes:::getQuote(
+dailyAtomKucoinSpot <- cryptoQuotes:::getQuote(
   source = 'kucoin',
-  ticker = 'BTC-USDT',
+  ticker = 'ATOM-USDT',
   futures = FALSE,
-  interval = '1h'
+  interval = '1d',
+  from = '2023-01-01',
+  to   = '2023-01-07'
 )
-#
-#
-# test <- cryptoQuotes:::kucoinQuote(
-#   ticker = 'BTC-USDT',
-#   futures = FALSE,
-#   interval = '1h'
-# )
-#
-#
-# rev(test$quote)
-#
-#
-# quote <- zoo::as.zoo(
-#   test$quote[order(test$index, decreasing = FALSE),]
-# )
-#
-#
-# # 2) generate index
-# # of the quote
-# zoo::index(quote) <- sort(test$index, decreasing = FALSE)
-#
-# # 3) convert to xts
-# # object
-# quote <- xts::as.xts(
-#   quote
-# )
-#
-# # script end;
-#
-# 10/ifelse(
-#   TRUE,
-#   yes = 2,
-#   no  = 1
-# )
-# 2023-10-03 14:00:00 27003.8 26895.8 27045.5 26887.8 147.733300
+
+dailyAtomKucoinSpot$market <- 1
+
+
+DT_ <- rbind(
+  dailyAtomKucoinFutures,
+  dailyAtomKucoinSpot
+)
+
+
+DT_$exchange <- 2
+
+
+
+ATOMUSDT <- rbind(
+  DT_,
+  DT
+)
+
+
+usethis::use_data(
+  ATOMUSDT,
+  overwrite = TRUE
+)
+
