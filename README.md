@@ -14,6 +14,11 @@ The goal of cryptoQuotes is to create a unified API access to all known
 major cryptocurrency exchanges, and preserving the compatibility with
 libraries such as `quantmod` and `TTR`.
 
+### Supported Exchanges and Markets
+
+`cryptoQuotes` currently supports `binance`, `kucoin` and `kraken`. For
+each exchange `spot` and `futures` markets are supported.
+
 ## Installation
 
 ``` r
@@ -41,12 +46,9 @@ To get the latest prices on a desired cryptocurrency pair,
 spotPrice <- cryptoQuotes::getQuote(
   ticker = 'ATOMUSDT',
   source = 'binance',
-  futures = TRUE,
+  futures = FALSE,
   interval = '30m'
 )
-#> Registered S3 method overwritten by 'quantmod':
-#>   method            from
-#>   as.zoo.data.frame zoo
 ```
 
 This `spotPrice` can be passed to the `chartSeries` from `quantmod`
