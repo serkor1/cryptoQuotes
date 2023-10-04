@@ -4,10 +4,17 @@
 \alias{availableIntervals}
 \title{availableIntervals}
 \usage{
-availableIntervals(source = "binance")
+availableIntervals(source = "binance", futures = TRUE)
+}
+\arguments{
+\item{source}{character vector of length one. Must be the name of the
+supported exchange}
+
+\item{futures}{logical. TRUE by default. If FALSE, spotmarket are
+returned}
 }
 \description{
 This function shows all
-available
-intervals
+available intervals available
+from each exchange
 }

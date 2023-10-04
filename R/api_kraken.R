@@ -49,9 +49,6 @@ krakenIntervals <- function(interval, futures) {
 
 
 
-
-
-
 # baseURL;
 krakenUrl <- function(
     futures = TRUE

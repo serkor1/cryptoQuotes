@@ -5,69 +5,133 @@
 # script start;
 
 # available intervals in binance;
-kucoinIntervals <- function(interval, futures) {
+kucoinIntervals <- function(interval, futures, all = FALSE) {
 
 
-  # to parameters passed
-  # to Kucoin are different
-  # form binance.
+  # this funtion serves two purposes
   #
-  # 1m is 1min in the kucoin APi
-  # 1) generate keys
-  # for the intervals
-  intervalKeys <- c(
-    '1min',
-    '3min',
-    '5min',
-    '15min',
-    '30min',
-    '1hour',
-    '2hour',
-    '4hour',
-    '6hour',
-    '8hour',
-    '12hour',
-    '1day',
-    '1week'
-  )
-
-  # 2) locate the interval
-  # using grepl
-  indicator <- grepl(
-    pattern = paste0('^', interval),
-    ignore.case = TRUE,
-    x = intervalKeys
-  )
+  # 1) listing all available
+  # intervals
+  #
+  # 2) extracting chosen intervals
+  # for the remainder of this script.
+  #
+  # This step is unnessary for some of
+  # the REST APIs like binance, but it provides
+  # a more streamlined programming structure
 
   if (futures) {
 
-    intervalKeys <- c(
-      1,
-      3,
-      5,
-      15,
-      30,
-      60,
-      120,
-      240,
-      360,
-      480,
-      720,
-      1440,
-      10080
+    allIntervals <- data.frame(
+      cbind(
+        labels = c(
+          '1m',
+          '5m',
+          '15m',
+          '30m',
+          '1h',
+          '2h',
+          '4h',
+          '8h',
+          '12h',
+          '1d',
+          '1w'
+        ),
+        values = c(
+          1,
+          5,
+          15,
+          30,
+          60,
+          120,
+          240,
+          480,
+          720,
+          1440,
+          10080
+        )
+      )
+
     )
 
-    # 3) extract interval
-    # from hte keys list
-    interval <- intervalKeys[indicator]
 
   } else {
 
+    allIntervals <- data.frame(
+      cbind(
+        labels = c(
+          '1m',
+          '3m',
+          '5m',
+          '15m',
+          '30m',
+          '1h',
+          '2h',
+          '4h',
+          '6h',
+          '8h',
+          '12h',
+          '1d',
+          '1w'
+        ),
+        values = c(
+          '1min',
+          '3min',
+          '5min',
+          '15min',
+          '30min',
+          '1hour',
+          '2hour',
+          '4hour',
+          '6hour',
+          '8hour',
+          '12hour',
+          '1day',
+          '1week'
+        )
+      )
 
-    # 3) extract interval
-    # from hte keys list
-    interval <- intervalKeys[indicator]
+    )
+
   }
+
+  # if all; then this function
+  # has been called by availableIntervals
+  # and will return all available intervals
+  if (all) {
+
+    interval <- allIntervals$labels
+
+  } else {
+
+    # 2) locate the interval
+    # using grepl
+    indicator <- grepl(
+      pattern = paste0('^', '1d'),
+      ignore.case = TRUE,
+      x = allIntervals$labels
+    )
+
+    if (sum(indicator) == 0) {
+
+      rlang::abort(
+        message = c(
+          paste0(interval, ' were not found.'),
+          'v' = paste('Valid intervals:', paste(allIntervals$labels,collapse = ', '))
+        ),
+        # disable traceback, on this error.
+        trace = rlang::trace_back()
+      )
+
+    }
+
+    # 3) return interval
+    interval <- allIntervals[indicator,]$values
+
+  }
+
+
+
 
 
   return(
