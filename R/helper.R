@@ -25,30 +25,30 @@ constructInterval <- function(source, futures, interval) {
 
 
 
-check_interval <- function(
-    interval
-) {
-
-  indicator <- grepl(
-    pattern = paste0(
-      collapse = '|',
-      available_intervals()
-    ),
-    x = interval
-  )
-
-  if (!indicator) {
-
-    rlang::abort(
-      message = paste0('Chosen interval: "', interval, '" is not available.'),
-      body = 'Use availableIntervals()-function to see a full list.',
-      call = NULL
-    )
-
-  }
-
-
-}
+# check_interval <- function(
+#     interval
+# ) {
+#
+#   indicator <- grepl(
+#     pattern = paste0(
+#       collapse = '|',
+#       available_intervals()
+#     ),
+#     x = interval
+#   )
+#
+#   if (!indicator) {
+#
+#     rlang::abort(
+#       message = paste0('Chosen interval: "', interval, '" is not available.'),
+#       body = 'Use availableIntervals()-function to see a full list.',
+#       call = NULL
+#     )
+#
+#   }
+#
+#
+# }
 
 
 

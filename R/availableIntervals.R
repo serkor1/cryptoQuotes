@@ -13,6 +13,10 @@
 #' @export
 availableIntervals <- function(source = 'binance', futures = TRUE) {
 
+  # 1) return a message
+  # with  available
+  # intervals by exchange and market
+
   rlang::inform(
     message = c(
       'i' = paste0('Available Intervals at ', source, ifelse(futures, ' (futures)', no = ' (spot)')),

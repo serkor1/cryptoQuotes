@@ -15,14 +15,14 @@ This xts object is primarily for the unit
 tests, and serves no other purpose than this.
 }
 \details{
-A xts object with daily OHLC of USDT denominated ATOM with 28 rows and 7 columns:
+A xts object with daily OHLC of USDT denominated ATOM with 28 rows and 7 columns, from 2023-01-01 to 2023-01-07:
 \describe{
 \item{Open}{Opening price}
 \item{High}{Highest price}
 \item{Low}{Lowest price}
 \item{Close}{Closing price}
 \item{market}{Determines wether its Futures (0) or Spot (1) markets.}
-\item{exchange}{Determines the source of the data, ie. the excange. Binance (1), Kucoin (2)}
+\item{exchange}{Determines the source of the data, ie. the excange. Binance (1), Kucoin (2), Kraken (3)}
 }
 }
 \keyword{datasets}

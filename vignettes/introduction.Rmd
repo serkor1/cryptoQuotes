@@ -1,0 +1,115 @@
+---
+title: "Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cryptoQuotes)
+```
+
+### introduction
+
+The ```cryptoQuotes``` package provides access to most major cryptocurrency exchanges around the world, and it uses ```xts``` and ```zoo``` such that it seamlessly works with ```quantmod``` and ```ttr```.
+
+
+### binance spot market
+
+```{r}
+## load USDT denominated ATOM
+## with hourly intervals
+## for September
+spotAtom <- getQuote(
+  ticker   = 'ATOMUSDT',
+  source   = 'binance',
+  futures  = TRUE,
+  interval = '1h', 
+  from     = '2023-09-01',
+  to       = '2023-09-08'
+)
+```
+
+> **Note:** by default, the ```getQuote``` returns an UTC ```index``` which may trigger a warning depending on your timezone.
+
+The ```getQuote``` returns Open, High, Low, Close and Volumes which can be visualized using ```chartSeries``` from ```quantmod``` without further programming.
+
+```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center'}
+## chart the spotAtom
+## with candlesticks
+quantmod::chartSeries(
+  x     = spotAtom,
+  theme = quantmod::chartTheme('white')
+)
+```
+
+### kucoin futures market
+
+The tickers and intervals from the various exchanges varies, and is dependent on the ```API```. To check get a list of available tickers, we can use ```availableTickers```
+
+```{r}
+## list available
+## tickers on kucoin futures
+## market
+head(availableTickers(
+  source = 'kucoin',
+  futures = TRUE
+))
+```
+
+
+Our ticker of interst is, for example ,```XBTUSDTM```. It might be interesting to look at different intervals which, again, may differ from exchange to exchange. To get an overview of available intervals we use the ```availableIntervals``` function.
+
+```{r}
+## get available
+## tickers on kucoin
+availableIntervals(
+  source = 'kucoin',
+  futures = TRUE
+)
+```
+
+
+We will look at the ```30m``` intervals, and grab the latest values as possible. To achieve this, we leave ```from``` and ```to``` as ```NULL```
+
+```{r}
+## extract XTBUSDTM
+## from kucoin with
+## 30m intervals
+futuresBTC <- getQuote(
+  ticker   = 'XBTUSDTM',
+  interval = '30m',
+  futures = TRUE,
+  source = 'kucoin' 
+)
+```
+
+The ```futuresBTC``` can be charted using ```quantmod``` again, as below,
+
+```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center'}
+## chart the futuresBTC
+## with candlesticks
+quantmod::chartSeries(
+  x     = futuresBTC,
+  theme = quantmod::chartTheme('white')
+)
+```
+
+
+The chart can be extended further with various indicators such as the moving average convergence divergence (MACD).
+
+
+```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center'}
+## chart the futuresBTC
+## with candlesticks
+quantmod::addMACD()
+```
