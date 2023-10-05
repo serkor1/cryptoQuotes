@@ -1,10 +1,5 @@
 ---
-title: "Introduction"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Introduction}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+title: "introduction"
 ---
 
 ```{r, include = FALSE}
