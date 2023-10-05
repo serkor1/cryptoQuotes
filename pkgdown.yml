@@ -2,8 +2,11 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  introduction: introduction.html
-last_built: 2023-10-05T17:39Z
+  01_intervals: 01_intervals.html
+  02-tickers: 02-tickers.html
+  03-exchanges: 03-exchanges.html
+  04_introduction: 04_introduction.html
+last_built: 2023-10-05T19:56Z
 urls:
   reference: https://serkor1.github.io/cryptoQuotes/reference
   article: https://serkor1.github.io/cryptoQuotes/articles
