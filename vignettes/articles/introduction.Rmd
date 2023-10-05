@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, eval=FALSE}
 library(cryptoQuotes)
 ```
 
@@ -20,7 +20,7 @@ The ```cryptoQuotes``` package provides access to most major cryptocurrency exch
 
 ### binance spot market
 
-```{r}
+```{r, eval=FALSE}
 ## load USDT denominated ATOM
 ## with hourly intervals
 ## for September
@@ -38,7 +38,7 @@ spotAtom <- getQuote(
 
 The ```getQuote``` returns Open, High, Low, Close and Volumes which can be visualized using ```chartSeries``` from ```quantmod``` without further programming.
 
-```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center'}
+```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center', eval=FALSE}
 ## chart the spotAtom
 ## with candlesticks
 quantmod::chartSeries(
@@ -51,7 +51,7 @@ quantmod::chartSeries(
 
 The tickers and intervals from the various exchanges varies, and is dependent on the ```API```. To check get a list of available tickers, we can use ```availableTickers```
 
-```{r}
+```{r, eval=FALSE}
 ## list available
 ## tickers on kucoin futures
 ## market
@@ -64,7 +64,7 @@ head(availableTickers(
 
 Our ticker of interst is, for example ,```XBTUSDTM```. It might be interesting to look at different intervals which, again, may differ from exchange to exchange. To get an overview of available intervals we use the ```availableIntervals``` function.
 
-```{r}
+```{r, eval=FALSE}
 ## get available
 ## tickers on kucoin
 availableIntervals(
@@ -76,7 +76,7 @@ availableIntervals(
 
 We will look at the ```30m``` intervals, and grab the latest values as possible. To achieve this, we leave ```from``` and ```to``` as ```NULL```
 
-```{r}
+```{r, eval=FALSE}
 ## extract XTBUSDTM
 ## from kucoin with
 ## 30m intervals
@@ -90,7 +90,7 @@ futuresBTC <- getQuote(
 
 The ```futuresBTC``` can be charted using ```quantmod``` again, as below,
 
-```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center'}
+```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center', eval=FALSE}
 ## chart the futuresBTC
 ## with candlesticks
 quantmod::chartSeries(
@@ -103,7 +103,7 @@ quantmod::chartSeries(
 The chart can be extended further with various indicators such as the moving average convergence divergence (MACD).
 
 
-```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center'}
+```{r, message=FALSE,fig.width=6,fig.height=6,fig.asp=TRUE,fig.align='center', eval=FALSE}
 ## chart the futuresBTC
 ## with candlesticks
 quantmod::addMACD()
