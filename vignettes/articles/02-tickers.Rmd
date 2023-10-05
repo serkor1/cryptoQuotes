@@ -1,0 +1,32 @@
+---
+title: "Available Tickers"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cryptoQuotes)
+```
+
+#### Available tickers
+
+All tradable tickers on each exchange is supported. The naming convention differs across exchanges, so passing `ATOMUSDT` on the `cryptoQuotes::getQuote` as an argument will not necessarily provide you with the ticker you are looking for.
+
+To get all tradable assets on the desired market, and exchange, you can use the `cryptoQuotes::availableTickers()` function.
+
+> **Note: the function here is not evaluated as it 
+> fails the R-CMD-CHECK on github, and CRAN. The function returns a character
+> vector with all available tickers
+
+```{r, eval=FALSE}
+cryptoQuotes::availableTickers(
+  source  = 'kraken',
+  futures = TRUE
+)
+```
+

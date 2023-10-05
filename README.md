@@ -1,45 +1,35 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cryptoQuotes
+## cryptoQuotes
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/serkor1/cryptoQuotes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/serkor1/cryptoQuotes?branch=main)
 <!-- badges: end -->
 
-The goal of cryptoQuotes is to create a unified API access to all known
-major cryptocurrency exchanges, and preserving the compatibility with
-libraries such as `quantmod` and `TTR`.
+The cryptoQuotes package is an unified REST API access to public market
+data from all major cryptocurrency exchanges. The package is compatible
+with `quantmod` and `TTR` out of the box.
 
-### Supported Exchanges and Markets
+#### Supported Exchanges and Markets
 
-`cryptoQuotes` currently supports `binance`, `kucoin` and `kraken`. For
-each exchange `spot` and `futures` markets are supported.
+Currently, cryptoQuotes supports perpetual futures and spot markets on
+the following exchanges; `binance`, `kucoin` and `kraken`. More
+exchanges will be added in the future.
 
-## Installation
+> **Note:** cryptoQuotes supports various intervals limited to what the
+> different exchange APIs allows. The lowest interval is 1s (Seconds),
+> and the highest is 1M (Months)
 
-``` r
-devtools::install_github(
-  repo = 'https://github.com/serkor1/cryptoQuotes/',
-  ref = 'main'
-)
-```
+#### Basic usage
 
-You can install the development version of cryptoQuotes like so:
-
-``` r
-devtools::install_github(
-  repo = 'https://github.com/serkor1/cryptoQuotes/',
-  ref = 'development'
-)
-```
-
-## Example
-
-To get the latest prices on a desired cryptocurrency pair,
+Get USDT denominated ATOM in the spot market from Binance in `30m`
+intervals,
 
 ``` r
 ## get perpetual contracts on USDT denominated ATOM
@@ -63,9 +53,10 @@ quantmod::chartSeries(
 )
 ```
 
-<img src="man/figures/README-chartSeries-1.png" width="100%" /> When the
-`spotPrice` has been charted, the indicators in `quantmod` is directly
-applicable. See for example `addBBands`
+<img src="man/figures/README-chartSeries-1.png" width="100%" />
+
+When the `spotPrice` has been charted, the indicators in `quantmod` is
+directly applicable. See for example `addBBands`
 
 ``` r
 ## add bollinger bands 
@@ -74,3 +65,23 @@ quantmod::addBBands()
 ```
 
 <img src="man/figures/README-addBBands-1.png" width="100%" />
+
+#### Installation
+
+**Stable Version**
+
+``` r
+devtools::install_github(
+  repo = 'https://github.com/serkor1/cryptoQuotes/',
+  ref = 'main'
+)
+```
+
+**Development Version**
+
+``` r
+devtools::install_github(
+  repo = 'https://github.com/serkor1/cryptoQuotes/',
+  ref = 'development'
+)
+```

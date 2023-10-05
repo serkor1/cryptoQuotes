@@ -1,8 +1,8 @@
 Package: cryptoQuotes
-Title: Access Market Data From Major Cryptocurrency Exchanges
+Title: Access Market Data from Major Cryptocurrency Exchanges
 Version: 1.0.0
 Authors@R: c(
-    person("Serkan", "Korkmaz", role = c("cre", "aut", "ctb", "cph"), email = 'serkor1@duck.com')
+    person("Serkan", "Korkmaz", role = c("cre", "aut", "ctb", "cph"), email = 'serkor1@duck.com', comment = c(ORCID = "0000-0002-5052-0982"))
   )
 Description: Access spot and futures markets from major cryptocurrency exchanges.
 License: GPL (>= 2)
