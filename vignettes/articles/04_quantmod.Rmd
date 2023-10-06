@@ -54,7 +54,7 @@ head(
 )
 ```
 
-We can pass ```ATOMUSDT``` directly into the ```chartSeries```
+We can pass ```ATOMUSDT``` directly into the ```chartSeries``` and adding bollinger bands indicators using ```quantmod::addBBands```
 
 ```{r, out.width="100%",fig.align='center',fig.height=5}
 ## chart the spotAtom
@@ -63,11 +63,10 @@ quantmod::chartSeries(
   x     = ATOMUSDT,
   theme = quantmod::chartTheme('white')
 )
+
+## add Bollinger
+## bands
+quantmod::addBBands(n = 2)
 ```
 
 
-```{r, out.width="100%",fig.align='center',fig.height=5}
-## chart the ATOMUSDT
-## with candlesticks
-quantmod::addMACD()
-```
