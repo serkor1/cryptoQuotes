@@ -1,0 +1,96 @@
+---
+title: "The basics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The basics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(cryptoQuotes)
+```
+
+
+### Futures market
+
+```{r, eval=FALSE}
+## get OHLC data
+## from Kucoin futures
+## market with daily pips
+ATOMUSDT <- cryptoQuotes::getQuote(
+  ticker = 'ATOMUSDTM',
+  source = 'kucoin',
+  futures = TRUE,
+  interval = '1d',
+  from = '2023-01-01',
+  to   = '2023-01-11'
+)
+```
+
+
+The USDT denominated ATOM, can be charted directly via the `chart`-function, for a quick overview.
+
+```{r, include = FALSE, message=FALSE, echo=FALSE}
+### get data from kucoin
+### from the internal data set
+ATOMUSDT <- subset(
+        cryptoQuotes::ATOMUSDT,
+        cryptoQuotes::ATOMUSDT$exchange == 2 & cryptoQuotes::ATOMUSDT$market == 1
+      )[,1:5]
+```
+
+
+```{r, out.width="100%",fig.align='center',fig.height=5}
+## Create a chart
+cryptoQuotes::chart(
+  ATOMUSDT,
+  deficiency = FALSE
+)
+```
+
+
+### Spot market
+
+
+```{r, eval=FALSE}
+## get OHLC data
+## from Kucoin futures
+## market with daily pips
+ATOMUSDT <- cryptoQuotes::getQuote(
+  ticker = 'ATOMUSDTM',
+  source = 'binance',
+  futures = FALSE,
+  interval = '1d',
+  from = '2023-01-01',
+  to   = '2023-01-11'
+)
+```
+
+
+The USDT denominated ATOM, can be charted directly via the `chart`-function, for a quick overview.
+
+```{r, include = FALSE, message=FALSE, echo=FALSE}
+### get data from kucoin
+### from the internal data set
+ATOMUSDT <- subset(
+        cryptoQuotes::ATOMUSDT,
+        cryptoQuotes::ATOMUSDT$exchange == 1 & cryptoQuotes::ATOMUSDT$market == 0
+      )[,1:5]
+```
+
+
+```{r, out.width="100%",fig.align='center',fig.height=5}
+## Create a chart
+cryptoQuotes::chart(
+  ATOMUSDT,
+  deficiency = TRUE
+)
+```

@@ -30,6 +30,25 @@ Currently, cryptoQuotes supports perpetual futures and spot markets on the follo
 > **Note:** cryptoQuotes supports various intervals limited
 > to what the different exchange APIs allows. The lowest interval is 1s (Seconds), and the highest is 1M (Months)
 
+
+#### Installation
+
+**Stable Version**
+```{r, eval = FALSE}
+devtools::install_github(
+  repo = 'https://github.com/serkor1/cryptoQuotes/',
+  ref = 'main'
+)
+```
+
+**Development Version**
+```{r, eval = FALSE}
+devtools::install_github(
+  repo = 'https://github.com/serkor1/cryptoQuotes/',
+  ref = 'development'
+)
+```
+
 #### Basic usage
 
 Get USDT denominated ATOM in the spot market from Binance in `30m` intervals,
@@ -41,42 +60,5 @@ spotPrice <- cryptoQuotes::getQuote(
   source = 'binance',
   futures = FALSE,
   interval = '30m'
-)
-```
-
-This `spotPrice` can be passed to the `chartSeries` from `quantmod` directly to chart it with candlesticks.
-
-```{r chartSeries, echo=TRUE, warning=FALSE, message = FALSE}
-## chart the spotPrice series
-## using quantmod
-quantmod::chartSeries(
-  x = spotPrice,
-  theme = quantmod::chartTheme('black')
-)
-```
-
-When the `spotPrice` has been charted, the indicators in `quantmod` is directly applicable. See for example `addBBands`
-
-```{r addBBands, echo=TRUE, warning=FALSE, message = FALSE}
-## add bollinger bands 
-## using quantmod
-quantmod::addBBands()
-```
-
-#### Installation
-
-**Stable Version**
-``` r
-devtools::install_github(
-  repo = 'https://github.com/serkor1/cryptoQuotes/',
-  ref = 'main'
-)
-```
-
-**Development Version**
-``` r
-devtools::install_github(
-  repo = 'https://github.com/serkor1/cryptoQuotes/',
-  ref = 'development'
 )
 ```

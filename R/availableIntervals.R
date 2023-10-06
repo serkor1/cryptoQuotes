@@ -1,5 +1,5 @@
 #' See all available intervals for the futures and spot markets
-#' on the desired exchange.
+#' on the desired exchange
 #'
 #' This function shows all
 #' available intervals available

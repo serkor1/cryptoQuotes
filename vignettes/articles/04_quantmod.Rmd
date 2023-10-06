@@ -1,0 +1,73 @@
+---
+title: "Quantmod and TTR"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval=FALSE, include=FALSE}
+library(cryptoQuotes)
+```
+
+### Introduction
+
+The ```cryptoQuotes``` package provides access to most major cryptocurrency exchanges around the world and it uses ```xts``` and ```zoo``` such that it seamlessly works with powerful packages like ```quantmod``` and ```ttr```.
+
+### Charting using quantmod
+
+To demonstrate the interoperability between ```cryptoQuotes``` and ```quantmod```, we extract data from Binance futures market on USDT denominated ATOM
+
+```{r, eval=FALSE}
+## load USDT denominated ATOM
+## with hourly intervals
+## for September
+ATOMUSDT <- cryptoQuotes::getQuote(
+  ticker = 'ATOMUSDT',
+  source = 'binance',
+  futures = TRUE,
+  interval = '1d',
+  from = '2023-01-01',
+  to   = '2023-01-11'
+)
+```
+
+> **Note:** by default, the ```getQuote``` returns an UTC ```index``` which may trigger a warning depending on your timezone.
+
+```{r, eval=TRUE, include=FALSE}
+ATOMUSDT <- subset(
+  cryptoQuotes::ATOMUSDT,
+  cryptoQuotes::ATOMUSDT$exchange == 1 & cryptoQuotes::ATOMUSDT$market == 1
+)[,1:5]
+```
+
+
+The ```getQuote``` returns Open, High, Low, Close and Volumes which can be visualized using ```chartSeries``` from ```quantmod``` without further programming.
+
+```{r}
+## head data
+head(
+  ATOMUSDT
+)
+```
+
+We can pass ```ATOMUSDT``` directly into the ```chartSeries```
+
+```{r, out.width="100%",fig.align='center',fig.height=5}
+## chart the spotAtom
+## with candlesticks
+quantmod::chartSeries(
+  x     = ATOMUSDT,
+  theme = quantmod::chartTheme('white')
+)
+```
+
+
+```{r, out.width="100%",fig.align='center',fig.height=5}
+## chart the ATOMUSDT
+## with candlesticks
+quantmod::addMACD()
+```

@@ -5,7 +5,7 @@
 \alias{ATOMUSDT}
 \title{ATOM-USDT}
 \format{
-An object of class \code{xts} (inherits from \code{zoo}) with 27 rows and 7 columns.
+An object of class \code{xts} (inherits from \code{zoo}) with 43 rows and 7 columns.
 }
 \usage{
 ATOMUSDT

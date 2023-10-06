@@ -1,5 +1,5 @@
 #' Get a quote on a cryptopair from one
-#' of the major exchanges.
+#' of the major exchanges
 #'
 #' This function returns a crypto quote from
 #' one of the available exchanges. The function supports

@@ -19,6 +19,8 @@ Imports:
     curl (>= 5.0.2),
     httr (>= 1.4.7),
     jsonlite (>= 1.8.7),
+    magrittr,
+    plotly,
     rlang (>= 1.1.1),
     xts (>= 0.13.1),
     zoo (>= 1.8-12)
