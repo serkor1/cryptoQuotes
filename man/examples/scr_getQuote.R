@@ -1,4 +1,4 @@
-\donttest{
+\dontrun{
   # 1) load perpetual
   # futures
 

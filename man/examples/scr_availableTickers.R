@@ -1,4 +1,4 @@
-\donttest{
+\dontrun{
   ## available tickers
   ## in Binance spot market
   head(
