@@ -43,6 +43,9 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
+  <a class="nav-link" href="articles/cryptoQuotes.html">Get started</a>
+</li>
+<li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
@@ -51,7 +54,7 @@
     <a class="dropdown-item" href="articles/01_intervals.html">Intervals</a>
     <a class="dropdown-item" href="articles/02-tickers.html">Available Tickers</a>
     <a class="dropdown-item" href="articles/03-exchanges.html">Supported Exchanges</a>
-    <a class="dropdown-item" href="articles/04_introduction.html">introduction</a>
+    <a class="dropdown-item" href="articles/04_quantmod.html">Quantmod and TTR</a>
   </div>
 </li>
       </ul>
@@ -82,47 +85,32 @@
 </blockquote>
 </div>
 <div class="section level4">
+<h4 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h4>
+<p><strong>Stable Version</strong></p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
+<span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
+<span>  ref <span class="op">=</span> <span class="st">'main'</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><strong>Development Version</strong></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
+<span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
+<span>  ref <span class="op">=</span> <span class="st">'development'</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
 <h4 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h4>
 <p>Get USDT denominated ATOM in the spot market from Binance in <code>30m</code> intervals,</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## get perpetual contracts on USDT denominated ATOM</span></span>
 <span><span class="va">spotPrice</span> <span class="op">&lt;-</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/getQuote.html">getQuote</a></span><span class="op">(</span></span>
 <span>  ticker <span class="op">=</span> <span class="st">'ATOMUSDT'</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">'binance'</span>,</span>
 <span>  futures <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">'30m'</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>This <code>spotPrice</code> can be passed to the <code>chartSeries</code> from <code>quantmod</code> directly to chart it with candlesticks.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## chart the spotPrice series</span></span>
-<span><span class="co">## using quantmod</span></span>
-<span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartSeries.html" class="external-link">chartSeries</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="va">spotPrice</span>,</span>
-<span>  theme <span class="op">=</span> <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartTheme.html" class="external-link">chartTheme</a></span><span class="op">(</span><span class="st">'black'</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-chartSeries-1.png" width="100%"></p>
-<p>When the <code>spotPrice</code> has been charted, the indicators in <code>quantmod</code> is directly applicable. See for example <code>addBBands</code></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## add bollinger bands </span></span>
-<span><span class="co">## using quantmod</span></span>
-<span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/addBBands.html" class="external-link">addBBands</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-addBBands-1.png" width="100%"></p>
-</div>
-<div class="section level4">
-<h4 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h4>
-<p><strong>Stable Version</strong></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
-<span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
-<span>  ref <span class="op">=</span> <span class="st">'main'</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p><strong>Development Version</strong></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
-<span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
-<span>  ref <span class="op">=</span> <span class="st">'development'</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
