@@ -51,10 +51,10 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/01_intervals.html">Intervals</a>
+    <a class="dropdown-item" href="articles/01-intervals.html">Intervals</a>
     <a class="dropdown-item" href="articles/02-tickers.html">Available Tickers</a>
     <a class="dropdown-item" href="articles/03-exchanges.html">Supported Exchanges</a>
-    <a class="dropdown-item" href="articles/04_quantmod.html">Quantmod and TTR</a>
+    <a class="dropdown-item" href="articles/04-quantmod.html">Quantmod and TTR</a>
   </div>
 </li>
       </ul>
@@ -62,7 +62,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/serkor1/cryptoQuotes/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -85,26 +92,10 @@
 </blockquote>
 </div>
 <div class="section level4">
-<h4 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h4>
-<p><strong>Stable Version</strong></p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
-<span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
-<span>  ref <span class="op">=</span> <span class="st">'main'</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p><strong>Development Version</strong></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
-<span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
-<span>  ref <span class="op">=</span> <span class="st">'development'</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level4">
 <h4 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h4>
 <p>Get USDT denominated ATOM in the spot market from Binance in <code>30m</code> intervals,</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## get perpetual contracts on USDT denominated ATOM</span></span>
 <span><span class="va">spotPrice</span> <span class="op">&lt;-</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/getQuote.html">getQuote</a></span><span class="op">(</span></span>
 <span>  ticker <span class="op">=</span> <span class="st">'ATOMUSDT'</span>,</span>
@@ -113,8 +104,32 @@
 <span>  interval <span class="op">=</span> <span class="st">'30m'</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level4">
+<h4 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h4>
+<p><strong>Stable Version</strong></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
+<span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
+<span>  ref <span class="op">=</span> <span class="st">'main'</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><strong>Development Version</strong></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
+<span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
+<span>  ref <span class="op">=</span> <span class="st">'development'</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+</div>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/serkor1/cryptoQuotes/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/serkor1/cryptoQuotes/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
