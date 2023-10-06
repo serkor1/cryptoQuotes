@@ -7,6 +7,17 @@ with volume and bollinger bands}
 \usage{
 chart(quote, deficiency = FALSE, slider = TRUE)
 }
+\arguments{
+\item{quote}{A cryptoQuote in xts/zoo format.}
+
+\item{deficiency}{Logical. FALSE by default, if TRUE color defiency compliant
+colors are used.}
+
+\item{slider}{Logical. TRUE by default. If FALSE, no slider will be included.}
+}
+\value{
+a plotly object
+}
 \description{
 This function returns a plotly candlestick with
 the most common indicators.

@@ -10,8 +10,12 @@
 #'
 #' This function returns a plotly candlestick with
 #' the most common indicators.
+#' @param quote A cryptoQuote in xts/zoo format.
+#' @param deficiency Logical. FALSE by default, if TRUE color defiency compliant
+#' colors are used.
+#' @param slider Logical. TRUE by default. If FALSE, no slider will be included.
 #'
-#'
+#' @returns a plotly object
 #' @export
 
 chart <- function(
@@ -110,14 +114,6 @@ chart <- function(
 }
 
 
-
-# chart(
-#   subset(
-#     ATOMUSDT,
-#     ATOMUSDT$exchange == 1 & ATOMUSDT$market == 1
-#   ),
-#   deficiency = FALSE
-# )
 
 
 
