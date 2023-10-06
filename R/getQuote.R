@@ -57,7 +57,11 @@ getQuote <- function(
       ticker = ticker,
       from = from,
       to   = to
-    )
+    ),
+    source = source,
+    futures = futures,
+    interval = interval,
+    ticker = ticker
   )
 
 

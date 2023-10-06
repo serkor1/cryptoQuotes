@@ -3,7 +3,7 @@
 \name{availableTickers}
 \alias{availableTickers}
 \title{Get all the available tickers
-on the desired exchange and market.}
+on the desired exchange and market}
 \usage{
 availableTickers(source = "binance", futures = TRUE)
 }

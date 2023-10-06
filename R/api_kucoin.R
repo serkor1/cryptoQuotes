@@ -107,7 +107,7 @@ kucoinIntervals <- function(interval, futures, all = FALSE) {
     # 2) locate the interval
     # using grepl
     indicator <- grepl(
-      pattern = paste0('^', '1d'),
+      pattern = paste0('^', interval),
       ignore.case = TRUE,
       x = allIntervals$labels
     )
@@ -147,7 +147,7 @@ kucoinIntervals <- function(interval, futures, all = FALSE) {
 
 # baseURL;
 kucoinUrl <- function(
-  futures = TRUE
+    futures = TRUE
 ) {
 
   # 1) define baseURL
@@ -282,7 +282,7 @@ kucoinParams <- function(
     # choice, and user system.
     if (!is.null(from) & !is.null(to)) {
 
-      getParams$from <- (format(
+      getParams$from <- format(
         as.numeric(
           as.POSIXct(
             from,
@@ -291,10 +291,11 @@ kucoinParams <- function(
           )
         ) * 1e3,
         scientific = FALSE
-      ))
+      )
 
 
-      getParams$to <-  (format(
+
+      getParams$to <-  format(
         as.numeric(
           as.POSIXct(
             to,
@@ -303,7 +304,7 @@ kucoinParams <- function(
           )
         ) * 1e3,
         scientific = FALSE
-      ))
+      )
 
     }
 
@@ -407,7 +408,7 @@ kucoinQuote <- function(
   )
 
 
-  # 2) parse response
+  # # 2) parse response
   response <- jsonlite::fromJSON(
     txt = httr::content(
       x = response,

@@ -87,9 +87,10 @@ generate_data <- function(exchanges = c('binance', 'kucoin')) {
   markets <- c(
     'spot', 'futures'
   )
-do.call(
-  rbind,
-  lapply(
+
+  # NOTE: Had do.call(rbind
+
+  temp <- lapply(
     seq_along(exchanges),
     function(x) {
 
@@ -110,46 +111,57 @@ do.call(
       # for each exchange
       # we collect futures
       # and spot markets
-      do.call(
-        rbind,
-        lapply(
-          seq_along(markets),
-          function(y) {
+      temp <- lapply(
+        seq_along(markets),
+        function(y) {
 
-            Sys.sleep(2)
+          Sys.sleep(2)
 
-            # Collect data
-            quote <- getQuote(
-              ticker   = ticker[y],
-              source   = exchanges[x],
-              futures  = ifelse(markets[y] == 'futures', TRUE, FALSE),
-              interval = '1d',
-              from     = '2023-01-01',
-              to       = '2023-01-11'
-            )
+          # Collect data
+          quote <- getQuote(
+            ticker   = ticker[y],
+            source   = exchanges[x],
+            futures  = ifelse(markets[y] == 'futures', TRUE, FALSE),
+            interval = '15m',
+            from     = '2023-10-01',
+            to       = '2023-10-02'
+          )
 
-            quote$exchange <-  x
-            quote$market   <-  y - 1
+          # quote$exchange <-  x
+          # quote$market   <-  y - 1
 
 
-            return(
-              quote
-            )
+          return(
+            quote
+          )
 
 
-          }
-        )
+        }
       )
+
+      names(temp) <- ticker
+
+      return(temp)
 
     }
   )
 
-)
+  names(temp) <- exchanges
+
+
+  return(
+    temp
+  )
+
+
 
 
 
 
 }
+
+
+
 
 
 # script end;

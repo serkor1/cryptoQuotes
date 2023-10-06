@@ -56,7 +56,7 @@ krakenIntervals <- function(interval, futures, all = FALSE) {
     # 2) locate the interval
     # using grepl
     indicator <- grepl(
-      pattern = paste0('^', '1d'),
+      pattern = paste0('^', interval),
       ignore.case = TRUE,
       x = allIntervals$labels
     )

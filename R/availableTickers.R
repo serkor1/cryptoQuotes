@@ -1,5 +1,5 @@
 #' Get all the available tickers
-#' on the desired exchange and market.
+#' on the desired exchange and market
 #'
 #' This function returns all available
 #' pairs on the exchanges.

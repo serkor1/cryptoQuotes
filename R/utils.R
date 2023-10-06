@@ -12,7 +12,6 @@ baseUrl <- function(
     source = 'binance',
     futures
 ) {
-
   # 1) construct function
   # based on source
   baseUrl <- get(paste0(source, 'Url'))(
@@ -52,7 +51,6 @@ getParams <- function(
     to = NULL
 ) {
 
-
   getParams <- get(
     paste0(source, 'Params')
   )(
@@ -63,15 +61,9 @@ getParams <- function(
     to       = to
   )
 
-
-
-
-
   return(
     getParams
   )
-
-
 
 }
 
@@ -105,11 +97,12 @@ fetchQuote <- function(
 
 
 
-
-
-
 formatQuote <- function(
-    quoteList
+    quoteList,
+    ticker,
+    interval,
+    source,
+    futures
 ) {
 
 
@@ -129,88 +122,16 @@ formatQuote <- function(
     quote
   )
 
+  # 4) construct
+  # attributes for further
+  # functionality
+  attributes(quote)$source <- source
+  attributes(quote)$interval <- interval
+  attributes(quote)$ticker <- ticker
+  attributes(quote)$market <- ifelse(futures,'PERPETUAL', 'Spot')
+
   # 4) return quote;
   return(quote)
-
-
-
-
-
-  # if (!inherits(x = quote, what = c('rawQuote'))) {
-  #   rlang::abort(
-  #     message = 'Has to be class "rawQuote"'
-  #   )
-  # }
-  #
-  # if (inherits(x = quote, what = c('binance'))) {
-  #
-  #   # 1) construct names
-  #   column_names <- c(
-  #     'Open',
-  #     'High',
-  #     'Low',
-  #     'Close',
-  #     'Volume'
-  #   )
-  #
-  #
-  #
-  #
-  #   # 3) the first element
-  #   # is always the data
-  #   # from Binance
-  #   index <- as.POSIXct(
-  #     as.numeric(quote[,1])/1e3,
-  #     origin = '1970-01-01',
-  #     tz = 'UTC'
-  #   )
-  #
-  #
-  #
-  #   if (inherits(x = quote, what = c('futures'))) {
-  #
-  #     keep_cols <- c(
-  #       2:6
-  #     )
-  #     #attr(index, "tzone") <- Sys.timezone()
-  #
-  #
-  #
-  #   }
-  #
-  #   if (inherits(x = quote, what = 'spot')) {
-  #
-  #
-  #     keep_cols <- c(
-  #       2:6
-  #     )
-  #
-  #
-  #   }
-  #
-  #
-  #
-  #
-  #   quote <- quote[,keep_cols]
-  #
-  #
-  #   colnames(quote) <- column_names[seq_along(keep_cols)]
-  #
-  #
-  # }
-  #
-  # # 2) convert all
-  # # quote elements to
-  # # numeric
-  # quote <- apply(
-  #   quote,
-  #   c(1,2),
-  #   as.numeric
-  # )
-  #
-  #
-
-
 
 }
 

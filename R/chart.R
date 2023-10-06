@@ -67,6 +67,50 @@ chart <- function(
     )
   )
 
+  # add Bollinger bands
+  quote_ <- cbind(
+    quote_,
+    TTR::BBands(
+      HLC = quantmod::HLC(quote),
+      n = min(
+        20,
+        max(5, floor(nrow(quote_)/2))
+        )
+      )
+  )
+
+  suppressMessages(
+    candlestick <- candlestick %>% plotly::add_lines(
+      data = quote_,
+      x = rownames(quote_),
+      y = ~up,
+      line = list(
+        color ='steelblue'
+      ),
+      inherit = FALSE
+    ) %>% plotly::add_lines(
+      data = quote_,
+      x = rownames(quote_),
+      y = ~dn,
+      fill = 'tonexty',
+      fillcolor = 'rgba(168, 216, 234, 0.2)',
+      line = list(
+        color ='steelblue'
+      ),
+      inherit = FALSE
+    ) %>% plotly::add_lines(
+      data = quote_,
+      x = rownames(quote_),
+      y = ~mavg,
+      line = list(
+        dash ='dot',
+        color = 'steelblue'
+      ),
+      inherit = FALSE
+    )
+  )
+
+
   # 3) create volume
   # plot
   volume <- plotly::plot_ly(
@@ -103,18 +147,35 @@ chart <- function(
   )
 
   plot %>% plotly::layout(
-    title = "Basic Candlestick Chart",
-    xaxis = list(rangeslider = list(visible = slider)),
+    yaxis = list(
+      title = 'Price'
+    ),
+    xaxis = list(
+
+      rangeslider = list(visible = slider),
+      tickvals = seq(
+        from = 0,
+        to   = nrow(quote_),
+        by   = ceiling(nrow(quote_)/24)
+      )
+                 ),
     showlegend = FALSE,
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)'
+    ) %>% plotly::add_annotations(
+      x= 0,
+      y= 1,
+      xref = "paper",
+      yref = "paper",
+      #text = "<b>Ticker:</b>",
+      text = paste('<b>Ticker:</b>', attributes(quote)$ticker, '<b>Interval:</b>', attributes(quote)$interval, paste0('(', attributes(quote)$market,')'), '<b>Exchange:</b>', attributes(quote)$source),
+      showarrow = FALSE,
+      font = list(
+        size = 18
+      )
+
     )
 
 
 }
 
-
-
-
-
-# script end;

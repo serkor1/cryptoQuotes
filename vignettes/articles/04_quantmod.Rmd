@@ -63,10 +63,6 @@ quantmod::chartSeries(
   x     = ATOMUSDT,
   theme = quantmod::chartTheme('white')
 )
-
-## add Bollinger
-## bands
 quantmod::addBBands(n = 2)
 ```
-
 

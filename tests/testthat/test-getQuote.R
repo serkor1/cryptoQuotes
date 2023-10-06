@@ -11,14 +11,11 @@ testthat::test_that(
         ticker = 'ATOMUSDT',
         source = 'binance',
         futures = TRUE,
-        interval = '1d',
-        from = '2023-01-01',
-        to   = '2023-01-11'
+        interval = '15m',
+        from     = '2023-10-01',
+        to       = '2023-10-02'
       ),
-      expected = subset(
-        ATOMUSDT,
-        ATOMUSDT$exchange == 1 & ATOMUSDT$market == 1
-      )[,1:5]
+      expected = cryptoQuotes:::internalTest[[1]][[2]]
     )
 
     }
@@ -38,14 +35,11 @@ testthat::test_that(
         ticker = 'ATOMUSDTM',
         source = 'kucoin',
         futures = TRUE,
-        interval = '1d',
-        from = '2023-01-01',
-        to   = '2023-01-11'
+        interval = '15m',
+        from     = '2023-10-01',
+        to       = '2023-10-02'
       ),
-      expected = subset(
-        ATOMUSDT,
-        ATOMUSDT$exchange == 2 & ATOMUSDT$market == 1
-      )[,1:5]
+      expected = cryptoQuotes:::internalTest[[2]][[2]]
     )
 
   }
@@ -66,14 +60,11 @@ testthat::test_that(
         ticker = 'ATOMUSDT',
         source = 'binance',
         futures = FALSE,
-        interval = '1d',
-        from = '2023-01-01',
-        to   = '2023-01-11'
+        interval = '15m',
+        from     = '2023-10-01',
+        to       = '2023-10-02'
       ),
-      expected = subset(
-        ATOMUSDT,
-        ATOMUSDT$exchange == 1 & ATOMUSDT$market == 0
-      )[,1:5]
+      expected = cryptoQuotes:::internalTest[[1]][[1]]
     )
 
   }
@@ -93,14 +84,11 @@ testthat::test_that(
         ticker = 'ATOM-USDT',
         source = 'kucoin',
         futures = FALSE,
-        interval = '1d',
-        from = '2023-01-01',
-        to   = '2023-01-11'
+        interval = '15m',
+        from     = '2023-10-01',
+        to       = '2023-10-02'
       ),
-      expected = subset(
-        ATOMUSDT,
-        ATOMUSDT$exchange == 2 & ATOMUSDT$market == 0
-      )[,1:5]
+      expected = cryptoQuotes:::internalTest[[2]][[1]]
     )
 
   }

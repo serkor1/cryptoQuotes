@@ -68,7 +68,7 @@ binanceIntervals <- function(futures, interval, all = FALSE) {
 
   if (all) {
 
-    interval <- allIntervals
+    interval <- allIntervals$labels
 
   } else {
 

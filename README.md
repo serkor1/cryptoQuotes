@@ -26,6 +26,21 @@ exchanges will be added in the future.
 > different exchange APIs allows. The lowest interval is 1s (Seconds),
 > and the highest is 1M (Months)
 
+#### Basic usage
+
+Get USDT denominated ATOM in the spot market from Binance in `30m`
+intervals,
+
+``` r
+## get perpetual contracts on USDT denominated ATOM
+spotPrice <- cryptoQuotes::getQuote(
+  ticker = 'ATOMUSDT',
+  source = 'binance',
+  futures = FALSE,
+  interval = '30m'
+)
+```
+
 #### Installation
 
 **Stable Version**
@@ -43,20 +58,5 @@ devtools::install_github(
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
   ref = 'development'
-)
-```
-
-#### Basic usage
-
-Get USDT denominated ATOM in the spot market from Binance in `30m`
-intervals,
-
-``` r
-## get perpetual contracts on USDT denominated ATOM
-spotPrice <- cryptoQuotes::getQuote(
-  ticker = 'ATOMUSDT',
-  source = 'binance',
-  futures = FALSE,
-  interval = '30m'
 )
 ```
