@@ -4,12 +4,21 @@
 \name{cryptoQuotes-package}
 \alias{cryptoQuotes}
 \alias{cryptoQuotes-package}
-\title{cryptoQuotes: Access Market Data From Major Cryptocurrency Exchanges}
+\title{cryptoQuotes: Access Market Data from Major Cryptocurrency Exchanges}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Access spot and futures markets from major cryptocurrency exchanges.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://serkor1.github.io/cryptoQuotes/}
+}
+
+}
 \author{
-\strong{Maintainer}: Serkan Korkmaz \email{serkor1@duck.com} [contributor]
+\strong{Maintainer}: Serkan Korkmaz \email{serkor1@duck.com} (\href{https://orcid.org/0000-0002-5052-0982}{ORCID}) [contributor, copyright holder]
 
 }
 \keyword{internal}

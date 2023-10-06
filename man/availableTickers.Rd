@@ -2,7 +2,8 @@
 % Please edit documentation in R/availableTickers.R
 \name{availableTickers}
 \alias{availableTickers}
-\title{availableTickers}
+\title{Get all the available tickers
+on the desired exchange and market.}
 \usage{
 availableTickers(source = "binance", futures = TRUE)
 }
@@ -18,4 +19,27 @@ of length N equal to the tradable tickers
 \description{
 This function returns all available
 pairs on the exchanges.
+}
+\examples{
+\donttest{
+  ## available tickers
+  ## in Binance spot market
+  head(
+    cryptoQuotes::availableTickers(
+      source = 'binance',
+      futures = FALSE
+    )
+  )
+
+
+  ## available tickers
+  ## in Kraken futures market
+  head(
+    cryptoQuotes::availableTickers(
+      source = 'kraken',
+      futures = TRUE
+    )
+  )
+}
+
 }

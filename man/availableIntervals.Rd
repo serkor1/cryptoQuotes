@@ -2,7 +2,8 @@
 % Please edit documentation in R/availableIntervals.R
 \name{availableIntervals}
 \alias{availableIntervals}
-\title{availableIntervals}
+\title{See all available intervals for the futures and spot markets
+on the desired exchange.}
 \usage{
 availableIntervals(source = "binance", futures = TRUE)
 }
@@ -17,4 +18,27 @@ returned}
 This function shows all
 available intervals available
 from each exchange
+}
+\examples{
+# script:
+# date: 2023-10-06
+# author: Serkan Korkmaz, serkor1@duck.com
+# objective:
+# script start;
+
+# available intervals
+# at kucoin futures market
+cryptoQuotes::availableIntervals(
+  source = 'kucoin',
+  futures = TRUE
+)
+
+# available intervals
+# at kraken spot market
+cryptoQuotes::availableIntervals(
+  source = 'kraken',
+  futures = FALSE
+)
+
+# script end;
 }

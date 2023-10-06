@@ -1,9 +1,9 @@
-#' getQuote
+#' Get a quote on a cryptopair from one
+#' of the major exchanges.
 #'
-#'
-#' This function returns
-#' a crypto quote
-#'
+#' This function returns a crypto quote from
+#' one of the available exchanges. The function supports
+#' futues and spot markets
 #'
 #' @param ticker A character vector of length 1. Uppercase.
 #' @param source A character vector of length 1. Currently only binance is supported.

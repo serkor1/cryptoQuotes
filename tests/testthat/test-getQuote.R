@@ -13,11 +13,11 @@ testthat::test_that(
         futures = TRUE,
         interval = '1d',
         from = '2023-01-01',
-        to   = '2023-01-07'
+        to   = '2023-01-11'
       ),
       expected = subset(
         ATOMUSDT,
-        ATOMUSDT$exchange == 1 & ATOMUSDT$market == 0
+        ATOMUSDT$exchange == 1 & ATOMUSDT$market == 1
       )[,1:5]
     )
 
@@ -40,11 +40,11 @@ testthat::test_that(
         futures = TRUE,
         interval = '1d',
         from = '2023-01-01',
-        to   = '2023-01-07'
+        to   = '2023-01-11'
       ),
       expected = subset(
         ATOMUSDT,
-        ATOMUSDT$exchange == 2 & ATOMUSDT$market == 0
+        ATOMUSDT$exchange == 2 & ATOMUSDT$market == 1
       )[,1:5]
     )
 
@@ -68,11 +68,11 @@ testthat::test_that(
         futures = FALSE,
         interval = '1d',
         from = '2023-01-01',
-        to   = '2023-01-07'
+        to   = '2023-01-11'
       ),
       expected = subset(
         ATOMUSDT,
-        ATOMUSDT$exchange == 1 & ATOMUSDT$market == 1
+        ATOMUSDT$exchange == 1 & ATOMUSDT$market == 0
       )[,1:5]
     )
 
@@ -95,11 +95,11 @@ testthat::test_that(
         futures = FALSE,
         interval = '1d',
         from = '2023-01-01',
-        to   = '2023-01-07'
+        to   = '2023-01-11'
       ),
       expected = subset(
         ATOMUSDT,
-        ATOMUSDT$exchange == 2 & ATOMUSDT$market == 1
+        ATOMUSDT$exchange == 2 & ATOMUSDT$market == 0
       )[,1:5]
     )
 

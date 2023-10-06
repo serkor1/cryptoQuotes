@@ -2,7 +2,8 @@
 % Please edit documentation in R/getQuote.R
 \name{getQuote}
 \alias{getQuote}
-\title{getQuote}
+\title{Get a quote on a cryptopair from one
+of the major exchanges.}
 \usage{
 getQuote(
   ticker,
@@ -27,8 +28,9 @@ getQuote(
 \item{to}{A character vector of length 1.Given in \%Y-\%m-\%d format.}
 }
 \description{
-This function returns
-a crypto quote
+This function returns a crypto quote from
+one of the available exchanges. The function supports
+futues and spot markets
 }
 \examples{
 # script: scr_getQuote

@@ -6,6 +6,9 @@
 # script start;
 
 
+
+
+
 constructInterval <- function(source, futures, interval) {
 
   # 1) construct the interval
@@ -76,8 +79,77 @@ convert_date <- function(
 }
 
 
+# generate data;
+# this data is for the purpose of presenting
+# and error-testing
+generate_data <- function(exchanges = c('binance', 'kucoin')) {
+
+  markets <- c(
+    'spot', 'futures'
+  )
+do.call(
+  rbind,
+  lapply(
+    seq_along(exchanges),
+    function(x) {
+
+      if (x == 1) {
+
+        # Binance
+        ticker <- c('ATOMUSDT', 'ATOMUSDT')
+
+      }
+
+      if (x == 2) {
+
+        ticker <- c('ATOM-USDT', 'ATOMUSDTM')
+
+      }
 
 
+      # for each exchange
+      # we collect futures
+      # and spot markets
+      do.call(
+        rbind,
+        lapply(
+          seq_along(markets),
+          function(y) {
+
+            Sys.sleep(2)
+
+            # Collect data
+            quote <- getQuote(
+              ticker   = ticker[y],
+              source   = exchanges[x],
+              futures  = ifelse(markets[y] == 'futures', TRUE, FALSE),
+              interval = '1d',
+              from     = '2023-01-01',
+              to       = '2023-01-11'
+            )
+
+            quote$exchange <-  x
+            quote$market   <-  y - 1
+
+
+            return(
+              quote
+            )
+
+
+          }
+        )
+      )
+
+    }
+  )
+
+)
+
+
+
+
+}
 
 
 # script end;

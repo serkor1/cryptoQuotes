@@ -1,4 +1,5 @@
-#' availableIntervals
+#' See all available intervals for the futures and spot markets
+#' on the desired exchange.
 #'
 #' This function shows all
 #' available intervals available
@@ -10,6 +11,9 @@
 #' @param futures logical. TRUE by default. If FALSE, spotmarket are
 #' returned
 #'
+#' @example man/examples/scr_availableIntervals.R
+#'
+#' @returns NULL
 #' @export
 availableIntervals <- function(source = 'binance', futures = TRUE) {
 

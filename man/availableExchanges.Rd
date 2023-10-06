@@ -2,11 +2,24 @@
 % Please edit documentation in R/availableExchanges.R
 \name{availableExchanges}
 \alias{availableExchanges}
-\title{availableExchanges}
+\title{Get available exchanges}
 \usage{
 availableExchanges()
 }
 \description{
 This function returns all
-available exchanges
+available exchanges as a message in the console.
+}
+\examples{
+# script:
+# date: 2023-10-06
+# author: Serkan Korkmaz, serkor1@duck.com
+# objective:
+# script start;
+
+## return all
+## available exchanges
+cryptoQuotes::availableExchanges()
+
+# script end;
 }

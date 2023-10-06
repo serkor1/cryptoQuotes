@@ -5,10 +5,13 @@
 # exchanges in library
 # script start;
 
-#' availableExchanges
+#' Get available exchanges
 #'
 #' This function returns all
-#' available exchanges
+#' available exchanges as a message in the console.
+#' @example man/examples/scr_availableExchanges.R
+#'
+#' @returns NULL
 #'
 #' @export
 availableExchanges <- function(){
