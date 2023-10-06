@@ -23,15 +23,15 @@ library(cryptoQuotes)
 
 ```{r, eval=FALSE}
 ## get OHLC data
-## from Kucoin futures
+## from binance futures
 ## market with daily pips
 ATOMUSDT <- cryptoQuotes::getQuote(
-  ticker = 'ATOMUSDTM',
-  source = 'kucoin',
-  futures = TRUE,
-  interval = '1d',
-  from = '2023-01-01',
-  to   = '2023-01-11'
+  ticker   = 'ATOMUSDTM',
+  source   = 'binance',
+  futures  = TRUE,
+  interval = '15m',
+  from     = '2023-10-01',
+  to       = '2023-10-02'
 )
 ```
 
@@ -41,10 +41,7 @@ The USDT denominated ATOM, can be charted directly via the `chart`-function, for
 ```{r, include = FALSE, message=FALSE, echo=FALSE}
 ### get data from kucoin
 ### from the internal data set
-ATOMUSDT <- subset(
-        cryptoQuotes::ATOMUSDT,
-        cryptoQuotes::ATOMUSDT$exchange == 2 & cryptoQuotes::ATOMUSDT$market == 1
-      )[,1:5]
+ATOMUSDT <- cryptoQuotes:::internalTest[[1]][[2]]
 ```
 
 
@@ -65,12 +62,12 @@ cryptoQuotes::chart(
 ## from Kucoin futures
 ## market with daily pips
 ATOMUSDT <- cryptoQuotes::getQuote(
-  ticker = 'ATOMUSDTM',
-  source = 'binance',
-  futures = FALSE,
-  interval = '1d',
-  from = '2023-01-01',
-  to   = '2023-01-11'
+  ticker   = 'ATOM-USDT',
+  source   = 'kucoin',
+  futures  = FALSE,
+  interval = '15m',
+  from     = '2023-10-01',
+  to       = '2023-10-02'
 )
 ```
 
@@ -80,10 +77,7 @@ The USDT denominated ATOM, can be charted directly via the `chart`-function, for
 ```{r, include = FALSE, message=FALSE, echo=FALSE}
 ### get data from kucoin
 ### from the internal data set
-ATOMUSDT <- subset(
-        cryptoQuotes::ATOMUSDT,
-        cryptoQuotes::ATOMUSDT$exchange == 1 & cryptoQuotes::ATOMUSDT$market == 0
-      )[,1:5]
+ATOMUSDT <- cryptoQuotes:::internalTest[[2]][[1]]
 ```
 
 
