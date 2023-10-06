@@ -10,7 +10,6 @@
 #' @importFrom plotly layout
 #' @importFrom plotly plot_ly
 #' @importFrom plotly subplot
-#' @importFrom quantmod HLC
 #' @importFrom rlang abort
 #' @importFrom rlang trace_back
 #' @importFrom TTR BBands

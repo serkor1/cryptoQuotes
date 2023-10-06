@@ -14,6 +14,8 @@ Access spot and futures markets from major cryptocurrency exchanges.
 Useful links:
 \itemize{
   \item \url{https://serkor1.github.io/cryptoQuotes/}
+  \item \url{https://github.com/serkor1/cryptoQuotes}
+  \item Report bugs at \url{https://github.com/serkor1/cryptoQuotes/issues}
 }
 
 }

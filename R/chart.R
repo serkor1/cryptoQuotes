@@ -67,19 +67,18 @@ chart <- function(
     )
   )
 
-  # add Bollinger bands
   quote_ <- cbind(
     quote_,
     TTR::BBands(
-      HLC = quantmod::HLC(quote),
+      HLC = quote[,2:4],
       n = min(
         20,
         max(5, floor(nrow(quote_)/2))
-        )
       )
+    )
   )
 
-  suppressMessages(
+
     candlestick <- candlestick %>% plotly::add_lines(
       data = quote_,
       x = rownames(quote_),
@@ -108,7 +107,8 @@ chart <- function(
       ),
       inherit = FALSE
     )
-  )
+
+
 
 
   # 3) create volume

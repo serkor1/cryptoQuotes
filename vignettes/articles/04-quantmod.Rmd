@@ -15,7 +15,7 @@ library(cryptoQuotes)
 
 ### Introduction
 
-The ```cryptoQuotes``` package provides access to most major cryptocurrency exchanges around the world and it uses ```xts``` and ```zoo``` such that it seamlessly works with powerful packages like ```quantmod``` and ```ttr```.
+The ```cryptoQuotes``` package provides access to most major cryptocurrency exchanges around the world and it uses ```xts``` and ```zoo``` such that it seamlessly works with powerful packages like ```quantmod``` and ```TTR```.
 
 ### Charting using quantmod
 
