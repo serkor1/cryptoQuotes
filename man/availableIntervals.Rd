@@ -3,7 +3,7 @@
 \name{availableIntervals}
 \alias{availableIntervals}
 \title{See all available intervals for the futures and spot markets
-on the desired exchange.}
+on the desired exchange}
 \usage{
 availableIntervals(source = "binance", futures = TRUE)
 }

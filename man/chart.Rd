@@ -3,10 +3,9 @@
 \name{chart}
 \alias{chart}
 \title{Create a candlestick chart
-with volume, bollinger bands and moving average convergence and divergence
-indicators}
+with volume and bollinger bands}
 \usage{
-chart(quote, deficiency = FALSE)
+chart(quote, deficiency = FALSE, slider = TRUE)
 }
 \description{
 This function returns a plotly candlestick with
