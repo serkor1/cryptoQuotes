@@ -125,10 +125,12 @@ formatQuote <- function(
   # 4) construct
   # attributes for further
   # functionality
-  attributes(quote)$source <- source
-  attributes(quote)$interval <- interval
-  attributes(quote)$ticker <- ticker
-  attributes(quote)$market <- ifelse(futures,'PERPETUAL', 'Spot')
+  attributes(quote)$tickerInfo <- list(
+    source   = source,
+    interval = interval,
+    ticker   = ticker,
+    market   = ifelse(futures,'PERPETUAL', 'Spot')
+  )
 
   # 4) return quote;
   return(quote)

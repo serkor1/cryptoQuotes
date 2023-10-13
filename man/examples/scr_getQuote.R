@@ -1,6 +1,6 @@
 # 1) load perpetual
-# futures
-
+# futures from Binance
+# with 15m intervals
 perpAtom <- try(
   cryptoQuotes::getQuote(
     ticker  = 'ATOMUSDT',
@@ -15,7 +15,9 @@ perpAtom <- try(
 # function
 if (!inherits(perpAtom, 'try-error')){
   cryptoQuotes::chart(
-    perpAtom
+    chart = cryptoQuotes::kline(perpAtom) %>%
+      cryptoQuotes::addVolume()   %>%
+        cryptoQuotes::addBBands(cols = c('Close'))
   )
 }
 

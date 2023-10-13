@@ -2,23 +2,16 @@
 % Please edit documentation in R/chart.R
 \name{chart}
 \alias{chart}
-\title{Create a candlestick chart
-with volume and bollinger bands}
+\title{Chart your data}
 \usage{
-chart(quote, deficiency = FALSE, slider = TRUE)
+chart(chart, slider = TRUE)
 }
 \arguments{
-\item{quote}{A cryptoQuote in xts/zoo format.}
+\item{chart}{A kline or ohlc chart with and without
+indicators}
 
-\item{deficiency}{Logical. FALSE by default, if TRUE color defiency compliant
-colors are used.}
-
-\item{slider}{Logical. TRUE by default. If FALSE, no slider will be included.}
-}
-\value{
-a plotly object
+\item{slider}{Logical. TRUE by default.}
 }
 \description{
-This function returns a plotly candlestick with
-the most common indicators.
+Chart your data
 }

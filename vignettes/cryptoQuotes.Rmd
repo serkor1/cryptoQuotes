@@ -48,8 +48,10 @@ ATOMUSDT <- cryptoQuotes:::internalTest[[1]][[2]]
 ```{r, out.width="100%",fig.align='center',fig.height=5}
 ## Create a chart
 cryptoQuotes::chart(
-  ATOMUSDT,
-  deficiency = FALSE
+  cryptoQuotes::kline(
+    ATOMUSDT,
+    deficiency = FALSE
+  ) %>% cryptoQuotes::addVolume() %>% cryptoQuotes::addBBands(cols = c('close'))
 )
 ```
 
@@ -84,7 +86,9 @@ ATOMUSDT <- cryptoQuotes:::internalTest[[2]][[1]]
 ```{r, out.width="100%",fig.align='center',fig.height=5}
 ## Create a chart
 cryptoQuotes::chart(
-  ATOMUSDT,
-  deficiency = TRUE
+  cryptoQuotes::kline(
+    ATOMUSDT,
+    deficiency = FALSE
+  ) %>% cryptoQuotes::addVolume() %>% cryptoQuotes::addRSI()
 )
 ```

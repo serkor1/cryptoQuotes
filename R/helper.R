@@ -162,6 +162,118 @@ generate_data <- function(exchanges = c('binance', 'kucoin')) {
 
 
 
+convertIndicator <- function(indicator) {
+
+  # 1) convert indicator
+  # list.wise
+  indicator <- as.list(
+    indicator
+  )
+
+  # 2) extract names
+  # from the list
+  indicator_names <- names(
+    indicator
+  )
+
+  # 3) convert the
+  # list to a long
+  # data.frame
+  indicator <- do.call(
+    rbind,
+    lapply(
+      X = seq_along(indicator_names),
+      FUN = function(i) {
+
+        # 1) store the values
+        # in a variable
+        x <- indicator[[i]]
+
+        # 2) set column name
+        # to value
+        colnames(x) <- 'value'
+
+        # 3) convert to
+        # data.frame
+        x <- toDF(
+          x
+        )
+
+        # 4) add label
+        # to the data
+        x$label <- indicator_names[i]
+
+        return(
+          x
+        )
+
+      }
+
+    )
+  )
+
+
+
+  return(
+    indicator
+  )
+
+}
+
+
+toDF <- function(quote) {
+
+  # this function converts
+  # the quote to a data.frame
+  # for the plotting and reshaping
+
+  attr_list <- attributes(quote)$tickerInfo
+  # 2) convert to
+  # data.frame
+  DF <- as.data.frame(
+    zoo::coredata(quote),
+    row.names = NULL
+  )
+
+  # 3) add the index;
+  DF$Index <- zoo::index(
+    quote
+  )
+
+  # 1) determine
+  # wether the the day is closed
+  # green
+  try(
+    DF$direction <- ifelse(
+      test = DF$Close > DF$Open,
+      yes  = 'Increasing',
+      no   = 'Decreasing'
+    )
+  )
+
+  attributes(DF)$tickerInfo <- attr_list
+
+  return(
+    DF
+  )
+
+}
+
+
+
+toQuote <- function(DF) {
+
+  quote <- xts::as.xts(DF[,c('Open','High', 'Low', 'Close', 'Volume', 'Index')])
+  zoo::index(quote) <- as.POSIXct(DF$Index)
+
+  attributes(quote)$tickerInfo <- attributes(DF)$tickerInfo
+  return(
+    quote
+  )
+}
+
+
+
 
 
 # script end;
