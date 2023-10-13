@@ -286,9 +286,9 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
     FUN = FUN
   )
   quote_ <- toDF(foo(
-    quote[,'Close']
-  ),
-  ...
+    quote[,'Close'],
+    ...
+  )
   )
 
   colnames(quote_)[!grepl(colnames(quote_), pattern = 'Index', ignore.case =TRUE)] <- 'value'
@@ -333,7 +333,8 @@ addRSI <- function(
 
   quoteDF <- toDF(
     TTR::RSI(
-      quote[,'Close']
+      quote[,'Close'],
+      ...
     )
   )
 
