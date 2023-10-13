@@ -21,12 +21,14 @@ availableTickers <- function(
     ) {
 
 
-  ticker <- get(
+  ticker <- sort(
+    get(
     paste0(
       source,
       'Tickers'
     )
   )(futures = futures)
+  )
 
   return(
     ticker

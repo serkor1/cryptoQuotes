@@ -422,13 +422,27 @@ kucoinQuote <- function(
 
   # 3.1) set column
   # names
-  column_names <- c(
-    'Open',
-    'High',
-    'Low',
-    'Close',
-    'Volume'
-  )
+  if (futures) {
+
+    column_names <- c(
+      'Open',
+      'High',
+      'Low',
+      'Close',
+      'Volume'
+    )
+
+  } else {
+
+    column_names <- c(
+      'Open',
+      'Close',
+      'High',
+      'Low',
+      'Volume'
+    )
+
+  }
 
   # 3.2) format
   # dates

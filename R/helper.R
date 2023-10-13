@@ -160,6 +160,13 @@ generate_data <- function(exchanges = c('binance', 'kucoin')) {
 
 }
 
+# internalTest <- generate_data()
+# usethis::use_data(
+#   internalTest,
+#   internal = TRUE,
+#   overwrite = TRUE
+#
+# )
 
 
 convertIndicator <- function(indicator) {
