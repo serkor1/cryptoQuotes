@@ -159,9 +159,6 @@ chart <- function(
   # charts
   has_subplot <- length(chart) > 1
 
-  quoteDF <- attributes(chart)$quote
-  quote   <-  attributes(chart)$quote
-
   if (has_subplot) {
 
     heights <- c(
@@ -174,22 +171,17 @@ chart <- function(
 
   } else {
 
-    height <- 1
+    heights <- 1
 
 
   }
-  # heights <-  ifelse(
-  #   test = has_subplot,
-  #   yes = c(
-  #     0.5,
-  #     rep(
-  #       x          = (1-0.5)/length(chart),
-  #       length.out = length(chart)
-  #     )
-  #   ),
-  #   yes = c(0.3,0.3,0.3),
-  #   no = c(0.2,0.2,0.2)
-  # )
+
+
+  quoteDF <- attributes(chart)$quote
+  quote   <-  attributes(chart)$quote
+
+
+
 
   # 1) Main Chart
   chart <- plotly::subplot(
