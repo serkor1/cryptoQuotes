@@ -12,6 +12,7 @@ addVolume(plot)
 klines or OHLC}
 }
 \description{
-Add volume indicator
-to the chart
+A short description...
+
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }

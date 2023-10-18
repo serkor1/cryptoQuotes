@@ -34,7 +34,7 @@ kline <- function(
   # 2) Create candlestick
   # plot
   plot <- plotly::plot_ly(
-    data = quoteDF,
+    data = quoteDF,showlegend = FALSE,
     name = attributes(quote)$interval,
     yaxis = 'y',
     x    = ~Index,
@@ -155,25 +155,49 @@ chart <- function(
     slider = TRUE
 ) {
 
+  # 0) calculate number of
+  # charts
+  has_subplot <- length(chart) > 1
+
   quoteDF <- attributes(chart)$quote
   quote   <-  attributes(chart)$quote
 
+  if (has_subplot) {
+
+    heights <- c(
+      0.5,
+      rep(
+        x          = (1-0.5)/ (length(chart) - 1),
+        length.out = length(chart) - 1
+      )
+    )
+
+  } else {
+
+    height <- 1
+
+
+  }
+  # heights <-  ifelse(
+  #   test = has_subplot,
+  #   yes = c(
+  #     0.5,
+  #     rep(
+  #       x          = (1-0.5)/length(chart),
+  #       length.out = length(chart)
+  #     )
+  #   ),
+  #   yes = c(0.3,0.3,0.3),
+  #   no = c(0.2,0.2,0.2)
+  # )
+
   # 1) Main Chart
   chart <- plotly::subplot(
-    # chart$main,
-    # chart$volume,
-    # chart$rsi,
     chart,
     nrows = length(chart),
     shareX = TRUE,
     titleY = TRUE,
-    heights = c(
-      0.5,
-      rep(
-        (1-0.5)/length(chart),
-        length(chart) - 1
-      )
-    )
+    heights = heights
   )
 
   chart <- chart %>% plotly::layout(
@@ -183,7 +207,8 @@ chart <- function(
     xaxis = list(
       rangeslider = list(visible = slider)
     ),
-    showlegend = FALSE,
+    showlegend = TRUE,
+    legend = list(orientation = 'h', x = 0, y = 1),
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)'
   ) %>% plotly::add_annotations(

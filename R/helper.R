@@ -7,8 +7,6 @@
 
 
 
-
-
 constructInterval <- function(source, futures, interval) {
 
   # 1) construct the interval

@@ -6,6 +6,7 @@
 #' @importFrom httr content
 #' @importFrom httr GET
 #' @importFrom jsonlite fromJSON
+#' @importFrom lifecycle deprecated
 #' @importFrom plotly add_annotations
 #' @importFrom plotly layout
 #' @importFrom plotly plot_ly

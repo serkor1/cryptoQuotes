@@ -9,11 +9,18 @@
 #' Add Bollinger Bands indicators
 #' to the charts
 #'
+#'
+#' @description
+#' A short description...
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#'
 #' @param plot a kline, or OHLC, chart.
 #' @param cols a vector of column names for the
 #' Bollinger bands calculations.
 #' @param ... See [TTR::BBands()]
-#'
+
 #' @returns NULL
 #' @export
 addBBands <- function(
@@ -115,6 +122,10 @@ addBBands <- function(
 #' Add volume indicator
 #' to the chart
 #'
+#' @description
+#' A short description...
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param plot A plotly object of either
 #' klines or OHLC
@@ -180,7 +191,10 @@ addVolume <- function(plot) {
 
 
 #' Add MACD indicator to the chart
+#' @description
+#' A short description...
 #'
+#' `r lifecycle::badge("experimental")`
 #' @param plot A plotly object of either
 #' klines or OHLC
 #'
@@ -265,6 +279,11 @@ addMACD <- function(
 #' Add various Moving Average indicators
 #' to the chart.
 #'
+#' @description
+#' A short description...
+#'
+#' `r lifecycle::badge("experimental")`
+#'
 #' @param plot A plotly object of either
 #' klines or OHLC
 #' @param FUN A named function calculating MAs. See [TTR::MACD()]
@@ -274,6 +293,27 @@ addMACD <- function(
 #' @export
 addMA <- function(plot, FUN = TTR::SMA, ...) {
 
+  ## 0) extract
+  ## call to paste into the function
+  if (...length() == 0) {
+
+    arguments <- rlang::fn_fmls(
+      fn = eval(FUN)
+    )
+
+  } else {
+
+    arguments <- as.list(
+      match.call()
+    )
+  }
+
+
+  foo <- match.fun(
+    FUN = FUN
+  )
+
+
   quote <- toQuote(
     attributes(plot)$quote
   )
@@ -282,23 +322,48 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
   # chart from the plot
   plot_ <- plot$main
 
-  foo <- match.fun(
-    FUN = FUN
+  quote_ <- toDF(
+    foo(
+      quote[,'Close'],
+      ...
+    )
   )
-  quote_ <- toDF(foo(
-    quote[,'Close'],
-    ...
-  )
-  )
+
+
 
   colnames(quote_)[!grepl(colnames(quote_), pattern = 'Index', ignore.case =TRUE)] <- 'value'
 
   plot_ <- plot_ %>% plotly::add_lines(
     data = quote_,
+    name = paste0(
+      gsub(pattern = '^[a-z]+::', replacement = '', ignore.case = TRUE, x = deparse(arguments$FUN)),
+      '(',
+      names(arguments[4]),
+      '=',
+      arguments[[4]],
+      ')'
+    ),
     x = ~Index,
     y = ~value,
     inherit = FALSE
   )
+
+
+  # %>% plotly::add_annotations(
+  #
+  #   x= 0.5,
+  #
+  #   y= 0.5,
+  #
+  #   xref = "paper",
+  #
+  #   yref = "paper",
+  #
+  #   text = paste0(arguments[[1]], '(' ,arguments$n, ')'),
+  #
+  #   showarrow = TRUE
+  #
+  # )
 
   plot$main <- plot_
   attributes(plot)$quote <- toDF(quote)
@@ -307,6 +372,7 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
     invisible(plot)
   )
 
+
 }
 
 
@@ -314,8 +380,11 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
 
 #' Add RSI indicators to your
 #' chart
+#' @description
+#' A short description...
 #'
-#' Adds RSI to the chart
+#' `r lifecycle::badge("experimental")`
+#'
 #' @param plot A plotly object of either
 #' klines or OHLC
 #'
@@ -375,6 +444,75 @@ addRSI <- function(
 }
 
 
+#' add vertical lines to
+#' the chart
+#'
+#' @description
+#' A short description...
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' @param plot Chart
+#' @param object an XTS object with dates
+#' where the vertical line has to be drawn
+#' @param color description
+#'
+#' @export
+addVlines <- function(plot, object, color = 'steelblue') {
 
+  quote <- toDF(
+    object
+  )
+
+  vline <- function(x = 0, col = color) {
+
+    list(
+      type = "line",
+      y0 = 0,
+      y1 = 1,
+      yref = "paper",
+      x0 = x,
+      x1 = x,
+      line = list(
+        color = col,
+        dash="dot"
+        )
+    )
+
+  }
+
+  # 1) extract the main
+  # chart from the plot
+  plot_ <- plot$main
+
+
+
+  plot_ <- plotly::layout(
+    p = plot_,
+    shapes = do.call(
+      list,
+      lapply(
+        quote$Index,
+        function(x) {
+
+          vline(
+            x
+          )
+        }
+
+      )
+    )
+  )
+
+  plot$main <- plot_
+  attributes(plot)$quote <- toDF(quote)
+
+  return(
+    invisible(plot)
+  )
+
+
+
+}
 
 # script end;

@@ -13,5 +13,7 @@ klines or OHLC}
 \item{...}{See \code{\link[TTR:MACD]{TTR::MACD()}}}
 }
 \description{
-Add MACD indicator to the chart
+A short description...
+
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
