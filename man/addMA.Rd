@@ -11,12 +11,44 @@ addMA(plot, FUN = TTR::SMA, ...)
 \item{plot}{A plotly object of either
 klines or OHLC}
 
-\item{FUN}{A named function calculating MAs. See \code{\link[TTR:MACD]{TTR::MACD()}}}
+\item{FUN}{A named function calculating MAs. See \code{\link[TTR:MovingAverages]{TTR::SMA()}}}
 
-\item{...}{See \code{\link[TTR:MACD]{TTR::MACD()}}}
+\item{...}{See \code{\link[TTR:MovingAverages]{TTR::SMA()}}}
 }
 \description{
-A short description...
+The function supports all moving averages calculated
+by the TTR library. Has to be explicitly called.
 
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+}
+\examples{
+# script: scr_charting
+# date: 2023-10-25
+# author: Serkan Korkmaz, serkor1@duck.com
+# objective: Charting in general
+# script start;
+
+# library
+library(cryptoQuotes)
+
+# charting klines
+# with various indicators
+chart(
+  chart = kline(
+    ATOMUSDT
+  ) \%>\% addVolume() \%>\% addMA(
+    FUN = TTR::SMA,
+    n = 7
+  ) \%>\% addMA(
+    FUN = TTR::SMA,
+    n = 14
+  ) \%>\%
+    addBBands() \%>\%
+    addMACD() \%>\%
+    addRSI()
+
+)
+
+
+# script end;
 }

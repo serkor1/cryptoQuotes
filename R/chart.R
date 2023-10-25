@@ -34,7 +34,8 @@ kline <- function(
   # 2) Create candlestick
   # plot
   plot <- plotly::plot_ly(
-    data = quoteDF,showlegend = FALSE,
+    data = quoteDF,
+    showlegend = FALSE,
     name = attributes(quote)$interval,
     yaxis = 'y',
     x    = ~Index,
@@ -68,7 +69,7 @@ kline <- function(
     main = plot
   )
 
-  attributes(plot_list)$quote <- quoteDF
+  attributes(plot_list)$quote <- quote
   attributes(plot_list)$deficiency <- deficiency
 
   return(
@@ -96,6 +97,7 @@ ohlc <- function(
   # plot
   plot <- plotly::plot_ly(
     data = quoteDF,
+    showlegend = FALSE,
     name = attributes(quote)$interval,
     yaxis = 'y',
     x    = ~Index,
@@ -129,7 +131,7 @@ ohlc <- function(
     main = plot
   )
 
-  attributes(plot_list)$quote <- quoteDF
+  attributes(plot_list)$quote <- quote
   attributes(plot_list)$deficiency <- deficiency
 
   return(
@@ -154,73 +156,80 @@ chart <- function(
     chart,
     slider = TRUE
 ) {
+  suppressWarnings(
+    {
+      # 0) calculate number of
+      # charts
+      has_subplot <- length(chart) > 1
 
-  # 0) calculate number of
-  # charts
-  has_subplot <- length(chart) > 1
+      if (has_subplot) {
 
-  if (has_subplot) {
+        heights <- c(
+          0.5,
+          rep(
+            x          = (1-0.5)/ (length(chart) - 1),
+            length.out = length(chart) - 1
+          )
+        )
 
-    heights <- c(
-      0.5,
-      rep(
-        x          = (1-0.5)/ (length(chart) - 1),
-        length.out = length(chart) - 1
+      } else {
+
+        heights <- 1
+
+
+      }
+
+
+      quoteDF <- attributes(chart)$quote
+      quote   <-  attributes(chart)$quote
+
+
+
+
+      # 1) Main Chart
+      chart <- plotly::subplot(
+        chart,
+        nrows = length(chart),
+        shareX = TRUE,
+        titleY = TRUE,
+        heights = heights
       )
-    )
-
-  } else {
-
-    heights <- 1
 
 
-  }
+      chart <- chart %>% plotly::layout(
+        yaxis = list(
+          title = 'Price'
+        ),
+        xaxis = list(
+          rangeslider = list(
+            visible = slider
+            )
+        ),
+        showlegend = TRUE,
+        legend = list(orientation = 'h', x = 0, y = 1),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+      ) %>% plotly::add_annotations(
+        x= 0,
+        y= 1,
+        xref = "paper",
+        yref = "paper",
+        text = paste(
+          '<b>Ticker:</b>',
+          attributes(quote)$tickerInfo$ticker,
+          '<b>Interval:</b>', attributes(quote)$tickerInfo$interval, paste0('(', attributes(quote)$tickerInfo$market,')'),
+          '<b>Exchange:</b>', attributes(quote)$tickerInfo$source),
+        showarrow = FALSE,
+        font = list(
+          size = 18
+        )
 
+      )
 
-  quoteDF <- attributes(chart)$quote
-  quote   <-  attributes(chart)$quote
-
-
-
-
-  # 1) Main Chart
-  chart <- plotly::subplot(
-    chart,
-    nrows = length(chart),
-    shareX = TRUE,
-    titleY = TRUE,
-    heights = heights
+      return(chart)
+    }
   )
 
-  chart <- chart %>% plotly::layout(
-    yaxis = list(
-      title = 'Price'
-    ),
-    xaxis = list(
-      rangeslider = list(visible = slider)
-    ),
-    showlegend = TRUE,
-    legend = list(orientation = 'h', x = 0, y = 1),
-    paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)'
-  ) %>% plotly::add_annotations(
-    x= 0,
-    y= 1,
-    xref = "paper",
-    yref = "paper",
-    text = paste(
-      '<b>Ticker:</b>',
-      attributes(quote)$tickerInfo$ticker,
-      '<b>Interval:</b>', attributes(quote)$tickerInfo$interval, paste0('(', attributes(quote)$tickerInfo$market,')'),
-      '<b>Exchange:</b>', attributes(quote)$tickerInfo$source),
-    showarrow = FALSE,
-    font = list(
-      size = 18
-    )
-
-  )
-
-  return(chart)
 }
 
 

@@ -33,7 +33,7 @@ addBBands <- function(
   ## 1) convert the embedded
   ## data.frame in the plot
   ## to xts, zoo object
-  quote <- toQuote(
+  quote <- (
     attributes(plot)$quote
   )
 
@@ -65,6 +65,7 @@ addBBands <- function(
   ## to main plot_
   plot_ <- plot_ %>%
     plotly::add_lines(
+      showlegend = FALSE,
       data = indicator,
       x = ~Index,
       y = ~up,
@@ -77,6 +78,7 @@ addBBands <- function(
       data = indicator,
       x = ~Index,
       y = ~dn,
+      showlegend = FALSE,
       fill = 'tonexty',
       fillcolor = 'rgba(168, 216, 234, 0.1)',
       line = list(
@@ -85,6 +87,7 @@ addBBands <- function(
       inherit = FALSE
     ) %>%
     plotly::add_lines(
+      showlegend = FALSE,
       data = indicator,
       x = ~Index,
       y = ~mavg,
@@ -103,9 +106,7 @@ addBBands <- function(
   ## 6) pass the quote on
   ## to the attributes of the
   ## for further indicator plots
-  attributes(plot)$quote <- toDF(
-    quote
-  )
+  attributes(plot)$quote <- attributes(plot)$quote
 
 
   ## 7) return
@@ -131,13 +132,14 @@ addBBands <- function(
 #' klines or OHLC
 #'
 #' @returns NULL
+#' @example man/examples/scr_charting.R
 #' @export
 addVolume <- function(plot) {
 
   ## 1) extract the data
   ## and deficieny attribute
   ## fron the main plt.
-  quoteDF <- attributes(plot)$quote
+  quoteDF <- toDF(attributes(plot)$quote)
   deficiency <- attributes(plot)$deficiency
 
 
@@ -149,6 +151,7 @@ addVolume <- function(plot) {
     name = 'Volume',
     x = ~Index,
     y = ~Volume,
+    showlegend = FALSE,
     color = ~direction,
     type = 'bar',
     colors = c(
@@ -199,7 +202,7 @@ addVolume <- function(plot) {
 #' klines or OHLC
 #'
 #' @param ... See [TTR::MACD()]
-#'
+#' @example man/examples/scr_charting.R
 #' @export
 addMACD <- function(
     plot,
@@ -207,7 +210,7 @@ addMACD <- function(
 ) {
 
   # 1) Extract
-  quoteDF <- attributes(plot)$quote
+  quoteDF <- toDF(attributes(plot)$quote)
   deficiency <- attributes(plot)$deficiency
 
   # 2) calculate MACD
@@ -224,51 +227,60 @@ addMACD <- function(
     indicator$macd > indicator$signal
   )
 
-  plot_ <- plotly::plot_ly(
-    data = indicator,
-    name = 'MACD',
-    x    = ~Index,
-    y    = ~(macd - signal),
-    color = ~direction,
-    type = 'bar',
-    colors = c(
-      ifelse(
-        test = deficiency,
-        yes = '#FFD700',
-        no  = 'tomato'
+
+    plot_ <- plotly::plot_ly(
+      data = indicator,
+      showlegend = FALSE,
+      name = 'MACD',
+      x    = ~Index,
+      y    = ~(macd - signal),
+      color = ~direction,
+      type = 'bar',
+      colors = c(
+        ifelse(
+          test = deficiency,
+          yes = '#FFD700',
+          no  = 'tomato'
+        ),
+        ifelse(
+          test = deficiency,
+          yes = '#0000ff',
+          no  = 'palegreen'
+        )
       ),
-      ifelse(
-        test = deficiency,
-        yes = '#0000ff',
-        no  = 'palegreen'
+      marker = list(
+        line = list(
+          color = 'rgb(8,48,107)',
+          width = 0.5)
       )
-    ),
-    marker = list(
-      line = list(
-        color = 'rgb(8,48,107)',
-        width = 0.5)
+    ) %>% plotly::add_lines(
+      data = indicator,
+      showlegend = FALSE,
+      x = ~Index,
+      y = ~signal,
+      inherit = FALSE
+    ) %>% plotly::add_lines(
+      data = indicator,
+      showlegend = FALSE,
+      x = ~Index,
+      y = ~macd,
+      inherit = FALSE
+    )  %>% plotly::layout(
+      yaxis = list(
+        title = 'MACD'
+      )
     )
-  ) %>% plotly::add_lines(
-    data = indicator,
-    x = ~Index,
-    y = ~signal,
-    inherit = FALSE
-  ) %>% plotly::add_lines(
-    data = indicator,
-    x = ~Index,
-    y = ~macd,
-    inherit = FALSE
-  )  %>% plotly::layout(
-    yaxis = list(
-      title = 'MACD'
-    )
-  )
+
+
 
   plot$macd <- plot_
   attributes(plot)$quote <- attributes(plot)$quote
 
   return(
-    invisible(plot)
+
+      invisible(plot)
+
+
   )
 
 
@@ -280,16 +292,18 @@ addMACD <- function(
 #' to the chart.
 #'
 #' @description
-#' A short description...
+#'
+#' The function supports all moving averages calculated
+#' by the TTR library. Has to be explicitly called.
 #'
 #' `r lifecycle::badge("experimental")`
 #'
 #' @param plot A plotly object of either
 #' klines or OHLC
-#' @param FUN A named function calculating MAs. See [TTR::MACD()]
-#' @param ... See [TTR::MACD()]
+#' @param FUN A named function calculating MAs. See [TTR::SMA()]
+#' @param ... See [TTR::SMA()]
 #'
-#'
+#' @example man/examples/scr_charting.R
 #' @export
 addMA <- function(plot, FUN = TTR::SMA, ...) {
 
@@ -314,9 +328,7 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
   )
 
 
-  quote <- toQuote(
-    attributes(plot)$quote
-  )
+  quote <- attributes(plot)$quote
 
   # 1) extract the main
   # chart from the plot
@@ -349,28 +361,17 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
   )
 
 
-  # %>% plotly::add_annotations(
-  #
-  #   x= 0.5,
-  #
-  #   y= 0.5,
-  #
-  #   xref = "paper",
-  #
-  #   yref = "paper",
-  #
-  #   text = paste0(arguments[[1]], '(' ,arguments$n, ')'),
-  #
-  #   showarrow = TRUE
-  #
-  # )
+
 
   plot$main <- plot_
-  attributes(plot)$quote <- toDF(quote)
+  attributes(plot)$quote <- quote
+
 
   return(
     invisible(plot)
   )
+
+
 
 
 }
@@ -390,12 +391,13 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
 #'
 #' @param ... See [TTR::RSI()]
 #' @returns NULL
+#' @example man/examples/scr_charting.R
 #' @export
 addRSI <- function(
     plot,
     ...) {
 
-  quote <- toQuote(attributes(plot)$quote)
+  quote <- attributes(plot)$quote
   deficiency <- attributes(plot)$deficiency
   # 3) create volume
   # plot
@@ -413,6 +415,7 @@ addRSI <- function(
     name = 'RSI',
     x = ~Index,
     y = ~rsi,
+    showlegend = FALSE,
     mode = 'lines',
     type = 'scatter',
     color = I('steelblue')
@@ -457,29 +460,14 @@ addRSI <- function(
 #' where the vertical line has to be drawn
 #' @param color description
 #'
+#' @example man/examples/scr_addVlines.R
+#'
 #' @export
 addVlines <- function(plot, object, color = 'steelblue') {
 
   quote <- toDF(
     object
   )
-
-  vline <- function(x = 0, col = color) {
-
-    list(
-      type = "line",
-      y0 = 0,
-      y1 = 1,
-      yref = "paper",
-      x0 = x,
-      x1 = x,
-      line = list(
-        color = col,
-        dash="dot"
-        )
-    )
-
-  }
 
   # 1) extract the main
   # chart from the plot
@@ -492,11 +480,12 @@ addVlines <- function(plot, object, color = 'steelblue') {
     shapes = do.call(
       list,
       lapply(
-        quote$Index,
+        zoo::index(quote),
         function(x) {
 
           vline(
-            x
+            x,
+            color = color
           )
         }
 

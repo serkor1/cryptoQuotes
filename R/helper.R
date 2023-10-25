@@ -228,6 +228,7 @@ convertIndicator <- function(indicator) {
 
 toDF <- function(quote) {
 
+
   # this function converts
   # the quote to a data.frame
   # for the plotting and reshaping
@@ -248,13 +249,16 @@ toDF <- function(quote) {
   # 1) determine
   # wether the the day is closed
   # green
-  try(
+  if (all(c('Open', 'Close') %in% colnames(DF))) {
+
     DF$direction <- ifelse(
       test = DF$Close > DF$Open,
       yes  = 'Increasing',
       no   = 'Decreasing'
     )
-  )
+
+  }
+
 
   attributes(DF)$tickerInfo <- attr_list
 
@@ -265,19 +269,43 @@ toDF <- function(quote) {
 }
 
 
-
 toQuote <- function(DF) {
 
-  quote <- xts::as.xts(DF[,c('Open','High', 'Low', 'Close', 'Volume', 'Index')])
-  zoo::index(quote) <- as.POSIXct(DF$Index)
+  quote <- xts::as.xts(
+    DF[,c('Open','High', 'Low', 'Close', 'Volume', 'Index')]
+    )
+
+  zoo::index(quote) <- as.POSIXct(
+    DF$Index
+    )
 
   attributes(quote)$tickerInfo <- attributes(DF)$tickerInfo
+
   return(
     quote
   )
 }
 
 
+vline <- function(
+    x = 0,
+    color = 'steelblue'
+) {
+
+  list(
+    type = "line",
+    y0 = 0,
+    y1 = 1,
+    yref = "paper",
+    x0 = x,
+    x1 = x,
+    line = list(
+      color = col,
+      dash="dot"
+    )
+  )
+
+}
 
 
 
