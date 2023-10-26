@@ -465,9 +465,9 @@ addRSI <- function(
 #' @export
 addVlines <- function(plot, object, color = 'steelblue') {
 
-  quote <- toDF(
-    object
-  )
+  # quote <- toDF(
+  #   object
+  # )
 
   # 1) extract the main
   # chart from the plot
@@ -480,7 +480,7 @@ addVlines <- function(plot, object, color = 'steelblue') {
     shapes = do.call(
       list,
       lapply(
-        zoo::index(quote),
+        zoo::index(object),
         function(x) {
 
           vline(
@@ -494,7 +494,7 @@ addVlines <- function(plot, object, color = 'steelblue') {
   )
 
   plot$main <- plot_
-  attributes(plot)$quote <- toDF(quote)
+  # attributes(plot)$quote <- toDF(quote)
 
   return(
     invisible(plot)
