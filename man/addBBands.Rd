@@ -20,3 +20,12 @@ A short description...
 
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
+\seealso{
+Other chart indicators: 
+\code{\link{addMACD}()},
+\code{\link{addMA}()},
+\code{\link{addRSI}()},
+\code{\link{addVlines}()},
+\code{\link{addVolume}()}
+}
+\concept{chart indicators}

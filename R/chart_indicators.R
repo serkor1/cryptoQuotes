@@ -22,6 +22,7 @@
 #' @param ... See [TTR::BBands()]
 
 #' @returns NULL
+#' @family chart indicators
 #' @export
 addBBands <- function(
     plot,
@@ -133,6 +134,8 @@ addBBands <- function(
 #'
 #' @returns NULL
 #' @example man/examples/scr_charting.R
+#'
+#' @family chart indicators
 #' @export
 addVolume <- function(plot) {
 
@@ -201,8 +204,13 @@ addVolume <- function(plot) {
 #' @param plot A plotly object of either
 #' klines or OHLC
 #'
+
+#'
 #' @param ... See [TTR::MACD()]
 #' @example man/examples/scr_charting.R
+#'
+#'
+#' @family chart indicators
 #' @export
 addMACD <- function(
     plot,
@@ -228,48 +236,61 @@ addMACD <- function(
   )
 
 
-    plot_ <- plotly::plot_ly(
-      data = indicator,
-      showlegend = FALSE,
-      name = 'MACD',
-      x    = ~Index,
-      y    = ~(macd - signal),
-      color = ~direction,
-      type = 'bar',
-      colors = c(
-        ifelse(
-          test = deficiency,
-          yes = '#FFD700',
-          no  = 'tomato'
-        ),
-        ifelse(
-          test = deficiency,
-          yes = '#0000ff',
-          no  = 'palegreen'
-        )
+  plot_ <- plotly::plot_ly(
+    data = indicator,
+    showlegend = FALSE,
+    name = 'MACD',
+    x    = ~Index,
+    y    = ~(macd - signal),
+    color = ~direction,
+    type = 'bar',
+    colors = c(
+      ifelse(
+        test = deficiency,
+        yes = '#FFD700',
+        no  = 'tomato'
       ),
-      marker = list(
-        line = list(
-          color = 'rgb(8,48,107)',
-          width = 0.5)
+      ifelse(
+        test = deficiency,
+        yes = '#0000ff',
+        no  = 'palegreen'
       )
-    ) %>% plotly::add_lines(
-      data = indicator,
-      showlegend = FALSE,
-      x = ~Index,
-      y = ~signal,
-      inherit = FALSE
-    ) %>% plotly::add_lines(
-      data = indicator,
-      showlegend = FALSE,
-      x = ~Index,
-      y = ~macd,
-      inherit = FALSE
-    )  %>% plotly::layout(
-      yaxis = list(
-        title = 'MACD'
-      )
+    ),
+    marker = list(
+      line = list(
+        color = 'rgb(8,48,107)',
+        width = 0.5)
     )
+  ) %>% plotly::add_lines(
+    data = indicator,
+    showlegend = FALSE,
+    x = ~Index,
+    y = ~signal,
+    color = I('steelblue'),
+    inherit = FALSE
+  ) %>% plotly::add_lines(
+    data = indicator,
+    showlegend = FALSE,
+    x = ~Index,
+    y = ~macd,
+    color = I('orange'),
+    inherit = FALSE
+  )  %>% plotly::layout(
+    yaxis = list(
+      title = 'MACD'
+    )
+  ) %>% plotly::add_annotations(
+    x= 0,
+    y= 1,
+    xref = "paper",
+    yref = "paper",
+    text = 'Placeholder',
+    showarrow = FALSE,
+    font = list(
+      size = 12
+    )
+
+  )
 
 
 
@@ -278,7 +299,7 @@ addMACD <- function(
 
   return(
 
-      invisible(plot)
+    invisible(plot)
 
 
   )
@@ -304,6 +325,9 @@ addMACD <- function(
 #' @param ... See [TTR::SMA()]
 #'
 #' @example man/examples/scr_charting.R
+#'
+#'
+#' @family chart indicators
 #' @export
 addMA <- function(plot, FUN = TTR::SMA, ...) {
 
@@ -392,6 +416,9 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
 #' @param ... See [TTR::RSI()]
 #' @returns NULL
 #' @example man/examples/scr_charting.R
+#'
+#'
+#' @family chart indicators
 #' @export
 addRSI <- function(
     plot,
@@ -462,6 +489,7 @@ addRSI <- function(
 #'
 #' @example man/examples/scr_addVlines.R
 #'
+#' @family chart indicators
 #' @export
 addVlines <- function(plot, object, color = 'steelblue') {
 

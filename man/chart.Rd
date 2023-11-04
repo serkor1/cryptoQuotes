@@ -15,3 +15,9 @@ indicators}
 \description{
 Chart your data
 }
+\seealso{
+Other Charting: 
+\code{\link{kline}()},
+\code{\link{ohlc}()}
+}
+\concept{Charting}

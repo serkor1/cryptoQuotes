@@ -1,0 +1,75 @@
+---
+title: "Charting using Plotly"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Basic kline and bar chart
+
+The ```cryptoQuotes``` uses ```plotly``` to visualize the quotes. It supports color deficiency as well.
+
+> **Note:** As per `r paste(Sys.Date())` the charting is still in its experimental
+> phase.
+
+
+```{r setup}
+library(cryptoQuotes)
+```
+
+
+
+```{r basic OHLC chart, out.width="100%",fig.align='center',fig.height=8}
+## simple bar-chart
+## without indicators
+chart(
+  chart = ohlc(
+    ATOMUSDT
+  )
+)
+```
+
+
+```{r basic kline chart, out.width="100%",fig.align='center',fig.height=8}
+## simple kline chart
+## without indicators
+chart(
+  chart = kline(
+    ATOMUSDT
+  )
+)
+```
+
+
+## Charting with Indicators
+
+### MACD and Bollnger Bands
+
+The charts supports indicators that are added with the `magrittr` pipe operator. 
+
+```{r basic kline chart with MACD and Bollinger Bands, out.width="100%",fig.align='center',fig.height=8}
+## simple kline chart
+## without indicators
+chart(
+  chart = kline(
+    ATOMUSDT
+  ) %>% addMACD() %>% addBBands()
+)
+```
+
+
+### Bollinger Bands and Volume
+
+```{r basic kline chart with Bollinger Bands and Volume, out.width="100%",fig.align='center',fig.height=8}
+## simple kline chart
+## without indicators
+chart(
+  chart = kline(
+    ATOMUSDT
+  )  %>% addBBands() %>% addVolume()
+)
+```

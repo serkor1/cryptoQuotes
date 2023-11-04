@@ -49,3 +49,12 @@ chart(
 
 # script end;
 }
+\seealso{
+Other chart indicators: 
+\code{\link{addBBands}()},
+\code{\link{addMACD}()},
+\code{\link{addMA}()},
+\code{\link{addVlines}()},
+\code{\link{addVolume}()}
+}
+\concept{chart indicators}

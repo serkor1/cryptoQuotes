@@ -14,7 +14,7 @@
 #' @param deficiency Logical. FALSE by default, if TRUE color defiency compliant
 #' colors are used.
 #' @param slider Logical. TRUE by default. If FALSE, no slider will be included.
-#'
+#' @family Charting
 #' @returns NULL
 #' @export
 
@@ -79,7 +79,15 @@ kline <- function(
 }
 
 
-
+#' chart quote using
+#' ohlc bars
+#'
+#' @param quote A cryptoQuote in xts/zoo format.
+#' @param deficiency Logical. FALSE by default, if TRUE color defiency compliant
+#' colors are used.
+#' @param slider Logical. TRUE by default. If FALSE, no slider will be included.
+#' @family Charting
+#' @export
 ohlc <- function(
     quote,
     deficiency = FALSE,
@@ -150,7 +158,7 @@ ohlc <- function(
 #' indicators
 #'
 #' @param slider Logical. TRUE by default.
-#'
+#' @family Charting
 #' @export
 chart <- function(
     chart,
