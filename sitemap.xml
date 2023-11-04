@@ -16,7 +16,10 @@
     <loc>https://serkor1.github.io/cryptoQuotes/articles/03-exchanges.html</loc>
   </url>
   <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/04-quantmod.html</loc>
+    <loc>https://serkor1.github.io/cryptoQuotes/articles/04-charting.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/articles/05-quantmod.html</loc>
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/articles/cryptoQuotes.html</loc>
@@ -74,6 +77,9 @@
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/kline.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/ohlc.html</loc>
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/pipe.html</loc>
