@@ -22,7 +22,7 @@ availableExchanges <- function(){
   rlang::inform(
     message = c(
       'i' = c('Available exchanges'),
-      'v' = paste(c('binance', 'kucoin', 'kraken'), collapse = ', ')
+      'v' = paste(c('binance', 'kucoin', 'kraken', 'bitmart'), collapse = ', ')
 
     )
   )

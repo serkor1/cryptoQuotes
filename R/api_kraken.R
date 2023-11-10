@@ -375,8 +375,18 @@ krakenQuote <- function(
       )
       ),
       query = list(
-        from = from,
-        to = to
+        from = as.numeric(
+          as.POSIXct(
+            from,
+            tz = 'UTC'
+          )
+        ),
+        to = as.numeric(
+          as.POSIXct(
+            to,
+            tz = 'UTC'
+          )
+        )
       )
     )
 
@@ -426,6 +436,7 @@ krakenQuote <- function(
   }
 
 
+
   # 3) format response
   # accordingly
 
@@ -442,15 +453,27 @@ krakenQuote <- function(
   # 3.2) format
   # dates
   index <- as.POSIXct(
-    as.numeric(response[,1]),
+    as.numeric(response[,1])/ifelse(futures, 1000, 1),
     origin = '1970-01-01',
     tz = 'UTC'
   )
 
 
+  if (futures) {
+
+    idx <- c(2:6)
+
+  } else {
+
+    idx <- c(2:5, 7)
+
+  }
+
+
+
   # 3.3) extract needed
   # columns from the response
-  response <- response[,c(2:5, 7)]
+  response <- response[,idx]
   colnames(response) <- column_names
 
   # 3.4) convert all values

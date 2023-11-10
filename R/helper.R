@@ -77,10 +77,13 @@ convert_date <- function(
 }
 
 
+
+
+
 # generate data;
 # this data is for the purpose of presenting
 # and error-testing
-generate_data <- function(exchanges = c('binance', 'kucoin')) {
+generate_data <- function(exchanges = c('binance', 'kucoin', 'kraken', 'bitmart')) {
 
   markets <- c(
     'spot', 'futures'
@@ -92,6 +95,8 @@ generate_data <- function(exchanges = c('binance', 'kucoin')) {
     seq_along(exchanges),
     function(x) {
 
+      # determine tickers:
+      # First is SPOT, second is FUTURES
       if (x == 1) {
 
         # Binance
@@ -105,6 +110,18 @@ generate_data <- function(exchanges = c('binance', 'kucoin')) {
 
       }
 
+      if (x == 3) {
+
+        ticker <- c('ATOMUSDT', 'PF_ATOMUSD')
+
+      }
+
+      if (x == 4) {
+
+        ticker <- c('ATOM_USDT', 'ATOMUSDT')
+
+      }
+
 
       # for each exchange
       # we collect futures
@@ -113,7 +130,13 @@ generate_data <- function(exchanges = c('binance', 'kucoin')) {
         seq_along(markets),
         function(y) {
 
+          message(
+            paste(
+              'ticker:', ticker[y], 'market:', markets[y], 'exchange:', exchanges[x])
+          )
           Sys.sleep(2)
+
+
 
           # Collect data
           quote <- getQuote(
@@ -121,8 +144,8 @@ generate_data <- function(exchanges = c('binance', 'kucoin')) {
             source   = exchanges[x],
             futures  = ifelse(markets[y] == 'futures', TRUE, FALSE),
             interval = '15m',
-            from     = '2023-10-01',
-            to       = '2023-10-02'
+            from     = '2023-11-01',
+            to       = '2023-11-03'
           )
 
           # quote$exchange <-  x
@@ -158,13 +181,9 @@ generate_data <- function(exchanges = c('binance', 'kucoin')) {
 
 }
 
-# internalTest <- generate_data()
-# usethis::use_data(
-#   internalTest,
-#   internal = TRUE,
-#   overwrite = TRUE
-#
-# )
+
+
+
 
 
 convertIndicator <- function(indicator) {
