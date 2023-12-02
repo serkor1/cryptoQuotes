@@ -83,7 +83,15 @@ convert_date <- function(
 # generate data;
 # this data is for the purpose of presenting
 # and error-testing
-generate_data <- function(exchanges = c('binance', 'kucoin', 'kraken', 'bitmart')) {
+generate_data <- function(
+    exchanges = c(
+      'binance',
+      'kucoin'
+      # ,
+      # 'kraken',
+      # 'bitmart'
+      )
+    ) {
 
   markets <- c(
     'spot', 'futures'
@@ -110,17 +118,17 @@ generate_data <- function(exchanges = c('binance', 'kucoin', 'kraken', 'bitmart'
 
       }
 
-      if (x == 3) {
+      # if (x == 3) {
+      #
+      #   ticker <- c('ATOMUSDT', 'PF_ATOMUSD')
+      #
+      # }
 
-        ticker <- c('ATOMUSDT', 'PF_ATOMUSD')
-
-      }
-
-      if (x == 4) {
-
-        ticker <- c('ATOM_USDT', 'ATOMUSDT')
-
-      }
+      # if (x == 4) {
+      #
+      #   ticker <- c('ATOM_USDT', 'ATOMUSDT')
+      #
+      # }
 
 
       # for each exchange
@@ -144,8 +152,8 @@ generate_data <- function(exchanges = c('binance', 'kucoin', 'kraken', 'bitmart'
             source   = exchanges[x],
             futures  = ifelse(markets[y] == 'futures', TRUE, FALSE),
             interval = '15m',
-            from     = '2023-11-01',
-            to       = '2023-11-03'
+            from     = '2023-11-25',
+            to       = '2023-11-28'
           )
 
           # quote$exchange <-  x
@@ -169,15 +177,9 @@ generate_data <- function(exchanges = c('binance', 'kucoin', 'kraken', 'bitmart'
 
   names(temp) <- exchanges
 
-
   return(
     temp
   )
-
-
-
-
-
 
 }
 
