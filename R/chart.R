@@ -205,6 +205,7 @@ chart <- function(
 
 
       chart <- chart %>% plotly::layout(
+        margin = list(l = 60, r = 60, b = 110, t = 60),
         yaxis = list(
           title = 'Price'
         ),
@@ -214,12 +215,12 @@ chart <- function(
             )
         ),
         showlegend = TRUE,
-        legend = list(orientation = 'h', x = 0, y = 1),
+        legend = list(orientation = 'h', x = 0, y = 1.1),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)'
       ) %>% plotly::add_annotations(
         x= 0,
-        y= 1,
+        y= 1.05,
         xref = "paper",
         yref = "paper",
         text = paste(

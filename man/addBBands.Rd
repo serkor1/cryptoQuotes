@@ -22,10 +22,10 @@ A short description...
 }
 \seealso{
 Other chart indicators: 
+\code{\link{addEvents}()},
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
 \code{\link{addRSI}()},
-\code{\link{addVlines}()},
 \code{\link{addVolume}()}
 }
 \concept{chart indicators}

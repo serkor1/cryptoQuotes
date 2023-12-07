@@ -310,7 +310,7 @@ toQuote <- function(DF) {
 
 vline <- function(
     x = 0,
-    color = 'steelblue'
+    col = 'steelblue'
 ) {
 
   list(
@@ -330,4 +330,31 @@ vline <- function(
 
 
 
+
+annotations <- function(
+    x = 0,
+    text = 'text'
+) {
+
+  list(
+    x = x,
+    y = 1,
+    text = text,
+    showarrow = FALSE,
+    #xref = 'paper',
+    yref = 'paper',
+    xanchor = 'right',
+    yanchor = 'auto',
+    xshift = 0,
+    textangle = -90,
+    yshift = 0,
+    font = list(
+      size = 15,
+      color = "black",
+      angle = '90'
+    )
+  )
+
+
+}
 # script end;

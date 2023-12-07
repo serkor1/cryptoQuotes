@@ -2,10 +2,10 @@
 
 export("%>%")
 export(addBBands)
+export(addEvents)
 export(addMA)
 export(addMACD)
 export(addRSI)
-export(addVlines)
 export(addVolume)
 export(availableExchanges)
 export(availableIntervals)

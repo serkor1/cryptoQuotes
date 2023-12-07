@@ -55,9 +55,9 @@ chart(
 \seealso{
 Other chart indicators: 
 \code{\link{addBBands}()},
+\code{\link{addEvents}()},
 \code{\link{addMACD}()},
 \code{\link{addRSI}()},
-\code{\link{addVlines}()},
 \code{\link{addVolume}()}
 }
 \concept{chart indicators}
