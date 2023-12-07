@@ -6,9 +6,10 @@ articles:
   02-tickers: 02-tickers.html
   03-exchanges: 03-exchanges.html
   04-charting: 04-charting.html
+  04-chartingEvents: 04-chartingEvents.html
   05-quantmod: 05-quantmod.html
   cryptoQuotes: cryptoQuotes.html
-last_built: 2023-12-02T08:57Z
+last_built: 2023-12-07T10:33Z
 urls:
   reference: https://serkor1.github.io/cryptoQuotes/reference
   article: https://serkor1.github.io/cryptoQuotes/articles

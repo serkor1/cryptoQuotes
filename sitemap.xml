@@ -19,6 +19,9 @@
     <loc>https://serkor1.github.io/cryptoQuotes/articles/04-charting.html</loc>
   </url>
   <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/articles/04-chartingEvents.html</loc>
+  </url>
+  <url>
     <loc>https://serkor1.github.io/cryptoQuotes/articles/05-quantmod.html</loc>
   </url>
   <url>
@@ -40,6 +43,9 @@
     <loc>https://serkor1.github.io/cryptoQuotes/reference/addBBands.html</loc>
   </url>
   <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/addEvents.html</loc>
+  </url>
+  <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/addMA.html</loc>
   </url>
   <url>
@@ -47,9 +53,6 @@
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/addRSI.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/addVlines.html</loc>
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/addVolume.html</loc>
