@@ -7,6 +7,25 @@
 
 
 
+constructInterval <- function(source, futures, interval) {
+
+  # 1) construct the interval
+  interval <- get(
+    paste0(source, 'Intervals')
+  )(
+    futures = futures,
+    interval = interval
+  )
+
+  # 2) return the interval
+  return(
+    interval
+  )
+
+}
+
+
+
 # base-url;
 baseUrl <- function(
     source = 'binance',
