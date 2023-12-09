@@ -93,8 +93,6 @@ testthat::test_that(
   desc = "getQuote failing GET requests from Binance Spot market",
   code = {
 
-    # 1) skip tests on github
-    testthat::skip_on_ci()
 
     testthat::expect_error(
       object = cryptoQuotes::getQuote(
@@ -110,9 +108,6 @@ testthat::test_that(
 testthat::test_that(
   desc = "getQuote failing GET requests from Binance Futures market",
   code = {
-
-    # 1) skip tests on github
-    testthat::skip_on_ci()
 
     testthat::expect_error(
       object = cryptoQuotes::getQuote(
@@ -130,9 +125,6 @@ testthat::test_that(
 testthat::test_that(
   desc = "getQuote failing GET requests from KuCoin Futures market",
   code = {
-
-    # 1) skip tests on github
-    testthat::skip_on_ci()
 
     # 2) determine test parameter
     testthat::expect_error(
@@ -153,9 +145,6 @@ testthat::test_that(
 testthat::test_that(
   desc = "getQuote failing GET requests from KuCoin Spot market",
   code = {
-
-    # 1) skip tests on github
-    testthat::skip_on_ci()
 
     # 2) determine test parameter
     testthat::expect_error(
