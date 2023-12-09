@@ -1,5 +1,5 @@
 ---
-title: "Intervals"
+title: "Available intervals"
 ---
 
 ```{r, include = FALSE}
@@ -13,9 +13,9 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-#### Available intervals
+The available intervals depends on the exchange that you use as your `source` of market data. It is, for example, only possible to get monthly data from `binance` while ```kucoin``` doesn't support it. 
 
-The available intervals depends on the exchange that you use, as your `source` of market data. It is, for example, only possible to get monthly data from `binance`. To get an overview of the available intervals, the `cryptoQuotes::availableIntervals`-function can be used. It takes two arguments, `source` and `futures`.
+To get an overview of the available intervals, the `cryptoQuotes::availableIntervals`-function can be used. It takes two arguments, `source` and `futures`.
 
 > **Note:** The same intervals are not necessarily
 > equal across markets on the same exchange
@@ -29,8 +29,8 @@ cryptoQuotes::availableIntervals(
 
 ```{r}
 cryptoQuotes::availableIntervals(
-  source = 'kucoin',
-  futures = FALSE
+  source = 'binance',
+  futures = TRUE
 )
 ```
 

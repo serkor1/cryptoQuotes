@@ -1,5 +1,5 @@
 ---
-title: "Available Tickers"
+title: "Available tickers"
 ---
 
 ```{r, include = FALSE}
@@ -17,11 +17,10 @@ library(cryptoQuotes)
 
 All tradable tickers on each exchange is supported. The naming convention differs across exchanges, so passing `ATOMUSDT` on the `cryptoQuotes::getQuote` as an argument will not necessarily provide you with the ticker you are looking for.
 
+>***Note:*** Some exchanges uses different tickers for the same pair across markets. So the ticker ATOM-USDT in the spot market might have a different ticker in the perpertual futures market.
+
 To get all tradable assets on the desired market, and exchange, you can use the `cryptoQuotes::availableTickers()` function.
 
-> **Note: the function here is not evaluated as it 
-> fails the R-CMD-CHECK on github, and CRAN. The function returns a character
-> vector with all available tickers
 
 ```{r, eval=FALSE}
 cryptoQuotes::availableTickers(
@@ -30,3 +29,7 @@ cryptoQuotes::availableTickers(
 )
 ```
 
+
+> **Note:** the function here is not evaluated as it 
+> fails the R-CMD-CHECK on github, and CRAN. The function returns a character
+> vector with all available tickers

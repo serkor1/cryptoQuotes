@@ -1,5 +1,5 @@
 ---
-title: "Supported Exchanges"
+title: "Supported exchanges"
 ---
 
 ```{r, include = FALSE}
@@ -12,8 +12,6 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(cryptoQuotes)
 ```
-
-#### Supported exchanges
 
 The currently supported exchanges can be viewed using the `cryptoQuotes::availableExchanges`-function. It has no `arguments` and are updated as more exchanges are added to the package.
 

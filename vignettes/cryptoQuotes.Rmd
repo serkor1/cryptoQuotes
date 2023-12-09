@@ -1,8 +1,9 @@
 ---
-title: "The basics"
+title: "Crypto prices in R"
+subtitle: "An introduction"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The basics}
+  %\VignetteIndexEntry{Crypto prices in R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,8 +19,11 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
+This library provides access to recent, and historical, crypto prices from various centralized exchanges using a high level unified API. It supports perpetual futures and spot markets, with varying time intervals.
 
-### Futures market
+In this vignette, we will show how the ```ATOMUSDT```-pair can be retrieved from Binance and Kucoin for the futures and spot market, and how these prices can plotted with the most common charts and indicators
+
+### Binance futures market
 
 ```{r, eval=FALSE}
 ## get OHLC data
@@ -35,7 +39,6 @@ ATOMUSDT <- cryptoQuotes::getQuote(
 )
 ```
 
-
 The USDT denominated ATOM, can be charted directly via the `chart`-function, for a quick overview.
 
 ```{r, include = FALSE, message=FALSE, echo=FALSE}
@@ -48,16 +51,14 @@ ATOMUSDT <- cryptoQuotes:::internalTest[[1]][[2]]
 ```{r, out.width="100%",fig.align='center',fig.height=5}
 ## Create a chart
 cryptoQuotes::chart(
-  cryptoQuotes::kline(
-    ATOMUSDT,
-    deficiency = FALSE
-  ) %>% cryptoQuotes::addVolume() %>% cryptoQuotes::addBBands(cols = c('close'))
+  cryptoQuotes::kline(ATOMUSDT, deficiency = FALSE) %>%
+    cryptoQuotes::addVolume() %>% 
+    cryptoQuotes::addBBands(cols = c('close'))
 )
 ```
 
 
-### Spot market
-
+### Kucoin spot market
 
 ```{r, eval=FALSE}
 ## get OHLC data
@@ -73,7 +74,6 @@ ATOMUSDT <- cryptoQuotes::getQuote(
 )
 ```
 
-
 The USDT denominated ATOM, can be charted directly via the `chart`-function, for a quick overview.
 
 ```{r, include = FALSE, message=FALSE, echo=FALSE}
@@ -86,9 +86,8 @@ ATOMUSDT <- cryptoQuotes:::internalTest[[2]][[1]]
 ```{r, out.width="100%",fig.align='center',fig.height=5}
 ## Create a chart
 cryptoQuotes::chart(
-  cryptoQuotes::kline(
-    ATOMUSDT,
-    deficiency = FALSE
-  ) %>% cryptoQuotes::addVolume() %>% cryptoQuotes::addRSI()
+  cryptoQuotes::kline(ATOMUSDT, deficiency = FALSE) %>%
+    cryptoQuotes::addVolume() %>% 
+    cryptoQuotes::addRSI()
 )
 ```
