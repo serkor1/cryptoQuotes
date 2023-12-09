@@ -4,7 +4,7 @@ Version: 0.0.0
 Authors@R: c(
     person("Serkan", "Korkmaz", role = c("cre", "aut", "ctb", "cph"), email = 'serkor1@duck.com', comment = c(ORCID = "0000-0002-5052-0982"))
   )
-Description: Access spot and futures markets from major cryptocurrency exchanges.
+Description: A unified access spot and futures markets from major cryptocurrency exchanges.
 License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
