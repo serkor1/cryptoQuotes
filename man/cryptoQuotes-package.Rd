@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Access spot and futures markets from major cryptocurrency exchanges.
+A unified access spot and futures markets from major cryptocurrency exchanges.
 }
 \seealso{
 Useful links:

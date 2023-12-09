@@ -10,9 +10,11 @@
 #' @param interval A character vector of length 1. See [availableIntervals()] for a full list.
 #' @param futures A logical value. TRUE by default. If FALSE, the function will return spot prices.
 #' @param from A character vector of length 1. Given in %Y-%m-%d format.
-#' @param to A character vector of length 1.Given in %Y-%m-%d format.
+#' @param to A character vector of length 1. Given in %Y-%m-%d format.
 #'
 #' @example man/examples/scr_getQuote.R
+#'
+#' @returns an xts object with Open, High, Low, Close and Volume.
 #'
 #' @export
 

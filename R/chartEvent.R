@@ -1,9 +1,6 @@
 #' add eventlines to
 #' the chart
 #'
-#' @description
-#' A short description...
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' @param plot Chart
@@ -12,6 +9,8 @@
 #' @example man/examples/scr_addEvents.R
 #'
 #' @family chart indicators
+#'
+#' @returns NULL
 #' @export
 addEvents <- function(
     plot,

@@ -25,7 +25,10 @@ getQuote(
 
 \item{from}{A character vector of length 1. Given in \%Y-\%m-\%d format.}
 
-\item{to}{A character vector of length 1.Given in \%Y-\%m-\%d format.}
+\item{to}{A character vector of length 1. Given in \%Y-\%m-\%d format.}
+}
+\value{
+an xts object with Open, High, Low, Close and Volume.
 }
 \description{
 This function returns a crypto quote from

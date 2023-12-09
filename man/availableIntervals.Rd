@@ -11,7 +11,7 @@ availableIntervals(source = "binance", futures = TRUE)
 \item{source}{character vector of length one. Must be the name of the
 supported exchange}
 
-\item{futures}{logical. TRUE by default. If FALSE, spotmarket are
+\item{futures}{logical. TRUE by default. If FALSE, spot market are
 returned}
 }
 \description{

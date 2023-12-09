@@ -13,7 +13,6 @@
 #' @returns Returns a character vector
 #' of length N equal to the tradable tickers
 #'
-#'
 #' @export
 availableTickers <- function(
     source  = 'binance',

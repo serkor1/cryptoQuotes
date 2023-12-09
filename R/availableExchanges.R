@@ -9,6 +9,7 @@
 #'
 #' This function returns all
 #' available exchanges as a message in the console.
+#'
 #' @example man/examples/scr_availableExchanges.R
 #'
 #' @returns NULL

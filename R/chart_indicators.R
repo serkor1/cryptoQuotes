@@ -20,7 +20,7 @@
 #' @param cols a vector of column names for the
 #' Bollinger bands calculations.
 #' @param ... See [TTR::BBands()]
-
+#' @example man/examples/scr_charting.R
 #' @returns NULL
 #' @family chart indicators
 #' @export
@@ -204,12 +204,11 @@ addVolume <- function(plot) {
 #' @param plot A plotly object of either
 #' klines or OHLC
 #'
-
 #'
 #' @param ... See [TTR::MACD()]
 #' @example man/examples/scr_charting.R
 #'
-#'
+#' @returns NULL
 #' @family chart indicators
 #' @export
 addMACD <- function(
@@ -326,7 +325,7 @@ addMACD <- function(
 #'
 #' @example man/examples/scr_charting.R
 #'
-#'
+#' @returns NULL
 #' @family chart indicators
 #' @export
 addMA <- function(plot, FUN = TTR::SMA, ...) {

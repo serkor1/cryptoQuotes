@@ -87,6 +87,9 @@ kline <- function(
 #' colors are used.
 #' @param slider Logical. TRUE by default. If FALSE, no slider will be included.
 #' @family Charting
+#' @example man/examples/scr_charting.R
+#'
+#' @returns NULL
 #' @export
 ohlc <- function(
     quote,
@@ -159,6 +162,9 @@ ohlc <- function(
 #'
 #' @param slider Logical. TRUE by default.
 #' @family Charting
+#'
+#' @example man/examples/scr_charting.R
+#' @returns Returns a plotly object
 #' @export
 chart <- function(
     chart,
