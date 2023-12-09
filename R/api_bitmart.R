@@ -344,6 +344,11 @@ bitmartQuote <- function(
     )
   )
 
+  # 1.1) Check for error
+  check_for_errors(
+    response = response
+  )
+
 
   # 2) parse response
   response <- jsonlite::fromJSON(

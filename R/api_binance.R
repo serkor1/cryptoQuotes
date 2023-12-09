@@ -159,6 +159,7 @@ binanceTickers <- function(
     path = endPoint
   )
 
+
   # 3) parse response
   response <- jsonlite::fromJSON(
     txt = httr::content(
@@ -328,6 +329,11 @@ binanceQuote <- function(
       from = from,
       to   = to
     )
+  )
+
+  # 1.1) Check for error
+  check_for_errors(
+    response = response
   )
 
   # 2) parse response

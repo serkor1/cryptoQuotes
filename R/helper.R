@@ -357,4 +357,99 @@ annotations <- function(
 
 
 }
+
+
+
+# check for http errors;
+check_for_errors <- function(
+    response,
+    call = rlang::caller_env(n = 3)
+) {
+
+  # 1) check for error;
+  #
+  # If an error code is thrown
+  # or the response includes
+  # an empty list.
+  #
+  # Not all failed API calls returns
+  # a propoer code.
+  error_condition <- httr::http_error(response)
+
+  # 1.1) convert content
+  # and check its content if
+  # the returns a list
+  check_content <- jsonlite::fromJSON(
+    txt = httr::content(
+      response,
+      encoding = 'UTF-8',
+      as = 'text'
+    )
+  )
+
+  if (inherits(check_content, 'list')) {
+
+    no_data_returned <- all(
+      sapply(
+        X = jsonlite::fromJSON(
+          txt = httr::content(
+            response,
+            encoding = 'UTF-8',
+            as = 'text'
+          )
+        ),
+        FUN = function(x) {
+          (
+            inherits(x = x, what = 'character') | !length(x)
+          )
+
+
+        }
+      )
+    )
+
+    error_condition <- error_condition | no_data_returned
+
+  }
+
+  if (error_condition) {
+
+    # 2) abort remaining
+    # operations and paste
+    # the error message
+    error_message <- jsonlite::fromJSON(
+      txt = httr::content(
+        response,
+        encoding = 'UTF-8',
+        as = 'text'
+      )
+    )
+
+    # 2.1) check for empty
+    # content in the error messages
+    # this is relevant for REST APIs like
+    # KuCoin Futures.
+    idx <- sapply(error_message, function(x){!length(x)})
+    error_message[idx] <- 'No sensible error information.'
+
+    # 2.2) extract a the error
+    # message.
+    #
+    # NOTE: its not possible to
+    # use, say, ['msg'] as the container
+    # for each API varies. So this shotgun approach
+    # is somewhat sensible
+    rlang::abort(
+      message = paste(
+        error_message[[2]]
+      ),
+      call = call
+    )
+
+
+  }
+
+}
+
+
 # script end;

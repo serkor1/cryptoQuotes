@@ -2,57 +2,62 @@
 #
 # The internal test data, is the last known validated
 # data before any major overhauls to the functions.
+# expect no errors; ####
 #
-# NOTE: kuCoin futures doesnt support
-# calls that are more than a month old
-# so these tests may fail because of this. So the tests has to
-# updated once every month, or anytime the tests
-# has to be run.
-#
-# TODO: the tests has to be revised so its more
-# robust to API call limits.
+# Why wouldn't you?
 testthat::test_that(
-  desc = "getQuote returns a xts object from Binance futures, corresponding to the existing one.",
+  desc = "getQuote returning GET requests from Binance Spot market",
   code = {
 
     # 1) skip tests on github
     testthat::skip_on_ci()
 
-    # 2) determine test parameter
-    testthat::expect_equal(
+    testthat::expect_no_error(
+      object = cryptoQuotes::getQuote(
+        ticker = 'ATOMUSDT',
+        source = 'binance',
+        futures = FALSE,
+        interval = '15m'
+      )
+    )
+  }
+)
+
+testthat::test_that(
+  desc = "getQuote returning GET requests from Binance Futures market",
+  code = {
+
+    # 1) skip tests on github
+    testthat::skip_on_ci()
+
+    testthat::expect_no_error(
       object = cryptoQuotes::getQuote(
         ticker = 'ATOMUSDT',
         source = 'binance',
         futures = TRUE,
-        interval = '15m',
-        from     = '2023-11-25',
-        to       = '2023-11-28'
-      ),
-      expected = cryptoQuotes:::internalTest[[1]][[2]]
+        interval = '15m'
+      )
     )
 
-    }
+  }
 )
 
 
 testthat::test_that(
-  desc = "getQuote returns a xts object from Kucoin futures, corresponding to the existing one.",
+  desc = "getQuote returning GET requests from KuCoin Futures market",
   code = {
 
     # 1) skip tests on github
     testthat::skip_on_ci()
 
     # 2) determine test parameter
-    testthat::expect_equal(
+    testthat::expect_no_error(
       object = cryptoQuotes::getQuote(
         ticker = 'ATOMUSDTM',
         source = 'kucoin',
         futures = TRUE,
-        interval = '15m',
-        from     = '2023-11-25',
-        to       = '2023-11-28'
-      ),
-      expected = cryptoQuotes:::internalTest[[2]][[2]]
+        interval = '15m'
+      )
     )
 
   }
@@ -60,48 +65,106 @@ testthat::test_that(
 
 
 
+
 testthat::test_that(
-  desc = "getQuote returns a xts object from Binance spot, corresponding to the existing one.",
+  desc = "getQuote returning GET requests from KuCoin Spot market",
   code = {
 
     # 1) skip tests on github
     testthat::skip_on_ci()
 
     # 2) determine test parameter
-    testthat::expect_equal(
-      object = cryptoQuotes::getQuote(
-        ticker = 'ATOMUSDT',
-        source = 'binance',
-        futures = FALSE,
-        interval = '15m',
-        from     = '2023-11-25',
-        to       = '2023-11-28'
-      ),
-      expected = cryptoQuotes:::internalTest[[1]][[1]]
-    )
-
-  }
-)
-
-
-testthat::test_that(
-  desc = "getQuote returns a xts object from Kucoin spot, corresponding to the existing one.",
-  code = {
-
-    # 1) skip tests on github
-    testthat::skip_on_ci()
-
-    # 2) determine test parameter
-    testthat::expect_equal(
+    testthat::expect_no_error(
       object = cryptoQuotes::getQuote(
         ticker = 'ATOM-USDT',
         source = 'kucoin',
         futures = FALSE,
-        interval = '15m',
-        from     = '2023-11-25',
-        to       = '2023-11-28'
-      ),
-      expected = cryptoQuotes:::internalTest[[2]][[1]]
+        interval = '15m'
+      )
+    )
+
+  }
+)
+
+# expect errors; ####
+# Test forced errors to check wether
+# error messages are correctly displayed
+testthat::test_that(
+  desc = "getQuote failing GET requests from Binance Spot market",
+  code = {
+
+    # 1) skip tests on github
+    testthat::skip_on_ci()
+
+    testthat::expect_error(
+      object = cryptoQuotes::getQuote(
+        ticker = 'FAKETICKER',
+        source = 'binance',
+        futures = FALSE,
+        interval = '15m'
+      )
+    )
+  }
+)
+
+testthat::test_that(
+  desc = "getQuote failing GET requests from Binance Futures market",
+  code = {
+
+    # 1) skip tests on github
+    testthat::skip_on_ci()
+
+    testthat::expect_error(
+      object = cryptoQuotes::getQuote(
+        ticker = 'FAKETICKER',
+        source = 'binance',
+        futures = TRUE,
+        interval = '15m'
+      )
+    )
+
+  }
+)
+
+
+testthat::test_that(
+  desc = "getQuote failing GET requests from KuCoin Futures market",
+  code = {
+
+    # 1) skip tests on github
+    testthat::skip_on_ci()
+
+    # 2) determine test parameter
+    testthat::expect_error(
+      object = cryptoQuotes::getQuote(
+        ticker = 'FAKETICKER',
+        source = 'kucoin',
+        futures = TRUE,
+        interval = '15m'
+      )
+    )
+
+  }
+)
+
+
+
+
+testthat::test_that(
+  desc = "getQuote failing GET requests from KuCoin Spot market",
+  code = {
+
+    # 1) skip tests on github
+    testthat::skip_on_ci()
+
+    # 2) determine test parameter
+    testthat::expect_error(
+      object = cryptoQuotes::getQuote(
+        ticker = 'FAKETICKER',
+        source = 'kucoin',
+        futures = FALSE,
+        interval = '15m'
+      )
     )
 
   }
