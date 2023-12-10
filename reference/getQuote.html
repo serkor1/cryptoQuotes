@@ -33,11 +33,10 @@ futues and spot markets"><meta property="og:image" content="https://serkor1.gith
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/01-intervals.html">Intervals</a>
-    <a class="dropdown-item" href="../articles/02-tickers.html">Available Tickers</a>
-    <a class="dropdown-item" href="../articles/03-exchanges.html">Supported Exchanges</a>
-    <a class="dropdown-item" href="../articles/04-charting.html">Charting using Plotly</a>
-    <a class="dropdown-item" href="../articles/04-chartingEvents.html">Charting Important Events</a>
+    <a class="dropdown-item" href="../articles/01-intervals.html">Available intervals</a>
+    <a class="dropdown-item" href="../articles/02-tickers.html">Available tickers</a>
+    <a class="dropdown-item" href="../articles/03-exchanges.html">Supported exchanges</a>
+    <a class="dropdown-item" href="../articles/04-charting.html">Charting</a>
     <a class="dropdown-item" href="../articles/05-quantmod.html">Quantmod and TTR</a>
   </div>
 </li>
@@ -91,7 +90,7 @@ futues and spot markets</p>
 
 
 <dt>source</dt>
-<dd><p>A character vector of length 1. Currently only binance is supported.</p></dd>
+<dd><p>A character vector of length 1. See <code><a href="availableExchanges.html">availableExchanges()</a></code> for a full list of available exchanges.</p></dd>
 
 
 <dt>futures</dt>
@@ -107,9 +106,15 @@ futues and spot markets</p>
 
 
 <dt>to</dt>
-<dd><p>A character vector of length 1.Given in %Y-%m-%d format.</p></dd>
+<dd><p>A character vector of length 1. Given in %Y-%m-%d format.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>an xts object with Open, High, Low, Close and Volume.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
