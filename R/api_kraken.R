@@ -69,7 +69,8 @@ krakenIntervals <- function(interval, futures, all = FALSE) {
           'v' = paste('Valid intervals:', paste(allIntervals$labels,collapse = ', '))
         ),
         # disable traceback, on this error.
-        trace = rlang::trace_back()
+        trace = rlang::trace_back(),
+        call = rlang::caller_env(n = 6)
       )
 
     }

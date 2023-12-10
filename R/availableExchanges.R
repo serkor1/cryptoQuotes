@@ -12,10 +12,14 @@
 #'
 #' @example man/examples/scr_availableExchanges.R
 #'
-#' @returns NULL
+#' @returns A character vector of available exchanges
 #'
 #' @export
 availableExchanges <- function(){
+
+  # 0) define available
+  # exchanges
+  exchanges <- c('binance', 'kucoin', 'kraken', 'bitmart')
 
   # 1) retun a message
   # with all the available
@@ -23,8 +27,16 @@ availableExchanges <- function(){
   rlang::inform(
     message = c(
       'i' = c('Available exchanges'),
-      'v' = paste(c('binance', 'kucoin', 'kraken', 'bitmart'), collapse = ', ')
+      'v' = paste(
+        c('binance', 'kucoin', 'kraken', 'bitmart'),
+        collapse = ', '
+        )
+    )
+  )
 
+  return(
+    invisible(
+      exchanges
     )
   )
 

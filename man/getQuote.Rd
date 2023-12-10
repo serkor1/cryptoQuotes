@@ -17,7 +17,7 @@ getQuote(
 \arguments{
 \item{ticker}{A character vector of length 1. Uppercase.}
 
-\item{source}{A character vector of length 1. Currently only binance is supported.}
+\item{source}{A character vector of length 1. See \code{\link[=availableExchanges]{availableExchanges()}} for a full list of available exchanges.}
 
 \item{futures}{A logical value. TRUE by default. If FALSE, the function will return spot prices.}
 

@@ -6,7 +6,7 @@
 # script start;
 
 # laod library
-#library(cryptoQuotes)
+library(cryptoQuotes)
 
 # 1) Generate random events
 # of buys and sells and convert

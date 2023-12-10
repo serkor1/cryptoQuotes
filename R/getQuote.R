@@ -6,7 +6,7 @@
 #' futues and spot markets
 #'
 #' @param ticker A character vector of length 1. Uppercase.
-#' @param source A character vector of length 1. Currently only binance is supported.
+#' @param source A character vector of length 1. See [availableExchanges()] for a full list of available exchanges.
 #' @param interval A character vector of length 1. See [availableIntervals()] for a full list.
 #' @param futures A logical value. TRUE by default. If FALSE, the function will return spot prices.
 #' @param from A character vector of length 1. Given in %Y-%m-%d format.
@@ -43,11 +43,29 @@ getQuote <- function(
 
   }
 
-  # 1) check if the chosen
-  # interval is valid
-  # check_interval(
-  #   interval = interval
-  # )
+  # 1) check if chosen exchange
+  # is supported
+  if (!(tolower(trimws(source)) %in% suppressMessages(availableExchanges()))) {
+
+    rlang::abort(
+      message = c(
+        paste(source, 'is not supported.'),
+        'i' = paste(
+          paste(
+            suppressMessages(
+              availableExchanges()
+            ),
+            collapse = ', '
+          ),
+          'is supported'
+        )
+      )
+    )
+
+  }
+
+
+
 
   # 2) fetch and format
   # the quote and return

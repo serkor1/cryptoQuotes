@@ -6,6 +6,9 @@
 \usage{
 availableExchanges()
 }
+\value{
+A character vector of available exchanges
+}
 \description{
 This function returns all
 available exchanges as a message in the console.
