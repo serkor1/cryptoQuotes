@@ -15,8 +15,8 @@ generate_data <- function(
       # ,
       # 'kraken',
       # 'bitmart'
-      )
-    ) {
+    )
+) {
 
   markets <- c(
     'spot', 'futures'
@@ -156,11 +156,11 @@ toQuote <- function(DF) {
 
   quote <- xts::as.xts(
     DF[,c('Open','High', 'Low', 'Close', 'Volume', 'Index')]
-    )
+  )
 
   zoo::index(quote) <- as.POSIXct(
     DF$Index
-    )
+  )
 
   attributes(quote)$tickerInfo <- attributes(DF)$tickerInfo
 
@@ -189,9 +189,6 @@ vline <- function(
   )
 
 }
-
-
-
 
 annotations <- function(
     x = 0,
@@ -307,11 +304,88 @@ check_for_errors <- function(
       ),
       call = call
     )
-
-
   }
-
 }
 
 
+
+# check for errors
+# in chosen exchange
+# ie. the source
+check_exchange_validity <- function(
+    source,
+    call = rlang::caller_env(n = 1)
+) {
+
+  # 0) get all available exchanges
+  all_available_exchanges <- suppressMessages(
+    availableExchanges()
+  )
+
+  if (!(source %in% all_available_exchanges)) {
+
+    rlang::abort(
+      message = c(
+        paste(source, 'is not supported.'),
+        'v' = paste(
+          paste(
+            all_available_exchanges,
+            collapse = ', '
+          ),
+          'is supported'
+        )
+      ),
+      call = call
+    )
+
+  }
+}
+
+# check fo rerrors
+# in the chosen intervals;
+# it depends on the chosen market
+# and exchange
+check_interval_validity <- function(
+    interval,
+    source,
+    futures,
+    call = rlang::caller_env(n = 1)
+) {
+
+  # 0) get all available intervals
+  all_available_intervals <- suppressMessages(
+    availableIntervals(
+      source = source,
+      futures = futures
+    )
+  )
+
+
+  if (!(grepl(pattern = interval, x = all_available_intervals))) {
+
+    rlang::abort(
+      message = c(
+        paste(
+          'Interval',
+          interval,
+          'is not supported in',
+          paste(
+            source,
+            ifelse(
+              test = futures,
+              yes = 'futures.',
+              no = 'spot.'
+            )
+          )
+        ),
+        'v' = all_available_intervals
+      ),
+      call = call
+    )
+
+  }
+
+
+
+}
 # script end;

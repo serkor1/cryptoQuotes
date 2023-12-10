@@ -74,19 +74,19 @@ bitmartIntervals <- function(futures, interval, all = FALSE) {
       x = allIntervals$labels
     )
 
-    if (sum(indicator) == 0) {
-
-      rlang::abort(
-        message = c(
-          paste0(interval, ' were not found.'),
-          'v' = paste('Valid intervals:', paste(allIntervals$labels,collapse = ', '))
-        ),
-        # disable traceback, on this error.
-        trace = rlang::trace_back(),
-        call = rlang::caller_env(n = 6)
-      )
-
-    }
+    # if (sum(indicator) == 0) {
+    #
+    #   rlang::abort(
+    #     message = c(
+    #       paste0(interval, ' were not found.'),
+    #       'v' = paste('Valid intervals:', paste(allIntervals$labels,collapse = ', '))
+    #     ),
+    #     # disable traceback, on this error.
+    #     trace = rlang::trace_back(),
+    #     call = rlang::caller_env(n = 6)
+    #   )
+    #
+    # }
 
     # 2) extract the interval
     # from the list

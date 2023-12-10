@@ -43,31 +43,31 @@ getQuote <- function(
 
   }
 
-  # 1) check if chosen exchange
-  # is supported
-  if (!(tolower(trimws(source)) %in% suppressMessages(availableExchanges()))) {
+  # recode the exchange
+  # source to avoid errors
+  # based on capitalization
+  # and whitespace
+  source <- tolower(
+    trimws(source)
+  )
 
-    rlang::abort(
-      message = c(
-        paste(source, 'is not supported.'),
-        'i' = paste(
-          paste(
-            suppressMessages(
-              availableExchanges()
-            ),
-            collapse = ', '
-          ),
-          'is supported'
-        )
-      )
-    )
+  # 1) check wether
+  # the chosen exchange
+  # is supported by the library
+  check_exchange_validity(
+    source = source
+  )
 
-  }
+  # 2) check wether the
+  # interval is supported by
+  # the exchange API
+  check_interval_validity(
+    interval = interval,
+    source   = source,
+    futures  = futures
+  )
 
-
-
-
-  # 2) fetch and format
+  # 3) fetch and format
   # the quote and return
   formatQuote(
     fetchQuote(
@@ -84,8 +84,6 @@ getQuote <- function(
     ticker = ticker
   )
 
-
 }
 
-
-
+# script end;

@@ -1,13 +1,14 @@
-# script: helpers
+# script: utils
 # author: Serkan Korkmaz
 # date: 2023-09-20
 # objective: Generate a set of functions
 # to ease the process of getting cryptoQuotes
 # script start; ####
-
-
-
-constructInterval <- function(source, futures, interval) {
+constructInterval <- function(
+    source,
+    futures,
+    interval
+) {
 
   # 1) construct the interval
   interval <- get(
@@ -23,8 +24,6 @@ constructInterval <- function(source, futures, interval) {
   )
 
 }
-
-
 
 # base-url;
 baseUrl <- function(
@@ -43,9 +42,11 @@ baseUrl <- function(
   )
 }
 
-
 # endpoint
-endPoint <- function(source,futures) {
+endPoint <- function(
+    source,
+    futures
+) {
 
   # 1) construct function
   # based on source
@@ -53,13 +54,12 @@ endPoint <- function(source,futures) {
     futures = futures
   )
 
-  # 2) return the baseUrl
+  # 2) return the endpoint
   return(
     endPoint
   )
 
 }
-
 
 getParams <- function(
     source,
@@ -86,8 +86,6 @@ getParams <- function(
 
 }
 
-
-
 fetchQuote <- function(
     source,
     futures,
@@ -113,8 +111,6 @@ fetchQuote <- function(
   )
 
 }
-
-
 
 formatQuote <- function(
     quoteList,
@@ -155,8 +151,5 @@ formatQuote <- function(
   return(quote)
 
 }
-
-
-
 
 # end of script; ####
