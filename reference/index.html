@@ -29,7 +29,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/01-intervals.html">Available intervals</a>
     <a class="dropdown-item" href="../articles/02-tickers.html">Available tickers</a>
-    <a class="dropdown-item" href="../articles/03-exchanges.html">Supported exchanges</a>
+    <a class="dropdown-item" href="../articles/03-exchanges.html">Available exchanges</a>
     <a class="dropdown-item" href="../articles/04-charting.html">Charting</a>
     <a class="dropdown-item" href="../articles/05-quantmod.html">Quantmod and TTR</a>
   </div>
@@ -57,9 +57,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="crypto-prices">Crypto prices<a class="anchor" aria-label="anchor" href="#crypto-prices"></a></h2>
       
-      
+      <p class="section-desc"></p><p>OHLC crypto prices</p>
 
       
     </div><div id="" class="section level2">
@@ -69,10 +69,77 @@
 
       <dl><dt>
           
-          <code><a href="ATOMUSDT.html">ATOMUSDT</a></code> 
+          <code><a href="getQuote.html">getQuote()</a></code> 
         </dt>
-        <dd>ATOM-USDT</dd>
+        <dd>Get a quote on a cryptopair from one
+of the major exchanges</dd>
+      </dl></div><div class="section level2">
+      <h2 id="supported-calls">Supported calls<a class="anchor" aria-label="anchor" href="#supported-calls"></a></h2>
+      
+      <p class="section-desc"></p><p>All available API parameters.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="availableExchanges.html">availableExchanges()</a></code> 
+        </dt>
+        <dd>Get available exchanges</dd>
       </dl><dl><dt>
+          
+          <code><a href="availableIntervals.html">availableIntervals()</a></code> 
+        </dt>
+        <dd>See all available intervals for the futures and spot markets
+on the desired exchange</dd>
+      </dl><dl><dt>
+          
+          <code><a href="availableTickers.html">availableTickers()</a></code> 
+        </dt>
+        <dd>Get all the available tickers
+on the desired exchange and market</dd>
+      </dl></div><div class="section level2">
+      <h2 id="main-charts">Main charts<a class="anchor" aria-label="anchor" href="#main-charts"></a></h2>
+      
+      <p class="section-desc"></p><p>The main charts</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="chart.html">chart()</a></code> 
+        </dt>
+        <dd>Chart your data</dd>
+      </dl><dl><dt>
+          
+          <code><a href="kline.html">kline()</a></code> 
+        </dt>
+        <dd>Create a candlestick chart</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ohlc.html">ohlc()</a></code> 
+        </dt>
+        <dd>chart quote using
+ohlc bars</dd>
+      </dl></div><div class="section level2">
+      <h2 id="charting-indicators">Charting indicators<a class="anchor" aria-label="anchor" href="#charting-indicators"></a></h2>
+      
+      <p class="section-desc"></p><p>Adding indicators to charts</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="addBBands.html">addBBands()</a></code> 
         </dt>
@@ -89,7 +156,7 @@ the chart</dd>
           <code><a href="addMA.html">addMA()</a></code> 
         </dt>
         <dd>Add various Moving Average indicators
-to the chart.</dd>
+to the chart</dd>
       </dl><dl><dt>
           
           <code><a href="addMACD.html">addMACD()</a></code> 
@@ -107,47 +174,25 @@ chart</dd>
         </dt>
         <dd>Add volume indicator
 to the chart</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a></h2>
+      
+      <p class="section-desc"></p><p>Sample datasets returned by <code>getQuote</code></p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
-          <code><a href="availableExchanges.html">availableExchanges()</a></code> 
+          <code><a href="ATOMUSDT.html">ATOMUSDT</a></code> 
         </dt>
-        <dd>Get available exchanges</dd>
-      </dl><dl><dt>
-          
-          <code><a href="availableIntervals.html">availableIntervals()</a></code> 
-        </dt>
-        <dd>See all available intervals for the futures and spot markets
-on the desired exchange</dd>
-      </dl><dl><dt>
-          
-          <code><a href="availableTickers.html">availableTickers()</a></code> 
-        </dt>
-        <dd>Get all the available tickers
-on the desired exchange and market</dd>
-      </dl><dl><dt>
-          
-          <code><a href="chart.html">chart()</a></code> 
-        </dt>
-        <dd>Chart your data</dd>
-      </dl><dl><dt>
-          
-          <code><a href="getQuote.html">getQuote()</a></code> 
-        </dt>
-        <dd>Get a quote on a cryptopair from one
-of the major exchanges</dd>
-      </dl><dl><dt>
-          
-          <code><a href="kline.html">kline()</a></code> 
-        </dt>
-        <dd>Create a candlestick chart</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ohlc.html">ohlc()</a></code> 
-        </dt>
-        <dd>chart quote using
-ohlc bars</dd>
+        <dd>USDT denominated ATOMS, with 15m intervals</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
