@@ -12,6 +12,9 @@ addEvents(plot, event)
 
 \item{event}{a data.frame with index, event and colors.}
 }
+\value{
+Invisbly returns a plotly object.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }

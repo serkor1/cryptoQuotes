@@ -3,7 +3,7 @@
 \name{addMA}
 \alias{addMA}
 \title{Add various Moving Average indicators
-to the chart.}
+to the chart}
 \usage{
 addMA(plot, FUN = TTR::SMA, ...)
 }
@@ -15,9 +15,12 @@ klines or OHLC}
 
 \item{...}{See \code{\link[TTR:MovingAverages]{TTR::SMA()}}}
 }
+\value{
+Invisbly returns a plotly object.
+}
 \description{
 The function supports all moving averages calculated
-by the TTR library. Has to be explicitly called.
+by the TTR library. Has to be explicitly called
 
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }

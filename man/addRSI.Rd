@@ -13,6 +13,9 @@ klines or OHLC}
 
 \item{...}{See \code{\link[TTR:RSI]{TTR::RSI()}}}
 }
+\value{
+Invisbly returns a plotly object.
+}
 \description{
 A short description...
 

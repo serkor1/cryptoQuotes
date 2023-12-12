@@ -1,3 +1,26 @@
 url: https://serkor1.github.io/cryptoQuotes/
 template:
   bootstrap: 5
+
+reference:
+- title: Crypto prices
+  desc: OHLC crypto prices
+- contents:
+  - starts_with('get')
+- title: Supported calls
+  desc: All available API parameters.
+- contents:
+  - starts_with('available')
+- title: Main charts
+  desc: The main charts
+- contents:
+  - has_concept('charting')
+- title: Charting indicators
+  desc: Adding indicators to charts
+- contents:
+  - has_concept('chart indicators')
+
+- title: Datasets
+  desc: Sample datasets returned by ```getQuote```
+- contents:
+  - starts_with('ATOM')

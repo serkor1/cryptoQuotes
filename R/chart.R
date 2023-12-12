@@ -14,8 +14,8 @@
 #' @param deficiency Logical. FALSE by default, if TRUE color defiency compliant
 #' colors are used.
 #' @param slider Logical. TRUE by default. If FALSE, no slider will be included.
-#' @family Charting
-#' @returns NULL
+#' @family charting
+#' @returns Invisbly returns a plotly object.
 #' @export
 
 kline <- function(
@@ -86,10 +86,10 @@ kline <- function(
 #' @param deficiency Logical. FALSE by default, if TRUE color defiency compliant
 #' colors are used.
 #' @param slider Logical. TRUE by default. If FALSE, no slider will be included.
-#' @family Charting
+#' @family charting
 #' @example man/examples/scr_charting.R
 #'
-#' @returns NULL
+#' @returns Invisbly returns a plotly object.
 #' @export
 ohlc <- function(
     quote,
@@ -161,7 +161,7 @@ ohlc <- function(
 #' indicators
 #'
 #' @param slider Logical. TRUE by default.
-#' @family Charting
+#' @family charting
 #'
 #' @example man/examples/scr_charting.R
 #' @returns Returns a plotly object

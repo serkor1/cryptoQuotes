@@ -4,11 +4,11 @@
 \name{cryptoQuotes-package}
 \alias{cryptoQuotes}
 \alias{cryptoQuotes-package}
-\title{cryptoQuotes: Access Market Data from Major Cryptocurrency Exchanges}
+\title{cryptoQuotes: Access OHLC Market Data from Major Cryptocurrency Exchanges}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A unified access spot and futures markets from major cryptocurrency exchanges.
+A high level library to extract cryptocurrency OHLC market data from major centralized exchanges. The library supports all available intervals supported by the exchange API for spot and perpetual futures markets.
 }
 \seealso{
 Useful links:

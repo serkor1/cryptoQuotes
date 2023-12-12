@@ -361,7 +361,7 @@ check_interval_validity <- function(
   )
 
 
-  if (!(grepl(pattern = interval, x = all_available_intervals))) {
+  if (!(interval %in% all_available_intervals)) {
 
     rlang::abort(
       message = c(

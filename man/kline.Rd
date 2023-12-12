@@ -14,13 +14,16 @@ colors are used.}
 
 \item{slider}{Logical. TRUE by default. If FALSE, no slider will be included.}
 }
+\value{
+Invisbly returns a plotly object.
+}
 \description{
 This function returns a plotly kline chart with
 the most common indicators.
 }
 \seealso{
-Other Charting: 
+Other charting: 
 \code{\link{chart}()},
 \code{\link{ohlc}()}
 }
-\concept{Charting}
+\concept{charting}

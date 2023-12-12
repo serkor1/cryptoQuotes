@@ -15,6 +15,9 @@ Bollinger bands calculations.}
 
 \item{...}{See \code{\link[TTR:bollingerBands]{TTR::BBands()}}}
 }
+\value{
+Invisbly returns a plotly object.
+}
 \description{
 A short description...
 

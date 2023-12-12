@@ -14,6 +14,9 @@ supported exchange}
 \item{futures}{logical. TRUE by default. If FALSE, spot market are
 returned}
 }
+\value{
+Invisbly returns a character vector.
+}
 \description{
 This function shows all
 available intervals available

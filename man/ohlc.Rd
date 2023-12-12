@@ -15,6 +15,9 @@ colors are used.}
 
 \item{slider}{Logical. TRUE by default. If FALSE, no slider will be included.}
 }
+\value{
+Invisbly returns a plotly object.
+}
 \description{
 chart quote using
 ohlc bars
@@ -51,8 +54,8 @@ chart(
 # script end;
 }
 \seealso{
-Other Charting: 
+Other charting: 
 \code{\link{chart}()},
 \code{\link{kline}()}
 }
-\concept{Charting}
+\concept{charting}

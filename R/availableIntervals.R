@@ -13,20 +13,17 @@
 #'
 #' @example man/examples/scr_availableIntervals.R
 #'
-#' @returns NULL
+#' @returns Invisbly returns a character vector.
 #'
 #' @export
 availableIntervals <- function(source = 'binance', futures = TRUE) {
 
   # 0) extract available
   # intervals
-  all_intervals <- paste(
-    get(paste0(source, 'Intervals'))(
-      futures = futures,
-      all = TRUE,
-      interval = NULL
-    ),
-    collapse = ', '
+  all_intervals <- get(paste0(source, 'Intervals'))(
+    futures = futures,
+    all = TRUE,
+    interval = NULL
   )
 
   # 1) return a message
@@ -35,8 +32,10 @@ availableIntervals <- function(source = 'binance', futures = TRUE) {
   rlang::inform(
     message = c(
       'i' = paste0('Available Intervals at ', source, ifelse(futures, ' (futures)', no = ' (spot)')),
-      'v' = all_intervals
-
+      'v' = paste(
+        all_intervals,
+        collapse = ', '
+      )
     )
   )
 

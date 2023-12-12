@@ -7,7 +7,7 @@
 availableExchanges()
 }
 \value{
-A character vector of available exchanges
+Invisbly returns a character vector.
 }
 \description{
 This function returns all

@@ -12,7 +12,7 @@
 #'
 #' @example man/examples/scr_availableExchanges.R
 #'
-#' @returns A character vector of available exchanges
+#' @returns Invisbly returns a character vector.
 #'
 #' @export
 availableExchanges <- function(){

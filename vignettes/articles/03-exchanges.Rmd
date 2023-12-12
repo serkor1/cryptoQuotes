@@ -1,5 +1,5 @@
 ---
-title: "Supported exchanges"
+title: "Available exchanges"
 ---
 
 ```{r, include = FALSE}

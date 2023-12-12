@@ -21,7 +21,7 @@
 #' Bollinger bands calculations.
 #' @param ... See [TTR::BBands()]
 #' @example man/examples/scr_charting.R
-#' @returns NULL
+#' @returns Invisbly returns a plotly object.
 #' @family chart indicators
 #' @export
 addBBands <- function(
@@ -132,7 +132,7 @@ addBBands <- function(
 #' @param plot A plotly object of either
 #' klines or OHLC
 #'
-#' @returns NULL
+#' @returns Invisbly returns a plotly object.
 #' @example man/examples/scr_charting.R
 #'
 #' @family chart indicators
@@ -208,7 +208,7 @@ addVolume <- function(plot) {
 #' @param ... See [TTR::MACD()]
 #' @example man/examples/scr_charting.R
 #'
-#' @returns NULL
+#' @returns Invisbly returns a plotly object.
 #' @family chart indicators
 #' @export
 addMACD <- function(
@@ -309,12 +309,12 @@ addMACD <- function(
 
 
 #' Add various Moving Average indicators
-#' to the chart.
+#' to the chart
 #'
 #' @description
 #'
 #' The function supports all moving averages calculated
-#' by the TTR library. Has to be explicitly called.
+#' by the TTR library. Has to be explicitly called
 #'
 #' `r lifecycle::badge("experimental")`
 #'
@@ -325,7 +325,7 @@ addMACD <- function(
 #'
 #' @example man/examples/scr_charting.R
 #'
-#' @returns NULL
+#' @returns Invisbly returns a plotly object.
 #' @family chart indicators
 #' @export
 addMA <- function(plot, FUN = TTR::SMA, ...) {
@@ -413,7 +413,7 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
 #' klines or OHLC
 #'
 #' @param ... See [TTR::RSI()]
-#' @returns NULL
+#' @returns Invisbly returns a plotly object.
 #' @example man/examples/scr_charting.R
 #'
 #'

@@ -10,7 +10,7 @@
 #'
 #' @family chart indicators
 #'
-#' @returns NULL
+#' @returns Invisbly returns a plotly object.
 #' @export
 addEvents <- function(
     plot,

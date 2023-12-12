@@ -50,8 +50,8 @@ chart(
 # script end;
 }
 \seealso{
-Other Charting: 
+Other charting: 
 \code{\link{kline}()},
 \code{\link{ohlc}()}
 }
-\concept{Charting}
+\concept{charting}

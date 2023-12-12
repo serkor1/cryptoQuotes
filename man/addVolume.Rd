@@ -11,6 +11,9 @@ addVolume(plot)
 \item{plot}{A plotly object of either
 klines or OHLC}
 }
+\value{
+Invisbly returns a plotly object.
+}
 \description{
 A short description...
 
