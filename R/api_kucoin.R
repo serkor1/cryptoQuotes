@@ -266,24 +266,6 @@ kucoinResponse <- function(
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
 
