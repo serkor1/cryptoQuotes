@@ -22,12 +22,71 @@ package is compatible with `quantmod` and `TTR` out of the box.
 
 ### Supported Exchanges and Markets
 
-| Exchange | Spot | Futures |
-|:---------|:-----|:--------|
-| Binance  | ✔    | ✔       |
-| Kucoin   | ✔    | ✔       |
-| Bitmart  | ✔    | ✔       |
-| Kraken   | ✔    | ✔       |
+<div align="center">
+
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Exchange
+</th>
+<th style="text-align:center;">
+Spot
+</th>
+<th style="text-align:center;">
+Futures
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Binance
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+✔
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kucoin
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+✔
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bitmart
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+✔
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kraken
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+✔
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 #### Basic usage
 

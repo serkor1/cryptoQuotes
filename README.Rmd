@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -27,20 +28,31 @@ The `cryptoQuotes` package is an unified API client that provides access to publ
 
 ### Supported Exchanges and Markets
 
-```{r,echo=FALSE,results='asis',fig.align='center'}
+<div align="center">
+
+```{r,echo=FALSE}
 # 1) Supported Exchanges
 exchange <- c('Binance', 'Kucoin', 'Bitmart', 'Kraken')
 
 # 2) create
 # table
-knitr::kable(
-  data.frame(
-    Exchange = exchange,
-    Spot     = rep(x = cli::symbol$tick,length(exchange)),
-    Futures  = rep(x = cli::symbol$tick,length(exchange))
-  )
+kableExtra::kable_styling(
+  knitr::kable(
+    align = 'lcc',
+    table.attr = "style='width:100%;'",
+    x = data.frame(
+      Exchange = exchange,
+      Spot     = rep(x = cli::symbol$tick,length(exchange)),
+      Futures  = rep(x = cli::symbol$tick,length(exchange))
+    ),
+    format = 'html'
+  ),
+  full_width = TRUE,
+  position = 'center'
 )
 ```
+
+</div>
 
 #### Basic usage
 
