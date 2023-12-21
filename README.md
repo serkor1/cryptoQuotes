@@ -7,26 +7,27 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/serkor1/cryptoQuotes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/serkor1/cryptoQuotes?branch=main)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 <!-- badges: end -->
 
-The cryptoQuotes package is an unified REST API access to public market
-data from all major cryptocurrency exchanges. The package is compatible
-with `quantmod` and `TTR` out of the box.
+The `cryptoQuotes` package is an unified API client that provides access
+to public market data from all major cryptocurrency exchanges. The
+package is compatible with `quantmod` and `TTR` out of the box.
 
-#### Supported Exchanges and Markets
+### Supported Exchanges and Markets
 
-Currently, cryptoQuotes supports perpetual futures and spot markets on
-the following exchanges; `binance`, `kucoin` and `kraken`. More
-exchanges will be added in the future.
-
-> **Note:** cryptoQuotes supports various intervals limited to what the
-> different exchange APIs allows. The lowest interval is 1s (Seconds),
-> and the highest is 1M (Months)
+| Exchange | Spot | Futures |
+|:---------|:-----|:--------|
+| Binance  | ✔    | ✔       |
+| Kucoin   | ✔    | ✔       |
+| Bitmart  | ✔    | ✔       |
+| Kraken   | ✔    | ✔       |
 
 #### Basic usage
 
@@ -48,10 +49,8 @@ spotPrice <- cryptoQuotes::getQuote(
 **Stable Version**
 
 ``` r
-devtools::install_github(
-  repo = 'https://github.com/serkor1/cryptoQuotes/',
-  ref = 'main'
-)
+# install from CRAN
+install.packages('cryptoQuotes', dependencies = TRUE)
 ```
 
 **Development Version**
@@ -59,6 +58,6 @@ devtools::install_github(
 ``` r
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
-  ref = 'development'
+  ref = 'main'
 )
 ```

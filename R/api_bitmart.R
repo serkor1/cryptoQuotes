@@ -148,6 +148,11 @@ bitmartResponse <- function(
     futures
 ) {
 
+  # mock response
+  # to avoid check error in
+  # unevaluated expressions
+  response <- NULL
+
   if (ohlc) {
 
     # NOTE: Binance
@@ -200,6 +205,8 @@ bitmartResponse <- function(
 
     if (futures) {
 
+
+
       list(
         code = rlang::expr(
           response$data$symbol$symbol
@@ -231,21 +238,10 @@ bitmartDates <- function(
 
 
 
-  # dates are supplied and its not
-  # a reponse;
-  if (sum(sapply(dates, is.null)) == 2& !is_response) {
-
-    # NOTE: if nothing is supplied
-    # Bitmart wont return anything.
-    # This is only true for FUTURES trading.
-
-    dates[[1]] <- as.character(Sys.Date() - 1)
-    dates[[2]] <- as.character(Sys.Date())
-
-  }
 
 
-  if (sum(!sapply(dates, is.null)) == 2 & !is_response) {
+
+  if (!is_response) {
 
     # 1) set multiplier
     # according to spot/perpertual
@@ -395,3 +391,5 @@ bitmartParameters <- function(
 
 
 # script end;
+
+

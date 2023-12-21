@@ -150,6 +150,11 @@ krakenResponse <- function(
     futures
 ) {
 
+  # mock response
+  # to avoid check error in
+  # unevaluated expressions
+  response <- NULL
+
   if (ohlc) {
 
     # NOTE: kraken
@@ -250,7 +255,7 @@ krakenDates <- function(
 
   # dates are supplied and its not
   # a reponse;
-  if (sum(!sapply(dates, is.null)) == 2 & !is_response) {
+  if (!is_response) {
 
     # 1) set multiplier
     # according to spot/perpertual
@@ -270,7 +275,7 @@ krakenDates <- function(
     )
 
     # 1.1) add one day
-    dates[[2]] <- dates[[2]] # + 1*60*60*24
+    dates[[2]] <- dates[[2]]  + 1*60*60*24
 
     # # 2) convert all
     # # dates according

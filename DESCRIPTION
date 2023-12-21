@@ -24,8 +24,7 @@ Suggests:
 Config/testthat/edition: 3
 Imports:
     curl (>= 5.1.0),
-    httr (>= 1.4.7),
-    jsonlite (>= 1.8.7),
+    httr2,
     lifecycle,
     magrittr (>= 2.0.3),
     plotly (>= 4.10.2),
@@ -33,7 +32,7 @@ Imports:
     TTR,
     xts (>= 0.13.1),
     zoo (>= 1.8-12)
-Depends: 
+Depends:
     R (>= 2.10)
 LazyData: true
 VignetteBuilder: knitr

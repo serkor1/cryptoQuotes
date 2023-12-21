@@ -154,6 +154,11 @@ binanceResponse <- function(
     futures
 ) {
 
+  # mock response
+  # to avoid check error in
+  # unevaluated expressions
+  response <- NULL
+
   if (ohlc) {
 
     # NOTE: Binance
@@ -210,7 +215,7 @@ binanceDates <- function(
 
   # dates are supplied and its not
   # a reponse;
-  if (sum(!sapply(dates, is.null)) == 2 & !is_response) {
+  if (!is_response) {
 
     # 1) set multiplier
     # according to spot/perpertual
@@ -218,7 +223,7 @@ binanceDates <- function(
     multiplier <- ifelse(
       futures,
       yes = 1e3,
-      no = 1
+      no = 1e3
     )
     # 1) convert all
     # dates to numeric

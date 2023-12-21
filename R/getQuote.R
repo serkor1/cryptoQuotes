@@ -67,6 +67,21 @@ getQuote <- function(
     futures  = futures
   )
 
+  if (is.null(from) & is.null(to)) {
+
+    # to ensure consistency across
+    # APIs if no date is set the output
+    # is limited to 100 pips
+    forced_dates <- default_dates(
+      interval = interval
+    )
+
+    from <- forced_dates$from
+    to   <- forced_dates$to
+
+
+  }
+
   # 3) fetch and format
   # the quote and return
   quote_response(

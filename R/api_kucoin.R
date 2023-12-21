@@ -189,6 +189,11 @@ kucoinResponse <- function(
     futures
 ) {
 
+  # mock response
+  # to avoid check error in
+  # unevaluated expressions
+  response <- NULL
+
   if (ohlc) {
 
     if (futures) {
@@ -294,7 +299,7 @@ kucoinDates <- function(
 
   # dates are supplied and its not
   # a reponse;
-  if (sum(!sapply(dates, is.null)) == 2 & !is_response) {
+  if (!is_response) {
 
     # 1) set multiplier
     # according to spot/perpertual
