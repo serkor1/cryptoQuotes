@@ -6,7 +6,7 @@ reference:
   desc: OHLC crypto prices
 - contents: starts_with('get')
 - title: Supported calls
-  desc: All available API parameters.
+  desc: All available API parameters
 - contents: starts_with('available')
 - title: Main charts
   desc: The main charts
