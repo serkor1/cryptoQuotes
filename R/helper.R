@@ -222,92 +222,44 @@ annotations <- function(
 # check for http errors;
 check_for_errors <- function(
     response,
-    call = rlang::caller_env(n = 3)
+    source,
+    futures = FALSE,
+    call = rlang::caller_env(n = 2)
 ) {
 
-  # 1) check for error;
-  #
-  # If an error code is thrown
-  # or the response includes
-  # an empty list.
-  #
-  # Not all failed API calls returns
-  # a propoer code.
-  error_condition <- httr::http_error(response)
-
-  # 1.1) convert content
-  # and check its content if
-  # the returns a list
-  check_content <- jsonlite::fromJSON(
-    txt = httr::content(
-      response,
-      encoding = 'UTF-8',
-      as = 'text'
-    )
+  # 1) Evaluate error message
+  # based on source and market;
+  error_message <- rlang::eval_bare(
+    get(
+      paste0(
+        source, 'Error'
+      )
+    )(
+      response = response,
+      futures = futures
+    ),
+    env = rlang::caller_env(n = 0)
   )
 
-  if (inherits(check_content, 'list')) {
 
-    no_data_returned <- all(
-      sapply(
-        X = jsonlite::fromJSON(
-          txt = httr::content(
-            response,
-            encoding = 'UTF-8',
-            as = 'text'
-          )
-        ),
-        FUN = function(x) {
-          (
-            inherits(x = x, what = 'character') | !length(x)
-          )
+  # 2) Some APIs dosnt give
+  # an error message;
+  if (length(error_message) == 0) {
 
-
-        }
-      )
-    )
-
-    error_condition <- error_condition | no_data_returned
+    error_message <- 'No error information.'
 
   }
 
-  if (error_condition) {
+  # 3) Throw an error
+  # on user-side
+  rlang::abort(
+    message = paste(
+      error_message
+    ),
+    call = call
+  )
 
-    # 2) abort remaining
-    # operations and paste
-    # the error message
-    error_message <- jsonlite::fromJSON(
-      txt = httr::content(
-        response,
-        encoding = 'UTF-8',
-        as = 'text'
-      )
-    )
-
-    # 2.1) check for empty
-    # content in the error messages
-    # this is relevant for REST APIs like
-    # KuCoin Futures.
-    idx <- sapply(error_message, function(x){!length(x)})
-    error_message[idx] <- 'No sensible error information.'
-
-    # 2.2) extract a the error
-    # message.
-    #
-    # NOTE: its not possible to
-    # use, say, ['msg'] as the container
-    # for each API varies. So this shotgun approach
-    # is somewhat sensible
-    rlang::abort(
-      message = paste(
-        error_message[[2]]
-      ),
-      call = call
-    )
-  }
 }
-
-
 
 # check for errors
 # in chosen exchange
@@ -388,4 +340,50 @@ check_interval_validity <- function(
 
 
 }
+
+
+
+convertDate <- function(
+    date,
+    is_response = FALSE,
+    multiplier = 1,
+    power = 1
+) {
+
+  # This function converts
+  # epoch times to POSIXct
+
+  # TODO: Change pwer
+  # to character.
+  if (!is_response) {
+
+    as.numeric(
+      as.POSIXct(
+        date,
+        tz = 'UTC',
+        origin = "1970-01-01"
+      )
+    ) * (multiplier^power)
+
+  } else {
+
+    as.POSIXct(
+      date * (multiplier^power),
+      tz = 'UTC',
+      origin = "1970-01-01"
+    )
+
+
+  }
+
+
+}
+
+
+flatten <- function(x) {
+  if (!inherits(x, "list")) return(list(x))
+  else return(unlist(c(lapply(x, flatten)), recursive = FALSE))
+}
+
+
 # script end;

@@ -1,10 +1,65 @@
-# script: scr_bitmart
-# date: 2023-10-03
+# script: api_bitmart
+# date: 2023-12-20
 # author: Serkan Korkmaz, serkor1@duck.com
-# objective: These functions
+# objective:
 # script start;
 
-# available intervals in bitmart;
+# 0) Define base and endpoint
+# URLs
+bitmartUrl <- function(
+    futures = TRUE
+) {
+
+  # 1) define baseURL
+  # for each API
+  baseUrl <- base::ifelse(
+    test = futures,
+    yes  = 'https://api-cloud.bitmart.com',
+    no   = 'https://api-cloud.bitmart.com'
+  )
+
+  # 2) return the
+  # baseURL
+  return(
+    baseUrl
+  )
+
+}
+
+bitmartEndpoint <- function(
+    ohlc = TRUE,
+    futures = TRUE
+) {
+
+  if (ohlc) {
+
+    # 1) construct endpoint url
+    endPoint <- base::ifelse(
+      test = futures,
+      yes  = '/contract/public/kline',
+      no   = '/spot/quotation/v3/lite-klines'
+    )
+
+  } else {
+
+    endPoint <- base::ifelse(
+      test = futures,
+      yes  = '/contract/public/details',
+      no   = '/spot/v1/symbols'
+    )
+
+
+  }
+
+  # 2) return endPoint url
+  return(
+    endPoint
+  )
+
+}
+
+
+# 1) Define bitmart intervals
 bitmartIntervals <- function(futures, interval, all = FALSE) {
 
   # this funtion serves two purposes
@@ -74,20 +129,6 @@ bitmartIntervals <- function(futures, interval, all = FALSE) {
       x = allIntervals$labels
     )
 
-    # if (sum(indicator) == 0) {
-    #
-    #   rlang::abort(
-    #     message = c(
-    #       paste0(interval, ' were not found.'),
-    #       'v' = paste('Valid intervals:', paste(allIntervals$labels,collapse = ', '))
-    #     ),
-    #     # disable traceback, on this error.
-    #     trace = rlang::trace_back(),
-    #     call = rlang::caller_env(n = 6)
-    #   )
-    #
-    # }
-
     # 2) extract the interval
     # from the list
     interval <- allIntervals[indicator,]$values
@@ -100,357 +141,257 @@ bitmartIntervals <- function(futures, interval, all = FALSE) {
 
 }
 
-
-
-
-
-
-# baseURL;
-bitmartUrl <- function(
-    futures = TRUE
+# 3) define binance response object
+# and format
+bitmartResponse <- function(
+    ohlc = TRUE,
+    futures
 ) {
 
-  # 1) define baseURL
-  # for each API
-  baseUrl <- base::ifelse(
-    test = futures,
-    yes  = 'https://api-cloud.bitmart.com',
-    no   = 'https://api-cloud.bitmart.com'
-  )
+  if (ohlc) {
 
-  # 2) return the
-  # baseURL
-  return(
-    baseUrl
-  )
+    # NOTE: Binance
+    # returns everything
+    # from spot and futures market
+    # in a similar manner
+    if (futures) {
 
-}
+      list(
+        colum_names = c(
+          'Low',
+          'High',
+          'Open',
+          'Close',
+          'Volume'
+        ),
+        colum_location = c(
+          1:5
+        ),
+        index_location = c(
+          6
+        )
+
+      )
+
+    } else {
+
+      list(
+        colum_names = c(
+          'Open',
+          'High',
+          'Low',
+          'Close',
+          'Volume'
+        ),
+        colum_location = c(
+          2:5,7
+        ),
+        index_location = c(
+          1
+        )
+
+      )
+
+    }
 
 
-
-
-# tickers;
-bitmartTickers <- function(
-    futures = TRUE
-) {
-
-  # 1) extract endpoint
-  # based on futres
-  endPoint <- base::ifelse(
-    test = futures,
-    yes  = '/contract/public/details',
-    no   = '/spot/v1/symbols'
-  )
-
-  # 2) GET response
-  # using baseUrl
-  # and internal endpoint
-  # defined here
-  response <- httr::GET(
-    url = baseUrl(
-      source = 'bitmart',
-      futures = futures
-    ),
-    path = endPoint
-  )
-
-  # 3) parse response
-  response <- jsonlite::fromJSON(
-    txt = httr::content(
-      x        = response,
-      as       = 'text',
-      encoding = 'UTF-8'
-    )
-  )$data
-
-  if (futures) {
-
-    response <- response$symbol$symbol
 
   } else {
 
-    response <- response$symbols
+    if (futures) {
 
+      list(
+        code = rlang::expr(
+          response$data$symbol$symbol
+        )
+      )
+
+    } else {
+
+      list(
+        code = rlang::expr(
+          response$data$symbols
+        )
+      )
+
+    }
   }
-  # 4) subset by
-  # currently tradable
-  # tickers and extract
-  # the symbols as a character
-  # vector
-  # response <- subset(
-  #   x = response$symbols,
-  #   grepl(
-  #     pattern = 'trading',
-  #     ignore.case = TRUE,
-  #     x = response$symbols$status
-  #   )
-  # )$symbol
-
-
-  # 5) return the
-  # vector
-  return(
-    response
-  )
 
 }
 
 
-# endpoint
-bitmartEndpoint <- function(
-    futures = TRUE
-) {
-
-  # 1) construct endpoint url
-  endPoint <- base::ifelse(
-    test = futures,
-    yes  = '/contract/public/kline',
-    no   = '/spot/quotation/v3/lite-klines'
-  )
-
-  # 2) return endPoint url
-  return(
-    endPoint
-  )
-}
-
-
-
-# parameters;
-bitmartParams <- function(
+# 4) bitmart date formats
+# to be sent, and recieved, from
+# the API
+bitmartDates <- function(
     futures,
-    ticker,
-    interval,
-    from = NULL,
-    to   = NULL
+    dates,
+    is_response = FALSE
 ) {
 
-  # 1) construct baseparametes
-  # conditional on marketEndpoint
-  # ie. wether its futures, or spotmarket
-  if (futures) {
 
-    getParams <- list(
-      symbol         = ticker,
-      step     = constructInterval(
-        source = 'bitmart',
-        futures = futures,
-        interval = interval
-      ),
-      start_time = as.numeric(
-        as.POSIXct(
-          Sys.Date() - 1,
-          origin = '1970-01-01'
-        )
-      ),
-      end_time = as.numeric(
-        as.POSIXct(
-          Sys.Date(),
-          origin = '1970-01-01'
-        )
-      )
-    )
 
-  } else {
+  # dates are supplied and its not
+  # a reponse;
+  if (sum(sapply(dates, is.null)) == 2& !is_response) {
 
-    getParams <- list(
-      symbol = ticker,
-      step = constructInterval(
-        source = 'bitmart',
-        futures = futures,
-        interval = interval
-      )
-    )
+    # NOTE: if nothing is supplied
+    # Bitmart wont return anything.
+    # This is only true for FUTURES trading.
+
+    dates[[1]] <- as.character(Sys.Date() - 1)
+    dates[[2]] <- as.character(Sys.Date())
 
   }
 
-  # 2) add startTime and endTime
-  # on the parameter list if not
-  # null
-  #
-  # NOT: Its all UTC, in a future
-  # update this should be depending on
-  # choice, and user system.
-  if (!is.null(from) & !is.null(to)) {
 
-    getParams$after <- format(
-      as.numeric(
-        as.POSIXct(
-          from,
-          tz = 'UTC'
-        )
-      ),
+  if (sum(!sapply(dates, is.null)) == 2 & !is_response) {
+
+    # 1) set multiplier
+    # according to spot/perpertual
+    # markets
+    multiplier <- ifelse(
+      futures,
+      yes = 1,
+      no = 1
+    )
+    # 1) convert all
+    # dates to numeric
+    dates <- lapply(
+      dates,
+      convertDate,
+      multiplier = multiplier,
+      power = 1
+    )
+
+    # 1.1) add one day
+    dates[[2]] <- dates[[2]] + 1*60*60*24
+
+    # 2) convert all
+    # dates according
+    # to the API requirements
+    dates <- lapply(
+      as.numeric(dates),
+      format,
       scientific = FALSE
     )
 
+    if (futures) {
+
+      names(dates) <- c(
+        'start_time',
+        'end_time'
+      )
+
+    } else {
+
+      names(dates) <- c(
+        'after',
+        'before'
+      )
+    }
 
 
-    getParams$before <- format(
-      as.numeric(
-        as.POSIXct(
-          to,
-          tz = 'UTC'
-        )
-      ), scientific = FALSE
+
+
+
+
+    return(
+      dates
+    )
+  }
+
+  # if its a response
+  # the dates should be parsed back accordingly
+  if (is_response) {
+
+    # 1) convert back to
+    # posit
+    dates <- convertDate(
+      date = as.numeric(dates),
+      is_response = TRUE
+    )
+
+    return(
+      dates
     )
 
   }
-
-  # 3) return parameters
-  return(
-    getParams
-  )
-
 }
 
 
-# get prices;
-bitmartQuote <- function(
-    futures,
-    interval,
+# 4) bitmart parameters
+bitmartParameters <- function(
+    futures = TRUE,
     ticker,
+    interval,
     from = NULL,
     to   = NULL
 ) {
 
-  # function information
-  #
-  #
-  # This function fetches the
-  # the data
 
-  # 1) GET request
-  response <- httr::GET(
-    url   = baseUrl(
-      source = 'bitmart',
-      futures = futures
-    ),
-    # NOTE: Cant connect
-    # to bitmart with this
-    # httr::use_proxy(
-    #   url = '141.11.158.172',
-    #   port = 8080
-    #   ),
-    path  = endPoint(
-      source = 'bitmart',
-      futures = futures
-    ),
-    query = getParams(
-      source = 'bitmart',
-      futures = futures,
-      ticker = ticker,
+  # Some parts are
+  # paths and some are
+  # queries
+  getParams <- list(
+    ticker   = ticker,
+    interval = bitmartIntervals(
       interval = interval,
-      from = from,
-      to   = to
+      futures  = futures
     )
   )
 
-  # 1.1) Check for error
-  check_for_errors(
-    response = response
-  )
-
-
-  # 2) parse response
-  response <- jsonlite::fromJSON(
-    txt = httr::content(
-      x = response,
-      as = 'text',
-      encoding = 'UTF-8'
-    )
-  )$data
-
-
-
-  # 3) format response
-  # accordingly
-
-  # 3.1) set column
-  # names
+  # 3) correct parameter names
+  # according to each api
   if (futures) {
-
-    column_names <- c(
-      'Low',
-      'High',
-      'Open',
-      'Close',
-      'Volume'
+    # 1) correct all the names
+    # of the elements
+    names(getParams) <- c(
+      # was pair
+      'symbol',
+      'step'
     )
 
-    # 3.2) format
-    # dates
-    index <- as.POSIXct(
-      as.numeric(response[,6]),
-      origin = '1970-01-01',
-      tz = 'UTC'
-    )
-
-    # 3.3) extract needed
-    # columns from the response
-    response <- response[,1:5]
-    colnames(response) <- column_names
-
-    # 3.4) convert all values
-    # to numeric
-    response <- apply(
-      response,
-      c(1,2),
-      as.numeric
-    )
-
-
-
-
-
+    #getParams$contractType <- 'PERPETUAL'
 
   } else {
-
-
-    column_names <- c(
-      'Open',
-      'High',
-      'Low',
-      'Close',
-      'Volume'
+    # 1) correct all the names
+    # of the elements
+    names(getParams) <- c(
+      'symbol',
+      'step'
     )
-
-    # 3.2) format
-    # dates
-    index <- as.POSIXct(
-      as.numeric(response[,1]),
-      origin = '1970-01-01',
-      tz = 'UTC'
-    )
-
-
-    # 3.3) extract needed
-    # columns from the response
-    response <- response[,c(2:5,7)]
-    colnames(response) <- column_names
-
-    # 3.4) convert all values
-    # to numeric
-    response <- apply(
-      response,
-      c(1,2),
-      as.numeric
-    )
-
-
-
   }
 
+  getParams <- c(
+    getParams,
+    bitmartDates(
+      futures = futures,
+      dates   = list(
+        from = from,
+        to   = to
+      ),
+      is_response = FALSE
+    )
+  )
 
   return(
     list(
-      index = index,
-      quote = response
+      query    = getParams,
+      path     = NULL,
+      futures  = futures,
+      source   = 'bitmart',
+      ticker   = ticker,
+      interval = interval
     )
+
   )
 
+
+
 }
+
 
 
 
 # script end;
-

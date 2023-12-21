@@ -13,7 +13,7 @@ testthat::test_that(
     testthat::skip_on_ci()
 
     testthat::expect_no_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'ATOMUSDT',
         source = 'binance',
         futures = FALSE,
@@ -31,7 +31,7 @@ testthat::test_that(
     testthat::skip_on_ci()
 
     testthat::expect_no_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'ATOMUSDT',
         source = 'binance',
         futures = TRUE,
@@ -52,7 +52,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_no_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'ATOMUSDTM',
         source = 'kucoin',
         futures = TRUE,
@@ -75,7 +75,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_no_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'ATOM-USDT',
         source = 'kucoin',
         futures = FALSE,
@@ -101,7 +101,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_no_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'ATOMUSDT',
         source = 'kraken',
         futures = FALSE,
@@ -121,7 +121,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_no_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'PF_ATOMUSD',
         source = 'kraken',
         futures = TRUE,
@@ -144,8 +144,12 @@ testthat::test_that(
     testthat::skip_on_ci()
 
     # 2) determine test parameter
+    # NOTE: this error is useful
+    # to do logging and tracing of error messages
+    # keep track of this.
+    # it was when we gave 1 week of 15 min data
     testthat::expect_no_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'ATOM_USDT',
         source = 'bitmart',
         futures = FALSE,
@@ -165,7 +169,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_no_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'ATOMUSDT',
         source = 'bitmart',
         futures = TRUE,
@@ -178,6 +182,7 @@ testthat::test_that(
 
 
 
+
 # expect errors; ####
 # Test forced errors to check wether
 # error messages are correctly displayed
@@ -187,7 +192,7 @@ testthat::test_that(
 
 
     testthat::expect_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'FAKETICKER',
         source = 'binance',
         futures = FALSE,
@@ -202,7 +207,7 @@ testthat::test_that(
   code = {
 
     testthat::expect_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'FAKETICKER',
         source = 'binance',
         futures = TRUE,
@@ -220,7 +225,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'FAKETICKER',
         source = 'kucoin',
         futures = TRUE,
@@ -240,7 +245,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'FAKETICKER',
         source = 'kucoin',
         futures = FALSE,
@@ -259,7 +264,7 @@ testthat::test_that(
 
 
     testthat::expect_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'FAKETICKER',
         source = 'kraken',
         futures = FALSE,
@@ -274,7 +279,7 @@ testthat::test_that(
   code = {
 
     testthat::expect_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'FAKETICKER',
         source = 'kraken',
         futures = TRUE,
@@ -292,7 +297,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'FAKETICKER',
         source = 'bitmart',
         futures = TRUE,
@@ -312,7 +317,7 @@ testthat::test_that(
 
     # 2) determine test parameter
     testthat::expect_error(
-      object = cryptoQuotes::getQuote(
+      object = getQuote(
         ticker = 'FAKETICKER',
         source = 'bitmart',
         futures = FALSE,

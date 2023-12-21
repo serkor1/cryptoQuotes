@@ -69,19 +69,19 @@ getQuote <- function(
 
   # 3) fetch and format
   # the quote and return
-  formatQuote(
-    fetchQuote(
-      source = source,
-      futures = futures,
-      interval = interval,
-      ticker = ticker,
-      from = from,
-      to   = to
-    ),
-    source = source,
-    futures = futures,
-    interval = interval,
-    ticker = ticker
+  quote_response(
+    response = api_call(
+      source   = source,
+      ohlc     = TRUE,
+      parameters = source_parameters(
+        source  = source,
+        futures = futures,
+        ticker  = ticker,
+        interval= interval,
+        from    = from,
+        to      = to
+      )
+    )
   )
 
 }

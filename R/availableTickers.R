@@ -17,25 +17,26 @@
 availableTickers <- function(
     source  = 'binance',
     futures = TRUE
-    ) {
+) {
 
 
   ticker <- sort(
-    get(
-    paste0(
-      source,
-      'Tickers'
+    ticker_response(
+      api_call(
+        source = source,
+        ohlc = FALSE,
+        parameters = list(
+          source = source,
+          futures = futures
+        )
+      )
     )
-  )(futures = futures)
   )
 
   return(
     ticker
   )
 
-
-
-
 }
 
-
+# script end;
