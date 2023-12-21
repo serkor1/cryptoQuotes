@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cryptoQuotes</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,10 +58,30 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="cryptoquotes-110">cryptoQuotes 1.1.0<a class="anchor" aria-label="anchor" href="#cryptoquotes-110"></a></h2>
+<div class="section level3">
+<h3 id="frontend-1-1-0">Frontend<a class="anchor" aria-label="anchor" href="#frontend-1-1-0"></a></h3>
+<p><code>getQuotes</code> now returns up to 100 pips, when <code>to</code> and <code>from</code> is <code>NULL</code></p>
+</div>
+<div class="section level3">
+<h3 id="backend-1-1-0">Backend<a class="anchor" aria-label="anchor" href="#backend-1-1-0"></a></h3>
+<ul><li>All code has been rewritten so its compatible with <code>httr2</code>, the package used <code>httr</code> at version <code>1.0.0</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="future-releases-1-1-0">Future releases<a class="anchor" aria-label="anchor" href="#future-releases-1-1-0"></a></h3>
+<p>In the next release, three more exchanges will be supported.</p>
+</div>
+<div class="section level3">
+<h3 id="known-bugs-1-1-0">Known bugs<a class="anchor" aria-label="anchor" href="#known-bugs-1-1-0"></a></h3>
+<p>The returned <code>quotes</code> are in local timezone, this is an unintentional feature and will be fixed in a bugfix.</p>
+</div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="cryptoquotes-100">cryptoQuotes 1.0.0<a class="anchor" aria-label="anchor" href="#cryptoquotes-100"></a></h2><p class="text-muted">CRAN release: 2023-12-13</p>
 <ul><li>Initial CRAN submission.</li>
 </ul></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
