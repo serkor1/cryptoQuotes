@@ -7,8 +7,43 @@
 # script start;
 
 default_dates <- function(
-    interval
+    interval,
+    from = NULL,
+    to   = NULL
 ) {
+
+  if (!is.null(from) | !is.null(to)) {
+
+    if (!is.null(from)) {
+
+      operation <- '+'
+
+    }
+
+    if (!is.null(to)) {
+
+      operation <- '-'
+
+    }
+
+    starting_point <- as.POSIXct(
+      c(from, to),
+      tz = 'UTC',
+      origin = '1970-01-01'
+    )
+
+  } else {
+
+    starting_point <- as.POSIXct(
+      Sys.Date(),
+      tz = 'UTC',
+      origin = '1970-01-01'
+    )
+
+    operation <- '-'
+
+  }
+
 
 
   # 1) add white-space to the
@@ -69,13 +104,9 @@ default_dates <- function(
 
 
   interval <- seq(
-    from = as.POSIXct(
-      Sys.time(),
-      tz = 'UTC',
-      origin = '1970-01-01'
-      ),
+    from = starting_point,
     by = paste0(
-      '-', interval
+      operation, interval
     ),
     length.out = 100
   )
@@ -86,11 +117,19 @@ default_dates <- function(
   return(
     list(
       from = min(interval),
-      to   = max(interval)
+      to   = min(
+        max(interval),
+        as.POSIXct(
+          Sys.Date(),
+          tz = 'UTC',
+          origin = '1970-01-01'
+        )
+      )
     )
   )
 
 }
+
 
 
 

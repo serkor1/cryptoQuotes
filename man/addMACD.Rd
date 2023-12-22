@@ -19,7 +19,6 @@ Invisbly returns a plotly object.
 
 Traders and investors use the MACD indicator to identify trend changes, potential reversals, and overbought or oversold conditions in the market.
 It is a versatile tool that can be applied to various timeframes and asset classes, making it a valuable part of technical analysis for many traders.
-Read more \link[www.investopedia.com/terms/m/macd.asp]{Investopedia}.
 }
 \examples{
 # script: scr_charting

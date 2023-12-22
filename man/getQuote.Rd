@@ -35,7 +35,12 @@ Open, High, Low, Close, and Volume (OHLCV) quotes are essential pieces of
 information used to analyze the price and trading activity of a financial asset over a specific time frame.
 }
 \details{
-If \code{from} and \code{to} are \link{NULL} 100 pips returned.
+If only \code{from} is provided 100 pips are returned up to \code{Sys.Date()}.
+
+If only \code{to} is provided 100 pips up to the specified date
+is returned.
+
+If \code{from} and \code{to} are both \link{NULL} 100 pips returned up to \code{Sys.Date()}
 }
 \examples{
 # 1) load perpetual

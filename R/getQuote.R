@@ -7,6 +7,7 @@
 #' information used to analyze the price and trading activity of a financial asset over a specific time frame.
 #'
 #'
+#'
 #' @param ticker A character vector of length 1. Uppercase. See [availableTickers()] for available tickers.
 #' @param source A character vector of length 1. See [availableExchanges()] for available exchanges.
 #' @param interval A character vector of length 1. See [availableIntervals()] for available intervals.
@@ -28,7 +29,13 @@
 #' @returns an xts object with Open, High, Low, Close and Volume. If ```futures = TRUE``` the prices are last prices.
 #'
 #' @details
-#' If ``from`` and ``to`` are [NULL] 100 pips returned.
+#'
+#' If only ``from`` is provided 100 pips are returned up to ``Sys.Date()``.
+#'
+#' If only ``to`` is provided 100 pips up to the specified date
+#' is returned.
+#'
+#' If ``from`` and ``to`` are both [NULL] 100 pips returned up to ``Sys.Date()``
 #'
 #'
 #' @export
@@ -92,7 +99,9 @@ getQuote <- function(
     # APIs if no date is set the output
     # is limited to 100 pips
     forced_dates <- default_dates(
-      interval = interval
+      interval = interval,
+      from     = from,
+      to       = to
     )
 
     # generate from
