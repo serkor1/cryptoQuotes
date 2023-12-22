@@ -1,8 +1,39 @@
+# cryptoQuotes 1.2.0
+
+`getQuotes` now returns up to 100 pips preceding the specified `to` date, when `from = NULL`. It returns 100 pips, or up to `Sys.Date()`, from the specified `from` date.
+
+The `getQuote()`-function can now be used as follows;
+
+```
+## Specifying from
+## date only;
+##
+## Returns 10 pips
+getQuote(
+ ticker   = 'BTCUSDT',
+ interval = '1d'
+ from     = as.character(Sys.Date() - 10)
+ )
+```
+
+```
+## Specifying to
+## date only;
+##
+## Returns 100 pips
+getQuote(
+ ticker   = 'BTCUSDT',
+ interval = '1d'
+ to     = as.character(Sys.Date())
+ )
+```
+
+
 # cryptoQuotes 1.1.0
 
 ## Frontend
 
-`getQuotes` now returns up to 100 pips, when `to` and `from` is `NULL`
+`getQuote()` now returns up to 100 pips when `to` and `from` is `NULL`
 
 ## Backend
 
