@@ -293,3 +293,69 @@ testthat::test_that(
 
   }
 )
+
+
+
+
+# check errors;
+testthat::test_that(
+  desc = 'Check if getQuotes returns an rlang error message',
+  code = {
+
+    # 0) Set exchanges
+    suppressMessages(
+      exchanges <- availableExchanges()
+    )
+
+    lgl_futures <- c(TRUE,FALSE)
+
+    # 2) run tests via
+    # lapply and force a fail
+    # to see what happens
+    for (futures in lgl_futures) {
+      for (exchange in exchanges) {
+
+        # 0) Run with fake
+        # ticker wrapped in tryCatch
+        # to capture error-messages
+        error_output <- tryCatch(
+          {
+            getQuote(
+              ticker   = 'FAKETICKER',
+              source   = exchange,
+              futures  = futures,
+              interval = '1d'
+            )
+          },
+          error = function(error_message) {
+
+            return(
+              error_message
+            )
+
+
+          }
+        )
+
+        # 1) check if its an
+        # rlang error; otherwise
+        testthat::expect_true(
+          object = inherits(
+            x = error_output,
+            what = 'rlang_error'
+          )
+        )
+
+
+      }
+
+
+
+    }
+
+  }
+)
+
+
+
+
