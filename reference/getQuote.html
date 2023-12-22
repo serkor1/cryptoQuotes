@@ -14,7 +14,7 @@ information used to analyze the price and trading activity of a financial asset 
     
     <a class="navbar-brand me-2" href="../index.html">cryptoQuotes</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,7 +114,10 @@ information used to analyze the price and trading activity of a financial asset 
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>If <code>from</code> and <code>to</code> are <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> 100 pips returned.</p>
+    <p>If only <code>from</code> is provided 100 pips are returned up to <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code>.</p>
+<p>If only <code>to</code> is provided 100 pips up to the specified date
+is returned.</p>
+<p>If <code>from</code> and <code>to</code> are both <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> 100 pips returned up to <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code></p>
     </div>
 
     <div class="section level2">

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cryptoQuotes</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,10 +58,33 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0" id="cryptoquotes-120">cryptoQuotes 1.2.0<a class="anchor" aria-label="anchor" href="#cryptoquotes-120"></a></h2>
+<p><code>getQuotes</code> now returns up to 100 pips preceding the specified <code>to</code> date, when <code>from = NULL</code>. It returns 100 pips, or up to <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code>, from the specified <code>from</code> date.</p>
+<p>The <code><a href="../reference/getQuote.html">getQuote()</a></code>-function can now be used as follows;</p>
+<pre><code>## Specifying from
+## date only;
+##
+## Returns 10 pips
+getQuote(
+ ticker   = 'BTCUSDT',
+ interval = '1d'
+ from     = as.character(Sys.Date() - 10)
+ )</code></pre>
+<pre><code>## Specifying to
+## date only;
+##
+## Returns 100 pips
+getQuote(
+ ticker   = 'BTCUSDT',
+ interval = '1d'
+ to     = as.character(Sys.Date())
+ )</code></pre>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="cryptoquotes-110">cryptoQuotes 1.1.0<a class="anchor" aria-label="anchor" href="#cryptoquotes-110"></a></h2>
 <div class="section level3">
 <h3 id="frontend-1-1-0">Frontend<a class="anchor" aria-label="anchor" href="#frontend-1-1-0"></a></h3>
-<p><code>getQuotes</code> now returns up to 100 pips, when <code>to</code> and <code>from</code> is <code>NULL</code></p>
+<p><code><a href="../reference/getQuote.html">getQuote()</a></code> now returns up to 100 pips when <code>to</code> and <code>from</code> is <code>NULL</code></p>
 </div>
 <div class="section level3">
 <h3 id="backend-1-1-0">Backend<a class="anchor" aria-label="anchor" href="#backend-1-1-0"></a></h3>
