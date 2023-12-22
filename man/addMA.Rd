@@ -5,13 +5,12 @@
 \title{Add various Moving Average indicators
 to the chart}
 \usage{
-addMA(plot, FUN = TTR::SMA, ...)
+addMA(chart, FUN = TTR::SMA, ...)
 }
 \arguments{
-\item{plot}{A plotly object of either
-klines or OHLC}
+\item{chart}{a \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} chart}
 
-\item{FUN}{A named function calculating MAs. See \code{\link[TTR:MovingAverages]{TTR::SMA()}}}
+\item{FUN}{A named function calculating MAs. Has to be explicitly called. See \code{\link[TTR:MovingAverages]{TTR::SMA()}} for more information.}
 
 \item{...}{See \code{\link[TTR:MovingAverages]{TTR::SMA()}}}
 }
@@ -19,10 +18,14 @@ klines or OHLC}
 Invisbly returns a plotly object.
 }
 \description{
-The function supports all moving averages calculated
-by the TTR library. Has to be explicitly called
-
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Moving averages are versatile tools used by traders and analysts in various timeframes, from short-term intraday trading to long-term investing.
+They help smooth out noise in price data and provide valuable information for decision-making in financial markets.
+}
+\details{
+The function supports all moving averages calculated
+by the \link{TTR} library. See \code{\link[TTR:MovingAverages]{TTR::SMA()}} for more information.
 }
 \examples{
 # script: scr_charting
@@ -61,6 +64,7 @@ Other chart indicators:
 \code{\link{addEvents}()},
 \code{\link{addMACD}()},
 \code{\link{addRSI}()},
-\code{\link{addVolume}()}
+\code{\link{addVolume}()},
+\code{\link{chart}()}
 }
 \concept{chart indicators}

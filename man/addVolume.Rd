@@ -2,22 +2,22 @@
 % Please edit documentation in R/chart_indicators.R
 \name{addVolume}
 \alias{addVolume}
-\title{Add volume indicator
+\title{Add volume indicators
 to the chart}
 \usage{
-addVolume(plot)
+addVolume(chart)
 }
 \arguments{
-\item{plot}{A plotly object of either
-klines or OHLC}
+\item{chart}{a \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} chart}
 }
 \value{
 Invisbly returns a plotly object.
 }
 \description{
-A short description...
-
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Volume indicators are technical analysis tools used to analyze trading volume, which represents the number of shares or contracts traded in a financial market over a specific period of time.
+These indicators provide valuable insights into the strength and significance of price movements.
 }
 \examples{
 # script: scr_charting
@@ -56,6 +56,7 @@ Other chart indicators:
 \code{\link{addEvents}()},
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
-\code{\link{addRSI}()}
+\code{\link{addRSI}()},
+\code{\link{chart}()}
 }
 \concept{chart indicators}

@@ -3,37 +3,39 @@
 \name{getQuote}
 \alias{getQuote}
 \title{Get a quote on a cryptopair from one
-of the major exchanges}
+of the supported exchanges}
 \usage{
 getQuote(
-  ticker,
-  source = "binance",
-  futures = TRUE,
-  interval,
-  from = NULL,
-  to = NULL
+ ticker,
+ source   = 'binance',
+ futures  = TRUE,
+ interval = '1d',
+ from     = NULL,
+ to       = NULL
 )
 }
 \arguments{
-\item{ticker}{A character vector of length 1. Uppercase.}
+\item{ticker}{A character vector of length 1. Uppercase. See \code{\link[=availableTickers]{availableTickers()}} for available tickers.}
 
-\item{source}{A character vector of length 1. See \code{\link[=availableExchanges]{availableExchanges()}} for a full list of available exchanges.}
+\item{source}{A character vector of length 1. See \code{\link[=availableExchanges]{availableExchanges()}} for available exchanges.}
 
-\item{futures}{A logical value. TRUE by default. If FALSE, the function will return spot prices.}
+\item{futures}{A logical value. Returns futures market if \link{TRUE}, spot market otherwise.}
 
-\item{interval}{A character vector of length 1. See \code{\link[=availableIntervals]{availableIntervals()}} for a full list.}
+\item{interval}{A character vector of length 1. See \code{\link[=availableIntervals]{availableIntervals()}} for available intervals.}
 
-\item{from}{A character vector of length 1. Given in \%Y-\%m-\%d format.}
+\item{from}{An optional character vector of length 1. Given in \%Y-\%m-\%d format.}
 
-\item{to}{A character vector of length 1. Given in \%Y-\%m-\%d format.}
+\item{to}{An optional character vector of length 1. Given in \%Y-\%m-\%d format.}
 }
 \value{
-an xts object with Open, High, Low, Close and Volume.
+an xts object with Open, High, Low, Close and Volume. If \code{futures = TRUE} the prices are last prices.
 }
 \description{
-This function returns a crypto quote from
-one of the available exchanges. The function supports
-futues and spot markets
+Open, High, Low, Close, and Volume (OHLCV) quotes are essential pieces of
+information used to analyze the price and trading activity of a financial asset over a specific time frame.
+}
+\details{
+If \code{from} and \code{to} are \link{NULL} 100 pips returned.
 }
 \examples{
 # 1) load perpetual

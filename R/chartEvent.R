@@ -1,10 +1,22 @@
 #' add eventlines to
 #' the chart
 #'
+#' @description
+#'
 #' `r lifecycle::badge("experimental")`
 #'
-#' @param plot Chart
-#' @param event a data.frame with index, event and colors.
+#' Common types of event indicators include earnings release dates, dividend payouts, central bank interest rate decisions, chart pattern breakouts, and geopolitical events like elections or geopolitical tensions.
+#' The choice of event indicators depends on the trader's or analyst's specific objectives and the factors they believe are most relevant to the asset's price movements.
+#'
+#'
+#' # Note
+#' The eventlines are drawn using [plotly::layout()], so all existing
+#' eventlines will be replaced each time you call [addEvents()].
+#'
+#'
+#'
+#' @param chart a [kline()] or [ohlc()] chart
+#' @param event a [data.frame] with index, event and colors.
 #'
 #' @example man/examples/scr_addEvents.R
 #'
@@ -13,7 +25,7 @@
 #' @returns Invisbly returns a plotly object.
 #' @export
 addEvents <- function(
-    plot,
+    chart,
     event
 ) {
 
@@ -54,12 +66,12 @@ addEvents <- function(
 
   # 1) extract the main
   # chart from the plot
-  plot_ <- plot$main
+  chart_ <- chart$main
 
 
 
-  plot_ <- plotly::layout(
-    p = plot_,
+  chart_ <- plotly::layout(
+    p = chart_,
     shapes = do.call(
       list,
       lapply(
@@ -90,11 +102,11 @@ addEvents <- function(
     )
   )
 
-  plot$main <- plot_
+  chart$main <- chart_
   # attributes(plot)$quote <- toDF(quote)
 
   return(
-    invisible(plot)
+    invisible(chart)
   )
 
 }

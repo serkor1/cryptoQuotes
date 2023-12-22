@@ -19,8 +19,11 @@ colors are used.}
 Invisbly returns a plotly object.
 }
 \description{
-chart quote using
-ohlc bars
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+
+Traders and analysts use OHLC bar charts to analyze price action, identify trends, support and resistance levels, and potential reversal patterns.
+They are especially useful for assessing the relationship between the opening and closing prices
+within a given time frame, which can offer insights into market sentiment and potential future price movements.
 }
 \examples{
 # script: scr_charting

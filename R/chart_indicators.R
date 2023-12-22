@@ -6,26 +6,33 @@
 # plotly
 # script start;
 
-#' Add Bollinger Bands indicators
-#' to the charts
-#'
+#' Add Bollinger Bands
+#' to the chart
 #'
 #' @description
-#' A short description...
 #'
 #' `r lifecycle::badge("experimental")`
 #'
+#' Bollinger Bands provide a visual representation of price volatility and are widely used by traders
+#' and investors to assess potential price reversals and trade opportunities in various financial markets, including stocks, forex, and commodities.
 #'
-#' @param plot a kline, or OHLC, chart.
-#' @param cols a vector of column names for the
-#' Bollinger bands calculations.
+#'
+#' @param chart a [kline()] or [ohlc()] chart
+#' @param cols a vector of column names used to calculate the  Bollinger Bands
+#' Default values ``High``, `Low` and ``Close``
+#'
 #' @param ... See [TTR::BBands()]
 #' @example man/examples/scr_charting.R
+#'
+#'
+#'
 #' @returns Invisbly returns a plotly object.
+#'
 #' @family chart indicators
+#'
 #' @export
 addBBands <- function(
-    plot,
+    chart,
     cols = c('High', 'Low', 'Close'),
     ...
 ) {
@@ -35,12 +42,12 @@ addBBands <- function(
   ## data.frame in the plot
   ## to xts, zoo object
   quote <- (
-    attributes(plot)$quote
+    attributes(chart)$quote
   )
 
   ## 2) extract the main chart
   ## and store it it as plot_
-  plot_ <- plot$main
+  chart_ <- chart$main
 
   ## 3) calculate the bollinger
   ## bands using TTR and store
@@ -64,7 +71,7 @@ addBBands <- function(
 
   ## 4) add the indicator
   ## to main plot_
-  plot_ <- plot_ %>%
+  chart_ <- chart_ %>%
     plotly::add_lines(
       showlegend = FALSE,
       data = indicator,
@@ -102,12 +109,12 @@ addBBands <- function(
   ## 5) store plot_
   ## in the plot list
   ## in main
-  plot$main <- plot_
+  chart$main <- chart_
 
   ## 6) pass the quote on
   ## to the attributes of the
   ## for further indicator plots
-  attributes(plot)$quote <- attributes(plot)$quote
+  attributes(chart)$quote <- attributes(chart)$quote
 
 
   ## 7) return
@@ -115,41 +122,48 @@ addBBands <- function(
   ## to force enduser
   ## to use chart-function
   return(
-    invisible(plot)
+    invisible(chart)
   )
 
 }
 
-
-#' Add volume indicator
+#' Add volume indicators
 #' to the chart
 #'
 #' @description
-#' A short description...
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' @param plot A plotly object of either
-#' klines or OHLC
+#' Volume indicators are technical analysis tools used to analyze trading volume, which represents the number of shares or contracts traded in a financial market over a specific period of time.
+#' These indicators provide valuable insights into the strength and significance of price movements.
+#'
+#' @param chart a [kline()] or [ohlc()] chart
 #'
 #' @returns Invisbly returns a plotly object.
+#'
 #' @example man/examples/scr_charting.R
 #'
 #' @family chart indicators
+#'
 #' @export
-addVolume <- function(plot) {
+addVolume <- function(
+    chart
+    ) {
 
   ## 1) extract the data
   ## and deficieny attribute
   ## fron the main plt.
-  quoteDF <- toDF(attributes(plot)$quote)
-  deficiency <- attributes(plot)$deficiency
+  quoteDF <- toDF(
+    attributes(chart)$quote
+    )
+
+  deficiency <- attributes(chart)$deficiency
 
 
   ## 2) create volume
   ## plot and store it
   ## as plot_
-  plot_ <- plotly::plot_ly(
+  chart_ <- plotly::plot_ly(
     data = quoteDF,
     name = 'Volume',
     x = ~Index,
@@ -178,31 +192,34 @@ addVolume <- function(plot) {
 
   ## 3) store the volume
   ## plot_ in the plot list
-  plot$volume <- plot_
+  chart$volume <- chart_
 
   ## 4) pass on the data
   ## as is in the the quote
   ## attribute of the plot
   ## so it can be used in the additional
   ## plot
-  attributes(plot)$quote <- attributes(plot)$quote
+  attributes(chart)$quote <- attributes(chart)$quote
 
 
   return(
-    invisible(plot)
+    invisible(chart)
   )
 
 
 }
 
 
-#' Add MACD indicator to the chart
+#' Add MACD indicators to the chart
+#'
 #' @description
-#' A short description...
 #'
 #' `r lifecycle::badge("experimental")`
-#' @param plot A plotly object of either
-#' klines or OHLC
+#'
+#' Traders and investors use the MACD indicator to identify trend changes, potential reversals, and overbought or oversold conditions in the market.
+#' It is a versatile tool that can be applied to various timeframes and asset classes, making it a valuable part of technical analysis for many traders.
+#'
+#' @param chart a [kline()] or [ohlc()] chart
 #'
 #'
 #' @param ... See [TTR::MACD()]
@@ -212,13 +229,13 @@ addVolume <- function(plot) {
 #' @family chart indicators
 #' @export
 addMACD <- function(
-    plot,
+    chart,
     ...
 ) {
 
   # 1) Extract
-  quoteDF <- toDF(attributes(plot)$quote)
-  deficiency <- attributes(plot)$deficiency
+  quoteDF <- toDF(attributes(chart)$quote)
+  deficiency <- attributes(chart)$deficiency
 
   # 2) calculate MACD
   indicator <- toDF(
@@ -234,8 +251,7 @@ addMACD <- function(
     indicator$macd > indicator$signal
   )
 
-
-  plot_ <- plotly::plot_ly(
+  chart_ <- plotly::plot_ly(
     data = indicator,
     showlegend = FALSE,
     name = 'MACD',
@@ -291,19 +307,12 @@ addMACD <- function(
 
   )
 
-
-
-  plot$macd <- plot_
-  attributes(plot)$quote <- attributes(plot)$quote
+  chart$macd <- chart_
+  attributes(chart)$quote <- attributes(chart)$quote
 
   return(
-
-    invisible(plot)
-
-
+    invisible(chart)
   )
-
-
 }
 
 
@@ -313,22 +322,30 @@ addMACD <- function(
 #'
 #' @description
 #'
-#' The function supports all moving averages calculated
-#' by the TTR library. Has to be explicitly called
-#'
 #' `r lifecycle::badge("experimental")`
 #'
-#' @param plot A plotly object of either
-#' klines or OHLC
-#' @param FUN A named function calculating MAs. See [TTR::SMA()]
+#' Moving averages are versatile tools used by traders and analysts in various timeframes, from short-term intraday trading to long-term investing.
+#' They help smooth out noise in price data and provide valuable information for decision-making in financial markets.
+#'
+#'
+#'
+#' @param chart a [kline()] or [ohlc()] chart
+#' @param FUN A named function calculating MAs. Has to be explicitly called. See [TTR::SMA()] for more information.
 #' @param ... See [TTR::SMA()]
+#'
+#' @details
+#' The function supports all moving averages calculated
+#' by the [TTR] library. See [TTR::SMA()] for more information.
+#'
+#'
 #'
 #' @example man/examples/scr_charting.R
 #'
 #' @returns Invisbly returns a plotly object.
+#'
 #' @family chart indicators
 #' @export
-addMA <- function(plot, FUN = TTR::SMA, ...) {
+addMA <- function(chart, FUN = TTR::SMA, ...) {
 
   ## 0) extract
   ## call to paste into the function
@@ -351,11 +368,11 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
   )
 
 
-  quote <- attributes(plot)$quote
+  quote <- attributes(chart)$quote
 
   # 1) extract the main
   # chart from the plot
-  plot_ <- plot$main
+  chart_ <- chart$main
 
   quote_ <- toDF(
     foo(
@@ -368,7 +385,7 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
 
   colnames(quote_)[!grepl(colnames(quote_), pattern = 'Index', ignore.case =TRUE)] <- 'value'
 
-  plot_ <- plot_ %>% plotly::add_lines(
+  chart_ <- chart_ %>% plotly::add_lines(
     data = quote_,
     name = paste0(
       gsub(pattern = '^[a-z]+::', replacement = '', ignore.case = TRUE, x = deparse(arguments$FUN)),
@@ -386,12 +403,12 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
 
 
 
-  plot$main <- plot_
-  attributes(plot)$quote <- quote
+  chart$main <- chart_
+  attributes(chart)$quote <- quote
 
 
   return(
-    invisible(plot)
+    invisible(chart)
   )
 
 
@@ -404,27 +421,31 @@ addMA <- function(plot, FUN = TTR::SMA, ...) {
 
 #' Add RSI indicators to your
 #' chart
+#'
 #' @description
-#' A short description...
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' @param plot A plotly object of either
-#' klines or OHLC
+#' The RSI can be customized with different look-back periods to suit various trading strategies and timeframes.
+#' It is a valuable tool for assessing the momentum and relative strength of an asset, helping traders make more informed decisions in financial markets.
 #'
+#'
+#' @param chart a [kline()] or [ohlc()] chart
 #' @param ... See [TTR::RSI()]
+#'
 #' @returns Invisbly returns a plotly object.
+#'
 #' @example man/examples/scr_charting.R
 #'
 #'
 #' @family chart indicators
 #' @export
 addRSI <- function(
-    plot,
+    chart,
     ...) {
 
-  quote <- attributes(plot)$quote
-  deficiency <- attributes(plot)$deficiency
+  quote <- attributes(chart)$quote
+  deficiency <- attributes(chart)$deficiency
   # 3) create volume
   # plot
 
@@ -436,7 +457,7 @@ addRSI <- function(
   )
 
 
-  plot_ <- plotly::plot_ly(
+  chart_ <- plotly::plot_ly(
     data = quoteDF,
     name = 'RSI',
     x = ~Index,
@@ -459,13 +480,13 @@ addRSI <- function(
     )
   )
 
-  plot$rsi <- plot_
+  chart$rsi <- chart_
 
-  attributes(plot)$quote <- attributes(plot)$quote
+  attributes(chart)$quote <- attributes(chart)$quote
 
 
   return(
-    invisible(plot)
+    invisible(chart)
   )
 
 

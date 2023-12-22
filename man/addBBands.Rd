@@ -2,16 +2,16 @@
 % Please edit documentation in R/chart_indicators.R
 \name{addBBands}
 \alias{addBBands}
-\title{Add Bollinger Bands indicators
-to the charts}
+\title{Add Bollinger Bands
+to the chart}
 \usage{
-addBBands(plot, cols = c("High", "Low", "Close"), ...)
+addBBands(chart, cols = c("High", "Low", "Close"), ...)
 }
 \arguments{
-\item{plot}{a kline, or OHLC, chart.}
+\item{chart}{a \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} chart}
 
-\item{cols}{a vector of column names for the
-Bollinger bands calculations.}
+\item{cols}{a vector of column names used to calculate the  Bollinger Bands
+Default values \code{High}, \code{Low} and \code{Close}}
 
 \item{...}{See \code{\link[TTR:bollingerBands]{TTR::BBands()}}}
 }
@@ -19,9 +19,10 @@ Bollinger bands calculations.}
 Invisbly returns a plotly object.
 }
 \description{
-A short description...
-
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Bollinger Bands provide a visual representation of price volatility and are widely used by traders
+and investors to assess potential price reversals and trade opportunities in various financial markets, including stocks, forex, and commodities.
 }
 \examples{
 # script: scr_charting
@@ -60,6 +61,7 @@ Other chart indicators:
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
 \code{\link{addRSI}()},
-\code{\link{addVolume}()}
+\code{\link{addVolume}()},
+\code{\link{chart}()}
 }
 \concept{chart indicators}

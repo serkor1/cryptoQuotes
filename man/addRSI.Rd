@@ -5,11 +5,10 @@
 \title{Add RSI indicators to your
 chart}
 \usage{
-addRSI(plot, ...)
+addRSI(chart, ...)
 }
 \arguments{
-\item{plot}{A plotly object of either
-klines or OHLC}
+\item{chart}{a \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} chart}
 
 \item{...}{See \code{\link[TTR:RSI]{TTR::RSI()}}}
 }
@@ -17,9 +16,10 @@ klines or OHLC}
 Invisbly returns a plotly object.
 }
 \description{
-A short description...
-
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+The RSI can be customized with different look-back periods to suit various trading strategies and timeframes.
+It is a valuable tool for assessing the momentum and relative strength of an asset, helping traders make more informed decisions in financial markets.
 }
 \examples{
 # script: scr_charting
@@ -58,6 +58,7 @@ Other chart indicators:
 \code{\link{addEvents}()},
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
-\code{\link{addVolume}()}
+\code{\link{addVolume}()},
+\code{\link{chart}()}
 }
 \concept{chart indicators}

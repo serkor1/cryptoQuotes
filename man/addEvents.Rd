@@ -5,19 +5,27 @@
 \title{add eventlines to
 the chart}
 \usage{
-addEvents(plot, event)
+addEvents(chart, event)
 }
 \arguments{
-\item{plot}{Chart}
+\item{chart}{a \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} chart}
 
-\item{event}{a data.frame with index, event and colors.}
+\item{event}{a \link{data.frame} with index, event and colors.}
 }
 \value{
 Invisbly returns a plotly object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Common types of event indicators include earnings release dates, dividend payouts, central bank interest rate decisions, chart pattern breakouts, and geopolitical events like elections or geopolitical tensions.
+The choice of event indicators depends on the trader's or analyst's specific objectives and the factors they believe are most relevant to the asset's price movements.
 }
+\section{Note}{
+The eventlines are drawn using \code{\link[plotly:layout]{plotly::layout()}}, so all existing
+eventlines will be replaced each time you call \code{\link[=addEvents]{addEvents()}}.
+}
+
 \examples{
 # script: scr_addEvents
 # date: 2023-12-07
@@ -102,6 +110,7 @@ Other chart indicators:
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
 \code{\link{addRSI}()},
-\code{\link{addVolume}()}
+\code{\link{addVolume}()},
+\code{\link{chart}()}
 }
 \concept{chart indicators}

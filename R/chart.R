@@ -4,17 +4,25 @@
 # objective: Chart the quotes using
 # plotly
 # script start;
-
-#' Create a candlestick chart
+#' Chart the OHLC prices using candlesticks
 #'
-#' This function returns a plotly kline chart with
-#' the most common indicators.
+#' @description
+#'
+#' `r lifecycle::badge("stable")`
+#'
+#' Candlestick charts are highly visual and provide a quick and intuitive way to assess market sentiment and price action.
+#' Traders and analysts use them in conjunction with other technical analysis tools to make informed trading decisions.
+#' These charts are particularly useful for identifying key support and resistance levels, trend changes, and potential entry and exit points in financial markets.
 #'
 #' @param quote A cryptoQuote in xts/zoo format.
-#' @param deficiency Logical. FALSE by default, if TRUE color defiency compliant
+#'
+#' @param deficiency Logical. [FALSE] by default, if [TRUE] color defiency compliant
 #' colors are used.
+#'
+#'
 #' @param slider Logical. TRUE by default. If FALSE, no slider will be included.
 #' @family charting
+#'
 #' @returns Invisbly returns a plotly object.
 #' @export
 
@@ -82,10 +90,21 @@ kline <- function(
 #' chart quote using
 #' ohlc bars
 #'
+#' @description
+#'
+#' `r lifecycle::badge("stable")`
+#'
+#' Traders and analysts use OHLC bar charts to analyze price action, identify trends, support and resistance levels, and potential reversal patterns.
+#' They are especially useful for assessing the relationship between the opening and closing prices
+#'  within a given time frame, which can offer insights into market sentiment and potential future price movements.
+#'
 #' @param quote A cryptoQuote in xts/zoo format.
 #' @param deficiency Logical. FALSE by default, if TRUE color defiency compliant
 #' colors are used.
 #' @param slider Logical. TRUE by default. If FALSE, no slider will be included.
+#'
+#'
+#'
 #' @family charting
 #' @example man/examples/scr_charting.R
 #'
@@ -155,13 +174,24 @@ ohlc <- function(
 
 
 
-#' Chart your data
+#' Create an interactive financial chart
 #'
-#' @param chart A kline or ohlc chart with and without
-#' indicators
+#' @description
 #'
-#' @param slider Logical. TRUE by default.
+#' `r lifecycle::badge("stable")`
+#'
+#' Chart the [kline()] or [ohlc()] with optional indicators.
+#'
+#' @param chart a [kline()] or [ohlc()] chart with optional indicators.
+#'
+#' @param slider A logical value. [TRUE] by default. Include a slider in the bottom of the chart.
+#'
+#'
+#'
+#' @family chart indicators
 #' @family charting
+#'
+#'
 #'
 #' @example man/examples/scr_charting.R
 #' @returns Returns a plotly object

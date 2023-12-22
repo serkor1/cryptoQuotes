@@ -2,21 +2,22 @@
 % Please edit documentation in R/chart.R
 \name{chart}
 \alias{chart}
-\title{Chart your data}
+\title{Create an interactive financial chart}
 \usage{
 chart(chart, slider = TRUE)
 }
 \arguments{
-\item{chart}{A kline or ohlc chart with and without
-indicators}
+\item{chart}{a \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} chart with optional indicators.}
 
-\item{slider}{Logical. TRUE by default.}
+\item{slider}{A logical value. \link{TRUE} by default. Include a slider in the bottom of the chart.}
 }
 \value{
 Returns a plotly object
 }
 \description{
-Chart your data
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+
+Chart the \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} with optional indicators.
 }
 \examples{
 # script: scr_charting
@@ -50,8 +51,17 @@ chart(
 # script end;
 }
 \seealso{
+Other chart indicators: 
+\code{\link{addBBands}()},
+\code{\link{addEvents}()},
+\code{\link{addMACD}()},
+\code{\link{addMA}()},
+\code{\link{addRSI}()},
+\code{\link{addVolume}()}
+
 Other charting: 
 \code{\link{kline}()},
 \code{\link{ohlc}()}
 }
+\concept{chart indicators}
 \concept{charting}
