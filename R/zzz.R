@@ -6,15 +6,6 @@
 
 .onAttach <- function(libname, pkgname) {
 
-  # packageStartupMessage(
-  #   startup_message(
-  #     pkgname = pkgname,
-  #     pkgversion = utils::packageVersion(
-  #       pkgname
-  #     )
-  #   )
-  # )
-
   msg <- startup_message(
     pkgname = pkgname,
     pkgversion = utils::packageVersion(

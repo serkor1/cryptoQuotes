@@ -55,7 +55,11 @@ cryptoQuotes::chart(
 
 At January 14, 06.18 (UTC) Elon Musk tweets about Dogecoin (DOGE)
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Tesla merch buyable with Dogecoin</p>&mdash; Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/1481873421390680065?ref_src=twsrc%5Etfw">January 14, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+```{r, echo=FALSE, out.width="100%", fig.cap="Tweet by Elon Musk - the timezone is CET."}
+knitr::include_graphics("elonTweet.png")
+```
+
+
 
 To analyze the price action of Dogecoin following Elon Musks's tweet we could extract the price in ```1m``` intervals, between 06.00 and 07.00. As the returned quotes are just `xts`-objects the subsetting can be done using ```window```.
 
