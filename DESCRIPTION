@@ -29,6 +29,7 @@ Imports:
     magrittr (>= 2.0.3),
     plotly (>= 4.10.2),
     rlang (>= 1.1.1),
+    rvest,
     TTR,
     xts (>= 0.13.1),
     zoo (>= 1.8-12)

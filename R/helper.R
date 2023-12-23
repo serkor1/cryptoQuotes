@@ -284,4 +284,41 @@ flatten <- function(x) {
 }
 
 
+# package startup messages;
+startup_message <- function(
+    pkgname,
+    pkgversion
+) {
+
+  # 1) get github release
+  # using rvest
+  github_release <- rvest::html_text(
+    rvest::html_element(
+      css = 'small',
+      rvest::html_element(
+        css = 'div',
+        rvest::html_element(
+          css = 'nav',
+          rvest::read_html(
+            x = 'https://serkor1.github.io/cryptoQuotes/index.html'
+          )
+        )
+      )
+    )
+  )
+
+  # 2) Generate CLI
+  # formatted messages
+  c(
+    paste('Attaching', pkgname),
+    'i' = paste('CRAN version:', pkgversion),
+    'i' = paste('Development version:', github_release),
+    '*' = paste('Release notes:',  "https://serkor1.github.io/cryptoQuotes/news/index.html")
+  )
+
+
+
+}
+
+
 # script end;
