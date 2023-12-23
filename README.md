@@ -36,6 +36,15 @@ Spot
 <th style="text-align:center;">
 Futures
 </th>
+<th style="text-align:center;">
+Available Intervals
+</th>
+<th style="text-align:center;">
+Smallest Interval
+</th>
+<th style="text-align:center;">
+Biggest Interval
+</th>
 </tr>
 </thead>
 <tbody>
@@ -49,6 +58,15 @@ Binance
 <td style="text-align:center;">
 ✔
 </td>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+Seconds
+</td>
+<td style="text-align:center;">
+Months
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -59,6 +77,15 @@ Kucoin
 </td>
 <td style="text-align:center;">
 ✔
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+Minutes
+</td>
+<td style="text-align:center;">
+Weeks
 </td>
 </tr>
 <tr>
@@ -71,6 +98,15 @@ Bitmart
 <td style="text-align:center;">
 ✔
 </td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+Minutes
+</td>
+<td style="text-align:center;">
+Weeks
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -81,6 +117,15 @@ Kraken
 </td>
 <td style="text-align:center;">
 ✔
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+Minutes
+</td>
+<td style="text-align:center;">
+Weeks
 </td>
 </tr>
 </tbody>

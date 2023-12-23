@@ -38,12 +38,32 @@ exchange <- c('Binance', 'Kucoin', 'Bitmart', 'Kraken')
 # table
 kableExtra::kable_styling(
   knitr::kable(
-    align = 'lcc',
+    align = 'lccccc',
     table.attr = "style='width:100%;'",
+    col.names = c('Exchange', 'Spot', 'Futures', 'Available Intervals' ,'Smallest Interval', 'Biggest Interval'),
     x = data.frame(
-      Exchange = exchange,
-      Spot     = rep(x = cli::symbol$tick,length(exchange)),
-      Futures  = rep(x = cli::symbol$tick,length(exchange))
+      Exchange  = exchange,
+      Spot = rep(x = cli::symbol$tick,length(exchange)),
+      Futures = rep(x = cli::symbol$tick,length(exchange)),
+      `Available Intervals` = c(
+        16,
+        11,
+        13,
+        9
+      ),
+      `Smallest Interval` = c(
+        'Seconds',
+        'Minutes',
+        'Minutes',
+        'Minutes'
+      ),
+      `Biggest Interval` = c(
+        'Months',
+        'Weeks',
+        'Weeks',
+        'Weeks'
+        
+      )
     ),
     format = 'html'
   ),
