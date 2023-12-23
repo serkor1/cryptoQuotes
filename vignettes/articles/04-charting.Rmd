@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE}
 library(cryptoQuotes)
 ```
 
@@ -19,11 +19,9 @@ The ```cryptoQuotes``` library uses ```plotly``` to visualize the quotes interac
 > **Note:** As per `r paste(Sys.Date())` the charting is still in its experimental
 > phase.
 
-## Charting quotes
-
 There are two main price charts. The Japanese candlestick charts, ```klines```, and basic ```OHLC``` charts. A chart has to be wrapped in the ```chart``` function.
 
-### OHLC chart
+## OHLC chart
 
 ```{r basic OHLC chart, out.width="100%",fig.align='center',fig.height=8}
 ## simple bar-chart
@@ -35,7 +33,7 @@ chart(
 )
 ```
 
-### Candlestick chart
+## Candlestick chart
 
 ```{r basic kline chart, out.width="100%",fig.align='center',fig.height=8}
 ## simple kline chart

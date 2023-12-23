@@ -5,11 +5,12 @@ title: "Available intervals"
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = TRUE
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE}
 library(cryptoQuotes)
 ```
 
@@ -35,5 +36,3 @@ cryptoQuotes::availableIntervals(
 ```
 
 The available intervals are directly passed as `character` using the`interval` argument, in the `cryptoQuotes::getQuote`-function.
-
-

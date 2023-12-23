@@ -9,11 +9,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE}
 library(cryptoQuotes)
 ```
 
-#### Available tickers
 
 All tradable tickers on each exchange is supported. The naming convention differs across exchanges, so passing `ATOMUSDT` on the `cryptoQuotes::getQuote` as an argument will not necessarily provide you with the ticker you are looking for.
 

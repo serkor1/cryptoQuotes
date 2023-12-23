@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## cryptoQuotes <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptoQuotes website" /></a>
+# cryptoQuotes: Cryptocurrency Market Data in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptoQuotes website" /></a>
 
 <!-- badges: start -->
 
@@ -16,11 +16,18 @@ coverage](https://codecov.io/gh/serkor1/cryptoQuotes/branch/main/graph/badge.svg
 downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 <!-- badges: end -->
 
-The `cryptoQuotes` package is an unified API client that provides access
-to public market data from all major cryptocurrency exchanges. The
-package is compatible with `quantmod` and `TTR` out of the box.
+## Overview
+
+A high-level API-client to get current, and historical, cryptocurrency
+OHLCV market data in `R`, without using web-crawlers and API keys. This
+API-client uses `httr2`, `xts` and `zoo` under the hood and are
+compatible with `quantmod` and `TTR`.
 
 ### Supported Exchanges and Markets
+
+All supported Exchanges and Markets are listed in the table below,
+alongside the available range of intervals available from the respective
+exchanges.
 
 <div align="center">
 
@@ -133,7 +140,7 @@ Weeks
 
 </div>
 
-#### Basic usage
+### Basic usage
 
 Get USDT denominated ATOM in the spot market from Binance in `30m`
 intervals,
@@ -148,18 +155,22 @@ spotPrice <- cryptoQuotes::getQuote(
 )
 ```
 
-#### Installation
+## Installation
 
-**Stable Version**
+### Stable version
 
 ``` r
 # install from CRAN
-install.packages('cryptoQuotes', dependencies = TRUE)
+install.packages(
+  pkgs = 'cryptoQuotes',
+  dependencies = TRUE
+)
 ```
 
-**Development Version**
+### Development version
 
 ``` r
+# install from github
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
   ref = 'main'
