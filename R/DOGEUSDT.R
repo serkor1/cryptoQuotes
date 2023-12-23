@@ -1,6 +1,6 @@
-#' USDT denominated ATOMS, with 15m intervals
+#' USDT denominated DOGECOIN in 1m intervals
 #'
-#' A xts object with 15m OHLCV of USDT denominated ATOM with 97 rows and 4 columns, from 2023-01-01 to 2023-01-02.
+#' A xts object with 1m OHLCV of USDT denominated Dogecoin with 61 rows and 5 columns.
 #'
 #' \describe{
 #'   \item{Open}{Opening price}
@@ -9,7 +9,4 @@
 #'   \item{Close}{Closing price}
 #'   \item{Volume}{Volume}
 #' }
-"ATOMUSDT"
-
-
-
+"DOGEUSDT"
