@@ -11,12 +11,15 @@ An object of class \code{xts} (inherits from \code{zoo}) with 97 rows and 5 colu
 ATOMUSDT
 }
 \description{
-A xts object with 15m OHLC of USDT denominated ATOM with 97 rows and 4 columns, from 2023-01-01 to 2023-01-02:
+A xts object with 15m OHLCV of USDT denominated ATOM with 97 rows and 4 columns, from 2023-01-01 to 2023-01-02.
+}
+\details{
 \describe{
 \item{Open}{Opening price}
 \item{High}{Highest price}
 \item{Low}{Lowest price}
 \item{Close}{Closing price}
+\item{Volume}{Volume}
 }
 }
 \keyword{datasets}
