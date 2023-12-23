@@ -255,16 +255,22 @@ quote_response <- function(
     futures = futures
   )
 
-
-
-
   # 2.2) extract OHLCV
   # and index by location
   response_index <- response[,response_object$index_location]
-  response <-  rbind(response[,response_object$colum_location])
+  response <-  rbind(
+    response[,response_object$colum_location]
+  )
 
+  # 2.2.1) convert
+  # all to as.numeric
+  response <- apply(
+    response,
+    c(1,2),
+    as.numeric
+  )
 
-  # 2.2.1) convert dates
+  # 2.3) convert dates
   # to positxct
   response_index <- get(
     paste0(
@@ -276,10 +282,19 @@ quote_response <- function(
     is_response = TRUE
   )
 
+  # 2.4) set order to decreasing
+  # to comply with zoo/xts
   response_order <- order(
     decreasing = FALSE,
     response_index
   )
+
+  # WARNING:
+  #
+  # Do NOT modify the zoo/xts
+  # after this line;
+  #
+  # It resets the timezone!
 
   # 3) construct
   # zoo object
@@ -287,28 +302,25 @@ quote_response <- function(
     rbind(response[response_order,])
   )
 
+  # 3.1) set the index
+  # of the repsonse
+  # in order
   zoo::index(response) <- response_index[response_order]
 
-  # 2.3) set column
-  # names
+  # 3.2) set column
+  # names by location
   colnames(response) <- response_object$colum_names
 
-
-
+  # 3.3) Order
+  # columns so its
+  # in OHLCV
   response <- response[,c('Open', 'High', 'Low', 'Close', 'Volume')]
 
-  response <- apply(
-    response,
-    c(1,2),
-    as.numeric
-  )
-
-  # 2.4) set order to decreasing
-  # to comply with zoo/xts
+  # 3.4) convert
+  # the response to xts
   response <- xts::as.xts(
     response
   )
-
 
   # 4) construct
   # attributes for further
@@ -319,7 +331,6 @@ quote_response <- function(
     ticker   = ticker,
     market   = market
   )
-
 
   return(
     response
