@@ -1,3 +1,15 @@
+# cryptoQuotes 1.2.1
+
+### Minor Updates
+
+* Added DOGECOIN data. This data is extracted on the `1m` chart, around Elon Musks Tweet.
+* Added a usecase in the Vignette about Dogecoin and Elon Musk to showcase the functionality of the library.
+
+### Bugfixes
+
+* All returned Quotes are now in `UTC`, again.
+* Corrected misspelled ticker in Vignette 
+
 # cryptoQuotes 1.2.0
 
 `getQuotes` now returns up to 100 pips preceding the specified `to` date, when `from = NULL`. It returns 100 pips, or up to `Sys.Date()`, from the specified `from` date.
