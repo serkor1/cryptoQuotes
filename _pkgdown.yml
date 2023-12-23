@@ -16,5 +16,5 @@ reference:
 - contents: has_concept('chart indicators')
 - title: Datasets
   desc: Sample datasets returned by ```getQuote```
-- contents: starts_with('ATOM')
+- contents: starts_with('ATOM|DOGE')
 
