@@ -82,16 +82,22 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="section level2">
-<h2 id="cryptoquotes-">cryptoQuotes <a href="https://serkor1.github.io/cryptoQuotes/"><img src="reference/figures/logo.png" align="right" height="139" alt="cryptoQuotes website"></a>
-<a class="anchor" aria-label="anchor" href="#cryptoquotes-"></a>
-</h2>
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="cryptoquotes-cryptocurrency-market-data-in-r-">cryptoQuotes: Cryptocurrency Market Data in R 
+<a class="anchor" aria-label="anchor" href="#cryptoquotes-cryptocurrency-market-data-in-r-"></a>
+</h1>
+</div>
 <!-- badges: start -->
 
-<p>The <code>cryptoQuotes</code> package is an unified API client that provides access to public market data from all major cryptocurrency exchanges. The package is compatible with <code>quantmod</code> and <code>TTR</code> out of the box.</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>A high-level API-client to get current, and historical, cryptocurrency OHLCV market data in <code>R</code>, without using web-crawlers and API keys. This API-client uses <code>httr2</code>, <code>xts</code> and <code>zoo</code> under the hood and are compatible with <code>quantmod</code> and <code>TTR</code>.</p>
 <div class="section level3">
 <h3 id="supported-exchanges-and-markets">Supported Exchanges and Markets<a class="anchor" aria-label="anchor" href="#supported-exchanges-and-markets"></a>
 </h3>
+<p>All supported Exchanges and Markets are listed in the table below, alongside the available range of intervals available from the respective exchanges.</p>
 <div align="center">
 <table style="width:100%; margin-left: auto; margin-right: auto;" class="table table">
 <thead><tr>
@@ -198,9 +204,10 @@ Weeks
 </tbody>
 </table>
 </div>
-<div class="section level4">
-<h4 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
-</h4>
+</div>
+<div class="section level3">
+<h3 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
+</h3>
 <p>Get USDT denominated ATOM in the spot market from Binance in <code>30m</code> intervals,</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## get perpetual contracts on USDT denominated ATOM</span></span>
@@ -211,16 +218,26 @@ Weeks
 <span>  interval <span class="op">=</span> <span class="st">'30m'</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h4>
-<p><strong>Stable Version</strong></p>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="section level3">
+<h3 id="stable-version">Stable version<a class="anchor" aria-label="anchor" href="#stable-version"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install from CRAN</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'cryptoQuotes'</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Development Version</strong></p>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
+<span>  pkgs <span class="op">=</span> <span class="st">'cryptoQuotes'</span>,</span>
+<span>  dependencies <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="development-version">Development version<a class="anchor" aria-label="anchor" href="#development-version"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="co"># install from github</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
 <span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
 <span>  ref <span class="op">=</span> <span class="st">'main'</span></span>
 <span><span class="op">)</span></span></code></pre></div>
