@@ -49,7 +49,7 @@ default_dates <- function(
   # 1) add white-space to the
   # interval
   interval <-  gsub(
-    pattern = "([1-9]+)([a-zA-Z]+)",
+    pattern = "([1-9]*)([a-zA-Z]+)",
     replacement =  "\\1 \\2",
     x =  interval
   )
@@ -127,6 +127,7 @@ default_dates <- function(
       )
     )
   )
+
 
 }
 
