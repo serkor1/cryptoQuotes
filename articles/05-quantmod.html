@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="cryptoQuotes">
-<title>Quantmod and TTR • cryptoQuotes</title>
+<title>Cryptocurrency Market Data with Quantmod and TTR • cryptoQuotes</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Quantmod and TTR">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Cryptocurrency Market Data with Quantmod and TTR">
 <meta property="og:description" content="cryptoQuotes">
 <meta property="og:image" content="https://serkor1.github.io/cryptoQuotes/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -51,11 +51,11 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/01-intervals.html">Available intervals</a>
-    <a class="dropdown-item" href="../articles/02-tickers.html">Available tickers</a>
-    <a class="dropdown-item" href="../articles/03-exchanges.html">Available exchanges</a>
-    <a class="dropdown-item" href="../articles/04-charting.html">Charting</a>
-    <a class="dropdown-item" href="../articles/05-quantmod.html">Quantmod and TTR</a>
+    <a class="dropdown-item" href="../articles/00-introduction.html">Cryptocurrency Market Data in R</a>
+    <a class="dropdown-item" href="../articles/02-charting.html">Interactive Cryptocurrency Charts in R</a>
+    <a class="dropdown-item" href="../articles/03-timezones.html">Changing the time zone of XTS and Zoo objects</a>
+    <a class="dropdown-item" href="../articles/04-converting.html">Converting XTS and ZOO objects</a>
+    <a class="dropdown-item" href="../articles/05-quantmod.html">Cryptocurrency Market Data with Quantmod and TTR</a>
   </div>
 </li>
 <li class="nav-item">
@@ -85,7 +85,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Quantmod and TTR</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Cryptocurrency Market Data with Quantmod and TTR</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/serkor1/cryptoQuotes/blob/HEAD/vignettes/articles/05-quantmod.Rmd" class="external-link"><code>vignettes/articles/05-quantmod.Rmd</code></a></small>
@@ -94,16 +94,9 @@
 
     
     
-<p>The <code>cryptoQuotes</code> package provides access to most major
-cryptocurrency exchanges around the world and it uses <code>xts</code>
-and <code>zoo</code> such that it seamlessly works with powerful
-packages like <code>quantmod</code> and <code>TTR</code>.</p>
-<div class="section level2">
-<h2 id="charting-cryptocurrencies-using-quantmod">Charting cryptocurrencies using quantmod<a class="anchor" aria-label="anchor" href="#charting-cryptocurrencies-using-quantmod"></a>
-</h2>
-<p>To demonstrate the interoperability between <code>cryptoQuotes</code>
-and <code>quantmod</code>, we extract data from Binance futures market
-on USDT denominated ATOM</p>
+<p><code>cryptoQuotes</code> were built to be interoperable with the
+powerful packages <code>quantmod</code> and <code>TTR</code>. Here we
+use an example with <code>ATOMUSDT</code>,</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## load USDT denominated ATOM</span></span>
 <span><span class="co">## with hourly intervals</span></span>
@@ -113,49 +106,137 @@ on USDT denominated ATOM</p>
 <span>  source <span class="op">=</span> <span class="st">'binance'</span>,</span>
 <span>  futures <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">'15m'</span>,</span>
-<span>  from     <span class="op">=</span> <span class="st">'2023-10-01'</span>,</span>
-<span>  to       <span class="op">=</span> <span class="st">'2023-10-02'</span></span>
+<span>  from     <span class="op">=</span> <span class="st">'2023-01-01'</span>,</span>
+<span>  to       <span class="op">=</span> <span class="st">'2023-01-02'</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<blockquote>
-<p><strong>Note:</strong> by default, the <code>getQuote</code> returns
-an UTC <code>index</code> which may trigger a warning depending on your
-timezone.</p>
-</blockquote>
-<p>The <code>getQuote</code> returns Open, High, Low, Close and Volumes
-which can be visualized using <code>chartSeries</code> from
-<code>quantmod</code> without further programming.</p>
+<div class="section level2">
+<h2 id="cryptocurrency-and-quantmod">Cryptocurrency and Quantmod<a class="anchor" aria-label="anchor" href="#cryptocurrency-and-quantmod"></a>
+</h2>
+<div class="section level3">
+<h3 id="charting-cryptocurrency-with-quantmod">Charting Cryptocurrency with Quantmod<a class="anchor" aria-label="anchor" href="#charting-cryptocurrency-with-quantmod"></a>
+</h3>
+<p>The <code>ATOMUSDT</code> can be passed directly into the
+<code><a href="https://rdrr.io/pkg/quantmod/man/chartSeries.html" class="external-link">quantmod::chartSeries()</a></code>-function with, if desired, the
+relevant technical indicators. Pass <code><a href="https://rdrr.io/pkg/quantmod/man/addBBands.html" class="external-link">quantmod::addBBands()</a></code>
+and <code><a href="https://rdrr.io/pkg/quantmod/man/addMACD.html" class="external-link">quantmod::addMACD</a></code> into the <code>TA</code>-argument, to
+add Bollinger Bands and Moving Average Convergence Divergence (MACD)
+indicators,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## head data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span></span>
-<span>  <span class="va">ATOMUSDT</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt;                      Open  High   Low Close    Volume</span></span>
-<span><span class="co">#&gt; 2023-11-25 00:00:00 8.902 8.922 8.832 8.911 202887.22</span></span>
-<span><span class="co">#&gt; 2023-11-25 00:15:00 8.911 8.928 8.894 8.924  82399.15</span></span>
-<span><span class="co">#&gt; 2023-11-25 00:30:00 8.924 8.930 8.878 8.900 215060.74</span></span>
-<span><span class="co">#&gt; 2023-11-25 00:45:00 8.902 8.912 8.892 8.899  59910.18</span></span>
-<span><span class="co">#&gt; 2023-11-25 01:00:00 8.899 8.933 8.892 8.929  60591.93</span></span>
-<span><span class="co">#&gt; 2023-11-25 01:15:00 8.929 8.969 8.923 8.968  61824.11</span></span></code></pre></div>
-<p>We can pass <code>ATOMUSDT</code> directly into the
-<code>chartSeries</code> and adding MACD indicators using
-<code><a href="https://rdrr.io/pkg/quantmod/man/addMACD.html" class="external-link">quantmod::addMACD</a></code></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## chart the spotAtom</span></span>
-<span><span class="co">## with candlesticks</span></span>
+<span><span class="co">## with a candlestick</span></span>
+<span><span class="co">## chart with Bollinger Bands</span></span>
+<span><span class="co">## and MACD indicators</span></span>
 <span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartSeries.html" class="external-link">chartSeries</a></span><span class="op">(</span></span>
-<span>    x     <span class="op">=</span> <span class="va">ATOMUSDT</span>,</span>
-<span>    theme <span class="op">=</span> <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartTheme.html" class="external-link">chartTheme</a></span><span class="op">(</span><span class="st">'white'</span><span class="op">)</span></span>
+<span>  x <span class="op">=</span> <span class="va">ATOMUSDT</span>,</span>
+<span>  theme <span class="op">=</span> <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/chartTheme.html" class="external-link">chartTheme</a></span><span class="op">(</span><span class="st">"white"</span><span class="op">)</span>,</span>
+<span>  TA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="co"># Add Bollinger Bands</span></span>
+<span>    <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/addBBands.html" class="external-link">addBBands</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    </span>
+<span>    <span class="co"># Add MACD</span></span>
+<span>    <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/addMACD.html" class="external-link">addMACD</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Registered S3 method overwritten by 'quantmod':</span></span>
-<span><span class="co">#&gt;   method            from</span></span>
-<span><span class="co">#&gt;   as.zoo.data.frame zoo</span></span></code></pre></div>
-<p><img src="05-quantmod_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## addMACD</span></span>
-<span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/addMACD.html" class="external-link">addMACD</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="05-quantmod_files/figure-html/unnamed-chunk-5-2.png" width="100%" style="display: block; margin: auto;"></p>
+<span><span class="op">)</span> </span></code></pre></div>
+<p><img src="05-quantmod_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-  </main>
+<div class="section level3">
+<h3 id="locating-peaks-with-quantmod">Locating Peaks with Quantmod<a class="anchor" aria-label="anchor" href="#locating-peaks-with-quantmod"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1) find peaks</span></span>
+<span><span class="co"># using a small threshold;</span></span>
+<span><span class="va">peak_idx</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span></span>
+<span>  <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/peak.html" class="external-link">findPeaks</a></span><span class="op">(</span></span>
+<span>  <span class="va">ATOMUSDT</span><span class="op">$</span><span class="va">Close</span>,</span>
+<span>  thresh <span class="op">=</span> <span class="fl">0.022</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 2) add to main to main</span></span>
+<span><span class="co"># chart</span></span>
+<span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/TA.html" class="external-link">addLines</a></span><span class="op">(</span></span>
+<span>  h <span class="op">=</span> <span class="va">ATOMUSDT</span><span class="op">[</span><span class="va">peak_idx</span><span class="op">]</span><span class="op">$</span><span class="va">Close</span>,</span>
+<span>  overlay <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col     <span class="op">=</span> <span class="st">'steelblue1'</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="05-quantmod_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;"></p>
+<blockquote>
+<p><strong>NOTE:</strong> quantmod only supports daily interals and,
+therefore, functions like <code>allReturns()</code> needs to be
+modified.</p>
+</blockquote>
+</div>
+</div>
+<div class="section level2">
+<h2 id="cryptocurrency-and-ttr">Cryptocurrency and TTR<a class="anchor" aria-label="anchor" href="#cryptocurrency-and-ttr"></a>
+</h2>
+<p>For Artificial Intelligence applications, like price prediction,
+where the <code>numeric</code> value of the indicators are needed, the
+indicators from <code>TTR</code> can be calculated and added to the
+returned data from the <code><a href="../reference/getQuote.html">cryptoQuotes::getQuote()</a></code>-function.
+<code><a href="https://rdrr.io/pkg/TTR/man/bollingerBands.html" class="external-link">TTR::BBands()</a></code> is one of such indicators that some traders
+use as buy and sell signals, these can be added the following way,</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1) calculate</span></span>
+<span><span class="co"># Bollinger Bands</span></span>
+<span><span class="va">indicator</span> <span class="op">&lt;-</span> <span class="fu">TTR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TTR/man/bollingerBands.html" class="external-link">BBands</a></span><span class="op">(</span></span>
+<span>  <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/OHLC.Transformations.html" class="external-link">HLC</a></span><span class="op">(</span><span class="va">ATOMUSDT</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 2) add to the </span></span>
+<span><span class="co"># cryptocurrency quote</span></span>
+<span><span class="va">ATOMUSDT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span>
+<span>  <span class="va">ATOMUSDT</span>, </span>
+<span>  <span class="va">indicator</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 3) calculate</span></span>
+<span><span class="co"># the distance of the</span></span>
+<span><span class="co"># closing Price and upper band</span></span>
+<span><span class="va">ATOMUSDT</span><span class="op">$</span><span class="va">distance</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ATOMUSDT</span><span class="op">$</span><span class="va">up</span> <span class="op">-</span> <span class="va">ATOMUSDT</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span></code></pre></div>
+<p>The resulting indicator can be fit using, for example, the
+<code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>-function to determine how the distance affects the
+next closing price.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1) fit a simple</span></span>
+<span><span class="co"># model using the distance</span></span>
+<span><span class="co"># to the upper band and</span></span>
+<span><span class="co"># lagged closing price</span></span>
+<span><span class="co"># as predictors</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span></span>
+<span>    <span class="va">ATOMUSDT</span><span class="op">$</span><span class="va">Close</span> <span class="op">~</span> <span class="fu">xts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xts/man/diff.html" class="external-link">lag.xts</a></span><span class="op">(</span><span class="va">ATOMUSDT</span><span class="op">$</span><span class="va">Close</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xts/man/diff.html" class="external-link">lag.xts</a></span><span class="op">(</span><span class="va">ATOMUSDT</span><span class="op">$</span><span class="va">distance</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = ATOMUSDT$Close ~ xts::lag.xts(ATOMUSDT$Close) + </span></span>
+<span><span class="co">#&gt;     xts::lag.xts(ATOMUSDT$distance))</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;        Min         1Q     Median         3Q        Max </span></span>
+<span><span class="co">#&gt; -0.0230962 -0.0094336 -0.0004082  0.0085242  0.0293977 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;                                 Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)                      0.62168    0.43153   1.441    0.154    </span></span>
+<span><span class="co">#&gt; xts::lag.xts(ATOMUSDT$Close)     0.93390    0.04586  20.366   &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; xts::lag.xts(ATOMUSDT$distance)  1.07858    1.13709   0.949    0.346    </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 0.0127 on 74 degrees of freedom</span></span>
+<span><span class="co">#&gt;   (20 observations deleted due to missingness)</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.875,  Adjusted R-squared:  0.8716 </span></span>
+<span><span class="co">#&gt; F-statistic: 258.9 on 2 and 74 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<blockquote>
+<p><strong>NOTE:</strong> In case you werent awar:, this is not
+financial advise. Its merely a simple demonstration of the available
+applications.</p>
+</blockquote>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

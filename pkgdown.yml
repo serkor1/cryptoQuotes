@@ -2,13 +2,13 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  01-intervals: 01-intervals.html
-  02-tickers: 02-tickers.html
-  03-exchanges: 03-exchanges.html
-  04-charting: 04-charting.html
+  00-introduction: 00-introduction.html
+  02-charting: 02-charting.html
+  03-timezones: 03-timezones.html
+  04-converting: 04-converting.html
   05-quantmod: 05-quantmod.html
   cryptoQuotes: cryptoQuotes.html
-last_built: 2023-12-23T19:36Z
+last_built: 2023-12-24T15:54Z
 urls:
   reference: https://serkor1.github.io/cryptoQuotes/reference
   article: https://serkor1.github.io/cryptoQuotes/articles

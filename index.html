@@ -53,11 +53,11 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/01-intervals.html">Available intervals</a>
-    <a class="dropdown-item" href="articles/02-tickers.html">Available tickers</a>
-    <a class="dropdown-item" href="articles/03-exchanges.html">Available exchanges</a>
-    <a class="dropdown-item" href="articles/04-charting.html">Charting</a>
-    <a class="dropdown-item" href="articles/05-quantmod.html">Quantmod and TTR</a>
+    <a class="dropdown-item" href="articles/00-introduction.html">Cryptocurrency Market Data in R</a>
+    <a class="dropdown-item" href="articles/02-charting.html">Interactive Cryptocurrency Charts in R</a>
+    <a class="dropdown-item" href="articles/03-timezones.html">Changing the time zone of XTS and Zoo objects</a>
+    <a class="dropdown-item" href="articles/04-converting.html">Converting XTS and ZOO objects</a>
+    <a class="dropdown-item" href="articles/05-quantmod.html">Cryptocurrency Market Data with Quantmod and TTR</a>
   </div>
 </li>
 <li class="nav-item">
@@ -95,11 +95,14 @@
 </h2>
 <p>A high-level API-client to get current, and historical, cryptocurrency OHLCV market data in <code>R</code>, without using web-crawlers and API keys. This API-client uses <code>httr2</code>, <code>xts</code> and <code>zoo</code> under the hood and are compatible with <code>quantmod</code> and <code>TTR</code>.</p>
 <div class="section level3">
-<h3 id="supported-exchanges-and-markets">Supported Exchanges and Markets<a class="anchor" aria-label="anchor" href="#supported-exchanges-and-markets"></a>
+<h3 id="supported-exchanges-and-markets">Supported exchanges and markets<a class="anchor" aria-label="anchor" href="#supported-exchanges-and-markets"></a>
 </h3>
-<p>All supported Exchanges and Markets are listed in the table below, alongside the available range of intervals available from the respective exchanges.</p>
+<p>All supported exchanges and markets are listed in the table below, alongside the available range of intervals available from the respective exchanges</p>
 <div align="center">
 <table style="width:100%; margin-left: auto; margin-right: auto;" class="table table">
+<caption>
+Available exchanges, markets and interavals.
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Exchange
@@ -208,15 +211,166 @@ Weeks
 <div class="section level3">
 <h3 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h3>
-<p>Get USDT denominated ATOM in the spot market from Binance in <code>30m</code> intervals,</p>
+<p>Get USDT denominated Bitcoin spot market price from Binance with <code>30m</code>-intervals,</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## get perpetual contracts on USDT denominated ATOM</span></span>
-<span><span class="va">spotPrice</span> <span class="op">&lt;-</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/getQuote.html">getQuote</a></span><span class="op">(</span></span>
-<span>  ticker <span class="op">=</span> <span class="st">'ATOMUSDT'</span>,</span>
+<code class="sourceCode R"><span><span class="co">## BTC OHLC prices</span></span>
+<span><span class="co">## from Binance spot market</span></span>
+<span><span class="co">## in 30 minute intervals</span></span>
+<span><span class="va">BTC</span> <span class="op">&lt;-</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/getQuote.html">getQuote</a></span><span class="op">(</span></span>
+<span>  ticker <span class="op">=</span> <span class="st">'BTCUSDT'</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">'binance'</span>,</span>
 <span>  futures <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  interval <span class="op">=</span> <span class="st">'30m'</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<div align="center">
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table table">
+<caption>
+Bitcoin (BTC) OHLC-prices
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Index
+</th>
+<th style="text-align:center;">
+Open
+</th>
+<th style="text-align:center;">
+High
+</th>
+<th style="text-align:center;">
+Low
+</th>
+<th style="text-align:center;">
+Close
+</th>
+<th style="text-align:left;">
+Volume
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2023-12-23 21:30:00
+</td>
+<td style="text-align:center;">
+43774.33
+</td>
+<td style="text-align:center;">
+43779.71
+</td>
+<td style="text-align:center;">
+43754.09
+</td>
+<td style="text-align:center;">
+43772.55
+</td>
+<td style="text-align:left;">
+186.27761
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-23 22:00:00
+</td>
+<td style="text-align:center;">
+43772.55
+</td>
+<td style="text-align:center;">
+43835.94
+</td>
+<td style="text-align:center;">
+43737.85
+</td>
+<td style="text-align:center;">
+43773.92
+</td>
+<td style="text-align:left;">
+313.20162
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-23 22:30:00
+</td>
+<td style="text-align:center;">
+43773.93
+</td>
+<td style="text-align:center;">
+43810
+</td>
+<td style="text-align:center;">
+43745.85
+</td>
+<td style="text-align:center;">
+43745.86
+</td>
+<td style="text-align:left;">
+263.83343
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-23 23:00:00
+</td>
+<td style="text-align:center;">
+43745.86
+</td>
+<td style="text-align:center;">
+43806.38
+</td>
+<td style="text-align:center;">
+43742
+</td>
+<td style="text-align:center;">
+43778
+</td>
+<td style="text-align:left;">
+501.60698
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-23 23:30:00
+</td>
+<td style="text-align:center;">
+43778
+</td>
+<td style="text-align:center;">
+43783.16
+</td>
+<td style="text-align:center;">
+43701.1
+</td>
+<td style="text-align:center;">
+43702.16
+</td>
+<td style="text-align:left;">
+438.94469
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-24
+</td>
+<td style="text-align:center;">
+43702.15
+</td>
+<td style="text-align:center;">
+43718.95
+</td>
+<td style="text-align:center;">
+43606.18
+</td>
+<td style="text-align:center;">
+43708.99
+</td>
+<td style="text-align:left;">
+450.97816
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div class="section level2">
