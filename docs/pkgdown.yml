@@ -1,0 +1,15 @@
+pandoc: 3.1.1
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  00-introduction: 00-introduction.html
+  02-charting: 02-charting.html
+  03-timezones: 03-timezones.html
+  04-converting: 04-converting.html
+  05-quantmod: 05-quantmod.html
+  cryptoQuotes: cryptoQuotes.html
+last_built: 2023-12-24T15:46Z
+urls:
+  reference: https://serkor1.github.io/cryptoQuotes/reference
+  article: https://serkor1.github.io/cryptoQuotes/articles
+
