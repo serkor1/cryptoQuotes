@@ -23,15 +23,18 @@ OHLCV market data in `R`, without using web-crawlers and API keys. This
 API-client uses `httr2`, `xts` and `zoo` under the hood and are
 compatible with `quantmod` and `TTR`.
 
-### Supported Exchanges and Markets
+### Supported exchanges and markets
 
-All supported Exchanges and Markets are listed in the table below,
+All supported exchanges and markets are listed in the table below,
 alongside the available range of intervals available from the respective
-exchanges.
+exchanges
 
 <div align="center">
 
 <table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<caption>
+Available exchanges, markets and interavals.
+</caption>
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -142,18 +145,174 @@ Weeks
 
 ### Basic usage
 
-Get USDT denominated ATOM in the spot market from Binance in `30m`
-intervals,
+Get USDT denominated Bitcoin spot market price from Binance with
+`30m`-intervals,
 
 ``` r
-## get perpetual contracts on USDT denominated ATOM
-spotPrice <- cryptoQuotes::getQuote(
-  ticker = 'ATOMUSDT',
+## BTC OHLC prices
+## from Binance spot market
+## in 30 minute intervals
+BTC <- cryptoQuotes::getQuote(
+  ticker = 'BTCUSDT',
   source = 'binance',
   futures = FALSE,
   interval = '30m'
 )
 ```
+
+<div align="center">
+
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<caption>
+Bitcoin (BTC) OHLC-prices
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Index
+</th>
+<th style="text-align:center;">
+Open
+</th>
+<th style="text-align:center;">
+High
+</th>
+<th style="text-align:center;">
+Low
+</th>
+<th style="text-align:center;">
+Close
+</th>
+<th style="text-align:left;">
+Volume
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2023-12-23 21:30:00
+</td>
+<td style="text-align:center;">
+43774.33
+</td>
+<td style="text-align:center;">
+43779.71
+</td>
+<td style="text-align:center;">
+43754.09
+</td>
+<td style="text-align:center;">
+43772.55
+</td>
+<td style="text-align:left;">
+186.27761
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-23 22:00:00
+</td>
+<td style="text-align:center;">
+43772.55
+</td>
+<td style="text-align:center;">
+43835.94
+</td>
+<td style="text-align:center;">
+43737.85
+</td>
+<td style="text-align:center;">
+43773.92
+</td>
+<td style="text-align:left;">
+313.20162
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-23 22:30:00
+</td>
+<td style="text-align:center;">
+43773.93
+</td>
+<td style="text-align:center;">
+43810
+</td>
+<td style="text-align:center;">
+43745.85
+</td>
+<td style="text-align:center;">
+43745.86
+</td>
+<td style="text-align:left;">
+263.83343
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-23 23:00:00
+</td>
+<td style="text-align:center;">
+43745.86
+</td>
+<td style="text-align:center;">
+43806.38
+</td>
+<td style="text-align:center;">
+43742
+</td>
+<td style="text-align:center;">
+43778
+</td>
+<td style="text-align:left;">
+501.60698
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-23 23:30:00
+</td>
+<td style="text-align:center;">
+43778
+</td>
+<td style="text-align:center;">
+43783.16
+</td>
+<td style="text-align:center;">
+43701.1
+</td>
+<td style="text-align:center;">
+43702.16
+</td>
+<td style="text-align:left;">
+438.94469
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023-12-24
+</td>
+<td style="text-align:center;">
+43702.15
+</td>
+<td style="text-align:center;">
+43718.95
+</td>
+<td style="text-align:center;">
+43606.18
+</td>
+<td style="text-align:center;">
+43708.99
+</td>
+<td style="text-align:left;">
+450.97816
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 ## Installation
 

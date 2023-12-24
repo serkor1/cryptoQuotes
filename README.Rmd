@@ -79,18 +79,41 @@ kableExtra::kable_styling(
 
 ### Basic usage
 
-Get USDT denominated ATOM in the spot market from Binance in `30m` intervals,
+Get USDT denominated Bitcoin spot market price from Binance with `30m`-intervals,
 
 ```{r example}
-## get perpetual contracts on USDT denominated ATOM
-spotPrice <- cryptoQuotes::getQuote(
-  ticker = 'ATOMUSDT',
+## BTC OHLC prices
+## from Binance spot market
+## in 30 minute intervals
+BTC <- cryptoQuotes::getQuote(
+  ticker = 'BTCUSDT',
   source = 'binance',
   futures = FALSE,
   interval = '30m'
 )
 ```
 
+<div align="center">
+```{r, echo=FALSE}
+kableExtra::kable_styling(
+  knitr::kable(
+    caption = 'Bitcoin (BTC) OHLC-prices',
+    align = 'lcccc',
+    table.attr = "style='width:100%;'",
+    x = data.frame(
+      cbind(
+        Index = paste(tail(zoo::index(BTC))),
+        tail(zoo::coredata(BTC))
+      ),row.names = NULL
+    ),
+    format = 'html'
+  ),
+  full_width = TRUE,
+  position = 'center'
+)
+```
+
+</div>
 
 ## Installation
 

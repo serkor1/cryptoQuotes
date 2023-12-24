@@ -235,10 +235,7 @@ check_interval_validity <- function(
 
   }
 
-
-
 }
-
 
 
 convertDate <- function(
@@ -255,24 +252,70 @@ convertDate <- function(
   # to character.
   if (!is_response) {
 
-    as.numeric(
-      as.POSIXct(
-        date,
-        tz = 'UTC',
-        origin = "1970-01-01"
-      )
-    ) * (multiplier^power)
+   output <-  tryCatch(
+      expr = {
+        as.numeric(
+          as.POSIXct(
+            date,
+            tz = 'UTC',
+            origin = "1970-01-01"
+          )
+        ) * (multiplier^power)
+      },
+      error = function(error) {
+
+        rlang::abort(
+          message = c(
+            'Error in date format',
+            'v' = 'Accepted formats:',
+            '*' = as.character(Sys.Date()),
+            '*' = as.character(
+              format(
+                Sys.time()
+              )
+            )
+          ),
+          call = rlang::caller_env(n = 9)
+        )
+
+      }
+    )
 
   } else {
 
-    as.POSIXct(
+    # If there is an error
+    # here; its on the API side
+    #
+
+    output <- tryCatch(
+      expr = {
+        as.POSIXct(
       date * (multiplier^power),
       tz = 'UTC',
       origin = "1970-01-01"
     )
+      },
+    error = function(error) {
+
+      rlang::abort(
+        message = c(
+          'Error on API side',
+          'i' = 'Contact maintainer, or submit a bugreport!'
+        ),
+        call = rlang::caller_env(n = 9)
+      )
+
+
+
+    }
+    )
 
 
   }
+
+  return(
+    output
+  )
 
 
 }

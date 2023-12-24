@@ -47,6 +47,7 @@ Elon Musk tweeted (Well, now he X'ed) about Dogecoin January 14, 06.18 AM (UTC) 
 DOGEUSDT <- cryptoQuotes::getQuote(
   ticker   = 'DOGEUSDT',
   interval = '1m',
+  source   = 'binance',
   futures  = FALSE,
   from     = '2022-01-14',
   to       = '2022-01-15'
@@ -65,7 +66,7 @@ DOGEUSDT <- window(
 )
 ```
 
-This leaves `nrow(DOGEUSDT)` rows, corresponding to a minute by minute price action. We can calculate the price rallying using the 19th row, corresponding to the minute of the tweet. Dogecoin closed at `r DOGEUSDT[19]$Close`, rallying `r paste0(round((DOGEUSDT[19]$Close/DOGEUSDT[19]$Open - 1) * 100,2), '%')`.
+This leaves `r nrow(DOGEUSDT)` rows, corresponding to a minute by minute price action. We can calculate the price rallying using the 19th row, corresponding to the minute of the tweet. Dogecoin closed at `r DOGEUSDT[19]$Close`, rallying `r paste0(round((DOGEUSDT[19]$Close/DOGEUSDT[19]$Open - 1) * 100,2), '%')`.
 
 ## Charting price action with candlesticks
 

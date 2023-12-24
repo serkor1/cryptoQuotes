@@ -1,15 +1,17 @@
 ---
-title: "Charting"
+title: "Interactive Cryptocurrency Charts in R"
+subtitle: "The cryptoQuotes way"
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  message = FALSE,
   comment = "#>"
 )
 ```
 
-```{r setup, message = FALSE}
+```{r setup}
 library(cryptoQuotes)
 ```
 
@@ -19,9 +21,29 @@ The ```cryptoQuotes``` library uses ```plotly``` to visualize the quotes interac
 > **Note:** As per `r paste(Sys.Date())` the charting is still in its experimental
 > phase.
 
-There are two main price charts. The Japanese candlestick charts, ```klines```, and basic ```OHLC``` charts. A chart has to be wrapped in the ```chart``` function.
+There are two main price charts. The Japanese candlestick chart, ```kline()```, and the basic OHLC chart, ```ohlc()```, charts. A chart has to be wrapped in the ```chart()```-function.
+
+# Charting Cryptocurrency with R
+
+For charting the cryptocurrency, we get the ```ATOMUSDT``` pair from Binance in 15 minute intervals,
+
+```{r, eval=FALSE}
+## ATOMUSDT on the
+## 15m chart from the
+## futures market
+ATOMUSDT <- cryptoQuotes::getQuote(
+  ticker   = 'ATOMUSDT',
+  source   = 'binance',
+  interval = '15m',
+  futures  = TRUE,
+  from     = '2023-01-01',
+  to       = '2023-01-02'
+)
+```
 
 ## OHLC chart
+
+The basic ohlc chart can be charted by passing the ```ATOMUSDT```-pair into the ```ohlc()```-function and then wrap it in ```chart()```
 
 ```{r basic OHLC chart, out.width="100%",fig.align='center',fig.height=8}
 ## simple bar-chart
@@ -35,6 +57,8 @@ chart(
 
 ## Candlestick chart
 
+The japanese candlestick chart can be charted by passing the ```ATOMUSDT```-pair into the ```kline()```-function and then wrap it in ```chart()```
+
 ```{r basic kline chart, out.width="100%",fig.align='center',fig.height=8}
 ## simple kline chart
 ## without indicators
@@ -46,11 +70,13 @@ chart(
 ```
 
 
-## Common indicators
+# Charting cryptocurrency indicators with R
 
-All charts supports various indicators such as ```RSI``` and ```Bollinger Bands```. All indicators starts with ```addIndicator```, and can be used with he `magrittr` pipe operator.  
+All the charts supports various indicators such as ```RSI``` and ```Bollinger Bands```. All indicators starts with ```addIndicator```, and can be used with the pipe operator from ```magrittr```.
 
-### RSI and Bollinger Bands
+## RSI and Bollinger Bands
+
+Below is an example of using the ```addRSI()``` and ```addBBands()``` indicators,
 
 ```{r basic kline chart with RSI and Bollinger Bands, out.width="100%",fig.align='center',fig.height=8}
 ## simple kline chart
@@ -63,7 +89,9 @@ chart(
 ```
 
 
-### MACD and Volume
+## MACD and Volume
+
+Below is an example of using the ```addMACD()``` and ```addVolume()``` indicators,
 
 ```{r basic kline chart with Bollinger Bands and Volume, out.width="100%",fig.align='center',fig.height=8}
 ## simple kline chart
@@ -78,7 +106,7 @@ chart(
 
 ## Charting events
 
-Various events in the financial markets does, undoubtedly, have an impact on the prices. For traders relying on technical analysis one important event is when the short simple moving average (SMA), crosses the long SMA. 
+Various events in the financial markets does, undoubtedly, have an impact on the prices. For traders relying on technical analysis one important event is when the short simple moving average (SMA), crosses the long SMA. We can use ```TTR::SMA()``` to calculate the SMA,
 
 ```{r Locate bullcross}
 ## Calculate moving averages
@@ -104,8 +132,6 @@ ATOMUSDT$cross <- as.numeric(
 
 Based on the `cross` indicator, the `ATOMUSDT` pair can now be subset, and processed accordingly.
 
-> **NOTE:** The library supports all kinds of data.frames, including
-> data.table and tibbles.
 
 ```{r}
 ## create event data
@@ -114,7 +140,6 @@ event_data <- subset(
   ATOMUSDT,
   cross == 1
 )
-
 
 # 1.1) Extract the index
 # from the event data
@@ -141,9 +166,14 @@ event_data$color <- 'darkgray'
 ```
 
 
-Finally, the crosses can be plotted using the `chart` and `addEvents` functions, like below,
+Finally, the crosses can be plotted using the `chart()` and `addEvents()` functions, like below,
 
 ```{r, out.width="100%",fig.align='center',fig.height=10}
+## add the events
+## the chart, along
+## with Moving averages
+## and the Bollinger Bands
+## in a candlestick chart
 chart(
   chart = kline(quote = ATOMUSDT)  %>% 
     addBBands()                    %>%

@@ -1,0 +1,123 @@
+---
+title: "Converting XTS and ZOO objects"
+subtitle: "What about data integrity?"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE
+  )
+```
+
+```{r, message = FALSE}
+library(cryptoQuotes)
+```
+
+If you want to use the simplicity of ```tidverse``` or the power of ```data.table```, the ```xts```-object can be easily converted.
+
+However, its important to maintain data integrity, especially, if the date and timezone is important for you.
+
+## Converting xts and zoo to tibble
+
+Converting to ```tibble``` requires a few steps to achieve the same data structure as the ```xts```,
+
+```{r tibble}
+# 1) load pipe
+library(magrittr)
+
+# 2) convert to tibble
+# using as_tibble
+tbl <- tibble::as_tibble(
+  x = cbind(
+    Index = zoo::index(ATOMUSDT),
+    zoo::coredata(ATOMUSDT)
+  )
+) %>% dplyr::mutate(
+  Index = lubridate::as_datetime(
+    Index
+  )
+)
+```
+
+## Converting xts and zoo to data.table
+
+Converting to ```data.table``` is straightforward as ```as.data.table()``` handles everything under the hood,
+
+```{r data.table}
+# 1) convert to data.table
+# using as.data.table
+DT <- data.table::as.data.table(
+  ATOMUSDT
+) 
+
+# 2) set column name to upper
+colnames(DT)[1] <- 'Index'
+```
+
+
+## Checking data integrity
+
+### Checking date integrity
+
+It is important that the date.time has not been converted to a different timezone in the process, without explicitly coding it as such,
+
+```{r}
+# 1) store date.time objects
+time_objects <- list(
+  tbl = tbl$Index,
+  DT  = DT$Index
+)
+
+# 2) check if they are all equal
+all(
+  sapply(
+    time_objects,
+    function(x) {
+      
+      setequal(
+        x = x,
+        y = zoo::index(ATOMUSDT)
+        )
+      
+    }
+  )
+)
+```
+
+### Checking OHLCV values
+
+It goes without saying that ```R```-functions wouldn't tamper with the order of the data during conversion without a warning in the documentation, but nonetheless for the sake of argument, we will check the OHLCV values,
+
+```{r}
+# 1) store price objects
+# Open price here
+open_price <- list(
+  tbl = tbl$Open,
+  DT  = DT$Open
+)
+
+# 2) check if they are all equal
+all(
+  sapply(
+    open_price,
+    function(x) {
+      
+      setequal(
+        x = x,
+        y = ATOMUSDT$Open
+        )
+      
+    }
+  )
+)
+
+```
+
+
+## Why even convert?
+
+Even though numerical operations on ```xts```-objects are lightning fast (12% faster than ```data.table```), it comes with a cost; it doesn't support ```factors``` or ```characters```.
+
+Converting the ```xts```-object is a simple and trivial process, and simplifies grouped operations in a verbose manner.
+

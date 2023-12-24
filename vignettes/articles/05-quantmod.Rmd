@@ -1,24 +1,21 @@
 ---
-title: "Quantmod and TTR"
+title: "Cryptocurrency Market Data with Quantmod and TTR"
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE
 )
 ```
 
-```{r setup, eval=FALSE, include=FALSE}
+```{r setup, eval=TRUE, include=FALSE}
 library(cryptoQuotes)
 ```
 
 
-The ```cryptoQuotes``` package provides access to most major cryptocurrency exchanges around the world and it uses ```xts``` and ```zoo``` such that it seamlessly works with powerful packages like ```quantmod``` and ```TTR```.
-
-# Charting cryptocurrencies using quantmod
-
-To demonstrate the interoperability between ```cryptoQuotes``` and ```quantmod```, we extract data from Binance futures market on USDT denominated ATOM
+```cryptoQuotes``` were built to be interoperable with the powerful packages ```quantmod``` and ```TTR```. Here we use an example with ```ATOMUSDT```,
 
 ```{r, eval=FALSE}
 ## load USDT denominated ATOM
@@ -29,37 +26,100 @@ ATOMUSDT <- cryptoQuotes::getQuote(
   source = 'binance',
   futures = TRUE,
   interval = '15m',
-  from     = '2023-10-01',
-  to       = '2023-10-02'
+  from     = '2023-01-01',
+  to       = '2023-01-02'
 )
 ```
 
-> **Note:** by default, the ```getQuote``` returns an UTC ```index``` which may trigger a warning depending on your timezone.
+## Cryptocurrency and Quantmod
 
-```{r, eval=TRUE, include=FALSE}
-ATOMUSDT <- cryptoQuotes:::internalTest[[1]][[2]]
-```
+### Charting Cryptocurrency with Quantmod
 
-
-The ```getQuote``` returns Open, High, Low, Close and Volumes which can be visualized using ```chartSeries``` from ```quantmod``` without further programming.
-
-```{r}
-## head data
-head(
-  ATOMUSDT
-)
-```
-
-We can pass ```ATOMUSDT``` directly into the ```chartSeries``` and adding MACD indicators using ```quantmod::addMACD```
+The ```ATOMUSDT``` can be passed directly into the ```quantmod::chartSeries()```-function with, if desired, the relevant technical indicators. Pass ```quantmod::addBBands()``` and ```quantmod::addMACD``` into the ```TA```-argument, to add Bollinger Bands and Moving Average Convergence Divergence (MACD) indicators,
 
 ```{r, out.width="100%",fig.align='center',fig.height=5}
 ## chart the spotAtom
-## with candlesticks
+## with a candlestick
+## chart with Bollinger Bands
+## and MACD indicators
 quantmod::chartSeries(
-    x     = ATOMUSDT,
-    theme = quantmod::chartTheme('white')
+  x = ATOMUSDT,
+  theme = quantmod::chartTheme("white"),
+  TA = c(
+    # Add Bollinger Bands
+    quantmod::addBBands(),
+    
+    # Add MACD
+    quantmod::addMACD()
   )
-## addMACD
-quantmod::addMACD()
+) 
+
 ```
 
+
+### Locating Peaks with Quantmod
+
+```{r, out.width="100%",fig.align='center',fig.height=5}
+# 1) find peaks
+# using a small threshold;
+peak_idx  <- min(
+  quantmod::findPeaks(
+  ATOMUSDT$Close,
+  thresh = 0.022
+  )
+)
+
+# 2) add to main to main
+# chart
+quantmod::addLines(
+  h = ATOMUSDT[peak_idx]$Close,
+  overlay = TRUE,
+  col     = 'steelblue1'
+  )
+```
+
+
+
+> **NOTE:** quantmod only supports daily interals and, therefore, functions like ```allReturns()``` needs to be modified.
+
+
+## Cryptocurrency and TTR
+
+For Artificial Intelligence applications, like price prediction, where the ```numeric``` value of the indicators are needed, the indicators from ```TTR``` can be calculated and added to the returned data from the ```cryptoQuotes::getQuote()```-function. ```TTR::BBands()``` is one of such indicators that some traders use as buy and sell signals, these can be added the following way,
+
+```{r}
+# 1) calculate
+# Bollinger Bands
+indicator <- TTR::BBands(
+  quantmod::HLC(ATOMUSDT)
+)
+
+# 2) add to the 
+# cryptocurrency quote
+ATOMUSDT <- cbind(
+  ATOMUSDT, 
+  indicator
+)
+
+# 3) calculate
+# the distance of the
+# closing Price and upper band
+ATOMUSDT$distance <- (ATOMUSDT$up - ATOMUSDT$Close)^2
+```
+
+The resulting indicator can be fit using, for example, the ```lm()```-function to determine how the distance affects the next closing price.
+
+```{r}
+# 1) fit a simple
+# model using the distance
+# to the upper band and
+# lagged closing price
+# as predictors
+summary(
+  lm(
+    ATOMUSDT$Close ~ xts::lag.xts(ATOMUSDT$Close) + xts::lag.xts(ATOMUSDT$distance)
+  )
+)
+```
+
+> **NOTE:** In case you werent awar:, this is not financial advise. Its merely a simple demonstration of the available applications.

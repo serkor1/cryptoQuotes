@@ -1,0 +1,54 @@
+---
+title: "Changing the time zone of XTS and Zoo objects"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE
+)
+```
+
+```{r, message = FALSE}
+library(cryptoQuotes)
+```
+
+The quotes are, by default, returned in ```UTC```. This is to ensure comparability across applications, without having to account for timezones.
+
+Changing the time zone of ```xts``` and ```zoo``` objects are an easy and trivial process, as the time zone is stored in its ```attributes```.
+
+## Changing the time zone of XTS and Zoo objects
+
+Here is an example of changing the time zone to that of ```Sys.timezone()```,
+
+```{r}
+# 1) store ATOMUSDT to 
+# ATOMUSDT_local to avoid
+# overwriting the data
+ATOMUSDT_local <- ATOMUSDT
+
+# 2) changing the time zone
+attributes(zoo::index(ATOMUSDT_local))$tzone <- Sys.timezone()
+```
+
+```{r,echo=FALSE}
+# 1) create a kable
+# and print
+kableExtra::kable_styling(
+  knitr::kable(
+        caption = 'Time zone comparsion',
+    align = 'lrr',
+    table.attr = "style='width:100%;'",
+    col.names = c('Index','Default Time Zone (UTC)', 'System Time Zone'),
+    x =  cbind(
+        1:6,
+        paste(head(zoo::index(ATOMUSDT))),
+        paste(head(zoo::index(ATOMUSDT_local)))
+      ),
+    format = 'html'
+  ),
+  full_width = TRUE,
+  position = 'center'
+)
+```
+
