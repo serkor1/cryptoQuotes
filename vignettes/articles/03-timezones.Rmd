@@ -34,7 +34,6 @@ attributes(zoo::index(ATOMUSDT_local))$tzone <- Sys.timezone()
 ```{r,echo=FALSE}
 # 1) create a kable
 # and print
-kableExtra::kable_styling(
   knitr::kable(
         caption = 'Time zone comparsion',
     align = 'lrr',
@@ -46,9 +45,6 @@ kableExtra::kable_styling(
         paste(head(zoo::index(ATOMUSDT_local)))
       ),
     format = 'html'
-  ),
-  full_width = TRUE,
-  position = 'center'
-)
+  )
 ```
 

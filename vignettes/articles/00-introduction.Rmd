@@ -121,7 +121,6 @@ DOGEUSDT <- cryptoQuotes::getQuote(
 ```{r, echo =FALSE}
 ## print table as a kable
 ## for a neat presentationb
-kableExtra::kable_styling(
   knitr::kable(
     caption = 'USDT denominated Dogecoin structure',
     align = 'lcccc',
@@ -133,10 +132,8 @@ kableExtra::kable_styling(
       ),row.names = NULL
     ),
     format = 'html'
-  ),
-  full_width = TRUE,
-  position = 'center'
-)
+  )
+
 ```
 
 The arguments can be modified according to the application, below is an example of getting ATOM in 15 minutes intervals from the perpetual futures market using the Binance exchange again,
@@ -158,8 +155,7 @@ ATOMUSDT <- cryptoQuotes::getQuote(
 
 ```{r, echo =FALSE}
 ## print table as a kable
-## for a neat presentationb
-kableExtra::kable_styling(
+## for a neat presentation
   knitr::kable(
     caption = 'USDT denominated ATOM structure',
     align = 'lcccc',
@@ -171,10 +167,7 @@ kableExtra::kable_styling(
       ),row.names = NULL
     ),
     format = 'html'
-  ),
-  full_width = TRUE,
-  position = 'center'
-)
+  )
 ```
 
 > **Note:** getQuotes() can't be run here as CRAN, and Github, doesn't allow

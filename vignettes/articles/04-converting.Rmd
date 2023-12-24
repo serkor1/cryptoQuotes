@@ -38,6 +38,9 @@ tbl <- tibble::as_tibble(
     Index
   )
 )
+
+# 3) head data
+head(tbl, 3)
 ```
 
 ## Converting xts and zoo to data.table
@@ -53,6 +56,9 @@ DT <- data.table::as.data.table(
 
 # 2) set column name to upper
 colnames(DT)[1] <- 'Index'
+
+# 3) head data
+head(DT, 3)
 ```
 
 
