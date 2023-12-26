@@ -27,7 +27,7 @@ default_dates <- function(
     }
 
     starting_point <- as.POSIXct(
-      c(from, to),
+      from,
       tz = 'UTC',
       origin = '1970-01-01'
     )

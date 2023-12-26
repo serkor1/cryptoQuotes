@@ -1,29 +1,27 @@
-# 1) load perpetual
-# futures from Binance
-# with 15m intervals
-perpAtom <- try(
+# 1) Load BTC spot
+# from Kucoin with 30 minute
+# intervals
+BTC <- try(
   cryptoQuotes::getQuote(
-    ticker  = 'ATOMUSDT',
-    source = 'binance',
-    interval = '15m',
-    futures = TRUE
+    ticker   = 'BTC-USDT',
+    source   = 'kucoin',
+    interval = '30m',
+    futures  = FALSE,
+    from     = Sys.Date() - 1
   )
 )
 
-# 2) chart the futures
+# 2) chart the spot price
 # using the chart
 # function
-if (!inherits(perpAtom, 'try-error')){
+if (!inherits(BTC, 'try-error')){
+
   cryptoQuotes::chart(
-    chart = cryptoQuotes::kline(perpAtom) %>%
-      cryptoQuotes::addVolume()   %>%
-        cryptoQuotes::addBBands(cols = c('Close'))
+    chart = cryptoQuotes::kline(BTC) %>%
+      cryptoQuotes::addVolume() %>%
+      cryptoQuotes::addBBands()
   )
+
 }
-
-# NOTE: Without the try
-# the examples fails on
-# Github Actions
-
 
 # script end;

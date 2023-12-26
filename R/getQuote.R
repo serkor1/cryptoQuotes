@@ -54,16 +54,8 @@ getQuote <- function(
 
   # 0) check internet connection
   # before anything
-  if (!curl::has_internet()) {
-
-    rlang::abort(
-      message = 'You are currently not connected to the internet. Try again later.',
-
-      # disable traceback, on this error.
-      trace = rlang::trace_back()
-    )
-
-  }
+  check_internet_connection()
+  check_date_validity()
 
   # recode the exchange
   # source to avoid errors

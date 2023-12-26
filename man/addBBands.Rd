@@ -58,6 +58,7 @@ chart(
 \seealso{
 Other chart indicators: 
 \code{\link{addEvents}()},
+\code{\link{addFGIndex}()},
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
 \code{\link{addRSI}()},

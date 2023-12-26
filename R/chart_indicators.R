@@ -492,4 +492,111 @@ addRSI <- function(
 
 
 }
+
+#' Chart the Fear and Greed Index
+#'
+#' @description
+#' The fear and greed index is a market sentiment indicator that measures investor emotions to
+#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+#'
+#' @param chart a [kline()] or [ohlc()] chart
+#' @param FGI The Fear and Greed Index created by [getFGIndex()]
+#'
+#' @example man/examples/scr_FGIndex.R
+#' @details
+#' The Fear and Greed Index goes from 0-100, and can be classifed as follows
+#'
+#' \itemize{
+#'   \item 0-24, Extreme Fear
+#'   \item 25-44, Fear
+#'   \item 45-55, Neutral
+#'   \item 56-75, Greed
+#'   \item 76-100, Extreme Greed
+#' }
+#'
+#' @family chart indicators
+#' @returns Invisbly returns a plotly object.
+#' @export
+addFGIndex <- function(
+    chart,
+    FGI
+) {
+
+  # check if the interval of the quote
+  # is below 1d
+  # ticker_interval <- attributes(
+  #   attributes(chart$quote)
+  # )$tickerInfo$interval
+  #
+  # if (grepl(x = ticker_interval, pattern = 's|m',ignore.case = FALSE)) {
+  #
+  #   rlang::abort(
+  #     message = c(
+  #       'The Fear and Greed Index is a daily index, '
+  #     )
+  #   )
+  #
+  # }
+  # 0) convert
+  # FGI to data.frame
+  #
+  #
+  # TODO: Needs a fix
+  # the returned values are
+  # characters for some reason.
+
+  DT <- toDF(
+    quote = FGI
+  )
+
+  #DT$FGI <- as.numeric(DT$FGI)
+
+  value <- DT$FGI
+
+  DT$color_scale <- ceiling(
+    (1-11) * (value -0)/(100 - 0) + 11
+  )
+
+  DT$color_scale <- rev(RColorBrewer::brewer.pal(n = 11, name = 'RdYlGn'))[
+    DT$color_scale
+  ]
+
+  chart_ <- plotly::plot_ly(
+    showlegend = FALSE,
+    data = DT,
+    y = ~FGI,
+    x = ~Index,
+    type = 'scatter',
+    mode = 'lines+markers',
+    line = list(
+      color = 'gray',
+      dash = 'dash',
+      shape = 'spline',
+      smoothing = 1.5
+    ),
+    marker = list(
+      size = 10,
+      color = ~color_scale,
+      line = list(
+        color = 'black',
+        width = 2
+      )
+    )
+  ) %>% plotly::layout(
+    yaxis = list(
+      title = 'Fear and Greed Index'
+    )
+  )
+
+  chart$fgi <- chart_
+
+  return(
+    invisible(chart)
+  )
+
+}
+
+
+
+
 # script end;

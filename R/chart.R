@@ -209,9 +209,9 @@ chart <- function(
       if (has_subplot) {
 
         heights <- c(
-          0.5,
+          0.6,
           rep(
-            x          = (1-0.5)/ (length(chart) - 1),
+            x          = (1-0.6)/ (length(chart) - 1),
             length.out = length(chart) - 1
           )
         )

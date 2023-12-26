@@ -2,8 +2,8 @@ url: https://serkor1.github.io/cryptoQuotes/
 template:
   bootstrap: 5
 reference:
-- title: Crypto prices
-  desc: OHLC crypto prices
+- title: Cryptocurrency Market Data
+  desc: OHLC and Sentiment data
 - contents: starts_with('get')
 - title: Supported calls
   desc: All available API parameters

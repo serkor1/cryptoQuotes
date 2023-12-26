@@ -40,6 +40,13 @@ getQuote(
  )
 ```
 
+## Market Sentiment
+
+Two new functions are added,
+
+* `getFGIndex()` which returns the daily Fear and Greed Index
+* `addFGIndex()` which adds the Fear and Greed Index as a subplot to price charts.
+
 
 # cryptoQuotes 1.1.0
 

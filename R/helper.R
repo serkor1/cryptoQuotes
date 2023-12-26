@@ -364,4 +364,87 @@ startup_message <- function(
 }
 
 
+
+check_date_validity <- function(){
+
+  # this function checks if
+  # the dates are valid
+  passed_dates <- c(
+    rlang::env_get(
+      env = rlang::caller_env(n = 1),
+      nm = 'from'
+      ),
+    rlang::env_get(
+      env = rlang::caller_env(n = 1),
+      nm = 'to'
+      )
+  )
+
+  if (!is.null(passed_dates)) {
+
+    # 1) check if the dates
+    # can be parsed
+    parsed_dates <- sum(
+      sapply(
+        X = passed_dates,
+        FUN = function(date) {
+
+          # 1) parse date using
+          # try
+          rlang::inherits_only(
+            x = try(
+              (is.na(as.Date(date, "%Y-%m-%d %H:%M:%S")) | is.na(as.Date(date, "%Y-%m-%d"))),
+              silent = TRUE
+            ),
+            class = 'try-error'
+          )
+
+
+        }
+      )
+    )
+
+    if ((parsed_dates == length(passed_dates))) {
+
+      rlang::abort(
+        message = c(
+          'Error in date formats',
+          'v' = 'Accepted formats:',
+          '*' = as.character(Sys.Date()),
+          '*' = as.character(
+            format(
+              Sys.time()
+            )
+          )
+        ),
+        call = rlang::caller_env(n = 1)
+      )
+
+    }
+
+
+
+  }
+
+}
+
+check_internet_connection <- function() {
+
+  # 0) check internet connection
+  # before anything
+  if (!curl::has_internet()) {
+
+    rlang::abort(
+      message = 'You are currently not connected to the internet. Try again later.',
+
+      # disable traceback, on this error.
+      trace = rlang::trace_back()
+    )
+
+  }
+
+}
+
+
+
 # script end;
