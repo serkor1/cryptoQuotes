@@ -49,6 +49,9 @@
     <loc>https://serkor1.github.io/cryptoQuotes/reference/addEvents.html</loc>
   </url>
   <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/addFGIndex.html</loc>
+  </url>
+  <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/addMA.html</loc>
   </url>
   <url>
@@ -74,6 +77,9 @@
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/cryptoQuotes-package.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/getFGIndex.html</loc>
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/getQuote.html</loc>
