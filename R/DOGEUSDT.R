@@ -9,4 +9,6 @@
 #'   \item{Close}{Closing price}
 #'   \item{Volume}{Volume}
 #' }
+#'
+#' @family data
 "DOGEUSDT"

@@ -1,6 +1,6 @@
-#' USDT denominated ATOMS with 15m intervals
+#' USDT denominated Bitcoin(BTC) with 1 week intervals
 #'
-#' A xts object with 15m OHLCV of USDT denominated ATOM with 97 rows and 5 columns, from 2023-01-01 to 2023-01-02.
+#' A xts object with weekly OHLCV of USDT denominated Bitcoin with 99 rows and 5 columns, from 2022-02-07 to 2023-12-25.
 #'
 #' \describe{
 #'   \item{Open}{Opening price}
@@ -10,8 +10,6 @@
 #'   \item{Volume}{Volume}
 #' }
 #'
+#'
 #' @family data
-"ATOMUSDT"
-
-
-
+"BTCUSDT"

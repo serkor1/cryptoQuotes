@@ -44,8 +44,6 @@ getFGIndex <- function(
   #
   # Its otherwise selfcontained.
 
-
-
   # 1) check internet
   # connection
   check_internet_connection()
