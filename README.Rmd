@@ -6,11 +6,17 @@ always_allow_html: true
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
+# load library
+library(cryptoQuotes)
+
+# set options
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
@@ -81,7 +87,7 @@ kableExtra::kable_styling(
 
 Get USDT denominated Bitcoin spot market price from Binance with `30m`-intervals,
 
-```{r example}
+```{r example, eval=TRUE}
 ## BTC OHLC prices
 ## from Binance spot market
 ## in 30 minute intervals
@@ -112,7 +118,6 @@ kableExtra::kable_styling(
   position = 'center'
 )
 ```
-
 </div>
 
 ## Installation

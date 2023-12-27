@@ -22,7 +22,7 @@
 #' @param xts A xts-object that needs its bounds modified.
 #' @param bounds A character vector of length 1. Has to be one of `c('upper','lower','both')`. Defaults to Upper.
 #'
-#'
+#' @example man/examples/scr_FUN.R
 #' @family convinience
 #'
 #' @returns Returns an xts-class object with its bounds removed.
@@ -83,7 +83,7 @@ removeBound <- function(
 #' @param by A reference [zoo::index()]-object, to be split by.
 #' @param bounds A character vector of length 1. Has to be one of `c('upper','lower','both')`. Defaults to Upper.
 #'
-#'
+#' @example man/examples/scr_FUN.R
 #' @family convinience
 #'
 #' @returns Returns a list of iteratively restricted xts objects
@@ -144,7 +144,7 @@ splitWindow <- function(
 #' list
 #' @param ... optional arguments passed to `FUN`.
 #'
-#'
+#' @example man/examples/scr_FUN.R
 #' @family convinience
 #'
 #' @returns Returns a xts object.
