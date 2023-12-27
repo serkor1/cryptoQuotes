@@ -8,6 +8,9 @@ reference:
 - title: Supported calls
   desc: All available API parameters
 - contents: starts_with('available')
+- title: Convinience functions
+  desc: Manipulate and calibrate objects
+- contents: has_concept('convinience')
 - title: Main charts
   desc: The main charts
 - contents: has_concept('charting')
@@ -15,6 +18,6 @@ reference:
   desc: Adding indicators to charts
 - contents: has_concept('chart indicators')
 - title: Datasets
-  desc: Sample datasets returned by ```getQuote```
-- contents: starts_with('ATOM|DOGE')
+  desc: Sample datasets returned by ```getQuote()``` and ```getFGIndex()```
+- contents: has_concept('data')
 

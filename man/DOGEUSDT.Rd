@@ -22,4 +22,11 @@ A xts object with 1m OHLCV of USDT denominated Dogecoin with 61 rows and 5 colum
 \item{Volume}{Volume}
 }
 }
+\seealso{
+Other data: 
+\code{\link{ATOMUSDT}},
+\code{\link{BTCUSDT}},
+\code{\link{FGIndex}}
+}
+\concept{data}
 \keyword{datasets}

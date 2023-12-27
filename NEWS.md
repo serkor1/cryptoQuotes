@@ -47,6 +47,13 @@ Two new functions are added,
 * `getFGIndex()` which returns the daily Fear and Greed Index
 * `addFGIndex()` which adds the Fear and Greed Index as a subplot to price charts.
 
+## Convinience functions added
+
+Three new convinience functions are added applicable to some situations,
+
+* `removeBound()`
+* `splitWindow()`
+* `calibrateWindow()`
 
 # cryptoQuotes 1.1.0
 
