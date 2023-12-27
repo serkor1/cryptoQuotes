@@ -40,7 +40,13 @@
     <loc>https://serkor1.github.io/cryptoQuotes/reference/ATOMUSDT.html</loc>
   </url>
   <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/BTCUSDT.html</loc>
+  </url>
+  <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/DOGEUSDT.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/FGIndex.html</loc>
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/addBBands.html</loc>
@@ -73,6 +79,9 @@
     <loc>https://serkor1.github.io/cryptoQuotes/reference/availableTickers.html</loc>
   </url>
   <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/calibrateWindow.html</loc>
+  </url>
+  <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/chart.html</loc>
   </url>
   <url>
@@ -95,5 +104,11 @@
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/removeBound.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/splitWindow.html</loc>
   </url>
 </urlset>
