@@ -23,9 +23,9 @@ getQuote(
 
 \item{interval}{A character vector of length 1. See \code{\link[=availableIntervals]{availableIntervals()}} for available intervals.}
 
-\item{from}{An optional character vector of length 1. Given in \%Y-\%m-\%d format.}
+\item{from}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
 
-\item{to}{An optional character vector of length 1. Given in \%Y-\%m-\%d format.}
+\item{to}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
 }
 \value{
 an xts object with Open, High, Low, Close and Volume. If \code{futures = TRUE} the prices are last prices.
@@ -35,12 +35,12 @@ Open, High, Low, Close, and Volume (OHLCV) quotes are essential pieces of
 information used to analyze the price and trading activity of a financial asset over a specific time frame.
 }
 \details{
-If only \code{from} is provided 100 pips are returned up to \code{Sys.Date()}.
+If only \code{from} is provided 100 pips are returned up to \code{Sys.time()}.
 
 If only \code{to} is provided 100 pips up to the specified date
 is returned.
 
-If \code{from} and \code{to} are both \link{NULL} 100 pips returned up to \code{Sys.Date()}
+If \code{from} and \code{to} are both \link{NULL} 100 pips returned up to \code{Sys.time()}
 }
 \examples{
 # 1) Load BTC spot

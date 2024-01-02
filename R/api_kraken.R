@@ -133,10 +133,6 @@ krakenIntervals <- function(interval, futures, all = FALSE) {
 
   }
 
-
-
-
-
   return(
     interval
   )
@@ -275,8 +271,11 @@ krakenDates <- function(
     )
 
     # 1.1) add one day
-    dates[[2]] <- dates[[2]]  + 1*60*60*24
+    dates[[2]] <- dates[[2]]
 
+    if (!futures) {# Spot market for kraken
+      # returns since + 1 indices
+      dates[[1]] <- dates[[1]] - 15*60}
     # # 2) convert all
     # # dates according
     # # to the API requirements
@@ -294,8 +293,10 @@ krakenDates <- function(
 
     } else {
 
+
+
       names(dates) <- c(
-        'from',
+        'since',
         'to'
       )
 
@@ -418,8 +419,8 @@ krakenParameters <- function(
     return(
       list(
         query      = list(
-          from     = getParams$from,
-          to       = getParams$to,
+          since     = getParams$since,
+          #to       = getParams$to,
           pair     = ticker,
           interval = getParams$interval
         ),

@@ -8,9 +8,9 @@ for the cryptocurrency market}
 getFGIndex(from = NULL, to = NULL)
 }
 \arguments{
-\item{from}{An optional character vector of length 1. Given in \%Y-\%m-\%d format}
+\item{from}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
 
-\item{to}{An optional character vector of length 1. Given in \%Y-\%m-\%d format}
+\item{to}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
 }
 \value{
 A xts object with the FGI daily score

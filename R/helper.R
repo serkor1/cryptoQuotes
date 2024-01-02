@@ -182,7 +182,7 @@ check_exchange_validity <- function(
             all_available_exchanges,
             collapse = ', '
           ),
-          'is supported'
+          'is currently supported'
         )
       ),
       call = call
@@ -228,7 +228,7 @@ check_interval_validity <- function(
             )
           )
         ),
-        'v' = all_available_intervals
+        'v' = paste(all_available_intervals, collapse = ', ')
       ),
       call = call
     )
@@ -364,69 +364,49 @@ startup_message <- function(
 }
 
 
+date_validator <- function(from, to) {
 
-check_date_validity <- function(){
-
-  # this function checks if
-  # the dates are valid
-  passed_dates <- c(
-    rlang::env_get(
-      env = rlang::caller_env(n = 1),
-      nm = 'from'
-      ),
-    rlang::env_get(
-      env = rlang::caller_env(n = 1),
-      nm = 'to'
-      )
-  )
-
-  if (!is.null(passed_dates)) {
-
-    # 1) check if the dates
-    # can be parsed
-    parsed_dates <- sum(
-      sapply(
-        X = passed_dates,
-        FUN = function(date) {
-
-          # 1) parse date using
-          # try
-          rlang::inherits_only(
-            x = try(
-              (is.na(as.Date(date, "%Y-%m-%d %H:%M:%S")) | is.na(as.Date(date, "%Y-%m-%d"))),
-              silent = TRUE
-            ),
-            class = 'try-error'
-          )
-
-
-        }
-      )
-    )
-
-    if ((parsed_dates == length(passed_dates))) {
-
-      rlang::abort(
-        message = c(
-          'Error in date formats',
-          'v' = 'Accepted formats:',
-          '*' = as.character(Sys.Date()),
-          '*' = as.character(
-            format(
-              Sys.time()
+  # Function to parse and convert a date string
+  parse_and_convert_date <- function(date) {
+    if (!is.null(date)){
+      parsed_date <- as.POSIXct(date, format = "%Y-%m-%d %H:%M:%S", tz = 'UTC')
+      if (is.na(parsed_date)) {
+        parsed_date <- as.POSIXct(date, format = "%Y-%m-%d", tz = 'UTC')
+      }
+      if (is.na(parsed_date)) {
+        rlang::abort(
+          message = c(
+            'Error in date formats',
+            'v' = 'Accepted formats:',
+            '*' = as.character(Sys.Date()),
+            '*' = as.character(
+              format(
+                Sys.time()
+              )
             )
-          )
-        ),
-        call = rlang::caller_env(n = 1)
-      )
-
+          ),
+          call = rlang::caller_env(n = 1)
+        )
+      }
+      return(parsed_date)
+    } else {
+      return(NULL)
     }
-
-
-
   }
 
+  # Apply the function to both dates
+  from <- parse_and_convert_date(from)
+  to <- parse_and_convert_date(to)
+
+  return(
+    list(
+      from = from,
+      to   = to
+    )
+
+  )
 }
+
 
 check_internet_connection <- function() {
 

@@ -92,7 +92,7 @@ setequal(
 # script end;
 }
 \seealso{
-Other convinience:
+Other convinience: 
 \code{\link{calibrateWindow}()},
 \code{\link{splitWindow}()}
 }

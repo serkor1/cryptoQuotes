@@ -7,12 +7,15 @@
 
 ### Bugfixes
 
-* All returned Quotes are now in `UTC`, again.
 * Corrected misspelled ticker in Vignette 
+* All returned Quotes are now in `UTC`, again.
+* Fixed an error on the ``Bitmart` API where weekly candles would throw an error.
 
 # cryptoQuotes 1.2.0
 
-`getQuotes` now returns up to 100 pips preceding the specified `to` date, when `from = NULL`. It returns 100 pips, or up to `Sys.Date()`, from the specified `from` date.
+* All `from` and `to` arguments are now more flexible, and supports passing `Sys.Date()` and `Sys.time()` directly into the `get`-functions.
+
+* `getQuotes()` now returns up to 100 pips preceding the specified `to` date, when `from = NULL`. It returns 100 pips, or up to `Sys.Date()`, from the specified `from` date.
 
 The `getQuote()`-function can now be used as follows;
 

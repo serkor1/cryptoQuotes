@@ -13,8 +13,8 @@
 #' The fear and greed index is a market sentiment indicator that measures investor emotions to
 #' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
 #'
-#' @param from An optional character vector of length 1. Given in %Y-%m-%d format
-#' @param to An optional character vector of length 1. Given in %Y-%m-%d format
+#' @param from An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
+#' @param to An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
 #'
 #' @example man/examples/scr_FGIndex.R
 #'
@@ -50,7 +50,15 @@ getFGIndex <- function(
 
   # 2) check if the passed
   # dates are valid
-  check_date_validity()
+  # pass dates through
+  # the validator
+  valid_dates <- date_validator(
+    from = from,
+    to   = to
+  )
+
+  from <- valid_dates$from
+  to   <- valid_dates$to
 
   # 0) set fixed queries
   # the API doesnt hae any

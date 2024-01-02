@@ -38,8 +38,7 @@ testthat::test_that(
       # quote is 100 +/-
       testthat::expect_equal(
         object = nrow(returned_quote),
-        expected = 100,
-        tolerance = 50
+        expected = 100
       )
 
       # 3) expect that the years
@@ -110,8 +109,7 @@ testthat::test_that(
       # quote is 100 +/-
       testthat::expect_equal(
         object = nrow(returned_quote),
-        expected = 100,
-        tolerance = 50
+        expected = 100
       )
 
       # 3) expect that the years
@@ -182,8 +180,7 @@ testthat::test_that(
       # quote is 100 +/-
       testthat::expect_equal(
         object = nrow(returned_quote),
-        expected = 100,
-        tolerance = 50
+        expected = 100
       )
 
       # 3) expect that the years
@@ -219,9 +216,6 @@ testthat::test_that(
 
   }
 )
-
-
-
 
 testthat::test_that(
   desc = 'Check if Kraken API returns data correctly',
@@ -256,8 +250,7 @@ testthat::test_that(
       # quote is 100 +/-
       testthat::expect_equal(
         object = nrow(returned_quote),
-        expected = 100,
-        tolerance = 50
+        expected = 100
       )
 
       # 3) expect that the years
@@ -293,9 +286,6 @@ testthat::test_that(
 
   }
 )
-
-
-
 
 # check errors;
 testthat::test_that(
@@ -355,7 +345,4 @@ testthat::test_that(
 
   }
 )
-
-
-
 
