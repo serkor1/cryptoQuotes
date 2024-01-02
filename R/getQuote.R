@@ -12,8 +12,8 @@
 #' @param source A character vector of length 1. See [availableExchanges()] for available exchanges.
 #' @param interval A character vector of length 1. See [availableIntervals()] for available intervals.
 #' @param futures A logical value. Returns futures market if [TRUE], spot market otherwise.
-#' @param from An optional character vector of length 1. Given in %Y-%m-%d format.
-#' @param to An optional character vector of length 1. Given in %Y-%m-%d format.
+#' @param from An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
+#' @param to An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
 #'
 #' @usage getQuote(
 #'  ticker,
@@ -30,12 +30,12 @@
 #'
 #' @details
 #'
-#' If only ``from`` is provided 100 pips are returned up to ``Sys.Date()``.
+#' If only ``from`` is provided 100 pips are returned up to ``Sys.time()``.
 #'
 #' If only ``to`` is provided 100 pips up to the specified date
 #' is returned.
 #'
-#' If ``from`` and ``to`` are both [NULL] 100 pips returned up to ``Sys.Date()``
+#' If ``from`` and ``to`` are both [NULL] 100 pips returned up to ``Sys.time()``
 #'
 #'
 #' @export
@@ -55,7 +55,16 @@ getQuote <- function(
   # 0) check internet connection
   # before anything
   check_internet_connection()
-  check_date_validity()
+
+  # pass dates through
+  # the validator
+  valid_dates <- date_validator(
+    from = from,
+    to   = to
+  )
+
+  from <- valid_dates$from
+  to   <- valid_dates$to
 
   # recode the exchange
   # source to avoid errors

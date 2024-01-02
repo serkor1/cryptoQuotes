@@ -300,8 +300,7 @@ kucoinDates <- function(
       power = 1
     )
 
-    # 1.1) add one day
-    dates[[2]] <- dates[[2]] + 1*60*60*24
+
 
     # 2) convert all
     # dates according
@@ -318,6 +317,12 @@ kucoinDates <- function(
         dates,
         as.numeric
       )
+
+
+      # 1.1) add one day
+      # if kucoin spot
+      dates[[2]] <- dates[[2]] + 15*60
+
 
       names(dates) <- c(
         'startAt',

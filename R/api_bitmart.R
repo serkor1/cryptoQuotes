@@ -104,7 +104,7 @@ bitmartIntervals <- function(futures, interval, all = FALSE) {
         720,
         1440,
         4320,
-        10000
+        10080
       )
     )
   )
@@ -261,7 +261,7 @@ bitmartDates <- function(
     )
 
     # 1.1) add one day
-    dates[[2]] <- dates[[2]] + 1*60*60*24
+    dates[[2]] <- dates[[2]]
 
     # 2) convert all
     # dates according
