@@ -143,88 +143,33 @@ bitmartIntervals <- function(futures, interval, all = FALSE) {
 
 # 3) define binance response object
 # and format
-bitmartResponse <- function(
-    ohlc = TRUE,
-    futures
-) {
-
-  # mock response
-  # to avoid check error in
-  # unevaluated expressions
-  response <- NULL
-
+bitmartResponse <- function(ohlc = TRUE, futures) {
   if (ohlc) {
+    # Base structure for OHLC data
+    base_ohlc <- list(
+      colum_names = c('Open', 'High', 'Low', 'Close', 'Volume'),
+      colum_location = if (futures) 1:5 else c(2:5,7),
+      index_location = if (futures) 6 else 1
+    )
 
-    # NOTE: Binance
-    # returns everything
-    # from spot and futures market
-    # in a similar manner
-    if (futures) {
-
-      list(
-        colum_names = c(
-          'Low',
-          'High',
-          'Open',
-          'Close',
-          'Volume'
-        ),
-        colum_location = c(
-          1:5
-        ),
-        index_location = c(
-          6
-        )
-
-      )
-
-    } else {
-
-      list(
-        colum_names = c(
-          'Open',
-          'High',
-          'Low',
-          'Close',
-          'Volume'
-        ),
-        colum_location = c(
-          2:5,7
-        ),
-        index_location = c(
-          1
-        )
-
-      )
-
-    }
-
-
-
+    return(base_ohlc)
   } else {
 
-    if (futures) {
-
-
-
+    # Non-OHLC data
+    return(
       list(
-        code = rlang::expr(
-          response$data$symbol$symbol
+        code = switch (
+          if (futures) 'futures' else 'spot',
+          futures = rlang::expr(response$data$symbol$symbol),
+          spot    = rlang::expr(response$data$symbols)
         )
       )
 
-    } else {
-
-      list(
-        code = rlang::expr(
-          response$data$symbols
-        )
-      )
-
-    }
+    )
   }
-
 }
+
+
 
 
 # 4) bitmart date formats
@@ -235,10 +180,6 @@ bitmartDates <- function(
     dates,
     is_response = FALSE
 ) {
-
-
-
-
 
 
   if (!is_response) {

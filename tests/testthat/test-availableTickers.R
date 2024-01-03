@@ -1,32 +1,158 @@
 testthat::test_that(
-  desc = "availablePairs returns a vector of characters, with lenght > 1",
+  desc = "availablePairs on Binance returns a vector of characters, with lenght > 1",
   code = {
 
 
     testthat::skip_on_ci()
 
+    logicals <- c(TRUE, FALSE)
 
-    # 1) Load the available
-    # tickers
-    tickers <- cryptoQuotes::availableTickers(
-      source = 'binance',
-      futures = TRUE
-    )
+    for (lgl in logicals) {
 
-    # 2) Check wether its
-    # a character vector
-    testthat::expect_type(
-      object = tickers,
-      type = 'character'
-    )
+      # 1) Load the available
+      # tickers
+      tickers <- availableTickers(
+        source = 'binance',
+        futures = lgl
+      )
 
-    # Check that the vector
-    # is greater than one
-    testthat::expect_gt(
-      object = length(tickers),
-      expected = 1
+      # 2) Check wether its
+      # a character vector
+      testthat::expect_type(
+        object = tickers,
+        type = 'character'
+      )
 
-    )
+      # Check that the vector
+      # is greater than one
+      testthat::expect_gt(
+        object = length(tickers),
+        expected = 1
+
+      )
+
+    }
+
+
+  }
+)
+
+
+testthat::test_that(
+  desc = "availablePairs on Kraken returns a vector of characters, with lenght > 1",
+  code = {
+
+
+    testthat::skip_on_ci()
+
+    logicals <- c(TRUE, FALSE)
+
+    for (lgl in logicals) {
+
+      # 1) Load the available
+      # tickers
+      tickers <- availableTickers(
+        source = 'kraken',
+        futures = lgl
+      )
+
+      # 2) Check wether its
+      # a character vector
+      testthat::expect_type(
+        object = tickers,
+        type = 'character'
+      )
+
+      # Check that the vector
+      # is greater than one
+      testthat::expect_gt(
+        object = length(tickers),
+        expected = 1
+
+      )
+
+    }
+
+
+  }
+)
+
+
+testthat::test_that(
+  desc = "availablePairs on Bitmart returns a vector of characters, with lenght > 1",
+  code = {
+
+
+    testthat::skip_on_ci()
+
+    logicals <- c(TRUE, FALSE)
+
+    for (lgl in logicals) {
+
+      # 1) Load the available
+      # tickers
+      tickers <- availableTickers(
+        source = 'bitmart',
+        futures = lgl
+      )
+
+      # 2) Check wether its
+      # a character vector
+      testthat::expect_type(
+        object = tickers,
+        type = 'character'
+      )
+
+      # Check that the vector
+      # is greater than one
+      testthat::expect_gt(
+        object = length(tickers),
+        expected = 1
+
+      )
+
+    }
+
+
+  }
+)
+
+
+testthat::test_that(
+  desc = "availablePairs on Kucoin returns a vector of characters, with lenght > 1",
+  code = {
+
+
+    testthat::skip_on_ci()
+
+    logicals <- c(TRUE, FALSE)
+
+    for (lgl in logicals) {
+
+      # 1) Load the available
+      # tickers
+      tickers <- availableTickers(
+        source = 'kucoin',
+        futures = lgl
+      )
+
+      # 2) Check wether its
+      # a character vector
+      testthat::expect_type(
+        object = tickers,
+        type = 'character'
+      )
+
+      # Check that the vector
+      # is greater than one
+      testthat::expect_gt(
+        object = length(tickers),
+        expected = 1
+
+      )
+
+    }
+
 
   }
 )

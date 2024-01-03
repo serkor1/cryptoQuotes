@@ -141,101 +141,52 @@ krakenIntervals <- function(interval, futures, all = FALSE) {
 
 # 3) define kraken response object
 # and format
-krakenResponse <- function(
-    ohlc = TRUE,
-    futures
-) {
-
-  # mock response
-  # to avoid check error in
-  # unevaluated expressions
-  response <- NULL
+krakenResponse <- function(ohlc = TRUE, futures) {
+  # Define the basic structure for OHLC data
+  ohlc_structure <- function(volume_loc = 6) {
+    list(
+      colum_names = c('Open', 'High', 'Low', 'Close', 'Volume'),
+      colum_location = c(2:5, volume_loc),
+      index_location = 1
+    )
+  }
 
   if (ohlc) {
-
-    # NOTE: kraken
-    # returns everything
-    # from spot and futures market
-    # in a similar manner
-
-    if (futures) {
-
-      list(
-        colum_names = c(
-          'Open',
-          'High',
-          'Low',
-          'Close',
-          'Volume'
-        ),
-        colum_location = c(
-          2:6
-        ),
-        index_location = c(
-          1
-        )
-
-      )
-
-    } else {
-
-      list(
-        colum_names = c(
-          'Open',
-          'High',
-          'Low',
-          'Close',
-          'Volume'
-        ),
-        colum_location = c(
-          2:5,7
-        ),
-        index_location = c(
-          1
-        )
-
-      )
-
-    }
-
-
+    # Adjust the structure based on futures
+    return(ohlc_structure(volume_loc = if (!futures) 7 else 6))
   } else {
+    # Non-OHLC data
+    response_code_structure <- function(market) {
 
-
-
-
-    if (futures) {
-
-      list(
-        code = rlang::expr(
-          subset(
-            response$instruments,
-            response$instruments$tradeable == 'TRUE'
-          )$symbol
-        )
-      )
-
-    } else {
-
-      list(
-        code = rlang::expr(
-          names(
-            lapply(
-              response$result,
-              function(x) {
-                if (x$status == 'online'){
-                  x$altname
+      switch (
+        market,
+        'futures' = list(
+          code = rlang::expr(
+            subset(
+              response$instruments,
+              response$instruments$tradeable == 'TRUE'
+            )$symbol
+          )
+        ),
+        'spot'    = list(
+          code = rlang::expr(
+            names(
+              lapply(
+                response$result,
+                function(x) {
+                  if (x$status == 'online'){
+                    x$altname
+                  }
                 }
-              }
+              )
             )
           )
         )
       )
-
     }
 
+    return(response_code_structure(market = if (futures) 'futures' else 'spot'))
   }
-
 }
 
 # 4) kraken date formats

@@ -184,92 +184,37 @@ kucoinIntervals <- function(interval, futures, all = FALSE) {
 
 # 2) kucoin response
 # object and format;
-kucoinResponse <- function(
-    ohlc = TRUE,
-    futures
-) {
-
-  # mock response
-  # to avoid check error in
-  # unevaluated expressions
-  response <- NULL
-
+kucoinResponse <- function(ohlc = TRUE, futures) {
   if (ohlc) {
+    # Common structure for OHLC data
+    ohlc_structure <- list(
+      colum_names = c('Open', 'High', 'Low', 'Close', 'Volume'),
+      colum_location = 2:6,
+      index_location = 1
+    )
 
-    if (futures) {
-
-      list(
-        colum_names =  c(
-          'Open',
-          'High',
-          'Low',
-          'Close',
-          'Volume'
-        ),
-        colum_location = c(
-          2:6
-        ),
-        index_location = c(
-          1
-        )
-      )
-
-    } else {
-
-      list(
-        colum_names = c(
-          'Open',
-          'Close',
-          'High',
-          'Low',
-          'Volume'
-        ),
-        colum_location = c(
-          2:6
-        ),
-        index_location = c(
-          1
-        )
-      )
-
-    }
-
+    return(ohlc_structure)
   } else {
-
-
-
-
-
-
-    if (futures) {
-
+    # Non-OHLC data
+    non_ohlc_structure <- if (futures) {
       list(
         code = rlang::expr(
           subset(
             x = response$data,
-            grepl(
-              pattern = 'open',
-              ignore.case = TRUE,
-              x = response$data$status
-            )
+            grepl(pattern = 'open', ignore.case = TRUE, x = response$data$status)
           )$symbol
         )
       )
-
     } else {
-
       list(
-        code = rlang::expr(
-          response$data$ticker$symbol
-        )
+        code = rlang::expr(response$data$ticker$symbol)
       )
-
     }
 
+    return(non_ohlc_structure)
   }
-
-
 }
+
 
 # 3) Kucoin date formats
 # to be sent to the API
