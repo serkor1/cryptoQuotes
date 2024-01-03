@@ -95,7 +95,7 @@ kucoinResponse <- function(
   if (ohlc) {
     # Common structure for OHLC data
     ohlc_structure <- list(
-      colum_names = c('Open', 'High', 'Low', 'Close', 'Volume'),
+      colum_names = if (futures) c('Open', 'High', 'Low', 'Close', 'Volume') else c('Open', 'Close', 'High', 'Low', 'Volume'),
       colum_location = 2:6,
       index_location = 1
     )

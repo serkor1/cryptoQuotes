@@ -95,7 +95,7 @@ bitmartResponse <- function(
   if (ohlc) {
     # Base structure for OHLC data
     base_ohlc <- list(
-      colum_names = c('Open', 'High', 'Low', 'Close', 'Volume'),
+      colum_names = if (futures) c('Low', 'High', 'Open', 'Close', 'Volume') else c('Open', 'High', 'Low', 'Close', 'Volume'),
       colum_location = if (futures) 1:5 else c(2:5,7),
       index_location = if (futures) 6 else 1
     )

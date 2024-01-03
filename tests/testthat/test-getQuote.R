@@ -69,6 +69,19 @@ testthat::test_that(
       )
 
 
+      # 3.3 Check if all values
+      # makes sense. This is important
+      # to check for any breaking code changes
+      testthat::expect_true(
+        all(
+          returned_quote$High >= returned_quote$Low,
+          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
+          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+        )
+
+      )
+
+
 
     }
 
@@ -137,6 +150,19 @@ testthat::test_that(
         min(year_range),
         expected = as.numeric(
           format(Sys.Date(), '%Y'))
+      )
+
+
+      # 3.3 Check if all values
+      # makes sense. This is important
+      # to check for any breaking code changes
+      testthat::expect_true(
+        all(
+          returned_quote$High >= returned_quote$Low,
+          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
+          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+        )
+
       )
 
 
@@ -210,6 +236,18 @@ testthat::test_that(
           format(Sys.Date(), '%Y'))
       )
 
+      # 3.3 Check if all values
+      # makes sense. This is important
+      # to check for any breaking code changes
+      testthat::expect_true(
+        all(
+          returned_quote$High >= returned_quote$Low,
+          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
+          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+        )
+
+      )
+
 
 
     }
@@ -278,6 +316,19 @@ testthat::test_that(
         min(year_range),
         expected = as.numeric(
           format(Sys.Date(), '%Y'))
+      )
+
+
+      # 3.3 Check if all values
+      # makes sense. This is important
+      # to check for any breaking code changes
+      testthat::expect_true(
+        all(
+          returned_quote$High >= returned_quote$Low,
+          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
+          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+        )
+
       )
 
 
