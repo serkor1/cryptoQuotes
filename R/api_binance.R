@@ -282,74 +282,41 @@ binanceDates <- function(
 
 
 # 4) Binance parameters
-binanceParameters <- function(
-    futures = TRUE,
-    ticker,
-    interval,
-    from = NULL,
-    to   = NULL
-) {
-
-
-  # Some parts are
-  # paths and some are
-  # queries
-  getParams <- list(
-    ticker   = ticker,
+binanceParameters <- function(futures = TRUE, ticker, interval, from = NULL, to = NULL) {
+  # Basic parameters common to both futures and non-futures
+  params <- list(
+    symbol = ticker,
     interval = binanceIntervals(
       interval = interval,
-      futures  = futures
+      futures = futures
     )
   )
 
-  # 3) correct parameter names
-  # according to each api
-  if (futures) {
-    # 1) correct all the names
-    # of the elements
-    names(getParams) <- c(
-      # was pair
-      'symbol',
-      'interval'
-    )
-
-    #getParams$contractType <- 'PERPETUAL'
-
-  } else {
-    # 1) correct all the names
-    # of the elements
-    names(getParams) <- c(
-      'symbol',
-      'interval'
-    )
-  }
-
-  getParams <- c(
-    getParams,
-    binanceDates(
-      futures = futures,
-      dates   = list(
-        from = from,
-        to   = to
-      ),
-      is_response = FALSE
-    )
+  # Add date parameters
+  date_params <- binanceDates(
+    futures = futures,
+    dates = list(
+      from = from,
+      to = to
+    ),
+    is_response = FALSE
   )
 
+  # Combine all parameters
+  params <- c(params, date_params)
+
+  # Return a structured list with additional common parameters
   return(
     list(
-      query    = getParams,
-      path     = NULL,
-      futures  = futures,
-      source   = 'binance',
-      ticker   = ticker,
+      query = params,
+      path = NULL,
+      futures = futures,
+      source = 'binance',
+      ticker = ticker,
       interval = interval
     )
-
   )
-
-
-
 }
+
 
 # script end;

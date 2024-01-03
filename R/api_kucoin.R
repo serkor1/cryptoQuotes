@@ -375,63 +375,38 @@ kucoinParameters <- function(
     ticker,
     interval,
     from = NULL,
-    to   = NULL
-) {
+    to = NULL
+    ) {
 
-  # Some parts are
-  # paths and some are
-  # queries
-  getParams <- list(
-    ticker   = ticker,
+  # Initial parameter setup
+  params <- list(
+    symbol = ticker,
     interval = kucoinIntervals(
       interval = interval,
-      futures  = futures
-    )
-  )
-
-  # 3) correct parameter names
-  # according to each api
-  if (futures) {
-    # 1) correct all the names
-    # of the elements
-    names(getParams) <- c(
-      'symbol',
-      'granularity'
-    )
-
-  } else {
-    # 1) correct all the names
-    # of the elements
-    names(getParams) <- c(
-      'symbol',
-      'type'
-    )
-  }
-
-  getParams <- c(
-    getParams,
-    kucoinDates(
-      futures = futures,
-      dates   = list(
-        from = from,
-        to   = to
+      futures = futures
       )
-    )
   )
+  # Assign appropriate names based on the futures flag
+  interval_param_name <- if (futures) 'granularity' else 'type'
+  names(params)[2] <- interval_param_name
 
+  # Add date parameters
+  date_params <- kucoinDates(futures = futures, dates = list(from = from, to = to))
+
+  # Combine all parameters
+  params <- c(params, date_params)
+
+  # Return structured list with additional parameters
   return(
     list(
-      query    = getParams,
-      path     = NULL,
-      futures  = futures,
-      source   = 'kucoin',
-      ticker   = ticker,
+      query = params,
+      path = NULL,
+      futures = futures,
+      source = 'kucoin',
+      ticker = ticker,
       interval = interval
     )
-
   )
-
 }
-
 
 # script end;

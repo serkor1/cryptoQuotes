@@ -322,73 +322,43 @@ bitmartParameters <- function(
     ticker,
     interval,
     from = NULL,
-    to   = NULL
-) {
+    to = NULL
+    ) {
 
-
-  # Some parts are
-  # paths and some are
-  # queries
-  getParams <- list(
-    ticker   = ticker,
-    interval = bitmartIntervals(
+  # Basic parameters
+  params <- list(
+    symbol = ticker,
+    step = bitmartIntervals(
       interval = interval,
-      futures  = futures
-    )
+      futures = futures
+      )
   )
 
-  # 3) correct parameter names
-  # according to each api
-  if (futures) {
-    # 1) correct all the names
-    # of the elements
-    names(getParams) <- c(
-      # was pair
-      'symbol',
-      'step'
-    )
-
-    #getParams$contractType <- 'PERPETUAL'
-
-  } else {
-    # 1) correct all the names
-    # of the elements
-    names(getParams) <- c(
-      'symbol',
-      'step'
-    )
-  }
-
-  getParams <- c(
-    getParams,
-    bitmartDates(
-      futures = futures,
-      dates   = list(
-        from = from,
-        to   = to
+  # Add date parameters
+  date_params <- bitmartDates(
+    futures = futures,
+    dates = list(
+      from = from,
+      to = to
       ),
-      is_response = FALSE
+    is_response = FALSE
     )
-  )
 
+  # Combine all parameters
+  params <- c(params, date_params)
+
+  # Return a structured list with additional common parameters
   return(
     list(
-      query    = getParams,
-      path     = NULL,
-      futures  = futures,
-      source   = 'bitmart',
-      ticker   = ticker,
+      query = params,
+      path = NULL,
+      futures = futures,
+      source = 'bitmart',
+      ticker = ticker,
       interval = interval
     )
-
   )
-
-
-
 }
-
-
-
 
 # script end;
 

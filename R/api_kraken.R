@@ -209,9 +209,9 @@ krakenResponse <- function(
       list(
         code = rlang::expr(
           subset(
-          response$instruments,
-          response$instruments$tradeable == 'TRUE'
-        )$symbol
+            response$instruments,
+            response$instruments$tradeable == 'TRUE'
+          )$symbol
         )
       )
 
@@ -335,107 +335,60 @@ krakenDates <- function(
 
 
 # 4) kraken parameters
-krakenParameters <- function(
-    futures = TRUE,
-    ticker,
-    interval,
-    from = NULL,
-    to   = NULL
-) {
+krakenParameters <- function(futures = TRUE, ticker, interval, from = NULL, to = NULL) {
 
-
-  # Some parts are
-  # paths and some are
-  # queries
-  getParams <- list(
-    ticker   = ticker,
+  # Set common parameters
+  params <- list(
+    ticker = ticker,
     interval = krakenIntervals(
       interval = interval,
-      futures  = futures
+      futures = futures
     )
   )
 
-  # 3) correct parameter names
-  # according to each api
+  # Add dates
+  date_params <- krakenDates(
+    futures = futures,
+    dates = list(
+      from = from,
+      to = to
+    ),
+    is_response = FALSE)
+
+
+  # Set specific parameters for futures or non-futures
   if (futures) {
-    # 1) correct all the names
-    # of the elements
-    names(getParams) <- c(
-      # was pair
-      'symbol',
-      'resolution'
+    params$symbol = params$ticker
+    params$resolution = params$interval
+    params$tick_type = 'trade'
+    params$from = date_params$from
+    params$to = date_params$to
+    params$query = list(
+      from = params$from,
+      to = params$to
     )
-
-    getParams$tick_type <-  'trade'
-    # There is a tick_tupe == trade
-
-    #getParams$contractType <- 'PERPETUAL'
-
+    params$path = list(
+      tick_type = 'trade',
+      symbol = params$symbol,
+      resolution = params$resolution
+    )
   } else {
-    # 1) correct all the names
-    # of the elements
-    names(getParams) <- c(
-      'pair',
-      'interval'
+    params$pair = params$ticker
+    params$since = date_params$since
+    params$query = list(
+      since = params$since,
+      pair = params$pair,
+      interval = params$interval
     )
+    params$path = NULL
   }
 
-  getParams <- c(
-    getParams,
-    krakenDates(
-      futures = futures,
-      dates   = list(
-        from = from,
-        to   = to
-      ),
-      is_response = FALSE
-    )
-  )
+  # Common parameters for both futures and non-futures
+  params$futures = futures
+  params$source = 'kraken'
 
-  if (futures) {
-
-    return(
-      list(
-        query    = list(
-          from  = getParams$from,
-          to    = getParams$to
-        ),
-        path     = list(
-          tick_type  = 'trade',
-          symbol     = getParams$symbol,
-          resolution = getParams$resolution
-        ),
-        futures  = futures,
-        source   = 'kraken',
-        ticker   = ticker
-
-      )
-
-    )
-
-
-  } else {
-
-    return(
-      list(
-        query      = list(
-          since     = getParams$since,
-          #to       = getParams$to,
-          pair     = ticker,
-          interval = getParams$interval
-        ),
-        path     = NULL,
-        futures  = futures,
-        source   = 'kraken',
-        ticker   = ticker
-
-      )
-
-    )
-
-  }
-
-
+  # Return the structured list
+  return(params)
 }
 
 #  # script end;
