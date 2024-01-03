@@ -243,83 +243,39 @@ convertDate <- function(
     is_response = FALSE,
     multiplier = 1,
     power = 1
-) {
+    ) {
 
-  # This function converts
-  # epoch times to POSIXct
+  # This function formats
+  # all passed and returned
+  # date formats
 
-  # TODO: Change pwer
-  # to character.
-  if (!is_response) {
+  # 1) Calculate scale
+  # facor; this determines
+  # wether the values should be scaled
+  # according to the unix epoch time
+  scale_factor <- multiplier^power
 
-   output <-  tryCatch(
-      expr = {
-        as.numeric(
-          as.POSIXct(
-            date,
-            tz = 'UTC',
-            origin = "1970-01-01"
-          )
-        ) * (multiplier^power)
-      },
-      error = function(error) {
-
-        rlang::abort(
-          message = c(
-            'Error in date format',
-            'v' = 'Accepted formats:',
-            '*' = as.character(Sys.Date()),
-            '*' = as.character(
-              format(
-                Sys.time()
-              )
-            )
-          ),
-          call = rlang::caller_env(n = 9)
-        )
-
+  # 2) Calculate the actual
+  # values
+  tryCatch(
+    expr = {
+      if (!is_response) {
+        # Convert to POSIXct and then to numeric
+        as.numeric(as.POSIXct(date, tz = 'UTC', origin = "1970-01-01")) * scale_factor
+      } else {
+        # Direct conversion to POSIXct for API response
+        as.POSIXct(date * scale_factor, tz = 'UTC', origin = "1970-01-01")
       }
-    )
-
-  } else {
-
-    # If there is an error
-    # here; its on the API side
-    #
-
-    output <- tryCatch(
-      expr = {
-        as.POSIXct(
-      date * (multiplier^power),
-      tz = 'UTC',
-      origin = "1970-01-01"
-    )
-      },
+    },
     error = function(error) {
-
+      # Unified error message
       rlang::abort(
-        message = c(
-          'Error on API side',
-          'i' = 'Contact maintainer, or submit a bugreport!'
-        ),
+        message = "Error in processing date. Please contact package maintainer, or submit a bugreport.",
         call = rlang::caller_env(n = 9)
       )
-
-
-
     }
-    )
-
-
-  }
-
-  return(
-    output
   )
-
-
 }
-
 
 flatten <- function(x) {
   if (!inherits(x, "list")) return(list(x))
