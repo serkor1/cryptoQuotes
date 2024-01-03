@@ -62,89 +62,21 @@ binanceEndpoint <- function(
 
 # 1) Define Binance intervals
 binanceIntervals <- function(futures, interval, all = FALSE) {
-
-  # this funtion serves two purposes
-  #
-  # 1) listing all available
-  # intervals
-  #
-  # 2) extracting chosen intervals
-  # for the remainder of this script.
-  #
-  # This step is unnessary for some of
-  # the REST APIs like binance, but it provides
-  # a more streamlined programming structure
-
+  # Define all intervals in a data frame
   allIntervals <- data.frame(
-    cbind(
-      labels = c(
-        '1s',
-        '1m',
-        '3m',
-        '5m',
-        '15m',
-        '30m',
-        '1h',
-        '2h',
-        '4h',
-        '6h',
-        '8h',
-        '12h',
-        '1d',
-        '3d',
-        '1w',
-        '1M'
-      ),
-      values = c(
-        '1s',
-        '1m',
-        '3m',
-        '5m',
-        '15m',
-        '30m',
-        '1h',
-        '2h',
-        '4h',
-        '6h',
-        '8h',
-        '12h',
-        '1d',
-        '3d',
-        '1w',
-        '1M'
-      )
-    )
+    labels = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'),
+    values = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M')
   )
-
-  # if all; then this function
-  # has been called by availableIntervals
-  # and will return all available intervals
 
   if (all) {
-
-    interval <- allIntervals$labels
-
+    return(allIntervals$labels)
   } else {
-
-    # 1) locate the chosen interval
-    # from the list
-    indicator <- grepl(
-      pattern = paste0('^', interval),
-      ignore.case = FALSE,
-      x = allIntervals$labels
-    )
-
-    # 2) extract the interval
-    # from the list
-    interval <- allIntervals[indicator,]$values
+    # Select the specified interval
+    selectedInterval <- allIntervals$values[grepl(paste0('^', interval, '$'), allIntervals$values)]
+    return(selectedInterval)
   }
-
-
-  return(
-    interval
-  )
-
 }
+
 
 
 # 3) define binance response object
@@ -205,80 +137,36 @@ binanceResponse <- function(
 # 4) Binance date formats
 # to be sent, and recieved, from
 # the API
-binanceDates <- function(
-    futures,
-    dates,
-    is_response = FALSE
-) {
+binanceDates <- function(futures, dates, is_response = FALSE) {
+  multiplier <- 1e3
 
-
-
-  # dates are supplied and its not
-  # a reponse;
   if (!is_response) {
-
-    # 1) set multiplier
-    # according to spot/perpertual
-    # markets
-    multiplier <- ifelse(
-      futures,
-      yes = 1e3,
-      no = 1e3
-    )
-    # 1) convert all
-    # dates to numeric
-    dates <- lapply(
-      dates,
-      convertDate,
+    # Convert dates to numeric and format
+    dates <- convertDate(
+      date = dates,
       multiplier = multiplier,
       power = 1
     )
 
-    # 1.1) add one day
-    dates[[2]] <- dates[[2]] + 1*60*60*24
+    # Add one day to the second date
+    dates[2] <- dates[2] + 1 * 60 * 60 * 24
 
-    # 2) convert all
-    # dates according
-    # to the API requirements
-    dates <- lapply(
-      dates,
-      format,
-      scientific = FALSE
-    )
+    dates <- lapply(dates, format, scientific = FALSE)
+    names(dates) <- c('startTime', 'endTime')
 
-    names(dates) <- c(
-      'startTime',
-      'endTime'
-    )
-
-    return(
-      dates
-    )
-  }
-
-  # if its a response
-  # the dates should be parsed back accordingly
-  if (is_response) {
-
-    # 1) convert back to
-    # posit
+    return(dates)
+  } else {
+    # Processing response
     dates <- convertDate(
       date = as.numeric(dates),
-      multiplier = ifelse(
-        futures,
-        yes = 1e3,
-        no = 1e3
-      ),
+      multiplier = multiplier,
       power = -1,
       is_response = TRUE
-    )
-
-    return(
-      dates
-    )
-
+      )
+    return(dates)
   }
 }
+
 
 
 # 4) Binance parameters
@@ -295,7 +183,7 @@ binanceParameters <- function(futures = TRUE, ticker, interval, from = NULL, to 
   # Add date parameters
   date_params <- binanceDates(
     futures = futures,
-    dates = list(
+    dates = c(
       from = from,
       to = to
     ),

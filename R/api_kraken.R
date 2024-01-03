@@ -61,87 +61,37 @@ krakenEndpoint <- function(
 
 # 1) Define kraken intervals
 krakenIntervals <- function(interval, futures, all = FALSE) {
-
-  # this funtion serves two purposes
-  #
-  # 1) listing all available
-  # intervals
-  #
-  # 2) extracting chosen intervals
-  # for the remainder of this script.
-  #
-  # This step is unnessary for some of
-  # the REST APIs like binance, but it provides
-  # a more streamlined programming structure
-
   if (futures) {
-
+    # For futures, labels and values are the same
     allIntervals <- data.frame(
-      cbind(
-        labels =  c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w"),
-        values =  c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
+      labels = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w"),
+      values = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
       )
-
-    )
-
-
   } else {
-
+    # For non-futures, labels and values are different
     allIntervals <- data.frame(
-      cbind(
-        labels = c("1m","5m","15m", "30m", "1h","4h", "1d", "1w", "2w"),
-        values = c(1   ,5   ,15   ,30    ,60   ,240 , 1440,10080,21600)
-      )
-
+      labels = c("1m", "5m", "15m", "30m", "1h", "4h", "1d", "1w", "2w"),
+      values = c(1   ,5   ,15   ,30    ,60   ,240 , 1440,10080,21600)
     )
-
   }
 
-  # if all; then this function
-  # has been called by availableIntervals
-  # and will return all available intervals
   if (all) {
-
-    interval <- allIntervals$labels
-
+    return(allIntervals$labels)
   } else {
-
-    # 2) locate the interval
-    # using grepl
-    indicator <- grepl(
-      pattern = paste0('^', interval),
-      ignore.case = TRUE,
-      x = allIntervals$labels
-    )
-
-    # if (sum(indicator) == 0) {
-    #
-    #   rlang::abort(
-    #     message = c(
-    #       paste0(interval, ' were not found.'),
-    #       'v' = paste('Valid intervals:', paste(allIntervals$labels,collapse = ', '))
-    #     ),
-    #     # disable traceback, on this error.
-    #     trace = rlang::trace_back(),
-    #     call = rlang::caller_env(n = 6)
-    #   )
-    #
-    # }
-
-    # 3) return interval
-    interval <- allIntervals[indicator,]$values
-
+    # Locate and return the chosen interval value
+    matchedInterval <- allIntervals$values[grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)]
+    return(matchedInterval)
   }
-
-  return(
-    interval
-  )
 }
+
 
 
 # 3) define kraken response object
 # and format
 krakenResponse <- function(ohlc = TRUE, futures) {
+
+  response <- NULL
+
   # Define the basic structure for OHLC data
   ohlc_structure <- function(volume_loc = 6) {
     list(
@@ -189,98 +139,41 @@ krakenResponse <- function(ohlc = TRUE, futures) {
   }
 }
 
-# 4) kraken date formats
-# to be sent, and recieved, from
-# the API
+# Kraken dates; ####
 krakenDates <- function(
     futures,
     dates,
     is_response = FALSE
-) {
+    ) {
 
-
-
-  # dates are supplied and its not
-  # a reponse;
   if (!is_response) {
-
-    # 1) set multiplier
-    # according to spot/perpertual
-    # markets
-    multiplier <- ifelse(
-      futures,
-      yes = 1,
-      no = 1
-    )
-    # 1) convert all
-    # dates to numeric
-    dates <- lapply(
-      dates,
-      convertDate,
-      multiplier = multiplier,
+    dates <- convertDate(
+      date = dates,
+      is_response = FALSE,
+      multiplier = 1,
       power = 1
-    )
-
-    # 1.1) add one day
-    dates[[2]] <- dates[[2]]
-
-    if (!futures) {# Spot market for kraken
-      # returns since + 1 indices
-      dates[[1]] <- dates[[1]] - 15*60}
-    # # 2) convert all
-    # # dates according
-    # # to the API requirements
-    dates <- lapply(
-      dates,
-      format,
-      scientific = FALSE
-    )
-
-    if (futures) {
-      names(dates) <- c(
-        'from',
-        'to'
       )
 
-    } else {
-
-
-
-      names(dates) <- c(
-        'since',
-        'to'
-      )
-
+    if (!futures) {
+      # Adjust for Spot market
+      dates[1] <- dates[1] - 15 * 60
     }
 
+    dates <- format(x = dates, scientific = FALSE)
 
+    # Set names based on futures
+    names(dates) <- if (futures) c('from', 'to') else c('since', 'to')
 
-    return(
-      dates
-    )
-  }
+    return(dates)
 
-  # if its a response
-  # the dates should be parsed back accordingly
-  if (is_response) {
+  } else {
+    # Processing response
+    dates <- convertDate(date = as.numeric(dates),
+                         multiplier = ifelse(futures, yes = 1000, no = 1),
+                         power = -1,
+                         is_response = TRUE)
 
-    # 1) convert back to
-    # posit
-    dates <- convertDate(
-      date = as.numeric(dates),
-      multiplier = base::ifelse(
-        futures,
-        yes = 1000,
-        no  = 1
-      ),
-      power = -1,
-      is_response = TRUE
-    )
-
-    return(
-      dates
-    )
-
+    return(dates)
   }
 }
 
@@ -300,11 +193,12 @@ krakenParameters <- function(futures = TRUE, ticker, interval, from = NULL, to =
   # Add dates
   date_params <- krakenDates(
     futures = futures,
-    dates = list(
+    dates = c(
       from = from,
       to = to
     ),
-    is_response = FALSE)
+    is_response = FALSE
+    )
 
 
   # Set specific parameters for futures or non-futures
@@ -312,11 +206,11 @@ krakenParameters <- function(futures = TRUE, ticker, interval, from = NULL, to =
     params$symbol = params$ticker
     params$resolution = params$interval
     params$tick_type = 'trade'
-    params$from = date_params$from
-    params$to = date_params$to
+    params$from = date_params[1]
+    params$to = date_params[2]
     params$query = list(
-      from = params$from,
-      to = params$to
+      from = date_params[1],
+      to =date_params[2]
     )
     params$path = list(
       tick_type = 'trade',
@@ -324,10 +218,10 @@ krakenParameters <- function(futures = TRUE, ticker, interval, from = NULL, to =
       resolution = params$resolution
     )
   } else {
+
     params$pair = params$ticker
-    params$since = date_params$since
     params$query = list(
-      since = params$since,
+      since = date_params[1],
       pair = params$pair,
       interval = params$interval
     )

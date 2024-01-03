@@ -61,89 +61,30 @@ bitmartEndpoint <- function(
 
 # 1) Define bitmart intervals
 bitmartIntervals <- function(futures, interval, all = FALSE) {
-
-  # this funtion serves two purposes
-  #
-  # 1) listing all available
-  # intervals
-  #
-  # 2) extracting chosen intervals
-  # for the remainder of this script.
-  #
-  # This step is unnessary for some of
-  # the REST APIs like bitmart, but it provides
-  # a more streamlined programming structure
-
+  # Define all intervals in a data frame
   allIntervals <- data.frame(
-    cbind(
-      labels = c(
-        '1m',
-        '3m',
-        '5m',
-        '15m',
-        '30m',
-        '1h',
-        '2h',
-        '4h',
-        '6h',
-        '12h',
-        '1d',
-        '3d',
-        '1w'
-      ),
-      values = c(
-        1,
-        3,
-        5,
-        15,
-        30,
-        60,
-        120,
-        240,
-        360, #
-        720,
-        1440,
-        4320,
-        10080
-      )
-    )
+    labels = c('1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '12h', '1d', '3d', '1w'),
+    values = c(1, 3, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080)
   )
-
-
-  # if all; then this function
-  # has been called by availableIntervals
-  # and will return all available intervals
-
 
   if (all) {
-
-    interval <- allIntervals$labels
-
+    return(allIntervals$labels)
   } else {
-
-    # 1) locate the chosen interval
-    # from the list
-    indicator <- grepl(
-      pattern = paste0('^', interval),
-      ignore.case = FALSE,
-      x = allIntervals$labels
-    )
-
-    # 2) extract the interval
-    # from the list
-    interval <- allIntervals[indicator,]$values
+    # Locate and return the chosen interval value
+    selectedInterval <- allIntervals$values[allIntervals$labels == interval]
+    return(selectedInterval)
   }
-
-
-  return(
-    interval
-  )
-
 }
+
+
+
 
 # 3) define binance response object
 # and format
 bitmartResponse <- function(ohlc = TRUE, futures) {
+
+  response <- NULL
+
   if (ohlc) {
     # Base structure for OHLC data
     base_ohlc <- list(
@@ -175,86 +116,35 @@ bitmartResponse <- function(ohlc = TRUE, futures) {
 # 4) bitmart date formats
 # to be sent, and recieved, from
 # the API
-bitmartDates <- function(
-    futures,
-    dates,
-    is_response = FALSE
-) {
-
-
+bitmartDates <- function(futures, dates, is_response = FALSE) {
   if (!is_response) {
-
-    # 1) set multiplier
-    # according to spot/perpertual
-    # markets
-    multiplier <- ifelse(
-      futures,
-      yes = 1,
-      no = 1
+    # Convert dates to numeric and then format
+    dates <- convertDate(
+      date = dates,
+      multiplier = 1,
+      power = 1,
+      is_response = FALSE
     )
-    # 1) convert all
-    # dates to numeric
-    dates <- lapply(
+
+    dates <- format(
       dates,
-      convertDate,
-      multiplier = multiplier,
-      power = 1
-    )
-
-    # 1.1) add one day
-    dates[[2]] <- dates[[2]]
-
-    # 2) convert all
-    # dates according
-    # to the API requirements
-    dates <- lapply(
-      as.numeric(dates),
-      format,
       scientific = FALSE
-    )
-
-    if (futures) {
-
-      names(dates) <- c(
-        'start_time',
-        'end_time'
       )
 
-    } else {
+    # Set names based on futures
+    names(dates) <- if (futures) c('start_time', 'end_time') else c('after', 'before')
 
-      names(dates) <- c(
-        'after',
-        'before'
-      )
-    }
-
-
-
-
-
-
-    return(
-      dates
-    )
-  }
-
-  # if its a response
-  # the dates should be parsed back accordingly
-  if (is_response) {
-
-    # 1) convert back to
-    # posit
+    return(dates)
+  } else {
+    # Processing response
     dates <- convertDate(
       date = as.numeric(dates),
       is_response = TRUE
-    )
-
-    return(
-      dates
-    )
-
+      )
+    return(dates)
   }
 }
+
 
 
 # 4) bitmart parameters
@@ -278,7 +168,7 @@ bitmartParameters <- function(
   # Add date parameters
   date_params <- bitmartDates(
     futures = futures,
-    dates = list(
+    dates = c(
       from = from,
       to = to
       ),

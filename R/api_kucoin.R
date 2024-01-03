@@ -65,126 +65,34 @@ kucoinEndpoint <- function(
 # 1) kucoin available intervals
 # available intervals in binance;
 kucoinIntervals <- function(interval, futures, all = FALSE) {
-
-
-  # this funtion serves two purposes
-  #
-  # 1) listing all available
-  # intervals
-  #
-  # 2) extracting chosen intervals
-  # for the remainder of this script.
-  #
-  # This step is unnessary for some of
-  # the REST APIs like binance, but it provides
-  # a more streamlined programming structure
-
   if (futures) {
-
     allIntervals <- data.frame(
-      cbind(
-        labels = c(
-          '1m',
-          '5m',
-          '15m',
-          '30m',
-          '1h',
-          '2h',
-          '4h',
-          '8h',
-          '12h',
-          '1d',
-          '1w'
-        ),
-        values = c(
-          1,
-          5,
-          15,
-          30,
-          60,
-          120,
-          240,
-          480,
-          720,
-          1440,
-          10080
-        )
-      )
-
+      labels = c('1m', '5m', '15m', '30m', '1h', '2h', '4h', '8h', '12h', '1d', '1w'),
+      values = c(1, 5, 15, 30, 60, 120, 240, 480, 720, 1440, 10080)
     )
-
-
   } else {
-
     allIntervals <- data.frame(
-      cbind(
-        labels = c(
-          '1m',
-          '3m',
-          '5m',
-          '15m',
-          '30m',
-          '1h',
-          '2h',
-          '4h',
-          '6h',
-          '8h',
-          '12h',
-          '1d',
-          '1w'
-        ),
-        values = c(
-          '1min',
-          '3min',
-          '5min',
-          '15min',
-          '30min',
-          '1hour',
-          '2hour',
-          '4hour',
-          '6hour',
-          '8hour',
-          '12hour',
-          '1day',
-          '1week'
-        )
-      )
-
+      labels = c('1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '1w'),
+      values = c('1min', '3min', '5min', '15min', '30min', '1hour', '2hour', '4hour', '6hour', '8hour', '12hour', '1day', '1week')
     )
-
   }
 
-  # if all; then this function
-  # has been called by availableIntervals
-  # and will return all available intervals
   if (all) {
-
-    interval <- allIntervals$labels
-
+    return(allIntervals$labels)
   } else {
-
-    # 2) locate the interval
-    # using grepl
-    indicator <- grepl(
-      pattern = paste0('^', interval),
-      ignore.case = TRUE,
-      x = allIntervals$labels
-    )
-
-    # 3) return interval
-    interval <- allIntervals[indicator,]$values
-
+    # Select the specified interval
+    selectedInterval <- allIntervals$values[grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)]
+    return(selectedInterval)
   }
-
-  return(
-    interval
-  )
-
 }
+
 
 # 2) kucoin response
 # object and format;
 kucoinResponse <- function(ohlc = TRUE, futures) {
+
+  response <- NULL
+
   if (ohlc) {
     # Common structure for OHLC data
     ohlc_structure <- list(
@@ -218,100 +126,47 @@ kucoinResponse <- function(ohlc = TRUE, futures) {
 
 # 3) Kucoin date formats
 # to be sent to the API
-kucoinDates <- function(
-    futures,
-    dates,
-    is_response = FALSE
-) {
+kucoinDates <- function(futures, dates, is_response = FALSE) {
+  multiplier <- if (futures) 1e3 else 1
 
-  # dates are supplied and its not
-  # a reponse;
   if (!is_response) {
+    # Convert dates and format
 
-    # 1) set multiplier
-    # according to spot/perpertual
-    # markets
-    multiplier <- ifelse(
-      futures,
-      yes = 1e3,
-      no = 1
-    )
-    # 1) convert all
-    # dates to numeric
-    dates <- lapply(
-      dates,
-      convertDate,
+    dates <- convertDate(
+      date = dates,
       multiplier = multiplier,
-      power = 1
+      power = 1,
+      is_response = FALSE
     )
 
-
-
-    # 2) convert all
-    # dates according
-    # to the API requirements
-    dates <- lapply(
+    dates <- format(
       dates,
-      format,
       scientific = FALSE
     )
 
+
     if (!futures) {
-
-      dates <- lapply(
-        dates,
-        as.numeric
-      )
-
-
-      # 1.1) add one day
-      # if kucoin spot
-      dates[[2]] <- dates[[2]] + 15*60
-
-
-      names(dates) <- c(
-        'startAt',
-        'endAt'
-      )
-
+      # Adjust for Kucoin spot and set names
+      dates <- as.numeric(dates)
+      dates[2] <- dates[2] + 15 * 60
+      names(dates) <- c('startAt', 'endAt')
     } else {
-
-      names(dates) <- c(
-        'from',
-        'to'
-      )
-
+      # Set names for futures
+      names(dates) <- c('from', 'to')
     }
 
-    return(
-      dates
-    )
-  }
-
-  # if its a response
-  # the dates should be parsed back accordingly
-  if (is_response) {
-
-    # 1) convert back to
-    # posit
+    return(dates)
+  } else {
+    # Processing response
     dates <- convertDate(
       date = as.numeric(dates),
-      multiplier = ifelse(
-        futures,
-        yes = 1e3,
-        no = 1
-      ),
+      multiplier = multiplier,
       power = -1,
-      is_response = TRUE
-    )
-
-    return(
-      dates
-    )
-
+      is_response = TRUE)
+    return(dates)
   }
-
 }
+
 
 # 4) kucoin parameters
 # to be passed to the relevant functions
@@ -336,7 +191,7 @@ kucoinParameters <- function(
   names(params)[2] <- interval_param_name
 
   # Add date parameters
-  date_params <- kucoinDates(futures = futures, dates = list(from = from, to = to))
+  date_params <- kucoinDates(futures = futures, dates = c(from = from, to = to))
 
   # Combine all parameters
   params <- c(params, date_params)
