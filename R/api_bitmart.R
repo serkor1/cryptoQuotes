@@ -1,11 +1,10 @@
 # script: api_bitmart
 # date: 2023-12-20
 # author: Serkan Korkmaz, serkor1@duck.com
-# objective:
+# objective: Create all necessary parameters
+# for a proper API call
 # script start;
-
-# 0) Define base and endpoint
-# URLs
+# 1) URLs and Endpoint; ####
 bitmartUrl <- function(
     futures = TRUE
 ) {
@@ -58,9 +57,13 @@ bitmartEndpoint <- function(
 
 }
 
+# 2) Available intervals; #####
+bitmartIntervals <- function(
+    futures,
+    interval,
+    all = FALSE
+) {
 
-# 1) Define bitmart intervals
-bitmartIntervals <- function(futures, interval, all = FALSE) {
   # Define all intervals in a data frame
   allIntervals <- data.frame(
     labels = c('1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '12h', '1d', '3d', '1w'),
@@ -68,20 +71,24 @@ bitmartIntervals <- function(futures, interval, all = FALSE) {
   )
 
   if (all) {
+
     return(allIntervals$labels)
+
   } else {
     # Locate and return the chosen interval value
-    selectedInterval <- allIntervals$values[allIntervals$labels == interval]
+    selectedInterval <- allIntervals$values[
+      allIntervals$labels == interval
+    ]
+
     return(selectedInterval)
   }
 }
 
-
-
-
-# 3) define binance response object
-# and format
-bitmartResponse <- function(ohlc = TRUE, futures) {
+# 3) define response object and format; ####
+bitmartResponse <- function(
+    ohlc = TRUE,
+    futures
+) {
 
   response <- NULL
 
@@ -110,13 +117,12 @@ bitmartResponse <- function(ohlc = TRUE, futures) {
   }
 }
 
-
-
-
-# 4) bitmart date formats
-# to be sent, and recieved, from
-# the API
-bitmartDates <- function(futures, dates, is_response = FALSE) {
+# 4) Dates passed to and from endpoints; ####
+bitmartDates <- function(
+    futures,
+    dates,
+    is_response = FALSE
+) {
   if (!is_response) {
     # Convert dates to numeric and then format
     dates <- convertDate(
@@ -129,7 +135,7 @@ bitmartDates <- function(futures, dates, is_response = FALSE) {
     dates <- format(
       dates,
       scientific = FALSE
-      )
+    )
 
     # Set names based on futures
     names(dates) <- if (futures) c('start_time', 'end_time') else c('after', 'before')
@@ -140,21 +146,19 @@ bitmartDates <- function(futures, dates, is_response = FALSE) {
     dates <- convertDate(
       date = as.numeric(dates),
       is_response = TRUE
-      )
+    )
     return(dates)
   }
 }
 
-
-
-# 4) bitmart parameters
+# 5) Parameters passed to endpoints; ####
 bitmartParameters <- function(
     futures = TRUE,
     ticker,
     interval,
     from = NULL,
     to = NULL
-    ) {
+) {
 
   # Basic parameters
   params <- list(
@@ -162,7 +166,7 @@ bitmartParameters <- function(
     step = bitmartIntervals(
       interval = interval,
       futures = futures
-      )
+    )
   )
 
   # Add date parameters
@@ -171,9 +175,9 @@ bitmartParameters <- function(
     dates = c(
       from = from,
       to = to
-      ),
+    ),
     is_response = FALSE
-    )
+  )
 
   # Combine all parameters
   params <- c(params, date_params)
@@ -192,5 +196,3 @@ bitmartParameters <- function(
 }
 
 # script end;
-
-

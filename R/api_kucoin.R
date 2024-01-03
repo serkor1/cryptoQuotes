@@ -1,13 +1,10 @@
 # script: new_api_kucoin
 # date: 2023-12-18
 # author: Serkan Korkmaz, serkor1@duck.com
-# objective: This api is
-# for the httr2 for kucoin
-# to test
+# objective: Create all necessary parameters
+# for a proper API call
 # script start;
-
-# 0) kucoin baseurls and endpoints
-# endpoint
+# 1) URLs and Endpoint; ####
 kucoinUrl <- function(
     futures = TRUE
 ) {
@@ -50,10 +47,7 @@ kucoinEndpoint <- function(
       no   = '/api/v1/market/allTickers'
     )
 
-
   }
-
-
 
   # 2) return endPoint url
   return(
@@ -61,10 +55,12 @@ kucoinEndpoint <- function(
   )
 }
 
-
-# 1) kucoin available intervals
-# available intervals in binance;
-kucoinIntervals <- function(interval, futures, all = FALSE) {
+# 2) Available intervals; #####
+kucoinIntervals <- function(
+    interval,
+    futures,
+    all = FALSE
+) {
   if (futures) {
     allIntervals <- data.frame(
       labels = c('1m', '5m', '15m', '30m', '1h', '2h', '4h', '8h', '12h', '1d', '1w'),
@@ -81,15 +77,18 @@ kucoinIntervals <- function(interval, futures, all = FALSE) {
     return(allIntervals$labels)
   } else {
     # Select the specified interval
-    selectedInterval <- allIntervals$values[grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)]
+    selectedInterval <- allIntervals$values[
+      grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)
+    ]
     return(selectedInterval)
   }
 }
 
-
-# 2) kucoin response
-# object and format;
-kucoinResponse <- function(ohlc = TRUE, futures) {
+# 3) define response object and format; ####
+kucoinResponse <- function(
+    ohlc = TRUE,
+    futures
+) {
 
   response <- NULL
 
@@ -123,10 +122,13 @@ kucoinResponse <- function(ohlc = TRUE, futures) {
   }
 }
 
+# 4) Dates passed to and from endpoints; ####
+kucoinDates <- function(
+    futures,
+    dates,
+    is_response = FALSE
+) {
 
-# 3) Kucoin date formats
-# to be sent to the API
-kucoinDates <- function(futures, dates, is_response = FALSE) {
   multiplier <- if (futures) 1e3 else 1
 
   if (!is_response) {
@@ -167,16 +169,14 @@ kucoinDates <- function(futures, dates, is_response = FALSE) {
   }
 }
 
-
-# 4) kucoin parameters
-# to be passed to the relevant functions
+# 5) Parameters passed to endpoints; ####
 kucoinParameters <- function(
     futures = TRUE,
     ticker,
     interval,
     from = NULL,
     to = NULL
-    ) {
+) {
 
   # Initial parameter setup
   params <- list(
@@ -184,14 +184,17 @@ kucoinParameters <- function(
     interval = kucoinIntervals(
       interval = interval,
       futures = futures
-      )
+    )
   )
   # Assign appropriate names based on the futures flag
   interval_param_name <- if (futures) 'granularity' else 'type'
   names(params)[2] <- interval_param_name
 
   # Add date parameters
-  date_params <- kucoinDates(futures = futures, dates = c(from = from, to = to))
+  date_params <- kucoinDates(
+    futures = futures,
+    dates = c(from = from, to = to)
+  )
 
   # Combine all parameters
   params <- c(params, date_params)

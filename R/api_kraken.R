@@ -1,11 +1,10 @@
 # script: api_kraken
 # date: 2023-12-20
 # author: Serkan Korkmaz, serkor1@duck.com
-# objective:
+# objective: Create all necessary parameters
+# for a proper API call
 # script start;
-
-# 0) Define base and endpoint
-# URLs
+# 1) URLs and Endpoint; ####
 krakenUrl <- function(
     futures = TRUE
 ) {
@@ -58,15 +57,18 @@ krakenEndpoint <- function(
 
 }
 
-
-# 1) Define kraken intervals
-krakenIntervals <- function(interval, futures, all = FALSE) {
+# 2) Available intervals; #####
+krakenIntervals <- function(
+    interval,
+    futures,
+    all = FALSE
+) {
   if (futures) {
     # For futures, labels and values are the same
     allIntervals <- data.frame(
       labels = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w"),
       values = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
-      )
+    )
   } else {
     # For non-futures, labels and values are different
     allIntervals <- data.frame(
@@ -76,19 +78,24 @@ krakenIntervals <- function(interval, futures, all = FALSE) {
   }
 
   if (all) {
+
     return(allIntervals$labels)
+
   } else {
     # Locate and return the chosen interval value
-    matchedInterval <- allIntervals$values[grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)]
+    matchedInterval <- allIntervals$values[
+      grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)
+    ]
+
     return(matchedInterval)
   }
 }
 
-
-
-# 3) define kraken response object
-# and format
-krakenResponse <- function(ohlc = TRUE, futures) {
+# 3) define response object and format; ####
+krakenResponse <- function(
+    ohlc = TRUE,
+    futures
+) {
 
   response <- NULL
 
@@ -103,7 +110,11 @@ krakenResponse <- function(ohlc = TRUE, futures) {
 
   if (ohlc) {
     # Adjust the structure based on futures
-    return(ohlc_structure(volume_loc = if (!futures) 7 else 6))
+    return(
+      ohlc_structure(
+        volume_loc = if (!futures) 7 else 6
+      )
+    )
   } else {
     # Non-OHLC data
     response_code_structure <- function(market) {
@@ -135,16 +146,20 @@ krakenResponse <- function(ohlc = TRUE, futures) {
       )
     }
 
-    return(response_code_structure(market = if (futures) 'futures' else 'spot'))
+    return(
+      response_code_structure(
+        market = if (futures) 'futures' else 'spot'
+      )
+    )
   }
 }
 
-# Kraken dates; ####
+# 4) Dates passed to and from endpoints; ####
 krakenDates <- function(
     futures,
     dates,
     is_response = FALSE
-    ) {
+) {
 
   if (!is_response) {
     dates <- convertDate(
@@ -152,7 +167,7 @@ krakenDates <- function(
       is_response = FALSE,
       multiplier = 1,
       power = 1
-      )
+    )
 
     if (!futures) {
       # Adjust for Spot market
@@ -168,18 +183,26 @@ krakenDates <- function(
 
   } else {
     # Processing response
-    dates <- convertDate(date = as.numeric(dates),
-                         multiplier = ifelse(futures, yes = 1000, no = 1),
-                         power = -1,
-                         is_response = TRUE)
+    dates <- convertDate(
+      date = as.numeric(dates),
+      multiplier = ifelse(futures, yes = 1000, no = 1),
+      power = -1,
+      is_response = TRUE
+    )
 
     return(dates)
   }
 }
 
 
-# 4) kraken parameters
-krakenParameters <- function(futures = TRUE, ticker, interval, from = NULL, to = NULL) {
+# 5) Parameters passed to endpoints; ####
+krakenParameters <- function(
+    futures = TRUE,
+    ticker,
+    interval,
+    from = NULL,
+    to = NULL
+) {
 
   # Set common parameters
   params <- list(
@@ -198,7 +221,7 @@ krakenParameters <- function(futures = TRUE, ticker, interval, from = NULL, to =
       to = to
     ),
     is_response = FALSE
-    )
+  )
 
 
   # Set specific parameters for futures or non-futures

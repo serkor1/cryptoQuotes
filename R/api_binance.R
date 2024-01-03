@@ -1,11 +1,10 @@
 # script: api_binance
 # date: 2023-12-20
 # author: Serkan Korkmaz, serkor1@duck.com
-# objective:
+# objective: Create all necessary parameters
+# for a proper API call
 # script start;
-
-# 0) Define base and endpoint
-# URLs
+# 1) URLs and Endpoint; ####
 binanceUrl <- function(
     futures = TRUE
 ) {
@@ -59,8 +58,7 @@ binanceEndpoint <- function(
 
 }
 
-
-# 1) Define Binance intervals
+# 2) Available intervals; #####
 binanceIntervals <- function(futures, interval, all = FALSE) {
   # Define all intervals in a data frame
   allIntervals <- data.frame(
@@ -72,15 +70,15 @@ binanceIntervals <- function(futures, interval, all = FALSE) {
     return(allIntervals$labels)
   } else {
     # Select the specified interval
-    selectedInterval <- allIntervals$values[grepl(paste0('^', interval, '$'), allIntervals$values)]
+    selectedInterval <- allIntervals$values[
+      grepl(paste0('^', interval, '$'), allIntervals$values)
+      ]
+
     return(selectedInterval)
   }
 }
 
-
-
-# 3) define binance response object
-# and format
+# 3) define response object and format; ####
 binanceResponse <- function(
     ohlc = TRUE,
     futures
@@ -134,10 +132,13 @@ binanceResponse <- function(
 
 }
 
-# 4) Binance date formats
-# to be sent, and recieved, from
-# the API
-binanceDates <- function(futures, dates, is_response = FALSE) {
+# 4) Dates passed to and from endpoints; ####
+binanceDates <- function(
+    futures,
+    dates,
+    is_response = FALSE
+) {
+
   multiplier <- 1e3
 
   if (!is_response) {
@@ -155,6 +156,7 @@ binanceDates <- function(futures, dates, is_response = FALSE) {
     names(dates) <- c('startTime', 'endTime')
 
     return(dates)
+
   } else {
     # Processing response
     dates <- convertDate(
@@ -162,15 +164,20 @@ binanceDates <- function(futures, dates, is_response = FALSE) {
       multiplier = multiplier,
       power = -1,
       is_response = TRUE
-      )
+    )
     return(dates)
   }
 }
 
+# 5) Parameters passed to endpoints; ####
+binanceParameters <- function(
+    futures = TRUE,
+    ticker,
+    interval,
+    from = NULL,
+    to = NULL
+) {
 
-
-# 4) Binance parameters
-binanceParameters <- function(futures = TRUE, ticker, interval, from = NULL, to = NULL) {
   # Basic parameters common to both futures and non-futures
   params <- list(
     symbol = ticker,
@@ -206,5 +213,4 @@ binanceParameters <- function(futures = TRUE, ticker, interval, from = NULL, to 
   )
 }
 
-
-# script end;
+# script end; ####

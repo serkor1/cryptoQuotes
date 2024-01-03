@@ -4,9 +4,7 @@
 # objective: A class of helper
 # function
 # script start;
-
-
-
+# converting Quotes to and from data.frames; ####
 toDF <- function(quote) {
 
 
@@ -67,7 +65,7 @@ toQuote <- function(DF) {
   )
 }
 
-
+# Plotly parameters; ####
 vline <- function(
     x = 0,
     col = 'steelblue'
@@ -117,7 +115,7 @@ annotations <- function(
 
 
 
-# check for http errors;
+# Errror checkers; ####
 check_for_errors <- function(
     response,
     source,
@@ -238,6 +236,25 @@ check_interval_validity <- function(
 }
 
 
+
+check_internet_connection <- function() {
+
+  # 0) check internet connection
+  # before anything
+  if (!curl::has_internet()) {
+
+    rlang::abort(
+      message = 'You are currently not connected to the internet. Try again later.',
+
+      # disable traceback, on this error.
+      trace = rlang::trace_back()
+    )
+
+  }
+
+}
+
+# converting dates; ####
 convertDate <- function(
     date,
     is_response = FALSE,
@@ -268,7 +285,9 @@ convertDate <- function(
       }
     },
     error = function(error) {
-      # Unified error message
+      # Unified error message;
+      # as all dates are validated; errors here can only
+      # be bugs.
       rlang::abort(
         message = "Error in processing date. Please contact package maintainer, or submit a bugreport.",
         call = rlang::caller_env(n = 9)
@@ -277,13 +296,14 @@ convertDate <- function(
   )
 }
 
+# general helpers; ####
 flatten <- function(x) {
   if (!inherits(x, "list")) return(list(x))
   else return(unlist(c(lapply(x, flatten)), recursive = FALSE))
 }
 
 
-# package startup messages;
+# package startup messages; ####
 startup_message <- function(
     pkgname,
     pkgversion
@@ -319,10 +339,15 @@ startup_message <- function(
 
 }
 
+# validators; ####
+date_validator <- function(
+    from,
+    to
+    ) {
 
-date_validator <- function(from, to) {
+  # This function converts all input
+  # dates to POSIX and checks for errors in the dates
 
-  # Function to parse and convert a date string
   parse_and_convert_date <- function(date) {
     if (!is.null(date)){
       parsed_date <- as.POSIXct(date, format = "%Y-%m-%d %H:%M:%S", tz = 'UTC')
@@ -362,25 +387,5 @@ date_validator <- function(from, to) {
 
   )
 }
-
-
-check_internet_connection <- function() {
-
-  # 0) check internet connection
-  # before anything
-  if (!curl::has_internet()) {
-
-    rlang::abort(
-      message = 'You are currently not connected to the internet. Try again later.',
-
-      # disable traceback, on this error.
-      trace = rlang::trace_back()
-    )
-
-  }
-
-}
-
-
 
 # script end;
