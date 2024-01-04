@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# cryptoQuotes: Cryptocurrency Market Data in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptoQuotes website" /></a>
+# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptoQuotes website" /></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
@@ -139,3 +139,8 @@ devtools::install_github(
   ref = 'main'
 )
 ```
+
+
+## Code of Conduct
+  
+Please note that the `cryptoQuotes` project is released with a [Contributor Code of Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

@@ -15,7 +15,7 @@
 
 * All `from` and `to` arguments are now more flexible, and supports passing `Sys.Date()` and `Sys.time()` directly into the `get`-functions.
 
-* `getQuotes()` now returns up to 100 pips preceding the specified `to` date, when `from = NULL`. It returns 100 pips, or up to `Sys.Date()`, from the specified `from` date.
+* `getQuote()` now returns up to 100 pips preceding the specified `to` date, when `from = NULL`. It returns 100 pips, or up to `Sys.Date()`, from the specified `from` date.
 
 The `getQuote()`-function can now be used as follows;
 

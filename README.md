@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cryptoQuotes: Cryptocurrency Market Data in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptoQuotes website" /></a>
+# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptoQuotes website" /></a>
 
 <!-- badges: start -->
 
@@ -191,122 +191,122 @@ Volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2023-12-26 21:30:00
+2024-01-04 08:00:00
 </td>
 <td style="text-align:center;">
-42328.05
+42763.08
 </td>
 <td style="text-align:center;">
-42342.64
+42975.38
 </td>
 <td style="text-align:center;">
-42251.1
+42699.83
 </td>
 <td style="text-align:center;">
-42338.47
+42939.24
 </td>
 <td style="text-align:left;">
-476.10312
+1028.24554
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2023-12-26 22:00:00
+2024-01-04 08:30:00
 </td>
 <td style="text-align:center;">
-42338.47
+42939.24
 </td>
 <td style="text-align:center;">
-42591.89
+42953.08
 </td>
 <td style="text-align:center;">
-42325.41
+42779.2
 </td>
 <td style="text-align:center;">
-42474.72
+42849.66
 </td>
 <td style="text-align:left;">
-833.25736
+622.08307
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2023-12-26 22:30:00
+2024-01-04 09:00:00
 </td>
 <td style="text-align:center;">
-42474.73
+42849.67
 </td>
 <td style="text-align:center;">
-42500
+43029.51
 </td>
 <td style="text-align:center;">
-42400.57
+42849.66
 </td>
 <td style="text-align:center;">
-42469.99
+42987.65
 </td>
 <td style="text-align:left;">
-363.68336
+557.59948
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2023-12-26 23:00:00
+2024-01-04 09:30:00
 </td>
 <td style="text-align:center;">
-42470
+42987.65
 </td>
 <td style="text-align:center;">
-42520
+43084.38
 </td>
 <td style="text-align:center;">
-42404.1
+42930
 </td>
 <td style="text-align:center;">
-42422.47
+43007.74
 </td>
 <td style="text-align:left;">
-565.58056
+854.37965
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2023-12-26 23:30:00
+2024-01-04 10:00:00
 </td>
 <td style="text-align:center;">
-42422.46
+43007.73
 </td>
 <td style="text-align:center;">
-42530.09
+43080.16
 </td>
 <td style="text-align:center;">
-42416
+42616.28
 </td>
 <td style="text-align:center;">
-42508.93
+42786.61
 </td>
 <td style="text-align:left;">
-412.06818
+1144.38022
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2023-12-27
+2024-01-04 10:30:00
 </td>
 <td style="text-align:center;">
-42508.93
+42786.61
 </td>
 <td style="text-align:center;">
-42541.1
+42811.33
 </td>
 <td style="text-align:center;">
-42425.72
+42769.2
 </td>
 <td style="text-align:center;">
-42464.59
+42769.21
 </td>
 <td style="text-align:left;">
-442.53384
+38.48847
 </td>
 </tr>
 </tbody>
@@ -335,3 +335,10 @@ devtools::install_github(
   ref = 'main'
 )
 ```
+
+## Code of Conduct
+
+Please note that the `cryptoQuotes` project is released with a
+[Contributor Code of
+Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
