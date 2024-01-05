@@ -37,6 +37,9 @@ binanceEndpoint <- function(
     },
     ticker ={
       if (futures) '/fapi/v1/exchangeInfo' else '/api/v3/exchangeInfo'
+    },
+    lsratio = {
+      '/futures/data/globalLongShortAccountRatio'
     }
   )
 

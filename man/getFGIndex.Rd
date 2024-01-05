@@ -72,4 +72,8 @@ if (!inherits(BTCUSDT, 'try-error') & !inherits(FGI, 'try-error')) {
 
 # script end;
 }
+\seealso{
+Other sentiment: 
+\code{\link{getLSRatio}()}
+}
 \concept{sentiment}
