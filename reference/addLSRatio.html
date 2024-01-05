@@ -104,18 +104,21 @@
 <span class="r-in"><span><span class="co"># on the 15 minute candle</span></span></span>
 <span class="r-in"><span><span class="co"># wrapped in try to avoid</span></span></span>
 <span class="r-in"><span><span class="co"># failure on Github</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 1) long-short ratio</span></span></span>
+<span class="r-in"><span><span class="co"># on BTCUSDT pair</span></span></span>
 <span class="r-in"><span><span class="va">BTC_LSR</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="getLSRatio.html">getLSRatio</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  expr <span class="op">=</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="getLSRatio.html">getLSRatio</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    ticker <span class="op">=</span> <span class="st">'BTCUSDT'</span>,</span></span>
 <span class="r-in"><span>    interval <span class="op">=</span> <span class="st">'15m'</span>,</span></span>
 <span class="r-in"><span>    from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    to   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  silent <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in httr2::req_perform(req = httr2::req_url_query(httr2::request(paste0(baseurl,  : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   HTTP 451 Unavailable For Legal Reasons.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 2) BTCSDT in same period</span></span></span>
+<span class="r-in"><span><span class="co"># as the long-short ratio;</span></span></span>
 <span class="r-in"><span><span class="va">BTCUSDT</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="getQuote.html">getQuote</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    ticker <span class="op">=</span> <span class="st">'BTCUSDT'</span>,</span></span>
@@ -128,14 +131,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in cryptoQuotes::getQuote(ticker = "BTCUSDT", futures = TRUE, interval = "15m",  : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Service unavailable from a restricted location according to 'b. Eligibility' in https://www.binance.com/en/terms. Please contact customer service if you believe you received this message in error.</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">BTC_LSR</span>, what <span class="op">=</span> <span class="st">'try-error'</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">BTCUSDT</span>, what <span class="op">=</span> <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># plot and head the data</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">BTC_LSR</span>, what <span class="op">=</span> <span class="st">'try-error'</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># 3) head the data</span></span></span>
+<span class="r-in"><span>  <span class="co"># and display contents</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">BTC_LSR</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># 4) plot BTCUSDT-pair</span></span></span>
+<span class="r-in"><span>  <span class="co"># with long-short ratio</span></span></span>
 <span class="r-in"><span>  <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="chart.html">chart</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    chart <span class="op">=</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="kline.html">kline</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>      <span class="va">BTCUSDT</span></span></span>
@@ -145,6 +150,8 @@
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># end of scrtipt;</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
