@@ -596,6 +596,96 @@ addFGIndex <- function(
 
 }
 
+#' Chart the long-short ratios
+#'
+#' @description
+#' The long-short ratio is a market sentiment indicator on expected price movement.
+#'
+#' @param chart a [kline()] or [ohlc()] chart
+#' @param LSR The Fear and Greed Index created by [getLSRatio()]
+#'
+#' @example man/examples/scr_LSR.R
+#'
+#' @family chart indicators
+#' @returns Invisbly returns a plotly object.
+#' @export
+addLSRatio <- function(
+    chart,
+    LSR
+) {
+
+  # check if the interval of the quote
+  # is below 1d
+  # ticker_interval <- attributes(
+  #   attributes(chart$quote)
+  # )$tickerInfo$interval
+  #
+  # if (grepl(x = ticker_interval, pattern = 's|m',ignore.case = FALSE)) {
+  #
+  #   rlang::abort(
+  #     message = c(
+  #       'The Fear and Greed Index is a daily index, '
+  #     )
+  #   )
+  #
+  # }
+  # 0) convert
+  # FGI to data.frame
+  #
+  #
+  # TODO: Needs a fix
+  # the returned values are
+  # characters for some reason.
+
+  DT <- toDF(
+    quote = LSR
+  )
+
+  #DT$FGI <- as.numeric(DT$FGI)
+
+  value <- DT$LSRatio
+
+  DT$color_scale <- round((11) * (value -0)/(2 - 0))
+
+  DT$color_scale <- RColorBrewer::brewer.pal(n = 11, name = 'RdYlGn')[
+    DT$color_scale
+  ]
+
+  chart_ <- plotly::plot_ly(
+    showlegend = FALSE,
+    data = DT,
+    y = ~LSRatio,
+    x = ~Index,
+    type = 'scatter',
+    mode = 'lines+markers',
+    line = list(
+      color = 'gray',
+      dash = 'dash',
+      shape = 'spline',
+      smoothing = 1.5
+    ),
+    marker = list(
+      size = 10,
+      color = ~color_scale,
+      line = list(
+        color = 'black',
+        width = 2
+      )
+    )
+  ) %>% plotly::layout(
+    yaxis = list(
+      title = 'Long-Short Ratio'
+    )
+  )
+
+  chart$lsr <- chart_
+
+  return(
+    invisible(chart)
+  )
+
+}
+
 
 
 

@@ -22,5 +22,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Serkan Korkmaz \email{serkor1@duck.com} (\href{https://orcid.org/0000-0002-5052-0982}{ORCID}) [contributor, copyright holder]
 
+Other contributors:
+\itemize{
+  \item Jonas Cuzulan Hirani \email{jjh@vive.dk} (\href{https://orcid.org/0000-0002-9512-1993}{ORCID}) [contributor]
+}
+
 }
 \keyword{internal}

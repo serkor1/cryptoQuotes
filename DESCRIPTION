@@ -2,13 +2,10 @@ Package: cryptoQuotes
 Title: A streamlined access to OHLC-V market data and sentiment indicators
 Version: 1.2.1
 Authors@R: c(
-    person(
-    "Serkan",
-    "Korkmaz",
-    role = c("cre", "aut", "ctb", "cph"),
-    email = 'serkor1@duck.com',
-    comment = c(ORCID = "0000-0002-5052-0982")
-    )
+    person("Serkan", "Korkmaz", , "serkor1@duck.com", role = c("cre", "aut", "ctb", "cph"),
+           comment = c(ORCID = "0000-0002-5052-0982")),
+    person("Jonas", "Cuzulan Hirani", , "jjh@vive.dk", role = "ctb",
+           comment = c(ORCID = "0000-0002-9512-1993"))
   )
 Description: This high-level API client offers a streamlined access to comprehensive cryptocurrency market data from major exchanges. 
   It features robust OHLC-V (Open, High, Low, Close, Volume) candle data with flexible granularity, ranging from seconds to months, and includes insightful sentiment indicators. 

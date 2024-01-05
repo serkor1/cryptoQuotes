@@ -57,6 +57,7 @@ Other chart indicators:
 \code{\link{addBBands}()},
 \code{\link{addEvents}()},
 \code{\link{addFGIndex}()},
+\code{\link{addLSRatio}()},
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
 \code{\link{addVolume}()},

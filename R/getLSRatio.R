@@ -3,22 +3,23 @@
 # Author: Jonas Cuzulan Hirani
 # objective: Extract the Long-Short Ratios
 # from the exchanges
-
 #' Get long-short ratios for tickers
 #'
 #' @description
 #' The long-short ratio is a market sentiment indicator on expected price movement
 #'
-#'
-#' @param ticker A character vector of length 1. Uppercase. See [availableTickers(source = 'binance')] for available tickers.
+#' @param ticker A character vector of length 1. Uppercase. See [availableTickers()] for available tickers.
 #' @param from An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
 #' @param to An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
+#' @param interval A character vector of length 1. See [availableIntervals()] for available intervals.
 #'
 #' @author Jonas Cuzulan Hirani
 #'
 #' @example man/examples/scr_LSR.R
 #' @family sentiment
-#' @returns A xts object with the share of long and short position, and the ratio of the two.
+#' @returns A xts object with the share of long and short position, and the ratio of the two. If no from and to are supplied
+#' the 100 most recent pips are returned.
+#'
 #' @export
 getLSRatio <- function(
     ticker,
@@ -31,73 +32,21 @@ getLSRatio <- function(
   # connection
   check_internet_connection()
 
-  # 2) check if the passed
-  # dates are valid
-  # pass dates through
-  # the validator but only
-  # if either is not null
-  if (!is.null(from) || !is.null(to)){
-    valid_dates <- date_validator(
-      from = from,
-      to   = to
-    )
-
-    from <- valid_dates$from
-    to   <- valid_dates$to
-  }
-
-  # 3) if no from and to
-  # are passed; construct
-  # forced date intervals
-  if (is.null(from) || is.null(to)) {
-
-    # to ensure consistency across
-    # APIs if no date is set the output
-    # is limited to 100 pips
-    forced_dates <- default_dates(
-      interval = interval,
-      from     = from,
-      to       = to
-    )
-
-    # generate from
-    # to variables
-    from <- forced_dates$from
-    to   <- forced_dates$to
-
-  }
-
-  # 4) The from date are limited
-  # by binance, and they are only providing
-  # the LS ratios for the last 30 days.
-  min_dates <- date_validator(
-    from = Sys.Date() - 30,
-    to   = Sys.time()
+  # 2) construct dates
+  # with API constraints;
+  #
+  # If no dates are specified
+  # it will return the last
+  # 100 available pips
+  # closest to Sys.time()
+  dates <- date_validator(
+    from = if (is.null(from)){Sys.Date() - 30} else {max(Sys.Date() - 30, from)},
+    to   = if (is.null(to)){Sys.time()} else {to}
   )
 
-  if (min_dates$from >= from) {
-
-    message(
-      c(
-        'Only the data of the latest 30 days is available. Returning available data.'
-      )
-    )
-
-  }
-
-  from <- max(
-    min_dates$from,
-    from
-  )
-
-  to <- min(
-    min_dates$to,
-    to
-  )
-
-
-  # construct baseURL
-  # and endPoint
+  # 3) construct
+  # the baseUrl and endPoints
+  # accordingly
   baseurl <- baseUrl(
     source  = 'binance',
     futures = TRUE
@@ -115,13 +64,24 @@ getLSRatio <- function(
     source = 'binance',
     futures = TRUE,
     interval = interval,
-    from     = from,
-    to       = to
+    from     = dates$from,
+    to       = dates$to
   )$query
 
+  # 4.1) This is a standalone
+  # parameter; was called interval
+  # but is named period in the API calls
   names(query)[2] <- 'period'
-  query$limit <- 500
 
+  # 4.1) Return only
+  # 100 such that this function
+  # aligns with the remaining
+  # functions which
+  # also returns 100
+  query$limit <- 100
+
+  # 5) perform request;
+  # with the queries above
   response <- httr2::req_perform(
     req = httr2::req_url_query(
       httr2::request(
@@ -133,7 +93,7 @@ getLSRatio <- function(
     )
   )
 
-  # 5) the response is named
+  # 5.1) the response is named
   # json list, and the data
   # of interst is stored
   # in data
@@ -143,10 +103,8 @@ getLSRatio <- function(
   )
 
 
+
   # 6) prepare the data;
-  # 6) dates are returned in UNIX
-  # and doesnt need any numerical
-  # operations.
   response$timestamp <- convertDate(
     date = as.numeric(response$timestamp),
     is_response = TRUE,
@@ -154,22 +112,15 @@ getLSRatio <- function(
     power = -1
   )
 
-
-  # 7) order response timestamp and
-  # convert to xts
-  response <- response[
-    order(response$timestamp, decreasing = FALSE),
-  ]
-
-
+  # 6.1) convert
+  # to xts;
   response <- xts::as.xts(
-    response[,c(2:4)],
+    apply(response[, c(2:4)], c(1,2), as.numeric),
     order.by = response$timestamp
   )
 
-
   colnames(response) <- c('Long', 'LSRatio', 'Short')
-  response <- response[,c('Long', 'Short', 'LSRatio')]
+  response <- response[, c('Long', 'Short', 'LSRatio')]
 
 
 
@@ -180,7 +131,3 @@ getLSRatio <- function(
   )
 
 }
-
-
-
-

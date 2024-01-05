@@ -7,14 +7,17 @@
 getLSRatio(ticker, interval = "1d", from = NULL, to = NULL)
 }
 \arguments{
-\item{ticker}{A character vector of length 1. Uppercase. See \link{availableTickers(source = 'binance')} for available tickers.}
+\item{ticker}{A character vector of length 1. Uppercase. See \code{\link[=availableTickers]{availableTickers()}} for available tickers.}
+
+\item{interval}{A character vector of length 1. See \code{\link[=availableIntervals]{availableIntervals()}} for available intervals.}
 
 \item{from}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
 
 \item{to}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
 }
 \value{
-A xts object with the long-short ratio
+A xts object with the share of long and short position, and the ratio of the two. If no from and to are supplied
+the 100 most recent pips are returned.
 }
 \description{
 The long-short ratio is a market sentiment indicator on expected price movement
@@ -22,30 +25,50 @@ The long-short ratio is a market sentiment indicator on expected price movement
 \examples{
 # Example on loading
 # long-short ratio
-# for the last 5 days
+# for the last days
 # on the 15 minute candle
 # wrapped in try to avoid
 # failure on Github
 BTC_LSR <- try(
-  getLSRatio(
+  cryptoQuotes::getLSRatio(
     ticker = 'BTCUSDT',
     interval = '15m',
-    from = Sys.Date() - 5,
+    from = Sys.Date() - 1,
     to   = Sys.Date()
   )
 )
 
-# head the data;
+
+BTCUSDT <- try(
+  cryptoQuotes::getQuote(
+    ticker = 'BTCUSDT',
+    futures = TRUE,
+    interval = '15m',
+    from = Sys.Date() - 1,
+    to   = Sys.Date()
+  )
+)
+
+
+# plot and head the data
 if (!inherits(x = BTC_LSR, what = 'try-error')) {
 
   head(
     BTC_LSR
   )
 
+  cryptoQuotes::chart(
+    chart = cryptoQuotes::kline(
+      BTCUSDT
+    ) \%>\% cryptoQuotes::addLSRatio(
+      LSR = BTC_LSR
+    )
+  )
+
 }
 }
 \seealso{
-Other sentiment:
+Other sentiment: 
 \code{\link{getFGIndex}()}
 }
 \author{

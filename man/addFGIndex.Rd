@@ -75,6 +75,7 @@ if (!inherits(BTCUSDT, 'try-error') & !inherits(FGI, 'try-error')) {
 Other chart indicators: 
 \code{\link{addBBands}()},
 \code{\link{addEvents}()},
+\code{\link{addLSRatio}()},
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
 \code{\link{addRSI}()},

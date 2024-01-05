@@ -45,10 +45,12 @@ getQuote(
 
 ## Market Sentiment
 
-Two new functions are added,
+Four new functions are added,
 
-* `getFGIndex()` which returns the daily Fear and Greed Index
+* `getFGIndex()` which returns the daily Fear and Greed Index.
 * `addFGIndex()` which adds the Fear and Greed Index as a subplot to price charts.
+* `getLSRatio()` which returns the long-short ratio with varying granularity. Contributor has been credited.
+* `addLSRatio()` whidh adds the long-short ratio as a subplot to price charts.
 
 ## Convinience functions added
 

@@ -108,6 +108,7 @@ chart(
 Other chart indicators: 
 \code{\link{addBBands}()},
 \code{\link{addFGIndex}()},
+\code{\link{addLSRatio}()},
 \code{\link{addMACD}()},
 \code{\link{addMA}()},
 \code{\link{addRSI}()},
