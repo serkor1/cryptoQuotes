@@ -24,7 +24,7 @@ availableTickers <- function(
     ticker_response(
       api_call(
         source = source,
-        ohlc = FALSE,
+        type = 'ticker',
         parameters = list(
           source = source,
           futures = futures

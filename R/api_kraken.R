@@ -26,29 +26,21 @@ krakenUrl <- function(
 }
 
 krakenEndpoint <- function(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures = TRUE
 ) {
 
-  if (ohlc) {
-
-    # 1) construct endpoint url
-    endPoint <- base::ifelse(
-      test = futures,
-      yes  = 'api/charts/v1',
-      no   = '0/public/OHLC'
-    )
-
-  } else {
-
-    endPoint <- base::ifelse(
-      test = futures,
-      yes  = '/derivatives/api/v3/instruments',
-      no   = '0/public/AssetPairs'
-    )
+  endPoint <- switch(
+    EXPR = type,
+    ohlc = {
+      if (futures) 'api/charts/v1' else '0/public/OHLC'
+    },
+    ticker ={
+      if (futures) '/derivatives/api/v3/instruments' else '0/public/AssetPairs'
+    }
+  )
 
 
-  }
 
   # 2) return endPoint url
   return(
@@ -93,11 +85,15 @@ krakenIntervals <- function(
 
 # 3) define response object and format; ####
 krakenResponse <- function(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures
 ) {
 
   response <- NULL
+
+
+
+
 
   # Define the basic structure for OHLC data
   ohlc_structure <- function(volume_loc = 6) {
@@ -108,50 +104,55 @@ krakenResponse <- function(
     )
   }
 
-  if (ohlc) {
-    # Adjust the structure based on futures
-    return(
+
+  switch(
+    EXPR = type,
+    ohlc = {
       ohlc_structure(
         volume_loc = if (!futures) 7 else 6
       )
-    )
-  } else {
-    # Non-OHLC data
-    response_code_structure <- function(market) {
+    },
+    ticker = {
 
-      switch (
-        market,
-        'futures' = list(
-          code = rlang::expr(
-            subset(
-              response$instruments,
-              response$instruments$tradeable == 'TRUE'
-            )$symbol
-          )
-        ),
-        'spot'    = list(
-          code = rlang::expr(
-            names(
-              lapply(
-                response$result,
-                function(x) {
-                  if (x$status == 'online'){
-                    x$altname
+      # Non-OHLC data
+      response_code_structure <- function(market) {
+
+        switch (
+          market,
+          'futures' = list(
+            code = rlang::expr(
+              subset(
+                response$instruments,
+                response$instruments$tradeable == 'TRUE'
+              )$symbol
+            )
+          ),
+          'spot'    = list(
+            code = rlang::expr(
+              names(
+                lapply(
+                  response$result,
+                  function(x) {
+                    if (x$status == 'online'){
+                      x$altname
+                    }
                   }
-                }
+                )
               )
             )
           )
         )
-      )
-    }
+      }
 
-    return(
-      response_code_structure(
-        market = if (futures) 'futures' else 'spot'
+      return(
+        response_code_structure(
+          market = if (futures) 'futures' else 'spot'
+        )
       )
-    )
-  }
+
+    }
+  )
+
 }
 
 # 4) Dates passed to and from endpoints; ####

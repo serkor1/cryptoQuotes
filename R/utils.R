@@ -48,7 +48,7 @@ baseUrl <- function(
 # endpoint
 endPoint <- function(
     source,
-    ohlc = TRUE,
+    type = 'ohlc',
     futures
 ) {
 
@@ -56,7 +56,7 @@ endPoint <- function(
   # based on source
   endPoint <- get(paste0(source, 'Endpoint'))(
     futures = futures,
-    ohlc = ohlc
+    type = type
   )
 
   # 2) return the endpoint
@@ -72,7 +72,7 @@ endPoint <- function(
 # call for the api
 api_call <- function(
     source,
-    ohlc,
+    type = 'ohlc',
     parameters
 ) {
 
@@ -97,7 +97,7 @@ api_call <- function(
     endpoint = endPoint(
       source = source,
       futures = parameters$futures,
-      ohlc = ohlc
+      type = type
     )
   )
 
@@ -172,7 +172,7 @@ ticker_response <- function(
       response$source, 'Response'
     )
   )(
-    ohlc = FALSE,
+    type = 'ticker',
     futures = response$futures
   )
 
@@ -251,7 +251,7 @@ quote_response <- function(
       source, 'Response'
     )
   )(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures = futures
   )
 

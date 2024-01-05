@@ -26,28 +26,22 @@ kucoinUrl <- function(
 }
 
 kucoinEndpoint <- function(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures = TRUE
 ) {
 
-  if (ohlc) {
 
-    # 1) construct endpoint url
-    endPoint <- base::ifelse(
-      test = futures,
-      yes   =  '/api/v1/kline/query',
-      no    = '/api/v1/market/candles'
-    )
+  endPoint <- switch(
+    EXPR = type,
+    ohlc = {
+      if (futures) '/api/v1/kline/query' else '/api/v1/market/candles'
+    },
+    ticker ={
+      if (futures) '/api/v1/contracts/active' else '/api/v1/market/allTickers'
+    }
+  )
 
-  } else {
 
-    endPoint <- base::ifelse(
-      test = futures,
-      yes  = '/api/v1/contracts/active',
-      no   = '/api/v1/market/allTickers'
-    )
-
-  }
 
   # 2) return endPoint url
   return(
@@ -86,40 +80,46 @@ kucoinIntervals <- function(
 
 # 3) define response object and format; ####
 kucoinResponse <- function(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures
 ) {
 
   response <- NULL
 
-  if (ohlc) {
-    # Common structure for OHLC data
-    ohlc_structure <- list(
-      colum_names = if (futures) c('Open', 'High', 'Low', 'Close', 'Volume') else c('Open', 'Close', 'High', 'Low', 'Volume'),
-      colum_location = 2:6,
-      index_location = 1
-    )
+  # mock response
+  # to avoid check error in
+  # unevaluated expressions
+  response <- NULL
 
-    return(ohlc_structure)
-  } else {
-    # Non-OHLC data
-    non_ohlc_structure <- if (futures) {
+  switch(
+    EXPR = type,
+    ohlc = {
       list(
-        code = rlang::expr(
-          subset(
-            x = response$data,
-            grepl(pattern = 'open', ignore.case = TRUE, x = response$data$status)
-          )$symbol
+        colum_names = if (futures) c('Open', 'High', 'Low', 'Close', 'Volume') else c('Open', 'Close', 'High', 'Low', 'Volume'),
+        colum_location = 2:6,
+        index_location = 1
+      )
+    },
+    ticker = {
+
+      if (futures) {
+        list(
+          code = rlang::expr(
+            subset(
+              x = response$data,
+              grepl(pattern = 'open', ignore.case = TRUE, x = response$data$status)
+            )$symbol
+          )
         )
-      )
-    } else {
-      list(
-        code = rlang::expr(response$data$ticker$symbol)
-      )
-    }
+      } else {
+        list(
+          code = rlang::expr(response$data$ticker$symbol)
+        )
+      }
 
-    return(non_ohlc_structure)
-  }
+    }
+  )
+
 }
 
 # 4) Dates passed to and from endpoints; ####

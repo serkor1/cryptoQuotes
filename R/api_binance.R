@@ -26,30 +26,19 @@ binanceUrl <- function(
 }
 
 binanceEndpoint <- function(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures = TRUE
 ) {
 
-  if (ohlc) {
-
-    # 1) construct endpoint url
-    endPoint <- base::ifelse(
-      test = futures,
-      yes = '/fapi/v1/klines',
-      # yes  = '/fapi/v1/continuousKlines',
-      no   = '/api/v3/klines'
-    )
-
-  } else {
-
-    endPoint <- base::ifelse(
-      test = futures,
-      yes  = '/fapi/v1/exchangeInfo',
-      no   = '/api/v3/exchangeInfo'
-    )
-
-
-  }
+  endPoint <- switch(
+    EXPR = type,
+    ohlc = {
+      if (futures) '/fapi/v1/klines' else '/api/v3/klines'
+    },
+    ticker ={
+      if (futures) '/fapi/v1/exchangeInfo' else '/api/v3/exchangeInfo'
+    }
+  )
 
   # 2) return endPoint url
   return(
@@ -59,7 +48,11 @@ binanceEndpoint <- function(
 }
 
 # 2) Available intervals; #####
-binanceIntervals <- function(futures, interval, all = FALSE) {
+binanceIntervals <- function(
+    futures,
+    interval,
+    all = FALSE
+) {
   # Define all intervals in a data frame
   allIntervals <- data.frame(
     labels = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'),
@@ -72,7 +65,7 @@ binanceIntervals <- function(futures, interval, all = FALSE) {
     # Select the specified interval
     selectedInterval <- allIntervals$values[
       grepl(paste0('^', interval, '$'), allIntervals$values)
-      ]
+    ]
 
     return(selectedInterval)
   }
@@ -80,7 +73,7 @@ binanceIntervals <- function(futures, interval, all = FALSE) {
 
 # 3) define response object and format; ####
 binanceResponse <- function(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures
 ) {
 
@@ -89,46 +82,41 @@ binanceResponse <- function(
   # unevaluated expressions
   response <- NULL
 
-  if (ohlc) {
+  switch(
+    EXPR = type,
+    ohlc = {
+      list(
+        colum_names = c(
+          'Open',
+          'High',
+          'Low',
+          'Close',
+          'Volume'
+        ),
+        colum_location = c(
+          2:6
+        ),
+        index_location = c(
+          1
+        )
 
-    # NOTE: Binance
-    # returns everything
-    # from spot and futures market
-    # in a similar manner
-
-    list(
-      colum_names = c(
-        'Open',
-        'High',
-        'Low',
-        'Close',
-        'Volume'
-      ),
-      colum_location = c(
-        2:6
-      ),
-      index_location = c(
-        1
       )
-
-    )
-
-  } else {
-
-    list(
-      code = rlang::expr(
-        subset(
-          x = response$symbols,
-          grepl(
-            pattern = 'trading',
-            ignore.case = TRUE,
-            x = response$symbols$status
-          )
-        )$symbol
+    },
+    ticker = {
+      list(
+        code = rlang::expr(
+          subset(
+            x = response$symbols,
+            grepl(
+              pattern = 'trading',
+              ignore.case = TRUE,
+              x = response$symbols$status
+            )
+          )$symbol
+        )
       )
-    )
-
-  }
+    }
+  )
 
 }
 

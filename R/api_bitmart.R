@@ -26,29 +26,21 @@ bitmartUrl <- function(
 }
 
 bitmartEndpoint <- function(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures = TRUE
 ) {
 
-  if (ohlc) {
 
-    # 1) construct endpoint url
-    endPoint <- base::ifelse(
-      test = futures,
-      yes  = '/contract/public/kline',
-      no   = '/spot/quotation/v3/lite-klines'
-    )
+  endPoint <- switch(
+    EXPR = type,
+    ohlc = {
+      if (futures) '/contract/public/kline' else '/spot/quotation/v3/lite-klines'
+    },
+    ticker ={
+      if (futures) '/contract/public/details' else '/spot/v1/symbols'
+    }
+  )
 
-  } else {
-
-    endPoint <- base::ifelse(
-      test = futures,
-      yes  = '/contract/public/details',
-      no   = '/spot/v1/symbols'
-    )
-
-
-  }
 
   # 2) return endPoint url
   return(
@@ -86,25 +78,28 @@ bitmartIntervals <- function(
 
 # 3) define response object and format; ####
 bitmartResponse <- function(
-    ohlc = TRUE,
+    type = 'ohlc',
     futures
 ) {
 
   response <- NULL
 
-  if (ohlc) {
-    # Base structure for OHLC data
-    base_ohlc <- list(
-      colum_names = if (futures) c('Low', 'High', 'Open', 'Close', 'Volume') else c('Open', 'High', 'Low', 'Close', 'Volume'),
-      colum_location = if (futures) 1:5 else c(2:5,7),
-      index_location = if (futures) 6 else 1
-    )
 
-    return(base_ohlc)
-  } else {
+  # mock response
+  # to avoid check error in
+  # unevaluated expressions
+  response <- NULL
 
-    # Non-OHLC data
-    return(
+  switch(
+    EXPR = type,
+    ohlc = {
+      list(
+        colum_names = if (futures) c('Low', 'High', 'Open', 'Close', 'Volume') else c('Open', 'High', 'Low', 'Close', 'Volume'),
+        colum_location = if (futures) 1:5 else c(2:5,7),
+        index_location = if (futures) 6 else 1
+      )
+    },
+    ticker = {
       list(
         code = switch (
           if (futures) 'futures' else 'spot',
@@ -112,9 +107,10 @@ bitmartResponse <- function(
           spot    = rlang::expr(response$data$symbols)
         )
       )
+    }
+  )
 
-    )
-  }
+
 }
 
 # 4) Dates passed to and from endpoints; ####

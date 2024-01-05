@@ -118,7 +118,7 @@ getQuote <- function(
   quote_response(
     response = api_call(
       source   = source,
-      ohlc     = TRUE,
+      type     = 'ohlc',
       parameters = source_parameters(
         source  = source,
         futures = futures,
