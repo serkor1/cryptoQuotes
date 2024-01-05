@@ -4,12 +4,14 @@
 \alias{getLSRatio}
 \title{Get long-short ratios for tickers}
 \usage{
-getLSRatio(ticker, interval = "1d", from = NULL, to = NULL)
+getLSRatio(ticker, interval = "1d", top = FALSE, from = NULL, to = NULL)
 }
 \arguments{
 \item{ticker}{A character vector of length 1. Uppercase. See \code{\link[=availableTickers]{availableTickers()}} for available tickers.}
 
 \item{interval}{A character vector of length 1. See \code{\link[=availableIntervals]{availableIntervals()}} for available intervals.}
+
+\item{top}{A logical vector. \link{FALSE} by default. If \link{TRUE} it returns the top traders Long-Short ratios.}
 
 \item{from}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
 

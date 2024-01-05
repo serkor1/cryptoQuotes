@@ -51,14 +51,16 @@ baseUrl <- function(
 endPoint <- function(
     source,
     type = 'ohlc',
-    futures
+    futures,
+    ...
 ) {
 
   # 1) construct function
   # based on source
   endPoint <- get(paste0(source, 'Endpoint'))(
     futures = futures,
-    type = type
+    type = type,
+    ...
   )
 
   # 2) return the endpoint
@@ -75,7 +77,8 @@ endPoint <- function(
 api_call <- function(
     source,
     type = 'ohlc',
-    parameters
+    parameters,
+    ...
 ) {
 
 
@@ -99,7 +102,8 @@ api_call <- function(
     endpoint = endPoint(
       source = source,
       futures = parameters$futures,
-      type = type
+      type = type,
+      ...
     )
   )
 

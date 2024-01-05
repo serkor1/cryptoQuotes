@@ -27,7 +27,8 @@ binanceUrl <- function(
 
 binanceEndpoint <- function(
     type = 'ohlc',
-    futures = TRUE
+    futures = TRUE,
+    top = FALSE
 ) {
 
   endPoint <- switch(
@@ -39,7 +40,7 @@ binanceEndpoint <- function(
       if (futures) '/fapi/v1/exchangeInfo' else '/api/v3/exchangeInfo'
     },
     lsratio = {
-      '/futures/data/globalLongShortAccountRatio'
+      if (top) '/futures/data/topLongShortAccountRatio' else '/futures/data/globalLongShortAccountRatio'
     }
   )
 

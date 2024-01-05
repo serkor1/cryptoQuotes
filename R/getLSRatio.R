@@ -12,6 +12,7 @@
 #' @param from An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
 #' @param to An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
 #' @param interval A character vector of length 1. See [availableIntervals()] for available intervals.
+#' @param top A logical vector. [FALSE] by default. If [TRUE] it returns the top traders Long-Short ratios.
 #'
 #' @details
 #' Note! This endpoint only supports intervals between 5 minutes and 1 day.
@@ -28,6 +29,7 @@
 getLSRatio <- function(
     ticker,
     interval = '1d',
+    top      = FALSE,
     from     = NULL,
     to       = NULL
 ) {
@@ -62,24 +64,13 @@ getLSRatio <- function(
     to   = if (is.null(to)){Sys.time()} else {to}
   )
 
-  # 3) construct
-  # the baseUrl and endPoints
-  # accordingly
-  baseurl <- baseUrl(
-    source  = 'binance',
-    futures = TRUE
-  )
-
-  endpoint <- endPoint(
-    source = 'binance',
-    type   = 'lsratio'
-  )
 
   # 4) make the API call;
   # using existing infrastructure
   response_ <- api_call(
     source = 'binance',
     type   = 'lsratio',
+    top    = top,
     parameters = source_parameters(
       source   = 'binance',
       futures  = TRUE,
@@ -90,6 +81,7 @@ getLSRatio <- function(
       to       = dates$to
     )
   )
+
 
   # 5.1) the response is named
   # json list, and the data
