@@ -173,6 +173,7 @@ kucoinDates <- function(
 kucoinParameters <- function(
     futures = TRUE,
     ticker,
+    type = NULL,
     interval,
     from = NULL,
     to = NULL

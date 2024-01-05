@@ -151,6 +151,7 @@ bitmartDates <- function(
 bitmartParameters <- function(
     futures = TRUE,
     ticker,
+    type = NULL,
     interval,
     from = NULL,
     to = NULL

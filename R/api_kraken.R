@@ -201,6 +201,7 @@ krakenParameters <- function(
     futures = TRUE,
     ticker,
     interval,
+    type = NULL,
     from = NULL,
     to = NULL
 ) {

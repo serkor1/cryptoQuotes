@@ -13,6 +13,10 @@
 #' @param to An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
 #' @param interval A character vector of length 1. See [availableIntervals()] for available intervals.
 #'
+#' @details
+#' Note! This endpoint only supports intervals between 5 minutes and 1 day.
+#'
+#'
 #' @author Jonas Cuzulan Hirani
 #'
 #' @example man/examples/scr_LSR.R
@@ -29,8 +33,22 @@ getLSRatio <- function(
 ) {
 
   # 1) check internet
-  # connection
+  # connection and interval validity
   check_internet_connection()
+
+  if (!(interval %in% available_interval_ls)){
+
+    rlang::abort(
+      message = c(
+        "Chosen interval is not supported in Long-Short Ratios",
+        "v" = paste(
+          available_interval_ls,
+          collapse = ', '
+        )
+      )
+    )
+
+  }
 
   # 2) construct dates
   # with API constraints;
@@ -57,39 +75,19 @@ getLSRatio <- function(
     type   = 'lsratio'
   )
 
-  # 4) perform request and
-  # store;
-  query <- source_parameters(
-    ticker = ticker,
+  # 4) make the API call;
+  # using existing infrastructure
+  response_ <- api_call(
     source = 'binance',
-    futures = TRUE,
-    interval = interval,
-    from     = dates$from,
-    to       = dates$to
-  )$query
-
-  # 4.1) This is a standalone
-  # parameter; was called interval
-  # but is named period in the API calls
-  names(query)[2] <- 'period'
-
-  # 4.1) Return only
-  # 100 such that this function
-  # aligns with the remaining
-  # functions which
-  # also returns 100
-  query$limit <- 100
-
-  # 5) perform request;
-  # with the queries above
-  response <- httr2::req_perform(
-    req = httr2::req_url_query(
-      httr2::request(
-        paste0(
-          baseurl, endpoint
-        )
-      ),
-      !!!query
+    type   = 'lsratio',
+    parameters = source_parameters(
+      source   = 'binance',
+      futures  = TRUE,
+      type     = 'lsratio',
+      ticker   = ticker,
+      interval = interval,
+      from     = dates$from,
+      to       = dates$to
     )
   )
 
@@ -98,11 +96,9 @@ getLSRatio <- function(
   # of interst is stored
   # in data
   response <- httr2::resp_body_json(
-    resp = response,
+    resp = response_$response,
     simplifyVector = TRUE
   )
-
-
 
   # 6) prepare the data;
   response$timestamp <- convertDate(
@@ -114,10 +110,25 @@ getLSRatio <- function(
 
   # 6.1) convert
   # to xts;
-  response <- xts::as.xts(
-    apply(response[, c(2:4)], c(1,2), as.numeric),
-    order.by = response$timestamp
+  response <- try(
+    xts::as.xts(
+      apply(response[, c(2:4)], c(1,2), as.numeric),
+      order.by = response$timestamp
+    ),
+    silent = TRUE
   )
+
+  if (inherits(response, 'try-error')){
+
+    check_for_errors(
+      response = response_$response,
+      source = 'binance',
+      futures = TRUE,
+      call = rlang::caller_env(n = 0)
+    )
+
+  }
+
 
   colnames(response) <- c('Long', 'LSRatio', 'Short')
   response <- response[, c('Long', 'Short', 'LSRatio')]
@@ -131,3 +142,4 @@ getLSRatio <- function(
   )
 
 }
+

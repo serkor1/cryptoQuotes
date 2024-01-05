@@ -142,7 +142,7 @@ check_for_errors <- function(
   # an error message;
   if (length(error_message) == 0) {
 
-    error_message <- 'No error information.'
+    error_message <- 'No error information. Check your arugments - if the error persists, please submit a bugreport!'
 
   }
 
@@ -235,6 +235,8 @@ check_interval_validity <- function(
 
 }
 
+
+available_interval_ls <- c("5m","15m","30m","1h","2h","4h","6h","12h","1d")
 
 
 check_internet_connection <- function() {

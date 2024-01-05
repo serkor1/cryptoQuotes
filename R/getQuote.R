@@ -120,6 +120,7 @@ getQuote <- function(
       source   = source,
       type     = 'ohlc',
       parameters = source_parameters(
+        type    = 'ohlc',
         source  = source,
         futures = futures,
         ticker  = ticker,

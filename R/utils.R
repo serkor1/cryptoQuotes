@@ -7,6 +7,7 @@
 source_parameters <- function(
     source,
     futures,
+    type,
     ticker,
     interval,
     from,
@@ -19,6 +20,7 @@ source_parameters <- function(
     )
   )(
     futures  = futures,
+    type     = type,
     ticker   = ticker,
     interval = interval,
     from     = from,

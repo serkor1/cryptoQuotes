@@ -163,6 +163,7 @@ binanceDates <- function(
 # 5) Parameters passed to endpoints; ####
 binanceParameters <- function(
     futures = TRUE,
+    type   = 'ohlc',
     ticker,
     interval,
     from = NULL,
@@ -187,6 +188,21 @@ binanceParameters <- function(
     ),
     is_response = FALSE
   )
+
+  if (type == 'lsratio') {
+    # 4.1) This is a standalone
+    # parameter; was called interval
+    # but is named period in the API calls
+    names(params)[2] <- 'period'
+
+    # 4.1) Return only
+    # 100 such that this function
+    # aligns with the remaining
+    # functions which
+    # also returns 100
+    params$limit <- 100
+
+  }
 
   # Combine all parameters
   params <- c(params, date_params)
