@@ -496,6 +496,9 @@ addRSI <- function(
 #' Chart the Fear and Greed Index
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
 #' The fear and greed index is a market sentiment indicator that measures investor emotions to
 #' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
 #'
@@ -599,6 +602,9 @@ addFGIndex <- function(
 #' Chart the long-short ratios
 #'
 #' @description
+#'
+#' `r lifecycle::badge("experimental")`
+#'
 #' The long-short ratio is a market sentiment indicator on expected price movement.
 #'
 #' @param chart a [kline()] or [ohlc()] chart
@@ -614,34 +620,12 @@ addLSRatio <- function(
     LSR
 ) {
 
-  # check if the interval of the quote
-  # is below 1d
-  # ticker_interval <- attributes(
-  #   attributes(chart$quote)
-  # )$tickerInfo$interval
-  #
-  # if (grepl(x = ticker_interval, pattern = 's|m',ignore.case = FALSE)) {
-  #
-  #   rlang::abort(
-  #     message = c(
-  #       'The Fear and Greed Index is a daily index, '
-  #     )
-  #   )
-  #
-  # }
-  # 0) convert
-  # FGI to data.frame
-  #
-  #
-  # TODO: Needs a fix
-  # the returned values are
-  # characters for some reason.
+
 
   DT <- toDF(
     quote = LSR
   )
 
-  #DT$FGI <- as.numeric(DT$FGI)
 
   value <- DT$LSRatio
 

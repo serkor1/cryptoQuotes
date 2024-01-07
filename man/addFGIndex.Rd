@@ -15,6 +15,8 @@ addFGIndex(chart, FGI)
 Invisbly returns a plotly object.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 The fear and greed index is a market sentiment indicator that measures investor emotions to
 gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
 }

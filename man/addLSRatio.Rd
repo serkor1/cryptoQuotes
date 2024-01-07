@@ -15,6 +15,8 @@ addLSRatio(chart, LSR)
 Invisbly returns a plotly object.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 The long-short ratio is a market sentiment indicator on expected price movement.
 }
 \examples{

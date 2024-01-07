@@ -191,122 +191,122 @@ Volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-01-04 08:00:00
+2024-01-07 06:00:00
 </td>
 <td style="text-align:center;">
-42763.08
+43885.48
 </td>
 <td style="text-align:center;">
-42975.38
+44088.01
 </td>
 <td style="text-align:center;">
-42699.83
+43858
 </td>
 <td style="text-align:center;">
-42939.24
+43979.25
 </td>
 <td style="text-align:left;">
-1028.24554
+501.07804
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-04 08:30:00
+2024-01-07 06:30:00
 </td>
 <td style="text-align:center;">
-42939.24
+43979.24
 </td>
 <td style="text-align:center;">
-42953.08
+44041.1
 </td>
 <td style="text-align:center;">
-42779.2
+43956.62
 </td>
 <td style="text-align:center;">
-42849.66
+44022
 </td>
 <td style="text-align:left;">
-622.08307
+204.59897
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-04 09:00:00
+2024-01-07 07:00:00
 </td>
 <td style="text-align:center;">
-42849.67
+44021.99
 </td>
 <td style="text-align:center;">
-43029.51
+44055.27
 </td>
 <td style="text-align:center;">
-42849.66
+43991.1
 </td>
 <td style="text-align:center;">
-42987.65
+44046.81
 </td>
 <td style="text-align:left;">
-557.59948
+278.09136
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-04 09:30:00
+2024-01-07 07:30:00
 </td>
 <td style="text-align:center;">
-42987.65
+44046.82
 </td>
 <td style="text-align:center;">
-43084.38
+44100
 </td>
 <td style="text-align:center;">
-42930
+44026.01
 </td>
 <td style="text-align:center;">
-43007.74
+44080
 </td>
 <td style="text-align:left;">
-854.37965
+298.31594
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-04 10:00:00
+2024-01-07 08:00:00
 </td>
 <td style="text-align:center;">
-43007.73
+44080
 </td>
 <td style="text-align:center;">
-43080.16
+44146
 </td>
 <td style="text-align:center;">
-42616.28
+44067.29
 </td>
 <td style="text-align:center;">
-42786.61
+44137.52
 </td>
 <td style="text-align:left;">
-1144.38022
+443.12419
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-04 10:30:00
+2024-01-07 08:30:00
 </td>
 <td style="text-align:center;">
-42786.61
+44137.51
 </td>
 <td style="text-align:center;">
-42811.33
+44167.81
 </td>
 <td style="text-align:center;">
-42769.2
+44124.69
 </td>
 <td style="text-align:center;">
-42769.21
+44124.7
 </td>
 <td style="text-align:left;">
-38.48847
+133.4928
 </td>
 </tr>
 </tbody>

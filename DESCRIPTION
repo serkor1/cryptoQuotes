@@ -1,5 +1,5 @@
 Package: cryptoQuotes
-Title: A streamlined access to OHLC-V market data and sentiment indicators
+Title: A Streamlined Access to OHLC-v Market Data and Sentiment Indicators
 Version: 1.2.1
 Authors@R: c(
     person("Serkan", "Korkmaz", , "serkor1@duck.com", role = c("cre", "aut", "ctb", "cph"),
