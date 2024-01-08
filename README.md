@@ -5,10 +5,10 @@
 
 <!-- badges: start -->
 
+![GitHub
+Release](https://img.shields.io/github/v/release/serkor1/cryptoQuotes?logo=github&label=release)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
-![GitHub
-Release](https://img.shields.io/github/v/release/serkor1/cryptoQuotes?logo=github&label=release&link=https%3A%2F%2Fserkor1.github.io%2FcryptoQuotes%2Fnews%2Findex.html&link=https%3A%2F%2Fserkor1.github.io%2FcryptoQuotes%2Fnews%2Findex.html)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
@@ -193,26 +193,6 @@ Volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-01-08 02:00:00
-</td>
-<td style="text-align:center;">
-43713.07
-</td>
-<td style="text-align:center;">
-43800.07
-</td>
-<td style="text-align:center;">
-43534.78
-</td>
-<td style="text-align:center;">
-43636.94
-</td>
-<td style="text-align:left;">
-684.95496
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 2024-01-08 02:30:00
 </td>
 <td style="text-align:center;">
@@ -299,16 +279,36 @@ Volume
 43530.34
 </td>
 <td style="text-align:center;">
-43608.84
+43610.68
 </td>
 <td style="text-align:center;">
 43500
 </td>
 <td style="text-align:center;">
-43592.55
+43599.26
 </td>
 <td style="text-align:left;">
-325.11253
+523.47388
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-01-08 05:00:00
+</td>
+<td style="text-align:center;">
+43599.26
+</td>
+<td style="text-align:center;">
+43599.27
+</td>
+<td style="text-align:center;">
+43590.62
+</td>
+<td style="text-align:center;">
+43590.62
+</td>
+<td style="text-align:left;">
+2.06449
 </td>
 </tr>
 </tbody>
