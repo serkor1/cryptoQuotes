@@ -311,40 +311,21 @@ startup_message <- function(
     pkgversion
 ) {
 
-  # 1) get github release
-  # using rvest
-  #
-  # NOTE: This is risky in case
-  # urls changes. Outcommented until a
-  # better solution to display deevelopment + cran version
-  # in startuå
-  # github_release <- rvest::html_text(
-  #   rvest::html_element(
-  #     css = 'small',
-  #     rvest::html_element(
-  #       css = 'div',
-  #       rvest::html_element(
-  #         css = 'nav',
-  #         rvest::read_html(
-  #           x = 'https://serkor1.github.io/cryptoQuotes/index.html'
-  #         )
-  #       )
-  #     )
-  #   )
-  # )
+  cli::rule(
+    left = paste(pkgname, cli::col_br_blue(pkgversion)),
+    right = cli::style_hyperlink(
+      text = paste(
+        cli::col_br_blue('release notes')
+        ),
+      url  = 'https://serkor1.github.io/cryptoQuotes/news/index.html'
 
-  # 2) Generate CLI
-  # formatted messages
-  c(
-    paste('Loading', pkgname),
-    'i' = paste('CRAN version:', pkgversion),
-    # 'i' = paste('Development version:', github_release),
-    '*' = paste('Release notes:',  "https://serkor1.github.io/cryptoQuotes/news/index.html")
+      )
   )
 
 
 
 }
+
 
 # validators; ####
 date_validator <- function(

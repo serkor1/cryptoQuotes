@@ -23,6 +23,7 @@ Suggests:
     tidyverse
 Config/testthat/edition: 3
 Imports:
+    cli,
     curl (>= 5.1.0),
     httr2,
     lifecycle,

@@ -4,8 +4,10 @@
 # objective:
 # script start;
 
-.onAttach <- function(libname, pkgname) {
+.onAttach <- function(libname, pkgname,...) {
 
+  # 1) startup message with
+  # using cli::rule
   msg <- startup_message(
     pkgname = pkgname,
     pkgversion = utils::packageVersion(
@@ -13,10 +15,19 @@
     )
   )
 
-  rlang::inform(
-    msg,
-    class = "packageStartupMessage"
+
+    rlang::inform(
+      msg
+      ,
+      ...,
+      class = "packageStartupMessage"
     )
+
+
+
+
+
+
 
 
 }
