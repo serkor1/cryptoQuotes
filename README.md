@@ -7,6 +7,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
+![GitHub
+Release](https://img.shields.io/github/v/release/serkor1/cryptoQuotes?logo=github&label=release)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
@@ -191,122 +193,122 @@ Volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-01-07 06:00:00
+2024-01-08 01:30:00
 </td>
 <td style="text-align:center;">
-43885.48
+43788.74
 </td>
 <td style="text-align:center;">
-44088.01
+43800.03
 </td>
 <td style="text-align:center;">
-43858
+43665.31
 </td>
 <td style="text-align:center;">
-43979.25
+43713.06
 </td>
 <td style="text-align:left;">
-501.07804
+466.61525
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-07 06:30:00
+2024-01-08 02:00:00
 </td>
 <td style="text-align:center;">
-43979.24
+43713.07
 </td>
 <td style="text-align:center;">
-44041.1
+43800.07
 </td>
 <td style="text-align:center;">
-43956.62
+43534.78
 </td>
 <td style="text-align:center;">
-44022
+43636.94
 </td>
 <td style="text-align:left;">
-204.59897
+684.95496
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-07 07:00:00
+2024-01-08 02:30:00
 </td>
 <td style="text-align:center;">
-44021.99
+43636.94
 </td>
 <td style="text-align:center;">
-44055.27
+43668.14
 </td>
 <td style="text-align:center;">
-43991.1
+43175
 </td>
 <td style="text-align:center;">
-44046.81
+43371.09
 </td>
 <td style="text-align:left;">
-278.09136
+1740.05517
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-07 07:30:00
+2024-01-08 03:00:00
 </td>
 <td style="text-align:center;">
-44046.82
+43371.09
 </td>
 <td style="text-align:center;">
-44100
+43442.42
 </td>
 <td style="text-align:center;">
-44026.01
+43225
 </td>
 <td style="text-align:center;">
-44080
+43277.82
 </td>
 <td style="text-align:left;">
-298.31594
+1138.00533
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-07 08:00:00
+2024-01-08 03:30:00
 </td>
 <td style="text-align:center;">
-44080
+43277.83
 </td>
 <td style="text-align:center;">
-44146
+43568.85
 </td>
 <td style="text-align:center;">
-44067.29
+43257.29
 </td>
 <td style="text-align:center;">
-44137.52
+43518.2
 </td>
 <td style="text-align:left;">
-443.12419
+984.91972
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-07 08:30:00
+2024-01-08 04:00:00
 </td>
 <td style="text-align:center;">
-44137.51
+43518.2
 </td>
 <td style="text-align:center;">
-44167.81
+43598
 </td>
 <td style="text-align:center;">
-44124.69
+43430.79
 </td>
 <td style="text-align:center;">
-44124.7
+43495.83
 </td>
 <td style="text-align:left;">
-133.4928
+566.69391
 </td>
 </tr>
 </tbody>
