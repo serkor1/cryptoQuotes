@@ -247,7 +247,7 @@ kableExtra::kable_styling(
 
 The `BTC`-object can be charted using the `chart()`-function,
 
-```{r chart quote, fig.align='center',fig.dpi=180, fig.alt="cryptocurrency charts in R"}
+```{r chartquote, fig.align='center',fig.dpi=180, fig.alt="cryptocurrency charts in R"}
 ## Chart BTC
 ## using klines, SMA, 
 ## MACD and Bollinger Bands

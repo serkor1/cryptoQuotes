@@ -24,7 +24,7 @@
 #' )
 #'
 #' @param ticker A [character] vector of [length] 1. See [available_tickers()] for available tickers.
-#' @param interval A [character] vector of [length] 1. See [available intervals()] for available intervals.
+#' @param interval A [character] vector of [length] 1. See [available_intervals()] for available intervals.
 #' @param source A [character]-vector of [length] 1. See [available_exchanges()] for details.
 #' @param from An optional vector of [length] 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
 #' @param to An optional vector of [length] 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.

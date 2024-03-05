@@ -215,122 +215,122 @@ Volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-03-04 08:00:00
+2024-03-05 14:00:00
 </td>
 <td style="text-align:center;">
-63689.16
+67325.03
 </td>
 <td style="text-align:center;">
-63800.21
+68025.94
 </td>
 <td style="text-align:center;">
-63480.64
+67312.38
 </td>
 <td style="text-align:center;">
-63750
+67649.82
 </td>
 <td style="text-align:left;">
-815.08403
+2267.51137
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-04 08:30:00
+2024-03-05 14:30:00
 </td>
 <td style="text-align:center;">
-63750
+67649.82
 </td>
 <td style="text-align:center;">
-64300
+67880.15
 </td>
 <td style="text-align:center;">
-63697.03
+67504.19
 </td>
 <td style="text-align:center;">
-64066.62
+67770.01
 </td>
 <td style="text-align:left;">
-2014.75878
+1286.53443
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-04 09:00:00
+2024-03-05 15:00:00
 </td>
 <td style="text-align:center;">
-64066.62
+67770.02
 </td>
 <td style="text-align:center;">
-65000
+67796.25
 </td>
 <td style="text-align:center;">
-64000.11
+67244
 </td>
 <td style="text-align:center;">
-64894.05
+67576.02
 </td>
 <td style="text-align:left;">
-3850.54156
+1587.12193
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-04 09:30:00
+2024-03-05 15:30:00
 </td>
 <td style="text-align:center;">
-64894.06
+67576.02
 </td>
 <td style="text-align:center;">
-65500
+68789
 </td>
 <td style="text-align:center;">
-64767.35
+67274.77
 </td>
 <td style="text-align:center;">
-65241.08
+68710.41
 </td>
 <td style="text-align:left;">
-3782.66574
+4070.54196
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-04 10:00:00
+2024-03-05 16:00:00
 </td>
 <td style="text-align:center;">
-65241.08
+68710.41
 </td>
 <td style="text-align:center;">
-65300
+69000
 </td>
 <td style="text-align:center;">
-64625.59
+67080.45
 </td>
 <td style="text-align:center;">
-65167.04
+67170.01
 </td>
 <td style="text-align:left;">
-2225.38732
+6416.30113
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-04 10:30:00
+2024-03-05 16:30:00
 </td>
 <td style="text-align:center;">
-65167.04
+67170.02
 </td>
 <td style="text-align:center;">
-65244
+67389.13
 </td>
 <td style="text-align:center;">
-65085.45
+66370
 </td>
 <td style="text-align:center;">
-65232.9
+67153.84
 </td>
 <td style="text-align:left;">
-87.5148
+2549.25246
 </td>
 </tr>
 </tbody>
@@ -362,7 +362,7 @@ cryptoQuotes::chart(
 )
 ```
 
-<img src="man/figures/README-chart quote-1.png" alt="cryptocurrency charts in R" style="display: block; margin: auto;" />
+<img src="man/figures/README-chartquote-1.png" alt="cryptocurrency charts in R" style="display: block; margin: auto;" />
 
 ## :information_source: Installation
 

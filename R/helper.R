@@ -603,7 +603,7 @@ default_dates <-function(
     length.out = interval_length
   )
 
-  if (!is.null(limit)) interval_seq <-  head(interval_seq, limit)
+  if (!is.null(limit)) interval_seq <-  utils::head(interval_seq, limit)
 
   # 3) construct the interval
   # by extracing the min date (from)

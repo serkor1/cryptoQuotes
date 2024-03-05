@@ -16,7 +16,7 @@ getLSRatio(
 \arguments{
 \item{ticker}{A \link{character} vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
-\item{interval}{A \link{character} vector of \link{length} 1. See \code{\link[=available intervals]{available intervals()}} for available intervals.}
+\item{interval}{A \link{character} vector of \link{length} 1. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
 \item{source}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_exchanges]{available_exchanges()}} for details.}
 
