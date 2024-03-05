@@ -2,22 +2,48 @@
 % Please edit documentation in R/chart.R
 \name{chart}
 \alias{chart}
-\title{Create an interactive financial chart}
+\title{Build interactive financial charts}
 \usage{
-chart(chart, slider = TRUE)
+chart(
+  ticker,
+  main = kline(),
+  sub = list(volume()),
+  indicator = list(bollinger_bands()),
+  event_data = NULL,
+  options = list()
+)
 }
 \arguments{
-\item{chart}{a \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} chart with optional indicators.}
+\item{ticker}{A \code{\link[xts:xts]{xts::xts()}}-object with Open, High, Low, Close and Volume columns.}
 
-\item{slider}{A logical value. \link{TRUE} by default. Include a slider in the bottom of the chart.}
+\item{main}{A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}. \code{\link[=kline]{kline()}} by default.}
+
+\item{sub}{An optional \link{list} of \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object(s) wrapped in \code{\link[rlang:expr]{rlang::expr()}}.}
+
+\item{indicator}{An optional \link{list} of \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object(s) wrapped in \code{\link[rlang:expr]{rlang::expr()}}.}
+
+\item{event_data}{An optional \link{data.frame} with event line(s) to be added to the \code{\link[=chart]{chart()}}. See \code{\link[=add_event]{add_event()}} for more details.}
+
+\item{options}{An optional \link{list} of \code{\link[=chart]{chart()}}-options. See details below.}
 }
 \value{
-Returns a plotly object
+Returns a \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Chart the \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} with optional indicators.
+\code{\link[=chart]{chart()}} creates interactive financial charts using \code{\link[plotly:plot_ly]{plotly::plot_ly()}} as backend. It's a high-level function which collects
+and structures the passed chart elements.
+}
+\details{
+\subsection{Options}{
+\itemize{
+\item \code{dark} A \link{logical}-value of \link{length} 1. \link{TRUE} by default. Sets the overall theme of the \code{\link[=chart]{chart()}}
+\item \code{slider} A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added.
+\item \code{deficiency} A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
+\item \code{size} A \link{numeric}-value of \link{length} 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
+}
+}
 }
 \examples{
 # script: scr_charting
@@ -26,44 +52,73 @@ Chart the \code{\link[=kline]{kline()}} or \code{\link[=ohlc]{ohlc()}} with opti
 # objective: Charting in general
 # script start;
 
-# library
-library(cryptoQuotes)
-
-# charting klines
-# with various indicators
+## charting the klines
+## with indicators as
+## subcharts
 chart(
-  chart = kline(
-    ATOMUSDT
-  ) \%>\% addVolume() \%>\% addMA(
-    FUN = TTR::SMA,
-    n = 7
-  ) \%>\% addMA(
-    FUN = TTR::SMA,
-    n = 14
-  ) \%>\%
-    addBBands() \%>\%
-    addMACD() \%>\%
-    addRSI()
-
+  ticker     = BTC,
+  main       = kline(),
+  sub        = list(
+    volume(),
+    macd()
+  ),
+  indicator = list(
+    bollinger_bands(),
+    sma(),
+    alma()
+  ),
+  options = list(
+    dark = TRUE,
+    deficiency = FALSE
+  )
 )
 
+## charting the MACD-indicator
+## with klines as subcharts
+chart(
+  ticker     = BTC,
+  main       = macd(),
+  sub        = list(
+    volume(),
+    kline()
+  ),
+  indicator = list(
+    bollinger_bands(),
+    sma()
+  ),
+  options = list(
+    dark = TRUE,
+    deficiency = FALSE
+  )
+)
 
 # script end;
 }
 \seealso{
 Other chart indicators: 
-\code{\link{addBBands}()},
-\code{\link{addEvents}()},
-\code{\link{addFGIndex}()},
-\code{\link{addLSRatio}()},
-\code{\link{addMACD}()},
-\code{\link{addMA}()},
-\code{\link{addRSI}()},
-\code{\link{addVolume}()}
+\code{\link{add_event}()},
+\code{\link{alma}()},
+\code{\link{bollinger_bands}()},
+\code{\link{dema}()},
+\code{\link{ema}()},
+\code{\link{evwma}()},
+\code{\link{fgi}()},
+\code{\link{hma}()},
+\code{\link{lsr}()},
+\code{\link{macd}()},
+\code{\link{rsi}()},
+\code{\link{sma}()},
+\code{\link{volume}()},
+\code{\link{vwap}()},
+\code{\link{wma}()},
+\code{\link{zlema}()}
 
-Other charting: 
+Other price charts: 
 \code{\link{kline}()},
 \code{\link{ohlc}()}
 }
+\author{
+Serkan Korkmaz
+}
 \concept{chart indicators}
-\concept{charting}
+\concept{price charts}

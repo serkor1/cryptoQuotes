@@ -6,6 +6,6 @@
 
 ## return all
 ## available exchanges
-cryptoQuotes::availableExchanges()
+cryptoQuotes::available_exchanges()
 
 # script end;

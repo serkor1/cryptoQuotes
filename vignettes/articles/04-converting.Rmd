@@ -30,8 +30,8 @@ library(magrittr)
 # using as_tibble
 tbl <- tibble::as_tibble(
   x = cbind(
-    Index = zoo::index(ATOMUSDT),
-    zoo::coredata(ATOMUSDT)
+    Index = zoo::index(ATOM),
+    zoo::coredata(ATOM)
   )
 ) %>% dplyr::mutate(
   Index = lubridate::as_datetime(
@@ -51,7 +51,7 @@ Converting to ```data.table``` is straightforward as ```as.data.table()``` handl
 # 1) convert to data.table
 # using as.data.table
 DT <- data.table::as.data.table(
-  ATOMUSDT
+  ATOM
 ) 
 
 # 2) set column name to upper
@@ -83,7 +83,7 @@ all(
       
       setequal(
         x = x,
-        y = zoo::index(ATOMUSDT)
+        y = zoo::index(ATOM)
         )
       
     }
@@ -111,7 +111,7 @@ all(
       
       setequal(
         x = x,
-        y = ATOMUSDT$Open
+        y = ATOM$Open
         )
       
     }

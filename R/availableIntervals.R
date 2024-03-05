@@ -1,26 +1,27 @@
-#' See all available intervals for the futures and spot markets
-#' on the desired exchange
+#' Get available intervals
 #'
-#' This function shows all
-#' available intervals available
-#' from each exchange
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' @param source character vector of length one. Must be the name of the
-#' supported exchange
-#'
-#' @param futures logical. TRUE by default. If FALSE, spot market are
-#' returned
-#'
-#' @example man/examples/scr_availableIntervals.R
-#'
-#' @returns Invisbly returns a character vector.
+#' @inherit available_intervals
+#' @family deprecated
 #'
 #' @export
-availableIntervals <- function(source = 'binance', futures = TRUE) {
+availableIntervals <- function(
+    source = 'binance',
+    type   = 'ohlc',
+    futures = TRUE) {
+
+  lifecycle::deprecate_soft(
+    when = '1.3.0',
+    what = "availableIntervals()",
+    with = "available_intervals()"
+  )
 
   # 0) extract available
   # intervals
   all_intervals <- get(paste0(source, 'Intervals'))(
+    type   = type,
     futures = futures,
     all = TRUE,
     interval = NULL
@@ -29,9 +30,9 @@ availableIntervals <- function(source = 'binance', futures = TRUE) {
   # 1) return a message
   # with  available
   # intervals by exchange and market
-  rlang::inform(
+  cli::cli_inform(
     message = c(
-      'i' = paste0('Available Intervals at ', source, ifelse(futures, ' (futures)', no = ' (spot)')),
+      'i' = paste0('Available Intervals at ', "{.val {source}}", ifelse(futures, ' (futures):', no = ' (spot):')),
       'v' = paste(
         all_intervals,
         collapse = ', '
@@ -39,10 +40,8 @@ availableIntervals <- function(source = 'binance', futures = TRUE) {
     )
   )
 
-  return(
-    invisible(
-      all_intervals
-    )
+  invisible(
+    all_intervals
   )
 
 }

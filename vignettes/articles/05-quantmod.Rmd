@@ -21,7 +21,7 @@ library(cryptoQuotes)
 ## load USDT denominated ATOM
 ## with hourly intervals
 ## for September
-ATOMUSDT <- cryptoQuotes::getQuote(
+ATOM <- cryptoQuotes::get_quote(
   ticker = 'ATOMUSDT',
   source = 'binance',
   futures = TRUE,
@@ -43,7 +43,7 @@ The ```ATOMUSDT``` can be passed directly into the ```quantmod::chartSeries()```
 ## chart with Bollinger Bands
 ## and MACD indicators
 quantmod::chartSeries(
-  x = ATOMUSDT,
+  x = ATOM,
   theme = quantmod::chartTheme("white"),
   TA = c(
     # Add Bollinger Bands
@@ -64,7 +64,7 @@ quantmod::chartSeries(
 # using a small threshold;
 peak_idx  <- min(
   quantmod::findPeaks(
-  ATOMUSDT$Close,
+  ATOM$Close,
   thresh = 0.022
   )
 )
@@ -72,7 +72,7 @@ peak_idx  <- min(
 # 2) add to main to main
 # chart
 quantmod::addLines(
-  h = ATOMUSDT[peak_idx]$Close,
+  h = ATOM[peak_idx]$Close,
   overlay = TRUE,
   col     = 'steelblue1'
   )
@@ -85,26 +85,26 @@ quantmod::addLines(
 
 ## Cryptocurrency and TTR
 
-For Artificial Intelligence applications, like price prediction, where the ```numeric``` value of the indicators are needed, the indicators from ```TTR``` can be calculated and added to the returned data from the ```cryptoQuotes::getQuote()```-function. ```TTR::BBands()``` is one of such indicators that some traders use as buy and sell signals, these can be added the following way,
+For Artificial Intelligence applications, like price prediction, where the ```numeric``` value of the indicators are needed, the indicators from ```TTR``` can be calculated and added to the returned data from the ```cryptoQuotes::get_quote()```-function. ```TTR::BBands()``` is one of such indicators that some traders use as buy and sell signals, these can be added the following way,
 
 ```{r}
 # 1) calculate
 # Bollinger Bands
 indicator <- TTR::BBands(
-  quantmod::HLC(ATOMUSDT)
+  quantmod::HLC(ATOM)
 )
 
 # 2) add to the 
 # cryptocurrency quote
-ATOMUSDT <- cbind(
-  ATOMUSDT, 
+ATOM <- cbind(
+  ATOM, 
   indicator
 )
 
 # 3) calculate
 # the distance of the
 # closing Price and upper band
-ATOMUSDT$distance <- (ATOMUSDT$up - ATOMUSDT$Close)^2
+ATOM$distance <- (ATOM$up - ATOM$Close)^2
 ```
 
 The resulting indicator can be fit using, for example, the ```lm()```-function to determine how the distance affects the next closing price.
@@ -117,7 +117,7 @@ The resulting indicator can be fit using, for example, the ```lm()```-function t
 # as predictors
 summary(
   lm(
-    ATOMUSDT$Close ~ xts::lag.xts(ATOMUSDT$Close) + xts::lag.xts(ATOMUSDT$distance)
+    ATOM$Close ~ xts::lag.xts(ATOM$Close) + xts::lag.xts(ATOM$distance)
   )
 )
 ```

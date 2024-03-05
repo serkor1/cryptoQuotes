@@ -8,19 +8,37 @@ for the cryptocurrency market}
 getFGIndex(from = NULL, to = NULL)
 }
 \arguments{
-\item{from}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+\item{from}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+\item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
-A xts object with the FGI daily score
+An \link{xts}-object containing,
+\itemize{
+\item fgi (\link{numeric}): The daily fear and greed index value
+}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 The fear and greed index is a market sentiment indicator that measures investor emotions to
 gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
 }
 \details{
-The Fear and Greed Index goes from 0-100, and can be classifed as follows
+\subsection{On time-zones and dates}{
+
+Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}}, or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or \code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default
+all dates are passed and returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
+}
+
+\subsection{On returns}{
+
+If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}. If only \code{to} is provided 200 pips up to the specified date
+is returned.
+}
+}
+\note{
+The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
 \itemize{
 \item 0-24, Extreme Fear
@@ -31,49 +49,35 @@ The Fear and Greed Index goes from 0-100, and can be classifed as follows
 }
 }
 \examples{
-# script: Fear and Greed Index
-# date: 2023-12-26
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Retrieve and Plot the
-# index
-# script start;
+\dontrun{
+  # script: Fear and Greed Index
+  # date: 2023-12-26
+  # author: Serkan Korkmaz, serkor1@duck.com
+  # objective: Retrieve and Plot the
+  # index
+  # script start;
 
-# 1) get the fear and greed index
-# over time
-FGI <- try(
-  cryptoQuotes::getFGIndex()
-)
-
-# 2) get BTCUSDT-pair on
-# daily
-BTCUSDT <- try(
-  cryptoQuotes::getQuote(
-    ticker = 'BTCUSDT',
-    interval = '1d',
-    futures = FALSE
-  )
-)
-
-# 3) chart the klines
-# of BTCUSDT with
-# the Fear and Greed Index
-if (!inherits(BTCUSDT, 'try-error') & !inherits(FGI, 'try-error')) {
-
-  cryptoQuotes::chart(
-    chart = cryptoQuotes::kline(
-      BTCUSDT
-    ) \%>\% cryptoQuotes::addFGIndex(
-      FGI = FGI
-    ),
-    slider = FALSE
+  # 1) get the fear and greed index
+  # for the last 7 days
+  tail(
+    fgi <- cryptoQuotes::get_fgindex(
+      from = Sys.Date() - 7
+    )
   )
 
+  # script end;
 }
 
-# script end;
 }
 \seealso{
-Other sentiment: 
-\code{\link{getLSRatio}()}
+Other deprecated: 
+\code{\link{availableExchanges}()},
+\code{\link{availableIntervals}()},
+\code{\link{availableTickers}()},
+\code{\link{getLSRatio}()},
+\code{\link{getQuote}()}
 }
-\concept{sentiment}
+\author{
+Serkan Korkmaz
+}
+\concept{deprecated}

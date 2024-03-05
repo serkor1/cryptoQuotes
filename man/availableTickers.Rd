@@ -2,47 +2,61 @@
 % Please edit documentation in R/availableTickers.R
 \name{availableTickers}
 \alias{availableTickers}
-\title{Get all the available tickers
-on the desired exchange and market}
+\title{Get available cryptocurrency pairs}
 \usage{
 availableTickers(source = "binance", futures = TRUE)
 }
 \arguments{
-\item{source}{a character vector of length 1. The source of the API}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{futures}{a logical value. Default TRUE.}
+\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default. Returns futures market if \link{TRUE}, spot market otherwise.}
 }
 \value{
-Returns a character vector
-of length N equal to the tradable tickers
+A \link{character}-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 This function returns all available
-pairs on the exchanges.
+cryptocurrewncy pairs on the \link{available_exchanges}
+}
+\details{
+The naming-conventions across, and within, \code{\link[=available_exchanges]{available_exchanges()}} are not necessarily the same. This function lists
+all actively traded tickers.
 }
 \examples{
-## available tickers
-## in Binance spot market
-head(
-  try(
-    cryptoQuotes::availableTickers(
+\dontrun{
+  ## available tickers
+  ## in Binance spot market
+  head(
+    cryptoQuotes::available_tickers(
       source = 'binance',
       futures = FALSE
     )
   )
-)
 
-
-## available tickers
-## in Kraken futures market
-head(
-  try(
-    cryptoQuotes::availableTickers(
+  ## available tickers
+  ## on Kraken futures market
+  head(
+    cryptoQuotes::available_tickers(
       source = 'kraken',
       futures = TRUE
     )
   )
-)
+}
+
 
 
 }
+\seealso{
+Other deprecated: 
+\code{\link{availableExchanges}()},
+\code{\link{availableIntervals}()},
+\code{\link{getFGIndex}()},
+\code{\link{getLSRatio}()},
+\code{\link{getQuote}()}
+}
+\author{
+Serkan Korkmaz
+}
+\concept{deprecated}

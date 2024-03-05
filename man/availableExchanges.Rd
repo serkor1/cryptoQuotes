@@ -4,14 +4,35 @@
 \alias{availableExchanges}
 \title{Get available exchanges}
 \usage{
-availableExchanges()
+availableExchanges(type = "ohlc")
+}
+\arguments{
+\item{type}{\link{character}-vector of length 1. See details}
 }
 \value{
-Invisbly returns a character vector.
+An \code{\link[=invisible]{invisible()}} \link{character} vector containing available exchanges
 }
 \description{
-This function returns all
-available exchanges as a message in the console.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Get a vector of all available exchanges passed into the source
+argument of the get-functions.
+}
+\details{
+\subsection{Available types}{
+\itemize{
+\item ohlc: Open, High, Low, Close and Volume
+\item lsratio: Long-Short ratio
+\item fundingrate: Funding rates
+\item interest: Open perpetual contracts on both sides
+}
+}
+
+\subsection{Limits}{
+
+The endpoints supported by the \code{\link[=available_exchanges]{available_exchanges()}} are not uniform,
+so exchanges available for, say, \code{\link[=get_lsratio]{get_lsratio()}} is not necessarily the same as those available for \code{\link[=get_quote]{get_quote()}}
+}
 }
 \examples{
 # script:
@@ -22,7 +43,19 @@ available exchanges as a message in the console.
 
 ## return all
 ## available exchanges
-cryptoQuotes::availableExchanges()
+cryptoQuotes::available_exchanges()
 
 # script end;
 }
+\seealso{
+Other deprecated: 
+\code{\link{availableIntervals}()},
+\code{\link{availableTickers}()},
+\code{\link{getFGIndex}()},
+\code{\link{getLSRatio}()},
+\code{\link{getQuote}()}
+}
+\author{
+Serkan Korkmaz
+}
+\concept{deprecated}

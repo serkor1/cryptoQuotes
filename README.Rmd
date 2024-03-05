@@ -3,78 +3,197 @@ output: github_document
 always_allow_html: true
 ---
 
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-# load library
-library(cryptoQuotes)
-
+```{r setup, include = FALSE}
 # set options
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  collapse = FALSE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%",
   message = FALSE,
   warning = FALSE
 )
 ```
 
-# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptoQuotes website" /></a>
+# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
-![GitHub Release](https://img.shields.io/github/v/release/serkor1/cryptoQuotes?logo=github&label=release)
-[![CRAN status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://www.cran-e.com/package/cryptoQuotes)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://www.cran-e.com/package/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/serkor1/cryptoQuotes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/serkor1/cryptoQuotes?branch=main)
-[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-## Overview
+## :information_source: Overview
 
-A high-level API-client to get current, and historical, cryptocurrency OHLCV market data in ```R```, without using web-crawlers and API keys. This API-client uses `httr2`, `xts` and `zoo` under the hood and are compatible with `quantmod` and `TTR`.
+The `cryptoQuotes`-package is a high-level API-client to get current, and historical, cryptocurrency OHLC-V market and sentiment data in ```R```, without using web-crawlers or API keys. This ```R```-package uses `xts` and `zoo` under the hood and are compatible with `quantmod` and `TTR` out of the box.
 
 ### Supported exchanges and markets
 
-All supported exchanges and markets are listed in the table below, alongside the available range of intervals available from the respective exchanges
+All supported exchanges and markets are listed in the table below, alongside the available range of intervals available from the respective exchanges,
 
 <div align="center">
-```{r,echo=FALSE}
+```{r supported calls, echo=FALSE,fig.alt="Cryptocurrency market data in R"}
+# function to make 
+# first letter uppercase without
+# declaring dependency on stringr
+# Thank you Stackoverflow
+# https://stackoverflow.com/a/18509816
+firstup <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
+
+sort_granularities <- function(granularity_vector) {
+  # Define a custom ordering based on granularity
+  custom_order <- c("s","m", "h", "d", "w", "M")
+  
+  # Extract numeric and non-numeric parts
+  numeric_part <- as.numeric(gsub("[^0-9]", "", granularity_vector))
+  non_numeric_part <- gsub("[0-9]", "", granularity_vector)
+  
+  # Map non-numeric part to custom order
+  non_numeric_part_order <- match(non_numeric_part, custom_order)
+  
+  # Create a sorting index
+  sorting_index <- order(non_numeric_part_order, numeric_part)
+  
+  # Sort the vector
+  sorted_granularity_vector <- granularity_vector[sorting_index]
+  
+  return(sorted_granularity_vector)
+}
+
 # 1) Supported Exchanges
-exchange <- c('Binance', 'Kucoin', 'Bitmart', 'Kraken')
+# sorted alphabetically
+exchange <- firstup(
+  sort(
+    suppressMessages(
+      cryptoQuotes::available_exchanges()
+    )
+  )
+)
+
+
+# 2) calculate available
+# intervals
+intervals <- sapply(
+  exchange,
+  function(x){
+    suppressMessages(
+      {
+        futures = cryptoQuotes::available_intervals(
+          type   = 'ohlc',
+          source = tolower(x),
+          futures = TRUE
+        )
+        
+        spot = cryptoQuotes::available_intervals(
+          type   = 'ohlc',
+          source = tolower(x),
+          futures = FALSE
+        )
+        
+      }
+    )
+    
+    
+    
+    length(union(futures, spot))
+    
+  }
+)
+
+
+# 2) calculate available
+# intervals
+granularity <- function(
+    lowest = TRUE
+)
+{
+  sapply(
+    exchange,
+    function(x){
+      suppressMessages(
+        {
+          futures = cryptoQuotes::available_intervals(
+            source = tolower(x),
+            futures = TRUE
+          )
+          
+          spot = cryptoQuotes::available_intervals(
+            source = tolower(x),
+            futures = FALSE
+          )
+          
+        }
+      )
+      
+      available_granularity <- sort_granularities(union(
+        futures,
+        spot
+      ))
+      
+      
+      if (lowest) {
+        
+        output <- available_granularity[1]
+        
+        
+        
+      } else {
+        
+        output <- available_granularity[length(available_granularity)]
+        
+      }
+      
+      
+      output <- gsub("(.)(.)", "\\1 \\2", output)
+      
+      output <- strsplit(
+        output,
+        split = " "
+      )[[1]]
+      
+      
+      number <- output[1]
+      
+      granularity <- switch(
+        EXPR = output[2],
+        s = "second(s)",
+        m = "minute(s)",
+        h = "hour(s)",
+        w = "week(s)",
+        d = "day(s)",
+        M = "month(s)"
+      )
+      
+      paste(number, granularity)
+      
+    }
+  )
+}
 
 # 2) create
 # table
 kableExtra::kable_styling(
   knitr::kable(
-    caption = 'Available exchanges, markets and interavals.',
+    digits = 2,
+    caption = 'Supported exchanges, markets and intervals.',
     align = 'lccccc',
     table.attr = "style='width:100%;'",
     col.names = c('Exchange', 'Spot', 'Futures', 'Available Intervals' ,'Smallest Interval', 'Biggest Interval'),
     x = data.frame(
+      row.names = NULL,
       Exchange  = exchange,
       Spot = rep(x = cli::symbol$tick,length(exchange)),
       Futures = rep(x = cli::symbol$tick,length(exchange)),
-      `Available Intervals` = c(
-        16,
-        11,
-        13,
-        9
-      ),
-      `Smallest Interval` = c(
-        'Seconds',
-        'Minutes',
-        'Minutes',
-        'Minutes'
-      ),
-      `Biggest Interval` = c(
-        'Months',
-        'Weeks',
-        'Weeks',
-        'Weeks'
-        
-      )
+      `Available Intervals` = c(intervals),
+      `Smallest Interval` = c(granularity(TRUE)),
+      `Biggest Interval` = c(granularity(FALSE))
     ),
     format = 'html'
   ),
@@ -84,24 +203,27 @@ kableExtra::kable_styling(
 ```
 </div>
 
-### Basic usage
+### :information_source: Basic Usage
 
-Get USDT denominated Bitcoin spot market price from Binance with `30m`-intervals,
+#### OHLC-V Market Data 
 
-```{r example, eval=TRUE}
+Get USDT denominated Bitcoin spot market price from Binance with `30m`-intervals using the `get_quote()`-function,
+
+```{r cryptocurrency market data in R, eval=TRUE}
 ## BTC OHLC prices
 ## from Binance spot market
 ## in 30 minute intervals
-BTC <- cryptoQuotes::getQuote(
+BTC <- cryptoQuotes::get_quote(
   ticker = 'BTCUSDT',
   source = 'binance',
   futures = FALSE,
-  interval = '30m'
+  interval = '30m',
+  from    = Sys.Date() - 1 
 )
 ```
 
 <div align="center">
-```{r, echo=FALSE}
+```{r print table, echo=FALSE, fig.alt="cryptocurrency prices in R"}
 kableExtra::kable_styling(
   knitr::kable(
     caption = 'Bitcoin (BTC) OHLC-prices',
@@ -121,10 +243,34 @@ kableExtra::kable_styling(
 ```
 </div>
 
-## Installation
+#### Charting OHLC-V 
+
+The `BTC`-object can be charted using the `chart()`-function,
+
+```{r chart quote, fig.align='center',fig.dpi=180, fig.alt="cryptocurrency charts in R"}
+## Chart BTC
+## using klines, SMA, 
+## MACD and Bollinger Bands
+cryptoQuotes::chart(
+  ticker = BTC,
+  main   = cryptoQuotes::kline(),
+  sub    = list(
+    cryptoQuotes::volume(),
+    cryptoQuotes::macd()
+  ),
+  indicator = list(
+    cryptoQuotes::sma(n = 7),
+    cryptoQuotes::sma(n = 14),
+    cryptoQuotes::sma(n = 21),
+    cryptoQuotes::bollinger_bands()
+  )
+)
+```
+
+## :information_source: Installation
 
 ### Stable version
-```{r, eval = FALSE}
+```{r stable version guide, eval = FALSE}
 # install from CRAN
 install.packages(
   pkgs = 'cryptoQuotes',
@@ -133,15 +279,18 @@ install.packages(
 ```
 
 ### Development version
-```{r, eval = FALSE}
+```{r development version guide, eval = FALSE}
 # install from github
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
-  ref = 'main'
+  ref  = 'development'
 )
 ```
 
+## :warning: Disclaimer
 
-## Code of Conduct
-  
+This `library` is still considered `experimental` but no breaking changes will be made on functions labelled as `stable` without appropriate action; please refer to the [release notes](NEWS.md), or submit an [issue](https://github.com/serkor1/cryptoQuotes/issues) if that promise is broken..
+
+## :information_source: Code of Conduct
+
 Please note that the `cryptoQuotes` project is released with a [Contributor Code of Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

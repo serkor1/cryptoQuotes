@@ -2,6 +2,7 @@
 title: "cryptoQuotes: Cryptocurrency Market Data in R"
 subtitle: "What happens when Elon Musk Tweets about Dogecoin?"
 output: rmarkdown::html_vignette
+always_allow_html: true
 vignette: >
   %\VignetteIndexEntry{cryptoQuotes: Cryptocurrency Market Data in R}
   %\VignetteEngine{knitr::rmarkdown}
@@ -10,13 +11,23 @@ vignette: >
   
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-collapse = TRUE,
-comment = "#>",
-message = FALSE
+  collapse = FALSE,
+  out.width = "100%",
+  comment = "#>",
+  message = FALSE
 )
 ```
 
-```{r setup}
+```{css, echo=FALSE}
+body, .main-container, .container-fluid {
+  max-width: 920px !important; /* or a specific pixel width, e.g., 1200px */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+````
+
+
+```{r, message=FALSE}
 library(cryptoQuotes)
 ```
 
@@ -28,6 +39,7 @@ This high-level API-client gives access to cryptocurrency market data, without h
 
 In this vignette we will explore a case study to showcase the capabilities of the library; how was the price action of Dogecoin affected in the minutes after Elon Musk tweeted,
 
+<div align="center">
 ```{r, echo=FALSE, out.width="80%", fig.cap="Tweet by Elon Musk - the timezone is CET.",fig.align='center'}
 ## include tweet from
 ## Elon Musk
@@ -35,6 +47,7 @@ knitr::include_graphics(
   path = "elonTweet.png"
 )
 ```
+</div>
 
 # Cryptocurrency Market Analysis in R
 
@@ -44,7 +57,7 @@ Elon Musk tweeted (Well, now he X'ed) about Dogecoin January 14, 06.18 AM (UTC) 
 ## DOGEUSDT the day
 ## of the tweet on the
 ## 1m chart
-DOGEUSDT <- cryptoQuotes::getQuote(
+DOGE <- cryptoQuotes::get_quote(
   ticker   = 'DOGEUSDT',
   interval = '1m',
   source   = 'binance',
@@ -54,33 +67,37 @@ DOGEUSDT <- cryptoQuotes::getQuote(
 )
 ```
 
-This returns an object of class `r paste(class(DOGEUSDT),collapse = ' and ')` with `500` rows. To get a closer look on the price action around the tweet hour, we can `subset` the data using the `window()`-function,
+This returns an object of class `r paste(class(DOGE),collapse = ' and ')` with `500` rows. To get a closer look on the price action around the tweet hour, we can `subset` the data using the `window()`-function,
 
 ```{r}
 ## extract the hour
 ## of the tweet
-DOGEUSDT <- window(
-  x     = DOGEUSDT,
-  start = ('2022-01-14 06:00:00'),
-  end   = ('2022-01-14 07:00:00')
+DOGE <- window(
+  x     = DOGE,
+  start = ('2022-01-14 07:00:00'),
+  end   = ('2022-01-14 08:00:00')
 )
 ```
 
-This leaves `r nrow(DOGEUSDT)` rows, corresponding to a minute by minute price action. We can calculate the price rallying using the 19th row, corresponding to the minute of the tweet. Dogecoin closed at `r DOGEUSDT[19]$Close`, rallying `r paste0(round((DOGEUSDT[19]$Close/DOGEUSDT[19]$Open - 1) * 100,2), '%')`.
+This leaves `r nrow(DOGE)` rows, corresponding to a minute by minute price action. We can calculate the price rallying using the 19th row, corresponding to the minute of the tweet. Dogecoin closed at `r DOGE[19]$Close`, rallying `r paste0(round((DOGE[19]$Close/DOGE[19]$Open - 1) * 100,2), '%')`.
 
 ## Charting price action with candlesticks
 
 We can illustrate this with candlestick charts using the ```chart()```- and ```kline()```-function, 
 
-```{r, out.width="100%",fig.align='center',fig.height=5}
+```{r, fig.align='center', out.height=1000, out.width=1000}
 ## chart the
 ## price action
 ## using klines
 cryptoQuotes::chart(
-  chart = cryptoQuotes::kline(
-    quote = DOGEUSDT
-  ) %>% cryptoQuotes::addVolume(),
-  slider = FALSE
+  ticker     = DOGE,
+  main       = cryptoQuotes::kline(),
+  sub  = list(
+    cryptoQuotes::volume()
+  ),
+  options = list(
+    dark = FALSE
+  )
 )
 ```
 
@@ -93,14 +110,14 @@ To create a, presumably, better visual overview we can add event lines using the
 ## by subsetting the data
 event_data <- as.data.frame(
   zoo::coredata(
-    DOGEUSDT[19]
+    DOGE[19]
   )
 )
 
 ## 1.1) add the index 
 ## to the event_data
 event_data$index <- zoo::index(
-  DOGEUSDT[19]
+  DOGE[19]
 )
 
 # 1.2) add event label
@@ -114,19 +131,19 @@ event_data$color <- 'steelblue'
 
 This event data, can be passed into the chart,
 
-```{r, out.width="100%",fig.align='center',fig.height=5}
+```{r, out.height = 920}
 ## 1) create event data.frame
 ## by subsetting the data
 event_data <- as.data.frame(
   zoo::coredata(
-    DOGEUSDT[19]
+    DOGE[19]
   )
 )
 
 ## 1.1) add the index 
 ## to the event_data
 event_data$index <- zoo::index(
-  DOGEUSDT[19]
+  DOGE[19]
 )
 
 # 1.2) add event label
@@ -141,13 +158,15 @@ event_data$color <- 'steelblue'
 ## price action
 ## using klines
 cryptoQuotes::chart(
-  chart = cryptoQuotes::kline(
-    quote = DOGEUSDT
-  )%>% addEvents(
-    event = event_data
-  ) %>% cryptoQuotes::addVolume(),
-  slider = FALSE
+  ticker     = DOGE,
+  event_data = event_data,
+  main       = cryptoQuotes::kline(),
+  sub  = list(
+    cryptoQuotes::volume()
+  ),
+  options = list(
+    dark = FALSE
+  )
 )
 ```
-
 

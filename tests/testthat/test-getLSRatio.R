@@ -9,25 +9,41 @@ testthat::test_that(
   desc = 'Test that the LSR ratio is returned as expected',
   code = {
 
+    # 0) skip if online;
+    testthat::skip_if_offline()
+
     # 1) we skip tests on github
     # as these fails automatically
-    testthat::skip_on_ci(
+    testthat::skip_on_ci()
 
-    )
+
+    # set dates
+    from <- Sys.Date() - 29
+    to   <- Sys.Date()
+
 
     # 1) get quote without errors
     # and store
     testthat::expect_no_error(
-      LSR <- getLSRatio(
+      LSR <- get_lsratio(
         ticker = "BTCUSDT",
-        from = Sys.Date() - 29,
-        to = Sys.Date()
+        interval = "1d",
+        from = from,
+        to = to
       )
     )
 
     testthat::expect_equal(
       object = nrow(LSR),
-      expected = 30
+      tolerance = 0,
+      expected = min(
+        29,length(
+        seq(
+          from = from,
+          to   = to,
+          by   = "1 day"
+        )
+      ))
     )
 
     # 3) expect that the years

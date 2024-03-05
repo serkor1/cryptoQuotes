@@ -7,37 +7,59 @@
 
 #' Get available exchanges
 #'
-#' This function returns all
-#' available exchanges as a message in the console.
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' @example man/examples/scr_availableExchanges.R
+#' Get a vector of all available exchanges passed into the source
+#' argument of the get-functions.
 #'
-#' @returns Invisbly returns a character vector.
+#' @inherit available_exchanges
+#' @family deprecated
 #'
 #' @export
-availableExchanges <- function(){
+availableExchanges <- function(
+    type = "ohlc"){
 
+  lifecycle::deprecate_soft(
+    when = '1.3.0',
+    what = "availableExchanges()",
+    with = "available_exchanges()"
+  )
   # 0) define available
   # exchanges
-  exchanges <- c('binance', 'kucoin', 'kraken', 'bitmart')
+  assert(
+    type %in% c("ohlc", "lsratio", "fundingrate", "interest"),
+    error_message = c(
+      "x" = "Unsupported type",
+      "i" = "Has to be one of XXX"
+    )
+  )
+
+  exchanges <- sort(
+    switch(
+      type,
+      ohlc        = c('binance', 'kucoin', 'kraken', 'bitmart', 'bybit'),
+      fundingrate = c('binance', 'bybit', 'kucoin'),
+      lsratio     = c('binance', 'bybit', 'kraken'),
+      interest    = c('binance', 'bybit')
+    )
+  )
 
   # 1) retun a message
   # with all the available
   # exchanges
-  rlang::inform(
+  cli::cli_inform(
     message = c(
-      'i' = c('Available exchanges'),
+      'i' = cli::style_underline('Available Exchanges:'),
       'v' = paste(
-        c('binance', 'kucoin', 'kraken', 'bitmart'),
+        exchanges,
         collapse = ', '
-        )
+      )
     )
   )
 
-  return(
-    invisible(
-      exchanges
-    )
+  invisible(
+    exchanges
   )
 
 }

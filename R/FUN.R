@@ -28,14 +28,13 @@
 #' @returns Returns an xts-class object with its bounds removed.
 #' @export
 
-removeBound <- function(
+remove_bound <- function(
     xts,
-    bounds = c('upper')
-) {
+    bounds = c('upper')) {
 
   # check if bounds are correctly
   # specified
-  if (!grepl(x = bounds, pattern = 'upper|lower|both')){
+  if (!grepl(x = bounds, pattern = 'upper|lower|both')) {
 
     rlang::abort(
       message = c(
@@ -62,9 +61,7 @@ removeBound <- function(
     both  = xts[-c(1,nrow(xts))]
   )
 
-  return(
-    xts
-  )
+  xts
 
 }
 
@@ -76,7 +73,7 @@ removeBound <- function(
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' The [splitWindow()]-function is a high level wrapper of the [stats::window()]-function which restricts
+#' The [split_window()]-function is a high level wrapper of the [stats::window()]-function which restricts
 #' the intervals between the first and second index value iteratively
 #'
 #' @param xts A xts-object that needs needs to be split.
@@ -89,11 +86,10 @@ removeBound <- function(
 #' @returns Returns a list of iteratively restricted xts objects
 #'
 #' @export
-splitWindow <- function(
+split_window <- function(
     xts,
     by,
-    bounds = 'upper'
-) {
+    bounds = 'upper') {
 
   # this function splits
   # the xts object in lists
@@ -110,7 +106,7 @@ splitWindow <- function(
       # 2) subset using
       # window and cut the upper
       # bound
-      xts <- removeBound(
+      xts <- remove_bound(
         xts = stats::window(
           x = xts,
           start = index[1],
@@ -119,10 +115,7 @@ splitWindow <- function(
         bounds = bounds
       )
 
-      return(
-        xts
-      )
-
+      xts
 
     }
   )
@@ -150,11 +143,10 @@ splitWindow <- function(
 #' @returns Returns a xts object.
 #'
 #' @export
-calibrateWindow <- function(
+calibrate_window <- function(
     list,
     FUN,
-    ...
-) {
+    ...) {
 
   # This function calibrates
   # the window and returns
@@ -172,9 +164,5 @@ calibrateWindow <- function(
   )
 
 }
-
-
-
-
 
 # script end;

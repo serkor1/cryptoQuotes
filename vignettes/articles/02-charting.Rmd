@@ -25,13 +25,13 @@ There are two main price charts. The Japanese candlestick chart, ```kline()```, 
 
 # Charting Cryptocurrency with R
 
-For charting the cryptocurrency, we get the ```ATOMUSDT``` pair from Binance in 15 minute intervals,
+For charting the cryptocurrency, we get the ```ATOM``` pair from Binance in 15 minute intervals,
 
 ```{r, eval=FALSE}
-## ATOMUSDT on the
+## ATOM on the
 ## 15m chart from the
 ## futures market
-ATOMUSDT <- cryptoQuotes::getQuote(
+ATOM <- cryptoQuotes::get_quote(
   ticker   = 'ATOMUSDT',
   source   = 'binance',
   interval = '15m',
@@ -43,28 +43,32 @@ ATOMUSDT <- cryptoQuotes::getQuote(
 
 ## OHLC chart
 
-The basic ohlc chart can be charted by passing the ```ATOMUSDT```-pair into the ```ohlc()```-function and then wrap it in ```chart()```
+The basic ohlc chart can be charted by passing the ```ATOM```-pair into the ```ohlc()```-function and then wrap it in ```chart()```
 
 ```{r basic OHLC chart, out.width="100%",fig.align='center',fig.height=8}
 ## simple bar-chart
 ## without indicators
-chart(
-  chart = ohlc(
-    ATOMUSDT
+cryptoQuotes::chart(
+  ticker  = ATOM,
+  main    = ohlc(),
+  options = list(
+    dark = TRUE
   )
 )
 ```
 
 ## Candlestick chart
 
-The japanese candlestick chart can be charted by passing the ```ATOMUSDT```-pair into the ```kline()```-function and then wrap it in ```chart()```
+The japanese candlestick chart can be charted by passing the ```ATOM```-pair into the ```kline()```-function and then wrap it in ```chart()```
 
 ```{r basic kline chart, out.width="100%",fig.align='center',fig.height=8}
 ## simple kline chart
 ## without indicators
-chart(
-  chart = kline(
-    ATOMUSDT
+cryptoQuotes::chart(
+  ticker  = ATOM,
+  main    = ohlc(),
+  options = list(
+    dark = TRUE
   )
 )
 ```
@@ -82,9 +86,12 @@ Below is an example of using the ```addRSI()``` and ```addBBands()``` indicators
 ## simple kline chart
 ## without indicators
 chart(
-  chart = kline(ATOMUSDT) %>% 
-    addRSI() %>% 
-    addBBands()
+  ticker = ATOM,
+  main   = kline(),
+  indicator = list(
+    rsi(),
+    bollinger_bands()
+  )
 )
 ```
 
@@ -97,9 +104,12 @@ Below is an example of using the ```addMACD()``` and ```addVolume()``` indicator
 ## simple kline chart
 ## without indicators
 chart(
-  chart = kline(ATOMUSDT) %>%
-    addMACD() %>% 
-    addVolume()
+  ticker = ATOM,
+  main   = kline(),
+  indicator = list(
+    macd(),
+    volume()
+  )
 )
 ```
 
@@ -111,33 +121,33 @@ Various events in the financial markets does, undoubtedly, have an impact on the
 ```{r Locate bullcross}
 ## Calculate moving averages
 ## SMA(7) and SMA(10)
-ATOMUSDT$short_SMA <- TTR::SMA(
-  x = ATOMUSDT$Close,
+ATOM$short_SMA <- TTR::SMA(
+  x = ATOM$Close,
   n = 7,
 )
 
-ATOMUSDT$long_SMA <- TTR::SMA(
-  x = ATOMUSDT$Close,
+ATOM$long_SMA <- TTR::SMA(
+  x = ATOM$Close,
   n = 21,
 )
 
 ## Determine the cross
 ## from below
-ATOMUSDT$cross <- as.numeric(
-  lag(ATOMUSDT$short_SMA) < ATOMUSDT$long_SMA &
-    ATOMUSDT$short_SMA > ATOMUSDT$long_SMA 
+ATOM$cross <- as.numeric(
+  lag(ATOM$short_SMA) < ATOM$long_SMA &
+    ATOM$short_SMA > ATOM$long_SMA 
 )
 ```
 
 
-Based on the `cross` indicator, the `ATOMUSDT` pair can now be subset, and processed accordingly.
+Based on the `cross` indicator, the `ATOM` pair can now be subset, and processed accordingly.
 
 
 ```{r}
 ## create event data
 ## and store it as a data.rfrae
 event_data <- subset(
-  ATOMUSDT,
+  ATOM,
   cross == 1
 )
 
@@ -175,10 +185,13 @@ Finally, the crosses can be plotted using the `chart()` and `addEvents()` functi
 ## and the Bollinger Bands
 ## in a candlestick chart
 chart(
-  chart = kline(quote = ATOMUSDT)  %>% 
-    addBBands()                    %>%
-    addMA(FUN = TTR::SMA, n = 7)   %>%
-    addMA(FUN = TTR::SMA, n = 21)  %>% 
-    addEvents(event = event_data)
+  ticker = ATOM,
+  main   = kline(),
+  indicator = list(
+    bollinger_bands(),
+    sma(n = 7),
+    sma(n = 21)
+  ),
+  event_data = event_data
 )
 ```

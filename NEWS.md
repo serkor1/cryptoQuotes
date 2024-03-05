@@ -1,3 +1,104 @@
+# cryptoQuotes 1.3.0
+
+## Improvements
+
+### General function improvements
+
+* `get_lsratio` and `getLSratio()` supports `kraken` and `bybit` as `source`
+
+* `available_`-functions are more adaptive to the callling environments
+
+```R
+## charting the klines
+## with indicators as
+## subcharts
+available_exchanges(type = 'ohlc')
+```
+
+Now returns all available exhanges that supports Open, High, Low and Close market data. The `type`-argument can be changed to, for example, `lsratio` to get
+all available exchanges that supports Long to Shorts ratios. Similar changes have been made to remaining `available_`-functions.
+
+### Error-handling
+
+All `get_*`- and `available_*`-functions are now more robust to API and input errors.
+
+### Default Returning
+
+* `quotes` and `fear and greed index` now returns `200` rows instead of `100`
+
+### Charting
+
+* The `charts` now has a `dark` and `light` theme. Its passed into the `options = list(dark = TRUE)` of the `chart()`-function.
+* The `charts` are now more color deficiency compliant, and the `deficiency` parameter in `options = list(deficiency = TRUE)` now applies to all `chart`-elements
+* The `charts` are now constructed without `%>%` and, should, be more intuitive to navigate in. See example below,
+
+```R
+## charting the klines
+## with indicators as
+## subcharts
+chart(
+  ticker     = BTCUSDT,
+  main       = kline(),
+  sub        = list(
+    volume(),
+    macd()
+  ),
+  indicator = list(
+    bollinger_bands(),
+    sma(),
+    alma()
+  ),
+  options = list(
+    dark = TRUE,
+    deficiency = FALSE
+  )
+)
+```
+
+### Exchange Support
+
+The following exchanges have been added to list of `exchanges` available,
+
+* ByBit
+
+### New features
+
+* Funding rates
+
+```R
+## get funding rate
+get_fundingrate(
+    ticker = "BTCUSDT",
+    source = "binance"
+  )
+```
+
+* Open interest
+
+```R
+## get open interest
+get_openinterest(
+      ticker = "BTCUSDT",
+      source = "binance"
+    )
+```
+
+
+## Breaking Changes
+
+### Charting
+
+* All the `charting`-functions have been reworked without backwards compatibility, or `lifecycle::deprecated()`-warnings. The `charting`-functions were, and still is, in an `experimental`-stage.
+
+### API Calls
+
+* All `dates` passed to `get_*`-functions assumed the dates were given in `UTC`, and were retrieved as `UTC`. These have now been changed; all functions now uses `Sys.timezone()` as `default` upon request and retrieval.
+
+## Warning
+
+As the `cryptoQuotes`-package has moved to the `tidyverse` style guide, the `getFoo`-functions are now `deprecated`. These will be permanently deleted, and removed from the `cryptoQuotes`-package, at version 1.4.0!
+
+
 # cryptoQuotes 1.2.1
 
 ### Minor Updates

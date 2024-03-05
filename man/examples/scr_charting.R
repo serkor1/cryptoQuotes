@@ -4,26 +4,44 @@
 # objective: Charting in general
 # script start;
 
-# library
-library(cryptoQuotes)
-
-# charting klines
-# with various indicators
+## charting the klines
+## with indicators as
+## subcharts
 chart(
-  chart = kline(
-    ATOMUSDT
-  ) %>% addVolume() %>% addMA(
-    FUN = TTR::SMA,
-    n = 7
-  ) %>% addMA(
-    FUN = TTR::SMA,
-    n = 14
-  ) %>%
-    addBBands() %>%
-    addMACD() %>%
-    addRSI()
-
+  ticker     = BTC,
+  main       = kline(),
+  sub        = list(
+    volume(),
+    macd()
+  ),
+  indicator = list(
+    bollinger_bands(),
+    sma(),
+    alma()
+  ),
+  options = list(
+    dark = TRUE,
+    deficiency = FALSE
+  )
 )
 
+## charting the MACD-indicator
+## with klines as subcharts
+chart(
+  ticker     = BTC,
+  main       = macd(),
+  sub        = list(
+    volume(),
+    kline()
+  ),
+  indicator = list(
+    bollinger_bands(),
+    sma()
+  ),
+  options = list(
+    dark = TRUE,
+    deficiency = FALSE
+  )
+)
 
 # script end;

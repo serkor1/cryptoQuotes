@@ -16,8 +16,8 @@ library(cryptoQuotes)
 # but only base R is shown here to avoid
 # too many dependencies
 set.seed(1903)
-event_data <- ATOMUSDT[
-  sample(1:nrow(ATOMUSDT), size = 2)
+event_data <- ATOM[
+  sample(1:nrow(ATOM), size = 2)
 ]
 
 # 1.1) Extract the index
@@ -66,10 +66,18 @@ event_data$event <- paste0(
 # 2) Chart the the klines
 # and add the buy and sell events
 chart(
-  chart = kline(
-    ATOMUSDT
-  ) %>% addEvents(
-    event = event_data
+  ticker     = ATOM,
+  main       = kline(),
+  sub        = list(
+    volume()
+  ),
+  indicator = list(
+    bollinger_bands()
+  ),
+  event_data = event_data,
+  options = list(
+    dark = TRUE,
+    deficiency = FALSE
   )
 )
 

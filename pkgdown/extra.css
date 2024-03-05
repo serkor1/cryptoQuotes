@@ -1,0 +1,73 @@
+/*
+NOTE: This css works as it should as it
+is written here.
+*/
+
+/*
+use html in front of the CSS-selector
+to claim precendence over inline css
+
+NOTE: Body has to be larger than main
+*/
+
+
+
+
+html .container {
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+html main {
+    max-width: 1000;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* The body of the webpage */
+/*
+html body {
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+*/
+
+
+
+
+/*
+html main {
+  max-width: 70% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+@media (min-width: 1981px) {
+  html * {
+    max-width: 1981px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 120% !important;
+  }
+}
+*/
+/*
+html .plotly-chart-container {
+  width: 100% !important;
+}
+
+
+html .col {
+  width: 70% !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+*/

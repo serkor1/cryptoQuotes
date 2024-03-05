@@ -4,7 +4,7 @@
 \name{cryptoQuotes-package}
 \alias{cryptoQuotes}
 \alias{cryptoQuotes-package}
-\title{cryptoQuotes: A Streamlined Access to OHLC-v Market Data and Sentiment Indicators}
+\title{cryptoQuotes: A Streamlined Access to Cryptocurrency OHLC-V Market Data and Sentiment Indicators}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 

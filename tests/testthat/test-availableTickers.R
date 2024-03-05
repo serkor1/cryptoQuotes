@@ -2,6 +2,9 @@ testthat::test_that(
   desc = "availablePairs on Binance returns a vector of characters, with lenght > 1",
   code = {
 
+    # 0) skip if online;
+    testthat::skip_if_offline()
+
 
     testthat::skip_on_ci()
 
@@ -11,7 +14,7 @@ testthat::test_that(
 
       # 1) Load the available
       # tickers
-      tickers <- availableTickers(
+      tickers <- available_tickers(
         source = 'binance',
         futures = lgl
       )
@@ -42,6 +45,9 @@ testthat::test_that(
   desc = "availablePairs on Kraken returns a vector of characters, with lenght > 1",
   code = {
 
+    # 0) skip if online;
+    testthat::skip_if_offline()
+
 
     testthat::skip_on_ci()
 
@@ -51,7 +57,7 @@ testthat::test_that(
 
       # 1) Load the available
       # tickers
-      tickers <- availableTickers(
+      tickers <- available_tickers(
         source = 'kraken',
         futures = lgl
       )
@@ -82,6 +88,9 @@ testthat::test_that(
   desc = "availablePairs on Bitmart returns a vector of characters, with lenght > 1",
   code = {
 
+    # 0) skip if online;
+    testthat::skip_if_offline()
+
 
     testthat::skip_on_ci()
 
@@ -91,7 +100,7 @@ testthat::test_that(
 
       # 1) Load the available
       # tickers
-      tickers <- availableTickers(
+      tickers <- available_tickers(
         source = 'bitmart',
         futures = lgl
       )
@@ -122,6 +131,9 @@ testthat::test_that(
   desc = "availablePairs on Kucoin returns a vector of characters, with lenght > 1",
   code = {
 
+    # 0) skip if online;
+    testthat::skip_if_offline()
+
 
     testthat::skip_on_ci()
 
@@ -131,7 +143,7 @@ testthat::test_that(
 
       # 1) Load the available
       # tickers
-      tickers <- availableTickers(
+      tickers <- available_tickers(
         source = 'kucoin',
         futures = lgl
       )

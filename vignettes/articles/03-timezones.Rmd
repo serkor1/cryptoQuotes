@@ -25,7 +25,7 @@ Here is an example of changing the time zone to that of ```Sys.timezone()```,
 # 1) store ATOMUSDT to 
 # ATOMUSDT_local to avoid
 # overwriting the data
-ATOMUSDT_local <- ATOMUSDT
+ATOMUSDT_local <- ATOM
 
 # 2) changing the time zone
 attributes(zoo::index(ATOMUSDT_local))$tzone <- Sys.timezone()
@@ -41,7 +41,7 @@ attributes(zoo::index(ATOMUSDT_local))$tzone <- Sys.timezone()
     col.names = c('Index','Default Time Zone (UTC)', 'System Time Zone'),
     x =  cbind(
         1:6,
-        paste(head(zoo::index(ATOMUSDT))),
+        paste(head(zoo::index(ATOM))),
         paste(head(zoo::index(ATOMUSDT_local)))
       ),
     format = 'html'
