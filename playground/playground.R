@@ -10,64 +10,21 @@
 rm(list = ls()); gc(); devtools::load_all()
 
 
-nrow(
- BTC <-  get_quote(
-    ticker = "BTCUSDT",
-    source = "bybit",
-    to     = Sys.Date() - 1,
-    futures = FALSE
-  )
-)
-
-
-
-
-
-index <- zoo::index(BTC)
-
-length(
-  seq(
-    from = index[1],
-    to   = index[length(index)],
-    by   = "1 day"
-  )
-)
-
-
-
-length(
-  seq(
-    from = Sys.Date() - 199,
-    to   = Sys.Date(),
-    by   = "1 day"
-  )
-)
-
-
-Sys.Date() - (Sys.Date() - 200)
-
 
 
 chart(
   ticker = BTC,
-  main = kline()
+  main = ohlc(),
+  indicator = list(
+    sma(),
+    ema(),
+    bollinger_bands()
+  ),
+  sub = list(
+    rsi(),
+    macd()
+  )
 )
-
-
-chart(
-  ticker = BTC,
-  main = ohlc()
-)
-
-
-to_title <- function(
-    x) {
-
-  gsub("\\b(.)", "\\U\\1", tolower(x), perl = TRUE)
-}
-
-
-
 
 
 # Example OHLC prices
@@ -89,3 +46,4 @@ if (is_valid) {
 }
 
 # script end;
+

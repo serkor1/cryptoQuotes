@@ -4,7 +4,7 @@
 \alias{alma}
 \title{Add Arnaud Legoux Moving Average to the chart}
 \usage{
-alma(price = "Close", n = 9, offset = 0.85, sigma = 6, internal = list(), ...)
+alma(price = "close", n = 9, offset = 0.85, sigma = 6, internal = list(), ...)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ALMA}}

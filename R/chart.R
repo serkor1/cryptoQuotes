@@ -306,9 +306,9 @@ chart <- function(
         ),
         # width  = if (interactive()) Inf else 1980,  #Was 1000
         # height =  if (interactive()) Inf else 1080,  #was 1000
-        margin = list(l = 60, r = 30, b = 60, t = 60),
+        margin = list(l = 60, r = 30, b = 65, t = 65),
         yaxis = list(
-          #title = 'Price',
+          title = NULL,
           gridcolor = if (dark) '#40454c' else NULL
         ),
         xaxis = list(

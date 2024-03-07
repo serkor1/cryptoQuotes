@@ -51,8 +51,8 @@ volume <- function(internal = list()){
         plot <- plotly::plot_ly(
           data = ticker,
           name = "Volume",
-          x    = ~Index,
-          y    = ~Volume,
+          x    = ~index,
+          y    = ~volume,
           showlegend = FALSE,
           color = ~direction,
           type  = "bar",

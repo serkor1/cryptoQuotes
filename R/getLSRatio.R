@@ -35,7 +35,6 @@ getLSRatio <- function(
   # connection and interval validity
   check_internet_connection()
 
-
   # 1) check all arguments
   # what are missing, and are
   # the classes correct?
@@ -70,7 +69,6 @@ getLSRatio <- function(
     trimws(ticker)
   )
 
-
   # 1) check wether
   # the chosen exchange
   # is supported by the library
@@ -96,10 +94,6 @@ getLSRatio <- function(
     )
   )
 
-
-
-
-
   # 2) construct dates
   # with API constraints;
   #
@@ -107,15 +101,20 @@ getLSRatio <- function(
   # it will return the last
   # 100 available pips
   # closest to Sys.time()
-  from <- coerce_date(
-    if (is.null(from)) Sys.Date() - 28 else max(Sys.Date() - 28, from)
-  )
+  from <- coerce_date(from); to <- coerce_date(to)
 
-  to <- coerce_date(
-    if (is.null(to)) Sys.time() else to
-  )
+  # NOTE: binance only supports
+  # the last 30 days
+  if (source %in% 'binance') {
 
+    from <- max(
+      from,
+      coerce_date(
+        Sys.Date() - 28
+      )
+    )
 
+  }
 
   response <- fetch(
     ticker = ticker,
@@ -139,8 +138,6 @@ getLSRatio <- function(
     response$short <- response$short/100
 
   }
-
-
 
   # return the
   # response

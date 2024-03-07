@@ -4,7 +4,7 @@
 \alias{sma}
 \title{Add Simple Moving Averages to the charts}
 \usage{
-sma(price = "Close", n = 10, internal = list(), ...)
+sma(price = "close", n = 10, internal = list(), ...)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::SMA}}

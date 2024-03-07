@@ -71,7 +71,7 @@ fgi <- function(
 
         }
 
-        value <- DT$FGI
+        value <- DT$fgi
 
         DT$color_scale <- ceiling(
           (1-30) * (value -0)/(100 - 0) + 30
@@ -89,8 +89,8 @@ fgi <- function(
             showlegend = TRUE,
             name = "FGI",
             data = DT,
-            y = ~FGI,
-            x = ~Index,
+            y = ~fgi,
+            x = ~index,
             type = 'scatter',
             mode = 'lines+markers',
             line = list(

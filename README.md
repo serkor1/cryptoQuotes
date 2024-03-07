@@ -196,141 +196,141 @@ Bitcoin (BTC) OHLC-prices
 Index
 </th>
 <th style="text-align:center;">
-Open
+open
 </th>
 <th style="text-align:center;">
-High
+high
 </th>
 <th style="text-align:center;">
-Low
+low
 </th>
 <th style="text-align:center;">
-Close
+close
 </th>
 <th style="text-align:left;">
-Volume
+volume
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-03-05 14:00:00
+2024-03-07 13:00:00
 </td>
 <td style="text-align:center;">
-67325.03
+66905.34
 </td>
 <td style="text-align:center;">
-68025.94
+67113.9
 </td>
 <td style="text-align:center;">
-67312.38
+66822
 </td>
 <td style="text-align:center;">
-67649.82
+66836.77
 </td>
 <td style="text-align:left;">
-2267.51137
+1167.04733
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-05 14:30:00
+2024-03-07 13:30:00
 </td>
 <td style="text-align:center;">
-67649.82
+66836.76
 </td>
 <td style="text-align:center;">
-67880.15
+66900
 </td>
 <td style="text-align:center;">
-67504.19
+66575.52
 </td>
 <td style="text-align:center;">
-67770.01
+66712.44
 </td>
 <td style="text-align:left;">
-1286.53443
+941.182
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-05 15:00:00
+2024-03-07 14:00:00
 </td>
 <td style="text-align:center;">
-67770.02
+66712.43
 </td>
 <td style="text-align:center;">
-67796.25
+66881.03
 </td>
 <td style="text-align:center;">
-67244
+66592.52
 </td>
 <td style="text-align:center;">
-67576.02
+66881.02
 </td>
 <td style="text-align:left;">
-1587.12193
+768.26032
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-05 15:30:00
+2024-03-07 14:30:00
 </td>
 <td style="text-align:center;">
-67576.02
+66881.03
 </td>
 <td style="text-align:center;">
-68789
+67010
 </td>
 <td style="text-align:center;">
-67274.77
+66755.14
 </td>
 <td style="text-align:center;">
-68710.41
+66905.69
 </td>
 <td style="text-align:left;">
-4070.54196
+963.93827
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-05 16:00:00
+2024-03-07 15:00:00
 </td>
 <td style="text-align:center;">
-68710.41
+66905.68
 </td>
 <td style="text-align:center;">
-69000
+67307.05
 </td>
 <td style="text-align:center;">
-67080.45
+66905.68
 </td>
 <td style="text-align:center;">
-67170.01
+67249.59
 </td>
 <td style="text-align:left;">
-6416.30113
+1489.56914
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-05 16:30:00
+2024-03-07 15:30:00
 </td>
 <td style="text-align:center;">
-67170.02
+67249.59
 </td>
 <td style="text-align:center;">
-67389.13
+67899
 </td>
 <td style="text-align:center;">
-66370
+66541.1
 </td>
 <td style="text-align:center;">
-67153.84
+67055
 </td>
 <td style="text-align:left;">
-2549.25246
+4784.76307
 </td>
 </tr>
 </tbody>

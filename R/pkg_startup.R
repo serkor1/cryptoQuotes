@@ -49,8 +49,20 @@ header <- function(
     pkgversion) {
 
   cli::rule(
-    left = cli::style_bold(pkgname),
-    right = cli::style_bold(pkgversion),
+    left = paste(
+      # Package Name
+      pkgname,
+      # package version
+      pkgversion
+
+    ),
+    right = paste(
+      # Add a link to the release notes
+      cli::style_hyperlink(
+        text = 'release notes',
+        url = 'https://serkor1.github.io/cryptoQuotes/news/index.html'
+      )
+      ),
     line = 1,
     line_col = cli::make_ansi_style(
       "cyan"
@@ -80,21 +92,8 @@ pkg_information <- function(){
         cli::col_br_yellow(cli::symbol$star),
         "Browse the",
         cli::style_hyperlink(
-          text = cli::col_br_green("source code"),
+          text = cli::col_br_blue("source code"),
           url = "https://github.com/serkor1/cryptoQuotes/"
-        ),
-        "on",
-        cli::col_br_cyan("Github"),
-        "\n"
-      ),
-
-      # Link to to the release notes
-      paste(
-        cli::col_br_yellow(cli::symbol$star),
-        "Read the",
-        cli::style_hyperlink(
-          text = cli::col_br_blue('release notes'),
-          url = 'https://serkor1.github.io/cryptoQuotes/news/index.html'
         ),
         "\n"
       ),
@@ -104,29 +103,20 @@ pkg_information <- function(){
         cli::col_br_yellow(cli::symbol$star),
         "Read the",
         cli::style_hyperlink(
-          text = cli::col_br_blue('guides and articles'),
+          text = cli::col_br_blue("documentation"),
           url = 'https://serkor1.github.io/cryptoQuotes/'
         ),
-        "on",
-        cli::col_br_cyan("pkgdown"),
         "\n"
-      )
-      # ,
-      #
-      # # link to blog
-      # paste(
-      #   cli::col_br_red(cli::symbol$heart),
-      #   "Follow our",
-      #   cli::style_hyperlink(
-      #     text = cli::col_br_blue('blog'),
-      #     url = 'https://serkor1.github.io/cryptoQuotes/news/index.html'
-      #   ),
-      #   "on",
-      #   cli::col_br_cyan("Github pages"),
-      #   "for regular updates and use-cases",
-      #   "\n"
-      # )
+      ),
 
+      paste(
+        cli::col_br_yellow(cli::symbol$star),
+        "Join the",
+        cli::style_hyperlink(
+          text = cli::col_br_blue("discussion"),
+          url = 'https://github.com/serkor1/cryptoQuotes/discussions'
+        )
+      )
     )
   )
 }

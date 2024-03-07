@@ -77,9 +77,9 @@ testthat::test_that(
       # to check for any breaking code changes
       testthat::expect_true(
         all(
-          returned_quote$High >= returned_quote$Low,
-          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
-          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+          returned_quote$high >= returned_quote$low,
+          returned_quote$open >= returned_quote$low & returned_quote$open <= returned_quote$high,
+          returned_quote$close >= returned_quote$low & returned_quote$close <= returned_quote$high
         )
 
       )
@@ -168,9 +168,9 @@ testthat::test_that(
       # to check for any breaking code changes
       testthat::expect_true(
         all(
-          returned_quote$High >= returned_quote$Low,
-          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
-          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+          returned_quote$high >= returned_quote$low,
+          returned_quote$open >= returned_quote$low & returned_quote$open <= returned_quote$high,
+          returned_quote$close >= returned_quote$low & returned_quote$close <= returned_quote$high
         )
 
       )
@@ -259,9 +259,9 @@ testthat::test_that(
       # to check for any breaking code changes
       testthat::expect_true(
         all(
-          returned_quote$High >= returned_quote$Low,
-          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
-          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+          returned_quote$high >= returned_quote$low,
+          returned_quote$open >= returned_quote$low & returned_quote$open <= returned_quote$high,
+          returned_quote$close >= returned_quote$low & returned_quote$close <= returned_quote$high
         )
 
       )
@@ -348,9 +348,9 @@ testthat::test_that(
       # to check for any breaking code changes
       testthat::expect_true(
         all(
-          returned_quote$High >= returned_quote$Low,
-          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
-          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+          returned_quote$high >= returned_quote$low,
+          returned_quote$open >= returned_quote$low & returned_quote$open <= returned_quote$high,
+          returned_quote$close >= returned_quote$low & returned_quote$close <= returned_quote$high
         )
 
       )
@@ -437,9 +437,9 @@ testthat::test_that(
       # to check for any breaking code changes
       testthat::expect_true(
         all(
-          returned_quote$High >= returned_quote$Low,
-          returned_quote$Open >= returned_quote$Low & returned_quote$Open <= returned_quote$High,
-          returned_quote$Close >= returned_quote$Low & returned_quote$Close <= returned_quote$High
+          returned_quote$high >= returned_quote$low,
+          returned_quote$open >= returned_quote$low & returned_quote$open <= returned_quote$high,
+          returned_quote$close >= returned_quote$low & returned_quote$close <= returned_quote$high
         )
 
       )

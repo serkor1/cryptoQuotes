@@ -9,17 +9,7 @@
     pkgname,
     ...) {
 
-
-
-  # 1) bugreport
-  # requests
-  rlang::inform(
-    request_bugreport(),
-    ...,
-    class = "packageStartupMessage"
-  )
-
-  # 2) package
+  # 1) package
   # header
   rlang::inform(
     header(
@@ -32,34 +22,10 @@
     class = "packageStartupMessage"
   )
 
-  # 3) package information
+  # 2) package information
   # to the user
   rlang::inform(
     pkg_information(),
-    ...,
-    class = "packageStartupMessage"
-  )
-
-  # 4) caution to the user
-  # 4.1) caution header
-  rlang::inform(
-    caution_header(),
-    ...,
-    class = "packageStartupMessage"
-  )
-
-  # 4.2) caution message
-  rlang::inform(
-    caution_message(),
-    ...,
-    class = "packageStartupMessage"
-  )
-
-  # 5) conflict handling
-  # will only print if
-  # conflicts occur
-  rlang::inform(
-    conflicting_pkg(),
     ...,
     class = "packageStartupMessage"
   )

@@ -129,11 +129,11 @@ bybitResponse <- function(
     ohlc = {
       list(
         colum_names = c(
-          'Open',
-          'High',
-          'Low',
-          'Close',
-          'Volume'
+          'open',
+          'high',
+          'low',
+          'close',
+          'volume'
         ),
         colum_location = c(
           2:6

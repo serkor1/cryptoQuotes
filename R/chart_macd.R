@@ -61,7 +61,7 @@ macd <- function(
         # indicator
         indicator_ <- toDF(
           TTR::MACD(
-            x = toQuote(ticker)[,"Close"],
+            x = toQuote(ticker)[,grep(pattern = 'close', x = colnames(ticker))],
             nFast    = !!nFast,
             nSlow    = !!nSlow,
             nSig     = !!nSig,
@@ -77,48 +77,75 @@ macd <- function(
 
         # 2) create plot
         # without using pipes;
+        p <- plotly::plot_ly(
+          data       = indicator_,
+          showlegend = FALSE,
+          name       = 'MACD',
+          x          = ~ index,
+          y          = ~ (macd - signal),
+          color      = ~ direction,
+          colors     = c(
+            # The first color always
+            # applies to the true condition
+            candle_color$bullish,
+            candle_color$bearish),
+          type       = 'bar',
+          marker     = list(line = list(
+            color = "black",
+            width = 0.5
+          ))
+        )
 
-        # layout: adds the title MACD
-          plotly::layout(
-            p = plotly::add_lines(
-              p = plotly::add_lines(
-                p = plotly::plot_ly(
-                  data       = indicator_,
-                  showlegend = FALSE,
-                  name       = 'MACD',
-                  x          = ~ Index,
-                  y          = ~ (macd - signal),
-                  color      = ~ direction,
-                  colors     = c(
-                    # The first color always
-                    # applies to the true condition
-                    candle_color$bullish,
-                    candle_color$bearish),
-                  type       = 'bar',
-                  marker     = list(line = list(
-                    color = "black",
-                    width = 0.5
-                  ))
-                ),
-                name         = "MACD: Signal",
-                data = indicator_,
-                showlegend = TRUE,
-                x = ~ Index,
-                y = ~ signal,
-                inherit = FALSE,
-                line = list(width = linewidth)
-              ),
+        layers <- list(
+          list(
+            type = "add_lines",
+            params = list(
+              name = "MACD: Signal",
+              data = indicator_,
+              showlegend = FALSE,
+              x = ~ index,
+              y = ~ signal,
+              inherit = FALSE,
+              line = list(width = linewidth)
+            )
+
+          ),
+          list(
+            type = "add_lines",
+            params = list(
               name = "MACD: MACD",
               data = indicator_,
-              showlegend = TRUE,
-              x = ~ Index,
+              showlegend = FALSE,
+              x = ~ index,
               y = ~ macd,
               inherit = FALSE,
               line = list(width = linewidth)
-            ),
-            yaxis = list(title = 'MACD')
-          )
+            )
 
+          )
+        )
+
+
+        p <- build(
+          plot = p,
+          layers = layers,
+          annotations = list(
+            list(
+              text = paste0("MACD(",paste(c(!!nFast, !!nSlow,!!nSig), collapse = ','), ")"),
+              x = 0.01,
+              y = 1,
+              xref = 'paper',
+              yref = 'paper',
+              showarrow = FALSE
+            )
+          ),
+          yaxis = list(
+            title = NA
+          )
+        )
+
+
+        p
 
 
       }

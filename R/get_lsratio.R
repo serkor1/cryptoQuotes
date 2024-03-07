@@ -67,8 +67,6 @@ get_lsratio <- function(
   # connection and interval validity
   check_internet_connection()
 
-
-
   # 1) check all arguments
   # what are missing, and are
   # the classes correct?
@@ -103,7 +101,6 @@ get_lsratio <- function(
     trimws(ticker)
   )
 
-
   # 1) check wether
   # the chosen exchange
   # is supported by the library
@@ -129,7 +126,6 @@ get_lsratio <- function(
     )
   )
 
-
   assert(
     interval %in% suppressMessages(
       available_intervals(
@@ -154,10 +150,6 @@ get_lsratio <- function(
     )
   )
 
-
-
-
-
   # 2) construct dates
   # with API constraints;
   #
@@ -165,15 +157,20 @@ get_lsratio <- function(
   # it will return the last
   # 100 available pips
   # closest to Sys.time()
-  from <- coerce_date(
-    if (is.null(from)) Sys.Date() - 28 else max(Sys.Date() - 28, from)
-  )
+  from <- coerce_date(from); to <- coerce_date(to)
 
-  to <- coerce_date(
-    if (is.null(to)) Sys.time() else to
-  )
+  # NOTE: binance only supports
+  # the last 30 days
+  if (source %in% 'binance') {
 
+    from <- max(
+      from,
+      coerce_date(
+        Sys.Date() - 28
+      )
+    )
 
+  }
 
   response <- fetch(
     ticker = ticker,
@@ -186,9 +183,9 @@ get_lsratio <- function(
     top   = top
   )
 
-  # # Calculate the long
-  # # short ratio as not
-  # # all APIs provides this by default
+  # Calculate the long
+  # short ratio as not
+  # all APIs provides this by default
   response$ls_ratio <- response$long / response$short
 
   if (source == 'kraken') {
@@ -197,8 +194,6 @@ get_lsratio <- function(
     response$short <- response$short/100
 
   }
-
-
 
   # return the
   # response

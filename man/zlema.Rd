@@ -4,7 +4,7 @@
 \alias{zlema}
 \title{Add Zero Lag Exponential Moving Average to the chart}
 \usage{
-zlema(price = "Close", n = 10, ratio = NULL, internal = list(), ...)
+zlema(price = "close", n = 10, ratio = NULL, internal = list(), ...)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ZLEMA}}

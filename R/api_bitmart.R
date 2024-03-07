@@ -92,7 +92,7 @@ bitmartResponse <- function(
     EXPR = type,
     ohlc = {
       list(
-        colum_names = if (futures) c('Low', 'High', 'Open', 'Close', 'Volume') else c('Open', 'High', 'Low', 'Close', 'Volume'),
+        colum_names = if (futures) c('low', 'high', 'open', 'close', 'volume') else c('open', 'high', 'low', 'close', 'volume'),
         colum_location = if (futures) 1:5 else c(2:5,7),
         index_location = if (futures) 6 else 1
       )

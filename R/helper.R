@@ -4,8 +4,54 @@
 # objective: A class of helper
 # function
 # script start;
-# converting Quotes to and from data.frames; ####
 
+build <- function(
+    plot,
+    layers,
+    ...
+) {
+
+  # 0) generate function
+  apply_layer <- function(
+    plot,
+    layer
+  ) {
+
+    # Generalize function calling based on the 'type' attribute
+    fun_name <- layer$type  # The Plotly function to call, e.g., "add_lines", "add_ribbons"
+    layer$params$p <- plot  # Ensure the plot is passed as the first argument
+
+    if (!"data" %in% names(layer$params)) {
+      # If 'data' is not explicitly provided, assume the plot's original data should be used
+      layer$params$data <- plot$x$data
+    }
+
+    # Dynamically call the Plotly function with the parameters specified in 'layer$params'
+    do.call(
+      get(
+        fun_name,
+        envir = asNamespace('plotly')
+      ), args = layer$params
+    )
+
+  }
+
+  plotly::layout(
+    p =  Reduce(
+      f = apply_layer,
+      x = layers,
+      init = plot
+    ),
+    ...
+  )
+
+
+}
+
+
+
+
+# converting Quotes to and from data.frames; ####
 
 to_title <- function(
     x) {
@@ -45,23 +91,23 @@ infer_interval <- function(
 
   switch(
     as.character(x),
-         "1" = "1s",
-         "60" = "1m",
-         "180" = "3m",
-         "300" = "5m",
-         "900" = "15m",
-         "1800" = "30m",
-         "3600" = "1h",
-         "7200" = "2h",
-         "14400" = "4h",
-         "21600" = "6h",
-         "28800" = "8h",
-         "43200" = "12h",
-         "86400" = "1d",
-         "259200" = "3d",
-         "604800" = "1w",
-         "1209600" = "2w",
-         "1M"
+    "1" = "1s",
+    "60" = "1m",
+    "180" = "3m",
+    "300" = "5m",
+    "900" = "15m",
+    "1800" = "30m",
+    "3600" = "1h",
+    "7200" = "2h",
+    "14400" = "4h",
+    "21600" = "6h",
+    "28800" = "8h",
+    "43200" = "12h",
+    "86400" = "1d",
+    "259200" = "3d",
+    "604800" = "1w",
+    "1209600" = "2w",
+    "1M"
   )
 
 
@@ -227,7 +273,7 @@ toDF <- function(quote) {
   # the quote to a data.frame
   # for the plotting and reshaping
 
-  attr_list <- attributes(quote)$tickerInfo
+  attr_list <- attributes(quote)$source
   # 2) convert to
   # data.frame
   DF <- as.data.frame(
@@ -235,18 +281,22 @@ toDF <- function(quote) {
     row.names = NULL
   )
 
+  colnames(DF) <- tolower(
+    colnames(DF)
+  )
+
   # 3) add the index;
-  DF$Index <- zoo::index(
+  DF$index <- zoo::index(
     quote
   )
 
   # 1) determine
   # wether the the day is closed
   # green
-  if (all(c('Open', 'Close') %in% colnames(DF))) {
+  if (all(c('open', 'close') %in% colnames(DF))) {
 
     DF$direction <- ifelse(
-      test = DF$Close > DF$Open,
+      test = DF$close > DF$open,
       yes  = 'Increasing',
       no   = 'Decreasing'
     )
@@ -254,7 +304,7 @@ toDF <- function(quote) {
   }
 
 
-  attributes(DF)$tickerInfo <- attr_list
+  attributes(DF)$source <- attr_list
 
   return(
     DF
@@ -266,18 +316,16 @@ toDF <- function(quote) {
 toQuote <- function(DF) {
 
   quote <- xts::as.xts(
-    DF[,c('Open','High', 'Low', 'Close', 'Volume', 'Index')]
+    DF[,grep(pattern = 'open|high|low|close|volume|index',x = colnames(DF), ignore.case = TRUE)]
   )
 
   zoo::index(quote) <- as.POSIXct(
-    DF$Index
+    DF$index
   )
 
-  attributes(quote)$tickerInfo <- attributes(DF)$tickerInfo
+  attributes(quote)$source <- attributes(DF)$source
 
-  return(
-    quote
-  )
+  quote
 }
 
 # Plotly parameters; ####

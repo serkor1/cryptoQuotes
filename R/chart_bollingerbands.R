@@ -39,7 +39,6 @@ bollinger_bands <- function(
     rlang::expr(
       {
 
-
         # 0) locate global
         # parameters to be passed
         # into the charting functions;
@@ -52,8 +51,6 @@ bollinger_bands <- function(
         ticker <- internal_args$ticker
         deficiency <- internal_args$deficiency
         chart  <- internal_args$chart
-
-
 
         candle_color <- movement_color(
           deficiency = deficiency
@@ -69,18 +66,79 @@ bollinger_bands <- function(
         # indicator
         indicator_ <- toDF(
           TTR::BBands(
-            HLC = toQuote(ticker)[, c("High", "Low", "Close")],
+            HLC = toQuote(ticker)[, grep(pattern = 'high|low|close', x = colnames(ticker),ignore.case = TRUE)],
             n = !!n,
             maType = !!maType,
             ... = !!rlang::enquos(...)
           )
         )
 
+
+
+        layers <- list(
+          # middle line
+          list(
+            type = "add_lines",
+            params = list(
+              showlegend = FALSE,legendgroup = 'bb',
+              name = "Lower",
+              inherit = FALSE,
+              data = indicator_,
+              x = ~index,
+              y = ~dn,
+              line =list(
+                color = color,
+                width = linewidth
+              )
+            )
+
+          ),
+
+          list(
+            type = "add_lines",
+            params = list(
+              showlegend = FALSE,
+              legendgroup = 'bb',
+              name = "Upper",
+              inherit = FALSE,
+              data = indicator_,
+              x = ~index,
+              y = ~up,
+              line = list(
+                color = color,
+                width = linewidth
+              )
+            )
+
+          ),
+
+          list(
+            type = "add_lines",
+            params = list(
+              showlegend = FALSE,
+              legendgroup = 'bb',
+              name = paste(!!maType),
+              inherit = FALSE,
+              data = indicator_,
+              x = ~index,
+              y = ~mavg,
+              line = list(
+                color =color,
+                dash ='dot',
+                width = linewidth
+              )
+            )
+
+          )
+
+        )
+
         chart <- plotly::add_ribbons(
           showlegend = TRUE,
+          legendgroup = 'bb',
           p = chart,
           inherit = FALSE,
-          x = ~Index,
+          x = ~index,
           ymin = ~dn,
           ymax = ~up,
           data = indicator_,
@@ -88,43 +146,13 @@ bollinger_bands <- function(
           line = list(
             color = "transparent"
           ),
-          name = "Bollinger Bands"
+          name = paste0("BB(", paste(c(!!n, !!sd), collapse = ", "), ")")
         )
 
-        # 2) add middle band
-        chart <- plotly::add_lines(
-          p= plotly::add_lines(
-            p =plotly::add_lines(
-              showlegend = TRUE,
-              p = chart,
-              inherit = FALSE,
-              data = indicator_,
-              x = ~Index,
-              y = ~mavg,
-              line = list(
-                color =color,
-                dash ='dot',
-                width = linewidth
-              ),
-              name = "Moving Average"
-            ),
-            name = "Upper Band",
-            inherit = FALSE,
-            x = ~Index,
-            y = ~up,
-            line = list(
-              color = color,
-              width = linewidth
-            )
-          ),
-          inherit = FALSE,
-          name = "Lower Band",
-          x = ~Index,
-          y = ~dn,
-          line = list(
-            color = color,
-            width = linewidth
-          )
+
+        chart <- build(
+          plot = chart,
+          layers = layers
         )
 
         chart

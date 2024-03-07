@@ -102,7 +102,7 @@ kucoinResponse <- function(
     EXPR = type,
     ohlc = {
       list(
-        colum_names = if (futures) c('Open', 'High', 'Low', 'Close', 'Volume') else c('Open', 'Close', 'High', 'Low', 'Volume'),
+        colum_names = if (futures) c('open', 'high', 'low', 'close', 'volume') else c('open', 'close', 'high', 'low', 'volume'),
         colum_location = 2:6,
         index_location = 1
       )

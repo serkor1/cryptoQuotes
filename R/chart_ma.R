@@ -28,7 +28,7 @@
 #'
 #' @export
 sma <- function(
-    price = "Close",
+    price = "close",
     n = 10,
     internal = list(),
     ...) {
@@ -62,7 +62,7 @@ sma <- function(
         # indicator
         indicator <- toDF(
           TTR::SMA(
-            x = toQuote(ticker)[, !!price],
+            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
             n = !!n,
             ... = !!rlang::enquos(...)
           )
@@ -76,8 +76,8 @@ sma <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
-          y = ~SMA,
+          x = ~index,
+          y = ~sma,
           line = list(
             width = linewidth
           ),
@@ -152,7 +152,7 @@ ema <- function(
         # indicator
         indicator <- toDF(
           TTR::EMA(
-            x = toQuote(ticker)[, !!price],
+            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
             n = !!n,
             wilder = !!wilder,
             ratio = !!ratio,
@@ -168,8 +168,8 @@ ema <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
-          y = ~EMA,
+          x = ~index,
+          y = ~ema,
           line = list(
             width = linewidth
           ),
@@ -206,7 +206,7 @@ ema <- function(
 #'
 #' @export
 dema <- function(
-    price = "Close",
+    price = "close",
     n = 10,
     v = 1,
     wilder = FALSE,
@@ -243,7 +243,7 @@ dema <- function(
         # indicator
         indicator <- toDF(
           TTR::DEMA(
-            x = toQuote(ticker)[, !!price],
+            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
             n = !!n,
             v = !!v,
             wilder = !!wilder,
@@ -259,8 +259,8 @@ dema <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
-          y = ~DEMA,
+          x = ~index,
+          y = ~dema,
           line = list(
             width = linewidth
           ),
@@ -298,7 +298,7 @@ dema <- function(
 #'
 #' @export
 wma <- function(
-    price = "Close",
+    price = "close",
     n = 10,
     wts = 1:n,
     internal = list(),
@@ -334,7 +334,7 @@ wma <- function(
         # indicator
         indicator <- toDF(
           TTR::WMA(
-            x = toQuote(ticker)[, !!price],
+            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
             n   = !!n,
             wts = !!wts,
             ... = !!rlang::enquos(...)
@@ -353,8 +353,8 @@ wma <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
-          y = ~V1,
+          x = ~index,
+          y = ~v1,
           line = list(
             width = linewidth
           ),
@@ -424,8 +424,8 @@ evwma <- function(
         # indicator
         indicator <- toDF(
           TTR::EVWMA(
-            price  = toQuote(ticker)[, !!price],
-            volume = toQuote(ticker)$Volume,
+            price  = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
+            volume = toQuote(ticker)$volume,
             n   = !!n,
             ... = !!rlang::enquos(...)
           )
@@ -443,8 +443,8 @@ evwma <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
-          y = ~V1,
+          x = ~index,
+          y = ~v1,
           line = list(
             width = linewidth
           ),
@@ -479,7 +479,7 @@ evwma <- function(
 #'
 #' @export
 zlema <- function(
-    price = "Close",
+    price = "close",
     n = 10,
     ratio = NULL,
     internal = list(),
@@ -515,7 +515,7 @@ zlema <- function(
         # indicator
         indicator <- toDF(
           TTR::ZLEMA(
-            x  = toQuote(ticker)[, !!price],
+            x  = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
             ratio = !!ratio,
             n   = !!n,
             ... = !!rlang::enquos(...)
@@ -534,8 +534,8 @@ zlema <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
-          y = ~V1,
+          x = ~index,
+          y = ~v1,
           line = list(
             width = linewidth
           ),
@@ -567,7 +567,7 @@ zlema <- function(
 #' @family chart indicators
 #' @export
 vwap <- function(
-    price = "Close",
+    price = "close",
     n = 10,
     ratio = NULL,
     internal = list(),
@@ -603,8 +603,8 @@ vwap <- function(
         # indicator
         indicator <- toDF(
           TTR::VWAP(
-            price  = toQuote(ticker)[, !!price],
-            volume = toQuote(ticker)$Volume,
+            price  = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
+            volume = toQuote(ticker)$volume,
             n   = !!n,
             ... = !!rlang::enquos(...)
           )
@@ -616,8 +616,8 @@ vwap <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
-          y = ~VWAP,
+          x = ~index,
+          y = ~vwap,
           line = list(
             width = linewidth
           ),
@@ -687,7 +687,7 @@ hma <- function(
         # indicator
         indicator <- toDF(
           TTR::HMA(
-            x  = toQuote(ticker)[, !!price],
+            x  = toQuote(ticker)[,grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
             n   = !!n,
             ... = !!rlang::enquos(...)
           )
@@ -699,8 +699,8 @@ hma <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
-          y = ~V1,
+          x = ~index,
+          y = ~v1,
           line = list(
             width = linewidth
           ),
@@ -734,7 +734,7 @@ hma <- function(
 #'
 #' @export
 alma <- function(
-    price = "Close",
+    price = "close",
     n = 9,
     offset = 0.85,
     sigma  = 6,
@@ -778,7 +778,7 @@ alma <- function(
         # indicator
         indicator <- toDF(
           TTR::ALMA(
-            x  = toQuote(ticker)[, !!price],
+            x  = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
             n   = !!n,
             offset = !!offset,
             sigma = !!sigma,
@@ -792,7 +792,7 @@ alma <- function(
           p = chart,
           inherit = FALSE,
           data = indicator,
-          x = ~Index,
+          x = ~index,
           y = ~!!rlang::sym(price),
           line = list(
             width = linewidth

@@ -25,9 +25,9 @@ rsi(
     See Examples.
 }}
 
-\item{upper_limit}{A \link{numeric}-vector of length 1. 80 by default. Sets the upper limit of the \link[TTR:RSI]{TTR::RSI}.}
+\item{upper_limit}{A \link{numeric}-vector of \link{length} 1. 80 by default. Sets the upper limit of the \link[TTR:RSI]{TTR::RSI}.}
 
-\item{lower_limit}{A \link{numeric}-vector of length 1. 20 by default. Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
+\item{lower_limit}{A \link{numeric}-vector of \link{length} 1. 20 by default. Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
 
 \item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
 

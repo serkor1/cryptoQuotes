@@ -29,7 +29,6 @@ testthat::test_that(
         wma(),
         evwma(),
         vwap(),
-
         bollinger_bands()
 
       )
@@ -50,6 +49,7 @@ testthat::test_that(
 
   }
 )
+
 
 testthat::test_that(
   desc = "Charting with ohlc bars and indicators",

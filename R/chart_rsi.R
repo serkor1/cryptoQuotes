@@ -16,8 +16,8 @@
 #' It is a valuable tool for assessing the momentum and relative strength of an asset, helping traders make more informed decisions in financial markets.
 #'
 #' @inheritParams TTR::RSI
-#' @param upper_limit A [numeric]-vector of length 1. 80 by default. Sets the upper limit of the [TTR::RSI].
-#' @param lower_limit A [numeric]-vector of length 1. 20 by default. Sets the lower limit of the [TTR::RSI].
+#' @param upper_limit A [numeric]-vector of [length] 1. 80 by default. Sets the upper limit of the [TTR::RSI].
+#' @param lower_limit A [numeric]-vector of [length] 1. 20 by default. Sets the lower limit of the [TTR::RSI].
 #' @param internal An empty [list]. Used for internal purposes. Ignore.
 #'
 #' @returns Invisbly returns a plotly object.
@@ -45,7 +45,12 @@ rsi <- function(
         # into the charting functions;
 
         # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+        internal_args <- flatten(
+          lapply(
+            X   = !!rlang::enexpr(internal),
+            FUN = rlang::eval_tidy
+          )
+        )
 
         ticker <- internal_args$ticker
         deficiency <- internal_args$deficiency
@@ -62,68 +67,96 @@ rsi <- function(
 
         indicator <- toDF(
           TTR::RSI(
-            price    = toQuote(ticker)[,"Close"],
+            price    = toQuote(ticker)[,grep(pattern = 'close', x = colnames(ticker))],
             n        = !!n,
             maType   = !!maType,
             ...      = !!rlang::enquos(...)
           )
         )
 
-
-        plotly::layout(p = plotly::add_ribbons(
-          # RSI plot: upper lline
-          plotly::add_lines(
-            # Lower line
-            p = plotly::add_lines(
-              # RSI
-              p = plotly::plot_ly(
-                name = "RSI",
-                data = indicator,
-                mode = "lines",
-                showlegend = TRUE,
-                type = "scatter",
-                x = ~Index,
-                y = ~rsi,
-                line = list(
-                  color = color,
-                  width = linewidth
-                )
-              ),
+        layers <- list(
+          list(
+            type = "add_lines",
+            params = list(
               showlegend = FALSE,
               name = "Upper Bound",
-              x = ~Index,
-              y = !!upper_limit,
+              y = ~!!upper_limit,
               line = list(
                 color = color,
-                dash ='dot',
+                dash = 'dot',
                 width = linewidth
               )
-            ),
-            showlegend = FALSE,
-            name = "Lower Bound",
-            x = ~Index,
-            y = !!lower_limit,
-            line = list(
-              color = color,
-              dash ='dot',
-              width = linewidth
+            )
+
+          ),
+          list(
+            type = "add_lines",
+            params = list(
+              showlegend = FALSE,
+              name = "Lower Bound",
+              y = ~!!lower_limit,
+              line = list(
+                color = color,
+                dash = 'dot',
+                width = linewidth
+              )
+            )
+
+          ),
+          list(
+            type = "add_ribbons",
+            params = list(
+              data       = ticker,
+              showlegend = FALSE,
+              ymin = ~!!lower_limit,
+              ymax = ~!!upper_limit,
+              fillcolor = "rgba(241,0,241,0.1)",
+              line = list(
+                color = 'rgba(0,0,0,0)'
+                ) # Transparent line
+            )
+
+          )
+        )
+
+        # Initialize the plot with RSI line
+        p <- plot_ly(
+          name = 'RSI',
+          data = indicator,
+          mode = "lines",
+          showlegend = FALSE,
+          type = "scatter",
+          x = ~index,
+          y = ~rsi,
+          line = list(
+            color = color,
+            width = linewidth
+          )
+        )
+
+        p <- build(
+          plot   = p,
+          layers = layers,
+          annotations = list(
+            list(
+              text = paste0("RSI(", !!n, ")"),
+              x = 0.01,
+              y = 1,
+              xref = 'paper',
+              yref = 'paper',
+              showarrow = FALSE
             )
           ),
-          showlegend = FALSE,
-          data = ticker,
-          x = ~Index,
-          ymin = !!lower_limit,
-          ymax = !!upper_limit,
-          line = list(color = 'rgba(0,0,0,0)'), # Transparent lines
-          fillcolor = "rgba(241,0,241,0.1)"
-        ),
-        yaxis = list(
-          title = 'RSI',
-          range = c(0, 100)
-        )
+          yaxis = list(
+            title = NA,
+            range = c(0, 100)
+          )
+
         )
 
 
+        # Display the plot
+        p
 
       }
 

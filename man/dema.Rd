@@ -5,7 +5,7 @@
 \title{Add Double Exponential Moving Average to the chart}
 \usage{
 dema(
-  price = "Close",
+  price = "close",
   n = 10,
   v = 1,
   wilder = FALSE,

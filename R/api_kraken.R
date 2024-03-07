@@ -133,7 +133,7 @@ krakenResponse <- function(
   # Define the basic structure for OHLC data
   ohlc_structure <- function(volume_loc = 6) {
     list(
-      colum_names = c('Open', 'High', 'Low', 'Close', 'Volume'),
+      colum_names = c('open', 'high', 'low', 'close', 'volume'),
       colum_location = c(2:5, volume_loc),
       index_location = 1
     )
