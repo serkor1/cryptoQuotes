@@ -1,13 +1,13 @@
 Package: cryptoQuotes
 Title: A Streamlined Access to Cryptocurrency OHLC-V Market Data and Sentiment Indicators
-Version: 1.2.1
+Version: 1.3.0
 Authors@R: c(
     person("Serkan", "Korkmaz", , "serkor1@duck.com", role = c("cre", "aut", "ctb", "cph"),
            comment = c(ORCID = "0000-0002-5052-0982")),
     person("Jonas", "Cuzulan Hirani", , "jjh@vive.dk", role = "ctb",
            comment = c(ORCID = "0000-0002-9512-1993"))
   )
-Description: This high-level API client offers a streamlined access to comprehensive cryptocurrency market data from major exchanges.  
+Description: This high-level API client offers a streamlined access to comprehensive public cryptocurrency market data from major exchanges.  
   It features robust OHLC-V (Open, High, Low, Close, Volume) candle data with flexible granularity, ranging from seconds to months, and includes insightful sentiment indicators. 
   By aggregating data directly from leading exchanges, this package ensures a reliable and stable flow of market information, eliminating the need for complex, low-level API interactions.
 License: GPL (>= 2)

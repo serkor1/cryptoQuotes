@@ -6,7 +6,7 @@
 
 * `get_lsratio` and `getLSratio()` supports `kraken` and `bybit` as `source`
 
-* `available_`-functions are more adaptive to the callling environments
+* `available_`-functions are more adaptive to the calling environments
 
 ```R
 ## charting the klines
@@ -83,7 +83,6 @@ get_openinterest(
     )
 ```
 
-
 ## Breaking Changes
 
 ### Charting
@@ -110,7 +109,7 @@ As the `cryptoQuotes`-package has moved to the `tidyverse` style guide, the `get
 
 * Corrected misspelled ticker in Vignette 
 * All returned Quotes are now in `UTC`, again.
-* Fixed an error on the ``Bitmart` API where weekly candles would throw an error.
+* Fixed an error on the `Bitmart` API where weekly candles would throw an error.
 
 # cryptoQuotes 1.2.0
 
