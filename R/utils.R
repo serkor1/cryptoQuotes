@@ -266,23 +266,20 @@ fetch <- function(
     what = c('array', 'matrix', 'data.frame')
   )
 
-
   # 2.1.1) If no data-type container
   # exists
   if (!any(idx)) {
 
-    tmp <- as.data.frame(
-      response
-    )
 
+    tmp <- as.data.frame(response)
 
-    if (nrow(tmp) == 0) {
+    if(nrow(tmp) == 1) {
       # 2.1.2) Look for possible
       # error messages
       idx <- vapply(
         X = response,
         FUN = grepl,
-        pattern = "Not Exist|Error|Failed|Invalid|Illegal",
+        pattern = "Not Exist|Error|Failed|Invalid|Illegal|Unknown",
         ignore.case = TRUE,
         FUN.VALUE = logical(1)
       )
@@ -300,12 +297,14 @@ fetch <- function(
           )
         ))
       )
+
     }
+
+
 
     response <- tmp
 
   } else {
-
 
     # 2.2) Extract data
     # using location

@@ -9,7 +9,7 @@
 # setup
 rm(list = ls()); gc(); devtools::load_all()
 
-
-# script end;
-
+get_quote(
+  "sd"
+)
 

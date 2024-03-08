@@ -50,7 +50,7 @@ testthat::test_that(
           interval = "1h",
           from     = from,
           to       = to
-        )
+        ),message = paste("Error for:", exchange)
       )
 
       # 2) expect that the number of
