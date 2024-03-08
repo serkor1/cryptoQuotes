@@ -159,6 +159,36 @@ get_lsratio <- function(
   # closest to Sys.time()
   from <- coerce_date(from); to <- coerce_date(to)
 
+
+  # 3) if either of the
+  # date variables are NULL
+  # pass them into the default_dates
+  # function to extract 100 pips.
+  if (is.null(from) | is.null(to)) {
+
+    # to ensure consistency across
+    # APIs if no date is set the output
+    # is limited to 200 pips
+    forced_dates <- default_dates(
+      interval = interval,
+      from     = from,
+      to       = to,
+      limit    = switch(
+        EXPR = source,
+        'bitmart' = {
+          if (futures) NULL else 200
+        },
+        NULL
+      )
+    )
+
+    # generate from
+    # to variables
+    from <- forced_dates$from
+    to   <- forced_dates$to
+
+  }
+
   # NOTE: binance only supports
   # the last 30 days
   if (source %in% 'binance') {
@@ -182,6 +212,17 @@ get_lsratio <- function(
     from  = from,
     top   = top
   )
+
+  # Bybit has no to or from
+  # parameter - so this have to be subsettet
+  # manually
+  if (source == "bybit") {
+
+    response <- response[
+      paste(c(from, to),collapse = "/")
+      ]
+
+  }
 
   # Calculate the long
   # short ratio as not

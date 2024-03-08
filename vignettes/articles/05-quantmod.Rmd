@@ -1,125 +1,113 @@
 ---
-title: "Cryptocurrency Market Data with Quantmod and TTR"
+title: "Cryptocurrency Market Data with quantmod and TTR"
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  message = FALSE
+  message = FALSE,
+  out.width = "100%"
 )
 ```
 
-```{r setup, eval=TRUE, include=FALSE}
+```{r, message=FALSE}
+## load libraries
 library(cryptoQuotes)
 ```
 
+The `cryptoQuotes` were built with `quantmod` and `TTR` in mind. To demonstrate how `cryptoQuotes` works with these packages, we will use the following data,
 
-```cryptoQuotes``` were built to be interoperable with the powerful packages ```quantmod``` and ```TTR```. Here we use an example with ```ATOMUSDT```,
-
-```{r, eval=FALSE}
-## load USDT denominated ATOM
-## with hourly intervals
-## for September
-ATOM <- cryptoQuotes::get_quote(
-  ticker = 'ATOMUSDT',
-  source = 'binance',
-  futures = TRUE,
-  interval = '15m',
-  from     = '2023-01-01',
-  to       = '2023-01-02'
+```{r}
+## Get daily 
+## Bitcoin from 
+## the spot market
+BTC <- get_quote(
+  ticker  = "BTCUSDT",
+  source  = "bybit",
+  futures = FALSE,
+  interval= "1d",
+  from    = "2024-01-01",
+  to      = Sys.Date()
 )
 ```
 
-## Cryptocurrency and Quantmod
+## Cryptocurrency and quantmod
 
-### Charting Cryptocurrency with Quantmod
+The `BTC` can be passed into the charting functions, or be used in the `quantmod::tradeModel()`-functions.
 
-The ```ATOMUSDT``` can be passed directly into the ```quantmod::chartSeries()```-function with, if desired, the relevant technical indicators. Pass ```quantmod::addBBands()``` and ```quantmod::addMACD``` into the ```TA```-argument, to add Bollinger Bands and Moving Average Convergence Divergence (MACD) indicators,
+### Building Cryptocurrency Trade Models
 
-```{r, out.width="100%",fig.align='center',fig.height=5}
-## chart the spotAtom
-## with a candlestick
-## chart with Bollinger Bands
-## and MACD indicators
+Below is an example on how to use the `quantmod::tradeModel` with `BTC`,
+
+
+```{r}
+## 1) specify
+## the model
+BTC_model <-  quantmod::specifyModel(
+  quantmod::Next(quantmod::OpCl(BTC)) ~ quantmod::Lag(quantmod::OpHi(BTC),0:3)
+  )
+
+## 2) build the
+## model
+built_model <-  quantmod::buildModel(
+  x = BTC_model,
+  method ='lm',
+  training.per = range(head(zoo::index(BTC), 10))
+  )
+
+## 3) trade the model
+quantmod::tradeModel(built_model,leverage=2)
+```
+
+### Charting Cryptocurrency with quantmod
+
+```{r}
+## chart the
+## BTC with candlesticks
+## and Bollinger BAnds
 quantmod::chartSeries(
-  x = ATOM,
-  theme = quantmod::chartTheme("white"),
+  x = BTC,
+  type = "candlesticks",
   TA = c(
-    # Add Bollinger Bands
-    quantmod::addBBands(),
-    
-    # Add MACD
-    quantmod::addMACD()
-  )
-) 
-
-```
-
-
-### Locating Peaks with Quantmod
-
-```{r, out.width="100%",fig.align='center',fig.height=5}
-# 1) find peaks
-# using a small threshold;
-peak_idx  <- min(
-  quantmod::findPeaks(
-  ATOM$Close,
-  thresh = 0.022
+    quantmod::addBBands()
   )
 )
-
-# 2) add to main to main
-# chart
-quantmod::addLines(
-  h = ATOM[peak_idx]$Close,
-  overlay = TRUE,
-  col     = 'steelblue1'
-  )
 ```
-
-
-
-> **NOTE:** quantmod only supports daily interals and, therefore, functions like ```allReturns()``` needs to be modified.
-
 
 ## Cryptocurrency and TTR
 
-For Artificial Intelligence applications, like price prediction, where the ```numeric``` value of the indicators are needed, the indicators from ```TTR``` can be calculated and added to the returned data from the ```cryptoQuotes::get_quote()```-function. ```TTR::BBands()``` is one of such indicators that some traders use as buy and sell signals, these can be added the following way,
+Below is an example on how to use the `BBands()`-function from the `TTR`-package,
 
 ```{r}
 # 1) calculate
 # Bollinger Bands
 indicator <- TTR::BBands(
-  quantmod::HLC(ATOM)
+  quantmod::HLC(BTC)
 )
 
 # 2) add to the 
 # cryptocurrency quote
-ATOM <- cbind(
-  ATOM, 
+BTC <- cbind(
+  BTC, 
   indicator
 )
-
-# 3) calculate
-# the distance of the
-# closing Price and upper band
-ATOM$distance <- (ATOM$up - ATOM$Close)^2
 ```
 
-The resulting indicator can be fit using, for example, the ```lm()```-function to determine how the distance affects the next closing price.
-
-```{r}
-# 1) fit a simple
-# model using the distance
-# to the upper band and
-# lagged closing price
-# as predictors
-summary(
-  lm(
-    ATOM$Close ~ xts::lag.xts(ATOM$Close) + xts::lag.xts(ATOM$distance)
-  )
+```{r, echo =FALSE, fig.alt="Cryptocurrency Market Data in Quantmod"}
+## print table as a kable
+## for a neat presentationb
+knitr::kable(
+  caption = 'Bitcoin with Bollinger Bands using TTR',
+  align = 'lccccccccr',
+  table.attr = "style='width:100%;'",
+  x = data.frame(
+    cbind(
+      Index = paste(tail(zoo::index(BTC))),
+      round(tail(zoo::coredata(BTC)),3)
+    ),row.names = NULL
+  ),
+  format = 'html'
 )
-```
 
-> **NOTE:** In case you werent awar:, this is not financial advise. Its merely a simple demonstration of the available applications.
+```

@@ -1,5 +1,5 @@
 ---
-title: "Changing the time zone of XTS and Zoo objects"
+title: "Time Zones"
 ---
 
 ```{r setup, include=FALSE}
@@ -10,25 +10,89 @@ knitr::opts_chunk$set(
 ```
 
 ```{r, message = FALSE}
+## load library
 library(cryptoQuotes)
 ```
 
-The quotes are, by default, returned in ```UTC```. This is to ensure comparability across applications, without having to account for timezones.
+By `default` all data is returned with `Sys.timezone()` and, if not specified otherwise, all `dates` passed into the `get`-functions are `Sys.timezone()` too.
 
-Changing the time zone of ```xts``` and ```zoo``` objects are an easy and trivial process, as the time zone is stored in its ```attributes```.
+## Different time zones
 
-## Changing the time zone of XTS and Zoo objects
+### OHLC (Local)
 
-Here is an example of changing the time zone to that of ```Sys.timezone()```,
+If `from` and `to` are passed as valid `date`-type `characters`, `sys.time()` or `as.POSIXct()` without specifying the `TZ` the returned `xts::index()` is 'as is',
 
 ```{r}
-# 1) store ATOMUSDT to 
-# ATOMUSDT_local to avoid
-# overwriting the data
-ATOMUSDT_local <- ATOM
+## Get hourly
+## BTC between
+## 20.00 and 22.00 from
+## yesterday
+BTC_local <- get_quote(
+  ticker   = "BTCUSDT",
+  source   = "bybit",
+  interval = "1h",
+  futures  = FALSE,
+  from     = paste(Sys.Date()-1, "20:00:00"),
+  to       = paste(Sys.Date()-1, "22:00:00")
+)
+```
 
-# 2) changing the time zone
-attributes(zoo::index(ATOMUSDT_local))$tzone <- Sys.timezone()
+### OHLC (UTC)
+
+If `from` and `to` are passed as `as.POSIXct()` while specifying the `TZ` the returned `xts::index()` is internally converted,
+
+```{r}
+## Get hourly
+## BTC between
+## 20.00 and 22.00 from
+## yesterday
+BTC_utc <- get_quote(
+  ticker   = "BTCUSDT",
+  source   = "bybit",
+  interval = "1h",
+  futures  = FALSE,
+  from     = as.POSIXct(paste(Sys.Date()-1, "20:00:00"), tz = "UTC"),
+  to       = as.POSIXct(paste(Sys.Date()-1, "22:00:00"), tz = "UTC")
+)
+```
+
+### Difference
+
+In each case the returned `index` is, alongside the OHLC-V data, different,
+
+```{r,echo=FALSE}
+# 1) create a kable
+# and print
+  knitr::kable(
+        caption = 'Time zone comparsion',
+    align = 'lr',
+    table.attr = "style='width:100%;'",
+    col.names = c('BTC_local', 'BTC_utc'),
+    x =  cbind(
+      paste(zoo::index(BTC_local)),
+      paste(zoo::index(BTC_utc))
+      ),
+    format = 'html'
+  )
+```
+
+
+## Changing the time zones
+
+All time zones can be converted using the `xts::tzone()`-function. Below is an example of converting the `BTC` to `UTC`,
+
+```{r}
+## 1) Change time
+## zone to UTC
+## 
+## Store BTC_utc in
+## a new variable to avoid
+## replacing it. Not necessary in the 
+## real world - its just for 
+## demonstrations
+BTC_tzone <- BTC_utc
+
+xts::tzone(BTC_tzone) <- "UTC"
 ```
 
 ```{r,echo=FALSE}
@@ -36,15 +100,16 @@ attributes(zoo::index(ATOMUSDT_local))$tzone <- Sys.timezone()
 # and print
   knitr::kable(
         caption = 'Time zone comparsion',
-    align = 'lrr',
+    align = 'lr',
     table.attr = "style='width:100%;'",
-    col.names = c('Index','Default Time Zone (UTC)', 'System Time Zone'),
+    col.names = c('Original Index', 'Converted Index'),
     x =  cbind(
-        1:6,
-        paste(head(zoo::index(ATOM))),
-        paste(head(zoo::index(ATOMUSDT_local)))
+        paste(zoo::index(BTC_utc)),
+        paste(zoo::index(BTC_tzone))
       ),
     format = 'html'
   )
 ```
+
+The converted time zones now match the original `argument`-input in `BTC_utc`.
 

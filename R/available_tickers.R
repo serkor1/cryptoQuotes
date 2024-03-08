@@ -39,6 +39,20 @@ available_tickers <- function(
       available_exchanges(
         type = 'ohlc'
       )
+    ),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Exchange {.val %s} is not supported.",
+        source
+      ),
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::available_exchanges()",
+          code_theme = "Chaos"
+        ),
+        "for supported exhanges"
+      )
     )
   )
 

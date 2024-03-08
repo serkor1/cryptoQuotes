@@ -25,13 +25,23 @@ availableExchanges <- function(
     what = "availableExchanges()",
     with = "available_exchanges()"
   )
+
   # 0) define available
   # exchanges
   assert(
     type %in% c("ohlc", "lsratio", "fundingrate", "interest"),
     error_message = c(
-      "x" = "Unsupported type",
-      "i" = "Has to be one of XXX"
+      "x" = sprintf(
+        "{.arg type} {.val %s} is not available.",
+        type
+      ),
+      "i" = sprintf(
+        "Has to be one of %s",
+        paste(
+          paste0("{.val ",c("ohlc", "lsratio", "fundingrate", "interest") ,"}"),
+          collapse = ", "
+        )
+      )
     )
   )
 

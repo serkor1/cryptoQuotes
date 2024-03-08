@@ -29,7 +29,6 @@ GET <- function(
   # curl handle
   handle <- curl::new_handle()
 
-
   # 2) construct
   # query string
   query_string <- paste(
@@ -62,9 +61,6 @@ GET <- function(
     handle = handle,
     url    = url
   )
-
-
-
 
   # 5) store
   # response in memory
@@ -110,10 +106,6 @@ GET <- function(
 
     }
   )
-
-
-
-
 
 }
 
@@ -278,8 +270,6 @@ fetch <- function(
   # 2.1.1) If no data-type container
   # exists
   if (!any(idx)) {
-
-
 
     tmp <- as.data.frame(
       response

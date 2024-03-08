@@ -18,6 +18,49 @@ availableIntervals <- function(
     with = "available_intervals()"
   )
 
+
+  # 0) define available
+  # exchanges
+  assert(
+    type %in% c("ohlc", "lsratio", "fundingrate", "interest"),
+    error_message = c(
+      "x" = sprintf(
+        "{.arg type} {.val %s} is not available.",
+        type
+      ),
+      "i" = sprintf(
+        "Has to be one of %s",
+        paste(
+          paste0("{.val ",c("ohlc", "lsratio", "fundingrate", "interest") ,"}"),
+          collapse = ", "
+        )
+      )
+    )
+  )
+
+  assert(
+    source %in% suppressMessages(
+      available_exchanges(
+        type = type
+      )
+    ),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Exchange {.val %s} is not supported.",
+        source
+      ),
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::available_exchanges()",
+          code_theme = "Chaos"
+        ),
+        "for supported exhanges"
+      )
+    )
+  )
+
+
   # 0) extract available
   # intervals
   all_intervals <- get(paste0(source, 'Intervals'))(
@@ -26,6 +69,7 @@ availableIntervals <- function(
     all = TRUE,
     interval = NULL
   )
+
 
   # 1) return a message
   # with  available

@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r, message = FALSE}
+## load library
 library(cryptoQuotes)
 ```
 
