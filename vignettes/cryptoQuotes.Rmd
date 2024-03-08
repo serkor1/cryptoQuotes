@@ -58,9 +58,9 @@ Elon Musk tweeted (Well, now he X'ed) about `Dogecoin` January 14, 06.18 AM (UTC
 ## of the tweet on the
 ## 1m chart
 DOGE <- cryptoQuotes::get_quote(
-  ticker   = 'DOGEUSD',
+  ticker   = 'DOGE-USDT',
   interval = '1m',
-  source   = 'kraken',
+  source   = 'kucoin',
   futures  = FALSE,
   from     = '2022-01-14 07:00:00',
   to       = '2022-01-14 08:00:00'

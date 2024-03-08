@@ -116,13 +116,7 @@ getLSRatio <- function(
       interval = interval,
       from     = from,
       to       = to,
-      limit    = switch(
-        EXPR = source,
-        'bitmart' = {
-          if (futures) NULL else 200
-        },
-        NULL
-      )
+      limit    = NULL
     )
 
     # generate from

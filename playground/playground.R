@@ -10,12 +10,6 @@
 rm(list = ls()); gc(); devtools::load_all()
 
 
-get_lsratio(
-  ticker = "BTCUSDT",
-  source = "bybit",
-  interval = "1h",
-  from = Sys.Date()-5
-)
-
 # script end;
+
 

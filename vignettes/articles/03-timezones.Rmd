@@ -28,8 +28,8 @@ If `from` and `to` are passed as valid `date`-type `characters`, `sys.time()` or
 ## 20.00 and 22.00 from
 ## yesterday
 BTC_local <- get_quote(
-  ticker   = "BTCUSDT",
-  source   = "bybit",
+  ticker   = "BTCUSD",
+  source   = "kraken",
   interval = "1h",
   futures  = FALSE,
   from     = paste(Sys.Date()-1, "20:00:00"),
@@ -47,8 +47,8 @@ If `from` and `to` are passed as `as.POSIXct()` while specifying the `TZ` the re
 ## 20.00 and 22.00 from
 ## yesterday
 BTC_utc <- get_quote(
-  ticker   = "BTCUSDT",
-  source   = "bybit",
+  ticker   = "BTCUSD",
+  source   = "kraken",
   interval = "1h",
   futures  = FALSE,
   from     = as.POSIXct(paste(Sys.Date()-1, "20:00:00"), tz = "UTC"),

@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-This high-level API client offers a streamlined access to comprehensive cryptocurrency market data from major exchanges. It features robust OHLC-V (Open, High, Low, Close, Volume) candle data with flexible granularity, ranging from seconds to months, and includes insightful sentiment indicators. By aggregating data directly from leading exchanges, this package ensures a reliable and stable flow of market information, eliminating the need for complex, low-level API interactions.
+This high-level API client offers a streamlined access to comprehensive public cryptocurrency market data from major exchanges. It features robust OHLC-V (Open, High, Low, Close, Volume) candle data with flexible granularity, ranging from seconds to months, and includes insightful sentiment indicators. By aggregating data directly from leading exchanges, this package ensures a reliable and stable flow of market information, eliminating the need for complex, low-level API interactions.
 }
 \seealso{
 Useful links:

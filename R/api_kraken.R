@@ -324,6 +324,7 @@ krakenParameters <- function(
       params$pair = params$ticker
       params$query = list(
         since = date_params[1],
+        to    = date_params[2],
         pair = params$pair,
         interval = params$interval
       )

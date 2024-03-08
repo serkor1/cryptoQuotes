@@ -23,12 +23,11 @@ The `cryptoQuotes` were built with `quantmod` and `TTR` in mind. To demonstrate 
 ## Bitcoin from 
 ## the spot market
 BTC <- get_quote(
-  ticker  = "BTCUSDT",
-  source  = "bybit",
+  ticker  = "BTCUSD",
+  source  = "kraken",
   futures = FALSE,
   interval= "1d",
-  from    = "2024-01-01",
-  to      = Sys.Date()
+  from    = "2024-01-01"
 )
 ```
 

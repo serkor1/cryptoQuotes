@@ -16,7 +16,7 @@ library(cryptoQuotes)
 
 The main goal of the `cryptoQuotes`-package is to bridge the gap between `R` and the cryptocurrency market data. Its a high-level `API`-client that connects to major cryptocurrency exchanges and their respective public market data endpoints.
 
-In this article we will focus on `price` and `sentiment` data made available by the [Bybit](https://www.bybit.com/en/) exchange.
+In this article we will focus on `price` and `sentiment` data made available by the [Kraken](https://www.kraken.com/) exchange.
 
 ## Cryptocurrency market data
 
@@ -31,8 +31,8 @@ To get `OHLC` data the `get_quote()`-function is the go-to function,
 ## SPOT price of 
 ## Bitcoin on the hourly
 BTC <- get_quote(
-  ticker  = "BTCUSDT",
-  source  = "bybit",
+  ticker  = "BTCUSD",
+  source  = "kraken",
   futures = FALSE,
   interval = "1h",
   from = Sys.Date() - 1
@@ -67,8 +67,8 @@ One sentiment indicator for Bitcoin is the long-short ratio, which can be retrie
 ## long-short ratio of 
 ## Bitcoin on the hourly
 LS_BTC <- get_lsratio(
-  ticker  = "BTCUSDT",
-  source  = "bybit",
+  ticker  = "PF_XBTUSD",
+  source  = "kraken",
   interval = "1h",
   from = Sys.Date() - 1
 )
@@ -96,7 +96,7 @@ knitr::kable(
 
 ## Limitations
 
-There is a limit to the amount of market data that can be extracted in one call. The [Bybit](https://www.bybit.com/en/) exchange, for example, has a limit on `1000` rows of data per call in the spot market,
+There is a limit to the amount of market data that can be extracted in one call. The [Kraken](https://www.kraken.com/) exchange, for example, has a limit on `720` rows of data per call in the spot market,
 
 ```{r}
 ## Get the SPOT
@@ -104,8 +104,8 @@ There is a limit to the amount of market data that can be extracted in one call.
 ## 2000 rows
 nrow(
   BTC <- get_quote(
-    ticker  = "BTCUSDT",
-    source  = "bybit",
+    ticker  = "BTCUSD",
+    source  = "kraken",
     futures = FALSE,
     interval = "30m",
     from = Sys.Date() - 30,
@@ -122,7 +122,7 @@ If you need more data than this, you need to do multiple calls. One such solutio
 dates <- seq(
   from = as.POSIXct(Sys.Date()),
   by = "-30 mins",
-  length.out = 2000
+  length.out = 1440
 )
 
 ## 2) split the sequence
@@ -131,7 +131,7 @@ dates <- seq(
 ## to each indices of 100
 idx <- rep(
   x = 1:2,
-  each = 1000
+  each = 720
 )
 
 ## 3) use the idx to split
@@ -152,8 +152,8 @@ ohlc <- lapply(
     Sys.sleep(1)
     
     cryptoQuotes::get_quote(
-      ticker = "BTCUSDT",
-      source = "bybit",
+      ticker = "BTCUSD",
+      source = "kraken",
       futures = FALSE,
       interval = "30m",
       from = min(dates),

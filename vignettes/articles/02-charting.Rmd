@@ -28,8 +28,8 @@ Throughout this article we will analyze Bitcoin on the hourly chart called by th
 ## SPOT price of 
 ## Bitcoin on the hourly
 BTC <- get_quote(
-  ticker  = "BTCUSDT",
-  source  = "bybit",
+  ticker  = "BTCUSD",
+  source  = "kraken",
   futures = FALSE,
   interval = "1h",
   from = Sys.Date() - 1
