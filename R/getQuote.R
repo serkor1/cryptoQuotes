@@ -157,9 +157,9 @@ getQuote <- function(
 
   }
 
-  # 3) fetch and format
-  # the quote and return
-  fetch(
+
+
+  ohlc <- fetch(
     ticker = ticker,
     source = source,
     futures= futures,
@@ -169,6 +169,19 @@ getQuote <- function(
     from   = from
   )
 
+  # Kraken doesnt have a to
+  # parameter on spot market
+  if (source == "kraken" & !futures) {
+
+    ohlc <- ohlc[paste(c(from, to), collapse = "/")]
+
+  }
+
+  attributes(ohlc)$source <- paste0(
+    to_title(source), if (futures) " (PERPETUALS)" else " (SPOT)"
+  )
+
+  ohlc
 
 }
 
