@@ -5,10 +5,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="This high-level API client offers a streamlined access to comprehensive cryptocurrency market data from major exchanges. 
-  It features robust OHLC-V (Open, High, Low, Close, Volume) candle data with flexible granularity, ranging from seconds to months, and includes insightful sentiment indicators. 
-  By aggregating data directly from leading exchanges, this package ensures a reliable and stable flow of market information, eliminating the need for complex, low-level API interactions.">
-<title>A Streamlined Access to OHLC-v Market Data and Sentiment Indicators • cryptoQuotes</title>
+<meta name="description" content="A high-level API client to fetch historical cryptocurrency OHLC-V market data, and sentiment indicators, in R.">
+<title>Cryptocurrency with R • cryptoQuotes</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -19,10 +17,9 @@
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="A Streamlined Access to OHLC-v Market Data and Sentiment Indicators">
-<meta property="og:description" content="This high-level API client offers a streamlined access to comprehensive cryptocurrency market data from major exchanges. 
-  It features robust OHLC-V (Open, High, Low, Close, Volume) candle data with flexible granularity, ranging from seconds to months, and includes insightful sentiment indicators. 
-  By aggregating data directly from leading exchanges, this package ensures a reliable and stable flow of market information, eliminating the need for complex, low-level API interactions.">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<script src="extra.js"></script><meta property="og:title" content="Cryptocurrency with R">
+<meta property="og:description" content="A high-level API client to fetch historical cryptocurrency OHLC-V market data, and sentiment indicators, in R.">
 <meta property="og:image" content="https://serkor1.github.io/cryptoQuotes/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,11 +30,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">cryptoQuotes</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,9 +54,9 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="articles/00-introduction.html">Cryptocurrency Market Data in R</a>
     <a class="dropdown-item" href="articles/02-charting.html">Interactive Cryptocurrency Charts in R</a>
-    <a class="dropdown-item" href="articles/03-timezones.html">Changing the time zone of XTS and Zoo objects</a>
+    <a class="dropdown-item" href="articles/03-timezones.html">Time Zones</a>
     <a class="dropdown-item" href="articles/04-converting.html">Converting XTS and ZOO objects</a>
-    <a class="dropdown-item" href="articles/05-quantmod.html">Cryptocurrency Market Data with Quantmod and TTR</a>
+    <a class="dropdown-item" href="articles/05-quantmod.html">Cryptocurrency Market Data with quantmod and TTR</a>
   </div>
 </li>
 <li class="nav-item">
@@ -93,17 +90,18 @@
 <!-- badges: start -->
 
 <div class="section level2">
-<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+<h2 id="information_source-overview">
+<span class="emoji" data-emoji="information_source">ℹ️</span> Overview<a class="anchor" aria-label="anchor" href="#information_source-overview"></a>
 </h2>
-<p>A high-level API-client to get current, and historical, cryptocurrency OHLCV market data in <code>R</code>, without using web-crawlers and API keys. This API-client uses <code>httr2</code>, <code>xts</code> and <code>zoo</code> under the hood and are compatible with <code>quantmod</code> and <code>TTR</code>.</p>
+<p>The <code>cryptoQuotes</code>-package is a high-level API-client to get current, and historical, cryptocurrency OHLC-V market and sentiment data in <code>R</code>, without using web-crawlers or API keys. This <code>R</code>-package uses <code>xts</code> and <code>zoo</code> under the hood and are compatible with <code>quantmod</code> and <code>TTR</code> out of the box.</p>
 <div class="section level3">
 <h3 id="supported-exchanges-and-markets">Supported exchanges and markets<a class="anchor" aria-label="anchor" href="#supported-exchanges-and-markets"></a>
 </h3>
-<p>All supported exchanges and markets are listed in the table below, alongside the available range of intervals available from the respective exchanges</p>
+<p>All supported exchanges and markets are listed in the table below, alongside the available range of intervals available from the respective exchanges,</p>
 <div align="center">
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table table">
 <caption>
-Available exchanges, markets and interavals.
+Supported exchanges, markets and intervals.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -140,30 +138,10 @@ Binance
 16
 </td>
 <td style="text-align:center;">
-Seconds
+1 second(s)
 </td>
 <td style="text-align:center;">
-Months
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Kucoin
-</td>
-<td style="text-align:center;">
-✔
-</td>
-<td style="text-align:center;">
-✔
-</td>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-Minutes
-</td>
-<td style="text-align:center;">
-Weeks
+1 month(s)
 </td>
 </tr>
 <tr>
@@ -180,10 +158,30 @@ Bitmart
 13
 </td>
 <td style="text-align:center;">
-Minutes
+1 minute(s)
 </td>
 <td style="text-align:center;">
-Weeks
+1 week(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bybit
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+1 minute(s)
+</td>
+<td style="text-align:center;">
+1 month(s)
 </td>
 </tr>
 <tr>
@@ -197,13 +195,33 @@ Kraken
 ✔
 </td>
 <td style="text-align:center;">
-9
+10
 </td>
 <td style="text-align:center;">
-Minutes
+1 minute(s)
 </td>
 <td style="text-align:center;">
-Weeks
+2 week(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kucoin
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+1 minute(s)
+</td>
+<td style="text-align:center;">
+1 week(s)
 </td>
 </tr>
 </tbody>
@@ -211,21 +229,26 @@ Weeks
 </div>
 </div>
 <div class="section level3">
-<h3 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
+<h3 id="information_source-basic-usage">
+<span class="emoji" data-emoji="information_source">ℹ️</span> Basic Usage<a class="anchor" aria-label="anchor" href="#information_source-basic-usage"></a>
 </h3>
-<p>Get USDT denominated Bitcoin spot market price from Binance with <code>30m</code>-intervals,</p>
+<div class="section level4">
+<h4 id="ohlc-v-market-data">OHLC-V Market Data<a class="anchor" aria-label="anchor" href="#ohlc-v-market-data"></a>
+</h4>
+<p>Get USDT denominated Bitcoin spot market price from Binance with <code>30m</code>-intervals using the <code><a href="reference/get_quote.html">get_quote()</a></code>-function,</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## BTC OHLC prices</span></span>
 <span><span class="co">## from Binance spot market</span></span>
 <span><span class="co">## in 30 minute intervals</span></span>
-<span><span class="va">BTC</span> <span class="op">&lt;-</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/getQuote.html">getQuote</a></span><span class="op">(</span></span>
+<span><span class="va">BTC</span> <span class="op">&lt;-</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/get_quote.html">get_quote</a></span><span class="op">(</span></span>
 <span>  ticker <span class="op">=</span> <span class="st">'BTCUSDT'</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">'binance'</span>,</span>
 <span>  futures <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  interval <span class="op">=</span> <span class="st">'30m'</span></span>
+<span>  interval <span class="op">=</span> <span class="st">'30m'</span>,</span>
+<span>  from    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span> </span>
 <span><span class="op">)</span></span></code></pre></div>
 <div align="center">
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table table">
 <caption>
 Bitcoin (BTC) OHLC-prices
 </caption>
@@ -234,154 +257,180 @@ Bitcoin (BTC) OHLC-prices
 Index
 </th>
 <th style="text-align:center;">
-Open
+open
 </th>
 <th style="text-align:center;">
-High
+high
 </th>
 <th style="text-align:center;">
-Low
+low
 </th>
 <th style="text-align:center;">
-Close
+close
 </th>
 <th style="text-align:left;">
-Volume
+volume
 </th>
 </tr></thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-01-08 11:30:00
+2024-03-07 13:00:00
 </td>
 <td style="text-align:center;">
-44196.7
+66905.34
 </td>
 <td style="text-align:center;">
-44688
+67113.9
 </td>
 <td style="text-align:center;">
-44154.28
+66822
 </td>
 <td style="text-align:center;">
-44635.99
+66836.77
 </td>
 <td style="text-align:left;">
-2259.56815
+1167.04733
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 12:00:00
+2024-03-07 13:30:00
 </td>
 <td style="text-align:center;">
-44636
+66836.76
 </td>
 <td style="text-align:center;">
-45200
+66900
 </td>
 <td style="text-align:center;">
-44350
+66575.52
 </td>
 <td style="text-align:center;">
-44518.16
+66712.44
 </td>
 <td style="text-align:left;">
-5567.92331
+941.182
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 12:30:00
+2024-03-07 14:00:00
 </td>
 <td style="text-align:center;">
-44518.15
+66712.43
 </td>
 <td style="text-align:center;">
-45120.05
+66881.03
 </td>
 <td style="text-align:center;">
-44518.15
+66592.52
 </td>
 <td style="text-align:center;">
-45111.09
+66881.02
 </td>
 <td style="text-align:left;">
-1949.63739
+768.26032
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 13:00:00
+2024-03-07 14:30:00
 </td>
 <td style="text-align:center;">
-45111.1
+66881.03
 </td>
 <td style="text-align:center;">
-45179.14
+67010
 </td>
 <td style="text-align:center;">
-44948.83
+66755.14
 </td>
 <td style="text-align:center;">
-45098
+66905.69
 </td>
 <td style="text-align:left;">
-1995.89183
+963.93827
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 13:30:00
+2024-03-07 15:00:00
 </td>
 <td style="text-align:center;">
-45098
+66905.68
 </td>
 <td style="text-align:center;">
-45108.38
+67307.05
 </td>
 <td style="text-align:center;">
-44807.56
+66905.68
 </td>
 <td style="text-align:center;">
-44911.58
+67249.59
 </td>
 <td style="text-align:left;">
-1327.42193
+1489.56914
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 14:00:00
+2024-03-07 15:30:00
 </td>
 <td style="text-align:center;">
-44911.58
+67249.59
 </td>
 <td style="text-align:center;">
-45031.31
+67899
 </td>
 <td style="text-align:center;">
-44832
+66541.1
 </td>
 <td style="text-align:center;">
-45002.78
+67055
 </td>
 <td style="text-align:left;">
-871.80155
+4784.76307
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+<div class="section level4">
+<h4 id="charting-ohlc-v">Charting OHLC-V<a class="anchor" aria-label="anchor" href="#charting-ohlc-v"></a>
+</h4>
+<p>The <code>BTC</code>-object can be charted using the <code><a href="reference/chart.html">chart()</a></code>-function,</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Chart BTC</span></span>
+<span><span class="co">## using klines, SMA, </span></span>
+<span><span class="co">## MACD and Bollinger Bands</span></span>
+<span><span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/chart.html">chart</a></span><span class="op">(</span></span>
+<span>  ticker <span class="op">=</span> <span class="va">BTC</span>,</span>
+<span>  main   <span class="op">=</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/kline.html">kline</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  sub    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/volume.html">volume</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/macd.html">macd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  indicator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/sma.html">sma</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>,</span>
+<span>    <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/sma.html">sma</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">14</span><span class="op">)</span>,</span>
+<span>    <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/sma.html">sma</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">21</span><span class="op">)</span>,</span>
+<span>    <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu"><a href="reference/bollinger_bands.html">bollinger_bands</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-chartquote-1.png" alt="cryptocurrency charts in R" style="display: block; margin: auto;"></p>
+</div>
+</div>
 </div>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="information_source-installation">
+<span class="emoji" data-emoji="information_source">ℹ️</span> Installation<a class="anchor" aria-label="anchor" href="#information_source-installation"></a>
 </h2>
 <div class="section level3">
 <h3 id="stable-version">Stable version<a class="anchor" aria-label="anchor" href="#stable-version"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install from CRAN</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
 <span>  pkgs <span class="op">=</span> <span class="st">'cryptoQuotes'</span>,</span>
@@ -391,16 +440,23 @@ Volume
 <div class="section level3">
 <h3 id="development-version">Development version<a class="anchor" aria-label="anchor" href="#development-version"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install from github</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
 <span>  repo <span class="op">=</span> <span class="st">'https://github.com/serkor1/cryptoQuotes/'</span>,</span>
-<span>  ref <span class="op">=</span> <span class="st">'main'</span></span>
+<span>  ref  <span class="op">=</span> <span class="st">'development'</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
-<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+<h2 id="warning-disclaimer">
+<span class="emoji" data-emoji="warning">⚠️</span> Disclaimer<a class="anchor" aria-label="anchor" href="#warning-disclaimer"></a>
+</h2>
+<p>This <code>library</code> is still considered <code>experimental</code> but no breaking changes will be made on functions labelled as <code>stable</code> without appropriate action; please refer to the <a href="NEWS.html">release notes</a>, or submit an <a href="https://github.com/serkor1/cryptoQuotes/issues" class="external-link">issue</a> if that promise is broken..</p>
+</div>
+<div class="section level2">
+<h2 id="information_source-code-of-conduct">
+<span class="emoji" data-emoji="information_source">ℹ️</span> Code of Conduct<a class="anchor" aria-label="anchor" href="#information_source-code-of-conduct"></a>
 </h2>
 <p>Please note that the <code>cryptoQuotes</code> project is released with a <a href="https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
@@ -425,6 +481,7 @@ Volume
 <div class="community">
 <h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
@@ -447,11 +504,11 @@ Volume
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=cryptoQuotes" class="external-link"><img src="https://www.r-pkg.org/badges/version/cryptoQuotes" alt="CRAN status"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://www.cran-e.com/package/cryptoQuotes" class="external-link"><img src="https://www.r-pkg.org/badges/version/cryptoQuotes" alt="CRAN status"></a></li>
+<li><a href="https://www.cran-e.com/package/cryptoQuotes" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
 <li><a href="https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/serkor1/cryptoQuotes?branch=main" class="external-link"><img src="https://codecov.io/gh/serkor1/cryptoQuotes/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://r-pkg.org/pkg/cryptoQuotes" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
 
