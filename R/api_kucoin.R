@@ -178,6 +178,7 @@ kucoinDates <- function(
     if (!futures) {
       # Adjust for Kucoin spot and set names
       dates <- as.numeric(dates)
+
       dates[2] <- dates[2] + 15 * 60
       names(dates) <- c('startAt', 'endAt')
     } else {
@@ -191,42 +192,6 @@ kucoinDates <- function(
 
   dates
 
-  # if (!is_response) {
-  #   # Convert dates and format
-  #
-  #   dates <- convertDate(
-  #     date = dates,
-  #     multiplier = multiplier,
-  #     power = 1,
-  #     is_response = FALSE
-  #   )
-  #
-  #   dates <- format(
-  #     dates,
-  #     scientific = FALSE
-  #   )
-  #
-  #
-  #   if (!futures) {
-  #     # Adjust for Kucoin spot and set names
-  #     dates <- as.numeric(dates)
-  #     dates[2] <- dates[2] + 15 * 60
-  #     names(dates) <- c('startAt', 'endAt')
-  #   } else {
-  #     # Set names for futures
-  #     names(dates) <- c('from', 'to')
-  #   }
-  #
-  #   return(dates)
-  # } else {
-  #   # Processing response
-  #   dates <- convertDate(
-  #     date = as.numeric(dates),
-  #     multiplier = multiplier,
-  #     power = -1,
-  #     is_response = TRUE)
-  #   return(dates)
-  # }
 }
 
 # 5) Parameters passed to endpoints; ####

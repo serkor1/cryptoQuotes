@@ -6,7 +6,16 @@
 # library
 # script start;
 
-# setup
+# setup;
 rm(list = ls()); gc(); devtools::load_all()
+
+DOGE <- cryptoQuotes::get_quote(
+  ticker   = 'DOGEUSDTM',
+  interval = '1m',
+  source   = 'kucoin',
+  futures  = TRUE
+)
+
+
 
 # script end;

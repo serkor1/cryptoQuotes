@@ -4,10 +4,18 @@
 # objective:
 # script start;
 
+# 1) on attach
 .onAttach <- function(
     libname,
     pkgname,
     ...) {
+
+  # 1) set options
+  # for xts suppressing
+  # timezone messages
+  options(
+    xts_check_TZ = FALSE
+  )
 
   # 1) package
   # header
@@ -33,5 +41,18 @@
 }
 
 
+# 1) on detach
+.onDetach <- function(
+    libpath,
+    ...) {
 
+
+  # 1) reset options
+  # for xts suppressing
+  # timezone messages
+  options(
+    xts_check_TZ = TRUE
+  )
+
+}
 # script end;

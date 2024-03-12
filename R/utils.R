@@ -77,35 +77,43 @@ GET <- function(
 
       cli::cli_abort(
         message = error$message,
-        call    = error$call
+        call    =  sys.call(
+          1 - length(sys.calls())
+        )
       )
 
     }
   )
 
- tryCatch(
+  response <- tryCatch(
     expr = {
       jsonlite::fromJSON(
         txt = rawToChar(
           x = response$content
         ),
-        simplifyVector = TRUE
+        simplifyVector = TRUE,
+        flatten = TRUE
       )
     },
     error = function(error) {
 
       cli::cli_abort(
         message = c(
-          "x" = "Unexpected error",
-          "i" = cli::style_hyperlink(
-            text = url,
-            url  = url
+          "x" = rawToChar(
+            x = response$content
           )
+        ),
+        call =  sys.call(
+          1 - length(sys.calls())
         )
       )
 
     }
   )
+
+    response
+
+
 
 }
 
@@ -219,6 +227,30 @@ fetch <- function(
     from,
     ...){
 
+  # 0) define error-message
+  # NOTE: The only point of failure
+  # is misspelled tickers
+  error_message <- c(
+    "x" = sprintf("Couldn't find {.val %s} on {.val %s}.", ticker, source),
+    "v" = paste(
+      "Run",
+      cli::code_highlight(
+        code = sprintf(
+          "available_tickers(source = '%s', futures = %s)", source, futures
+        ),
+        code_theme = 'Chaos'
+      ),
+      "to see available tickers."
+    ),
+    "i" = sprintf(
+      fmt = "If the error persists please submit a %s.",
+      cli::style_hyperlink(
+        text = cli::col_br_red("bug report"),
+        url = "https://github.com/serkor1/cryptoQuotes"
+      )
+    )
+  )
+
 
   # This is a high-level fetch-function
   # to get all values regardless of the
@@ -255,21 +287,11 @@ fetch <- function(
     )
   )
 
-
+  # 2.1) Check if response
+  # is NULL
   assert(
     !is.null(response),
-    error_message = c(
-      "x" = sprintf(
-        "No sensible error-message. This mostly likely related to the {.arg ticker}-value {.val %s}.",
-        ticker
-      ),
-      "i" = sprintf(
-        fmt = "Try again or submit a %s if the error persists.",
-        cli::style_hyperlink(
-          text = cli::col_br_red("bug report"),
-          url = "https://github.com/serkor1/cryptoQuotes"
-        )
-      ))
+    error_message = error_message
   )
 
 
@@ -282,65 +304,24 @@ fetch <- function(
     what = c('array', 'matrix', 'data.frame')
   )
 
-  # # 2.1.1) If no data-type container
-  # # exists
-  # if (!any(idx)) {
-  #
-  #
-  #   # 2.1.2) Look for possible
-  #   # error messages
-    # idx <- vapply(
-    #   X = response,
-    #   FUN = grepl,
-    #   pattern = "Not Exist|Error|Failed|Invalid|Illegal|Unknown",
-    #   ignore.case = TRUE,
-    #   FUN.VALUE = logical(1)
-    # )
-  #
-  #   # 2.1.3) Assert
-  #   # FALSE and paste error message,
-  #   # or generic if it doesn't exist
-    # assert(
-    #   FALSE,
-    #   error_message = c("x" = if (any(idx)) response[[which(idx)]] else sprintf(
-    #     fmt = "No sensible error-message. Try again or submit a %s if the error persists.",
-    #     cli::style_hyperlink(
-    #       text = cli::col_br_red("bug report"),
-    #       url = "https://github.com/serkor1/cryptoQuotes"
-    #     )
-    #   ))
-    # )
-  #
-  #
-  #
-  # } else {
-  #
-  #   # 2.2) Extract data
-  #   # using location
-  #   response <- response[[which(idx)]]
-  #
-  # }
 
   # 2.2) extract data
-  # from the response object
+  # from reponse:
   #
-  # Kraken returns a unnested list
-  # of vectors which cant be caught by vapply
-  # as it has no idx do it will get
-  # captured by the error
+  # NOTE: if this fails
+  # then it is likely
+  # that we are dealing with
+  # an error, or Kraken
   response <- tryCatch(
     expr = {
-
       response[[which(idx)]]
-
     },
-
     error = function(error){
-
       as.data.frame(response)
-
     }
   )
+
+
 
   # 3) Extract source specific
   # response parameters
@@ -353,36 +334,32 @@ fetch <- function(
     futures = futures
   )
 
-  # Assert that the response has
-  # at the minimum as many expected columns
-  #
-  # NOTE: this is not a robust approach, but it is sufficient
-  # for now.
-  assert(
-    ncol(response) >= length(c(parameters$index_location, parameters$colum_location)),
-    error_message = c(
-      "x" = sprintf(
-        "No sensible error-message. This mostly likely related to the {.arg ticker}-value {.val %s}.",
-        ticker
-      ),
-      "i" = sprintf(
-        fmt = "Try again or submit a %s if the error persists.",
-        cli::style_hyperlink(
-          text = cli::col_br_red("bug report"),
-          url = "https://github.com/serkor1/cryptoQuotes"
-        )
-      ))
+  # 3.1) wrap parameters
+  # in tryCatch to check wether
+  # the columns exists
+  column_list <- tryCatch(
+    expr = {
+      list(
+        index = response[, parameters$index_location],
+        core  = rbind(response[,parameters$colum_location])
+      )
+    },
+    error = function(error) {
+
+      assert(
+        FALSE,
+        error_message = error_message
+      )
+
+    }
   )
 
+  # 3.1.1) extract the values
+  # from the list
+  index <- column_list$index
+  core  <- column_list$core
 
-
-  # 3.1) extract index
-  # and core data
-  index <- response[, parameters$index_location]
-  core  <-  rbind(response[,parameters$colum_location])
-
-
-  # 3.1.1) convert
+  # 3.1.2) convert
   # all to as.numeric
   core <- apply(
     X = core,
@@ -390,7 +367,7 @@ fetch <- function(
     FUN = as.numeric
   )
 
-  # 3.1.2) convert dates
+  # 3.1.3) convert dates
   # to positxct
   index <- get(
     paste0(
