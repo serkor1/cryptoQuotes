@@ -14,16 +14,16 @@
 # 1) check index of BTCUSDT and
 # the Fear and Greed Index
 setequal(
-  zoo::index(BTCUSDT),
+  zoo::index(BTC),
   zoo::index(FGIndex)
 )
 
 # 2) to align the indices,
 # we use the convincience functions
 # by splitting the FGI by the BTC index.
-FGIndex <- splitWindow(
+FGIndex <- split_window(
   xts = FGIndex,
-  by  = zoo::index(BTCUSDT),
+  by  = zoo::index(BTC),
 
   # Remove upper bounds of the
   # index to avoid overlap between
@@ -38,7 +38,7 @@ FGIndex <- splitWindow(
 # 3) as splitWindow returns a list
 # it needs to passed into calibrateWindow
 # to ensure comparability
-FGIndex <- calibrateWindow(
+FGIndex <- calibrate_window(
   list = FGIndex,
 
   # As each element in the list can include
@@ -54,7 +54,7 @@ FGIndex <- calibrateWindow(
 # 3) check if candles aligns
 # accordingly
 setequal(
-  zoo::index(BTCUSDT),
+  zoo::index(BTC),
   zoo::index(FGIndex)
 )
 

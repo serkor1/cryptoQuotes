@@ -6,7 +6,8 @@
 # script start;
 # 1) URLs and Endpoint; ####
 kucoinUrl <- function(
-    futures = TRUE
+    futures = TRUE,
+    ...
 ) {
 
   # 1) define baseURL
@@ -27,17 +28,21 @@ kucoinUrl <- function(
 
 kucoinEndpoint <- function(
     type = 'ohlc',
-    futures = TRUE
+    futures = TRUE,
+    ...
 ) {
 
 
   endPoint <- switch(
     EXPR = type,
     ohlc = {
-      if (futures) '/api/v1/kline/query' else '/api/v1/market/candles'
+      if (futures) 'api/v1/kline/query' else 'api/v1/market/candles'
     },
     ticker ={
-      if (futures) '/api/v1/contracts/active' else '/api/v1/market/allTickers'
+      if (futures) 'api/v1/contracts/active' else 'api/v1/market/allTickers'
+    },
+    fundingrate = {
+      'api/v1/contract/funding-rates'
     }
   )
 
@@ -53,7 +58,8 @@ kucoinEndpoint <- function(
 kucoinIntervals <- function(
     interval,
     futures,
-    all = FALSE
+    all = FALSE,
+    ...
 ) {
   if (futures) {
     allIntervals <- data.frame(
@@ -81,7 +87,8 @@ kucoinIntervals <- function(
 # 3) define response object and format; ####
 kucoinResponse <- function(
     type = 'ohlc',
-    futures
+    futures,
+    ...
 ) {
 
   response <- NULL
@@ -95,28 +102,37 @@ kucoinResponse <- function(
     EXPR = type,
     ohlc = {
       list(
-        colum_names = if (futures) c('Open', 'High', 'Low', 'Close', 'Volume') else c('Open', 'Close', 'High', 'Low', 'Volume'),
+        colum_names = if (futures) c('open', 'high', 'low', 'close', 'volume') else c('open', 'close', 'high', 'low', 'volume'),
         colum_location = 2:6,
         index_location = 1
       )
     },
     ticker = {
+      list(
+        foo = function(response, futures){
 
-      if (futures) {
-        list(
-          code = rlang::expr(
+          if (futures) {
             subset(
               x = response$data,
               grepl(pattern = 'open', ignore.case = TRUE, x = response$data$status)
             )$symbol
-          )
-        )
-      } else {
-        list(
-          code = rlang::expr(response$data$ticker$symbol)
-        )
-      }
+          } else {
 
+            response$data$ticker$symbol
+          }
+
+        }
+      )
+
+
+    },
+
+    fundingrate = {
+      list(
+        colum_names     = "funding_rate",
+        index_location = c(3),
+        colum_location = c(2)
+      )
     }
   )
 
@@ -126,19 +142,31 @@ kucoinResponse <- function(
 kucoinDates <- function(
     futures,
     dates,
-    is_response = FALSE
+    is_response = FALSE,
+    ...
 ) {
 
+  # 0) set multiplier based
+  # on market
   multiplier <- if (futures) 1e3 else 1
 
-  if (!is_response) {
+  # 1) if its a response
+  if (is_response) {
+
+    dates <- convert_date(
+      x = as.numeric(dates),
+      multiplier = multiplier
+      )
+
+
+  } else {
+
+
     # Convert dates and format
 
-    dates <- convertDate(
-      date = dates,
-      multiplier = multiplier,
-      power = 1,
-      is_response = FALSE
+    dates <- convert_date(
+      x = dates,
+      multiplier = multiplier
     )
 
     dates <- format(
@@ -150,6 +178,7 @@ kucoinDates <- function(
     if (!futures) {
       # Adjust for Kucoin spot and set names
       dates <- as.numeric(dates)
+
       dates[2] <- dates[2] + 15 * 60
       names(dates) <- c('startAt', 'endAt')
     } else {
@@ -157,16 +186,12 @@ kucoinDates <- function(
       names(dates) <- c('from', 'to')
     }
 
-    return(dates)
-  } else {
-    # Processing response
-    dates <- convertDate(
-      date = as.numeric(dates),
-      multiplier = multiplier,
-      power = -1,
-      is_response = TRUE)
-    return(dates)
+
+
   }
+
+  dates
+
 }
 
 # 5) Parameters passed to endpoints; ####
@@ -176,7 +201,8 @@ kucoinParameters <- function(
     type = NULL,
     interval,
     from = NULL,
-    to = NULL
+    to = NULL,
+    ...
 ) {
 
   # Initial parameter setup

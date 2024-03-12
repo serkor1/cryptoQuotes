@@ -4,7 +4,268 @@
 # objective: A class of helper
 # function
 # script start;
+
+build <- function(
+    plot,
+    layers,
+    ...
+) {
+
+  # 0) generate function
+  apply_layer <- function(
+    plot,
+    layer
+  ) {
+
+    # Generalize function calling based on the 'type' attribute
+    fun_name <- layer$type  # The Plotly function to call, e.g., "add_lines", "add_ribbons"
+    layer$params$p <- plot  # Ensure the plot is passed as the first argument
+
+    if (!"data" %in% names(layer$params)) {
+      # If 'data' is not explicitly provided, assume the plot's original data should be used
+      layer$params$data <- plot$x$data
+    }
+
+    # Dynamically call the Plotly function with the parameters specified in 'layer$params'
+    do.call(
+      get(
+        fun_name,
+        envir = asNamespace('plotly')
+      ), args = layer$params
+    )
+
+  }
+
+  plotly::layout(
+    p =  Reduce(
+      f = apply_layer,
+      x = layers,
+      init = plot
+    ),
+    ...
+  )
+
+
+}
+
+
+
+
 # converting Quotes to and from data.frames; ####
+
+to_title <- function(
+    x) {
+
+  gsub("\\b(.)", "\\U\\1", tolower(x), perl = TRUE)
+}
+
+
+infer_interval <- function(
+    x) {
+
+
+
+  # 0) extract
+  # index
+  index <- zoo::index(
+    x
+  )
+
+  # 1) calculate
+  # differences
+  x <- unique(
+    as.numeric(
+      difftime(
+        time1 = index[-1],
+        time2 = index[-length(index)],
+        units = "secs"
+      )
+    )
+  )
+
+  assert(
+    length(x) == 1,
+    error_message = "error in time-index"
+  )
+
+
+  switch(
+    as.character(x),
+    "1" = "1s",
+    "60" = "1m",
+    "180" = "3m",
+    "300" = "5m",
+    "900" = "15m",
+    "1800" = "30m",
+    "3600" = "1h",
+    "7200" = "2h",
+    "14400" = "4h",
+    "21600" = "6h",
+    "28800" = "8h",
+    "43200" = "12h",
+    "86400" = "1d",
+    "259200" = "3d",
+    "604800" = "1w",
+    "1209600" = "2w",
+    "1M"
+  )
+
+
+
+}
+
+
+#' Check if values are valid dates
+#'
+#' @description
+#' This function check is equivalent to [is.numeric()], [is.logical()], and checks for the date type classes
+#' POSIXct, POSIXt and Date. And wether the character vector can be formatted to dates.
+#'
+#' @param x object to be tested
+#'
+#'
+#' @family development tools
+#' @keywords internal
+#' @returns [TRUE] if its either POSIXct, POSIXt or Date. [FALSE] otherwise.
+is.date <- function(x){
+
+
+  # check if its
+  # a date
+  indicator <- inherits(
+    x = x,
+    what = c("Date","POSIXct","POSIXt")
+  )
+
+
+  if (!indicator & is.character(x)){
+
+
+    indicator <- tryCatch(
+      expr = {
+        # Either of these have to be
+        # non-NA to work
+        !is.na(as.POSIXct(x)) | !is.na(as.POSIXct(x,format = "%Y-%m-%d %H:%M:%S"))
+      },
+      error = function(error){
+
+        FALSE
+
+      }
+    )
+
+  }
+
+  indicator
+
+}
+
+#' Assert truthfulness of conditions before evaluation
+#'
+#'
+#' @description
+#' This function is a wrapper of [stopifnot()], [tryCatch()] and [cli::cli_abort()] and asserts
+#' the truthfulness of the passed expression(s).
+#' @param ... expressions >= 1. If named the names are used as error messages, otherwise
+#' R's internal error-messages are thrown
+#'
+#' @param error_message character. An error message, supports [cli]-formatting.
+#' @example man/examples/scr_assert.R
+#' @seealso [stopifnot()], [cli::cli_abort()], [tryCatch()]
+#' @keywords internal
+#' @returns [NULL] if all statements in ... are [TRUE]
+assert <- function(..., error_message = NULL) {
+
+  # 1) count number of expressions
+  # in the ellipsis - this
+  # is the basis for the error-handling
+  number_expressions <- ...length()
+  named_expressions  <- ...names()
+
+
+  # 2) if there is more than
+  # one expression the condtions
+  # will either be stored in an list
+  # or pased directly into the tryCatch/stopifnot
+  if (number_expressions != 1 & !is.null(named_expressions)){
+
+    # 2.1) store all conditions
+    # in a list alongside its
+    # names
+    conditions <- list(...)
+
+    # 2.2) if !is.null(condition_names) the
+    # above condition never gets evaluated and
+    # stopped otherwise, if there is errors
+    #
+    # The condition is the names(list()), and is
+    # the error messages written on lhs of the the assert
+    # function
+    for (condition in named_expressions) {
+
+      # if TRUE abort
+      # function
+      if (!eval.parent(conditions[[condition]])) {
+
+        cli::cli_abort(
+          c("x" = condition),
+
+          # the call will reference the caller
+          # by default, so we need the second
+          # topmost caller
+          call = sys.call(
+            1 - length(sys.calls())
+          )
+        )
+
+
+      }
+
+    }
+
+    # stop the function
+    # here
+    return(NULL)
+
+  }
+
+  # 3) if there length(...) == 1 then
+  # above will not run, and stopped if anything
+
+  tryCatch(
+    expr = {
+      eval.parent(
+        substitute(
+          stopifnot(exprs = ...)
+        )
+      )
+    },
+    error = function(error){
+
+      # each error message
+      # has a message and call
+      #
+      # the call will reference the caller
+      # by default, so we need the second
+      # topmost caller
+
+      cli::cli_abort(
+        # 3.1) if the length of expressions
+        # is >1, then then the error message
+        # is forced to be the internal otherwise
+        # the assert function will throw the same error-message
+        # for any error.
+        message = if (is.null(error_message) || number_expressions != 1) error$message else error_message,
+        call    = sys.call(
+          1 - length(sys.calls())
+        )
+      )
+
+    }
+  )
+
+}
+
 toDF <- function(quote) {
 
 
@@ -12,7 +273,7 @@ toDF <- function(quote) {
   # the quote to a data.frame
   # for the plotting and reshaping
 
-  attr_list <- attributes(quote)$tickerInfo
+  attr_list <- attributes(quote)$source
   # 2) convert to
   # data.frame
   DF <- as.data.frame(
@@ -20,18 +281,22 @@ toDF <- function(quote) {
     row.names = NULL
   )
 
+  colnames(DF) <- tolower(
+    colnames(DF)
+  )
+
   # 3) add the index;
-  DF$Index <- zoo::index(
+  DF$index <- zoo::index(
     quote
   )
 
   # 1) determine
   # wether the the day is closed
   # green
-  if (all(c('Open', 'Close') %in% colnames(DF))) {
+  if (all(c('open', 'close') %in% colnames(DF))) {
 
     DF$direction <- ifelse(
-      test = DF$Close > DF$Open,
+      test = DF$close > DF$open,
       yes  = 'Increasing',
       no   = 'Decreasing'
     )
@@ -39,7 +304,7 @@ toDF <- function(quote) {
   }
 
 
-  attributes(DF)$tickerInfo <- attr_list
+  attributes(DF)$source <- attr_list
 
   return(
     DF
@@ -51,18 +316,16 @@ toDF <- function(quote) {
 toQuote <- function(DF) {
 
   quote <- xts::as.xts(
-    DF[,c('Open','High', 'Low', 'Close', 'Volume', 'Index')]
+    DF[,grep(pattern = 'open|high|low|close|volume|index',x = colnames(DF), ignore.case = TRUE)]
   )
 
   zoo::index(quote) <- as.POSIXct(
-    DF$Index
+    DF$index
   )
 
-  attributes(quote)$tickerInfo <- attributes(DF)$tickerInfo
+  attributes(quote)$source <- attributes(DF)$source
 
-  return(
-    quote
-  )
+  quote
 }
 
 # Plotly parameters; ####
@@ -105,7 +368,7 @@ annotations <- function(
     yshift = 0,
     font = list(
       size = 15,
-      color = "black",
+      # color = "black",
       angle = '90'
     )
   )
@@ -115,265 +378,305 @@ annotations <- function(
 
 
 
-# Errror checkers; ####
-check_for_errors <- function(
-    response,
-    source,
-    futures = FALSE,
-    call = rlang::caller_env(n = 2)
-) {
-
-  # 1) Evaluate error message
-  # based on source and market;
-  error_message <- rlang::eval_bare(
-    get(
-      paste0(
-        source, 'Error'
-      )
-    )(
-      response = response,
-      futures = futures
-    ),
-    env = rlang::caller_env(n = 0)
-  )
-
-
-  # 2) Some APIs dosnt give
-  # an error message;
-  if (length(error_message) == 0) {
-
-    error_message <- 'No error information. Check your arugments - if the error persists, please submit a bugreport!'
-
-  }
-
-  # 3) Throw an error
-  # on user-side
-  rlang::abort(
-    message = paste(
-      error_message
-    ),
-    call = call
-  )
-
-}
-
-# check for errors
-# in chosen exchange
-# ie. the source
-check_exchange_validity <- function(
-    source,
-    call = rlang::caller_env(n = 1)
-) {
-
-  # 0) get all available exchanges
-  all_available_exchanges <- suppressMessages(
-    availableExchanges()
-  )
-
-  if (!(source %in% all_available_exchanges)) {
-
-    rlang::abort(
-      message = c(
-        paste(source, 'is not supported.'),
-        'v' = paste(
-          paste(
-            all_available_exchanges,
-            collapse = ', '
-          ),
-          'is currently supported'
-        )
-      ),
-      call = call
-    )
-
-  }
-}
-
-# check fo rerrors
-# in the chosen intervals;
-# it depends on the chosen market
-# and exchange
-check_interval_validity <- function(
-    interval,
-    source,
-    futures,
-    call = rlang::caller_env(n = 1)
-) {
-
-  # 0) get all available intervals
-  all_available_intervals <- suppressMessages(
-    availableIntervals(
-      source = source,
-      futures = futures
-    )
-  )
-
-
-  if (!(interval %in% all_available_intervals)) {
-
-    rlang::abort(
-      message = c(
-        paste(
-          'Interval',
-          interval,
-          'is not supported in',
-          paste(
-            source,
-            ifelse(
-              test = futures,
-              yes = 'futures.',
-              no = 'spot.'
-            )
-          )
-        ),
-        'v' = paste(all_available_intervals, collapse = ', ')
-      ),
-      call = call
-    )
-
-  }
-
-}
-
-
-available_interval_ls <- c("5m","15m","30m","1h","2h","4h","6h","12h","1d")
-
-
 check_internet_connection <- function() {
 
   # 0) check internet connection
   # before anything
-  if (!curl::has_internet()) {
-
-    rlang::abort(
-      message = 'You are currently not connected to the internet. Try again later.',
-
-      # disable traceback, on this error.
-      trace = rlang::trace_back()
+  assert(
+    curl::has_internet(),
+    error_message = c(
+      "x" = "You are currently not connected to the internet."
     )
-
-  }
+  )
 
 }
 
-# converting dates; ####
-convertDate <- function(
-    date,
-    is_response = FALSE,
-    multiplier = 1,
-    power = 1
-    ) {
 
-  # This function formats
-  # all passed and returned
-  # date formats
+coerce_date <- function(x){
 
-  # 1) Calculate scale
-  # facor; this determines
-  # wether the values should be scaled
-  # according to the unix epoch time
-  scale_factor <- multiplier^power
+  if (!is.null(x)) {
 
-  # 2) Calculate the actual
-  # values
-  tryCatch(
-    expr = {
-      if (!is_response) {
-        # Convert to POSIXct and then to numeric
-        as.numeric(as.POSIXct(date, tz = 'UTC', origin = "1970-01-01")) * scale_factor
-      } else {
-        # Direct conversion to POSIXct for API response
-        as.POSIXct(date * scale_factor, tz = 'UTC', origin = "1970-01-01")
-      }
-    },
-    error = function(error) {
-      # Unified error message;
-      # as all dates are validated; errors here can only
-      # be bugs.
-      rlang::abort(
-        message = "Error in processing date. Please contact package maintainer, or submit a bugreport.",
-        call = rlang::caller_env(n = 9)
-      )
-    }
-  )
+    as.POSIXct(
+      x = x,
+      tz = Sys.timezone(),
+      origin = "1970-01-01"
+    )
+  } else {
+
+    NULL
+
+  }
+
+
 }
 
 # general helpers; ####
+#' flatten nested lists
+#'
+#' @description
+#' `r lifecycle::badge("stable")`
+#'
+#' Flatten a nested [list], regardless of its level of nesting.
+#'
+#' @param x A [list]
+#'
+#' @example man/examples/devtools_flatten.R
+#'
+#' @family development tools
+#'
+#' @returns An unnested [list]
+#'
+#' @keywords internal
 flatten <- function(x) {
-  if (!inherits(x, "list")) return(list(x))
-  else return(unlist(c(lapply(x, flatten)), recursive = FALSE))
+
+  if (!inherits(x, "list")) return(list(x)) else return(unlist(c(lapply(x, flatten)), recursive = FALSE))
 }
 
 
-# package startup messages; ####
-startup_message <- function(
-    pkgname,
-    pkgversion
-) {
 
-  cli::rule(
-    left = paste(pkgname, cli::col_br_blue(pkgversion)),
-    right = cli::style_hyperlink(
-      text = paste(
-        cli::col_br_blue('release notes')
-        ),
-      url  = 'https://serkor1.github.io/cryptoQuotes/news/index.html'
+# base-chart colors; ####
 
-      )
-  )
+movement_color <- function(deficiency = FALSE){
+
+  palette <- paletteer::paletteer_d("ggthemes::wsj_rgby")
 
 
 
-}
+  if (deficiency) {
 
-
-# validators; ####
-date_validator <- function(
-    from,
-    to
-    ) {
-
-  # This function converts all input
-  # dates to POSIX and checks for errors in the dates
-
-  parse_and_convert_date <- function(date) {
-    if (!is.null(date)){
-      parsed_date <- as.POSIXct(date, format = "%Y-%m-%d %H:%M:%S", tz = 'UTC')
-      if (is.na(parsed_date)) {
-        parsed_date <- as.POSIXct(date, format = "%Y-%m-%d", tz = 'UTC')
-      }
-      if (is.na(parsed_date)) {
-        rlang::abort(
-          message = c(
-            'Error in date formats',
-            'v' = 'Accepted formats:',
-            '*' = as.character(Sys.Date()),
-            '*' = as.character(
-              format(
-                Sys.time()
-              )
-            )
-          ),
-          call = rlang::caller_env(n = 1)
-        )
-      }
-      return(parsed_date)
-    } else {
-      return(NULL)
-    }
-  }
-
-  # Apply the function to both dates
-  from <- parse_and_convert_date(from)
-  to <- parse_and_convert_date(to)
-
-  return(
     list(
-      from = from,
-      to   = to
+      bullish = palette[3],
+      bearish = palette[1]
     )
 
-  )
+  } else {
+
+    list(
+      bullish = palette[4],
+      bearish = palette[2]
+    )
+  }
+
 }
+
+
+
+#' Convert dates passed to UNIX
+#'
+#' @description
+#' This function converts dates to UNIX time if passed to the API, and converts
+#' it to [POSIXct] from API
+#'
+#'
+#' @param x a [numeric] vector, or [date]-type object
+#' @param multiplier [numeric]
+#'
+#' @details
+#' If x is numeric, then the function assumes
+#' that its a return value
+#'
+#' @family development tools
+#'
+#' @keywords internal
+#' @returns A vector of same length as x.
+convert_date <- function(
+    x,
+    multiplier) {
+
+
+  # NOTE: If its numeric its a return
+  # value from the API
+  is_numeric <- is.numeric(x)
+
+  # calculate scale
+  # factor
+  #
+  # If the values are numeric
+  # it is returned from the
+  # API
+  scale_factor <- multiplier ** ifelse(is_numeric, -1, 1)
+
+  if (is_numeric) {
+
+    # NOTE: Only this part
+    # needs to be in try
+
+    x <- tryCatch(
+      expr = {
+        as.POSIXct(
+          x = x * scale_factor,
+          tz = Sys.timezone(),
+          origin = "1970-01-01"
+        )
+      },
+      error = function(error){
+        assert(
+          FALSE,
+          error_message = sprintf(
+            fmt = "Unexpected error. Contact the package maintainer or submit a %s.",
+            cli::style_hyperlink(
+              text = cli::col_br_red("bug report"),
+              url = "https://github.com/serkor1/cryptoQuotes"
+            )
+          )
+        )
+      }
+    )
+
+  } else {
+
+    # NOTE: All dates passed into
+    # this function from
+    # the get_*-function are already
+    # validated and checked so we
+    # can just go ahead and make the numeric values
+    x <- as.numeric(x) * scale_factor
+
+
+  }
+
+  x
+
+}
+
+
+#' Get the minimum and maximum date range
+#'
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' All [available_exchanges()] have different limitations on the
+#' returned data this function is adaptive in nature so enforces
+#' compliance on the limits
+#'
+#' @inheritParams get_quote
+#' @param length a [numeric]-value of [length] 1. The desired distance between `from` and `to`.
+#'
+#'
+#' @returns
+#'
+#' A vector of minimum and maximum dates.
+#'
+#'
+#' @family development tools
+#' @keywords internal
+#' @author Serkan Korkmaz
+#'
+default_dates <-function(
+    interval,
+    from   = NULL,
+    to     = NULL,
+    length = 200,
+    limit  = NULL) {
+
+
+  # 1) Determine parameters
+  # passed futher;
+  current_time <- Sys.time()
+  origin_date <- '1970-01-01'
+
+  # 1.1) check if from date is
+  # provided
+  is_from_provided <- !is.null(from)
+
+  # 1.2) if a from date is provided
+  # the operation is always
+  # adding values
+  operation <- if (is_from_provided) "+" else "-"
+
+
+  # 1.3) determine starting point
+  # if from is no provided
+  # use Sys.time. Truncate to nearest
+  # 15 minutes
+  starting_point_time <- if (is_from_provided) from else current_time
+
+  starting_point <- as.POSIXct(
+    trunc(as.double(starting_point_time)/(15*60))*(15*60),
+    tz = 'UTC',
+    origin = origin_date
+  )
+
+  # 2) Construct the returning
+  # intervals based on granularity
+  # and units
+
+  # 2.1) Extract the granularity
+  # by removing the numbers
+  # of the intervals; this is a
+  # reverse operation
+  #
+  # Returns either s, m, h, d, w, M
+  # based on supplied intervals
+  granularity <-  gsub(
+    pattern = "([0-9]*)",
+    x = interval,
+    replacement = ""
+  )
+
+  # 2.2) Extract the numerical
+  # value of the interval -
+  # all intervals is 1m, 2w, etc
+  # which has to be supplied
+  # to sequence
+  value <- as.integer(
+    gsub("([a-zA-Z]+)", "", interval)
+  )
+
+  # 2.3) translate the granularity
+  # so it can passed into seq
+  # accordingly using switc;
+  #
+  # This change gains 10-15% in speed
+  # over using multiple if-statements
+  granularity <- switch(
+    EXPR = granularity,
+    s = "secs",
+    m = "mins",
+    h = "hours",
+    w = "weeks",
+    d = "days",
+    M = "months"
+  )
+
+  # 2.4) construct interval
+  # from starting point and return
+  # 100 (or 100 if daily) values
+  interval_length <- length + (granularity == "days")
+
+  interval_seq <- seq(
+    from = starting_point,
+    by = paste0(operation, value, " ", granularity),
+    length.out = interval_length
+  )
+
+  if (!is.null(limit)) interval_seq <-  utils::head(interval_seq, limit)
+
+  # 3) construct the interval
+  # by extracing the min date (from)
+  # and the max date in the constructed
+  # interval; this has to be limited
+  # by sys.date to avoid calling values
+  # that havent been realized yet... for obvious reasons...
+  interval <- list(
+    from = min(interval_seq),
+    to   = min(
+      max(interval_seq),
+      as.POSIXct(
+        current_time,
+        tz = "UTC",
+        origin = origin_date
+      )
+    )
+  )
+
+  # 4) return statement
+  # as interval
+  interval
+
+}
+
+# script end;
 
 # script end;

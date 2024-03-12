@@ -2,9 +2,9 @@
 % Please edit documentation in R/getQuote.R
 \name{getQuote}
 \alias{getQuote}
-\title{Get a quote on a cryptopair from one
-of the supported exchanges}
+\title{Get the Open, High, Low, Close and Volume data on a cryptocurrency pair}
 \usage{
+## get OHLC-V
 getQuote(
  ticker,
  source   = 'binance',
@@ -15,59 +15,91 @@ getQuote(
 )
 }
 \arguments{
-\item{ticker}{A character vector of length 1. Uppercase. See \code{\link[=availableTickers]{availableTickers()}} for available tickers.}
+\item{ticker}{An \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
-\item{source}{A character vector of length 1. See \code{\link[=availableExchanges]{availableExchanges()}} for available exchanges.}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{futures}{A logical value. Returns futures market if \link{TRUE}, spot market otherwise.}
+\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default. Returns futures market if \link{TRUE}, spot market otherwise.}
 
-\item{interval}{A character vector of length 1. See \code{\link[=availableIntervals]{availableIntervals()}} for available intervals.}
+\item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
-\item{from}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+\item{from}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+\item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
-an xts object with Open, High, Low, Close and Volume. If \code{futures = TRUE} the prices are last prices.
+An \link{xts}-object containing,
+\itemize{
+\item open (\link{numeric}): the opening price
+\item close (\link{numeric}): the closing price
+\item high (\link{numeric}): the highest price
+\item low  (\link{numeric}): the lowest price
+\item volume  (\link{numeric}): the trading volume
+}
 }
 \description{
-Open, High, Low, Close, and Volume (OHLCV) quotes are essential pieces of
-information used to analyze the price and trading activity of a financial asset over a specific time frame.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Get a quote on a cryptocurrency pair from the \code{\link[=available_exchanges]{available_exchanges()}} in various \code{\link[=available_intervals]{available_intervals()}} for any actively traded \code{\link[=available_tickers]{available_tickers()}}.
 }
 \details{
-If only \code{from} is provided 100 pips are returned up to \code{Sys.time()}.
+\subsection{On time-zones and dates}{
 
-If only \code{to} is provided 100 pips up to the specified date
+Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}}, or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or \code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default
+all dates are passed and returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
+}
+
+\subsection{On returns}{
+
+If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}. If only \code{to} is provided 200 pips up to the specified date
 is returned.
-
-If \code{from} and \code{to} are both \link{NULL} 100 pips returned up to \code{Sys.time()}
+}
 }
 \examples{
-# 1) Load BTC spot
-# from Kucoin with 30 minute
-# intervals
-BTC <- try(
-  cryptoQuotes::getQuote(
-    ticker   = 'BTC-USDT',
-    source   = 'kucoin',
+\dontrun{
+# script: scr_getQuote
+# date: 2024-02-29
+# author: Serkan Korkmaz, serkor1@duck.com
+# objective: Demonstrate the basic
+# usage of the get_quote-function
+# script start;
+
+
+  # 1) Load BTC spot
+  # from Kucoin with 30 minute
+  # intervals
+  BTC <- cryptoQuotes::get_quote(
+    ticker   = 'BTCUSDT',
+    source   = 'binance',
     interval = '30m',
     futures  = FALSE,
     from     = Sys.Date() - 1
   )
-)
 
-# 2) chart the spot price
-# using the chart
-# function
-if (!inherits(BTC, 'try-error')){
-
+  # 2) chart the spot price
+  # using the chart
+  # function
   cryptoQuotes::chart(
-    chart = cryptoQuotes::kline(BTC) \%>\%
-      cryptoQuotes::addVolume() \%>\%
-      cryptoQuotes::addBBands()
+    ticker = BTC,
+    main   = cryptoQuotes::kline(),
+    indicator = list(
+      cryptoQuotes::volume(),
+      cryptoQuotes::bollinger_bands()
+    )
   )
-
-}
 
 # script end;
 }
+}
+\seealso{
+Other deprecated: 
+\code{\link{availableExchanges}()},
+\code{\link{availableIntervals}()},
+\code{\link{availableTickers}()},
+\code{\link{getFGIndex}()},
+\code{\link{getLSRatio}()}
+}
+\author{
+Serkan Korkmaz
+}
+\concept{deprecated}

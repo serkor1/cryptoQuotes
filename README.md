@@ -1,41 +1,40 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptoQuotes website" /></a>
+# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
 
-![GitHub
-Release](https://img.shields.io/github/v/release/serkor1/cryptoQuotes?logo=github&label=release)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://www.cran-e.com/package/cryptoQuotes)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://www.cran-e.com/package/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/serkor1/cryptoQuotes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/serkor1/cryptoQuotes?branch=main)
-[![CRAN RStudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-## Overview
+## :information_source: Overview
 
-A high-level API-client to get current, and historical, cryptocurrency
-OHLCV market data in `R`, without using web-crawlers and API keys. This
-API-client uses `httr2`, `xts` and `zoo` under the hood and are
-compatible with `quantmod` and `TTR`.
+The `cryptoQuotes`-package is a high-level API-client to get current,
+and historical, cryptocurrency OHLC-V market and sentiment data in `R`,
+without using web-crawlers or API keys. This `R`-package uses `xts` and
+`zoo` under the hood and are compatible with `quantmod` and `TTR` out of
+the box.
 
 ### Supported exchanges and markets
 
 All supported exchanges and markets are listed in the table below,
 alongside the available range of intervals available from the respective
-exchanges
+exchanges,
 
 <div align="center">
 
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
-Available exchanges, markets and interavals.
+Supported exchanges, markets and intervals.
 </caption>
 <thead>
 <tr>
@@ -74,30 +73,10 @@ Binance
 16
 </td>
 <td style="text-align:center;">
-Seconds
+1 second(s)
 </td>
 <td style="text-align:center;">
-Months
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Kucoin
-</td>
-<td style="text-align:center;">
-✔
-</td>
-<td style="text-align:center;">
-✔
-</td>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-Minutes
-</td>
-<td style="text-align:center;">
-Weeks
+1 month(s)
 </td>
 </tr>
 <tr>
@@ -114,10 +93,30 @@ Bitmart
 13
 </td>
 <td style="text-align:center;">
-Minutes
+1 minute(s)
 </td>
 <td style="text-align:center;">
-Weeks
+1 week(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bybit
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+1 minute(s)
+</td>
+<td style="text-align:center;">
+1 month(s)
 </td>
 </tr>
 <tr>
@@ -131,13 +130,33 @@ Kraken
 ✔
 </td>
 <td style="text-align:center;">
-9
+10
 </td>
 <td style="text-align:center;">
-Minutes
+1 minute(s)
 </td>
 <td style="text-align:center;">
-Weeks
+2 week(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kucoin
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+✔
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+1 minute(s)
+</td>
+<td style="text-align:center;">
+1 week(s)
 </td>
 </tr>
 </tbody>
@@ -145,26 +164,29 @@ Weeks
 
 </div>
 
-### Basic usage
+### :information_source: Basic Usage
+
+#### OHLC-V Market Data
 
 Get USDT denominated Bitcoin spot market price from Binance with
-`30m`-intervals,
+`30m`-intervals using the `get_quote()`-function,
 
 ``` r
 ## BTC OHLC prices
 ## from Binance spot market
 ## in 30 minute intervals
-BTC <- cryptoQuotes::getQuote(
+BTC <- cryptoQuotes::get_quote(
   ticker = 'BTCUSDT',
   source = 'binance',
   futures = FALSE,
-  interval = '30m'
+  interval = '30m',
+  from    = Sys.Date() - 1 
 )
 ```
 
 <div align="center">
 
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Bitcoin (BTC) OHLC-prices
 </caption>
@@ -174,141 +196,141 @@ Bitcoin (BTC) OHLC-prices
 Index
 </th>
 <th style="text-align:center;">
-Open
+open
 </th>
 <th style="text-align:center;">
-High
+high
 </th>
 <th style="text-align:center;">
-Low
+low
 </th>
 <th style="text-align:center;">
-Close
+close
 </th>
 <th style="text-align:left;">
-Volume
+volume
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-01-08 11:30:00
+2024-03-07 13:00:00
 </td>
 <td style="text-align:center;">
-44196.7
+66905.34
 </td>
 <td style="text-align:center;">
-44688
+67113.9
 </td>
 <td style="text-align:center;">
-44154.28
+66822
 </td>
 <td style="text-align:center;">
-44635.99
+66836.77
 </td>
 <td style="text-align:left;">
-2259.56815
+1167.04733
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 12:00:00
+2024-03-07 13:30:00
 </td>
 <td style="text-align:center;">
-44636
+66836.76
 </td>
 <td style="text-align:center;">
-45200
+66900
 </td>
 <td style="text-align:center;">
-44350
+66575.52
 </td>
 <td style="text-align:center;">
-44518.16
+66712.44
 </td>
 <td style="text-align:left;">
-5567.92331
+941.182
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 12:30:00
+2024-03-07 14:00:00
 </td>
 <td style="text-align:center;">
-44518.15
+66712.43
 </td>
 <td style="text-align:center;">
-45120.05
+66881.03
 </td>
 <td style="text-align:center;">
-44518.15
+66592.52
 </td>
 <td style="text-align:center;">
-45111.09
+66881.02
 </td>
 <td style="text-align:left;">
-1949.63739
+768.26032
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 13:00:00
+2024-03-07 14:30:00
 </td>
 <td style="text-align:center;">
-45111.1
+66881.03
 </td>
 <td style="text-align:center;">
-45179.14
+67010
 </td>
 <td style="text-align:center;">
-44948.83
+66755.14
 </td>
 <td style="text-align:center;">
-45098
+66905.69
 </td>
 <td style="text-align:left;">
-1995.89183
+963.93827
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 13:30:00
+2024-03-07 15:00:00
 </td>
 <td style="text-align:center;">
-45098
+66905.68
 </td>
 <td style="text-align:center;">
-45108.38
+67307.05
 </td>
 <td style="text-align:center;">
-44807.56
+66905.68
 </td>
 <td style="text-align:center;">
-44911.58
+67249.59
 </td>
 <td style="text-align:left;">
-1327.42193
+1489.56914
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-01-08 14:00:00
+2024-03-07 15:30:00
 </td>
 <td style="text-align:center;">
-44911.58
+67249.59
 </td>
 <td style="text-align:center;">
-45031.31
+67899
 </td>
 <td style="text-align:center;">
-44832
+66541.1
 </td>
 <td style="text-align:center;">
-45002.78
+67055
 </td>
 <td style="text-align:left;">
-871.80155
+4784.76307
 </td>
 </tr>
 </tbody>
@@ -316,7 +338,33 @@ Volume
 
 </div>
 
-## Installation
+#### Charting OHLC-V
+
+The `BTC`-object can be charted using the `chart()`-function,
+
+``` r
+## Chart BTC
+## using klines, SMA, 
+## MACD and Bollinger Bands
+cryptoQuotes::chart(
+  ticker = BTC,
+  main   = cryptoQuotes::kline(),
+  sub    = list(
+    cryptoQuotes::volume(),
+    cryptoQuotes::macd()
+  ),
+  indicator = list(
+    cryptoQuotes::sma(n = 7),
+    cryptoQuotes::sma(n = 14),
+    cryptoQuotes::sma(n = 21),
+    cryptoQuotes::bollinger_bands()
+  )
+)
+```
+
+<img src="man/figures/README-chartquote-1.png" alt="cryptocurrency charts in R" style="display: block; margin: auto;" />
+
+## :information_source: Installation
 
 ### Stable version
 
@@ -334,11 +382,19 @@ install.packages(
 # install from github
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
-  ref = 'main'
+  ref  = 'development'
 )
 ```
 
-## Code of Conduct
+## :warning: Disclaimer
+
+This `library` is still considered `experimental` but no breaking
+changes will be made on functions labelled as `stable` without
+appropriate action; please refer to the [release notes](NEWS.md), or
+submit an [issue](https://github.com/serkor1/cryptoQuotes/issues) if
+that promise is broken..
+
+## :information_source: Code of Conduct
 
 Please note that the `cryptoQuotes` project is released with a
 [Contributor Code of

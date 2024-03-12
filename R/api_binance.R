@@ -6,8 +6,8 @@
 # script start;
 # 1) URLs and Endpoint; ####
 binanceUrl <- function(
-    futures = TRUE
-) {
+    futures = TRUE,
+    ...) {
 
   # 1) define baseURL
   # for each API
@@ -19,9 +19,7 @@ binanceUrl <- function(
 
   # 2) return the
   # baseURL
-  return(
-    baseUrl
-  )
+  baseUrl
 
 }
 
@@ -34,13 +32,19 @@ binanceEndpoint <- function(
   endPoint <- switch(
     EXPR = type,
     ohlc = {
-      if (futures) '/fapi/v1/klines' else '/api/v3/klines'
+      if (futures) 'fapi/v1/klines' else 'api/v3/klines'
     },
     ticker ={
-      if (futures) '/fapi/v1/exchangeInfo' else '/api/v3/exchangeInfo'
+      if (futures) 'fapi/v1/exchangeInfo' else 'api/v3/exchangeInfo'
     },
     lsratio = {
-      if (top) '/futures/data/topLongShortAccountRatio' else '/futures/data/globalLongShortAccountRatio'
+      if (top) 'futures/data/topLongShortAccountRatio' else 'futures/data/globalLongShortAccountRatio'
+    },
+    interest = {
+      'futures/data/openInterestHist'
+    },
+    fundingrate = {
+      'fapi/v1/fundingRate'
     }
   )
 
@@ -55,20 +59,41 @@ binanceEndpoint <- function(
 binanceIntervals <- function(
     futures,
     interval,
-    all = FALSE
+    all = FALSE,
+    type,
+    ...
 ) {
-  # Define all intervals in a data frame
-  allIntervals <- data.frame(
-    labels = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'),
-    values = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M')
+
+  #  0) wrap all intercals
+  #  in switch
+  all_intervals <- switch(
+    EXPR = type,
+    'ohlc' = {
+      data.frame(
+        labels = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'),
+        values = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M')
+      )
+    },
+
+    # default return value
+    data.frame(
+      labels = c('5m', '15m', '30m', '1h', '2h', '4h', '6h', '12h', '1d'),
+      values = c('5m', '15m', '30m', '1h', '2h', '4h', '6h', '12h', '1d')
+    )
   )
 
+  # # Define all intervals in a data frame
+  # allIntervals <- data.frame(
+  #   labels = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'),
+  #   values = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M')
+  # )
+
   if (all) {
-    return(allIntervals$labels)
+    return(all_intervals$labels)
   } else {
     # Select the specified interval
-    selectedInterval <- allIntervals$values[
-      grepl(paste0('^', interval, '$'), allIntervals$values)
+    selectedInterval <- all_intervals$values[
+      grepl(paste0('^', interval, '$'), all_intervals$values)
     ]
 
     return(selectedInterval)
@@ -78,7 +103,8 @@ binanceIntervals <- function(
 # 3) define response object and format; ####
 binanceResponse <- function(
     type = 'ohlc',
-    futures
+    futures,
+    ...
 ) {
 
   # mock response
@@ -91,11 +117,11 @@ binanceResponse <- function(
     ohlc = {
       list(
         colum_names = c(
-          'Open',
-          'High',
-          'Low',
-          'Close',
-          'Volume'
+          'open',
+          'high',
+          'low',
+          'close',
+          'volume'
         ),
         colum_location = c(
           2:6
@@ -106,9 +132,12 @@ binanceResponse <- function(
 
       )
     },
+
     ticker = {
       list(
-        code = rlang::expr(
+        foo = function(
+    response,
+    futures = NULL){
           subset(
             x = response$symbols,
             grepl(
@@ -117,7 +146,31 @@ binanceResponse <- function(
               x = response$symbols$status
             )
           )$symbol
-        )
+        }
+      )
+    },
+
+    fundingrate = {
+      list(
+        colum_names     = "funding_rate",
+        index_location = c(2),
+        colum_location = c(3)
+      )
+    },
+
+    interest = {
+      list(
+        colum_names     = c("open_interest"),
+        index_location = c(4),
+        colum_location = c(2)
+      )
+    },
+
+    lsratio = {
+      list(
+        colum_names     = c('long', 'short'),
+        index_location = c(5),
+        colum_location = c(2,4)
       )
     }
   )
@@ -128,37 +181,41 @@ binanceResponse <- function(
 binanceDates <- function(
     futures,
     dates,
-    is_response = FALSE
-) {
+    is_response = FALSE,
+    ...) {
 
+  # 0) Set multiplier
   multiplier <- 1e3
 
-  if (!is_response) {
-    # Convert dates to numeric and format
-    dates <- convertDate(
-      date = dates,
-      multiplier = multiplier,
-      power = 1
-    )
+  # 1) determine wether
+  # its a response or request
+  if (is_response) {
 
-    # Add one day to the second date
-    dates[2] <- dates[2] + 1 * 60 * 60 * 24
-
-    dates <- lapply(dates, format, scientific = FALSE)
-    names(dates) <- c('startTime', 'endTime')
-
-    return(dates)
+    dates <- convert_date(
+      x = as.numeric(dates),
+      multiplier = multiplier)
 
   } else {
-    # Processing response
-    dates <- convertDate(
-      date = as.numeric(dates),
-      multiplier = multiplier,
-      power = -1,
-      is_response = TRUE
+
+    dates <- convert_date(
+      x = dates,
+      multiplier = multiplier)
+
+    dates <- vapply(
+      dates,
+      format,
+      scientific = FALSE,
+      FUN.VALUE = character(1)
     )
-    return(dates)
+
+    names(dates) <- c('startTime', 'endTime')
+
+
+
   }
+
+  dates
+
 }
 
 # 5) Parameters passed to endpoints; ####
@@ -168,7 +225,8 @@ binanceParameters <- function(
     ticker,
     interval,
     from = NULL,
-    to = NULL
+    to = NULL,
+    ...
 ) {
 
   # Basic parameters common to both futures and non-futures
@@ -176,8 +234,10 @@ binanceParameters <- function(
     symbol = ticker,
     interval = binanceIntervals(
       interval = interval,
-      futures = futures
-    )
+      futures = futures,
+      type     = type
+    ),
+    limit = if (futures) 1500 else 1000
   )
 
   # Add date parameters
@@ -190,7 +250,9 @@ binanceParameters <- function(
     is_response = FALSE
   )
 
-  if (type == 'lsratio') {
+
+
+  if (type %in% c('lsratio', 'interest', 'fundingrate')) {
     # 4.1) This is a standalone
     # parameter; was called interval
     # but is named period in the API calls
@@ -201,7 +263,7 @@ binanceParameters <- function(
     # aligns with the remaining
     # functions which
     # also returns 100
-    params$limit <- 100
+    params$limit <- 500
 
   }
 

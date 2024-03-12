@@ -4,11 +4,11 @@
 \name{cryptoQuotes-package}
 \alias{cryptoQuotes}
 \alias{cryptoQuotes-package}
-\title{cryptoQuotes: A Streamlined Access to OHLC-v Market Data and Sentiment Indicators}
+\title{cryptoQuotes: A Streamlined Access to Cryptocurrency OHLC-V Market Data and Sentiment Indicators}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-This high-level API client offers a streamlined access to comprehensive cryptocurrency market data from major exchanges. It features robust OHLC-V (Open, High, Low, Close, Volume) candle data with flexible granularity, ranging from seconds to months, and includes insightful sentiment indicators. By aggregating data directly from leading exchanges, this package ensures a reliable and stable flow of market information, eliminating the need for complex, low-level API interactions.
+This high-level API client offers a streamlined access to public cryptocurrency market data and sentiment indicators. It features OHLC-V (Open, High, Low, Close, Volume) that comes with granularity ranging from seconds to months and essential sentiment indicators to develop and backtest trading strategies, or conduct detailed market analysis. By interacting directly with the major cryptocurrency exchanges this package ensures a reliable, and stable, flow of market information, eliminating the need for complex, low-level API interactions or webcrawlers.
 }
 \seealso{
 Useful links:

@@ -1,21 +1,14 @@
-#' Get a quote on a cryptopair from one
-#' of the supported exchanges
+#' Get the Open, High, Low, Close and Volume data on a cryptocurrency pair
 #'
 #' @description
 #'
-#' Open, High, Low, Close, and Volume (OHLCV) quotes are essential pieces of
-#' information used to analyze the price and trading activity of a financial asset over a specific time frame.
+#' `r lifecycle::badge("deprecated")`
 #'
+#' Get a quote on a cryptocurrency pair from the [available_exchanges()] in various [available_intervals()] for any actively traded [available_tickers()].
 #'
-#'
-#' @param ticker A character vector of length 1. Uppercase. See [availableTickers()] for available tickers.
-#' @param source A character vector of length 1. See [availableExchanges()] for available exchanges.
-#' @param interval A character vector of length 1. See [availableIntervals()] for available intervals.
-#' @param futures A logical value. Returns futures market if [TRUE], spot market otherwise.
-#' @param from An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
-#' @param to An optional vector of length 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
-#'
-#' @usage getQuote(
+#' @usage
+#' ## get OHLC-V
+#' getQuote(
 #'  ticker,
 #'  source   = 'binance',
 #'  futures  = TRUE,
@@ -24,19 +17,8 @@
 #'  to       = NULL
 #' )
 #'
-#' @example man/examples/scr_getQuote.R
-#'
-#' @returns an xts object with Open, High, Low, Close and Volume. If ```futures = TRUE``` the prices are last prices.
-#'
-#' @details
-#'
-#' If only ``from`` is provided 100 pips are returned up to ``Sys.time()``.
-#'
-#' If only ``to`` is provided 100 pips up to the specified date
-#' is returned.
-#'
-#' If ``from`` and ``to`` are both [NULL] 100 pips returned up to ``Sys.time()``
-#'
+#' @inherit get_quote
+#' @family deprecated
 #'
 #' @export
 
@@ -46,25 +28,49 @@ getQuote <- function(
     futures   = TRUE,
     interval  = '1d',
     from      = NULL,
-    to        = NULL
-) {
+    to        = NULL) {
   # This function returns
   # the ticker with the desired intervals
   # and such
-
+  lifecycle::deprecate_soft(
+    when = '1.3.0',
+    what = "getQuote()",
+    with = "get_quote()"
+  )
   # 0) check internet connection
   # before anything
   check_internet_connection()
 
-  # pass dates through
-  # the validator
-  valid_dates <- date_validator(
-    from = from,
-    to   = to
-  )
 
-  from <- valid_dates$from
-  to   <- valid_dates$to
+
+  # 1) check all arguments
+  # what are missing, and are
+  # the classes correct?
+  {{
+
+    assert(
+      "Argument {.arg ticker} is missing with no default" =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+      "Argument {.arg source} has to be {.cls character} of length {1}" = (is.character(source) & length(source) == 1),
+      "Argument {.arg futures} has to be {.cls logical} of length {1}" = (is.logical(futures) & length(futures) == 1),
+      "Argument {.arg interval} has to be {.cls character} of length {1}" = (is.character(interval) & length(interval) == 1),
+      "Valid {.arg from} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
+              format(
+                Sys.time()
+              )
+            )}}" = (is.null(from) || (is.date(from) & length(from) == 1)),
+
+      "Valid {.arg to} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
+              format(
+                Sys.time()
+              )
+            )}}" = (is.null(to) || (is.date(to) & length(to) == 1))
+
+
+
+
+    )
+
+  }}
 
   # recode the exchange
   # source to avoid errors
@@ -73,27 +79,65 @@ getQuote <- function(
   source <- tolower(
     trimws(source)
   )
+  ticker <- toupper(
+    trimws(ticker)
+  )
 
   # 1) check wether
   # the chosen exchange
   # is supported by the library
-  check_exchange_validity(
-    source = source
+  assert(
+    source %in% suppressMessages(
+      available_exchanges()
+    ),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Exchange {.val %s} is not supported.",
+        source
+      ),
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::available_exchanges(type = 'ohlc')",
+          code_theme = "Chaos"
+        ),
+        "for supported exhanges"
+      )
+    )
   )
 
   # 2) check wether the
   # interval is supported by
   # the exchange API
-  check_interval_validity(
-    interval = interval,
-    source   = source,
-    futures  = futures
+  assert(
+    interval %in% suppressMessages(
+      available_intervals(
+        source  = source,
+        futures = futures
+      )
+    ),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Interval {.val %s} is not supported.",
+        interval
+      ),
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = sprintf("cryptoQuotes::available_intervals(source = '%s', futures = '%s')", source, futures),
+          code_theme = "Chaos"
+        ),
+        "for supported intervals"
+      )
+    )
   )
 
   # 3) if either of the
   # date variables are NULL
   # pass them into the default_dates
   # function to extract 100 pips.
+
+  from <- coerce_date(from); to <- coerce_date(to)
   if (is.null(from) | is.null(to)) {
 
     # to ensure consistency across
@@ -113,23 +157,30 @@ getQuote <- function(
 
   }
 
-  # 3) fetch and format
-  # the quote and return
-  quote_response(
-    response = api_call(
-      source   = source,
-      type     = 'ohlc',
-      parameters = source_parameters(
-        type    = 'ohlc',
-        source  = source,
-        futures = futures,
-        ticker  = ticker,
-        interval= interval,
-        from    = from,
-        to      = to
-      )
-    )
+
+  ohlc <- fetch(
+    ticker = ticker,
+    source = source,
+    futures= futures,
+    interval = interval,
+    type   = "ohlc",
+    to     = to,
+    from   = from
+  )[paste(c(from, to), collapse = "/")]
+
+  # # Kraken doesnt have a to
+  # # parameter on spot market
+  # if (source == "kraken" & !futures) {
+  #
+  #   ohlc <- ohlc[paste(c(from, to), collapse = "/")]
+  #
+  # }
+
+  attributes(ohlc)$source <- paste0(
+    to_title(source), if (futures) " (PERPETUALS)" else " (SPOT)"
   )
+
+  ohlc
 
 }
 

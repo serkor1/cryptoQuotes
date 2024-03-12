@@ -4,6 +4,120 @@
 # objective: Generate a set of functions
 # to ease the process of getting cryptoQuotes
 # script start; ####
+#' GET-requests
+#'
+#' @param url [character] of length 1. The baseurl
+#' @param endpoint [character] of length 1. The API endpoint
+#' @param query A named [list] of queries.
+#' @param path A [list] of paths.
+#'
+#'
+#' @example man/examples/scr_GET.R
+#'
+#' @family development tools
+#' @keywords internal
+#'
+#'
+#' @returns A [list] crated by [jsonlite::fromJSON()]
+GET <- function(
+    url,
+    endpoint = NULL,
+    query = NULL,
+    path = NULL) {
+
+  # 1) initialize
+  # curl handle
+  handle <- curl::new_handle()
+
+  # 2) construct
+  # query string
+  query_string <- paste(
+    names(query),
+    unlist(query),
+    sep = "=",
+    collapse = "&"
+  )
+
+  path_string <- paste(
+    unlist(path),
+    collapse = "/"
+  )
+
+  # 3) construct hte
+  # full url
+  url <- paste(
+    paste0(
+      paste(
+        url, endpoint, sep = "/"
+      ),
+      path_string),
+    query_string,
+    sep = if (!is.null(query)) '?' else ""
+  )
+
+  # 4) set URL
+  # to handle
+  curl::handle_setopt(
+    handle = handle,
+    url    = url
+  )
+
+  # 5) store
+  # response in memory
+  # and catch connection
+  # errors
+  response <- tryCatch(
+    expr = {
+      curl::curl_fetch_memory(
+        url = url,
+        handle = handle
+      )
+    },
+    error = function(error) {
+
+      cli::cli_abort(
+        message = error$message,
+        call    =  sys.call(
+          1 - length(sys.calls())
+        )
+      )
+
+    }
+  )
+
+  response <- tryCatch(
+    expr = {
+      jsonlite::fromJSON(
+        txt = rawToChar(
+          x = response$content
+        ),
+        simplifyVector = TRUE,
+        flatten = TRUE
+      )
+    },
+    error = function(error) {
+
+      cli::cli_abort(
+        message = c(
+          "x" = rawToChar(
+            x = response$content
+          )
+        ),
+        call =  sys.call(
+          1 - length(sys.calls())
+        )
+      )
+
+    }
+  )
+
+    response
+
+
+
+}
+
+
 source_parameters <- function(
     source,
     futures,
@@ -11,7 +125,8 @@ source_parameters <- function(
     ticker,
     interval,
     from,
-    to
+    to,
+    ...
 ) {
 
   get(
@@ -24,7 +139,8 @@ source_parameters <- function(
     ticker   = ticker,
     interval = interval,
     from     = from,
-    to       = to
+    to       = to,
+    ...
   )
 
 }
@@ -33,13 +149,15 @@ source_parameters <- function(
 # base-url;
 baseUrl <- function(
     source = 'binance',
-    futures
+    futures,
+    ...
 ) {
   # 1) construct function
   # based on source
   baseUrl <- get(paste0(source, 'Url'))(
-    futures = futures
-  )
+    futures = futures,
+    ...
+    )
 
   # 2) return the baseUrl
   return(
@@ -72,275 +190,215 @@ endPoint <- function(
 
 
 
-# 0) Main API
-# call for the api
-api_call <- function(
+
+#' Fetch time-based API-endpoint responses
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function is a high-level wrapper around the development tools available
+#' and should reduce the amount of coding.
+#'
+#' @inheritParams get_quote
+#' @inheritParams available_exchanges
+#' @param ... additional parameters passed down the endpoint
+#'
+#' @details
+#' This function can only be used to fetch time-based objects, and can therefore
+#' not be used to get, for example, [available_tickers()].
+#'
+#' @family development tools
+#'
+#' @keywords internal
+#'
+#' @returns
+#'
+#' It returns an [xts]-object from the desired endpoint.
+#'
+#'
+#' @author Serkan Korkmaz
+fetch <- function(
+    ticker,
     source,
-    type = 'ohlc',
-    parameters,
-    ...
-) {
+    futures,
+    interval,
+    type,
+    to,
+    from,
+    ...){
 
-
-  path <- parameters$path
-  query <- parameters$query
-
-
-  # 1) construct the basic path
-  # which are universal for all
-  # calls;
-  #
-  # This is a mix of baseurl
-  # and endpoint
-  baseCall <- httr2::req_url_path(
-    req = httr2::request(
-      base_url = baseUrl(
-        source = source,
-        futures = parameters$futures
-      )
+  # 0) define error-message
+  # NOTE: The only point of failure
+  # is misspelled tickers
+  error_message <- c(
+    "x" = sprintf("Couldn't find {.val %s} on {.val %s}.", ticker, source),
+    "v" = paste(
+      "Run",
+      cli::code_highlight(
+        code = sprintf(
+          "available_tickers(source = '%s', futures = %s)", source, futures
+        ),
+        code_theme = 'Chaos'
+      ),
+      "to see available tickers."
     ),
-    endpoint = endPoint(
-      source = source,
-      futures = parameters$futures,
-      type = type,
-      ...
+    "i" = sprintf(
+      fmt = "If the error persists please submit a %s.",
+      cli::style_hyperlink(
+        text = cli::col_br_red("bug report"),
+        url = "https://github.com/serkor1/cryptoQuotes"
+      )
     )
   )
 
-  # 2) construct
-  # a path if such exists
-  # and is declared
-  if (!is.null(path)) {
 
-    is_path_based <- TRUE
+  # This is a high-level fetch-function
+  # to get all values regardless of the
+  # type
 
-    baseCall <- httr2::req_url_path_append(
-      req = baseCall,
-      path
-    )
-
-  } else {
-
-    is_path_based <- FALSE
-
-    baseCall <- httr2::req_url_query(
-      baseCall,
-      !!!query
-    )
-
-  }
-
-
-  if (is_path_based & !is.null(query)) {
-
-    baseCall <- httr2::req_url_query(
-      baseCall,
-      !!!query
-    )
-
-  }
-
-
-  # 3) perform the call
-  # with returned errors
-  getResponse <- httr2::req_perform(
-    httr2::req_error(
-      req = baseCall,
-      is_error = \(repoonse) FALSE
-    )
+  # 1) extract parameters
+  # from source and type
+  parameters <- source_parameters(
+    type    = type,
+    source  = source,
+    futures = futures,
+    ticker  = ticker,
+    interval= interval,
+    from    = from,
+    to      = to
   )
 
-  return(
-    list(
-      response = getResponse,
-      futures  = parameters$futures,
-      source   = parameters$source,
-      ticker   = parameters$ticker,
-      interval = parameters$interval
-
-    )
-
-  )
-
-
-}
-
-
-ticker_response <- function(
-    response
-) {
-
-
-  # 0) extract source
-  # response object
-  source_response <- get(
-    paste0(
-      response$source, 'Response'
-    )
-  )(
-    type = 'ticker',
-    futures = response$futures
-  )
-
-  # 1) get response ojson
-  response <- httr2::resp_body_json(
-    resp = response$response,
-    simplifyVector = TRUE
-  )
-
-
-  response <- rlang::eval_bare(
-    source_response$code,
-    env = rlang::caller_env(n = 0)
-  )
-
-
-
-  return(response)
-
-}
-
-
-
-quote_response <- function(
-    response
-) {
-
-  response_ <- response$response
-
-  # 0) Extract informations
-  interval <-  response$interval
-  ticker   <-  response$ticker
-  market   <-  ifelse(response$futures,'PERPETUAL', 'Spot')
-  source   <-  response$source
-  futures  <-  response$futures
-
-  # 1) get json response
-  # from the call
+  # 2) GET request
   response <- flatten(
-    httr2::resp_body_json(
-      resp = response$response,
-      simplifyVector = TRUE
+    GET(
+      url = baseUrl(
+        source  = source,
+        futures = futures
+      ),
+      endpoint = endPoint(
+        source = source,
+        type   = type,
+        futures = futures,
+        ...
+
+      ),
+      query = parameters$query,
+      path  = parameters$path
     )
   )
 
-
-  idx <- sapply(
-    response,
-    inherits,
-    c('array', 'matrix', 'data.frame')
+  # 2.1) Check if response
+  # is NULL
+  assert(
+    !is.null(response),
+    error_message = error_message
   )
 
-  # 2) format response
-  response <- try(
-    response[idx][[1]],
-    silent = TRUE
+
+  # 2.1) Locate the
+  # data
+  idx <- vapply(
+    X = response,
+    FUN.VALUE = logical(1),
+    FUN = inherits,
+    what = c('array', 'matrix', 'data.frame')
   )
 
-  # 1.3) Error handling
 
-  if (inherits(response, 'try-error')) {
+  # 2.2) extract data
+  # from reponse:
+  #
+  # NOTE: if this fails
+  # then it is likely
+  # that we are dealing with
+  # an error, or Kraken
+  response <- tryCatch(
+    expr = {
+      response[[which(idx)]]
+    },
+    error = function(error){
+      as.data.frame(response)
+    }
+  )
 
-    check_for_errors(
-      response = response_,
-      futures = futures,
-      source  = source
-    )
 
 
-  }
-
-  # 2.1) get response oobject
-  # based on the exchange
-  response_object <- get(
+  # 3) Extract source specific
+  # response parameters
+  parameters <- get(
     paste0(
       source, 'Response'
     )
   )(
-    type = 'ohlc',
+    type = type,
     futures = futures
   )
 
-  # 2.2) extract OHLCV
-  # and index by location
-  response_index <- response[,response_object$index_location]
-  response <-  rbind(
-    response[,response_object$colum_location]
+  # 3.1) wrap parameters
+  # in tryCatch to check wether
+  # the columns exists
+  column_list <- tryCatch(
+    expr = {
+      list(
+        index = response[, parameters$index_location],
+        core  = rbind(response[,parameters$colum_location])
+      )
+    },
+    error = function(error) {
+
+      assert(
+        FALSE,
+        error_message = error_message
+      )
+
+    }
   )
 
-  # 2.2.1) convert
+  # 3.1.1) extract the values
+  # from the list
+  index <- column_list$index
+  core  <- column_list$core
+
+  # 3.1.2) convert
   # all to as.numeric
-  response <- apply(
-    response,
-    c(1,2),
-    as.numeric
+  core <- apply(
+    X = core,
+    MARGIN = 2,
+    FUN = as.numeric
   )
 
-  # 2.3) convert dates
+  # 3.1.3) convert dates
   # to positxct
-  response_index <- get(
+  index <- get(
     paste0(
       source, 'Dates'
     )
   )(
     futures = futures,
-    dates   = response_index,
-    is_response = TRUE
+    dates   = index,
+    is_response = TRUE,
+    type    = type
   )
 
-  # 2.4) set order to decreasing
-  # to comply with zoo/xts
-  response_order <- order(
-    decreasing = FALSE,
-    response_index
-  )
 
-  # WARNING:
-  #
-  # Do NOT modify the zoo/xts
-  # after this line;
-  #
-  # It resets the timezone!
 
-  # 3) construct
-  # zoo object
-  response <- zoo::as.zoo(
-    rbind(response[response_order,])
-  )
 
-  # 3.1) set the index
-  # of the repsonse
-  # in order
-  zoo::index(response) <- response_index[response_order]
-
-  # 3.2) set column
-  # names by location
-  colnames(response) <- response_object$colum_names
-
-  # 3.3) Order
-  # columns so its
-  # in OHLCV
-  response <- response[,c('Open', 'High', 'Low', 'Close', 'Volume')]
-
-  # 3.4) convert
-  # the response to xts
+  # 4) convert to xts
+  # from data.frame
+  # NOTE: This throws an error
+  # for KRAKEN no idea why
   response <- xts::as.xts(
-    response
+    zoo::as.zoo(
+      core
+    ),
+    index
   )
+  # 4.1) set column
+  # names
+  colnames(response) <- parameters$colum_names
 
-  # 4) construct
-  # attributes for further
-  # functionality
-  attributes(response)$tickerInfo <- list(
-    source   = source,
-    interval = interval,
-    ticker   = ticker,
-    market   = market
-  )
 
-  return(
-    response
-  )
+  response
 }
 
 # end of script; ####

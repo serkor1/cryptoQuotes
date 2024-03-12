@@ -5,13 +5,13 @@
 \alias{FGIndex}
 \title{Fear and Greed Index Values}
 \format{
-An object of class \code{xts} (inherits from \code{zoo}) with 689 rows and 1 columns.
+An object of class \code{xts} (inherits from \code{zoo}) with 364 rows and 1 columns.
 }
 \usage{
 FGIndex
 }
 \description{
-A xts object with Fear and Greed Index value. It has 689 rows, and 1 colum. Extracted from 2022-02-07 to 2023-12-27
+A xts object with Fear and Greed Index value. It has 689 rows, and 1 colum. Extracted from 2023-01-01 to 2023-12-31
 }
 \details{
 \describe{
@@ -20,9 +20,9 @@ A xts object with Fear and Greed Index value. It has 689 rows, and 1 colum. Extr
 }
 \seealso{
 Other data: 
-\code{\link{ATOMUSDT}},
-\code{\link{BTCUSDT}},
-\code{\link{DOGEUSDT}}
+\code{\link{ATOM}},
+\code{\link{BTC}},
+\code{\link{DOGE}}
 }
 \concept{data}
 \keyword{datasets}

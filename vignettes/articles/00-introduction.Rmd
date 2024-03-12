@@ -10,165 +10,172 @@ knitr::opts_chunk$set(
 ```
 
 ```{r, message = FALSE}
+## load library
 library(cryptoQuotes)
 ```
 
+The main goal of the `cryptoQuotes`-package is to bridge the gap between `R` and the cryptocurrency market data. Its a high-level `API`-client that connects to major cryptocurrency exchanges and their respective public market data endpoints.
 
-The main purpose of this library is to bring cryptocurrency market data into ```R```  without having to rely upon low-level coding. This high-level API-client have one main function, ```getQuotes()```, which returns cryptocurrency market data with a ```xts```- and ```zoo```-class. The returned objects contains Open, High, Low, Close and Volume data with different granularity, from the currently supported exchanges. In this article we will focus on the Binance exchange, and showcase the different possibilities in the calls.
+In this article we will focus on `price` and `sentiment` data made available by the [Kraken](https://www.kraken.com/) exchange.
 
-> **Note:** All exchanges supports spot and perpetual futures market.
+## Cryptocurrency market data
 
-## Supported intervals
+In this section we will focus on market data from the last 24 hours, on the hourly chart.
 
-All supported intervals varies with the exchanges, and market. Here is an example
-of supported intervals from the Binance futures market
+### OHLC data
 
-```{r}
-## available intervals
-## from Binance futures market
-cryptoQuotes::availableIntervals(
-  source = 'binance',
-  futures = TRUE
-)
-```
-
-
-The spot market intervals, can be extracted by setting ```futures = FALSE```,
+To get `OHLC` data the `get_quote()`-function is the go-to function,
 
 ```{r}
-## available intervals
-## from Binance spot market
-cryptoQuotes::availableIntervals(
-  source = 'binance',
-  futures = FALSE
-)
-```
-
-The ```availableIntervals()```-function invisibly returns a character vector, that can be used in, for example, lapply to extract the same cryptocurrency with different intervals. The ```source``` controls the exchange. Here is an example of what is returned using the Kucoin exchange,
-
-```{r, message=FALSE}
-## available intervals
-## from kucoin spot market
-## and its return value
-print(
-  cryptoQuotes::availableIntervals(
-    source = 'kucoin',
-    futures = FALSE
-  )
-)
-```
-
-## Supported exchanges
-
-The currently supported exchanges can be retrived using the ```availableExchanges()```-function, which also invisibly returns a ```character```-vector,
-
-
-```{r}
-## supported exchanges
-## and its return value
-exchanges <- cryptoQuotes::availableExchanges()
-
-## print its value
-print(
-  exchanges
-)
-```
-
-## Supported tickers
-
-All listed, and active, cryptocurrencies on the supported exchanges are available for extraction using the ```getQuotes()```-function. 
-
-The cryptocurrency tickers varies across exchanges, and within markets for some exchanges. Supported tickers for specific exchanges and markets can be retrieved using the ```availableTickers()```-function,
-
-```{r, eval = FALSE}
-## available tickers
-## on Binance futures
-## market
-cryptoQuotes::availableTickers(
-  source  = 'binance',
-  futures = TRUE 
-)
-```
-
-> **NOTE:** availableTickers() can't be run here as CRAN, and Github, doesn't allow
-> for API calls.
-
-The ```availableTickers()```-function returns a ```character```-vector, sorted alphabetically.
-
-## Cryptocurrency Market Data in R
-
-To get cryptocurrency market data in R, the ```getQuotes()```-function is used. Below is an example on how to get
-Dogecoin with 1 minute intervals using the Binance exchange,
-
-```{r, eval=FALSE}
-## DOGEUSDT on the
-## 1m chart from the
-## spot market
-DOGEUSDT <- cryptoQuotes::getQuote(
-  ticker   = 'DOGEUSDT',
-  source   = 'binance',
-  interval = '1m',
-  futures  = FALSE,
-  from     = '2022-01-14',
-  to       = '2022-01-15'
+## Get the
+## SPOT price of 
+## Bitcoin on the hourly
+BTC <- get_quote(
+  ticker  = "BTCUSD",
+  source  = "kraken",
+  futures = FALSE,
+  interval = "1h",
+  from = Sys.Date() - 1
 )
 ```
 
 
-```DOGEUSDT``` has the ```class``` `r paste(class(DOGEUSDT), collapse = ' and ')`, and has the following structure as seen below,
-
-
-```{r, echo =FALSE}
+```{r, echo =FALSE, fig.alt="Cryptocurrency Market Data in R"}
 ## print table as a kable
 ## for a neat presentationb
-  knitr::kable(
-    caption = 'USDT denominated Dogecoin structure',
-    align = 'lcccc',
-    table.attr = "style='width:100%;'",
-    x = data.frame(
-      cbind(
-        Index = paste(tail(zoo::index(DOGEUSDT))),
-        tail(zoo::coredata(DOGEUSDT))
-      ),row.names = NULL
-    ),
-    format = 'html'
-  )
+knitr::kable(
+  caption = 'Hourly Bitcoin OHLC-V data',
+  align = 'lcccc',
+  table.attr = "style='width:100%;'",
+  x = data.frame(
+    cbind(
+      Index = paste(tail(zoo::index(BTC))),
+      round(tail(zoo::coredata(BTC)),3)
+    ),row.names = NULL
+  ),
+  format = 'html'
+)
 
 ```
 
-The arguments can be modified according to the application, below is an example of getting ATOM in 15 minutes intervals from the perpetual futures market using the Binance exchange again,
+### Sentiment data
 
-```{r, eval=FALSE}
-## ATOMUSDT on the
-## 15m chart from the
-## futures market
-ATOMUSDT <- cryptoQuotes::getQuote(
-  ticker   = 'ATOMUSDT',
-  source   = 'binance',
-  interval = '15m',
-  futures  = TRUE,
-  from     = '2023-01-01',
-  to       = '2023-01-02'
+One sentiment indicator for Bitcoin is the long-short ratio, which can be retrieved using `get_lsratio()`-function,
+
+```{r}
+## Get the
+## long-short ratio of 
+## Bitcoin on the hourly
+LS_BTC <- get_lsratio(
+  ticker  = "PF_XBTUSD",
+  source  = "kraken",
+  interval = "1h",
+  from = Sys.Date() - 1
 )
 ```
 
 
-```{r, echo =FALSE}
+```{r, echo =FALSE, fig.alt="Cryptocurrency Sentiment Data in R"}
 ## print table as a kable
-## for a neat presentation
-  knitr::kable(
-    caption = 'USDT denominated ATOM structure',
-    align = 'lcccc',
-    table.attr = "style='width:100%;'",
-    x = data.frame(
-      cbind(
-        Index = paste(tail(zoo::index(ATOMUSDT))),
-        tail(zoo::coredata(ATOMUSDT))
-      ),row.names = NULL
-    ),
-    format = 'html'
-  )
+## for a neat presentationb
+knitr::kable(
+  caption = 'Hourly Bitcoin OHLC-V data',
+  align = 'lcccc',
+  table.attr = "style='width:100%;'",
+  x = data.frame(
+    cbind(
+      Index = paste(tail(zoo::index(LS_BTC))),
+      round(tail(zoo::coredata(LS_BTC)),3)
+    ),row.names = NULL
+  ),
+  format = 'html'
+)
+
 ```
 
-> **Note:** getQuotes() can't be run here as CRAN, and Github, doesn't allow
-> for API calls. The datasets are examples that can be found in the library.
+
+## Limitations
+
+There is a limit to the amount of market data that can be extracted in one call. The [Kraken](https://www.kraken.com/) exchange, for example, has a limit on `720` rows of data per call in the spot market,
+
+```{r}
+## Get the SPOT
+## market for over 
+## 2000 rows
+nrow(
+  BTC <- get_quote(
+    ticker  = "BTCUSD",
+    source  = "kraken",
+    futures = FALSE,
+    interval = "30m",
+    from = Sys.Date() - 30,
+    to   = Sys.Date()
+  )
+)
+```
+
+If you need more data than this, you need to do multiple calls. One such solution is the following,
+
+```{r}
+## 1) create date
+## sequence
+dates <- seq(
+  from = as.POSIXct(Sys.Date()),
+  by = "-30 mins",
+  length.out = 1440
+)
+
+## 2) split the sequence
+## in multiples of 100
+## by assigning numbers
+## to each indices of 100
+idx <- rep(
+  x = 1:2,
+  each = 720
+)
+
+## 3) use the idx to split
+## the dates into equal parts
+split_dates <- split(
+  x = dates,
+  f = idx
+)
+
+## 4) collect all all
+## calls in a list
+## using lapply
+ohlc <- lapply(
+  X = split_dates,
+  FUN = function(dates){
+    
+    
+    Sys.sleep(1)
+    
+    cryptoQuotes::get_quote(
+      ticker = "BTCUSD",
+      source = "kraken",
+      futures = FALSE,
+      interval = "30m",
+      from = min(dates),
+      to   = max(dates)
+    )
+    
+  })
+
+## 4.1) rbind all
+## elements
+nrow(
+  ohlc <- do.call(
+    what = rbind, 
+    args = ohlc
+  )
+)
+```
+
+> **Note:** For an indepth analysis of the various limitations and workarounds please see the `cryptoQuotes` [wiki](https://github.com/serkor1/cryptoQuotes/wiki) on
+> [Github](https://github.com/serkor1/cryptoQuotes)
+
+
+
+
+

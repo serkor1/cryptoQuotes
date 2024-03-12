@@ -7,137 +7,128 @@ subtitle: "The cryptoQuotes way"
 knitr::opts_chunk$set(
   collapse = TRUE,
   message = FALSE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%",
+  out.height = "1000",
+  fig.align = "center"
 )
 ```
 
-```{r setup}
+```{r, message = FALSE}
+## load library
 library(cryptoQuotes)
 ```
 
+As an `experimental` feature, the `cryptoQuotes`-package has a variety of `chart`-functions built on top of `plotly` and `TTR` to visualize cryptocurrency market data and trading indicators interactively.
 
-The ```cryptoQuotes``` library uses ```plotly``` to visualize the quotes interactively.
+Throughout this article we will analyze Bitcoin on the hourly chart called by the `get_quotes`-function,
 
-> **Note:** As per `r paste(Sys.Date())` the charting is still in its experimental
-> phase.
+```{r}
+## Get the
+## SPOT price of 
+## Bitcoin on the hourly
+BTC <- get_quote(
+  ticker  = "BTCUSD",
+  source  = "kraken",
+  futures = FALSE,
+  interval = "1h",
+  from = Sys.Date() - 1
+)
+```
+
+## Price charts
 
 There are two main price charts. The Japanese candlestick chart, ```kline()```, and the basic OHLC chart, ```ohlc()```, charts. A chart has to be wrapped in the ```chart()```-function.
 
-# Charting Cryptocurrency with R
+> All charts comes with `volume` and `bollinger bands` by `default`.
 
-For charting the cryptocurrency, we get the ```ATOMUSDT``` pair from Binance in 15 minute intervals,
+### Candlestick charts
 
-```{r, eval=FALSE}
-## ATOMUSDT on the
-## 15m chart from the
-## futures market
-ATOMUSDT <- cryptoQuotes::getQuote(
-  ticker   = 'ATOMUSDT',
-  source   = 'binance',
-  interval = '15m',
-  futures  = TRUE,
-  from     = '2023-01-01',
-  to       = '2023-01-02'
+```{r, fig.alt="cryptocurrency charts in R"}
+## chart BTC
+## with candlesticks
+chart(
+  ticker = BTC,
+  main   = kline()
 )
 ```
 
-## OHLC chart
 
-The basic ohlc chart can be charted by passing the ```ATOMUSDT```-pair into the ```ohlc()```-function and then wrap it in ```chart()```
+### OHLC charts
 
-```{r basic OHLC chart, out.width="100%",fig.align='center',fig.height=8}
-## simple bar-chart
-## without indicators
+```{r, fig.alt="cryptocurrency charts in R"}
+## chart BTC
+## with candlesticks
 chart(
-  chart = ohlc(
-    ATOMUSDT
+  ticker = BTC,
+  main   = ohlc()
+)
+```
+
+
+> The `chart()`-function comes with various `options` for color deficiency and themes. Use `?chart` for
+> further details.
+
+## Charting indicators
+
+All the charts supports various indicators such as `RSI`, `MACD` and `MA`. These can be passed into their respective arguments as follows,
+
+```{r, fig.alt="cryptocurrency charts in R"}
+## chart BTC
+## with candlesticks
+## and various indicators
+chart(
+  ticker = BTC,
+  main   = kline(),
+  sub    = list(
+    volume(),
+    rsi(),
+    macd()
+  ),
+  indicator = list(
+    sma(n = 7),
+    sma(n = 21),
+    bollinger_bands()
   )
-)
-```
-
-## Candlestick chart
-
-The japanese candlestick chart can be charted by passing the ```ATOMUSDT```-pair into the ```kline()```-function and then wrap it in ```chart()```
-
-```{r basic kline chart, out.width="100%",fig.align='center',fig.height=8}
-## simple kline chart
-## without indicators
-chart(
-  chart = kline(
-    ATOMUSDT
-  )
-)
-```
-
-
-# Charting cryptocurrency indicators with R
-
-All the charts supports various indicators such as ```RSI``` and ```Bollinger Bands```. All indicators starts with ```addIndicator```, and can be used with the pipe operator from ```magrittr```.
-
-## RSI and Bollinger Bands
-
-Below is an example of using the ```addRSI()``` and ```addBBands()``` indicators,
-
-```{r basic kline chart with RSI and Bollinger Bands, out.width="100%",fig.align='center',fig.height=8}
-## simple kline chart
-## without indicators
-chart(
-  chart = kline(ATOMUSDT) %>% 
-    addRSI() %>% 
-    addBBands()
-)
-```
-
-
-## MACD and Volume
-
-Below is an example of using the ```addMACD()``` and ```addVolume()``` indicators,
-
-```{r basic kline chart with Bollinger Bands and Volume, out.width="100%",fig.align='center',fig.height=8}
-## simple kline chart
-## without indicators
-chart(
-  chart = kline(ATOMUSDT) %>%
-    addMACD() %>% 
-    addVolume()
 )
 ```
 
 
 ## Charting events
 
-Various events in the financial markets does, undoubtedly, have an impact on the prices. For traders relying on technical analysis one important event is when the short simple moving average (SMA), crosses the long SMA. We can use ```TTR::SMA()``` to calculate the SMA,
+All charts supports passing `event_data`, which are any type of `data.frame`, that can be plotted on the chart. Below is an example of plotting the crossing of the `MA`, 
+
 
 ```{r Locate bullcross}
 ## Calculate moving averages
 ## SMA(7) and SMA(10)
-ATOMUSDT$short_SMA <- TTR::SMA(
-  x = ATOMUSDT$Close,
-  n = 7,
+BTC$short_SMA <- TTR::SMA(
+  x = BTC$close,
+  n = 7
 )
 
-ATOMUSDT$long_SMA <- TTR::SMA(
-  x = ATOMUSDT$Close,
-  n = 21,
+BTC$long_SMA <- TTR::SMA(
+  x = BTC$close,
+  n = 21
 )
 
 ## Determine the cross
 ## from below
-ATOMUSDT$cross <- as.numeric(
-  lag(ATOMUSDT$short_SMA) < ATOMUSDT$long_SMA &
-    ATOMUSDT$short_SMA > ATOMUSDT$long_SMA 
+BTC$cross <- as.numeric(
+  lag(BTC$short_SMA) < BTC$long_SMA &
+    BTC$short_SMA > BTC$long_SMA 
 )
 ```
 
 
-Based on the `cross` indicator, the `ATOMUSDT` pair can now be subset, and processed accordingly.
+Based on the `cross` indicator, the `BTC` pair can now be subset, and processed accordingly.
 
 
 ```{r}
 ## create event data
 ## and store it as a data.rfrae
 event_data <- subset(
-  ATOMUSDT,
+  BTC,
   cross == 1
 )
 
@@ -168,17 +159,25 @@ event_data$color <- 'darkgray'
 
 Finally, the crosses can be plotted using the `chart()` and `addEvents()` functions, like below,
 
-```{r, out.width="100%",fig.align='center',fig.height=10}
+```{r}
 ## add the events
 ## the chart, along
 ## with Moving averages
 ## and the Bollinger Bands
 ## in a candlestick chart
 chart(
-  chart = kline(quote = ATOMUSDT)  %>% 
-    addBBands()                    %>%
-    addMA(FUN = TTR::SMA, n = 7)   %>%
-    addMA(FUN = TTR::SMA, n = 21)  %>% 
-    addEvents(event = event_data)
+  ticker = BTC,
+  main   = kline(),
+  indicator = list(
+    bollinger_bands(),
+    sma(n = 7),
+    sma(n = 21)
+  ),
+  event_data = event_data
 )
 ```
+
+
+## Limitations
+
+The charting functions are still at an `experimental`-phase as per version `1.3.0`, and might therefore include various bugs of all sizes.

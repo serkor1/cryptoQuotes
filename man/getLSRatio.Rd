@@ -2,90 +2,123 @@
 % Please edit documentation in R/getLSRatio.R
 \name{getLSRatio}
 \alias{getLSRatio}
-\title{Get long-short ratios for tickers}
+\title{Get the long to short ratio of a cryptocurrency pair}
 \usage{
-getLSRatio(ticker, interval = "1d", top = FALSE, from = NULL, to = NULL)
+getLSRatio(
+  ticker,
+  interval = "1d",
+  source = "binance",
+  from = NULL,
+  to = NULL,
+  top = FALSE
+)
 }
 \arguments{
-\item{ticker}{A character vector of length 1. Uppercase. See \code{\link[=availableTickers]{availableTickers()}} for available tickers.}
+\item{ticker}{A \link{character} vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
-\item{interval}{A character vector of length 1. See \code{\link[=availableIntervals]{availableIntervals()}} for available intervals.}
+\item{interval}{A \link{character} vector of \link{length} 1. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
-\item{top}{A logical vector. \link{FALSE} by default. If \link{TRUE} it returns the top traders Long-Short ratios.}
+\item{source}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_exchanges]{available_exchanges()}} for details.}
 
-\item{from}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+\item{from}{An optional vector of \link{length} 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
 
-\item{to}{An optional vector of length 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+\item{to}{An optional vector of \link{length} 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+
+\item{top}{A \link{logical} vector. \link{FALSE} by default. If \link{TRUE} it returns the top traders Long-Short ratios.}
 }
 \value{
-A xts object with the share of long and short position, and the ratio of the two. If no from and to are supplied
-the 100 most recent pips are returned.
+An \link{xts}-object containing,
+\itemize{
+\item long (\link{numeric}) - the share of longs
+\item short (\link{numeric}) - the share of shorts
+\item ls_ratio (\link{numeric}) - the ratio of longs to shorts
+}
 }
 \description{
-The long-short ratio is a market sentiment indicator on expected price movement
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Get the long-short ratio for any \code{\link[=available_tickers]{available_tickers()}} from the \code{\link[=available_exchanges]{available_exchanges()}}
 }
 \details{
-Note! This endpoint only supports intervals between 5 minutes and 1 day.
+\subsection{On time-zones and dates}{
+
+Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}}, or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or \code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default
+all dates are passed and returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
+}
+
+\subsection{On returns}{
+
+If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}. If only \code{to} is provided 200 pips up to the specified date
+is returned.
+}
+}
+\note{
+\subsection{Available exchanges}{
+
+See \code{\link[=available_exchanges]{available_exchanges()}} with  for available exchanges.
+}
+
+\subsection{Limited return values}{
+
+Binance only supports data for the last 30 days. Use other exchanges if you need beyond that.
+}
 }
 \examples{
-# Example on loading
-# long-short ratio
-# for the last days
-# on the 15 minute candle
-# wrapped in try to avoid
-# failure on Github
+\dontrun{
+  # Example on loading
+  # long-short ratio
+  # for the last days
+  # on the 15 minute candle
+  # wrapped in try to avoid
+  # failure on Github
 
-# 1) long-short ratio
-# on BTCUSDT pair
-BTC_LSR <- try(
-  expr = cryptoQuotes::getLSRatio(
+  # 1) long-short ratio
+  # on BTCUSDT pair
+  ls_ratio <- cryptoQuotes::get_lsratio(
     ticker = 'BTCUSDT',
     interval = '15m',
     from = Sys.Date() - 1,
     to   = Sys.Date()
-  ),
-  silent = TRUE
-)
+  )
 
-# 2) BTCSDT in same period
-# as the long-short ratio;
-BTCUSDT <- try(
-  cryptoQuotes::getQuote(
+  # 2) BTCSDT in same period
+  # as the long-short ratio;
+  BTC <- cryptoQuotes::get_quote(
     ticker = 'BTCUSDT',
     futures = TRUE,
     interval = '15m',
     from = Sys.Date() - 1,
     to   = Sys.Date()
   )
-)
 
-if (!inherits(x = BTC_LSR, what = 'try-error') & !inherits(x = BTCUSDT, what = "try-error")) {
-
-  # 3) head the data
-  # and display contents
-  head(
-    BTC_LSR
-  )
-
-  # 4) plot BTCUSDT-pair
+  # 3) plot BTCUSDT-pair
   # with long-short ratio
   cryptoQuotes::chart(
-    chart = cryptoQuotes::kline(
-      BTCUSDT
-    ) \%>\% cryptoQuotes::addLSRatio(
-      LSR = BTC_LSR
+    ticker = BTC,
+    main   = cryptoQuotes::kline(),
+    sub    = list(
+      cryptoQuotes::lsr(ratio = ls_ratio),
+      cryptoQuotes::volume()
+    ),
+    indicator = list(
+      cryptoQuotes::bollinger_bands()
     )
   )
-
 }
+
+
 
 # end of scrtipt;
 }
 \seealso{
-Other sentiment: 
-\code{\link{getFGIndex}()}
+Other deprecated: 
+\code{\link{availableExchanges}()},
+\code{\link{availableIntervals}()},
+\code{\link{availableTickers}()},
+\code{\link{getFGIndex}()},
+\code{\link{getQuote}()}
 }
 \author{
 Jonas Cuzulan Hirani
 }
-\concept{sentiment}
+\concept{deprecated}

@@ -6,8 +6,8 @@
 # script start;
 # 1) URLs and Endpoint; ####
 bitmartUrl <- function(
-    futures = TRUE
-) {
+    futures = TRUE,
+    ...) {
 
   # 1) define baseURL
   # for each API
@@ -19,33 +19,29 @@ bitmartUrl <- function(
 
   # 2) return the
   # baseURL
-  return(
-    baseUrl
-  )
+  baseUrl
 
 }
 
 bitmartEndpoint <- function(
     type = 'ohlc',
-    futures = TRUE
-) {
+    futures = TRUE,
+    ...) {
 
 
   endPoint <- switch(
     EXPR = type,
     ohlc = {
-      if (futures) '/contract/public/kline' else '/spot/quotation/v3/lite-klines'
+      if (futures) 'contract/public/kline' else 'spot/quotation/v3/lite-klines'
     },
     ticker ={
-      if (futures) '/contract/public/details' else '/spot/v1/symbols'
+      if (futures) 'contract/public/details' else 'spot/v1/symbols'
     }
   )
 
 
   # 2) return endPoint url
-  return(
-    endPoint
-  )
+  endPoint
 
 }
 
@@ -53,7 +49,8 @@ bitmartEndpoint <- function(
 bitmartIntervals <- function(
     futures,
     interval,
-    all = FALSE
+    all = FALSE,
+    ...
 ) {
 
   # Define all intervals in a data frame
@@ -79,7 +76,8 @@ bitmartIntervals <- function(
 # 3) define response object and format; ####
 bitmartResponse <- function(
     type = 'ohlc',
-    futures
+    futures,
+    ...
 ) {
 
   response <- NULL
@@ -94,18 +92,18 @@ bitmartResponse <- function(
     EXPR = type,
     ohlc = {
       list(
-        colum_names = if (futures) c('Low', 'High', 'Open', 'Close', 'Volume') else c('Open', 'High', 'Low', 'Close', 'Volume'),
+        colum_names = if (futures) c('low', 'high', 'open', 'close', 'volume') else c('open', 'high', 'low', 'close', 'volume'),
         colum_location = if (futures) 1:5 else c(2:5,7),
         index_location = if (futures) 6 else 1
       )
     },
     ticker = {
       list(
-        code = switch (
-          if (futures) 'futures' else 'spot',
-          futures = rlang::expr(response$data$symbol$symbol),
-          spot    = rlang::expr(response$data$symbols)
-        )
+        foo = function(response, futures){
+
+          if (futures) response$data$symbol$symbol else response$data$symbols
+
+        }
       )
     }
   )
@@ -117,34 +115,39 @@ bitmartResponse <- function(
 bitmartDates <- function(
     futures,
     dates,
-    is_response = FALSE
+    is_response = FALSE,
+    ...
 ) {
-  if (!is_response) {
-    # Convert dates to numeric and then format
-    dates <- convertDate(
-      date = dates,
-      multiplier = 1,
-      power = 1,
-      is_response = FALSE
+
+  if (is_response) {
+
+    dates <- convert_date(
+      x = as.numeric(dates),
+      multiplier = 1
     )
 
-    dates <- format(
+  } else {
+
+    dates <- convert_date(
+      x = dates,
+      multiplier = 1
+      )
+
+    dates <- vapply(
       dates,
-      scientific = FALSE
+      format,
+      scientific = FALSE,
+      FUN.VALUE = character(1)
     )
 
-    # Set names based on futures
     names(dates) <- if (futures) c('start_time', 'end_time') else c('after', 'before')
 
-    return(dates)
-  } else {
-    # Processing response
-    dates <- convertDate(
-      date = as.numeric(dates),
-      is_response = TRUE
-    )
-    return(dates)
+
+
   }
+
+  dates
+
 }
 
 # 5) Parameters passed to endpoints; ####
@@ -154,7 +157,8 @@ bitmartParameters <- function(
     type = NULL,
     interval,
     from = NULL,
-    to = NULL
+    to = NULL,
+    ...
 ) {
 
   # Basic parameters
@@ -163,7 +167,8 @@ bitmartParameters <- function(
     step = bitmartIntervals(
       interval = interval,
       futures = futures
-    )
+    ),
+    limit = 200
   )
 
   # Add date parameters
