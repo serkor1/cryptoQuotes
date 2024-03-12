@@ -32,7 +32,7 @@ BTC <- get_quote(
   source  = "kraken",
   futures = FALSE,
   interval = "1h",
-  from = Sys.Date() - 1
+  from = Sys.Date() - 7
 )
 ```
 
