@@ -32,7 +32,7 @@ exchanges,
 
 <div align="center">
 
-<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Supported exchanges, markets and intervals.
 </caption>
@@ -186,7 +186,7 @@ BTC <- cryptoQuotes::get_quote(
 
 <div align="center">
 
-<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Bitcoin (BTC) OHLC-prices
 </caption>
@@ -215,122 +215,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-03-07 13:00:00
+2024-03-12 10:30:00
 </td>
 <td style="text-align:center;">
-66905.34
+71978.46
 </td>
 <td style="text-align:center;">
-67113.9
+72085.06
 </td>
 <td style="text-align:center;">
-66822
+71850.01
 </td>
 <td style="text-align:center;">
-66836.77
+71936
 </td>
 <td style="text-align:left;">
-1167.04733
+818.1898
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-07 13:30:00
+2024-03-12 11:00:00
 </td>
 <td style="text-align:center;">
-66836.76
+71936
 </td>
 <td style="text-align:center;">
-66900
+71959.12
 </td>
 <td style="text-align:center;">
-66575.52
+71647.14
 </td>
 <td style="text-align:center;">
-66712.44
+71705.63
 </td>
 <td style="text-align:left;">
-941.182
+587.18566
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-07 14:00:00
+2024-03-12 11:30:00
 </td>
 <td style="text-align:center;">
-66712.43
+71705.63
 </td>
 <td style="text-align:center;">
-66881.03
+71999
 </td>
 <td style="text-align:center;">
-66592.52
+71705.62
 </td>
 <td style="text-align:center;">
-66881.02
+71864
 </td>
 <td style="text-align:left;">
-768.26032
+642.93822
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-07 14:30:00
+2024-03-12 12:00:00
 </td>
 <td style="text-align:center;">
-66881.03
+71864
 </td>
 <td style="text-align:center;">
-67010
+72376
 </td>
 <td style="text-align:center;">
-66755.14
+71860
 </td>
 <td style="text-align:center;">
-66905.69
+72062.98
 </td>
 <td style="text-align:left;">
-963.93827
+1368.19948
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-07 15:00:00
+2024-03-12 12:30:00
 </td>
 <td style="text-align:center;">
-66905.68
+72062.99
 </td>
 <td style="text-align:center;">
-67307.05
+72257.56
 </td>
 <td style="text-align:center;">
-66905.68
+72012.72
 </td>
 <td style="text-align:center;">
-67249.59
+72023.82
 </td>
 <td style="text-align:left;">
-1489.56914
+673.04693
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-07 15:30:00
+2024-03-12 13:00:00
 </td>
 <td style="text-align:center;">
-67249.59
+72023.82
 </td>
 <td style="text-align:center;">
-67899
+72144.14
 </td>
 <td style="text-align:center;">
-66541.1
+71576
 </td>
 <td style="text-align:center;">
-67055
+71628.53
 </td>
 <td style="text-align:left;">
-4784.76307
+1283.8762
 </td>
 </tr>
 </tbody>
@@ -392,7 +392,7 @@ This `library` is still considered `experimental` but no breaking
 changes will be made on functions labelled as `stable` without
 appropriate action; please refer to the [release notes](NEWS.md), or
 submit an [issue](https://github.com/serkor1/cryptoQuotes/issues) if
-that promise is broken..
+that promise is broken.
 
 ## :information_source: Code of Conduct
 
