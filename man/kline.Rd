@@ -4,7 +4,7 @@
 \alias{kline}
 \title{Candlestick chart}
 \usage{
-kline(internal = list())
+kline(...)
 }
 \arguments{
 \item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}

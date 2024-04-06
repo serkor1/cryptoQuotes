@@ -4,15 +4,7 @@
 \alias{macd}
 \title{Add MACD indicators to the chart}
 \usage{
-macd(
-  nFast = 12,
-  nSlow = 26,
-  nSig = 9,
-  maType = "SMA",
-  percent = TRUE,
-  internal = list(),
-  ...
-)
+macd(nFast = 12, nSlow = 26, nSig = 9, maType = "SMA", percent = TRUE, ...)
 }
 \arguments{
 \item{nFast}{Number of periods for fast moving average.}
@@ -33,10 +25,10 @@ macd(
 fast and slow moving averages is returned, otherwise the difference between
 the respective averages is returned.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
-
 \item{...}{Other arguments to be passed to the \code{maType} function in
 case (1) above.}
+
+\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
 }
 \value{
 Invisbly returns a plotly object.

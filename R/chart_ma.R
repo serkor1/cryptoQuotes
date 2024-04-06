@@ -30,67 +30,51 @@
 sma <- function(
     price = "close",
     n = 10,
-    internal = list(),
     ...) {
 
+
   structure(
-    rlang::expr(
-      {
-
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
-
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
-
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
+    .Data = {
 
 
 
-        candle_color <- movement_color(
-          deficiency = deficiency
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
+
+
+      # 0.4) linewidth
+      linewidth <- 0.90
+
+      # 1) calculate MACD
+      # indicator
+      indicator <- toDF(
+        TTR::SMA(
+          x = toQuote(args$data)[, grep(pattern = price, x = colnames(args$data),ignore.case = TRUE)],
+          n = n
         )
+      )
 
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::SMA(
-            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            n = !!n,
-            ... = !!rlang::enquos(...)
-          )
-        )
-
-
-
-        # 2) add middle band
-        chart <- plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~sma,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("SMA(", !!n, ")")
-        )
+      # 2) add middle band
+      plotly::add_lines(
+        showlegend = TRUE,
+        p = args$plot,
+        inherit = FALSE,
+        data = indicator,
+        x = ~index,
+        y = ~sma,
+        line = list(
+          width = linewidth
+        ),
+        name = paste0("SMA(", n, ")")
+      )
 
 
 
-        chart
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c("indicator", "plotly", "htmlwidget")
   )
 
 }
@@ -119,7 +103,6 @@ ema <- function(
     n = 10,
     wilder = FALSE,
     ratio = NULL,
-    internal = list(),
     ...) {
 
   structure(
@@ -185,6 +168,13 @@ ema <- function(
     class = "indicator"
   )
 
+
+  structure(
+    .Data = {
+
+    },
+    class = c("indicator", "plotly", "htmlwidget")
+  )
 }
 
 #' Add Double Exponential Moving Average to the chart

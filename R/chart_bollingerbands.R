@@ -32,134 +32,154 @@ bollinger_bands <- function(
     n = 20,
     sd = 2,
     maType = "SMA",
-    internal = list(),
+    color  = '#F100F1',
     ...){
 
+
+
+
+
+
   structure(
-    rlang::expr(
-      {
+    .Data = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(
-          lapply(!!rlang::enexpr(internal), rlang::eval_tidy)
-          )
+      # # 1) unpack all elements
+      # # of the args
+      # data <- args$data
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
+      # # 1) unpack all elements
+      # # of the args
+      # data <- args$data
 
-        # 0.3) band color
-        color <- '#F100F1'
+      # 0.4) linewidth
+      linewidth <- 0.90
 
-        # 0.4) linewidth
-        linewidth <- 0.90
 
-        # 1) calculate MACD
-        # indicator
-        indicator_ <- toDF(
+      # 1) calculate MACD
+      # indicator
+      data <- cbind(
+        index = args$data$index,
+        as.data.frame(
           TTR::BBands(
-            HLC = toQuote(ticker)[, grep(pattern = 'high|low|close', x = colnames(ticker),ignore.case = TRUE)],
-            n = !!n,
-            maType = !!maType,
-            ... = !!rlang::enquos(...)
+            HLC = vapply(
+              X = c("high", "low", "close"),
+              FUN = pull,
+              from = args$data,
+              FUN.VALUE = numeric(
+                nrow(
+                  args$data)
+              )
+            ),
+            n = n,
+            maType = maType
           )
         )
 
+      )
 
-
-        layers <- list(
-          # middle line
-          list(
-            type = "add_lines",
-            params = list(
-              showlegend = FALSE,legendgroup = 'bb',
-              name = "Lower",
-              inherit = FALSE,
-              data = indicator_,
-              x = ~index,
-              y = ~dn,
-              line =list(
-                color = color,
-                width = linewidth
-              )
+      layers <- list(
+        # middle line
+        list(
+          type = "add_lines",
+          params = list(
+            showlegend = FALSE,
+            legendgroup = 'bb',
+            name = "Lower",
+            inherit = FALSE,
+            data = data,
+            x = ~index,
+            y = ~dn,
+            line =list(
+              color = color,
+              width = linewidth
             )
+          )
 
-          ),
+        ),
 
-          list(
-            type = "add_lines",
-            params = list(
-              showlegend = FALSE,
-              legendgroup = 'bb',
-              name = "Upper",
-              inherit = FALSE,
-              data = indicator_,
-              x = ~index,
-              y = ~up,
-              line = list(
-                color = color,
-                width = linewidth
-              )
+        list(
+          type = "add_lines",
+          params = list(
+            showlegend = FALSE,
+            legendgroup = 'bb',
+            name = "Upper",
+            inherit = FALSE,
+            data = data,
+            x = ~index,
+            y = ~up,
+            line = list(
+              color = color,
+              width = linewidth
             )
+          )
 
-          ),
+        ),
 
-          list(
-            type = "add_lines",
-            params = list(
-              showlegend = FALSE,
-              legendgroup = 'bb',
-              name = paste(!!maType),
-              inherit = FALSE,
-              data = indicator_,
-              x = ~index,
-              y = ~mavg,
-              line = list(
-                color =color,
-                dash ='dot',
-                width = linewidth
-              )
+        list(
+          type = "add_lines",
+          params = list(
+            showlegend = FALSE,
+            legendgroup = 'bb',
+            name = paste(maType),
+            inherit = FALSE,
+            data = data,
+            x = ~index,
+            y = ~mavg,
+            line = list(
+              color =color,
+              dash ='dot',
+              width = linewidth
             )
-
           )
 
         )
 
-        chart <- plotly::add_ribbons(
-          showlegend = TRUE,
-          legendgroup = 'bb',
-          p = chart,
-          inherit = FALSE,
-          x = ~index,
-          ymin = ~dn,
-          ymax = ~up,
-          data = indicator_,
-          fillcolor = 'rgba(241,0,241,0.1)',
-          line = list(
-            color = "transparent"
-          ),
-          name = paste0("BB(", paste(c(!!n, !!sd), collapse = ", "), ")")
-        )
+      )
+
+      plot <- plotly::add_ribbons(
+        showlegend = TRUE,
+        legendgroup = 'bb',
+        p = args$plot,
+        inherit = FALSE,
+        x = ~index,
+        ymin = ~dn,
+        ymax = ~up,
+        data = data,
+        fillcolor = hex_to_rgb_string(alpha = 0.1, hex_color = color),
+        line = list(
+          color = "transparent"
+        ),
+        name = paste0("BB(", paste(c(n, sd), collapse = ", "), ")")
+      )
 
 
-        chart <- build(
-          plot = chart,
-          layers = layers
-        )
+      plot <- build(
+        plot = plot,
+        layers = layers
+      )
 
-        chart
+      plot
 
-      }
-    ),
-    class = "indicator"
+
+
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }

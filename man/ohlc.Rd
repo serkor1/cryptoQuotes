@@ -4,10 +4,7 @@
 \alias{ohlc}
 \title{OHLC chart}
 \usage{
-ohlc(internal = list())
-}
-\arguments{
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+ohlc(...)
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.

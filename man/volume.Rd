@@ -5,7 +5,7 @@
 \title{Add volume indicators
 to the chart}
 \usage{
-volume(internal = list())
+volume(...)
 }
 \arguments{
 \item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}

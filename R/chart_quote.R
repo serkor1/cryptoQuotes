@@ -22,70 +22,81 @@
 #'
 #' @export
 kline <- function(
-    internal = list()) {
+    ...) {
+
+
   structure(
-    rlang::expr(
-      {
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
-
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
-
-        ticker     <- internal_args$ticker
-        interval   <- internal_args$interval
-        deficiency <- internal_args$deficiency
+    .Data = {
 
 
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        candle_color <- movement_color(
-          deficiency = deficiency
+      data <- args$data
+
+
+      # 1) bottom trace
+      bot <- 3
+      p <- plotly::plot_ly(
+        data = data,
+        x = ~index,
+        type = 'candlestick',
+        open = ~open,
+        close = ~close,
+        high = ~high,
+        low = ~low,
+        increasing = list(
+          line = list(color = "black", width = bot),  # Border color and width
+          fillcolor = "black"
+        ),
+        decreasing = list(
+          line = list(color = "black", width = bot),  # Border color and width
+          fillcolor = "black"
+        ),
+        showlegend = FALSE,
+        name = "Border"
+      )
+
+
+
+    p <- plotly::add_trace(
+        p,
+        x = ~index,
+        type = "candlestick",
+        open = ~open,
+        close = ~close,
+        high = ~high,
+        low = ~low,
+        increasing = list(
+          line = list(color = args$candle_color$bullish, width = bot - 1.75),  # Main candle color and narrower width
+          fillcolor = args$candle_color$bullish
+        ),
+        decreasing = list(
+          line = list(color = args$candle_color$bearish, width = bot - 1.75),    # Main candle color and narrower width
+          fillcolor = args$candle_color$bearish
+        ),
+        showlegend = TRUE,
+        name = args$interval
+      )
+
+
+    plotly::layout(
+      p = p,
+      xaxis = list(
+        rangeslider = list(
+          visible = args$slider,
+          thickness    = 0.05
         )
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-        plotly::layout(
-          p =  plotly::plot_ly(
-            data = ticker,
-            showlegend = TRUE,
-            name = interval,
-            yaxis = 'y',
-            x    = ~index,
-            type = 'candlestick',
-            open = ~open,
-            close = ~close,
-            high  = ~high,
-            low   = ~low,
-            increasing = list(
-              line = list(
-                color = candle_color$bullish
-              ),
-              fillcolor = candle_color$bullish
-            ),
-            decreasing = list(
-              line = list(
-                color =candle_color$bearish
-              ),
-              fillcolor = candle_color$bearish
-            )
-          ),
-          yaxis = list(
-            title = "Price"
-          )
-        )
+      )
+    )
 
 
 
-
-
-
-      }
-    ),
-    class = c("pricechart", "chartelement")
+    },
+    class = c("pricechart", "plotly", "htmlwidget")
   )
 
 }
@@ -97,61 +108,82 @@ kline <- function(
 #' @family price charts
 #' @export
 ohlc <- function(
-    internal = list()) {
+    ...) {
 
   structure(
-    rlang::expr(
-      {
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
-
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
-
-        ticker <- internal_args$ticker
-        interval   <- internal_args$interval
-        deficiency <- internal_args$deficiency
+    .Data = {
 
 
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        candle_color <- movement_color(
-          deficiency = deficiency
+      data <- args$data
+
+
+      # 1) bottom trace
+      bot <- 3
+      p <- plotly::plot_ly(
+        data = data,
+        x = ~index,
+        type = 'ohlc',
+        open = ~open,
+        close = ~close,
+        high = ~high,
+        low = ~low,
+        increasing = list(
+          line = list(color = "black", width = bot),  # Border color and width
+          fillcolor = "black"
+        ),
+        decreasing = list(
+          line = list(color = "black", width = bot),  # Border color and width
+          fillcolor = "black"
+        ),
+        showlegend = FALSE,
+        name = "Border"
+      )
+
+
+
+
+      p <- plotly::add_trace(
+        p,
+        x = ~index,
+        type = "ohlc",
+        open = ~open,
+        close = ~close,
+        high = ~high,
+        low = ~low,
+        increasing = list(
+          line = list(color = args$candle_color$bullish, width = bot - 2),  # Main candle color and narrower width
+          fillcolor = args$candle_color$bullish
+        ),
+        decreasing = list(
+          line = list(color = args$candle_color$bearish, width = bot - 2),    # Main candle color and narrower width
+          fillcolor = args$candle_color$bearish
+        ),
+        showlegend = TRUE,
+        name = args$interval
+      )
+
+
+      plotly::layout(
+        p = p,
+        xaxis = list(
+          rangeslider = list(
+            visible = args$slider,
+            thickness    = 0.05
+          )
         )
-
-        plotly::layout(
-          p =  plotly::plot_ly(
-            data = ticker,
-            showlegend = TRUE,
-            name = interval,
-            yaxis = 'y',
-            x    = ~index,
-            type = 'ohlc',
-            open = ~open,
-            close = ~close,
-            high  = ~high,
-            low   = ~low,
-            increasing = list(
-              line = list(
-                color = candle_color$bullish
-              )
-            ),
-            decreasing = list(
-              line = list(
-                color =candle_color$bearish
-              )
-            )
-          ),
-          yaxis = list(title = "Price")
-        )
+      )
 
 
 
 
-      }
-
-    ),
-    class = c("pricechart", "chartelement")
+    },
+    class = c("pricechart", "plotly", "htmlwidget")
   )
 
 

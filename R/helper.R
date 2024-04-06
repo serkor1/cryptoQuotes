@@ -313,6 +313,45 @@ toDF <- function(quote) {
 }
 
 
+pull <- function(
+    from,
+    what = "Open") {
+
+
+  # 0) identify column
+  # by name
+  column <- grep(
+    pattern = what,
+    x       = colnames(from),
+    ignore.case = TRUE,
+    value = TRUE
+  )
+
+  assert(
+    !identical(character(0), column),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Could not find column {.val %s}",
+        what
+      )
+    )
+  )
+
+
+  do.call(
+    what = `$`,
+    args = list(
+      from,
+      column
+    )
+  )
+
+}
+
+
+
+
+
 toQuote <- function(DF) {
 
   quote <- xts::as.xts(
