@@ -36,10 +36,6 @@ bollinger_bands <- function(
     ...){
 
 
-
-
-
-
   structure(
     .Data = {
 
@@ -66,27 +62,15 @@ bollinger_bands <- function(
       # 0.4) linewidth
       linewidth <- 0.90
 
-
       # 1) calculate MACD
       # indicator
-      data <- cbind(
-        index = args$data$index,
-        as.data.frame(
-          TTR::BBands(
-            HLC = vapply(
-              X = c("high", "low", "close"),
-              FUN = pull,
-              from = args$data,
-              FUN.VALUE = numeric(
-                nrow(
-                  args$data)
-              )
-            ),
-            n = n,
-            maType = maType
-          )
-        )
-
+      data <- indicator(
+        x = args$data,
+        columns = c("high", "low", "close"),
+        .f = TTR::BBands,
+        n = n,
+        sd = sd,
+        maType = maType
       )
 
       layers <- list(
@@ -161,7 +145,7 @@ bollinger_bands <- function(
         line = list(
           color = "transparent"
         ),
-        name = paste0("BB(", paste(c(n, sd), collapse = ", "), ")")
+        name = paste0("BB(", paste(c(n, sd, maType), collapse = ", "), ")")
       )
 
 

@@ -50,19 +50,24 @@ sma <- function(
 
       # 1) calculate MACD
       # indicator
-      indicator <- toDF(
-        TTR::SMA(
-          x = toQuote(args$data)[, grep(pattern = price, x = colnames(args$data),ignore.case = TRUE)],
-          n = n
-        )
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::SMA,
+        n = n
       )
+
+
+
+
+
 
       # 2) add middle band
       plotly::add_lines(
         showlegend = TRUE,
         p = args$plot,
         inherit = FALSE,
-        data = indicator,
+        data = data,
         x = ~index,
         y = ~sma,
         line = list(

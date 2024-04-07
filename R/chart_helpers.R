@@ -84,7 +84,7 @@ bar <- function(
       orientation = 'h',
       x = 0,
       y = 100,
-      yref="container",
+     yref="container",
       title = list(
         text = "<b>Indicators:</b>",
         font = list(

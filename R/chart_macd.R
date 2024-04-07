@@ -65,7 +65,7 @@ macd <- function(
 
       # 1) unpack all elements
       # of the args
-      data <- args$data
+      #data <- args$data
 
 
       # 0.4) linewidth
@@ -73,19 +73,16 @@ macd <- function(
 
       # 1) calculate MACD
       # indicator
-      data <- cbind(
-        data,
-        TTR::MACD(
-          x = pull(
-            from = data,
-            what = "close"
-          ),
-          nFast    = nFast,
-          nSlow    = nSlow,
-          nSig     = nSig,
-          maType   = maType,
-          percent  = percent
-        )
+      data <- indicator(
+        x = args$data,
+        columns = "close",
+        .f = TTR::MACD,
+        nFast    = nFast,
+        nSlow    = nSlow,
+        nSig     = nSig,
+        maType   = maType,
+        percent  = percent
+
       )
 
 

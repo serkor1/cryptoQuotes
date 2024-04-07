@@ -57,21 +57,29 @@ volume <- function(
         ...
       )
 
+
       # 0.4) linewidth
       linewidth <- 0.90
 
+
+      data <- indicator(
+        x = args$data
+      )
+
+
       plot <- plotly::layout(
         plotly::plot_ly(
-        data = args$data,
+        data = data,
         name = "Volume",
         x    = ~index,
         y    = ~volume,
         showlegend = FALSE,
-        color = ~direction,
+        color = ~ as.factor(candle),
         type  = "bar",
         colors = c(
-          args$candle_color$bearish,
-          args$candle_color$bullish
+          args$candle_color$bullish,
+          args$candle_color$bearish
+
 
         ),
         marker = list(

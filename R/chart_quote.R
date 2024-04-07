@@ -35,10 +35,10 @@ kline <- function(
         ...
       )
 
-      data <- args$data
+      data <- indicator(args$data)
 
 
-      # 1) bottom trace
+      #   # 1) bottom trace
       bot <- 3
       p <- plotly::plot_ly(
         data = data,
@@ -62,7 +62,7 @@ kline <- function(
 
 
 
-    p <- plotly::add_trace(
+      p <- plotly::add_trace(
         p,
         x = ~index,
         type = "candlestick",
@@ -83,15 +83,15 @@ kline <- function(
       )
 
 
-    plotly::layout(
-      p = p,
-      xaxis = list(
-        rangeslider = list(
-          visible = args$slider,
-          thickness    = 0.05
+      plotly::layout(
+        p = p,
+        xaxis = list(
+          rangeslider = list(
+            visible = args$slider,
+            thickness    = 0.05
+          )
         )
       )
-    )
 
 
 
