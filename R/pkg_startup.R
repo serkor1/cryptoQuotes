@@ -45,28 +45,18 @@ request_bugreport <- function(){
 # header that prints the line
 # with pkgname and version
 header <- function(
-    pkgname,
-    pkgversion) {
+    pkgname) {
 
-  cli::rule(
-    left = paste(
-      # Package Name
-      pkgname,
-      # package version
-      pkgversion
-
-    ),
-    right = paste(
-      # Add a link to the release notes
-      cli::style_hyperlink(
-        text = 'release notes',
-        url = 'https://serkor1.github.io/cryptoQuotes/news/index.html'
+  cli::cli(
+    cli::cli_h1(
+      text =  paste(
+        pkgname,
+        utils::packageVersion(
+          pkgname
+        )
       )
-      ),
-    line = 1,
-    line_col = cli::make_ansi_style(
-      "cyan"
     )
+
   )
 
 }
@@ -87,6 +77,14 @@ pkg_information <- function(){
   # message be supressed at startup
   cli::format_inline(
     c(
+      paste(
+        cli::col_br_red(cli::symbol$heart),
+        cli::style_hyperlink(
+          text = cli::col_br_blue('release notes'),
+          url = 'https://serkor1.github.io/cryptoQuotes/news/index.html'
+        ),
+        "\n"
+      ),
       # Source code  link
       paste(
         cli::col_br_yellow(cli::symbol$star),
@@ -119,6 +117,7 @@ pkg_information <- function(){
       )
     )
   )
+
 }
 
 # caution message; ####

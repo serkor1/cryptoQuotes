@@ -18,9 +18,9 @@
 #' @inheritParams TTR::RSI
 #' @param upper_limit A [numeric]-vector of [length] 1. 80 by default. Sets the upper limit of the [TTR::RSI].
 #' @param lower_limit A [numeric]-vector of [length] 1. 20 by default. Sets the lower limit of the [TTR::RSI].
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param color A [character]-vector of [length] 1.
 #'
-#' @returns Invisbly returns a plotly object.
+#' @inherit kline
 #'
 #' @example man/examples/scr_charting.R
 #'
@@ -68,7 +68,7 @@ rsi <- function(
 
       # 1) calculate RSI
       # indicator
-      data <- na.omit(
+      data <- stats::na.omit(
         indicator(
           x = args$data,
           columns = price,

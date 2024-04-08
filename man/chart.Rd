@@ -6,9 +6,9 @@
 \usage{
 chart(
   ticker,
-  main = kline(),
-  sub = list(volume()),
-  indicator = list(bollinger_bands()),
+  main = list(),
+  sub = list(),
+  indicator = list(),
   event_data = NULL,
   options = list()
 )

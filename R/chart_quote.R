@@ -8,7 +8,7 @@
 #' Traders and analysts use them in conjunction with other technical analysis tools to make informed trading decisions.
 #' These charts are particularly useful for identifying key support and resistance levels, trend changes, and potential entry and exit points in financial markets.
 #'
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
 #' @family price charts
 #'
@@ -16,7 +16,7 @@
 #'
 #' @returns
 #'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' Invisbly returns [plotly::plot_ly()]-object.
 #'
 #' @author Serkan Korkmaz
 #'
@@ -83,15 +83,20 @@ kline <- function(
       )
 
 
-      plotly::layout(
-        p = p,
-        xaxis = list(
-          rangeslider = list(
-            visible = args$slider,
-            thickness    = 0.05
+      invisible(
+        {
+          plotly::layout(
+            p = p,
+            xaxis = list(
+              rangeslider = list(
+                visible = args$slider,
+                thickness    = 0.05
+              )
+            )
           )
-        )
+        }
       )
+
 
 
 
@@ -120,11 +125,11 @@ ohlc <- function(
         ...
       )
 
-      data <- args$data
+      data <- indicator(args$data)
 
 
-      # 1) bottom trace
-      bot <- 3
+      #   # 1) bottom trace
+      bot <- 5
       p <- plotly::plot_ly(
         data = data,
         x = ~index,
@@ -147,7 +152,6 @@ ohlc <- function(
 
 
 
-
       p <- plotly::add_trace(
         p,
         x = ~index,
@@ -157,11 +161,11 @@ ohlc <- function(
         high = ~high,
         low = ~low,
         increasing = list(
-          line = list(color = args$candle_color$bullish, width = bot - 2),  # Main candle color and narrower width
+          line = list(color = args$candle_color$bullish, width = bot - 3),  # Main candle color and narrower width
           fillcolor = args$candle_color$bullish
         ),
         decreasing = list(
-          line = list(color = args$candle_color$bearish, width = bot - 2),    # Main candle color and narrower width
+          line = list(color = args$candle_color$bearish, width = bot - 3),    # Main candle color and narrower width
           fillcolor = args$candle_color$bearish
         ),
         showlegend = TRUE,
@@ -178,7 +182,6 @@ ohlc <- function(
           )
         )
       )
-
 
 
 

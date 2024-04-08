@@ -34,16 +34,16 @@ remove_bound <- function(
 
   # check if bounds are correctly
   # specified
-  if (!grepl(x = bounds, pattern = 'upper|lower|both')) {
-
-    rlang::abort(
-      message = c(
-        'Incorrectly specfied bounds',
-        'v' = 'Has to be "upper", "lower" or "both"'
-      )
-    )
-
-  }
+  # if (!grepl(x = bounds, pattern = 'upper|lower|both')) {
+  #
+  #   rlang::abort(
+  #     message = c(
+  #       'Incorrectly specfied bounds',
+  #       'v' = 'Has to be "upper", "lower" or "both"'
+  #     )
+  #   )
+  #
+  # }
 
   # this function
   # removes the upper

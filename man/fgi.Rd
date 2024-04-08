@@ -4,15 +4,15 @@
 \alias{fgi}
 \title{Chart the Fear and Greed Index}
 \usage{
-fgi(index, internal = list())
+fgi(index, ...)
 }
 \arguments{
 \item{index}{The Fear and Greed Index created by \code{\link[=getFGIndex]{getFGIndex()}}}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -80,6 +80,9 @@ Other subcharts:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{volume}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{sentiment indicators}

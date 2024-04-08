@@ -10,26 +10,33 @@ indicator <- function(
     .f = NULL,
     ...) {
 
-  x <- try(
+  x <- tryCatch(
     xts::as.xts(
       x
     ),
-    silent = TRUE
+    error = function(error) {
+
+      x
+
+    }
   )
 
   x <- do.call(
     cbind,
     # Set  names here
     # and remove from pull
-    lapply(
-      X = if (is.null(columns)) names(x) else columns,
-      FUN = pull,
-      from = x
+    stats::setNames(
+      lapply(
+        X = if (is.null(columns)) names(x) else columns,
+        FUN = pull,
+        from = x
+      ),
+      nm = if (is.null(columns))  names(x) else columns
     )
+
 
   )
 
-  names(x) <- if (is.null(columns))  names(x) else columns
 
   # 1) get the indicator function
   # for each
@@ -41,6 +48,7 @@ indicator <- function(
     )
 
   }
+
 
   names(x) <- tolower(names(x))
 
@@ -426,7 +434,7 @@ pull <- function(
   )
 
 
-  setNames(
+  stats::setNames(
     do.call(
       what = `$`,
       args = list(
@@ -568,7 +576,12 @@ flatten <- function(x) {
 
 movement_color <- function(deficiency = FALSE){
 
-  palette <- paletteer::paletteer_d("ggthemes::wsj_rgby")
+  palette <- c(
+    "#d3ba68",
+    "#d5695d",
+    "#5d8ca8",
+    "#65a479"
+  )
 
 
 

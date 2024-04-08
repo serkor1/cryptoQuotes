@@ -14,9 +14,8 @@
 #' Volume indicators are technical analysis tools used to analyze trading volume, which represents the number of shares or contracts traded in a financial market over a specific period of time.
 #' These indicators provide valuable insights into the strength and significance of price movements.
 #'
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @inherit kline
 #'
-#' @returns Invisbly returns a plotly object.
 #'
 #' @example man/examples/scr_charting.R
 #'
@@ -104,7 +103,11 @@ volume <- function(
 
 
     },
-    class = c("subchart", "plotly", "htmlwidget")
+    class = c(
+      "subchart",
+      "plotly",
+      "htmlwidget"
+      )
 
   )
 

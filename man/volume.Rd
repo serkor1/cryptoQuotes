@@ -8,10 +8,10 @@ to the chart}
 volume(...)
 }
 \arguments{
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -93,6 +93,9 @@ Other subcharts:
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{rsi}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{subcharts}

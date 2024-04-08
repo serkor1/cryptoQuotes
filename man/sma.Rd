@@ -12,9 +12,7 @@ sma(price = "close", n = 10, ...)
 \item{n}{Number of periods to average over. Must be between 1 and
 \code{nrow(x)}, inclusive.}
 
-\item{...}{any other passthrough parameters}
-
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.

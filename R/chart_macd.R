@@ -16,11 +16,11 @@
 #' It is a versatile tool that can be applied to various timeframes and asset classes, making it a valuable part of technical analysis for many traders.
 #'
 #' @inheritParams TTR::MACD
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#'
+#' @inherit kline
 #'
 #' @example man/examples/scr_charting.R
 #'
-#' @returns Invisbly returns a plotly object.
 #'
 #' @family chart indicators
 #' @family subcharts

@@ -56,11 +56,9 @@ chart <- function(
   name <- deparse(substitute(ticker))
   interval <- infer_interval(ticker)
   market <- attributes(ticker)$source
-
-
   ticker <- do.call(
     cbind,
-    setNames(
+    stats::setNames(
       lapply(
         c("open", "high", "low", "close", "volume"),
         pull,
@@ -71,12 +69,19 @@ chart <- function(
 
   )
 
+  # ticker <- foo(
+  #   ticker
+  # )
+
+
+
   ticker$candle <- factor(
     as.factor(
       ticker$open > ticker$close
     ),
     labels = c("bull" , "bear")
   )
+
 
 
   ## 1) set chart options
@@ -141,6 +146,7 @@ chart <- function(
       .f$slider <- slider
       .f$interval <- interval
       .f$candle_color <- candle_color
+      .f$deficiency <- deficiency
 
       .f
     }

@@ -28,6 +28,7 @@ compliance on the limits
 \seealso{
 Other development tools: 
 \code{\link{GET}()},
+\code{\link{chart_layout}()},
 \code{\link{convert_date}()},
 \code{\link{fetch}()},
 \code{\link{flatten}()},

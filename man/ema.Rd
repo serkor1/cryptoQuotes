@@ -18,9 +18,7 @@ calculated; see notes.}
 \item{ratio}{A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
 in \code{EMA}.}
 
-\item{...}{any other passthrough parameters}
-
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.

@@ -17,13 +17,12 @@
 #'
 #'
 #' @inheritParams TTR::BBands
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param color A [character]-vector of [length] 1.
+#' @param ... For internal use. Please ignore.
 #'
 #' @example man/examples/scr_charting.R
 #'
-#'
-#'
-#' @returns Invisbly returns a plotly object.
+#' @returns Invisbly returns a [plotly]-object.
 #'
 #' @family chart indicators
 #'
@@ -154,7 +153,11 @@ bollinger_bands <- function(
         layers = layers
       )
 
-      plot
+
+      invisible(
+        plot
+      )
+
 
 
 

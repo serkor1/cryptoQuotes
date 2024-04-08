@@ -13,11 +13,14 @@ chart_layout(x, layout_element, layout_attribute)
 
 \item{layout_attribute}{\link{character}-vector of \link{length} 1. \link[plotly:layout]{plotly::layout} element value. See example.}
 }
+\value{
+A \link{list} of layout elements.
+}
 \description{
 Create a list of layout elements on subcharts
 }
 \examples{
-# example code
+\dontrun{
 chart_layout(
   x = 1:plot_list_length,
   layout_element = "yaxis",
@@ -25,5 +28,17 @@ chart_layout(
   gridcolor = if (dark) "#40454c" else  '#D3D3D3' # Was CCCCCC
     )
 )
+}
+
 
 }
+\seealso{
+Other development tools: 
+\code{\link{GET}()},
+\code{\link{convert_date}()},
+\code{\link{default_dates}()},
+\code{\link{fetch}()},
+\code{\link{flatten}()},
+\code{\link{is.date}()}
+}
+\concept{development tools}

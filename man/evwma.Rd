@@ -4,7 +4,7 @@
 \alias{evwma}
 \title{Add Elastic Volume-weighted Moving Average to the chart}
 \usage{
-evwma(price = "Close", n = 10, internal = list(), ...)
+evwma(price = "Close", n = 10, ...)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::EVWMA}}
@@ -12,9 +12,7 @@ evwma(price = "Close", n = 10, internal = list(), ...)
 \item{n}{Number of periods to average over. Must be between 1 and
 \code{nrow(x)}, inclusive.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
-
-\item{...}{any other passthrough parameters}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.

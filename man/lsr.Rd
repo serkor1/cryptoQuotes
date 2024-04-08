@@ -4,15 +4,15 @@
 \alias{lsr}
 \title{Chart the long-short ratios}
 \usage{
-lsr(ratio, internal = list())
+lsr(ratio, ...)
 }
 \arguments{
 \item{ratio}{A \code{\link[xts:xts]{xts::xts()}}-object with the column LSRatio. See \code{\link[=get_lsratio]{get_lsratio()}} for more details.}
 
-\item{internal}{An empty \code{\link[=list]{list()}}. This is an internal helper-argument, ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}
+Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -97,6 +97,9 @@ Other subcharts:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{volume}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{sentiment indicators}

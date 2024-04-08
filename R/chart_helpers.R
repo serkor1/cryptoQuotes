@@ -12,7 +12,7 @@
 #' @param layout_attribute [character]-vector of [length] 1. [plotly::layout] element value. See example.
 #'
 #' @examples
-#' # example code
+#' \dontrun{
 #' chart_layout(
 #'   x = 1:plot_list_length,
 #'   layout_element = "yaxis",
@@ -20,17 +20,17 @@
 #'   gridcolor = if (dark) "#40454c" else  '#D3D3D3' # Was CCCCCC
 #'     )
 #' )
+#' }
+#'
 #'
 #' @return A [list] of layout elements.
 #' @family development tools
-#'
-#' @examples
 chart_layout <- function(
     x,
     layout_element,
     layout_attribute) {
 
-  setNames(
+  stats::setNames(
     lapply(
       0:x,
       function(i){
@@ -144,7 +144,7 @@ bar <- function(
 # Function to convert hex color to CSS rgb() or rgba() string format
 hex_to_rgb_string <- function(hex_color, alpha = NULL) {
   # Remove the '#' if present and convert to RGB values
-  rgb_values <- col2rgb(hex_color)
+  rgb_values <- grDevices::col2rgb(hex_color)
 
   # Format RGB values
   rgb_string <- sprintf("rgb(%d, %d, %d)", rgb_values[1, ], rgb_values[2, ], rgb_values[3, ])

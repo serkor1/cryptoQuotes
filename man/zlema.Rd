@@ -4,7 +4,7 @@
 \alias{zlema}
 \title{Add Zero Lag Exponential Moving Average to the chart}
 \usage{
-zlema(price = "close", n = 10, ratio = NULL, internal = list(), ...)
+zlema(price = "close", n = 10, ratio = NULL, ...)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ZLEMA}}
@@ -15,9 +15,7 @@ zlema(price = "close", n = 10, ratio = NULL, internal = list(), ...)
 \item{ratio}{A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
 in \code{EMA}.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
-
-\item{...}{any other passthrough parameters}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.

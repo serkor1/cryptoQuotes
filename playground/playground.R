@@ -10,73 +10,31 @@
 rm(list = ls()); gc(); devtools::load_all()
 
 
-
-
-foo <- function(
-    x) {
-
-  y <- try(
-    xts::as.xts(
-      x
-    )
-  )
-
-  if (!inherits(y, "try-error")) {
-
-    x <- do.call(
-      what = cbind,
-      lapply(
-        c("open", "high", "low", "close", "volume"),
-        pull,
-        from = y
-      )
-    )
-
-  } else {
-
-    x <- zoo::fortify.zoo(
-      do.call(
-        what = cbind,
-        setNames(
-          lapply(
-            c("open", "high", "low", "close", "volume"),
-            pull,
-            from = x
-          ),
-          nm = c("open", "high", "low", "close", "volume")
-        )
-
-      ),
-      names = c(
-        "index"
-      )
-    )
-
-
-
-  }
-
-  x
-
-}
-
-
-
+# fgi_ <- get_fgindex()
+# lsr_ <- get_lsratio("BTCUSDT")
 
 chart(
+  # ticker =  foo(
+  #   tibble::as_tibble(BTC)
+  # ),
   ticker = BTC,
-  main = kline(),
+  main = ohlc(),
   sub = list(
     volume()
   ),
   indicator = list(
     sma(n = 10),
-    sma(n = 20),
+    ema(n = 10),
+    dema(n = 10),
+    wma(n = 10),
+    evwma(n = 10),
+    zlema(n = 10),
+    vwap(n = 10),
+    hma(n = 10),
+    alma(n = 10),
     bollinger_bands(
       n = 20
     )
   )
 )
-
-
 # script end;

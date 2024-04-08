@@ -39,6 +39,7 @@ not be used to get, for example, \code{\link[=available_tickers]{available_ticke
 \seealso{
 Other development tools: 
 \code{\link{GET}()},
+\code{\link{chart_layout}()},
 \code{\link{convert_date}()},
 \code{\link{default_dates}()},
 \code{\link{flatten}()},
