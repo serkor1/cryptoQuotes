@@ -5,7 +5,7 @@
 \title{Add Bollinger Bands
 to the chart}
 \usage{
-bollinger_bands(n = 20, sd = 2, maType = "SMA", internal = list(), ...)
+bollinger_bands(n = 20, sd = 2, maType = "SMA", color = "#F100F1", ...)
 }
 \arguments{
 \item{n}{Number of periods for moving average.}
@@ -14,12 +14,12 @@ bollinger_bands(n = 20, sd = 2, maType = "SMA", internal = list(), ...)
 
 \item{maType}{A function or a string naming the function to be called.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{color}{A \link{character}-vector of \link{length} 1.}
 
-\item{...}{Other arguments to be passed to the \code{maType} function.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+Invisbly returns a \link{plotly}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

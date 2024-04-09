@@ -42,9 +42,10 @@ testthat::test_that(
     # 3) check that its a plotly
     # object
     testthat::expect_true(
-      object = rlang::inherits_any(
+      object = inherits(
         x =  test_chart,
-        class = "plotly"),
+        what = "plotly"
+        ),
     )
 
   }
@@ -89,9 +90,10 @@ testthat::test_that(
     # 3) check that its a plotly
     # object
     testthat::expect_true(
-      object = rlang::inherits_any(
+      object = inherits(
         x =  test_chart,
-        class = "plotly"),
+        what = "plotly"
+      )
     )
 
   }
@@ -153,7 +155,7 @@ testthat::test_that(
     # 2) Chart the the klines
     # and add the buy and sell events
     testthat::expect_true(
-      object = rlang::inherits_any(chart(
+      object = inherits(chart(
         ticker     = ATOM,
         main       = kline(),
         sub        = list(
@@ -168,7 +170,7 @@ testthat::test_that(
           deficiency = FALSE
         )
       ),
-      class = "plotly"
+      what = "plotly"
       )
     )
 

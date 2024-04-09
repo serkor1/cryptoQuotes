@@ -5,15 +5,15 @@
 \title{add eventlines to
 the chart}
 \usage{
-add_event(event_data, ...)
+add_event(data, ...)
 }
 \arguments{
-\item{event_data}{a \link{data.frame} with index, event and colors.}
+\item{data}{a \link{data.frame}-type object with \code{index}, \code{event} and \code{color} columns.}
 
-\item{...}{arguments pass interally by \link{chart}, ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+Returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object with event lines.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -22,13 +22,13 @@ Common types of event indicators include earnings release dates, dividend payout
 The choice of event indicators depends on the trader's or analyst's specific objectives and the factors they believe are most relevant to the asset's price movements.
 }
 \details{
-TBA
+The \link{data.frame} must include the following columns,
+\itemize{
+\item \code{index} \link{integer} or \link{date}: corresponding to the event timing.
+\item \code{event} \link{character}: the event label.
+\item \code{color} \link{character}: the color of the event
 }
-\section{Note}{
-The eventlines are drawn using \code{\link[plotly:layout]{plotly::layout()}}, so all existing
-eventlines will be replaced each time you call \code{\link[=add_event]{add_event()}}.
 }
-
 \examples{
 # script: scr_addEvents
 # date: 2023-12-07
@@ -113,6 +113,7 @@ chart(
   )
 )
 
+
 # script end;
 }
 \seealso{
@@ -133,13 +134,5 @@ Other chart indicators:
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
-
-Other subcharts: 
-\code{\link{fgi}()},
-\code{\link{lsr}()},
-\code{\link{macd}()},
-\code{\link{rsi}()},
-\code{\link{volume}()}
 }
 \concept{chart indicators}
-\concept{subcharts}

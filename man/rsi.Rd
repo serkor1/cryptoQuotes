@@ -6,15 +6,18 @@
 chart}
 \usage{
 rsi(
+  price = "close",
   n = 14,
   maType = "SMA",
   upper_limit = 80,
   lower_limit = 20,
-  internal = list(),
+  color = "#F100F1",
   ...
 )
 }
 \arguments{
+\item{price}{Price series that is coercible to xts or matrix.}
+
 \item{n}{Number of periods for moving averages.}
 
 \item{maType}{Either:
@@ -29,13 +32,13 @@ rsi(
 
 \item{lower_limit}{A \link{numeric}-vector of \link{length} 1. 20 by default. Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{color}{A \link{character}-vector of \link{length} 1.}
 
 \item{...}{Other arguments to be passed to the \code{maType} function in
 case (1) above.}
 }
 \value{
-Invisbly returns a plotly object.
+Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -112,11 +115,13 @@ Other chart indicators:
 \code{\link{zlema}()}
 
 Other subcharts: 
-\code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{volume}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{subcharts}

@@ -4,14 +4,7 @@
 \alias{ema}
 \title{Add Exponentially Weighted Moving Average to the charts}
 \usage{
-ema(
-  price = "Close",
-  n = 10,
-  wilder = FALSE,
-  ratio = NULL,
-  internal = list(),
-  ...
-)
+ema(price = "Close", n = 10, wilder = FALSE, ratio = NULL, ...)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::EMA}}
@@ -25,9 +18,7 @@ calculated; see notes.}
 \item{ratio}{A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
 in \code{EMA}.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
-
-\item{...}{any other passthrough parameters}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.

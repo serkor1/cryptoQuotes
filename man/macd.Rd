@@ -4,15 +4,7 @@
 \alias{macd}
 \title{Add MACD indicators to the chart}
 \usage{
-macd(
-  nFast = 12,
-  nSlow = 26,
-  nSig = 9,
-  maType = "SMA",
-  percent = TRUE,
-  internal = list(),
-  ...
-)
+macd(nFast = 12, nSlow = 26, nSig = 9, maType = "SMA", percent = TRUE, ...)
 }
 \arguments{
 \item{nFast}{Number of periods for fast moving average.}
@@ -33,13 +25,11 @@ macd(
 fast and slow moving averages is returned, otherwise the difference between
 the respective averages is returned.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
-
 \item{...}{Other arguments to be passed to the \code{maType} function in
 case (1) above.}
 }
 \value{
-Invisbly returns a plotly object.
+Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -116,11 +106,13 @@ Other chart indicators:
 \code{\link{zlema}()}
 
 Other subcharts: 
-\code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{rsi}()},
 \code{\link{volume}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{subcharts}

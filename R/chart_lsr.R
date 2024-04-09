@@ -17,7 +17,7 @@
 #' The long-short ratio is a market sentiment indicator on expected price movement.
 #'
 #' @param ratio A [xts::xts()]-object with the column LSRatio. See [get_lsratio()] for more details.
-#' @param internal An empty [list()]. This is an internal helper-argument, ignore.
+#' @inherit kline
 #'
 #' @example man/examples/scr_LSR.R
 #'
@@ -25,93 +25,108 @@
 #' @family sentiment indicators
 #' @family subcharts
 #'
-#' @returns A [plotly::plot_ly()]-object wrapped in [rlang::expr()]
 #'
 #' @export
 lsr <- function(
     ratio,
-    internal = list()) {
+    ...) {
+
   structure(
-    rlang::expr(
-      {
+    .Data = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
-
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
-
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
+      # 1) unpack values
+      # from chart
+      data <- zoo::fortify.zoo(ratio, names = "index")
+      color_deficiency <- args$deficiency
 
 
-        ratio <- toDF(
-          quote = !!ratio
+      # 1.1) define available
+      # colors
+      color_scale <- grDevices::palette(
+        grDevices::hcl.colors(
+          n = 30,
+          palette = "RdYlGn"
         )
+      )
 
-
-        value <- ratio$ls_ratio
-
-        ratio$color_scale <- round((30) * (value -0)/(2 - 0))
-
-
-        color_scale <- if (deficiency){
-
-
-          rev(paletteer::paletteer_c("grDevices::Cividis", 30))
-
-
-        } else {
-          paletteer::paletteer_c("grDevices::RdYlGn", 30)
-
-        }
-
-
-
-
-        ratio$color_scale <- color_scale[
-          ratio$color_scale
-        ]
-
-
-
-        plotly::layout(
-          yaxis = list(
-            title = 'Long-Short Ratio'
-          ),
-          p = plotly::plot_ly(
-            showlegend = FALSE,
-            data = ratio,
-            y = ~ls_ratio,
-            x = ~Index,
-            type = 'scatter',
-            mode = 'lines+markers',
-            line = list(
-              color = 'gray',
-              dash = 'dash',
-              shape = 'spline',
-              smoothing = 1.5
-            ),
-            marker = list(
-              size = 10,
-              color = ~color_scale,
-              line = list(
-                color = 'black',
-                width = 2
-              )
+      if (color_deficiency) {
+        color_scale <- rev(
+          grDevices::palette(
+            grDevices::hcl.colors(
+              n = 30,
+              palette = "Cividis"
             )
           )
         )
-
       }
-    ),
-    class = "subchart"
+
+      # 1.1.1) map the values
+      # to  the color scale
+      data$color_scale <- ceiling(
+        30 * (data$ls_ratio)/(3)
+      )
+
+      data$color_scale <- color_scale[
+        data$color_scale
+      ]
+
+      plotly::layout(
+        plotly::plot_ly(
+          showlegend = FALSE,
+          name = "Long-Short Ratio",
+          data = data,
+          y = ~ls_ratio,
+          x = ~index,
+          type = 'scatter',
+          mode = 'lines+markers',
+          line = list(
+            color = 'gray',
+            dash = 'dash',
+            shape = 'spline',
+            smoothing = 1.5
+          ),
+          marker = list(
+            size = 10,
+            color = ~color_scale,
+            line = list(
+              color = 'black',
+              width = 2
+            )
+          )
+        ),
+        annotations = list(
+          text = "Long-Short Ratio",
+          font = list(
+            size = 18
+          ),
+          showarrow = FALSE,
+          x = 0,
+          y = 1,
+          xref = "paper",
+          yref = "paper"
+        )
+      )
+
+
+
+
+
+    },
+    class = c(
+      "subchart",
+      "plotly",
+      "htmlwidget"
+    )
   )
+
+
+
 
 
 }

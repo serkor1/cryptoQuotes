@@ -4,6 +4,102 @@
 # objective: A class of helper
 # function
 # script start;
+indicator <- function(
+    x,
+    columns = NULL,
+    .f = NULL,
+    ...) {
+
+  x <- tryCatch(
+    xts::as.xts(
+      x
+    ),
+    error = function(error) {
+
+      x
+
+    }
+  )
+
+  x <- do.call(
+    cbind,
+    # Set  names here
+    # and remove from pull
+    stats::setNames(
+      lapply(
+        X = if (is.null(columns)) names(x) else columns,
+        FUN = pull,
+        from = x
+      ),
+      nm = if (is.null(columns))  names(x) else columns
+    )
+
+
+  )
+
+
+  # 1) get the indicator function
+  # for each
+  if (!is.null(.f)) {
+
+    x = .f(
+      x,
+      ...
+    )
+
+  }
+
+
+  names(x) <- tolower(names(x))
+
+  zoo::fortify.zoo(
+    x,
+    names = c(
+      "index"
+    )
+  )
+
+
+}
+
+
+
+
+# var_ly <- function(
+#     variable) {
+#
+#   # 0) extract variable
+#   # from the source
+#   variable <- grep(
+#     pattern     = variable,
+#     x           = names(get("args",envir = parent.frame())$data),
+#     ignore.case = TRUE,
+#     value       = TRUE
+#   )
+#
+#   # 1) assert variable
+#   # existance
+#   assert(
+#     !identical(
+#       variable,
+#       character(0)
+#     ) & length(variable) == 1,
+#     error_message = c(
+#       "x" = "Error in {.val variable}"
+#     )
+#   )
+#
+#   # 2) return as formula
+#   as.formula(
+#     paste(
+#       '~', variable
+#     )
+#   )
+#
+# }
+
+
+
 
 build <- function(
     plot,
@@ -313,6 +409,48 @@ toDF <- function(quote) {
 }
 
 
+pull <- function(
+    from,
+    what = "Open") {
+
+
+  # 0) identify column
+  # by name
+  column <- grep(
+    pattern = what,
+    x       = colnames(from),
+    ignore.case = TRUE,
+    value = TRUE
+  )
+
+  assert(
+    !identical(character(0), column),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Could not find column {.val %s}",
+        what
+      )
+    )
+  )
+
+
+  stats::setNames(
+    do.call(
+      what = `$`,
+      args = list(
+        from,
+        column
+      )
+    ),
+    nm = tolower(what)
+  )
+
+}
+
+
+
+
+
 toQuote <- function(DF) {
 
   quote <- xts::as.xts(
@@ -438,7 +576,12 @@ flatten <- function(x) {
 
 movement_color <- function(deficiency = FALSE){
 
-  palette <- paletteer::paletteer_d("ggthemes::wsj_rgby")
+  palette <- c(
+    "#d3ba68",
+    "#d5695d",
+    "#5d8ca8",
+    "#65a479"
+  )
 
 
 

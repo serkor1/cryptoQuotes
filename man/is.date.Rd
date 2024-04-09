@@ -19,6 +19,7 @@ POSIXct, POSIXt and Date. And wether the character vector can be formatted to da
 \seealso{
 Other development tools: 
 \code{\link{GET}()},
+\code{\link{chart_layout}()},
 \code{\link{convert_date}()},
 \code{\link{default_dates}()},
 \code{\link{fetch}()},

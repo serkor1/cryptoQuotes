@@ -9,45 +9,32 @@
 # setup;
 rm(list = ls()); gc(); devtools::load_all()
 
-BTC <- cryptoQuotes::get_quote(
-  ticker   = 'BTCUSD',
-  interval = '1d',
-  source   = 'kraken',
-  futures  = FALSE,
-  from     = Sys.Date() - 1000,
-  to       = Sys.Date()
-)
 
-nrow(BTC)
+# fgi_ <- get_fgindex()
+# lsr_ <- get_lsratio("BTCUSDT")
 
-
-head(BTC)
-head(BTC)
-
-
-
-length(
-  seq(
-    from = coerce_date(Sys.Date() - 10),
-    to   = coerce_date(Sys.Date() - 1),
-    by   = "+15 mins"
+chart(
+  # ticker =  foo(
+  #   tibble::as_tibble(BTC)
+  # ),
+  ticker = BTC,
+  main = ohlc(),
+  sub = list(
+    volume()
+  ),
+  indicator = list(
+    sma(n = 10),
+    ema(n = 10),
+    dema(n = 10),
+    wma(n = 10),
+    evwma(n = 10),
+    zlema(n = 10),
+    vwap(n = 10),
+    hma(n = 10),
+    alma(n = 10),
+    bollinger_bands(
+      n = 20
+    )
   )
 )
-
-
-default_dates(
-  interval = "15m",
-  from = coerce_date(Sys.Date() - 10),
-  to   = coerce_date(Sys.Date() - 1)
-)
-
 # script end;
-
-
-origin_date <- '1970-01-01'
-
-as.POSIXct(
-  trunc(as.double(coerce_date(Sys.Date() - 10))/(15*60))*(15*60),
-  tz = 'UTC',
-  origin = origin_date
-)

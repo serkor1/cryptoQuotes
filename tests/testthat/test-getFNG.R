@@ -16,9 +16,9 @@ testthat::test_that(
     # 3) test that its an
     # xts object
     testthat::expect_true(
-      object = rlang::inherits_any(
+      object = inherits(
         x = FGI,
-        class = c('xts')
+        what = c('xts')
       )
     )
 

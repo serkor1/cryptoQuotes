@@ -17,26 +17,21 @@
     xts_check_TZ = FALSE
   )
 
-  # 1) package
-  # header
-  rlang::inform(
-    header(
-      pkgname = pkgname,
-      pkgversion = utils::packageVersion(
-        pkgname
-      )
+
+  cli::cli_inform(
+    message = header(
+      pkgname
     ),
     ...,
     class = "packageStartupMessage"
   )
 
-  # 2) package information
-  # to the user
-  rlang::inform(
-    pkg_information(),
+  cli::cli_inform(
+    message = pkg_information(),
     ...,
     class = "packageStartupMessage"
   )
+
 
 }
 

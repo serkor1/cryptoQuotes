@@ -4,7 +4,7 @@
 \alias{hma}
 \title{Add Hull Moving Average to the chart}
 \usage{
-hma(price = "Close", n = 20, internal = list(), ...)
+hma(price = "Close", n = 20, ...)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::HMA}}
@@ -12,9 +12,7 @@ hma(price = "Close", n = 20, internal = list(), ...)
 \item{n}{Number of periods to average over. Must be between 1 and
 \code{nrow(x)}, inclusive.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
-
-\item{...}{any other passthrough parameters}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.

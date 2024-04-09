@@ -215,122 +215,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-03-12 10:30:00
+2024-04-07 11:00:00
 </td>
 <td style="text-align:center;">
-71978.46
+69479.99
 </td>
 <td style="text-align:center;">
-72085.06
+69493.25
 </td>
 <td style="text-align:center;">
-71850.01
+69365.95
 </td>
 <td style="text-align:center;">
-71936
+69365.95
 </td>
 <td style="text-align:left;">
-818.1898
+376.57463
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-12 11:00:00
+2024-04-07 11:30:00
 </td>
 <td style="text-align:center;">
-71936
+69365.95
 </td>
 <td style="text-align:center;">
-71959.12
+69386.9
 </td>
 <td style="text-align:center;">
-71647.14
+69199.01
 </td>
 <td style="text-align:center;">
-71705.63
+69289.99
 </td>
 <td style="text-align:left;">
-587.18566
+305.43605
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-12 11:30:00
+2024-04-07 12:00:00
 </td>
 <td style="text-align:center;">
-71705.63
+69290
 </td>
 <td style="text-align:center;">
-71999
+69430.54
 </td>
 <td style="text-align:center;">
-71705.62
+69236
 </td>
 <td style="text-align:center;">
-71864
+69384.01
 </td>
 <td style="text-align:left;">
-642.93822
+261.77595
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-12 12:00:00
+2024-04-07 12:30:00
 </td>
 <td style="text-align:center;">
-71864
+69384.01
 </td>
 <td style="text-align:center;">
-72376
+69495.15
 </td>
 <td style="text-align:center;">
-71860
+69317
 </td>
 <td style="text-align:center;">
-72062.98
+69328.14
 </td>
 <td style="text-align:left;">
-1368.19948
+217.97588
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-12 12:30:00
+2024-04-07 13:00:00
 </td>
 <td style="text-align:center;">
-72062.99
+69328.14
 </td>
 <td style="text-align:center;">
-72257.56
+69386.4
 </td>
 <td style="text-align:center;">
-72012.72
+69200
 </td>
 <td style="text-align:center;">
-72023.82
+69340.01
 </td>
 <td style="text-align:left;">
-673.04693
+280.18258
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-03-12 13:00:00
+2024-04-07 13:30:00
 </td>
 <td style="text-align:center;">
-72023.82
+69340.01
 </td>
 <td style="text-align:center;">
-72144.14
+69407.72
 </td>
 <td style="text-align:center;">
-71576
+69267.08
 </td>
 <td style="text-align:center;">
-71628.53
+69357
 </td>
 <td style="text-align:left;">
-1283.8762
+176.5647
 </td>
 </tr>
 </tbody>

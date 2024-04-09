@@ -1,3 +1,29 @@
+# cryptoQuotes 1.3.1
+
+## Improvements
+
+### Charting
+
+* The `chart()`-function now has proper `light`-theme available that isnt the default `plotly`-values.
+* The `bollinger_bands()`-function now accepts a `color`-argument. These can be passed as `Hexadecimal`-colors or as is, `"blue"` for example.
+
+
+### Backend Changes
+
+* The `chart()`-functions no longer depend on `rlang`. 
+
+> **Note:** we are generally moving away from `rlang`, `purrr` and `tidyverse` in general. We are, however, 
+> keeping the `tidyverse` styleguide.
+
+### New developper tools
+
+* `pull()`-function
+* `var_ly()`-function
+* `build()`-function
+
+
+## Bugfixes
+
 # cryptoQuotes 1.3.0
 
 ## Improvements
@@ -110,7 +136,7 @@ As the `cryptoQuotes`-package has moved to the `tidyverse` style guide, the `get
 
 * Corrected misspelled ticker in Vignette 
 * All returned Quotes are now in `UTC`, again.
-* Fixed an error on the ``Bitmart` API where weekly candles would throw an error.
+* Fixed an error on the `Bitmart` API where weekly candles would throw an error.
 
 # cryptoQuotes 1.2.0
 
@@ -151,7 +177,7 @@ Four new functions are added,
 * `getFGIndex()` which returns the daily Fear and Greed Index.
 * `addFGIndex()` which adds the Fear and Greed Index as a subplot to price charts.
 * `getLSRatio()` which returns the long-short ratio with varying granularity. Contributor has been credited.
-* `addLSRatio()` whidh adds the long-short ratio as a subplot to price charts.
+* `addLSRatio()` which adds the long-short ratio as a subplot to price charts.
 
 ## Convinience functions added
 

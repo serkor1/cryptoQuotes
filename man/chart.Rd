@@ -6,9 +6,9 @@
 \usage{
 chart(
   ticker,
-  main = kline(),
-  sub = list(volume()),
-  indicator = list(bollinger_bands()),
+  main = list(),
+  sub = list(),
+  indicator = list(),
   event_data = NULL,
   options = list()
 )
@@ -43,6 +43,14 @@ and structures the passed chart elements.
 \item \code{deficiency} A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
 \item \code{size} A \link{numeric}-value of \link{length} 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
 }
+}
+
+\subsection{Charting Events}{
+
+If \code{event_data} is passed, vertical eventlines with appropriate labels and coloring are added
+to the \code{\link[=chart]{chart()}}. This function is rigid, as it will fail if event, label and index columns are not passed.
+
+For more details please see \code{\link[=add_event]{add_event()}}.
 }
 }
 \examples{
