@@ -196,13 +196,13 @@ get_quote <- function(
     from   = from
   )[paste(c(from, to), collapse = "/")]
 
-  # # Kraken doesnt have a to
-  # # parameter on spot market
-  # if (source == "kraken" & !futures) {
-  #
-  #   ohlc <- ohlc[paste(c(from, to), collapse = "/")]
-  #
-  # }
+  # Kraken doesnt have a to
+  # parameter on spot market
+  if (source == "kraken") {
+
+    ohlc <- ohlc[paste(c(from, to), collapse = "/")]
+
+  }
 
   attributes(ohlc)$source <- paste0(
     to_title(source), if (futures) " (PERPETUALS)" else " (SPOT)"

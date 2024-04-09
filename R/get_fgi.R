@@ -11,7 +11,7 @@
 #'
 #' @description
 #'
-#' `r lifecycle::badge("deprecated")`
+#' `r lifecycle::badge("stable")`
 #'
 #' The fear and greed index is a market sentiment indicator that measures investor emotions to
 #' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)

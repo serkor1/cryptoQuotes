@@ -820,49 +820,4 @@ default_dates <-function(
 
 }
 
-
-
-#' Extract variable using REGEX
-#' to avoid errors due to different casing
-#'
-#' @param variable
-#'
-#' @return
-#' @export
-#'
-#' @examples
-var_ly <- function(
-    variable,
-    DT = get("DT")) {
-
-  # 0) extract variable
-  # from the source
-  variable <- grep(
-    pattern     = variable,
-    x           = names(DT),
-    ignore.case = TRUE,
-    value       = TRUE
-  )
-
-  # 1) assert variable
-  # existance
-  assert(
-    !identical(
-      variable,
-      character(0)
-    ) & length(variable) == 1,
-    error_message = c(
-      "x" = "Error in {.val variable}"
-    )
-  )
-
-  # 2) return as formula
-  as.formula(
-    paste(
-      '~', variable
-    )
-  )
-
-}
-
 # script end;

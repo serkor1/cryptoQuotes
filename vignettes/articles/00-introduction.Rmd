@@ -96,21 +96,26 @@ knitr::kable(
 
 ## Limitations
 
-There is a limit to the amount of market data that can be extracted in one call. The [Kraken](https://www.kraken.com/) exchange, for example, has a limit on `720` rows of data per call in the spot market,
+There is a limit to the amount of market data that can be extracted in one call. The [Kraken](https://www.kraken.com/) exchange, for example, has a limit on `5000` rows of data per call in the futures market,
 
 ```{r}
 ## Get the SPOT
 ## market for over 
 ## 2000 rows
-nrow(
-  BTC <- get_quote(
-    ticker  = "BTCUSD",
+tryCatch(
+  get_quote(
+    ticker  = "PF_XBTUSD",
     source  = "kraken",
-    futures = FALSE,
-    interval = "30m",
-    from = Sys.Date() - 30,
+    futures = TRUE,
+    interval = "5m",
+    from = Sys.Date() - 25,
     to   = Sys.Date()
-  )
+  ),
+  error = function(error) {
+    
+    error
+    
+  }
 )
 ```
 
@@ -121,8 +126,8 @@ If you need more data than this, you need to do multiple calls. One such solutio
 ## sequence
 dates <- seq(
   from = as.POSIXct(Sys.Date()),
-  by = "-30 mins",
-  length.out = 1440
+  by = "-5 mins",
+  length.out = 10000
 )
 
 ## 2) split the sequence
@@ -131,7 +136,7 @@ dates <- seq(
 ## to each indices of 100
 idx <- rep(
   x = 1:2,
-  each = 720
+  each = 5000
 )
 
 ## 3) use the idx to split
@@ -152,10 +157,10 @@ ohlc <- lapply(
     Sys.sleep(1)
     
     cryptoQuotes::get_quote(
-      ticker = "BTCUSD",
+      ticker = "PF_XBTUSD",
       source = "kraken",
-      futures = FALSE,
-      interval = "30m",
+      futures = TRUE,
+      interval = "5m",
       from = min(dates),
       to   = max(dates)
     )
@@ -166,7 +171,7 @@ ohlc <- lapply(
 ## elements
 nrow(
   ohlc <- do.call(
-    what = rbind, 
+    what = rbind,
     args = ohlc
   )
 )

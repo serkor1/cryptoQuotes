@@ -11,18 +11,18 @@ vignette: >
   
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = FALSE,
-  out.width = "100%",
-  comment = "#>",
-  message = FALSE
+collapse = FALSE,
+out.width = "100%",
+comment = "#>",
+message = FALSE
 )
 ```
 
 ```{css, echo=FALSE}
 body, .main-container, .container-fluid {
-  max-width: 920px !important; /* or a specific pixel width, e.g., 1200px */
-  margin-left: auto !important;
-  margin-right: auto !important;
+max-width: 920px !important; /* or a specific pixel width, e.g., 1200px */
+margin-left: auto !important;
+margin-right: auto !important;
 }
 ```
 
@@ -53,7 +53,7 @@ Elon Musk tweeted (Well, now he X'ed) about `Dogecoin` January 14, 06.18 AM (UTC
 
 
 
-```{r}
+```{r, eval=FALSE}
 ## DOGEUSDT the day
 ## of the tweet on the
 ## 1m chart
@@ -96,6 +96,9 @@ We can illustrate this with candlestick charts using the ```chart()```- and ```k
 cryptoQuotes::chart(
   ticker     = DOGE,
   main       = cryptoQuotes::kline(),
+  indicator = list(
+    cryptoQuotes::bollinger_bands()
+  ),
   sub  = list(
     cryptoQuotes::volume()
   ),
@@ -136,28 +139,6 @@ event_data$color <- 'steelblue'
 This event data, can be passed into the chart as follows,
 
 ```{r, out.height = 800}
-## 1) create event data.frame
-## by subsetting the data
-event_data <- as.data.frame(
-  zoo::coredata(
-    DOGE["2022-01-14 07:18:00"]
-  )
-)
-
-## 1.1) add the index 
-## to the event_data
-event_data$index <- zoo::index(
-  DOGE["2022-01-14 07:18:00"]
-)
-
-# 1.2) add event label
-# to the data
-event_data$event <- 'Elon Musk Tweets'
-
-# 1.3) add color to the
-# event label
-event_data$color <- 'steelblue'
-
 ## 1) chart the
 ## price action
 ## using klines
@@ -165,6 +146,9 @@ cryptoQuotes::chart(
   ticker     = DOGE,
   event_data = event_data,
   main       = cryptoQuotes::kline(),
+  indicator = list(
+    cryptoQuotes::bollinger_bands()
+  ),
   sub  = list(
     cryptoQuotes::volume()
   ),
