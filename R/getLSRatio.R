@@ -103,6 +103,8 @@ getLSRatio <- function(
   # closest to Sys.time()
   from <- coerce_date(from); to <- coerce_date(to)
 
+
+
   # 3) if either of the
   # date variables are NULL
   # pass them into the default_dates
@@ -126,18 +128,25 @@ getLSRatio <- function(
 
   }
 
+
   # NOTE: binance only supports
   # the last 30 days
   if (source %in% 'binance') {
 
     from <- max(
       from,
-      coerce_date(
-        Sys.Date() - 28
+      as.POSIXct(
+        coerce_date(
+          Sys.Date() - 28
+        ),
+        tz = "UTC"
       )
+
     )
 
   }
+
+
 
   response <- fetch(
     ticker = ticker,

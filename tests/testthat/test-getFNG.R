@@ -9,9 +9,10 @@ testthat::test_that(
     testthat::skip_on_ci()
 
     # 2) load FGI
-    FGI <- get_fgindex(
+    FGI <- testthat::expect_no_condition(get_fgindex(
       to = Sys.Date() - 1
       )
+    )
 
     # 3) test that its an
     # xts object

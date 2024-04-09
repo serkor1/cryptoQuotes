@@ -123,19 +123,6 @@ get_openinterest <- function(
 
   from <- coerce_date(from); to <- coerce_date(to)
 
-  # NOTE: binance only supports
-  # the last 30 days
-  if (source %in% 'binance') {
-
-    from <- max(
-      from,
-      coerce_date(
-        Sys.Date() - 28
-      )
-    )
-
-  }
-
   # 3) if either of the
   # date variables are NULL
   # pass them into the default_dates
@@ -156,6 +143,23 @@ get_openinterest <- function(
     # to variables
     from <- forced_dates$from
     to   <- forced_dates$to
+
+  }
+
+  # NOTE: binance only supports
+  # the last 30 days
+  if (source %in% 'binance') {
+
+    from <- max(
+      from,
+      as.POSIXct(
+        coerce_date(
+          Sys.Date() - 28
+        ),
+        tz = "UTC"
+      )
+
+    )
 
   }
 

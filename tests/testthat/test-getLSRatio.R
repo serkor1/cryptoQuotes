@@ -43,7 +43,7 @@ testthat::test_that(
 
       # 1) get quote without errors
       # and store
-      testthat::expect_no_error(
+      testthat::expect_no_condition(
         output <- get_lsratio(
           ticker   = ticker,
           source   = exchange,

@@ -32,7 +32,7 @@ testthat::test_that(
       )
 
       # 1) run without any errors
-      testthat::expect_no_error(
+      testthat::expect_no_condition(
         output <- get_fundingrate(
           ticker = ticker,
           source = exchange,

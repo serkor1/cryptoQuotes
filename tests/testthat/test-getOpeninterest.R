@@ -25,7 +25,7 @@ testthat::test_that(
       error_label <- exchange
 
       # Run without any errors
-      testthat::expect_no_error(
+      testthat::expect_no_condition(
         output <- get_openinterest(
           ticker = "BTCUSDT",
           source = exchange,
