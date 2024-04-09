@@ -30,13 +30,18 @@
 #' * ```deficiency``` A [logical]-value of [length] 1. [FALSE] by default. If [TRUE], all [chart()]-elements are colorblind friendly
 #' * ```size``` A [numeric]-value of [length] 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
 #'
+#' ## Charting Events
 #'
+#' If `event_data` is passed, vertical eventlines with appropriate labels and coloring are added
+#' to the [chart()]. This function is rigid, as it will fail if event, label and index columns are not passed.
+#'
+#' For more details please see [add_event()].
 #'
 #' @family chart indicators
 #' @family price charts
 #'
-#'
 #' @example man/examples/scr_charting.R
+#'
 #'
 #' @returns Returns a [plotly::plot_ly()] object.
 #'
@@ -192,6 +197,36 @@ chart <- function(
 
       }
     )[length(call_list$indicator)]
+
+  }
+
+
+  if (!is.null(event_data)) {
+
+
+    # 1) convert function
+    # to call
+    .f <- substitute(
+      add_event(
+        data = event_data
+      )
+    )
+
+    plot_list <- lapply(
+      X = plot_list,
+      FUN = function(x) {
+
+        # 1) add the plot to
+        # the function
+        .f$plot <- x
+
+        eval(
+          .f
+        )
+
+      }
+    )
+
 
   }
 

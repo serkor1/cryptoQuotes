@@ -75,7 +75,6 @@ Other sentiment indicators:
 \code{\link{lsr}()}
 
 Other subcharts: 
-\code{\link{add_event}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},

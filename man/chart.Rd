@@ -44,6 +44,14 @@ and structures the passed chart elements.
 \item \code{size} A \link{numeric}-value of \link{length} 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
 }
 }
+
+\subsection{Charting Events}{
+
+If \code{event_data} is passed, vertical eventlines with appropriate labels and coloring are added
+to the \code{\link[=chart]{chart()}}. This function is rigid, as it will fail if event, label and index columns are not passed.
+
+For more details please see \code{\link[=add_event]{add_event()}}.
+}
 }
 \examples{
 # script: scr_charting

@@ -115,7 +115,6 @@ Other chart indicators:
 \code{\link{zlema}()}
 
 Other subcharts: 
-\code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},

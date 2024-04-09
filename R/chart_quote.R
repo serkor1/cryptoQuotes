@@ -57,6 +57,7 @@ kline <- function(
           fillcolor = "black"
         ),
         showlegend = FALSE,
+        legendgroup = "price",
         name = "Border"
       )
 
@@ -79,6 +80,7 @@ kline <- function(
           fillcolor = args$candle_color$bearish
         ),
         showlegend = TRUE,
+        legendgroup = "price",
         name = args$interval
       )
 
@@ -147,7 +149,8 @@ ohlc <- function(
           fillcolor = "black"
         ),
         showlegend = FALSE,
-        name = "Border"
+        name = "Border",
+        legendgroup = "price"
       )
 
 
@@ -169,7 +172,8 @@ ohlc <- function(
           fillcolor = args$candle_color$bearish
         ),
         showlegend = TRUE,
-        name = args$interval
+        name = args$interval,
+        legendgroup = "price"
       )
 
 

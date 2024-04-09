@@ -92,7 +92,6 @@ Other sentiment indicators:
 \code{\link{fgi}()}
 
 Other subcharts: 
-\code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},
