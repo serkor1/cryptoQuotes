@@ -59,35 +59,57 @@ chart <- function(
   # 0) chart options and common
   # independent parameters
   name <- deparse(substitute(ticker))
-  interval <- infer_interval(ticker)
   market <- attributes(ticker)$source
-  ticker <- do.call(
-    cbind,
-    stats::setNames(
-      lapply(
-        c("open", "high", "low", "close", "volume"),
-        pull,
-        from = ticker
-      ),
-      c("open", "high", "low", "close", "volume")
-    )
+  ticker <- tryCatch(
+    {
+      # 1) convert to xts
+      # to ensure consisten
+      # behaviour across
+      # chart functions
+      ticker <- xts::as.xts(
+        ticker
+      )
 
+      ticker <- do.call(
+        cbind,
+        lapply(
+          c("open", "high", "low", "close", "volume"),
+          pull,
+          from = ticker
+        )
+      )
+
+      ticker$candle <- factor(
+        as.factor(
+          ticker$open > ticker$close
+        ),
+        labels = c("bull" , "bear")
+      )
+
+      ticker
+
+
+    },
+    error = function(error) {
+
+      assert(
+        FALSE,
+        error_message = c(
+          "x" = "The {.arg ticker} could not be coerced to {.cls xts}-object",
+          "v" = paste(
+            "See", cli::code_highlight(
+              code = "xts::as.xts()",
+              code_theme = "Chaos"
+            ),
+            "for further details."
+          )
+        )
+      )
+
+
+    }
   )
-
-  # ticker <- foo(
-  #   ticker
-  # )
-
-
-
-  ticker$candle <- factor(
-    as.factor(
-      ticker$open > ticker$close
-    ),
-    labels = c("bull" , "bear")
-  )
-
-
+  interval <- infer_interval(ticker)
 
   ## 1) set chart options
   ## globally (locally)
