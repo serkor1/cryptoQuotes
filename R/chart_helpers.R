@@ -98,6 +98,7 @@ bar <- function(
         name,
         "<b>Market:</b>",
         market
+
       ),
       font = list(
         size = 24

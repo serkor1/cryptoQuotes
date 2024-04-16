@@ -109,7 +109,9 @@ chart <- function(
 
     }
   )
-  interval <- infer_interval(ticker)
+
+  interval <- NULL
+  if (is.null(interval)) interval <- "Candle"
 
   ## 1) set chart options
   ## globally (locally)

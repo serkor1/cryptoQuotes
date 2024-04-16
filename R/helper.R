@@ -66,7 +66,7 @@ indicator <- function(
 
 
 # var_ly <- function(
-#     variable) {
+    #     variable) {
 #
 #   # 0) extract variable
 #   # from the source
@@ -156,37 +156,63 @@ to_title <- function(
 }
 
 
-infer_interval <- function(
+
+
+find_mode <- function(
     x) {
 
+  # 1) create a trable
+  # of values
+  frequency_table <- table(
+    x
+  )
+
+  # 2) find the mode
+  # and return as character
+  value <- as.character(
+    names(frequency_table)[which.max(frequency_table)]
+  )
+
+  value
+
+}
+
+
+infer_interval <- function(
+    x) {
 
 
   # 0) extract
   # index
   index <- zoo::index(
-    x
+    head(
+      x = x,
+      # n should be the minimum
+      # of available rows and 7. 7
+      # was chosen randomly, but its important
+      # that its odd numbered so consensus can be
+      # reached. This application is 20x faster
+      # than using the entire dataset
+      # and reaches the same conclusion
+      n = min(nrow(x), 7)
+    )
   )
 
   # 1) calculate
   # differences
-  x <- unique(
-    as.numeric(
-      difftime(
-        time1 = index[-1],
-        time2 = index[-length(index)],
-        units = "secs"
-      )
+  x <- as.numeric(
+    difftime(
+      time1 = index[-1],
+      time2 = index[-length(index)],
+      units = "secs"
     )
   )
 
-  assert(
-    length(x) == 1,
-    error_message = "error in time-index"
-  )
+  x <- find_mode(x)
 
 
   switch(
-    as.character(x),
+    x,
     "1" = "1s",
     "60" = "1m",
     "180" = "3m",
@@ -203,7 +229,8 @@ infer_interval <- function(
     "259200" = "3d",
     "604800" = "1w",
     "1209600" = "2w",
-    "1M"
+    "2629746" = "1M",
+    NULL
   )
 
 
