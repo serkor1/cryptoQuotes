@@ -215,26 +215,6 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-04-17 03:00:00
-</td>
-<td style="text-align:center;">
-64022.6
-</td>
-<td style="text-align:center;">
-64024.1
-</td>
-<td style="text-align:center;">
-63615
-</td>
-<td style="text-align:center;">
-63949.99
-</td>
-<td style="text-align:left;">
-553.07406
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 2024-04-17 03:30:00
 </td>
 <td style="text-align:center;">
@@ -331,6 +311,26 @@ volume
 </td>
 <td style="text-align:left;">
 309.33816
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-04-17 06:00:00
+</td>
+<td style="text-align:center;">
+63842.03
+</td>
+<td style="text-align:center;">
+63896.29
+</td>
+<td style="text-align:center;">
+63672.26
+</td>
+<td style="text-align:center;">
+63780.92
+</td>
+<td style="text-align:left;">
+307.61879
 </td>
 </tr>
 </tbody>

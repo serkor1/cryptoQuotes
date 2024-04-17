@@ -76,10 +76,8 @@ volume <- function(
         color = ~ as.factor(candle),
         type  = "bar",
         colors = c(
-          args$candle_color$bullish,
-          args$candle_color$bearish
-
-
+          args$candle_color$bearish,
+          args$candle_color$bullish
         ),
         marker = list(
           line = list(

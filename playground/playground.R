@@ -11,16 +11,19 @@ rm(list = ls()); gc(); devtools::load_all()
 
 
 # 1) SPY
-SPY <- quantmod::getSymbols(
-  "SPY",
-  auto.assign = FALSE
-)
+# SPY <- quantmod::getSymbols(
+#   "SPY",
+#   auto.assign = FALSE
+# )
 
 chart(
-  ticker = SPY,
+  ticker = BTC,
   main   = kline(),
   indicator = list(
     bollinger_bands(color = "steelblue")
+  ),
+  sub = list(
+    volume()
   )
 )
 
