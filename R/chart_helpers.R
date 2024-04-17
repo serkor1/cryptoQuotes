@@ -47,38 +47,69 @@ chart_layout <- function(
 }
 
 
+chart_theme <- function(
+    dark) {
+
+  if (dark) {
+    list(
+      paper_bgcolor = '#2b3139',
+      plot_bgcolor  = '#2b3139',
+      font_color    = '#848e9c',
+      grid_color    = '#40454c'
+    )
+  } else {
+    list(
+      paper_bgcolor = '#E3E3E3',
+      plot_bgcolor  = '#E3E3E3',
+      font_color    = '#A3A3A3',
+      grid_color    = '#D3D3D3'
+    )
+  }
+}
+
+
 bar <- function(
     dark,
     plot,
     name,
     market,
+    date_range,
     ...) {
 
-  paper_bgcolor <- plot_bgcolor <- '#2b3139'
 
-  font_color <- '#848e9c'
+  # 0) chart theme
+  theme <- chart_theme(
+    dark = dark
+  )
 
-  grid_color <- '#40454c'
 
-  if (!dark) {
 
-    paper_bgcolor <- plot_bgcolor <- '#E3E3E3'
 
-    font_color <- '#A3A3A3'
+  title_text <- ifelse(
+    !is.null(market),
+    yes = sprintf(
+      fmt = "<b>Ticker:</b> %s <b>Market:</b> %s<br><sub><b>Period:</b> %s</sub>",
+      name,
+      market,
+      date_range
+    ),
+    no = sprintf(
+      fmt = "<b>Ticker:</b> %s<br><sub><b>Period:</b> %s</sub>",
+      name,
+      date_range
+    )
 
-    grid_color <- '#D3D3D3'
-
-  }
-
+  )
 
 
   plot <- plotly::layout(
     p = plot,
-    paper_bgcolor = paper_bgcolor, # was D
-    plot_bgcolor  = plot_bgcolor,
+    margin = list(l = 5, r = 5, b = 5, t = 65),
+    paper_bgcolor = theme$paper_bgcolor,
+    plot_bgcolor  = theme$plot_bgcolor,
     font = list(
       size = 14,
-      color = font_color
+      color = theme$font_color
     ),
     legend = list(
       orientation = 'h',
@@ -93,13 +124,7 @@ bar <- function(
       )
     ),
     title = list(
-      text = paste(
-        "<b>Ticker:</b>",
-        name,
-        "<b>Market:</b>",
-        market
-
-      ),
+      text = title_text,
       font = list(
         size = 24
       ),
@@ -119,14 +144,14 @@ bar <- function(
         x = length(plot),
         layout_element = "yaxis",
         layout_attribute = list(
-          gridcolor = grid_color # Was CCCCCC
+          gridcolor = theme$grid_color # Was CCCCCC
         )
       ),
       chart_layout(
         x = length(plot),
         layout_element = "xaxis",
         layout_attribute = list(
-          gridcolor = grid_color# was C3
+          gridcolor = theme$grid_color# was C3
         )
       )
 

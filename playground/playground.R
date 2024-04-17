@@ -20,13 +20,9 @@ chart(
   ticker = SPY,
   main   = kline(),
   indicator = list(
-    bollinger_bands()
-  ),
-  sub    = list(
-    volume()
+    bollinger_bands(color = "steelblue")
   )
 )
 
 # script end;
-
 

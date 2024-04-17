@@ -80,11 +80,11 @@ chart <- function(
       )
 
       ticker$candle <- factor(
-        as.factor(
-          ticker$open > ticker$close
-        ),
-        labels = c("bull" , "bear")
+        as.factor(ticker$open > ticker$close),
+        levels = c(TRUE, FALSE),
+        labels = c("bear", "bull")
       )
+
 
       ticker
 
@@ -110,7 +110,7 @@ chart <- function(
     }
   )
 
-  interval <- NULL
+  interval <- infer_interval(ticker)
   if (is.null(interval)) interval <- "Candle"
 
   ## 1) set chart options
@@ -285,7 +285,8 @@ chart <- function(
     dark = dark,
     plot = plot,
     name = name,
-    market = market
+    market = market,
+    date_range = paste(range(zoo::index(ticker)), collapse = " - ")
   )
 
 }

@@ -5,6 +5,7 @@
 ### Charting
 
 * The `chart()`-function now has proper `light`-theme available that isnt the default `plotly`-values.
+* The charts now displays date ranges as a subtitles.
 * The `bollinger_bands()`-function now accepts a `color`-argument. These can be passed as `Hexadecimal`-colors or as is, `"blue"` for example.
 
 
