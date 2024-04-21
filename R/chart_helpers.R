@@ -24,6 +24,7 @@
 #'
 #'
 #' @return A [list] of layout elements.
+#' @keywords internal
 #' @family development tools
 chart_layout <- function(
     x,
@@ -166,26 +167,45 @@ bar <- function(
 }
 
 
+as_rgb <- function(
+    hex_color,
+    alpha = NULL) {
 
-# Function to convert hex color to CSS rgb() or rgba() string format
-hex_to_rgb_string <- function(hex_color, alpha = NULL) {
   # Remove the '#' if present and convert to RGB values
   rgb_values <- grDevices::col2rgb(hex_color)
 
   # Format RGB values
-  rgb_string <- sprintf("rgb(%d, %d, %d)", rgb_values[1, ], rgb_values[2, ], rgb_values[3, ])
+  rgb_string <- sprintf(
+    fmt = "rgb(%d, %d, %d)",
+    rgb_values[1, ],
+    rgb_values[2, ],
+    rgb_values[3, ]
+    )
 
   # Check if alpha is provided
   if (!is.null(alpha)) {
-    # Validate alpha value
-    if(alpha < 0 || alpha > 1) {
-      stop("Alpha value should be between 0 and 1.")
-    }
+
+    assert(
+      alpha >= 0 & alpha <= 1,
+      error_message = c(
+        "x" = sprintf(
+          fmt = "{.arg alpha} has to be in ]0, 1[-range. Got {.val %s}.",
+          alpha
+        )
+      )
+    )
+
     # Append alpha for rgba() format
-    rgb_string <- sprintf("rgba(%d, %d, %d, %.2f)", rgb_values[1, ], rgb_values[2, ], rgb_values[3, ], alpha)
+    rgb_string <- sprintf(
+      "rgba(%d, %d, %d, %.2f)",
+      rgb_values[1, ],
+      rgb_values[2, ],
+      rgb_values[3, ],
+      alpha
+      )
   }
 
-  return(rgb_string)
+  rgb_string
 }
 
 # script end;

@@ -11,12 +11,22 @@ indicator <- function(
     ...) {
 
   x <- tryCatch(
-    xts::as.xts(
-      x
-    ),
+    expr = {
+
+      xts::as.xts(
+        x
+      )
+
+    },
     error = function(error) {
 
-      x
+      assert(
+        FALSE,
+        error_message = c(
+          "x" = "Could not coerce to {.cls xts}",
+          "i" = error$message
+        )
+      )
 
     }
   )
@@ -185,7 +195,7 @@ infer_interval <- function(
   # 0) extract
   # index
   index <- zoo::index(
-    head(
+    utils::head(
       x = x,
       # n should be the minimum
       # of available rows and 7. 7
@@ -389,51 +399,7 @@ assert <- function(..., error_message = NULL) {
 
 }
 
-toDF <- function(quote) {
 
-
-  # this function converts
-  # the quote to a data.frame
-  # for the plotting and reshaping
-
-  attr_list <- attributes(quote)$source
-  # 2) convert to
-  # data.frame
-  DF <- as.data.frame(
-    zoo::coredata(quote),
-    row.names = NULL
-  )
-
-  colnames(DF) <- tolower(
-    colnames(DF)
-  )
-
-  # 3) add the index;
-  DF$index <- zoo::index(
-    quote
-  )
-
-  # 1) determine
-  # wether the the day is closed
-  # green
-  if (all(c('open', 'close') %in% colnames(DF))) {
-
-    DF$direction <- ifelse(
-      test = DF$close > DF$open,
-      yes  = 'Increasing',
-      no   = 'Decreasing'
-    )
-
-  }
-
-
-  attributes(DF)$source <- attr_list
-
-  return(
-    DF
-  )
-
-}
 
 
 pull <- function(
@@ -474,24 +440,6 @@ pull <- function(
 
 }
 
-
-
-
-
-toQuote <- function(DF) {
-
-  quote <- xts::as.xts(
-    DF[,grep(pattern = 'open|high|low|close|volume|index',x = colnames(DF), ignore.case = TRUE)]
-  )
-
-  zoo::index(quote) <- as.POSIXct(
-    DF$index
-  )
-
-  attributes(quote)$source <- attributes(DF)$source
-
-  quote
-}
 
 # Plotly parameters; ####
 vline <- function(

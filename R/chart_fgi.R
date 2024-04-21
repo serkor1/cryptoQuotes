@@ -10,10 +10,9 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' The fear and greed index is a market sentiment indicator that measures investor emotions to
-#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+#' A high-level [plotly::plot_ly()]-wrapper function.
 #'
-#' @param index The Fear and Greed Index created by [getFGIndex()]
+#' @param index A [xts::xts()]-object. See [get_fgindex()] for more details.
 #'
 #' @example man/examples/scr_FGIndex.R
 #'
@@ -38,6 +37,25 @@
 fgi <- function(
     index,
     ...) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data = {

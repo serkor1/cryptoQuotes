@@ -11,12 +11,9 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' The [lsr()]-function adds a scatter plot as a subplot to the chart colored by ratio size.
+#' A high-level [plotly::plot_ly()]-wrapper function.
 #'
-#' @details
-#' The long-short ratio is a market sentiment indicator on expected price movement.
-#'
-#' @param ratio A [xts::xts()]-object with the column LSRatio. See [get_lsratio()] for more details.
+#' @param ratio A [xts::xts()]-object. See [get_lsratio()] for more details.
 #' @inherit kline
 #'
 #' @example man/examples/scr_LSR.R
@@ -25,11 +22,29 @@
 #' @family sentiment indicators
 #' @family subcharts
 #'
-#'
 #' @export
 lsr <- function(
     ratio,
     ...) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data = {

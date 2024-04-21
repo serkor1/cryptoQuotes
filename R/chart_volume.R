@@ -11,11 +11,9 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' Volume indicators are technical analysis tools used to analyze trading volume, which represents the number of shares or contracts traded in a financial market over a specific period of time.
-#' These indicators provide valuable insights into the strength and significance of price movements.
+#' A high-level [plotly::plot_ly()]-wrapper function.
 #'
 #' @inherit kline
-#'
 #'
 #' @example man/examples/scr_charting.R
 #'
@@ -49,22 +47,18 @@ volume <- function(
   structure(
     .Data = {
 
-
       # 0) construct arguments
       # via chart function
       args <- list(
         ...
       )
 
-
       # 0.4) linewidth
       linewidth <- 0.90
-
 
       data <- indicator(
         x = args$data
       )
-
 
       plot <- plotly::layout(
         plotly::plot_ly(
@@ -98,8 +92,6 @@ volume <- function(
       )
       )
 
-
-
     },
     class = c(
       "subchart",
@@ -108,7 +100,6 @@ volume <- function(
       )
 
   )
-
 
 }
 

@@ -13,13 +13,12 @@ add_event(data, ...)
 \item{...}{For internal use. Please ignore.}
 }
 \value{
-Returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object with event lines.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object with \code{shapes} and \code{annotations}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Common types of event indicators include earnings release dates, dividend payouts, central bank interest rate decisions, chart pattern breakouts, and geopolitical events like elections or geopolitical tensions.
-The choice of event indicators depends on the trader's or analyst's specific objectives and the factors they believe are most relevant to the asset's price movements.
+A high-level \code{\link[plotly:layout]{plotly::layout()}}-wrapper that adds \code{shapes} and \code{annotations} to the \code{\link[=chart]{chart()}}.
 }
 \details{
 The \link{data.frame} must include the following columns,
@@ -134,5 +133,8 @@ Other chart indicators:
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}

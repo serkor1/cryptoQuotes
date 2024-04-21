@@ -10,20 +10,14 @@ kline(...)
 \item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Candlestick charts are highly visual and provide a quick and intuitive way to assess market sentiment and price action.
-Traders and analysts use them in conjunction with other technical analysis tools to make informed trading decisions.
-These charts are particularly useful for identifying key support and resistance levels, trend changes, and potential entry and exit points in financial markets.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function for charting Open, High, Low and Close prices.
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
 ## charting the klines
@@ -40,25 +34,6 @@ chart(
     bollinger_bands(),
     sma(),
     alma()
-  ),
-  options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
   ),
   options = list(
     dark = TRUE,

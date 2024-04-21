@@ -38,19 +38,14 @@ rsi(
 case (1) above.}
 }
 \value{
-Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The RSI can be customized with different look-back periods to suit various trading strategies and timeframes.
-It is a valuable tool for assessing the momentum and relative strength of an asset, helping traders make more informed decisions in financial markets.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts with the \code{\link[TTR:RSI]{TTR::RSI()}}-function.
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
 ## charting the klines
@@ -67,25 +62,6 @@ chart(
     bollinger_bands(),
     sma(),
     alma()
-  ),
-  options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
   ),
   options = list(
     dark = TRUE,

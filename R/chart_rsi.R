@@ -12,8 +12,7 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' The RSI can be customized with different look-back periods to suit various trading strategies and timeframes.
-#' It is a valuable tool for assessing the momentum and relative strength of an asset, helping traders make more informed decisions in financial markets.
+#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-wrapper function that interacts with the [TTR::RSI()]-function.
 #'
 #' @inheritParams TTR::RSI
 #' @param upper_limit A [numeric]-vector of [length] 1. 80 by default. Sets the upper limit of the [TTR::RSI].
@@ -119,7 +118,7 @@ rsi <- function(
             showlegend = FALSE,
             ymin = ~lower_limit,
             ymax = ~upper_limit,
-            fillcolor = hex_to_rgb_string(alpha = 0.1, hex_color = color),
+            fillcolor = as_rgb(alpha = 0.1, hex_color = color),
             line = list(
               color = 'transparent'
             ) # Transparent line

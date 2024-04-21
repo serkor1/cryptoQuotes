@@ -12,17 +12,11 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' Bollinger Bands provide a visual representation of price volatility and are widely used by traders
-#' and investors to assess potential price reversals and trade opportunities in various financial markets, including stocks, forex, and commodities.
-#'
+#' A high-level [plotly::add_lines()]-wrapper function that interacts with the [TTR::BBands()]-function.
 #'
 #' @inheritParams TTR::BBands
-#' @param color A [character]-vector of [length] 1.
-#' @param ... For internal use. Please ignore.
-#'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns Invisbly returns a [plotly]-object.
+#' @param color A [character]-vector of [length] 1. "#F100F1" by default.
+#' @inherit kline
 #'
 #' @family chart indicators
 #'
@@ -33,6 +27,25 @@ bollinger_bands <- function(
     maType = "SMA",
     color  = '#F100F1',
     ...){
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
 
   structure(
@@ -140,7 +153,7 @@ bollinger_bands <- function(
         ymin = ~dn,
         ymax = ~up,
         data = data,
-        fillcolor = hex_to_rgb_string(alpha = 0.1, hex_color = color),
+        fillcolor = as_rgb(alpha = 0.1, hex_color = color),
         line = list(
           color = "transparent"
         ),

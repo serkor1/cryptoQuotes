@@ -4,9 +4,7 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' Candlestick charts are highly visual and provide a quick and intuitive way to assess market sentiment and price action.
-#' Traders and analysts use them in conjunction with other technical analysis tools to make informed trading decisions.
-#' These charts are particularly useful for identifying key support and resistance levels, trend changes, and potential entry and exit points in financial markets.
+#' A high-level [plotly::plot_ly()]-wrapper function for charting Open, High, Low and Close prices.
 #'
 #' @param ... For internal use. Please ignore.
 #'
@@ -16,7 +14,7 @@
 #'
 #' @returns
 #'
-#' Invisbly returns [plotly::plot_ly()]-object.
+#' A [plotly::plot_ly()]-object.
 #'
 #' @author Serkan Korkmaz
 #'
@@ -24,10 +22,27 @@
 kline <- function(
     ...) {
 
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data = {
-
 
       # 0) construct arguments
       # via chart function
@@ -116,6 +131,25 @@ kline <- function(
 #' @export
 ohlc <- function(
     ...) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data = {

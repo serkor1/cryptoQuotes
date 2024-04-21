@@ -5,8 +5,7 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' Common types of event indicators include earnings release dates, dividend payouts, central bank interest rate decisions, chart pattern breakouts, and geopolitical events like elections or geopolitical tensions.
-#' The choice of event indicators depends on the trader's or analyst's specific objectives and the factors they believe are most relevant to the asset's price movements.
+#' A high-level [plotly::layout()]-wrapper that adds `shapes` and `annotations` to the [chart()].
 #'
 #' @param data a [data.frame]-type object with `index`, `event` and `color` columns.
 #' @param ... For internal use. Please ignore.
@@ -23,11 +22,32 @@
 #'
 #' @family chart indicators
 #'
-#' @returns Returns [plotly::plot_ly()]-object with event lines.
+#' @author Serkan Korkmaz
+#'
+#' @returns A [plotly::plot_ly()]-object with `shapes` and `annotations`
 add_event <- function(
     data,
     ...
     ) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data = {

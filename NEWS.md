@@ -33,7 +33,7 @@
 
 * `get_lsratio` and `getLSratio()` supports `kraken` and `bybit` as `source`
 
-* `available_`-functions are more adaptive to the callling environments
+* `available_`-functions are more adaptive to the calling environments
 
 ```R
 ## charting the klines

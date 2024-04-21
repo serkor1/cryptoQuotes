@@ -7,20 +7,17 @@
 lsr(ratio, ...)
 }
 \arguments{
-\item{ratio}{A \code{\link[xts:xts]{xts::xts()}}-object with the column LSRatio. See \code{\link[=get_lsratio]{get_lsratio()}} for more details.}
+\item{ratio}{A \code{\link[xts:xts]{xts::xts()}}-object. See \code{\link[=get_lsratio]{get_lsratio()}} for more details.}
 
 \item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The \code{\link[=lsr]{lsr()}}-function adds a scatter plot as a subplot to the chart colored by ratio size.
-}
-\details{
-The long-short ratio is a market sentiment indicator on expected price movement.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function.
 }
 \examples{
 \dontrun{

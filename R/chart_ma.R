@@ -44,7 +44,7 @@ chart_ma <- function(
 #'
 #' @returns
 #'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' A [plotly::plot_ly()]-object
 #'
 #' @family chart indicators
 #' @family moving average indicators
@@ -55,6 +55,24 @@ sma <- function(
     n = 10,
     ...) {
 
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data = {
@@ -90,29 +108,18 @@ sma <- function(
       "indicator",
       "plotly",
       "htmlwidget"
-      )
+    )
   )
 
 }
 
 
 #' Add Exponentially Weighted Moving Average to the charts
-#'
-#' @inherit sma description
-#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::EMA]
 #' @inheritParams TTR::EMA
 #' @inherit sma
-#'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
-#'
 #' @family chart indicators
 #' @family moving average indicators
-#'
 #' @export
 ema <- function(
     price = "Close",
@@ -120,6 +127,25 @@ ema <- function(
     wilder = FALSE,
     ratio = NULL,
     ...) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data  = {
@@ -157,28 +183,17 @@ ema <- function(
       "indicator",
       "plotly",
       "htmlwidget"
-      )
+    )
   )
 
 }
 
 #' Add Double Exponential Moving Average to the chart
-#'
-#' @inherit sma description
-#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::DEMA]
 #' @inheritParams TTR::DEMA
 #' @inherit sma
-#'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
-#'
 #' @family chart indicators
 #' @family moving average indicators
-#'
 #' @export
 dema <- function(
     price = "close",
@@ -188,6 +203,24 @@ dema <- function(
     ratio = NULL,
     ...) {
 
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data  = {
@@ -234,22 +267,11 @@ dema <- function(
 
 
 #' Add Weighted Moving Average to the chart
-#'
-#' @inherit sma description
-#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::WMA]
 #' @inheritParams TTR::WMA
 #' @inherit sma
-#'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
-#'
 #' @family chart indicators
 #' @family moving average indicators
-#'
 #' @export
 wma <- function(
     price = "close",
@@ -257,6 +279,24 @@ wma <- function(
     wts = 1:n,
     ...) {
 
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data  = {
@@ -300,27 +340,35 @@ wma <- function(
 
 
 #' Add Elastic Volume-weighted Moving Average to the chart
-#'
-#' @inherit sma description
-#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::EVWMA]
 #' @inheritParams TTR::EVWMA
 #' @inherit sma
-#'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
-#'
 #' @family chart indicators
 #' @family moving average indicators
-#'
 #' @export
 evwma <- function(
-    price = "Close",
+    price = "close",
     n = 10,
     ...) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data  = {
@@ -350,8 +398,6 @@ evwma <- function(
 
       )
 
-
-
     },
     class = c(
       "indicator",
@@ -360,29 +406,15 @@ evwma <- function(
     )
   )
 
-
-
 }
 
 
 #' Add Zero Lag Exponential Moving Average to the chart
-#'
-#'
-#' @inherit sma description
-#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::ZLEMA]
 #' @inheritParams TTR::ZLEMA
 #' @inherit sma
-#'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
-#'
 #' @family chart indicators
 #' @family moving average indicators
-#'
 #' @export
 zlema <- function(
     price = "close",
@@ -390,6 +422,24 @@ zlema <- function(
     ratio = NULL,
     ...) {
 
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data  = {
@@ -419,8 +469,6 @@ zlema <- function(
 
       )
 
-
-
     },
     class = c(
       "indicator",
@@ -429,29 +477,40 @@ zlema <- function(
     )
   )
 
-
-
 }
 
 
 #' Add Volume-weighted Moving Average to the chart
-#'
-#' @inherit sma description
-#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::VWAP]
 #' @inheritParams TTR::VWAP
 #' @inherit sma
-#'
-#' @example man/examples/scr_charting.R
-#'
-#'
 #' @family chart indicators
+#' @family moving average indicators
 #' @export
 vwap <- function(
     price = "close",
     n = 10,
     ratio = NULL,
     ...) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data  = {
@@ -482,8 +541,6 @@ vwap <- function(
 
       )
 
-
-
     },
     class = c(
       "indicator",
@@ -499,25 +556,35 @@ vwap <- function(
 
 
 #' Add Hull Moving Average to the chart
-#'
-#' @inherit sma description
-#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::HMA]
 #' @inheritParams TTR::HMA
 #' @inherit sma
-#'
-#' @example man/examples/scr_charting.R
-#'
-#'
 #' @family chart indicators
 #' @family moving average indicators
-#'
 #' @export
 hma <- function(
-    price = "Close",
+    price = "close",
     n = 20,
     ...) {
 
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data  = {
@@ -546,8 +613,6 @@ hma <- function(
 
       )
 
-
-
     },
     class = c(
       "indicator",
@@ -556,24 +621,14 @@ hma <- function(
     )
   )
 
-
-
 }
 
 #' Add Arnaud Legoux Moving Average to the chart
-#'
-#' @inherit sma description
-#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::ALMA]
 #' @inheritParams TTR::ALMA
 #' @inherit sma
-#'
-#' @example man/examples/scr_charting.R
-#'
-#'
 #' @family chart indicators
 #' @family moving average indicators
-#'
 #' @export
 alma <- function(
     price = "close",
@@ -581,6 +636,25 @@ alma <- function(
     offset = 0.85,
     sigma  = 6,
     ...) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
   structure(
     .Data  = {
@@ -610,8 +684,6 @@ alma <- function(
         y    = "alma"
 
       )
-
-
 
     },
     class = c(

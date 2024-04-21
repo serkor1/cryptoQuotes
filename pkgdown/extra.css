@@ -10,7 +10,34 @@ to claim precendence over inline css
 NOTE: Body has to be larger than main
 */
 
+/*
+html .html-widget {
+    width: 100% !important;
+    height: auto;
+    transform: scale(0.5);
+}
+*/
 
+/*
+html .html-widget .plotly {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+}
+*/
+
+html .html-widget {
+    max-width: 100% !important; /* Adjust this value to fit your layout needs */
+    height: auto !important;
+    margin: auto !important; /* Center the chart if the page width exceeds the max-width */
+    overflow: hidden !important; /* Ensures no spillover if things are still too large */
+}
+
+
+html .plotly-container {
+    transform: scale(0.5) !important; /* Scale down to match your DPI enhancement */
+    transform-origin: top left !important; /* Keeps the chart aligned to the top-left corner */
+}
 
 
 html .container {

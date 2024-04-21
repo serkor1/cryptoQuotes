@@ -42,3 +42,4 @@ Other development tools:
 \code{\link{is.date}()}
 }
 \concept{development tools}
+\keyword{internal}

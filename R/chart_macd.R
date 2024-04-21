@@ -12,15 +12,13 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' Traders and investors use the MACD indicator to identify trend changes, potential reversals, and overbought or oversold conditions in the market.
-#' It is a versatile tool that can be applied to various timeframes and asset classes, making it a valuable part of technical analysis for many traders.
+#'
+#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-wrapper function that interacts with the [TTR::MACD()]-function.
 #'
 #' @inheritParams TTR::MACD
-#'
 #' @inherit kline
 #'
 #' @example man/examples/scr_charting.R
-#'
 #'
 #' @family chart indicators
 #' @family subcharts
@@ -168,7 +166,11 @@ macd <- function(
 
 
     },
-    class = c("subchart", "plotly", "htmlwidget")
+    class = c(
+      "subchart",
+      "plotly",
+      "htmlwidget"
+      )
   )
 
 }

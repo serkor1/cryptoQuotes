@@ -11,16 +11,17 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' [chart()] creates interactive financial charts using [plotly::plot_ly()] as backend. It's a high-level function which collects
-#' and structures the passed chart elements.
 #'
-#' @param ticker A [xts::xts()]-object with Open, High, Low, Close and Volume columns.
-#' @param main A [plotly::plot_ly()]-object wrapped in [rlang::expr()]. [kline()] by default.
-#' @param sub An optional [list] of [plotly::plot_ly()]-object(s) wrapped in [rlang::expr()].
-#' @param indicator An optional [list] of [plotly::plot_ly()]-object(s) wrapped in [rlang::expr()].
+#' A high-level [plotly::plot_ly()]- and [plotly::subplot()]-wrapper function for building interactive financial charts using the affiliated chart-functions like [kline()], and [macd()].
+#'
+#'
+#'
+#' @param ticker An object with Open, High, Low, Close and Volume columns that can be coerced to a [xts::xts()]-object.
+#' @param main A [plotly::plot_ly()]-function. [kline()] by default.
+#' @param sub An optional [list] of [plotly::plot_ly()]-function(s).
+#' @param indicator An optional [list] of [plotly::add_lines()]-function(s).
 #' @param event_data An optional [data.frame] with event line(s) to be added to the [chart()]. See [add_event()] for more details.
 #' @param options An optional [list] of [chart()]-options. See details below.
-#'
 #'
 #' @details
 #'
@@ -42,15 +43,16 @@
 #'
 #' @example man/examples/scr_charting.R
 #'
-#'
-#' @returns Returns a [plotly::plot_ly()] object.
+#' @returns A [plotly::plot_ly()] object.
 #'
 #' @author Serkan Korkmaz
 #'
 #' @export
 chart <- function(
     ticker,
-    main = list(),
+    main = list(
+      kline()
+    ),
     sub = list(),
     indicator = list(),
     event_data = NULL,

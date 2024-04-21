@@ -7,18 +7,17 @@
 fgi(index, ...)
 }
 \arguments{
-\item{index}{The Fear and Greed Index created by \code{\link[=getFGIndex]{getFGIndex()}}}
+\item{index}{A \code{\link[xts:xts]{xts::xts()}}-object. See \code{\link[=get_fgindex]{get_fgindex()}} for more details.}
 
 \item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The fear and greed index is a market sentiment indicator that measures investor emotions to
-gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function.
 }
 \details{
 The Fear and Greed Index goes from 0-100, and can be classifed as follows

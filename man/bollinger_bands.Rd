@@ -14,24 +14,19 @@ bollinger_bands(n = 20, sd = 2, maType = "SMA", color = "#F100F1", ...)
 
 \item{maType}{A function or a string naming the function to be called.}
 
-\item{color}{A \link{character}-vector of \link{length} 1.}
+\item{color}{A \link{character}-vector of \link{length} 1. "#F100F1" by default.}
 
-\item{...}{For internal use. Please ignore.}
+\item{...}{Other arguments to be passed to the \code{maType} function.}
 }
 \value{
-Invisbly returns a \link{plotly}-object.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Bollinger Bands provide a visual representation of price volatility and are widely used by traders
-and investors to assess potential price reversals and trade opportunities in various financial markets, including stocks, forex, and commodities.
+A high-level \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts with the \code{\link[TTR:bollingerBands]{TTR::BBands()}}-function.
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
 ## charting the klines
@@ -48,25 +43,6 @@ chart(
     bollinger_bands(),
     sma(),
     alma()
-  ),
-  options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
   ),
   options = list(
     dark = TRUE,
@@ -94,5 +70,8 @@ Other chart indicators:
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}

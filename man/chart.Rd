@@ -6,7 +6,7 @@
 \usage{
 chart(
   ticker,
-  main = list(),
+  main = list(kline()),
   sub = list(),
   indicator = list(),
   event_data = NULL,
@@ -14,26 +14,25 @@ chart(
 )
 }
 \arguments{
-\item{ticker}{A \code{\link[xts:xts]{xts::xts()}}-object with Open, High, Low, Close and Volume columns.}
+\item{ticker}{An object with Open, High, Low, Close and Volume columns that can be coerced to a \code{\link[xts:xts]{xts::xts()}}-object.}
 
-\item{main}{A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}. \code{\link[=kline]{kline()}} by default.}
+\item{main}{A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function. \code{\link[=kline]{kline()}} by default.}
 
-\item{sub}{An optional \link{list} of \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object(s) wrapped in \code{\link[rlang:expr]{rlang::expr()}}.}
+\item{sub}{An optional \link{list} of \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function(s).}
 
-\item{indicator}{An optional \link{list} of \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object(s) wrapped in \code{\link[rlang:expr]{rlang::expr()}}.}
+\item{indicator}{An optional \link{list} of \code{\link[plotly:add_trace]{plotly::add_lines()}}-function(s).}
 
 \item{event_data}{An optional \link{data.frame} with event line(s) to be added to the \code{\link[=chart]{chart()}}. See \code{\link[=add_event]{add_event()}} for more details.}
 
 \item{options}{An optional \link{list} of \code{\link[=chart]{chart()}}-options. See details below.}
 }
 \value{
-Returns a \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{\link[=chart]{chart()}} creates interactive financial charts using \code{\link[plotly:plot_ly]{plotly::plot_ly()}} as backend. It's a high-level function which collects
-and structures the passed chart elements.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:subplot]{plotly::subplot()}}-wrapper function for building interactive financial charts using the affiliated chart-functions like \code{\link[=kline]{kline()}}, and \code{\link[=macd]{macd()}}.
 }
 \details{
 \subsection{Options}{
@@ -54,10 +53,6 @@ For more details please see \code{\link[=add_event]{add_event()}}.
 }
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
 ## charting the klines
@@ -74,25 +69,6 @@ chart(
     bollinger_bands(),
     sma(),
     alma()
-  ),
-  options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
   ),
   options = list(
     dark = TRUE,
