@@ -26,17 +26,18 @@ html .html-widget .plotly {
 }
 */
 
+/*
 html .html-widget {
-    max-width: 100% !important; /* Adjust this value to fit your layout needs */
+    max-width: 100% !important;
     height: auto !important;
-    margin: auto !important; /* Center the chart if the page width exceeds the max-width */
-    overflow: hidden !important; /* Ensures no spillover if things are still too large */
+    margin: auto !important;
+    overflow: hidden !important;
 }
 
 
 html .plotly-container {
-    transform: scale(0.5) !important; /* Scale down to match your DPI enhancement */
-    transform-origin: top left !important; /* Keeps the chart aligned to the top-left corner */
+    transform: scale(0.5) !important;
+    transform-origin: top left !important;
 }
 
 
@@ -47,12 +48,21 @@ html .container {
 }
 
 
-html main {
+#main {
     max-width: 1000;
     margin-left: auto !important;
-    margin-right: auto !important;
+    margin-right: 0 !important;
 }
 
+#toc {
+  width: fit-content;
+}
+
+html aside {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+*/
 /* The body of the webpage */
 /*
 html body {
