@@ -25,7 +25,6 @@ Suggests:
 Config/testthat/edition: 3
 Imports:
     cli (>= 3.6.2),
-    conflicted (>= 1.2.0),
     curl (>= 5.2.0),
     jsonlite (>= 1.8.8),
     lifecycle (>= 1.0.4),

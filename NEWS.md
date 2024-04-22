@@ -16,6 +16,11 @@
 > **Note:** we are generally moving away from `rlang`, `purrr` and `tidyverse` in general. We are, however, 
 > keeping the `tidyverse` styleguide.
 
+* Removed dependency on `conflicted`-package.
+
+Prior to version `1.3.0` the `get*`-functions were following the syntax of `quantmod` closely, and this goes for the function naming too. With the adoption of the `tidyverse` style guide, there is no conflicts that
+needs to be resolved on `stable`- and `experimental`-functions.
+
 ### New developper tools
 
 * `pull()`-function

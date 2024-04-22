@@ -4,7 +4,6 @@
 # objective:
 # script start;
 
-# 1) on attach
 .onAttach <- function(
     libname,
     pkgname,
@@ -19,7 +18,7 @@
 
 
   cli::cli_inform(
-    message = header(
+    message = pkg_header(
       pkgname
     ),
     ...,
@@ -35,12 +34,9 @@
 
 }
 
-
-# 1) on detach
 .onDetach <- function(
     libpath,
     ...) {
-
 
   # 1) reset options
   # for xts suppressing
@@ -50,4 +46,5 @@
   )
 
 }
+
 # script end;
