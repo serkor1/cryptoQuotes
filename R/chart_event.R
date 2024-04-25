@@ -21,6 +21,7 @@
 #' @example man/examples/scr_addEvents.R
 #'
 #' @family chart indicators
+#' @keywords internal
 #'
 #' @author Serkan Korkmaz
 #'

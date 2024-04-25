@@ -2,9 +2,15 @@
 % Please edit documentation in R/chart_ma.R
 \name{ema}
 \alias{ema}
-\title{Add Exponentially Weighted Moving Average to the charts}
+\title{Add Exponentially-Weighted Moving Average (EMA) to the charts}
 \usage{
-ema(price = "Close", n = 10, wilder = FALSE, ratio = NULL, ...)
+ema(
+ price  = "close",
+ n      = 10,
+ wilder = FALSE,
+ ratio  = NULL,
+ ...
+)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::EMA}}

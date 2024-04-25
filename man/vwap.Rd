@@ -2,9 +2,14 @@
 % Please edit documentation in R/chart_ma.R
 \name{vwap}
 \alias{vwap}
-\title{Add Volume-weighted Moving Average to the chart}
+\title{Add Volume-Weighted Moving Average (VWAP) to the chart}
 \usage{
-vwap(price = "close", n = 10, ratio = NULL, ...)
+vwap(
+ price  = "close",
+ n      = 10,
+ ratio = NULL,
+ ...
+)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::VWAP}}

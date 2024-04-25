@@ -138,3 +138,4 @@ Other chart indicators:
 Serkan Korkmaz
 }
 \concept{chart indicators}
+\keyword{internal}

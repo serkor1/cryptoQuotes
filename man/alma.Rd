@@ -2,9 +2,15 @@
 % Please edit documentation in R/chart_ma.R
 \name{alma}
 \alias{alma}
-\title{Add Arnaud Legoux Moving Average to the chart}
+\title{Add Arnaud Legoux Moving Average (ALMA) to the chart}
 \usage{
-alma(price = "close", n = 9, offset = 0.85, sigma = 6, ...)
+alma(
+ price  = "close",
+ n      = 9,
+ offset = 0.85,
+ sigma  = 6,
+ ...
+)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ALMA}}

@@ -2,9 +2,14 @@
 % Please edit documentation in R/chart_ma.R
 \name{wma}
 \alias{wma}
-\title{Add Weighted Moving Average to the chart}
+\title{Add Weighted Moving Average (WMA) to the chart}
 \usage{
-wma(price = "close", n = 10, wts = 1:n, ...)
+wma(
+ price  = "close",
+ n      = 10,
+ wts    = 1:n,
+ ...
+)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::WMA}}

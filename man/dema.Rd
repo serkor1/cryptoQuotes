@@ -2,9 +2,16 @@
 % Please edit documentation in R/chart_ma.R
 \name{dema}
 \alias{dema}
-\title{Add Double Exponential Moving Average to the chart}
+\title{Add Double Exponential Moving Average (DEMA) to the chart}
 \usage{
-dema(price = "close", n = 10, v = 1, wilder = FALSE, ratio = NULL, ...)
+dema(
+ price  = "close",
+ n      = 10,
+ v      = 1,
+ wilder = FALSE,
+ ratio  = NULL,
+ ...
+)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::DEMA}}

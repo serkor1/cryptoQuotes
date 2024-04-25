@@ -2,9 +2,13 @@
 % Please edit documentation in R/chart_ma.R
 \name{hma}
 \alias{hma}
-\title{Add Hull Moving Average to the chart}
+\title{Add Hull Moving Average (HMA) to the chart}
 \usage{
-hma(price = "close", n = 20, ...)
+hma(
+ price  = "close",
+ n      = 20,
+ ...
+)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::HMA}}

@@ -2,9 +2,13 @@
 % Please edit documentation in R/chart_ma.R
 \name{evwma}
 \alias{evwma}
-\title{Add Elastic Volume-weighted Moving Average to the chart}
+\title{Add Elastic Volume-Weighted Moving Average (EVWMA) to the chart}
 \usage{
-evwma(price = "close", n = 10, ...)
+evwma(
+ price  = "close",
+ n      = 10,
+ ...
+)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::EVWMA}}

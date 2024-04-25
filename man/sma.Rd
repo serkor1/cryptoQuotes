@@ -2,9 +2,13 @@
 % Please edit documentation in R/chart_ma.R
 \name{sma}
 \alias{sma}
-\title{Add Simple Moving Averages to the charts}
+\title{Add Simple Moving Averages (SMA) to the charts}
 \usage{
-sma(price = "close", n = 10, ...)
+sma(
+ price  = "close",
+ n      = 10,
+ ...
+)
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::SMA}}

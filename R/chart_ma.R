@@ -19,7 +19,13 @@ chart_ma <- function(
     showlegend = TRUE,
     name = name,
     x    = ~index,
-    y    = stats::as.formula(paste("~",y)),
+    y    = stats::as.formula(
+      # NOTE: to avoid possible naming
+      # bugs in TTR use names(data)[2].
+      # names(data)[1] is index as per
+      # zoo.fortify
+      paste("~",names(data)[2])
+      ),
     line = list(
       width = 0.9
     )
@@ -28,13 +34,19 @@ chart_ma <- function(
 }
 
 
-#' Add Simple Moving Averages to the charts
+#' Add Simple Moving Averages (SMA) to the charts
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::add_lines()]-wrapper function that interacts with [TTR]'s moving average family of functions.
+#'
+#' @usage sma(
+#'  price  = "close",
+#'  n      = 10,
+#'  ...
+#' )
 #'
 #' @inheritParams TTR::SMA
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::SMA]
@@ -114,7 +126,16 @@ sma <- function(
 }
 
 
-#' Add Exponentially Weighted Moving Average to the charts
+#' Add Exponentially-Weighted Moving Average (EMA) to the charts
+#'
+#' @usage ema(
+#'  price  = "close",
+#'  n      = 10,
+#'  wilder = FALSE,
+#'  ratio  = NULL,
+#'  ...
+#' )
+#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::EMA]
 #' @inheritParams TTR::EMA
 #' @inherit sma
@@ -122,7 +143,7 @@ sma <- function(
 #' @family moving average indicators
 #' @export
 ema <- function(
-    price = "Close",
+    price = "close",
     n = 10,
     wilder = FALSE,
     ratio = NULL,
@@ -188,7 +209,17 @@ ema <- function(
 
 }
 
-#' Add Double Exponential Moving Average to the chart
+#' Add Double Exponential Moving Average (DEMA) to the chart
+#'
+#' @usage dema(
+#'  price  = "close",
+#'  n      = 10,
+#'  v      = 1,
+#'  wilder = FALSE,
+#'  ratio  = NULL,
+#'  ...
+#' )
+#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::DEMA]
 #' @inheritParams TTR::DEMA
 #' @inherit sma
@@ -266,7 +297,15 @@ dema <- function(
 }
 
 
-#' Add Weighted Moving Average to the chart
+#' Add Weighted Moving Average (WMA) to the chart
+#'
+#' @usage wma(
+#'  price  = "close",
+#'  n      = 10,
+#'  wts    = 1:n,
+#'  ...
+#' )
+#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::WMA]
 #' @inheritParams TTR::WMA
 #' @inherit sma
@@ -278,6 +317,9 @@ wma <- function(
     n = 10,
     wts = 1:n,
     ...) {
+
+  # TODO: Submit PR, WMA has an issue
+  # too in the naming.
 
   call_stack <- as.character(
     lapply(sys.calls(), `[[`, 1)
@@ -339,7 +381,14 @@ wma <- function(
 }
 
 
-#' Add Elastic Volume-weighted Moving Average to the chart
+#' Add Elastic Volume-Weighted Moving Average (EVWMA) to the chart
+#'
+#' @usage evwma(
+#'  price  = "close",
+#'  n      = 10,
+#'  ...
+#' )
+#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::EVWMA]
 #' @inheritParams TTR::EVWMA
 #' @inherit sma
@@ -409,7 +458,15 @@ evwma <- function(
 }
 
 
-#' Add Zero Lag Exponential Moving Average to the chart
+#' Add Zero Lag Exponential Moving Average (ZLEMA) to the chart
+#'
+#' @usage zlema(
+#'  price  = "close",
+#'  n      = 10,
+#'  ratio = NULL,
+#'  ...
+#' )
+#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::ZLEMA]
 #' @inheritParams TTR::ZLEMA
 #' @inherit sma
@@ -480,7 +537,15 @@ zlema <- function(
 }
 
 
-#' Add Volume-weighted Moving Average to the chart
+#' Add Volume-Weighted Moving Average (VWAP) to the chart
+#'
+#' @usage vwap(
+#'  price  = "close",
+#'  n      = 10,
+#'  ratio = NULL,
+#'  ...
+#' )
+#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::VWAP]
 #' @inheritParams TTR::VWAP
 #' @inherit sma
@@ -555,7 +620,14 @@ vwap <- function(
 
 
 
-#' Add Hull Moving Average to the chart
+#' Add Hull Moving Average (HMA) to the chart
+#'
+#' @usage hma(
+#'  price  = "close",
+#'  n      = 20,
+#'  ...
+#' )
+#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::HMA]
 #' @inheritParams TTR::HMA
 #' @inherit sma
@@ -623,7 +695,16 @@ hma <- function(
 
 }
 
-#' Add Arnaud Legoux Moving Average to the chart
+#' Add Arnaud Legoux Moving Average (ALMA) to the chart
+#'
+#' @usage alma(
+#'  price  = "close",
+#'  n      = 9,
+#'  offset = 0.85,
+#'  sigma  = 6,
+#'  ...
+#' )
+#'
 #' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::ALMA]
 #' @inheritParams TTR::ALMA
 #' @inherit sma
