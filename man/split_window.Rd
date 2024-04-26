@@ -23,18 +23,7 @@ The \code{\link[=split_window]{split_window()}}-function is a high level wrapper
 the intervals between the first and second index value iteratively
 }
 \examples{
-# script: scr_FUN
-# date: 2023-12-27
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Demonstrate the use of the convinience
-# funtions
 # script start;
-
-# by default the Fear and Greed Index
-# is given daily. So to align these values
-# with, say, weekly candles it has to be aggregated
-#
-# In this example the built-in data are used
 
 # 1) check index of BTCUSDT and
 # the Fear and Greed Index
@@ -46,8 +35,8 @@ setequal(
 # 2) to align the indices,
 # we use the convincience functions
 # by splitting the FGI by the BTC index.
-FGIndex <- split_window(
-  xts = FGIndex,
+FGIndex <- cryptoQuotes::split_window(
+  xts = cryptoQuotes::FGIndex,
   by  = zoo::index(BTC),
 
   # Remove upper bounds of the
@@ -63,8 +52,8 @@ FGIndex <- split_window(
 # 3) as splitWindow returns a list
 # it needs to passed into calibrateWindow
 # to ensure comparability
-FGIndex <- calibrate_window(
-  list = FGIndex,
+FGIndex <- cryptoQuotes::calibrate_window(
+  list = cryptoQuotes::FGIndex,
 
   # As each element in the list can include
   # more than one row, each element needs to be aggregated
@@ -82,12 +71,6 @@ setequal(
   zoo::index(BTC),
   zoo::index(FGIndex)
 )
-
-
-# As the dates are now aligned
-# and the Fear and Greed Index being summarised by
-# the first value, the Fear and Greed Index is the opening
-# Fear and Greed Index value, at each candle.
 
 # script end;
 }

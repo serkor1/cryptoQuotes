@@ -1,11 +1,15 @@
-# script:
-# date: 2023-10-06
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective:
 # script start;
 
-## return all
-## available exchanges
-cryptoQuotes::available_exchanges()
+# 1) available exchanges
+# on ohlc-v endpoint
+cryptoQuotes::available_exchanges(
+  type = "ohlc"
+  )
+
+# 2) available exchanges
+# on long-short ratios
+cryptoQuotes::available_exchanges(
+  type = "lsratio"
+)
 
 # script end;

@@ -1,31 +1,25 @@
-# script: scr_GET
-# date: 2024-02-28
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: An example on how to use the GET-function
-# mostly for internal purposes
-# script start;
-
 \dontrun{
+  # script start;
+
   exchange <- "bybit"
   futures  <- FALSE
 
-  # 1) define baseUrl
-  # and endoint
+  # 1) define baseurl
   base_url <- cryptoQuotes:::baseUrl(
-    source = exchange,
+    source  = exchange,
     futures = futures
   )
 
+  # 2) define endpoint
   end_point <- cryptoQuotes:::endPoint(
     source  = "bybit",
     futures = futures,
-    type = "ohlc"
+    type    = "ohlc"
   )
 
-
-  # 2) define parameters
-  # that are passed into
-  # GET
+  # 2) define actual
+  # parameters based on
+  # API docs
   queries <- list(
     symbol   = "BTCUSDT",
     category = "spot",
@@ -33,13 +27,12 @@
     interval = "D"
   )
 
-
   # 3) perform GET request
-  GET(
+  cryptoQuotes:::GET(
     url      = base_url,
     endpoint = end_point,
     query    = queries
   )
-}
 
-# script end;
+  # script end;
+}

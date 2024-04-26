@@ -50,11 +50,6 @@ The Fear and Greed Index goes from 0-100, and can be classified as follows,
 }
 \examples{
 \dontrun{
-  # script: Fear and Greed Index
-  # date: 2023-12-26
-  # author: Serkan Korkmaz, serkor1@duck.com
-  # objective: Retrieve and Plot the
-  # index
   # script start;
 
   # 1) get the fear and greed index

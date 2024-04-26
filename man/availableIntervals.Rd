@@ -38,24 +38,22 @@ so exchanges available for, say, \code{\link[=get_lsratio]{get_lsratio()}} is no
 }
 \examples{
 \dontrun{
-  # script:
-  # date: 2023-10-06
-  # author: Serkan Korkmaz, serkor1@duck.com
-  # objective:
   # script start;
 
   # available intervals
   # at kucoin futures market
   cryptoQuotes::available_intervals(
-    source = 'kucoin',
-    futures = TRUE
+    source  = 'kucoin',
+    futures = TRUE,
+    type    = "ohlc"
   )
 
   # available intervals
   # at kraken spot market
   cryptoQuotes::available_intervals(
-    source = 'kraken',
-    futures = FALSE
+    source  = 'kraken',
+    futures = FALSE,
+    type    = "ohlc"
   )
 
   # script end;

@@ -26,20 +26,20 @@ all actively traded tickers.
 }
 \examples{
 \dontrun{
-  ## available tickers
-  ## in Binance spot market
+  # 1) available tickers
+  # in Binance spot market
   head(
     cryptoQuotes::available_tickers(
-      source = 'binance',
+      source  = 'binance',
       futures = FALSE
     )
   )
 
-  ## available tickers
-  ## on Kraken futures market
+  # 2) available tickers
+  # on Kraken futures market
   head(
     cryptoQuotes::available_tickers(
-      source = 'kraken',
+      source  = 'kraken',
       futures = TRUE
     )
   )

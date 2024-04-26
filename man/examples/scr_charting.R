@@ -1,22 +1,22 @@
 # script start;
 
-## charting the klines
-## with indicators as
-## subcharts
-chart(
+# 1) charting weekly
+# BTC using candlesticks
+# and indicators
+cryptoQuotes::chart(
   ticker     = BTC,
-  main       = kline(),
+  main       = cryptoQuotes::kline(),
   sub        = list(
-    volume(),
-    macd()
+    cryptoQuotes::volume(),
+    cryptoQuotes::macd()
   ),
   indicator = list(
-    bollinger_bands(),
-    sma(),
-    alma()
+    cryptoQuotes::bollinger_bands(),
+    cryptoQuotes::sma(),
+    cryptoQuotes::alma()
   ),
   options = list(
-    dark = TRUE,
+    dark       = TRUE,
     deficiency = FALSE
   )
 )
