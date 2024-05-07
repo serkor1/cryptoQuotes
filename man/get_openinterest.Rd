@@ -26,9 +26,22 @@ get_openinterest(
 }
 \value{
 An \link{xts}-object containing,
-\itemize{
-\item open_interest (\link{numeric}): total open perpetual contracts on both both sides.
+
+\describe{
+\item{}{<\link{POSIXct}> \strong{\code{index}:} the time-index}
+\item{}{<\link{numeric}> \strong{\code{open_interest}:} total open perpetual contracts on both both sides}
 }
+
+\strong{Sample output}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     open_interest
+#> 2024-05-02 02:00:00      55995.56
+#> 2024-05-03 02:00:00      54240.96
+#> 2024-05-04 02:00:00      55722.28
+#> 2024-05-05 02:00:00      54271.21
+#> 2024-05-06 02:00:00      54329.08
+#> 2024-05-07 02:00:00      55174.70
+}\if{html}{\out{</div>}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}

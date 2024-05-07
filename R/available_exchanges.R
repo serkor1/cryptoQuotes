@@ -28,12 +28,12 @@
 #'
 #' ## Available types
 #'
-#'
-#'  * ohlc: Open, High, Low, Close and Volume
-#'  * lsratio: Long-Short ratio
-#'  * fundingrate: Funding rates
-#'  * interest: Open perpetual contracts on both sides
-#'
+#' \describe{
+#'   \item{}{**ohlc:** Open, High, Low, Close and Volume market data}
+#'   \item{}{**lsratio:** Long-Short ratios}
+#'   \item{}{**fundingrate:** Funding rates}
+#'   \item{}{**interest:** Open interest on perpetual contracts on both sides}
+#' }
 #'
 #' ## Limits
 #'

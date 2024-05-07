@@ -14,6 +14,14 @@
 #'
 #' A high-level [plotly::add_lines()]-wrapper function that interacts with the [TTR::BBands()]-function.
 #'
+#' @usage bollinger_bands(
+#'    n = 20,
+#'    sd = 2,
+#'    maType = "SMA",
+#'    color  = '#F100F1',
+#'    ...
+#' )
+#'
 #' @inheritParams TTR::BBands
 #' @param color A [character]-vector of [length] 1. "#F100F1" by default.
 #' @inherit kline

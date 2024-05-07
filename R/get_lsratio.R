@@ -50,10 +50,22 @@
 #'
 #' @returns An [xts]-object containing,
 #'
-#' * long ([numeric]) - the share of longs
-#' * short ([numeric]) - the share of shorts
-#' * ls_ratio ([numeric]) - the ratio of longs to shorts
+#' \describe{
+#'   \item{}{<[POSIXct]> **```index```:** the time-index}
+#'   \item{}{<[numeric]> **```long```:** the share of longs}
+#'   \item{}{<[numeric]> **```short```:** the share of shorts}
+#'   \item{}{<[numeric]> **```ls_ratio```:**the ratio of longs to shorts}
+#' }
 #'
+#' **Sample output**
+#' ```{r output, echo = FALSE}
+#' tail(
+#'    cryptoQuotes::get_lsratio(
+#'      ticker = "BTCUSDT",
+#'      source = "bybit"
+#'    )
+#' )
+#' ```
 #' @export
 get_lsratio <- function(
     ticker,

@@ -28,19 +28,29 @@ chart(
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
+
+\strong{Output}
+
+\if{html}{
+  \out{<div style="text-align: center">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</div>}
+}
+\if{latex}{
+  \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:subplot]{plotly::subplot()}}-wrapper function for building interactive financial charts using the affiliated chart-functions like \code{\link[=kline]{kline()}}, and \code{\link[=macd]{macd()}}.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:subplot]{plotly::subplot()}}-wrapper function for building interactive financial charts using the affiliated \link{chart}-functions like \code{\link[=kline]{kline()}}, and \code{\link[=macd]{macd()}}.
 }
 \details{
 \subsection{Options}{
-\itemize{
-\item \code{dark} A \link{logical}-value of \link{length} 1. \link{TRUE} by default. Sets the overall theme of the \code{\link[=chart]{chart()}}
-\item \code{slider} A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added.
-\item \code{deficiency} A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
-\item \code{size} A \link{numeric}-value of \link{length} 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
+
+\describe{
+\item{}{\code{dark} A \link{logical}-value of \link{length} 1. \link{TRUE} by default. Sets the overall theme of the \code{\link[=chart]{chart()}}}
+\item{}{\code{slider}A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added.}
+\item{}{\code{deficiency} A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly}
+\item{}{\code{size} A \link{numeric}-value of \link{length} 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.}
 }
 }
 

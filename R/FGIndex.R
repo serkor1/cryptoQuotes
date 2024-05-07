@@ -5,18 +5,18 @@
 #'
 #' @format An [xts::xts()] object structured as follows:
 #' \describe{
-#'   \item{FGI}{[numeric] Daily Fear and Greed Index value.}
+#'   \item{}{**fgi**([numeric]) The daily fear and greed index value}
 #' }
 #'
 #' @details
 #' The Fear and Greed Index goes from 0-100, and can be classified as follows,
 #'
 #' \describe{
-#'   \item{0-24}{Extreme Fear}
-#'   \item{25-44}{Fear}
-#'   \item{45-55}{Neutral}
-#'   \item{56-75}{Greed}
-#'   \item{76-100}{Extreme Greed}
+#'   \item{}{**0-24** Extreme Fear.}
+#'   \item{}{**25-44** Fear.}
+#'   \item{}{**45-55** Neutral.}
+#'   \item{}{**56-75**  Greed.}
+#'   \item{}{**76-100** Extreme Greed.}
 #' }
 #'
 #'

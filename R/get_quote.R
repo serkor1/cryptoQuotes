@@ -30,12 +30,25 @@
 #'
 #' @returns An [xts]-object containing,
 #'
-#' * open ([numeric]): the opening price
-#' * close ([numeric]): the closing price
-#' * high ([numeric]): the highest price
-#' * low  ([numeric]): the lowest price
-#' * volume  ([numeric]): the trading volume
+#' \describe{
+#'   \item{}{<[POSIXct]> **```index```:** The time-index}
+#'   \item{}{<[numeric]> **```open```:** Opening price}
+#'   \item{}{<[numeric]> **```high```:** Highest price}
+#'   \item{}{<[numeric]> **```low```:** Lowest price}
+#'   \item{}{<[numeric]> **```close```:** Closing price}
+#'   \item{}{<[numeric]> **```volume```:** Trading volume}
+#' }
 #'
+#' **Sample output**
+#'
+#' ```{r output, echo = FALSE}
+#' tail(
+#'    cryptoQuotes::get_quote(
+#'      ticker = "BTCUSDT",
+#'      source = "bybit"
+#'    )
+#' )
+#' ```
 #' @details
 #'
 #' ## On time-zones and dates

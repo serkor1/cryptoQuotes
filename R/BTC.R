@@ -7,11 +7,11 @@
 #'
 #' @format An [xts::xts()] object structured as follows:
 #' \describe{
-#'   \item{open}{[numeric] Opening price of Bitcoin in USDT at the start of each week.}
-#'   \item{high}{[numeric] Highest price of Bitcoin in USDT during the week.}
-#'   \item{low}{[numeric] Lowest price of Bitcoin in USDT during the week.}
-#'   \item{close}{[numeric] Closing price of Bitcoin in USDT at the end of each week.}
-#'   \item{volume}{[numeric] Trading volume of Bitcoin for the week, measured in units of Bitcoin.}
+#'   \item{}{**open** [numeric] Opening price.}
+#'   \item{}{**high** [numeric] Highest price.}
+#'   \item{}{**low** [numeric] Lowest price.}
+#'   \item{}{**close** [numeric] Closing price.}
+#'   \item{}{**volume** [numeric] Trading volume.}
 #' }
 #'
 #' @examples

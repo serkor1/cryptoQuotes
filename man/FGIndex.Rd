@@ -7,7 +7,7 @@
 \format{
 An \code{\link[xts:xts]{xts::xts()}} object structured as follows:
 \describe{
-\item{FGI}{\link{numeric} Daily Fear and Greed Index value.}
+\item{}{\strong{fgi}(\link{numeric}) The daily fear and greed index value}
 }
 }
 \usage{
@@ -20,11 +20,11 @@ This dataset contains daily values of the Fear and Greed Index for the year 2023
 The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
 \describe{
-\item{0-24}{Extreme Fear}
-\item{25-44}{Fear}
-\item{45-55}{Neutral}
-\item{56-75}{Greed}
-\item{76-100}{Extreme Greed}
+\item{}{\strong{0-24} Extreme Fear.}
+\item{}{\strong{25-44} Fear.}
+\item{}{\strong{45-55} Neutral.}
+\item{}{\strong{56-75}  Greed.}
+\item{}{\strong{76-100} Extreme Greed.}
 }
 }
 \examples{

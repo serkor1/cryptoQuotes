@@ -3,7 +3,7 @@
 \name{get_fgindex}
 \alias{get_fgindex}
 \title{Get the daily Fear and Greed Index
-for the cryptocurrency market}
+in the cryptocurrency market}
 \usage{
 get_fgindex(from = NULL, to = NULL)
 }
@@ -14,38 +14,46 @@ get_fgindex(from = NULL, to = NULL)
 }
 \value{
 An \link{xts}-object containing,
-\itemize{
-\item fgi (\link{numeric}): The daily fear and greed index value
+
+\describe{
+\item{}{<\link{POSIXct}> \strong{\code{index}:} The time-index}
+\item{}{<\link{numeric}> \strong{\code{fgi}:} The daily fear and greed index value}
 }
+
+\strong{Output}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     fgi
+#> 2024-05-02 02:00:00  43
+#> 2024-05-03 02:00:00  48
+#> 2024-05-04 02:00:00  67
+#> 2024-05-05 02:00:00  69
+#> 2024-05-06 02:00:00  71
+#> 2024-05-07 02:00:00  68
+}\if{html}{\out{</div>}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-The fear and greed index is a market sentiment indicator that measures investor emotions to
-gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+Get the daily fear and greed index.
 }
 \details{
-\subsection{On time-zones and dates}{
+\subsection{Classification}{
 
-Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}}, or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or \code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default
-all dates are passed and returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
-}
-
-\subsection{On returns}{
-
-If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}. If only \code{to} is provided 200 pips up to the specified date
-is returned.
-}
-}
-\note{
 The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
-\itemize{
-\item 0-24, Extreme Fear
-\item 25-44, Fear
-\item 45-55, Neutral
-\item 56-75, Greed
-\item 76-100, Extreme Greed
+\describe{
+\item{}{\strong{0-24:} Extreme Fear.}
+\item{}{\strong{25-44:} Fear.}
+\item{}{\strong{45-55:} Neutral.}
+\item{}{\strong{56-75:} Greed.}
+\item{}{\strong{76-100:}  Extreme Greed.}
+}
+}
+
+\subsection{About the Fear and Greed Index}{
+
+The fear and greed index is a market sentiment indicator that measures investor emotions to
+gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
 }
 }
 \examples{

@@ -29,13 +29,26 @@ getQuote(
 }
 \value{
 An \link{xts}-object containing,
-\itemize{
-\item open (\link{numeric}): the opening price
-\item close (\link{numeric}): the closing price
-\item high (\link{numeric}): the highest price
-\item low  (\link{numeric}): the lowest price
-\item volume  (\link{numeric}): the trading volume
+
+\describe{
+\item{}{<\link{POSIXct}> \strong{\code{index}:} The time-index}
+\item{}{<\link{numeric}> \strong{\code{open}:} Opening price}
+\item{}{<\link{numeric}> \strong{\code{high}:} Highest price}
+\item{}{<\link{numeric}> \strong{\code{low}:} Lowest price}
+\item{}{<\link{numeric}> \strong{\code{close}:} Closing price}
+\item{}{<\link{numeric}> \strong{\code{volume}:} Trading volume}
 }
+
+\strong{Sample output}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#>                        open    high     low   close    volume
+#> 2024-05-02 02:00:00 58298.5 59581.0 56887.3 59030.4 131444.90
+#> 2024-05-03 02:00:00 59030.4 63343.7 58780.0 62843.7 150514.93
+#> 2024-05-04 02:00:00 62843.7 64499.9 62512.8 63860.0  83894.05
+#> 2024-05-05 02:00:00 63860.0 64630.0 62866.1 63997.8  70925.50
+#> 2024-05-06 02:00:00 63997.8 65540.0 62669.0 63149.3 141354.74
+#> 2024-05-07 02:00:00 63149.3 64000.0 62803.5 63774.3  27122.91
+}\if{html}{\out{</div>}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

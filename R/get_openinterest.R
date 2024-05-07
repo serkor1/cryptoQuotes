@@ -34,7 +34,20 @@
 #'
 #' An [xts]-object containing,
 #'
-#' * open_interest ([numeric]): total open perpetual contracts on both both sides.
+#' \describe{
+#'    \item{}{<[POSIXct]> **```index```:** the time-index}
+#'    \item{}{<[numeric]> **```open_interest```:** total open perpetual contracts on both both sides}
+#' }
+#'
+#' **Sample output**
+#' ```{r output, echo = FALSE}
+#' tail(
+#'    cryptoQuotes::get_openinterest(
+#'      ticker = "BTCUSDT",
+#'      source = "bybit"
+#'    )
+#' )
+#' ```
 #'
 #' @note
 #'

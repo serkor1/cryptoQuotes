@@ -17,17 +17,7 @@
 #' @example man/examples/scr_FGIndex.R
 #'
 #' @inherit kline
-#'
-#' @details
-#' The Fear and Greed Index goes from 0-100, and can be classifed as follows
-#'
-#' \itemize{
-#'   \item 0-24, Extreme Fear
-#'   \item 25-44, Fear
-#'   \item 45-55, Neutral
-#'   \item 56-75, Greed
-#'   \item 76-100, Extreme Greed
-#' }
+#' @inherit get_fgindex
 #'
 #' @family chart indicators
 #' @family sentiment indicators

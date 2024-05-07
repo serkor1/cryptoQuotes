@@ -7,14 +7,13 @@
 # script start;
 
 #' Get the daily Fear and Greed Index
-#' for the cryptocurrency market
+#' in the cryptocurrency market
 #'
 #' @description
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' The fear and greed index is a market sentiment indicator that measures investor emotions to
-#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+#' Get the daily fear and greed index.
 #'
 #' @inheritParams get_quote
 #'
@@ -26,22 +25,41 @@
 #'
 #' @returns An [xts]-object containing,
 #'
-#' * fgi ([numeric]): The daily fear and greed index value
+#' \describe{
+#'    \item{}{<[POSIXct]> **```index```:** The time-index}
+#'    \item{}{<[numeric]> **```fgi```:** The daily fear and greed index value}
+#' }
 #'
-#' @note
+#' **Output**
+#'
+#' ```{r output, echo = FALSE}
+#' ## fear and greed index
+#'
+#' tail(
+#'    cryptoQuotes::get_fgindex()
+#' )
+#' ```
+#'
+#' @details
+#'
+#' ## Classification
 #'
 #' The Fear and Greed Index goes from 0-100, and can be classified as follows,
 #'
-#' \itemize{
-#'   \item 0-24, Extreme Fear
-#'   \item 25-44, Fear
-#'   \item 45-55, Neutral
-#'   \item 56-75, Greed
-#'   \item 76-100, Extreme Greed
+#' \describe{
+#'   \item{}{**0-24:** Extreme Fear.}
+#'   \item{}{**25-44:** Fear.}
+#'   \item{}{**45-55:** Neutral.}
+#'   \item{}{**56-75:** Greed.}
+#'   \item{}{**76-100:**  Extreme Greed.}
 #' }
 #'
-#' @author Serkan Korkmaz
+#' ## About the Fear and Greed Index
 #'
+#' The fear and greed index is a market sentiment indicator that measures investor emotions to
+#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+#'
+#' @author Serkan Korkmaz
 #' @export
 get_fgindex <- function(
     from = NULL,
@@ -146,7 +164,7 @@ get_fgindex <- function(
 
   # 8) set colnames
   # to FGI
-  colnames(response) <- 'FGI'
+  colnames(response) <- 'fgi'
 
   # 9) subset according
   # to from and to

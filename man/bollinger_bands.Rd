@@ -5,7 +5,13 @@
 \title{Add Bollinger Bands
 to the chart}
 \usage{
-bollinger_bands(n = 20, sd = 2, maType = "SMA", color = "#F100F1", ...)
+bollinger_bands(
+   n = 20,
+   sd = 2,
+   maType = "SMA",
+   color  = '#F100F1',
+   ...
+)
 }
 \arguments{
 \item{n}{Number of periods for moving average.}

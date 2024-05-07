@@ -22,11 +22,12 @@ the exchange, market and endpoint
 }
 \details{
 \subsection{Available types}{
-\itemize{
-\item ohlc: Open, High, Low, Close and Volume
-\item lsratio: Long-Short ratio
-\item fundingrate: Funding rates
-\item interest: Open perpetual contracts on both sides
+
+\describe{
+\item{}{\strong{ohlc:} Open, High, Low, Close and Volume market data}
+\item{}{\strong{lsratio:} Long-Short ratios}
+\item{}{\strong{fundingrate:} Funding rates}
+\item{}{\strong{interest:} Open interest on perpetual contracts on both sides}
 }
 }
 

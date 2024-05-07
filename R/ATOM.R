@@ -6,11 +6,11 @@
 #'
 #' @format An [xts::xts()] object with 97 rows and 5 columns structured as follows:
 #' \describe{
-#'   \item{open}{[numeric] Opening price.}
-#'   \item{high}{[numeric] Highest price.}
-#'   \item{low}{[numeric] Lowest price.}
-#'   \item{close}{[numeric] Closing price.}
-#'   \item{volume}{[numeric] Trading volume.}
+#'   \item{}{**open** [numeric] Opening price.}
+#'   \item{}{**high** [numeric] Highest price.}
+#'   \item{}{**low** [numeric] Lowest price.}
+#'   \item{}{**close** [numeric] Closing price.}
+#'   \item{}{**volume** [numeric] Trading volume.}
 #' }
 #'
 #' @examples

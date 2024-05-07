@@ -8,6 +8,8 @@ always_allow_html: true
 
 ```{r setup, include = FALSE}
 # set options
+Sys.setenv(OPENSSL_CONF="/dev/null")
+
 knitr::opts_chunk$set(
   collapse = FALSE,
   comment = "#>",

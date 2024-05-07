@@ -12,7 +12,7 @@
 #' `r lifecycle::badge("experimental")`
 #'
 #'
-#' A high-level [plotly::plot_ly()]- and [plotly::subplot()]-wrapper function for building interactive financial charts using the affiliated chart-functions like [kline()], and [macd()].
+#' A high-level [plotly::plot_ly()]- and [plotly::subplot()]-wrapper function for building interactive financial charts using the affiliated [chart]-functions like [kline()], and [macd()].
 #'
 #'
 #'
@@ -26,10 +26,13 @@
 #' @details
 #'
 #' ## Options
-#' * ```dark``` A [logical]-value of [length] 1. [TRUE] by default. Sets the overall theme of the [chart()]
-#' * ```slider``` A [logical]-value of [length] 1. [FALSE] by default. If [TRUE], a [plotly::rangeslider()] is added.
-#' * ```deficiency``` A [logical]-value of [length] 1. [FALSE] by default. If [TRUE], all [chart()]-elements are colorblind friendly
-#' * ```size``` A [numeric]-value of [length] 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
+#'
+#' \describe{
+#'   \item{}{```dark``` A [logical]-value of [length] 1. [TRUE] by default. Sets the overall theme of the [chart()]}
+#'   \item{}{```slider```A [logical]-value of [length] 1. [FALSE] by default. If [TRUE], a [plotly::rangeslider()] is added.}
+#'   \item{}{```deficiency``` A [logical]-value of [length] 1. [FALSE] by default. If [TRUE], all [chart()]-elements are colorblind friendly}
+#'   \item{}{```size``` A [numeric]-value of [length] 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.}
+#' }
 #'
 #' ## Charting Events
 #'
@@ -44,6 +47,15 @@
 #' @example man/examples/scr_charting.R
 #'
 #' @returns A [plotly::plot_ly()] object.
+#'
+#' **Output**
+#'
+#' \if{html}{
+#'   \out{<div style="text-align: center">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</div>}
+#' }
+#' \if{latex}{
+#'   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
+#' }
 #'
 #' @author Serkan Korkmaz
 #'

@@ -13,7 +13,7 @@
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' Get the funding rate on a cryptocurrency pair from the [available_exchanges()] in any actively traded [available_tickers()] on the FUTURES markets.
+#' Get the funding rate on a cryptocurrency pair from the [available_exchanges()] in any actively traded [available_tickers()] on the futures markets.
 #'
 #' @inheritParams get_quote
 #'
@@ -30,8 +30,20 @@
 #'
 #' An [xts]-object containing,
 #'
-#'  * funding_rate ([numeric]): the current funding rate
+#' \describe{
+#'    \item{}{<[POSIXct]> **```index```:** the time-index}
+#'    \item{}{<[numeric]> **```funding_rate```:** the current funding rate}
+#' }
 #'
+#' **Sample output**
+#' ```{r output, echo = FALSE}
+#' tail(
+#'    cryptoQuotes::get_fundingrate(
+#'      ticker = "BTCUSDT",
+#'      source = "bybit"
+#'    )
+#' )
+#' ```
 #'
 #' @family get-function
 #'
