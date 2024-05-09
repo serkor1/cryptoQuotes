@@ -7,6 +7,7 @@
 # He tweeted at 06:18 UTC on January 14, 2022
 DOGE <- get_quote(
   ticker = "DOGEUSDT",
+  source = "bybit",
   interval = "1m",
   from =  as.POSIXct("2022-01-14 06:00:00", tz = "UTC"),
   to   =  as.POSIXct("2022-01-14 07:00:00", tz = "UTC")

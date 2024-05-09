@@ -5,8 +5,9 @@
 \alias{BTC}
 \title{USDT Denominated Bitcoin (BTCUSDT) Weekly Intervals}
 \format{
-An \code{\link[xts:xts]{xts::xts()}} object structured as follows:
+An \code{\link[xts:xts]{xts::xts()}}-object with 52 rows and 5 columns,
 
+\describe{
 \item{index}{<\link{POSIXct}> The time-index}
 \item{open}{<\link{numeric}> Opening price}
 \item{high}{<\link{numeric}> Highest price}
@@ -14,19 +15,19 @@ An \code{\link[xts:xts]{xts::xts()}} object structured as follows:
 \item{close}{<\link{numeric}> Closing price}
 \item{volume}{<\link{numeric}> Trading volume}
 }
+}
 \usage{
 BTC
 }
 \description{
 This dataset contains time-series data for Bitcoin (BTC) denominated in USDT (Tether),
-captured in weekly intervals (OHLC-V format). The dataset consists of 52 rows and 5 columns,
-covering the period from January 1, 2023, to December 31, 2023.
+captured in weekly intervals (OHLC-V format). The data spans from January 1, 2023, to December 31, 2023.
 }
 \examples{
 # Load the dataset
 data("BTC")
 
-# candlestick charts
+# chart
 chart(
   ticker = BTC,
   main = kline(),

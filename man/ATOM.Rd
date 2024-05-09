@@ -5,8 +5,9 @@
 \alias{ATOM}
 \title{USDT Denominated ATOM (ATOMUSDT) 15-Minute Intervals}
 \format{
-An \code{\link[xts:xts]{xts::xts()}} object with 97 rows and 5 columns structured as follows,
+An \code{\link[xts:xts]{xts::xts()}}-object with 97 rows and 5 columns,
 
+\describe{
 \item{index}{<\link{POSIXct}> The time-index}
 \item{open}{<\link{numeric}> Opening price}
 \item{high}{<\link{numeric}> Highest price}
@@ -14,18 +15,19 @@ An \code{\link[xts:xts]{xts::xts()}} object with 97 rows and 5 columns structure
 \item{close}{<\link{numeric}> Closing price}
 \item{volume}{<\link{numeric}> Trading volume}
 }
+}
 \usage{
 ATOM
 }
 \description{
-This dataset contains time-series data for the ATOM cryptocurrency denominated in USDT (Tether),
+This dataset contains time-series data for the ATOM (ATOM) denominated in USDT (Tether),
 captured in 15-minute intervals (OHLC-V format). The data spans from December 30 to December 31, 2023.
 }
 \examples{
 # Load the dataset
 data("ATOM")
 
-# candlestick charts
+# chart
 chart(
   ticker = ATOM,
   main = kline(),

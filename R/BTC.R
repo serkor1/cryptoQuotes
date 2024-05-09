@@ -2,23 +2,24 @@
 #'
 #' @description
 #' This dataset contains time-series data for Bitcoin (BTC) denominated in USDT (Tether),
-#' captured in weekly intervals (OHLC-V format). The dataset consists of 52 rows and 5 columns,
-#' covering the period from January 1, 2023, to December 31, 2023.
+#' captured in weekly intervals (OHLC-V format). The data spans from January 1, 2023, to December 31, 2023.
 #'
-#' @format An [xts::xts()] object structured as follows:
+#' @format An [xts::xts()]-object with 52 rows and 5 columns,
 #'
+#' \describe{
 #' \item{index}{<[POSIXct]> The time-index}
 #' \item{open}{<[numeric]> Opening price}
 #' \item{high}{<[numeric]> Highest price}
 #' \item{low}{<[numeric]> Lowest price}
 #' \item{close}{<[numeric]> Closing price}
 #' \item{volume}{<[numeric]> Trading volume}
+#' }
 #'
 #' @examples
 #' # Load the dataset
 #' data("BTC")
 #'
-#' # candlestick charts
+#' # chart
 #' chart(
 #'   ticker = BTC,
 #'   main = kline(),
