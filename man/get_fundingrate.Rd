@@ -23,20 +23,18 @@ get_fundingrate(
 \value{
 An \link{xts}-object containing,
 
-\describe{
-\item{}{<\link{POSIXct}> \strong{\code{index}:} the time-index}
-\item{}{<\link{numeric}> \strong{\code{funding_rate}:} the current funding rate}
-}
+\item{index}{<\link{POSIXct}> the time-index}
+\item{funding_rate}{<\link{numeric}> the current funding rate}
 
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     funding_rate
-#> 2024-05-05 10:00:00    7.133e-05
-#> 2024-05-05 18:00:00    1.000e-04
-#> 2024-05-06 02:00:00    4.545e-05
-#> 2024-05-06 10:00:00    7.226e-05
-#> 2024-05-06 18:00:00    8.717e-05
-#> 2024-05-07 02:00:00    1.000e-04
+#> 2024-05-07 18:00:00    1.000e-04
+#> 2024-05-08 02:00:00    1.000e-04
+#> 2024-05-08 10:00:00    1.000e-04
+#> 2024-05-08 18:00:00    1.000e-04
+#> 2024-05-09 02:00:00    1.000e-04
+#> 2024-05-09 10:00:00    4.634e-05
 }\if{html}{\out{</div>}}
 }
 \description{

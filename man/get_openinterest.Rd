@@ -27,20 +27,18 @@ get_openinterest(
 \value{
 An \link{xts}-object containing,
 
-\describe{
-\item{}{<\link{POSIXct}> \strong{\code{index}:} the time-index}
-\item{}{<\link{numeric}> \strong{\code{open_interest}:} total open perpetual contracts on both both sides}
-}
+\item{index}{<\link{POSIXct}> the time-index}
+\item{open_interest}{<\link{numeric}> total open perpetual contracts on both both sides}
 
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     open_interest
-#> 2024-05-02 02:00:00      55995.56
-#> 2024-05-03 02:00:00      54240.96
 #> 2024-05-04 02:00:00      55722.28
 #> 2024-05-05 02:00:00      54271.21
 #> 2024-05-06 02:00:00      54329.08
 #> 2024-05-07 02:00:00      55174.70
+#> 2024-05-08 02:00:00      56606.52
+#> 2024-05-09 02:00:00      56281.38
 }\if{html}{\out{</div>}}
 }
 \description{

@@ -30,10 +30,8 @@
 #'
 #' An [xts]-object containing,
 #'
-#' \describe{
-#'    \item{}{<[POSIXct]> **```index```:** the time-index}
-#'    \item{}{<[numeric]> **```funding_rate```:** the current funding rate}
-#' }
+#' \item{index}{<[POSIXct]> the time-index}
+#' \item{funding_rate}{<[numeric]> the current funding rate}
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}

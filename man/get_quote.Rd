@@ -30,24 +30,22 @@ get_quote(
 \value{
 An \link{xts}-object containing,
 
-\describe{
-\item{}{<\link{POSIXct}> \strong{\code{index}:} The time-index}
-\item{}{<\link{numeric}> \strong{\code{open}:} Opening price}
-\item{}{<\link{numeric}> \strong{\code{high}:} Highest price}
-\item{}{<\link{numeric}> \strong{\code{low}:} Lowest price}
-\item{}{<\link{numeric}> \strong{\code{close}:} Closing price}
-\item{}{<\link{numeric}> \strong{\code{volume}:} Trading volume}
-}
+\item{index}{<\link{POSIXct}> The time-index}
+\item{open}{<\link{numeric}> Opening price}
+\item{high}{<\link{numeric}> Highest price}
+\item{low}{<\link{numeric}> Lowest price}
+\item{close}{<\link{numeric}> Closing price}
+\item{volume}{<\link{numeric}> Trading volume}
 
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                        open    high     low   close    volume
-#> 2024-05-02 02:00:00 58298.5 59581.0 56887.3 59030.4 131444.90
-#> 2024-05-03 02:00:00 59030.4 63343.7 58780.0 62843.7 150514.93
 #> 2024-05-04 02:00:00 62843.7 64499.9 62512.8 63860.0  83894.05
 #> 2024-05-05 02:00:00 63860.0 64630.0 62866.1 63997.8  70925.50
 #> 2024-05-06 02:00:00 63997.8 65540.0 62669.0 63149.3 141354.74
-#> 2024-05-07 02:00:00 63149.3 64000.0 62803.5 63774.3  27122.91
+#> 2024-05-07 02:00:00 63149.3 64398.7 62230.0 62314.5 105874.30
+#> 2024-05-08 02:00:00 62314.5 63024.5 60850.0 61164.0 105337.31
+#> 2024-05-09 02:00:00 61164.0 61788.0 60890.1 61023.6  28352.55
 }\if{html}{\out{</div>}}
 }
 \description{

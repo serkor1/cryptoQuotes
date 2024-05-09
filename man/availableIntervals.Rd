@@ -9,7 +9,7 @@ availableIntervals(source = "binance", type = "ohlc", futures = TRUE)
 \arguments{
 \item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{type}{\link{character}-vector of length 1. See details}
+\item{type}{\link{character}-vector of length 1. See details.}
 
 \item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default. Returns futures market if \link{TRUE}, spot market otherwise.}
 }
@@ -22,12 +22,11 @@ the exchange, market and endpoint
 }
 \details{
 \subsection{Available types}{
-
-\describe{
-\item{}{\strong{ohlc:} Open, High, Low, Close and Volume market data}
-\item{}{\strong{lsratio:} Long-Short ratios}
-\item{}{\strong{fundingrate:} Funding rates}
-\item{}{\strong{interest:} Open interest on perpetual contracts on both sides}
+\itemize{
+\item \code{"ohlc"} <\link{character}> Open, High, Low, Close and Volume market data for the \code{\link[=get_quote]{get_quote()}}-function
+\item \code{"lsratio"} <\link{character}> Long-Short ratios for the \code{\link[=get_lsratio]{get_lsratio()}}-function
+\item \code{"fundingrate"} <\link{character}> Funding rates for the \code{\link[=get_fundingrate]{get_fundingrate()}}-function
+\item \code{"interest"} <\link{character} >Open interest on perpetual contracts on both sides for the \code{\link[=get_openinterest]{get_openinterest()}}-function
 }
 }
 

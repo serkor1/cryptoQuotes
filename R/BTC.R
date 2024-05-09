@@ -6,13 +6,13 @@
 #' covering the period from January 1, 2023, to December 31, 2023.
 #'
 #' @format An [xts::xts()] object structured as follows:
-#' \describe{
-#'   \item{}{**open** [numeric] Opening price.}
-#'   \item{}{**high** [numeric] Highest price.}
-#'   \item{}{**low** [numeric] Lowest price.}
-#'   \item{}{**close** [numeric] Closing price.}
-#'   \item{}{**volume** [numeric] Trading volume.}
-#' }
+#'
+#' \item{index}{<[POSIXct]> The time-index}
+#' \item{open}{<[numeric]> Opening price}
+#' \item{high}{<[numeric]> Highest price}
+#' \item{low}{<[numeric]> Lowest price}
+#' \item{close}{<[numeric]> Closing price}
+#' \item{volume}{<[numeric]> Trading volume}
 #'
 #' @examples
 #' # Load the dataset

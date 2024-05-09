@@ -15,7 +15,7 @@ fetch(ticker, source, futures, interval, type, to, from, ...)
 
 \item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
-\item{type}{\link{character}-vector of length 1. See details}
+\item{type}{\link{character}-vector of length 1. See details.}
 
 \item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
 

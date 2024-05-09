@@ -6,13 +6,13 @@
 \title{USDT Denominated Bitcoin (BTCUSDT) Weekly Intervals}
 \format{
 An \code{\link[xts:xts]{xts::xts()}} object structured as follows:
-\describe{
-\item{}{\strong{open} \link{numeric} Opening price.}
-\item{}{\strong{high} \link{numeric} Highest price.}
-\item{}{\strong{low} \link{numeric} Lowest price.}
-\item{}{\strong{close} \link{numeric} Closing price.}
-\item{}{\strong{volume} \link{numeric} Trading volume.}
-}
+
+\item{index}{<\link{POSIXct}> The time-index}
+\item{open}{<\link{numeric}> Opening price}
+\item{high}{<\link{numeric}> Highest price}
+\item{low}{<\link{numeric}> Lowest price}
+\item{close}{<\link{numeric}> Closing price}
+\item{volume}{<\link{numeric}> Trading volume}
 }
 \usage{
 BTC

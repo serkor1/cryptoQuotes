@@ -15,20 +15,18 @@ get_fgindex(from = NULL, to = NULL)
 \value{
 An \link{xts}-object containing,
 
-\describe{
-\item{}{<\link{POSIXct}> \strong{\code{index}:} The time-index}
-\item{}{<\link{numeric}> \strong{\code{fgi}:} The daily fear and greed index value}
-}
+\item{index}{<\link{POSIXct}> the time-index}
+\item{fgi}{<\link{numeric}> the daily fear and greed index value}
 
 \strong{Output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     fgi
-#> 2024-05-02 02:00:00  43
-#> 2024-05-03 02:00:00  48
 #> 2024-05-04 02:00:00  67
 #> 2024-05-05 02:00:00  69
 #> 2024-05-06 02:00:00  71
 #> 2024-05-07 02:00:00  68
+#> 2024-05-08 02:00:00  64
+#> 2024-05-09 02:00:00  55
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -41,12 +39,12 @@ Get the daily fear and greed index.
 
 The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
-\describe{
-\item{}{\strong{0-24:} Extreme Fear.}
-\item{}{\strong{25-44:} Fear.}
-\item{}{\strong{45-55:} Neutral.}
-\item{}{\strong{56-75:} Greed.}
-\item{}{\strong{76-100:}  Extreme Greed.}
+\itemize{
+\item 0-24, Extreme Fear
+\item 25-44, Fear
+\item 45-55, Neutral
+\item 56-75, Greed
+\item 76-100, Extreme Greed
 }
 }
 

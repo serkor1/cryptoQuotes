@@ -29,22 +29,20 @@ getLSRatio(
 \value{
 An \link{xts}-object containing,
 
-\describe{
-\item{}{<\link{POSIXct}> \strong{\code{index}:} the time-index}
-\item{}{<\link{numeric}> \strong{\code{long}:} the share of longs}
-\item{}{<\link{numeric}> \strong{\code{short}:} the share of shorts}
-\item{}{<\link{numeric}> **\code{ls_ratio}:**the ratio of longs to shorts}
-}
+\item{index}{<\link{POSIXct}> the time-index}
+\item{long}{<\link{numeric}> the share of longs}
+\item{short}{<\link{numeric}> the share of shorts}
+\item{ls_ratio}{<\link{numeric}> the ratio of longs to shorts}
 
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                       long  short ls_ratio
-#> 2024-05-02 02:00:00 0.5714 0.4286 1.333178
-#> 2024-05-03 02:00:00 0.5597 0.4403 1.271179
 #> 2024-05-04 02:00:00 0.5490 0.4510 1.217295
 #> 2024-05-05 02:00:00 0.5407 0.4593 1.177226
 #> 2024-05-06 02:00:00 0.5430 0.4570 1.188184
 #> 2024-05-07 02:00:00 0.5492 0.4508 1.218279
+#> 2024-05-08 02:00:00 0.5467 0.4533 1.206045
+#> 2024-05-09 02:00:00 0.5580 0.4420 1.262443
 }\if{html}{\out{</div>}}
 }
 \description{

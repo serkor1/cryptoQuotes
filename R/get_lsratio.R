@@ -50,12 +50,10 @@
 #'
 #' @returns An [xts]-object containing,
 #'
-#' \describe{
-#'   \item{}{<[POSIXct]> **```index```:** the time-index}
-#'   \item{}{<[numeric]> **```long```:** the share of longs}
-#'   \item{}{<[numeric]> **```short```:** the share of shorts}
-#'   \item{}{<[numeric]> **```ls_ratio```:**the ratio of longs to shorts}
-#' }
+#' \item{index}{<[POSIXct]> the time-index}
+#' \item{long}{<[numeric]> the share of longs}
+#' \item{short}{<[numeric]> the share of shorts}
+#' \item{ls_ratio}{<[numeric]> the ratio of longs to shorts}
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}

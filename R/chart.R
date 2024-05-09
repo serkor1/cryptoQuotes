@@ -27,12 +27,10 @@
 #'
 #' ## Options
 #'
-#' \describe{
-#'   \item{}{```dark``` A [logical]-value of [length] 1. [TRUE] by default. Sets the overall theme of the [chart()]}
-#'   \item{}{```slider```A [logical]-value of [length] 1. [FALSE] by default. If [TRUE], a [plotly::rangeslider()] is added.}
-#'   \item{}{```deficiency``` A [logical]-value of [length] 1. [FALSE] by default. If [TRUE], all [chart()]-elements are colorblind friendly}
-#'   \item{}{```size``` A [numeric]-value of [length] 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.}
-#' }
+#' * \code{dark} A <[logical]>-value of [length] 1. [TRUE] by default. Sets the overall theme of the [chart()]
+#' * \code{slider} A <[logical]>-value of [length] 1. [FALSE] by default. If [TRUE], a [plotly::rangeslider()] is added
+#' * \code{deficiency}  A <[logical]>-value of [length] 1. [FALSE] by default. If [TRUE], all [chart()]-elements are colorblind friendly
+#' * \code{size} A <[numeric]>-value of [length] 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
 #'
 #' ## Charting Events
 #'

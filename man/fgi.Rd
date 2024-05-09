@@ -24,12 +24,12 @@ A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function.
 
 The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
-\describe{
-\item{}{\strong{0-24:} Extreme Fear.}
-\item{}{\strong{25-44:} Fear.}
-\item{}{\strong{45-55:} Neutral.}
-\item{}{\strong{56-75:} Greed.}
-\item{}{\strong{76-100:}  Extreme Greed.}
+\itemize{
+\item 0-24, Extreme Fear
+\item 25-44, Fear
+\item 45-55, Neutral
+\item 56-75, Greed
+\item 76-100, Extreme Greed
 }
 }
 

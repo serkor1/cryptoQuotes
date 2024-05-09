@@ -20,7 +20,7 @@
 #'    type = "ohlc"
 #' )
 #'
-#' @param type [character]-vector of length 1. See details
+#' @param type [character]-vector of length 1. See details.
 #'
 #' @example man/examples/scr_availableExchanges.R
 #'
@@ -28,12 +28,10 @@
 #'
 #' ## Available types
 #'
-#' \describe{
-#'   \item{}{**ohlc:** Open, High, Low, Close and Volume market data}
-#'   \item{}{**lsratio:** Long-Short ratios}
-#'   \item{}{**fundingrate:** Funding rates}
-#'   \item{}{**interest:** Open interest on perpetual contracts on both sides}
-#' }
+#' * \code{"ohlc"} <[character]> Open, High, Low, Close and Volume market data for the [get_quote()]-function
+#' * \code{"lsratio"} <[character]> Long-Short ratios for the [get_lsratio()]-function
+#' * \code{"fundingrate"} <[character]> Funding rates for the [get_fundingrate()]-function
+#' * \code{"interest"} <[character] >Open interest on perpetual contracts on both sides for the [get_openinterest()]-function
 #'
 #' ## Limits
 #'

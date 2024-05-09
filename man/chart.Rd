@@ -45,12 +45,11 @@ A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[pl
 }
 \details{
 \subsection{Options}{
-
-\describe{
-\item{}{\code{dark} A \link{logical}-value of \link{length} 1. \link{TRUE} by default. Sets the overall theme of the \code{\link[=chart]{chart()}}}
-\item{}{\code{slider}A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added.}
-\item{}{\code{deficiency} A \link{logical}-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly}
-\item{}{\code{size} A \link{numeric}-value of \link{length} 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.}
+\itemize{
+\item \code{dark} A <\link{logical}>-value of \link{length} 1. \link{TRUE} by default. Sets the overall theme of the \code{\link[=chart]{chart()}}
+\item \code{slider} A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added
+\item \code{deficiency}  A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
+\item \code{size} A <\link{numeric}>-value of \link{length} 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
 }
 }
 

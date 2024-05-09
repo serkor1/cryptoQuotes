@@ -7,7 +7,7 @@
 #' Get a quote on a cryptocurrency pair from the [available_exchanges()] in various [available_intervals()] for any actively traded [available_tickers()].
 #'
 #' @param ticker An [character]-vector of [length] 1. See [available_tickers()] for available tickers.
-#' @param source A [character]-vector of [length] 1. ```binance``` by default. See [available_exchanges()] for available exchanges.
+#' @param source A [character]-vector of [length] 1. \code{binance} by default. See [available_exchanges()] for available exchanges.
 #' @param interval A [character]-vector of [length] 1. ```1d``` by default. See [available_intervals()] for available intervals.
 #' @param futures A [logical]-vector of [length] 1. [TRUE] by default. Returns futures market if [TRUE], spot market otherwise.
 #' @param from An optional [character], [date] or [POSIXct] vector of [length] 1. [NULL] by default.
@@ -30,14 +30,12 @@
 #'
 #' @returns An [xts]-object containing,
 #'
-#' \describe{
-#'   \item{}{<[POSIXct]> **```index```:** The time-index}
-#'   \item{}{<[numeric]> **```open```:** Opening price}
-#'   \item{}{<[numeric]> **```high```:** Highest price}
-#'   \item{}{<[numeric]> **```low```:** Lowest price}
-#'   \item{}{<[numeric]> **```close```:** Closing price}
-#'   \item{}{<[numeric]> **```volume```:** Trading volume}
-#' }
+#' \item{index}{<[POSIXct]> The time-index}
+#' \item{open}{<[numeric]> Opening price}
+#' \item{high}{<[numeric]> Highest price}
+#' \item{low}{<[numeric]> Lowest price}
+#' \item{close}{<[numeric]> Closing price}
+#' \item{volume}{<[numeric]> Trading volume}
 #'
 #' **Sample output**
 #'

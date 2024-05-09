@@ -34,10 +34,8 @@
 #'
 #' An [xts]-object containing,
 #'
-#' \describe{
-#'    \item{}{<[POSIXct]> **```index```:** the time-index}
-#'    \item{}{<[numeric]> **```open_interest```:** total open perpetual contracts on both both sides}
-#' }
+#' \item{index}{<[POSIXct]> the time-index}
+#' \item{open_interest}{<[numeric]> total open perpetual contracts on both both sides}
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}

@@ -15,6 +15,7 @@
 #'
 #' Get the daily fear and greed index.
 #'
+#'
 #' @inheritParams get_quote
 #'
 #' @example man/examples/scr_FGIndex.R
@@ -25,10 +26,8 @@
 #'
 #' @returns An [xts]-object containing,
 #'
-#' \describe{
-#'    \item{}{<[POSIXct]> **```index```:** The time-index}
-#'    \item{}{<[numeric]> **```fgi```:** The daily fear and greed index value}
-#' }
+#' \item{index}{<[POSIXct]> the time-index}
+#' \item{fgi}{<[numeric]> the daily fear and greed index value}
 #'
 #' **Output**
 #'
@@ -40,19 +39,22 @@
 #' )
 #' ```
 #'
+#'
+#'
 #' @details
 #'
 #' ## Classification
 #'
 #' The Fear and Greed Index goes from 0-100, and can be classified as follows,
 #'
-#' \describe{
-#'   \item{}{**0-24:** Extreme Fear.}
-#'   \item{}{**25-44:** Fear.}
-#'   \item{}{**45-55:** Neutral.}
-#'   \item{}{**56-75:** Greed.}
-#'   \item{}{**76-100:**  Extreme Greed.}
+#' \itemize{
+#'   \item 0-24, Extreme Fear
+#'   \item 25-44, Fear
+#'   \item 45-55, Neutral
+#'   \item 56-75, Greed
+#'   \item 76-100, Extreme Greed
 #' }
+#'
 #'
 #' ## About the Fear and Greed Index
 #'
@@ -60,6 +62,7 @@
 #' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
 #'
 #' @author Serkan Korkmaz
+#'
 #' @export
 get_fgindex <- function(
     from = NULL,
