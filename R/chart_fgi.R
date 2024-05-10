@@ -85,7 +85,7 @@ fgi <- function(
       # 1.1.1) map the values
       # to  the color scale
       data$color_scale <- ceiling(
-        (1-30) * (data$FGI)/(100) + 30
+        (1-30) * (data$fgi)/(100) + 30
       )
 
       data$color_scale <- rev(color_scale)[
@@ -97,7 +97,7 @@ fgi <- function(
           showlegend = FALSE,
           name = "FGI",
           data = data,
-          y = ~FGI,
+          y = ~fgi,
           x = ~index,
           type = 'scatter',
           mode = 'lines+markers',

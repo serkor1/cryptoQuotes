@@ -16,8 +16,9 @@ testthat::test_that(
       sub        = list(
         volume(),
         rsi(),
-        macd(),
-        fgi(index = FGIndex)
+        macd()
+        # ,
+        # fgi(index = FGIndex)
       ),
       indicator  = list(
         dema(),

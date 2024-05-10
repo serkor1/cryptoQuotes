@@ -128,7 +128,7 @@ getFGIndex <- function(
 
   # 8) set colnames
   # to FGI
-  colnames(response) <- 'FGI'
+  colnames(response) <- 'fgi'
 
   # 9) subset according
   # to from and to
