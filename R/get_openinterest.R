@@ -13,18 +13,15 @@
 #' `r lifecycle::badge("stable")`
 #'
 #' Get the open interest on a cryptocurrency pair from the [available_exchanges()] in any actively traded [available_tickers()] on the FUTURES markets.
-#'
-#' @inheritParams get_quote
-#'
-#' @usage
-#' ## open interest
-#' get_openinterest(
+#' @usage get_openinterest(
 #'  ticker,
 #'  interval = '1d',
 #'  source   = 'binance',
 #'  from     = NULL,
 #'  to       = NULL
 #' )
+#'
+#' @inheritParams get_quote
 #'
 #' @example man/examples/scr_getOpeninterest.R
 #'

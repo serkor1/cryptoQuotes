@@ -2,7 +2,7 @@
 % Please edit documentation in R/chart.R
 \name{chart}
 \alias{chart}
-\title{Build interactive financial charts}
+\title{Build an interactive financial chart}
 \usage{
 chart(
   ticker,
@@ -41,7 +41,8 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:subplot]{plotly::subplot()}}-wrapper function for building interactive financial charts using the affiliated \link{chart}-functions like \code{\link[=kline]{kline()}}, and \code{\link[=macd]{macd()}}.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:subplot]{plotly::subplot()}}-wrapper function for building interactive financial charts using the affiliated \link{chart}-functions. The \link{chart} consists
+of a main chart, and an optional subchart. The main chart supports overlaying various trading indicators like \link{sma} and \link{bollinger_bands}.
 }
 \details{
 \subsection{Options}{

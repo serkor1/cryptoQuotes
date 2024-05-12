@@ -1,11 +1,10 @@
-#' add eventlines to
-#' the chart
+#' add eventlines to the chart
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::layout()]-wrapper that adds `shapes` and `annotations` to the [chart()].
+#' A high-level [plotly::layout()]-function. The function adds `shapes` and `annotations` to the main [chart()].
 #'
 #' @param data a [data.frame]-type object with `index`, `event` and `color` columns.
 #' @param ... For internal use. Please ignore.

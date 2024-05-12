@@ -15,7 +15,7 @@ getQuote(
 )
 }
 \arguments{
-\item{ticker}{An \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
+\item{ticker}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
 \item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
@@ -23,9 +23,9 @@ getQuote(
 
 \item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
-\item{from}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
 An \link{xts}-object containing,
@@ -40,12 +40,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                        open    high     low   close    volume
-#> 2024-05-04 02:00:00 62843.7 64499.9 62512.8 63860.0  83894.05
-#> 2024-05-05 02:00:00 63860.0 64630.0 62866.1 63997.8  70925.50
-#> 2024-05-06 02:00:00 63997.8 65540.0 62669.0 63149.3 141354.74
 #> 2024-05-07 02:00:00 63149.3 64398.7 62230.0 62314.5 105874.30
 #> 2024-05-08 02:00:00 62314.5 63024.5 60850.0 61164.0 105337.31
-#> 2024-05-09 02:00:00 61164.0 61788.0 60890.1 61037.4  29250.32
+#> 2024-05-09 02:00:00 61164.0 63405.5 60544.5 63035.5 108058.17
+#> 2024-05-10 02:00:00 63035.5 63447.8 60111.0 60789.1 127069.12
+#> 2024-05-11 02:00:00 60789.1 61500.0 60461.0 60810.2  42665.59
+#> 2024-05-12 02:00:00 60810.2 61094.8 60566.6 60979.9  11222.76
 }\if{html}{\out{</div>}}
 }
 \description{

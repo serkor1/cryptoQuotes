@@ -12,7 +12,8 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::add_lines()]-wrapper function that interacts with the [TTR::BBands()]-function.
+#' A high-level [plotly::add_lines()]-wrapper function that interacts with the [TTR::BBands()]-function. The function
+#' adds bollinger bands to the main [chart()].
 #'
 #' @usage bollinger_bands(
 #'    n = 20,

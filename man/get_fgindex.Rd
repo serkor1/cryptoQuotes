@@ -5,12 +5,15 @@
 \title{Get the daily Fear and Greed Index
 in the cryptocurrency market}
 \usage{
-get_fgindex(from = NULL, to = NULL)
+get_fgindex(
+ from = NULL,
+ to   = NULL
+)
 }
 \arguments{
-\item{from}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
 An \link{xts}-object containing,
@@ -18,15 +21,15 @@ An \link{xts}-object containing,
 \item{index}{<\link{POSIXct}> the time-index}
 \item{fgi}{<\link{numeric}> the daily fear and greed index value}
 
-\strong{Output}
+\strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     fgi
-#> 2024-05-04 02:00:00  67
-#> 2024-05-05 02:00:00  69
-#> 2024-05-06 02:00:00  71
 #> 2024-05-07 02:00:00  68
 #> 2024-05-08 02:00:00  64
 #> 2024-05-09 02:00:00  55
+#> 2024-05-10 02:00:00  66
+#> 2024-05-11 02:00:00  53
+#> 2024-05-12 02:00:00  56
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -51,7 +54,12 @@ The Fear and Greed Index goes from 0-100, and can be classified as follows,
 \subsection{About the Fear and Greed Index}{
 
 The fear and greed index is a market sentiment indicator that measures investor emotions to
-gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm).
+}
+
+\subsection{Note}{
+
+This index is fetched from \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me}, and can be different from the one provided by \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
 }
 }
 \examples{

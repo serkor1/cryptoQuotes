@@ -13,12 +13,17 @@ availableTickers(source = "binance", futures = TRUE)
 }
 \value{
 A \link{character}-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
+
+\strong{Sample output}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10000000AIDOGEUSDT" "10000COQUSDT"       "10000LADYSUSDT"    
+#> [4] "10000NFTUSDT"       "10000SATSUSDT"      "10000STARLUSDT"
+}\if{html}{\out{</div>}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-This function returns all available
-cryptocurrewncy pairs on the \link{available_exchanges}
+Get actively traded cryptocurrency pairs on the \code{\link[=available_exchanges]{available_exchanges()}}.
 }
 \details{
 The naming-conventions across, and within, \code{\link[=available_exchanges]{available_exchanges()}} are not necessarily the same. This function lists

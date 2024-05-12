@@ -5,6 +5,12 @@
 #'
 #' Get available intervals for the [available_tickers()] on the [available_exchanges()].
 #'
+#' @usage available_intervals(
+#'    source = "binance",
+#'    type   = "ohlc",
+#'    futures = TRUE
+#' )
+#'
 #' @inheritParams get_quote
 #' @inheritParams available_exchanges
 #'
@@ -14,8 +20,18 @@
 #'
 #' @returns
 #'
-#' An [invisible()] [character] vector containing the  available intervals on
-#' the exchange, market and endpoint
+#' An [invisible()] [character]-vector containing the  available intervals on
+#' the exchange, market and endpoint.
+#'
+#' **Sample output**
+#'
+#' ```{r output, echo = FALSE}
+#' head(
+#'    cryptoQuotes::available_intervals(
+#'      source = "bybit"
+#'    )
+#' )
+#' ```
 #'
 #' @author Serkan Korkmaz
 #'

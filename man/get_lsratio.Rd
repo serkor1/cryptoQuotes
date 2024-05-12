@@ -4,7 +4,6 @@
 \alias{get_lsratio}
 \title{Get the long to short ratio of a cryptocurrency pair}
 \usage{
-## long-short ratio
 get_lsratio(
    ticker,
    interval = '1d',
@@ -15,15 +14,15 @@ get_lsratio(
 )
 }
 \arguments{
-\item{ticker}{A \link{character} vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
+\item{ticker}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
-\item{interval}{A \link{character} vector of \link{length} 1. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
+\item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
-\item{source}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_exchanges]{available_exchanges()}} for details.}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{from}{An optional vector of \link{length} 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+\item{from}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional vector of \link{length} 1. Can be \code{\link[=Sys.Date]{Sys.Date()}}-class, \code{\link[=Sys.time]{Sys.time()}}-class or \code{\link[=as.character]{as.character()}} in \%Y-\%m-\%d format.}
+\item{to}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
 \item{top}{A \link{logical} vector. \link{FALSE} by default. If \link{TRUE} it returns the top traders Long-Short ratios.}
 }
@@ -38,12 +37,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                       long  short ls_ratio
-#> 2024-05-04 02:00:00 0.5490 0.4510 1.217295
-#> 2024-05-05 02:00:00 0.5407 0.4593 1.177226
-#> 2024-05-06 02:00:00 0.5430 0.4570 1.188184
 #> 2024-05-07 02:00:00 0.5492 0.4508 1.218279
 #> 2024-05-08 02:00:00 0.5467 0.4533 1.206045
 #> 2024-05-09 02:00:00 0.5580 0.4420 1.262443
+#> 2024-05-10 02:00:00 0.5631 0.4369 1.288853
+#> 2024-05-11 02:00:00 0.5766 0.4234 1.361833
+#> 2024-05-12 02:00:00 0.5656 0.4344 1.302026
 }\if{html}{\out{</div>}}
 }
 \description{

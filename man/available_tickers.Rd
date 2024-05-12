@@ -2,7 +2,7 @@
 % Please edit documentation in R/available_tickers.R
 \name{available_tickers}
 \alias{available_tickers}
-\title{Get available cryptocurrency pairs}
+\title{Get actively traded cryptocurrency pairs}
 \usage{
 available_tickers(source = "binance", futures = TRUE)
 }
@@ -13,11 +13,17 @@ available_tickers(source = "binance", futures = TRUE)
 }
 \value{
 A \link{character}-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
+
+\strong{Sample output}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10000000AIDOGEUSDT" "10000COQUSDT"       "10000LADYSUSDT"    
+#> [4] "10000NFTUSDT"       "10000SATSUSDT"      "10000STARLUSDT"
+}\if{html}{\out{</div>}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-Get available cryptocurrency pairs
+Get actively traded cryptocurrency pairs on the \code{\link[=available_exchanges]{available_exchanges()}}.
 }
 \details{
 The naming-conventions across, and within, \code{\link[=available_exchanges]{available_exchanges()}} are not necessarily the same. This function lists

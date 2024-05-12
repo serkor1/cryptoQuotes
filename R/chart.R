@@ -6,15 +6,14 @@
 # script start;
 # old function; #######
 
-#' Build interactive financial charts
+#' Build an interactive financial chart
 #'
 #' @description
+#'
 #' `r lifecycle::badge("experimental")`
 #'
-#'
-#' A high-level [plotly::plot_ly()]- and [plotly::subplot()]-wrapper function for building interactive financial charts using the affiliated [chart]-functions like [kline()], and [macd()].
-#'
-#'
+#' A high-level [plotly::plot_ly()]- and [plotly::subplot()]-wrapper function for building interactive financial charts using the affiliated [chart]-functions. The [chart] consists
+#' of a main chart, and an optional subchart. The main chart supports overlaying various trading indicators like [sma] and [bollinger_bands].
 #'
 #' @param ticker An object with Open, High, Low, Close and Volume columns that can be coerced to a [xts::xts()]-object.
 #' @param main A [plotly::plot_ly()]-function. [kline()] by default.

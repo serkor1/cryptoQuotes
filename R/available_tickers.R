@@ -1,9 +1,9 @@
-#' Get available cryptocurrency pairs
+#' Get actively traded cryptocurrency pairs
 #'
 #' @description
 #' `r lifecycle::badge("stable")`
 #'
-#' Get available cryptocurrency pairs
+#' Get actively traded cryptocurrency pairs on the [available_exchanges()].
 #'
 #' @inheritParams get_quote
 #'
@@ -12,6 +12,18 @@
 #' @returns
 #'
 #' A [character]-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
+#'
+#' **Sample output**
+#'
+#' ```{r output, echo = FALSE}
+#' head(
+#'    cryptoQuotes::available_tickers(
+#'      source  = "bybit",
+#'      futures = TRUE
+#'    )
+#' )
+#' ```
+#'
 #'
 #' @details
 #'

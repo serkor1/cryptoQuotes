@@ -4,7 +4,6 @@
 \alias{get_openinterest}
 \title{Get the open interest on perpetual futures contracts}
 \usage{
-## open interest
 get_openinterest(
  ticker,
  interval = '1d',
@@ -14,15 +13,15 @@ get_openinterest(
 )
 }
 \arguments{
-\item{ticker}{An \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
+\item{ticker}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
 \item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
 \item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{from}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
 An \link{xts}-object containing,
@@ -33,12 +32,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     open_interest
-#> 2024-05-04 02:00:00      55722.28
-#> 2024-05-05 02:00:00      54271.21
-#> 2024-05-06 02:00:00      54329.08
 #> 2024-05-07 02:00:00      55174.70
 #> 2024-05-08 02:00:00      56606.52
 #> 2024-05-09 02:00:00      56281.38
+#> 2024-05-10 02:00:00      55302.66
+#> 2024-05-11 02:00:00      59957.97
+#> 2024-05-12 02:00:00      60191.36
 }\if{html}{\out{</div>}}
 }
 \description{

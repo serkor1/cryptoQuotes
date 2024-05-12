@@ -2,8 +2,7 @@
 % Please edit documentation in R/chart_event.R
 \name{add_event}
 \alias{add_event}
-\title{add eventlines to
-the chart}
+\title{add eventlines to the chart}
 \usage{
 add_event(data, ...)
 }
@@ -18,7 +17,7 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object with \code{shapes} and 
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:layout]{plotly::layout()}}-wrapper that adds \code{shapes} and \code{annotations} to the \code{\link[=chart]{chart()}}.
+A high-level \code{\link[plotly:layout]{plotly::layout()}}-function. The function adds \code{shapes} and \code{annotations} to the main \code{\link[=chart]{chart()}}.
 }
 \details{
 The \link{data.frame} must include the following columns,

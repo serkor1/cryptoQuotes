@@ -6,16 +6,27 @@
 # the charting function
 # script start;
 
-#' Add MACD indicators to the chart
+#' Chart the Moving Average Convergence Divergence (MACD) indicator
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
+#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-function that interacts with the [TTR::MACD()]-function. The function adds subchart with a
+#' [TTR::MACD()]-indicator.
 #'
-#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-wrapper function that interacts with the [TTR::MACD()]-function.
+#' #' @usage macd(
+#'  nFast   = 12,
+#'  nSlow   = 26,
+#'  nSig    = 9,
+#'  maType  = "SMA",
+#'  percent = TRUE,
+#'  ...
+#' #' )
 #'
 #' @inheritParams TTR::MACD
+#' @param ... For internal use. Please ignore.
+#'
 #' @inherit kline
 #'
 #' @example man/examples/scr_charting.R

@@ -2,17 +2,16 @@
 % Please edit documentation in R/chart_rsi.R
 \name{rsi}
 \alias{rsi}
-\title{Add RSI indicators to your
-chart}
+\title{Chart the Relative Strength Index (RSI)}
 \usage{
 rsi(
-  price = "close",
-  n = 14,
-  maType = "SMA",
-  upper_limit = 80,
-  lower_limit = 20,
-  color = "#F100F1",
-  ...
+ price       = "close",
+ n           = 14,
+ maType      = "SMA",
+ upper_limit = 80,
+ lower_limit = 20,
+ color       = '#F100F1',
+ ...
 )
 }
 \arguments{
@@ -32,10 +31,9 @@ rsi(
 
 \item{lower_limit}{A \link{numeric}-vector of \link{length} 1. 20 by default. Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
 
-\item{color}{A \link{character}-vector of \link{length} 1.}
+\item{color}{A \link{character}-vector of \link{length} 1. "#F100F1" by default.}
 
-\item{...}{Other arguments to be passed to the \code{maType} function in
-case (1) above.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
@@ -43,7 +41,8 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts with the \code{\link[TTR:RSI]{TTR::RSI()}}-function.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that interacts with the \code{\link[TTR:RSI]{TTR::RSI()}}-function. The function adds a subchart with a
+\code{\link[TTR:RSI]{TTR::RSI()}}-indicator.
 }
 \examples{
 # script start;

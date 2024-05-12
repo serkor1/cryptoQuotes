@@ -12,9 +12,7 @@
 #'
 #' Get the long-short ratio for any [available_tickers()] from the [available_exchanges()]
 #'
-#' @usage
-#' ## long-short ratio
-#' get_lsratio(
+#' @usage get_lsratio(
 #'    ticker,
 #'    interval = '1d',
 #'    source   = 'binance',
@@ -23,11 +21,7 @@
 #'    top      = FALSE
 #' )
 #'
-#' @param ticker A [character] vector of [length] 1. See [available_tickers()] for available tickers.
-#' @param interval A [character] vector of [length] 1. See [available_intervals()] for available intervals.
-#' @param source A [character]-vector of [length] 1. See [available_exchanges()] for details.
-#' @param from An optional vector of [length] 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
-#' @param to An optional vector of [length] 1. Can be [Sys.Date()]-class, [Sys.time()]-class or [as.character()] in %Y-%m-%d format.
+#' @inheritParams get_quote
 #' @param top A [logical] vector. [FALSE] by default. If [TRUE] it returns the top traders Long-Short ratios.
 #'
 #' @inherit get_quote details

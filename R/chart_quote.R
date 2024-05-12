@@ -1,10 +1,10 @@
-#' Candlestick chart
+#' Chart Open, High, Low and Close prices with Candlesticks
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]-wrapper function for charting Open, High, Low and Close prices.
+#' A high-level [plotly::plot_ly()]-function for charting Open, High, Low and Close prices.
 #'
 #' @param ... For internal use. Please ignore.
 #'
@@ -124,7 +124,7 @@ kline <- function(
 }
 
 
-#' OHLC chart
+#' Chart Open, High, Low and Close prices with OHLC-bars
 #'
 #' @inherit kline
 #' @family price charts

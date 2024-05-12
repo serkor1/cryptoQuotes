@@ -10,7 +10,7 @@
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]-wrapper function.
+#' A high-level [plotly::plot_ly()]-wrapper function. The function adds a subchart with the `fear and greed`-index.
 #'
 #' @param index A [xts::xts()]-object. See [get_fgindex()] for more details.
 #'

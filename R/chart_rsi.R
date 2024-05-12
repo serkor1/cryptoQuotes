@@ -5,33 +5,43 @@
 # objective: Create expressions to be evaluted in
 # the charting function
 # script start;
-#' Add RSI indicators to your
-#' chart
+#' Chart the Relative Strength Index (RSI)
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-wrapper function that interacts with the [TTR::RSI()]-function.
+#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-function that interacts with the [TTR::RSI()]-function. The function adds a subchart with a
+#' [TTR::RSI()]-indicator.
+#'
+#' @usage rsi(
+#'  price       = "close",
+#'  n           = 14,
+#'  maType      = "SMA",
+#'  upper_limit = 80,
+#'  lower_limit = 20,
+#'  color       = '#F100F1',
+#'  ...
+#' )
 #'
 #' @inheritParams TTR::RSI
 #' @param upper_limit A [numeric]-vector of [length] 1. 80 by default. Sets the upper limit of the [TTR::RSI].
 #' @param lower_limit A [numeric]-vector of [length] 1. 20 by default. Sets the lower limit of the [TTR::RSI].
-#' @param color A [character]-vector of [length] 1.
+#' @param color A [character]-vector of [length] 1. "#F100F1" by default.
+#' @param ... For internal use. Please ignore.
 #'
 #' @inherit kline
 #'
 #' @example man/examples/scr_charting.R
-#'
 #'
 #' @family chart indicators
 #' @family subcharts
 #'
 #' @export
 rsi <- function(
-    price = "close",
-    n = 14,
-    maType = "SMA",
+    price       = "close",
+    n           = 14,
+    maType      = "SMA",
     upper_limit = 80,
     lower_limit = 20,
     color       = '#F100F1',

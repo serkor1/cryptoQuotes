@@ -6,12 +6,12 @@
 #'
 #' Get a quote on a cryptocurrency pair from the [available_exchanges()] in various [available_intervals()] for any actively traded [available_tickers()].
 #'
-#' @param ticker An [character]-vector of [length] 1. See [available_tickers()] for available tickers.
+#' @param ticker A [character]-vector of [length] 1. See [available_tickers()] for available tickers.
 #' @param source A [character]-vector of [length] 1. \code{binance} by default. See [available_exchanges()] for available exchanges.
 #' @param interval A [character]-vector of [length] 1. ```1d``` by default. See [available_intervals()] for available intervals.
 #' @param futures A [logical]-vector of [length] 1. [TRUE] by default. Returns futures market if [TRUE], spot market otherwise.
-#' @param from An optional [character], [date] or [POSIXct] vector of [length] 1. [NULL] by default.
-#' @param to An optional [character], [date] or [POSIXct] vector of [length] 1. [NULL] by default.
+#' @param from An optional [character]-, [date]- or [POSIXct]-vector of [length] 1. [NULL] by default.
+#' @param to An optional [character]-, [date]- or [POSIXct]-vector of [length] 1. [NULL] by default.
 #'
 #' @usage
 #' ## get OHLC-V

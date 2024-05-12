@@ -12,13 +12,13 @@ get_fundingrate(
 )
 }
 \arguments{
-\item{ticker}{An \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
+\item{ticker}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
 \item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{from}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
 An \link{xts}-object containing,
@@ -29,12 +29,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     funding_rate
-#> 2024-05-07 18:00:00    1.000e-04
-#> 2024-05-08 02:00:00    1.000e-04
-#> 2024-05-08 10:00:00    1.000e-04
-#> 2024-05-08 18:00:00    1.000e-04
-#> 2024-05-09 02:00:00    1.000e-04
-#> 2024-05-09 10:00:00    4.634e-05
+#> 2024-05-10 18:00:00    1.000e-04
+#> 2024-05-11 02:00:00    1.000e-04
+#> 2024-05-11 10:00:00    1.000e-04
+#> 2024-05-11 18:00:00    1.000e-04
+#> 2024-05-12 02:00:00    1.000e-04
+#> 2024-05-12 10:00:00    5.654e-05
 }\if{html}{\out{</div>}}
 }
 \description{

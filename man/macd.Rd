@@ -2,7 +2,7 @@
 % Please edit documentation in R/chart_macd.R
 \name{macd}
 \alias{macd}
-\title{Add MACD indicators to the chart}
+\title{Chart the Moving Average Convergence Divergence (MACD) indicator}
 \usage{
 macd(nFast = 12, nSlow = 26, nSig = 9, maType = "SMA", percent = TRUE, ...)
 }
@@ -25,8 +25,7 @@ macd(nFast = 12, nSlow = 26, nSig = 9, maType = "SMA", percent = TRUE, ...)
 fast and slow moving averages is returned, otherwise the difference between
 the respective averages is returned.}
 
-\item{...}{Other arguments to be passed to the \code{maType} function in
-case (1) above.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
@@ -34,7 +33,17 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts with the \code{\link[TTR:MACD]{TTR::MACD()}}-function.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that interacts with the \code{\link[TTR:MACD]{TTR::MACD()}}-function. The function adds subchart with a
+\code{\link[TTR:MACD]{TTR::MACD()}}-indicator.
+
+#' @usage macd(
+nFast   = 12,
+nSlow   = 26,
+nSig    = 9,
+maType  = "SMA",
+percent = TRUE,
+...
+#' )
 }
 \examples{
 # script start;

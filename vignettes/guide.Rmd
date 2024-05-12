@@ -1,0 +1,190 @@
+---
+title: "Guide: Cryptocurrency Market Data in R"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Guide: Cryptocurrency Market Data in R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse      = TRUE,
+  comment       = "#>",
+  out.width     = "150%",
+  out.height    = "680",
+  fig.align     = "center",
+  cache         = TRUE,
+  cache.rebuild = TRUE
+)
+```
+
+```{r setup}
+library(cryptoQuotes)
+```
+
+This `vignette`  is a short introduction to the `cryptoQuotes`-package, for a more extensive introduction on its usecase and limitations please refer to the [wiki]
+(https://github.com/serkor1/cryptoQuotes/wiki).
+
+> **NOTE:** This `vignette` is limited by geolocation due to various country specific
+> cryptocurrency laws. The introduction, therefore, is limited to what is available in the US. 
+
+Throughout this `vignette` we will explore the Bitcoin market data using the `Kraken` exchange. All available `tickers` and its notation various across exchangs, so if you are unfamiliar with the exchange specific notation please use the `available_intervals()`-functions,
+
+```{r}
+# show a sample of 
+# the available tickers
+sample(
+  x = available_tickers(
+    source = "kraken",
+    futures = FALSE
+    
+  ),
+  size = 5
+)
+```
+
+These available tickers can be passed into the `ticker`-argument of all the `get_*`-functions with the appropriate `source` and `futures`-argument which, in this case, is `kraken` and `FALSE`.
+
+## Cryptocurrency market data in R
+
+### Open, High, Low, Close an Volume
+
+We will extract the Bitcoin market data in `hourly` intervals, and store it as `BTC`,
+
+```{r}
+## extract Bitcoin
+## market on the hourly 
+## chart
+BTC <- get_quote(
+  ticker   = "XBTUSDT",
+  source   = "kraken",
+  futures  = FALSE, 
+  interval = "1h"
+)
+```
+
+```{r, echo=FALSE}
+tail(
+ BTC 
+)
+```
+
+The market data can be extracted in different intervals using the `interval`-argument. To see available intervals, the `available_intervals()`-function can be used,
+
+```{r}
+## get available
+## intervals for OHLC
+## on Kraken
+available_intervals(
+  source  = "kraken",
+  type    = "ohlc",
+  futures = FALSE
+)
+```
+
+### Sentiment Data
+
+To put the Bitcoin price action in perspective, an interesting sentiment indicator like the `long` to `short` ratio can be extracted,
+
+```{r}
+## extract long-short
+## ratio on Bitcoin
+## using the hourly chart
+LS_BTC <- try(
+   get_lsratio(
+    ticker   = "XBTUSDT",
+    source   = "kraken",
+    interval = "1h"
+  )
+)
+```
+
+This gives an `error`. The source of the error is the ticker-naming convention; as the `long` to `short` ratio is specific to the perpetual futures market, and the current ticker is specific to the spot-market, the endpoint throws an error.
+
+To circumvent this, we can either use perpetual futures throughout the `script`, or modify the `ticker`-argument as follows,
+
+```{r}
+## extract long-short
+## ratio on Bitcoin
+## using the hourly chart
+LS_BTC <- get_lsratio(
+  ticker   = "PF_XBTUSD",
+  source   = "kraken",
+  interval = "1h"
+)
+```
+
+```{r, echo=FALSE}
+tail(
+ LS_BTC 
+)
+```
+
+The `ticker` specific to the perpetual futures market can be extracted using the `available_tickers` with `futures = TRUE` as follows,
+
+```{r}
+# show a sample of 
+# the available tickers
+sample(
+  x = available_tickers(
+    source = "kraken",
+    futures = TRUE
+    
+  ),
+  size = 5
+)
+```
+
+## Charting cryptocurrency market data
+
+The Bitcoin market data can be charted using the `chart()`-function, which uses `plotly` as backend,
+
+```{r, fig.alt="cryptocurrency market data with R"}
+# candlestick chart with
+# volume and Long to Short Ratio
+chart(
+  ticker = BTC,
+  main   = kline(),
+  sub = list(
+    volume(),
+    lsr(
+      ratio = LS_BTC
+    )
+  ),
+  options = list(
+    dark = FALSE
+  )
+)
+```
+
+
+### Adding indicators
+
+The `cryptoQuotes`-package also acts as an API-client to the `TTR`-package, and supports most of its functions. We can add Moving Average indicators, and bollinger bands to the chart using the `indicator`-argument,
+
+```{r, fig.alt="cryptocurrency market data with R"}
+# candlestick chart with
+# volume and Long to Short Ratio
+chart(
+  ticker = BTC,
+  main   = kline(),
+  sub = list(
+    volume(),
+    lsr(
+      ratio = LS_BTC
+    )
+  ),
+  indicator = list(
+    sma(n = 7),
+    sma(n = 14),
+    sma(n = 21),
+    bollinger_bands(
+      color = "steelblue"
+    )
+  ),
+  options = list(
+    dark = FALSE
+  )
+)
+```

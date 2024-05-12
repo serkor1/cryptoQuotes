@@ -2,8 +2,7 @@
 % Please edit documentation in R/chart_volume.R
 \name{volume}
 \alias{volume}
-\title{Add volume indicators
-to the chart}
+\title{Chart the trading volume}
 \usage{
 volume(...)
 }
@@ -16,7 +15,7 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function. The function adds a subchart with the trading \code{trading}.
 }
 \examples{
 # script start;

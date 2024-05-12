@@ -12,7 +12,7 @@ zlema(
 )
 }
 \arguments{
-\item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ZLEMA}}
+\item{price}{A \link{character}-vector of \link{length} 1. "close" by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ZLEMA}.}
 
 \item{n}{Number of periods to average over. Must be between 1 and
 \code{nrow(x)}, inclusive.}
@@ -20,7 +20,7 @@ zlema(
 \item{ratio}{A smoothing/decay ratio.  \code{ratio} overrides \code{wilder}
 in \code{EMA}.}
 
-\item{...}{any other passthrough parameters}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
 A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object
@@ -28,7 +28,8 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts with \link{TTR}'s moving average family of functions.
+A high-level \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts with \link{TTR}'s moving average family of functions. The function
+adds moving average indicators to the main \code{\link[=chart]{chart()}}.
 }
 \examples{
 # script start;

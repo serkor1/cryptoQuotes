@@ -15,6 +15,10 @@
 #'
 #' Get the daily fear and greed index.
 #'
+#' @usage get_fgindex(
+#'  from = NULL,
+#'  to   = NULL
+#' )
 #'
 #' @inheritParams get_quote
 #'
@@ -29,7 +33,7 @@
 #' \item{index}{<[POSIXct]> the time-index}
 #' \item{fgi}{<[numeric]> the daily fear and greed index value}
 #'
-#' **Output**
+#' **Sample output**
 #'
 #' ```{r output, echo = FALSE}
 #' ## fear and greed index
@@ -59,7 +63,10 @@
 #' ## About the Fear and Greed Index
 #'
 #' The fear and greed index is a market sentiment indicator that measures investor emotions to
-#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm).
+#'
+#' ## Note
+#' This index is fetched from \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me}, and can be different from the one provided by \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
 #'
 #' @author Serkan Korkmaz
 #'

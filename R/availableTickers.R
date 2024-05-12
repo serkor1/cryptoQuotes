@@ -3,8 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' This function returns all available
-#' cryptocurrewncy pairs on the [available_exchanges]
+#' Get actively traded cryptocurrency pairs on the [available_exchanges()].
 #'
 #' @inherit available_tickers
 #' @family deprecated

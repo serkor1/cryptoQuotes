@@ -2,7 +2,7 @@
 % Please edit documentation in R/chart_quote.R
 \name{ohlc}
 \alias{ohlc}
-\title{OHLC chart}
+\title{Chart Open, High, Low and Close prices with OHLC-bars}
 \usage{
 ohlc(...)
 }
@@ -15,7 +15,7 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function for charting Open, High, Low and Close prices.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function for charting Open, High, Low and Close prices.
 }
 \examples{
 # script start;

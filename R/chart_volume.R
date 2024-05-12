@@ -4,14 +4,13 @@
 # objective:
 # script start;
 
-#' Add volume indicators
-#' to the chart
+#' Chart the trading volume
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]-wrapper function.
+#' A high-level [plotly::plot_ly()]-function. The function adds a subchart with the trading `trading`.
 #'
 #' @inherit kline
 #'
