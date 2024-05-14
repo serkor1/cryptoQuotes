@@ -76,13 +76,13 @@ indicator <- function(
 
 
 # var_ly <- function(
-    #     variable) {
+#     variable) {
 #
 #   # 0) extract variable
 #   # from the source
 #   variable <- grep(
 #     pattern     = variable,
-#     x           = names(get("args",envir = parent.frame())$data),
+#     x           = names(get("data",envir = parent.frame())),
 #     ignore.case = TRUE,
 #     value       = TRUE
 #   )

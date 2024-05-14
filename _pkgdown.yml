@@ -9,36 +9,39 @@ home:
 navbar:
   type: inverse
 
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [github]
+
 url: https://serkor1.github.io/cryptoQuotes/
+
 template:
   bootstrap: 5
   bootswatch: flatly
 
 reference:
-- title: Cryptocurrency sentiment and price data
-  desc: Functions that return cryptocurrency market data
-- contents: has_concept('get-function')
-- title: Supported calls
-  desc: All available API parameters
+- title: Cryptocurrency Market Data
+  desc: The collection of functions to retrieve OHLC-V and sentiment data.
+- contents: has_concept('get-functions')
+- title: Available Argument Values
+  desc: The collection of functions of supported argument values.
 - contents: has_concept('supported calls')
 - title: Main charts
-  desc: The main charts
+  desc: The collection of Price Charts
 - contents:
   - has_concept('charting')
   - has_concept("price charts")
-- title: Subcharts
-  desc: The family of chart suited for subcharts
+- title: Subchart Indicators
+  desc: The collection of subchart indicators.
 - contents:
-  - has_concept('subcharts')
-- title: Charting indicators
-  desc: Adding indicators to charts
+  - has_concept('subchart indicators')
+- title: Main Chart Indicators
+  desc: The collection of main chart indicators.
 - contents:
-  - has_concept('chart indicators')
-  - has_concept('price charts')
-  - has_concept('subcharts')
-- title: Convinience functions
+  - has_concept('main chart indicators')
+- title: Utilities
   desc: Manipulate and calibrate objects
-- contents: has_concept('convinience')
+- contents: has_concept('utility')
 - title: Datasets
   desc: Sample datasets returned by ```get_quote()``` and ```get_fgindex()```
 - contents:

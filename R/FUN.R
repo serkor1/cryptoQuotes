@@ -23,7 +23,7 @@
 #' @param bounds A character vector of length 1. Has to be one of `c('upper','lower','both')`. Defaults to Upper.
 #'
 #' @example man/examples/scr_FUN.R
-#' @family convinience
+#' @family utility
 #'
 #' @returns Returns an xts-class object with its bounds removed.
 #' @export
@@ -81,7 +81,7 @@ remove_bound <- function(
 #' @param bounds A character vector of length 1. Has to be one of `c('upper','lower','both')`. Defaults to Upper.
 #'
 #' @example man/examples/scr_FUN.R
-#' @family convinience
+#' @family utility
 #'
 #' @returns Returns a list of iteratively restricted xts objects
 #'
@@ -138,7 +138,7 @@ split_window <- function(
 #' @param ... optional arguments passed to `FUN`.
 #'
 #' @example man/examples/scr_FUN.R
-#' @family convinience
+#' @family utility
 #'
 #' @returns Returns a xts object.
 #'

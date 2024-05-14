@@ -20,7 +20,7 @@
 #'
 #' @family chart indicators
 #' @family sentiment indicators
-#' @family subcharts
+#' @family subchart indicators
 #'
 #' @export
 lsr <- function(

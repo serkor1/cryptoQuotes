@@ -109,6 +109,7 @@ Other chart indicators:
 
 Other price charts: 
 \code{\link{kline}()},
+\code{\link{line}()},
 \code{\link{ohlc}()}
 }
 \author{

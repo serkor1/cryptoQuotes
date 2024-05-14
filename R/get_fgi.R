@@ -6,11 +6,11 @@
 # index from alternative.met
 # script start;
 
+#' @title
 #' Get the daily Fear and Greed Index
 #' in the cryptocurrency market
 #'
 #' @description
-#'
 #' `r lifecycle::badge("stable")`
 #'
 #' Get the daily fear and greed index.
@@ -22,11 +22,7 @@
 #'
 #' @inheritParams get_quote
 #'
-#' @example man/examples/scr_FGIndex.R
-#'
 #' @inherit get_quote details
-#'
-#' @family get-function
 #'
 #' @returns An [xts]-object containing,
 #'
@@ -43,10 +39,7 @@
 #' )
 #' ```
 #'
-#'
-#'
 #' @details
-#'
 #' ## Classification
 #'
 #' The Fear and Greed Index goes from 0-100, and can be classified as follows,
@@ -59,17 +52,17 @@
 #'   \item 76-100, Extreme Greed
 #' }
 #'
-#'
 #' ## About the Fear and Greed Index
-#'
 #' The fear and greed index is a market sentiment indicator that measures investor emotions to
 #' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm).
 #'
-#' ## Note
+#' ## Source
 #' This index is fetched from \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me}, and can be different from the one provided by \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
 #'
-#' @author Serkan Korkmaz
+#' @example man/examples/scr_FGIndex.R
 #'
+#' @family get-functions
+#' @author Serkan Korkmaz
 #' @export
 get_fgindex <- function(
     from = NULL,

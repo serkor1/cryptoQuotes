@@ -2,7 +2,7 @@
 % Please edit documentation in R/chart_quote.R
 \name{ohlc}
 \alias{ohlc}
-\title{Chart Open, High, Low and Close prices with OHLC-bars}
+\title{Chart Open, High, Low and Close prices using OHLC-bars}
 \usage{
 ohlc(...)
 }
@@ -46,7 +46,8 @@ cryptoQuotes::chart(
 \seealso{
 Other price charts: 
 \code{\link{chart}()},
-\code{\link{kline}()}
+\code{\link{kline}()},
+\code{\link{line}()}
 }
 \author{
 Serkan Korkmaz

@@ -1,29 +1,25 @@
 ---
-title: "cryptoQuotes: Cryptocurrency Market Data in R"
+title: "Usecase"
 subtitle: "What happens when Elon Musk Tweets about Dogecoin?"
 output: rmarkdown::html_vignette
 always_allow_html: true
 vignette: >
-  %\VignetteIndexEntry{cryptoQuotes: Cryptocurrency Market Data in R}
+  %\VignetteIndexEntry{Usecase}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
   
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-collapse = FALSE,
-out.width = "100%",
-comment = "#>",
-message = FALSE
+  collapse = FALSE,
+  out.width = "100%",
+  comment = "#>",
+  message = FALSE,
+  out.height    = "680",
+  fig.align     = "center",
+  cache         = TRUE,
+  cache.rebuild = TRUE
 )
-```
-
-```{css, echo=FALSE}
-body, .main-container, .container-fluid {
-max-width: 920px !important; /* or a specific pixel width, e.g., 1200px */
-margin-left: auto !important;
-margin-right: auto !important;
-}
 ```
 
 
@@ -89,7 +85,7 @@ cat(
 
 We can illustrate this with candlestick charts using the ```chart()```- and ```kline()```-function, 
 
-```{r, fig.align='center', out.height=800}
+```{r, fig.align='center', fig.alt= "Elon Musk DOGE"}
 ## chart the
 ## price action
 ## using klines
@@ -138,7 +134,7 @@ event_data$color <- 'steelblue'
 
 This event data, can be passed into the chart as follows,
 
-```{r, out.height = 800}
+```{r, fig.alt= "Elon Musk DOGE"}
 ## 1) chart the
 ## price action
 ## using klines

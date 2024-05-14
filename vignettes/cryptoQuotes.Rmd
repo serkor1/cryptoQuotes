@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse      = TRUE,
   comment       = "#>",
-  out.width     = "150%",
+  out.width     = "100%",
   out.height    = "680",
   fig.align     = "center",
   cache         = TRUE,
@@ -19,12 +19,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE}
 library(cryptoQuotes)
 ```
 
-This `vignette`  is a short introduction to the `cryptoQuotes`-package, for a more extensive introduction on its usecase and limitations please refer to the [wiki]
-(https://github.com/serkor1/cryptoQuotes/wiki).
+This `vignette`  is a short introduction to the `cryptoQuotes`-package, for a more extensive introduction on its usecase and limitations please refer to the [wiki](https://github.com/serkor1/cryptoQuotes/wiki).
 
 > **NOTE:** This `vignette` is limited by geolocation due to various country specific
 > cryptocurrency laws. The introduction, therefore, is limited to what is available in the US. 
@@ -158,7 +157,6 @@ chart(
 )
 ```
 
-
 ### Adding indicators
 
 The `cryptoQuotes`-package also acts as an API-client to the `TTR`-package, and supports most of its functions. We can add Moving Average indicators, and bollinger bands to the chart using the `indicator`-argument,
@@ -188,3 +186,4 @@ chart(
   )
 )
 ```
+

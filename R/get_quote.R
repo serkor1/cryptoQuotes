@@ -1,21 +1,12 @@
+#' @title
 #' Get the Open, High, Low, Close and Volume data on a cryptocurrency pair
 #'
 #' @description
-#'
 #' `r lifecycle::badge("stable")`
 #'
 #' Get a quote on a cryptocurrency pair from the [available_exchanges()] in various [available_intervals()] for any actively traded [available_tickers()].
 #'
-#' @param ticker A [character]-vector of [length] 1. See [available_tickers()] for available tickers.
-#' @param source A [character]-vector of [length] 1. \code{binance} by default. See [available_exchanges()] for available exchanges.
-#' @param interval A [character]-vector of [length] 1. ```1d``` by default. See [available_intervals()] for available intervals.
-#' @param futures A [logical]-vector of [length] 1. [TRUE] by default. Returns futures market if [TRUE], spot market otherwise.
-#' @param from An optional [character]-, [date]- or [POSIXct]-vector of [length] 1. [NULL] by default.
-#' @param to An optional [character]-, [date]- or [POSIXct]-vector of [length] 1. [NULL] by default.
-#'
-#' @usage
-#' ## get OHLC-V
-#' get_quote(
+#' @usage get_quote(
 #'  ticker,
 #'  source   = 'binance',
 #'  futures  = TRUE,
@@ -24,9 +15,12 @@
 #'  to       = NULL
 #' )
 #'
-#' @family get-function
-#'
-#' @example man/examples/scr_getQuote.R
+#' @param ticker A [character]-vector of [length] 1. See [available_tickers()] for available tickers.
+#' @param source A [character]-vector of [length] 1. \code{binance} by default. See [available_exchanges()] for available exchanges.
+#' @param interval A [character]-vector of [length] 1. ```1d``` by default. See [available_intervals()] for available intervals.
+#' @param futures A [logical]-vector of [length] 1. [TRUE] by default. Returns futures market if [TRUE], spot market otherwise.
+#' @param from An optional [character]-, [date]- or [POSIXct]-vector of [length] 1. [NULL] by default.
+#' @param to An optional [character]-, [date]- or [POSIXct]-vector of [length] 1. [NULL] by default.
 #'
 #' @returns An [xts]-object containing,
 #'
@@ -38,7 +32,6 @@
 #' \item{volume}{<[numeric]> Trading volume}
 #'
 #' **Sample output**
-#'
 #' ```{r output, echo = FALSE}
 #' tail(
 #'    cryptoQuotes::get_quote(
@@ -47,20 +40,21 @@
 #'    )
 #' )
 #' ```
+#'
 #' @details
 #'
 #' ## On time-zones and dates
-#'
 #' Values passed to ``from`` or ``to`` must be coercible by [as.Date()], or [as.POSIXct()], with a format of either ```"%Y-%m-%d"``` or ```"%Y-%m-%d %H:%M:%S"```. By default
 #' all dates are passed and returned with [Sys.timezone()].
 #'
 #' ## On returns
-#'
 #' If only ``from`` is provided 200 pips are returned up to ``Sys.time()``. If only ``to`` is provided 200 pips up to the specified date
 #' is returned.
 #'
-#' @author Serkan Korkmaz
+#' @example man/examples/scr_getQuote.R
 #'
+#' @family get-functions
+#' @author Serkan Korkmaz
 #' @export
 get_quote <- function(
     ticker,

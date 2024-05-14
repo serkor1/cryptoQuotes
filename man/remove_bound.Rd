@@ -75,8 +75,8 @@ setequal(
 # script end;
 }
 \seealso{
-Other convinience: 
+Other utility: 
 \code{\link{calibrate_window}()},
 \code{\link{split_window}()}
 }
-\concept{convinience}
+\concept{utility}

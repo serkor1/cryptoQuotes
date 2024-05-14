@@ -4,10 +4,10 @@
 # objective: Extract the Long-Short Ratios
 # from the exchange
 
+#' @title
 #' Get the long to short ratio of a cryptocurrency pair
 #'
 #' @description
-#'
 #' `r lifecycle::badge("stable")`
 #'
 #' Get the long-short ratio for any [available_tickers()] from the [available_exchanges()]
@@ -24,23 +24,6 @@
 #' @inheritParams get_quote
 #' @param top A [logical] vector. [FALSE] by default. If [TRUE] it returns the top traders Long-Short ratios.
 #'
-#' @inherit get_quote details
-#'
-#' @note
-#'
-#' ## Available exchanges
-#'
-#' See [available_exchanges()] with  for available exchanges.
-#'
-#' ## Limited return values
-#'
-#' Binance only supports data for the last 30 days. Use other exchanges if you need beyond that.
-#'
-#' @author Jonas Cuzulan Hirani
-#'
-#' @example man/examples/scr_LSR.R
-#'
-#' @family get-function
 #'
 #' @returns An [xts]-object containing,
 #'
@@ -58,6 +41,13 @@
 #'    )
 #' )
 #' ```
+#'
+#' @inherit get_quote details
+#'
+#' @example man/examples/scr_LSR.R
+#'
+#' @family get-functions
+#' @author Jonas Cuzulan Hirani
 #' @export
 get_lsratio <- function(
     ticker,

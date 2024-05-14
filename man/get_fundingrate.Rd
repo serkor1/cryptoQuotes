@@ -29,12 +29,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     funding_rate
-#> 2024-05-10 18:00:00    1.000e-04
-#> 2024-05-11 02:00:00    1.000e-04
-#> 2024-05-11 10:00:00    1.000e-04
-#> 2024-05-11 18:00:00    1.000e-04
-#> 2024-05-12 02:00:00    1.000e-04
-#> 2024-05-12 10:00:00    5.654e-05
+#> 2024-05-12 18:00:00    1.000e-04
+#> 2024-05-13 02:00:00   -1.440e-06
+#> 2024-05-13 10:00:00    9.033e-05
+#> 2024-05-13 18:00:00    9.590e-06
+#> 2024-05-14 02:00:00   -2.451e-05
+#> 2024-05-14 10:00:00    1.000e-04
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -66,7 +66,7 @@ tail(
 }
 }
 \seealso{
-Other get-function: 
+Other get-functions: 
 \code{\link{get_fgindex}()},
 \code{\link{get_lsratio}()},
 \code{\link{get_openinterest}()},
@@ -75,4 +75,4 @@ Other get-function:
 \author{
 Serkan Korkmaz
 }
-\concept{get-function}
+\concept{get-functions}

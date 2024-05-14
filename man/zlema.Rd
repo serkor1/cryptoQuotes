@@ -85,6 +85,18 @@ Other moving average indicators:
 \code{\link{sma}()},
 \code{\link{vwap}()},
 \code{\link{wma}()}
+
+Other main chart indicators: 
+\code{\link{alma}()},
+\code{\link{bollinger_bands}()},
+\code{\link{dema}()},
+\code{\link{ema}()},
+\code{\link{evwma}()},
+\code{\link{hma}()},
+\code{\link{sma}()},
+\code{\link{vwap}()},
+\code{\link{wma}()}
 }
 \concept{chart indicators}
+\concept{main chart indicators}
 \concept{moving average indicators}

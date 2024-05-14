@@ -21,12 +21,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     fgi
-#> 2024-05-07 02:00:00  68
-#> 2024-05-08 02:00:00  64
 #> 2024-05-09 02:00:00  55
 #> 2024-05-10 02:00:00  66
 #> 2024-05-11 02:00:00  53
 #> 2024-05-12 02:00:00  56
+#> 2024-05-13 02:00:00  57
+#> 2024-05-14 02:00:00  66
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -55,7 +55,7 @@ The fear and greed index is a market sentiment indicator that measures investor 
 gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm).
 }
 
-\subsection{Note}{
+\subsection{Source}{
 
 This index is fetched from \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me}, and can be different from the one provided by \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
 }

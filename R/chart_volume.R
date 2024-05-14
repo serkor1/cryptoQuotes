@@ -17,7 +17,7 @@
 #' @example man/examples/scr_charting.R
 #'
 #' @family chart indicators
-#' @family subcharts
+#' @family subchart indicators
 #'
 #' @export
 volume <- function(

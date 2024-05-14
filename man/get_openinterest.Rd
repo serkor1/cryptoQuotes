@@ -32,12 +32,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     open_interest
-#> 2024-05-07 02:00:00      55174.70
-#> 2024-05-08 02:00:00      56606.52
 #> 2024-05-09 02:00:00      56281.38
 #> 2024-05-10 02:00:00      55302.66
 #> 2024-05-11 02:00:00      59957.97
 #> 2024-05-12 02:00:00      60191.36
+#> 2024-05-13 02:00:00      59818.46
+#> 2024-05-14 02:00:00      58060.72
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -57,9 +57,6 @@ all dates are passed and returned with \code{\link[=Sys.timezone]{Sys.timezone()
 If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}. If only \code{to} is provided 200 pips up to the specified date
 is returned.
 }
-}
-\note{
-Not all exchanges supports this endpoint, check \code{\link[=available_exchanges]{available_exchanges()}} for details.
 }
 \examples{
 \dontrun{
@@ -86,7 +83,7 @@ Not all exchanges supports this endpoint, check \code{\link[=available_exchanges
 
 }
 \seealso{
-Other get-function: 
+Other get-functions: 
 \code{\link{get_fgindex}()},
 \code{\link{get_fundingrate}()},
 \code{\link{get_lsratio}()},
@@ -95,4 +92,4 @@ Other get-function:
 \author{
 Serkan Korkmaz
 }
-\concept{get-function}
+\concept{get-functions}

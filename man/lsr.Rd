@@ -83,7 +83,7 @@ Other chart indicators:
 Other sentiment indicators: 
 \code{\link{fgi}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{fgi}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},
@@ -94,4 +94,4 @@ Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{sentiment indicators}
-\concept{subcharts}
+\concept{subchart indicators}

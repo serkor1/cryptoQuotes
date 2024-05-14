@@ -92,6 +92,18 @@ Other moving average indicators:
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
+
+Other main chart indicators: 
+\code{\link{alma}()},
+\code{\link{bollinger_bands}()},
+\code{\link{ema}()},
+\code{\link{evwma}()},
+\code{\link{hma}()},
+\code{\link{sma}()},
+\code{\link{vwap}()},
+\code{\link{wma}()},
+\code{\link{zlema}()}
 }
 \concept{chart indicators}
+\concept{main chart indicators}
 \concept{moving average indicators}

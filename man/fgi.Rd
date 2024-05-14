@@ -39,7 +39,7 @@ The fear and greed index is a market sentiment indicator that measures investor 
 gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm).
 }
 
-\subsection{Note}{
+\subsection{Source}{
 
 This index is fetched from \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me}, and can be different from the one provided by \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
 }
@@ -82,7 +82,7 @@ Other chart indicators:
 Other sentiment indicators: 
 \code{\link{lsr}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},
@@ -93,4 +93,4 @@ Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{sentiment indicators}
-\concept{subcharts}
+\concept{subchart indicators}

@@ -7,15 +7,13 @@
 # script start;
 
 
+#' @title
 #' Get the funding rate on futures contracts
 #'
 #' @description
-#'
 #' `r lifecycle::badge("stable")`
 #'
 #' Get the funding rate on a cryptocurrency pair from the [available_exchanges()] in any actively traded [available_tickers()] on the futures markets.
-#'
-#' @inheritParams get_quote
 #'
 #' @usage get_fundingrate(
 #'  ticker,
@@ -24,11 +22,9 @@
 #'  to       = NULL
 #' )
 #'
-#' @example man/examples/scr_getFundingrate.R
+#' @inheritParams get_quote
 #'
-#' @returns
-#'
-#' An [xts]-object containing,
+#' @returns An [xts]-object containing,
 #'
 #' \item{index}{<[POSIXct]> the time-index}
 #' \item{funding_rate}{<[numeric]> the current funding rate}
@@ -43,10 +39,10 @@
 #' )
 #' ```
 #'
-#' @family get-function
+#' @example man/examples/scr_getFundingrate.R
 #'
+#' @family get-functions
 #' @author Serkan Korkmaz
-#'
 #' @export
 get_fundingrate <- function(
     ticker,

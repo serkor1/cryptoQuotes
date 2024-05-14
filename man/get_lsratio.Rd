@@ -37,12 +37,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                       long  short ls_ratio
-#> 2024-05-07 02:00:00 0.5492 0.4508 1.218279
-#> 2024-05-08 02:00:00 0.5467 0.4533 1.206045
 #> 2024-05-09 02:00:00 0.5580 0.4420 1.262443
 #> 2024-05-10 02:00:00 0.5631 0.4369 1.288853
 #> 2024-05-11 02:00:00 0.5766 0.4234 1.361833
 #> 2024-05-12 02:00:00 0.5656 0.4344 1.302026
+#> 2024-05-13 02:00:00 0.5635 0.4365 1.290951
+#> 2024-05-14 02:00:00 0.5447 0.4553 1.196354
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -61,17 +61,6 @@ all dates are passed and returned with \code{\link[=Sys.timezone]{Sys.timezone()
 
 If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}. If only \code{to} is provided 200 pips up to the specified date
 is returned.
-}
-}
-\note{
-\subsection{Available exchanges}{
-
-See \code{\link[=available_exchanges]{available_exchanges()}} with  for available exchanges.
-}
-
-\subsection{Limited return values}{
-
-Binance only supports data for the last 30 days. Use other exchanges if you need beyond that.
 }
 }
 \examples{
@@ -117,7 +106,7 @@ Binance only supports data for the last 30 days. Use other exchanges if you need
 # end of scrtipt;
 }
 \seealso{
-Other get-function: 
+Other get-functions: 
 \code{\link{get_fgindex}()},
 \code{\link{get_fundingrate}()},
 \code{\link{get_openinterest}()},
@@ -126,4 +115,4 @@ Other get-function:
 \author{
 Jonas Cuzulan Hirani
 }
-\concept{get-function}
+\concept{get-functions}

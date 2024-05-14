@@ -75,8 +75,8 @@ setequal(
 # script end;
 }
 \seealso{
-Other convinience: 
+Other utility: 
 \code{\link{calibrate_window}()},
 \code{\link{remove_bound}()}
 }
-\concept{convinience}
+\concept{utility}

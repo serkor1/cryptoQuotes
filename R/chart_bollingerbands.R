@@ -28,6 +28,7 @@
 #' @inherit kline
 #'
 #' @family chart indicators
+#' @family main chart indicators
 #'
 #' @export
 bollinger_bands <- function(

@@ -1,4 +1,4 @@
-#' Chart Open, High, Low and Close prices with Candlesticks
+#' Chart Open, High, Low and Close prices using Candlesticks
 #'
 #' @description
 #'
@@ -124,7 +124,7 @@ kline <- function(
 }
 
 
-#' Chart Open, High, Low and Close prices with OHLC-bars
+#' Chart Open, High, Low and Close prices using OHLC-bars
 #'
 #' @inherit kline
 #' @family price charts
@@ -227,5 +227,85 @@ ohlc <- function(
     class = c("pricechart", "plotly", "htmlwidget")
   )
 
+
+}
+
+#' @title
+#' Chart Open, High, Low or Close prices using lines
+#'
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#'
+#' @inherit kline
+#' @family price charts
+#' @export
+line <- function(
+    price = "close",
+    ...) {
+
+  call_stack <- as.character(
+    lapply(sys.calls(), `[[`, 1)
+  )
+
+  assert(
+    call_stack[1] != as.character(match.call()),
+    error_message = c(
+      "x" = "Error",
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
+
+  structure(
+    .Data = {
+
+      # 0) arguments passed
+      # via the chart function
+      args <- list(
+        ...
+      )
+
+      data <- indicator(args$data, columns = price)
+
+      p <- plotly::plot_ly(
+        data = data,
+        x    = ~index,
+        y    = stats::as.formula(
+          paste("~", price)
+        ),
+        type = "scatter",
+        mode = "lines",
+        showlegend = TRUE,
+        legendgroup = "price",
+        name        = paste0(
+          to_title(price),
+          " (", args$interval, ")"
+        ),
+        line = list(
+          width = 1.2,
+          color = "#d38b68"# was: "#d3ba68"
+        )
+      )
+
+      invisible({
+        plotly::layout(
+          p = p,
+          xaxis = list(
+            rangeslider = list(
+              visible = args$slider,
+              thickness    = 0.05
+            )
+          )
+        )
+      })
+
+    },
+    class = c("pricechart", "plotly", "htmlwidget")
+  )
 
 }

@@ -61,6 +61,7 @@ chart_ma <- function(
 #'
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #'
 #' @export
 sma <- function(
@@ -143,6 +144,7 @@ sma <- function(
 #' @inherit sma
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #' @export
 ema <- function(
     price = "close",
@@ -228,6 +230,7 @@ ema <- function(
 #' @inherit sma
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #' @export
 dema <- function(
     price = "close",
@@ -315,6 +318,7 @@ dema <- function(
 #' @inherit sma
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #' @export
 wma <- function(
     price = "close",
@@ -399,6 +403,7 @@ wma <- function(
 #' @inherit sma
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #' @export
 evwma <- function(
     price = "close",
@@ -478,6 +483,7 @@ evwma <- function(
 #' @inherit sma
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #' @export
 zlema <- function(
     price = "close",
@@ -558,6 +564,7 @@ zlema <- function(
 #' @inherit sma
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #' @export
 vwap <- function(
     price = "close",
@@ -642,6 +649,7 @@ vwap <- function(
 #' @inherit sma
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #' @export
 hma <- function(
     price = "close",
@@ -721,6 +729,7 @@ hma <- function(
 #' @inherit sma
 #' @family chart indicators
 #' @family moving average indicators
+#' @family main chart indicators
 #' @export
 alma <- function(
     price = "close",

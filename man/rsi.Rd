@@ -89,7 +89,7 @@ Other chart indicators:
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
@@ -99,4 +99,4 @@ Other subcharts:
 Serkan Korkmaz
 }
 \concept{chart indicators}
-\concept{subcharts}
+\concept{subchart indicators}

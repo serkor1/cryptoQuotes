@@ -76,8 +76,8 @@ setequal(
 # script end;
 }
 \seealso{
-Other convinience: 
+Other utility: 
 \code{\link{remove_bound}()},
 \code{\link{split_window}()}
 }
-\concept{convinience}
+\concept{utility}
