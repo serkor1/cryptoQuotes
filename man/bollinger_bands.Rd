@@ -25,7 +25,7 @@ bollinger_bands(
 \item{...}{Other arguments to be passed to the \code{maType} function.}
 }
 \value{
-A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
+An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -36,24 +36,14 @@ adds bollinger bands to the main \code{\link[=chart]{chart()}}.
 \examples{
 # script start;
 
-# 1) charting weekly
-# BTC using candlesticks
-# and indicators
+# Charting BTC using
+# candlesticks as main
+# chart
 cryptoQuotes::chart(
-  ticker     = BTC,
-  main       = cryptoQuotes::kline(),
-  sub        = list(
-    cryptoQuotes::volume(),
-    cryptoQuotes::macd()
-  ),
-  indicator = list(
-    cryptoQuotes::bollinger_bands(),
-    cryptoQuotes::sma(),
-    cryptoQuotes::alma()
-  ),
-  options = list(
-    dark       = TRUE,
-    deficiency = FALSE
+  ticker = BTC,
+  main   = cryptoQuotes::kline(),
+  sub    = list(
+    cryptoQuotes::volume()
   )
 )
 

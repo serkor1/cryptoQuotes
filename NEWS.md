@@ -7,6 +7,7 @@
 * The `chart()`-function now has proper `light`-theme available that isn't the default `plotly`-values.
 * The charts now displays date ranges as a subtitles.
 * The `bollinger_bands()`-function now accepts a `color`-argument. These can be passed as `Hexadecimal`-colors or as is, `"blue"` for example.
+* A new main chart function has been introduced. `line()` which is a univariate price chart based on either open, high, low or close prices.
 
 ### Documentation
 

@@ -29,12 +29,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     funding_rate
-#> 2024-05-12 18:00:00    1.000e-04
-#> 2024-05-13 02:00:00   -1.440e-06
 #> 2024-05-13 10:00:00    9.033e-05
 #> 2024-05-13 18:00:00    9.590e-06
 #> 2024-05-14 02:00:00   -2.451e-05
 #> 2024-05-14 10:00:00    1.000e-04
+#> 2024-05-14 18:00:00    9.399e-05
+#> 2024-05-15 02:00:00    6.589e-05
 }\if{html}{\out{</div>}}
 }
 \description{

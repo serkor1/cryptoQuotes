@@ -1,23 +1,20 @@
-#' Chart Open, High, Low and Close prices using Candlesticks
+#' @title
+#' Candlestick Chart
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::plot_ly()]-function for charting Open, High, Low and Close prices.
 #'
 #' @param ... For internal use. Please ignore.
 #'
-#' @family price charts
-#'
-#' @example man/examples/scr_charting.R
+#' @example man/examples/scr_klinechart.R
 #'
 #' @returns
+#' An [invisible] [plotly::plot_ly()]-object.
 #'
-#' A [plotly::plot_ly()]-object.
-#'
+#' @family price charts
 #' @author Serkan Korkmaz
-#'
 #' @export
 kline <- function(
     ...) {
@@ -124,10 +121,15 @@ kline <- function(
 }
 
 
-#' Chart Open, High, Low and Close prices using OHLC-bars
+#' @title
+#' OHLC Barchart
 #'
 #' @inherit kline
+#'
+#' @example man/examples/scr_ohlcchart.R
+#'
 #' @family price charts
+#' @author Serkan Korkmaz
 #' @export
 ohlc <- function(
     ...) {
@@ -231,12 +233,16 @@ ohlc <- function(
 }
 
 #' @title
-#' Chart Open, High, Low or Close prices using lines
+#' Line Chart
+#'
+#' @inherit kline
 #'
 #' @param price A [character]-vector of [length] 1. "close" by default.
 #'
-#' @inherit kline
+#' @example man/examples/scr_linechart.R
+#'
 #' @family price charts
+#' @author Serkan Korkmaz
 #' @export
 line <- function(
     price = "close",

@@ -6,10 +6,10 @@
 # script start;
 # old function; #######
 
+#' @title
 #' Build an interactive financial chart
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::plot_ly()]- and [plotly::subplot()]-wrapper function for building interactive financial charts using the affiliated [chart]-functions. The [chart] consists
@@ -22,8 +22,17 @@
 #' @param event_data An optional [data.frame] with event line(s) to be added to the [chart()]. See [add_event()] for more details.
 #' @param options An optional [list] of [chart()]-options. See details below.
 #'
-#' @details
+#' @returns A [plotly::plot_ly()] object.
 #'
+#' **Sample Output**
+#' \if{html}{
+#'   \out{<div style="text-align: center">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</div>}
+#' }
+#' \if{latex}{
+#'   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
+#' }
+#'
+#' @details
 #' ## Options
 #'
 #' * \code{dark} A <[logical]>-value of [length] 1. [TRUE] by default. Sets the overall theme of the [chart()]
@@ -38,24 +47,11 @@
 #'
 #' For more details please see [add_event()].
 #'
-#' @family chart indicators
-#' @family price charts
-#'
 #' @example man/examples/scr_charting.R
 #'
-#' @returns A [plotly::plot_ly()] object.
-#'
-#' **Output**
-#'
-#' \if{html}{
-#'   \out{<div style="text-align: center">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</div>}
-#' }
-#' \if{latex}{
-#'   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
-#' }
-#'
+#' @family chart indicators
+#' @family price charts
 #' @author Serkan Korkmaz
-#'
 #' @export
 chart <- function(
     ticker,

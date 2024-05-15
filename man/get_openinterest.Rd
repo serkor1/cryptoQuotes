@@ -32,12 +32,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     open_interest
-#> 2024-05-09 02:00:00      56281.38
 #> 2024-05-10 02:00:00      55302.66
 #> 2024-05-11 02:00:00      59957.97
 #> 2024-05-12 02:00:00      60191.36
 #> 2024-05-13 02:00:00      59818.46
 #> 2024-05-14 02:00:00      58060.72
+#> 2024-05-15 02:00:00      57687.82
 }\if{html}{\out{</div>}}
 }
 \description{

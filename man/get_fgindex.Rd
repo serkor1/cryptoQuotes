@@ -24,12 +24,12 @@ An \link{xts}-object containing,
 \strong{Sample output}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     fgi
-#> 2024-05-09 02:00:00  55
 #> 2024-05-10 02:00:00  66
 #> 2024-05-11 02:00:00  53
 #> 2024-05-12 02:00:00  56
 #> 2024-05-13 02:00:00  57
 #> 2024-05-14 02:00:00  66
+#> 2024-05-15 02:00:00  64
 }\if{html}{\out{</div>}}
 }
 \description{

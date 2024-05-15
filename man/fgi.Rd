@@ -12,7 +12,7 @@ fgi(index, ...)
 \item{...}{For internal use. Please ignore.}
 }
 \value{
-A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
+An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
