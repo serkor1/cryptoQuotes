@@ -33,8 +33,8 @@ chart_ma <- function(
 
 }
 
-
-#' Add Simple Moving Averages (SMA) indicators to the chart
+#' @title
+#' Add Simple Moving Average (SMA) indicators to the chart
 #'
 #' @description
 #'
@@ -53,7 +53,7 @@ chart_ma <- function(
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::SMA].
 #' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
+#' @example man/examples/scr_MAindicator.R
 #'
 #' @returns
 #'
@@ -62,7 +62,7 @@ chart_ma <- function(
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
-#'
+#' @author Serkan Korkmaz
 #' @export
 sma <- function(
     price = "close",
@@ -127,7 +127,7 @@ sma <- function(
 
 }
 
-
+#' @title
 #' Add Exponentially-Weighted Moving Average (EMA) to the chart
 #'
 #' @usage ema(
@@ -141,10 +141,13 @@ sma <- function(
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::EMA].
 #' @inheritParams TTR::EMA
 #' @param ... For internal use. Please ignore.
+#'
 #' @inherit sma
+#'
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 ema <- function(
     price = "close",
@@ -213,6 +216,7 @@ ema <- function(
 
 }
 
+#' @title
 #' Add Double Exponential Moving Average (DEMA) to the chart
 #'
 #' @usage dema(
@@ -227,10 +231,13 @@ ema <- function(
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::DEMA].
 #' @inheritParams TTR::DEMA
 #' @param ... For internal use. Please ignore.
+#'
 #' @inherit sma
+#'
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 dema <- function(
     price = "close",
@@ -303,6 +310,7 @@ dema <- function(
 }
 
 
+#' @title
 #' Add Weighted Moving Average (WMA) to the chart
 #'
 #' @usage wma(
@@ -315,10 +323,13 @@ dema <- function(
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::WMA].
 #' @inheritParams TTR::WMA
 #' @param ... For internal use. Please ignore.
+#'
 #' @inherit sma
+#'
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 wma <- function(
     price = "close",
@@ -388,7 +399,7 @@ wma <- function(
 
 }
 
-
+#' @title
 #' Add Elastic Volume-Weighted Moving Average (EVWMA) to the chart
 #'
 #' @usage evwma(
@@ -400,10 +411,13 @@ wma <- function(
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::EVWMA]
 #' @inheritParams TTR::EVWMA
 #' @param ... For internal use. Please ignore.
+#'
 #' @inherit sma
+#'
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 evwma <- function(
     price = "close",
@@ -468,6 +482,7 @@ evwma <- function(
 }
 
 
+#' @title
 #' Add Zero Lag Exponential Moving Average (ZLEMA) to the chart
 #'
 #' @usage zlema(
@@ -480,10 +495,13 @@ evwma <- function(
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::ZLEMA].
 #' @inheritParams TTR::ZLEMA
 #' @param ... For internal use. Please ignore.
+#'
 #' @inherit sma
+#'
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 zlema <- function(
     price = "close",
@@ -549,6 +567,7 @@ zlema <- function(
 }
 
 
+#' @title
 #' Add Volume-Weighted Moving Average (VWAP) to the chart
 #'
 #' @usage vwap(
@@ -561,10 +580,13 @@ zlema <- function(
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::VWAP]
 #' @inheritParams TTR::VWAP
 #' @param ... For internal use. Please ignore.
+#'
 #' @inherit sma
+#'
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 vwap <- function(
     price = "close",
@@ -634,6 +656,7 @@ vwap <- function(
 
 
 
+#' @title
 #' Add Hull Moving Average (HMA) to the chart
 #'
 #' @usage hma(
@@ -643,13 +666,15 @@ vwap <- function(
 #' )
 #'
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::HMA].
-#' @param ... For internal use. Please ignore.
 #' @inheritParams TTR::HMA
 #' @param ... For internal use. Please ignore.
+#'
 #' @inherit sma
+#'
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 hma <- function(
     price = "close",
@@ -712,6 +737,7 @@ hma <- function(
 
 }
 
+#' @title
 #' Add Arnaud Legoux Moving Average (ALMA) to the chart
 #'
 #' @usage alma(
@@ -723,13 +749,15 @@ hma <- function(
 #' )
 #'
 #' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::ALMA].
-#' @param ... For internal use. Please ignore.
 #' @inheritParams TTR::ALMA
 #' @param ... For internal use. Please ignore.
+#'
 #' @inherit sma
+#'
 #' @family chart indicators
 #' @family moving average indicators
 #' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 alma <- function(
     price = "close",

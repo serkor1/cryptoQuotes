@@ -5,10 +5,10 @@
 # objective: Create expressions to be evaluted in
 # the charting function
 # script start;
+#' @title
 #' Chart the Relative Strength Index (RSI)
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-function that interacts with the [TTR::RSI()]-function. The function adds a subchart with a
@@ -36,7 +36,8 @@
 #'
 #' @family chart indicators
 #' @family subchart indicators
-#'
+#' @family momentum indicators
+#' @author Serkan Korkmaz
 #' @export
 rsi <- function(
     price       = "close",

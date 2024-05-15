@@ -36,8 +36,8 @@ cryptoQuotes::chart(
 \seealso{
 Other price charts: 
 \code{\link{chart}()},
-\code{\link{line}()},
-\code{\link{ohlc}()}
+\code{\link{ohlc}()},
+\code{\link{pline}()}
 }
 \author{
 Serkan Korkmaz

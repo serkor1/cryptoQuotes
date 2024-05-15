@@ -90,13 +90,18 @@ Other chart indicators:
 \code{\link{zlema}()}
 
 Other subchart indicators: 
+\code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{volume}()}
+
+Other momentum indicators: 
+\code{\link{macd}()}
 }
 \author{
 Serkan Korkmaz
 }
 \concept{chart indicators}
+\concept{momentum indicators}
 \concept{subchart indicators}

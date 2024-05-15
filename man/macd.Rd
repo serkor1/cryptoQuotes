@@ -4,7 +4,14 @@
 \alias{macd}
 \title{Chart the Moving Average Convergence Divergence (MACD) indicator}
 \usage{
-macd(nFast = 12, nSlow = 26, nSig = 9, maType = "SMA", percent = TRUE, ...)
+macd(
+ nFast   = 12,
+ nSlow   = 26,
+ nSig    = 9,
+ maType  = "SMA",
+ percent = TRUE,
+ ...
+)
 }
 \arguments{
 \item{nFast}{Number of periods for fast moving average.}
@@ -35,15 +42,6 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 
 A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that interacts with the \code{\link[TTR:MACD]{TTR::MACD()}}-function. The function adds subchart with a
 \code{\link[TTR:MACD]{TTR::MACD()}}-indicator.
-
-#' @usage macd(
-nFast   = 12,
-nSlow   = 26,
-nSig    = 9,
-maType  = "SMA",
-percent = TRUE,
-...
-#' )
 }
 \examples{
 # script start;
@@ -91,13 +89,18 @@ Other chart indicators:
 \code{\link{zlema}()}
 
 Other subchart indicators: 
+\code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{rsi}()},
 \code{\link{volume}()}
+
+Other momentum indicators: 
+\code{\link{rsi}()}
 }
 \author{
 Serkan Korkmaz
 }
 \concept{chart indicators}
+\concept{momentum indicators}
 \concept{subchart indicators}

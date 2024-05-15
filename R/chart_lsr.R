@@ -3,12 +3,10 @@
 # author: Serkan Korkmaz, serkor1@duck.com
 # objective:
 # script start;
-
-
+#' @title
 #' Chart the long-short ratio
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::plot_ly()]-wrapper function. The function adds a subchart to the [chart] with `long-short ratio`.
@@ -16,12 +14,12 @@
 #' @param ratio A [xts::xts()]-object. See [get_lsratio()] for more details.
 #' @inherit kline
 #'
-#' @example man/examples/scr_LSR.R
+#' @example man/examples/scr_chartLSR.R
 #'
 #' @family chart indicators
 #' @family sentiment indicators
 #' @family subchart indicators
-#'
+#' @author Serkan Korkmaz
 #' @export
 lsr <- function(
     ratio,

@@ -6,23 +6,23 @@
 # the charting function
 # script start;
 
+#' @title
 #' Chart the Moving Average Convergence Divergence (MACD) indicator
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-function that interacts with the [TTR::MACD()]-function. The function adds subchart with a
 #' [TTR::MACD()]-indicator.
 #'
-#' #' @usage macd(
+#' @usage macd(
 #'  nFast   = 12,
 #'  nSlow   = 26,
 #'  nSig    = 9,
 #'  maType  = "SMA",
 #'  percent = TRUE,
 #'  ...
-#' #' )
+#' )
 #'
 #' @inheritParams TTR::MACD
 #' @param ... For internal use. Please ignore.
@@ -33,7 +33,8 @@
 #'
 #' @family chart indicators
 #' @family subchart indicators
-#'
+#' @family momentum indicators
+#' @author Serkan Korkmaz
 #' @export
 macd <- function(
     nFast   = 12,

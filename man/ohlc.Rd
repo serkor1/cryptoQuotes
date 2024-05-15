@@ -37,7 +37,7 @@ cryptoQuotes::chart(
 Other price charts: 
 \code{\link{chart}()},
 \code{\link{kline}()},
-\code{\link{line}()}
+\code{\link{pline}()}
 }
 \author{
 Serkan Korkmaz

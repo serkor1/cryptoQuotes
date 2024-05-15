@@ -30,24 +30,13 @@ adds moving average indicators to the main \code{\link[=chart]{chart()}}.
 \examples{
 # script start;
 
-# 1) charting weekly
-# BTC using candlesticks
-# and indicators
 cryptoQuotes::chart(
-  ticker     = BTC,
-  main       = cryptoQuotes::kline(),
-  sub        = list(
-    cryptoQuotes::volume(),
-    cryptoQuotes::macd()
-  ),
+  ticker = BTC,
+  main   = kline(),
   indicator = list(
-    cryptoQuotes::bollinger_bands(),
-    cryptoQuotes::sma(),
-    cryptoQuotes::alma()
-  ),
-  options = list(
-    dark       = TRUE,
-    deficiency = FALSE
+    cryptoQuotes::ema(n = 7),
+    cryptoQuotes::sma(n = 14),
+    cryptoQuotes::wma(n = 21)
   )
 )
 
@@ -83,6 +72,7 @@ Other moving average indicators:
 \code{\link{zlema}()}
 
 Other main chart indicators: 
+\code{\link{add_event}()},
 \code{\link{alma}()},
 \code{\link{bollinger_bands}()},
 \code{\link{dema}()},
@@ -92,6 +82,9 @@ Other main chart indicators:
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{main chart indicators}

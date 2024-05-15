@@ -5,11 +5,11 @@
 # the charting function
 # script start;
 
+#' @title
 #' Add Bollinger Bands
 #' to the chart
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::add_lines()]-wrapper function that interacts with the [TTR::BBands()]-function. The function
@@ -25,11 +25,12 @@
 #'
 #' @inheritParams TTR::BBands
 #' @param color A [character]-vector of [length] 1. "#F100F1" by default.
+#'
 #' @inherit kline
 #'
 #' @family chart indicators
 #' @family main chart indicators
-#'
+#' @author Serkan Korkmaz
 #' @export
 bollinger_bands <- function(
     n = 20,

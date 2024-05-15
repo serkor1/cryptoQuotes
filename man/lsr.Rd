@@ -25,7 +25,7 @@ A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function. T
 
   # 1) long-short ratio
   # on BTCUSDT pair
-  ls_ratio <- cryptoQuotes::get_lsratio(
+  LS_BTC <- cryptoQuotes::get_lsratio(
     ticker   = 'BTCUSDT',
     interval = '15m',
     from     = Sys.Date() - 1,
@@ -48,18 +48,15 @@ A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function. T
     ticker = BTC,
     main   = cryptoQuotes::kline(),
     sub    = list(
-      cryptoQuotes::lsr(ratio = ls_ratio),
-      cryptoQuotes::volume()
-    ),
-    indicator = list(
-      cryptoQuotes::bollinger_bands()
+      cryptoQuotes::lsr(
+        ratio = LS_BTC
+      )
     )
   )
+
+  # end of scrtipt;
 }
 
-
-
-# end of scrtipt;
 }
 \seealso{
 Other chart indicators: 
@@ -84,6 +81,7 @@ Other sentiment indicators:
 \code{\link{fgi}()}
 
 Other subchart indicators: 
+\code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},

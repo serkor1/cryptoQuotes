@@ -239,12 +239,12 @@ ohlc <- function(
 #'
 #' @param price A [character]-vector of [length] 1. "close" by default.
 #'
-#' @example man/examples/scr_linechart.R
+#' @example man/examples/scr_plinechart.R
 #'
 #' @family price charts
 #' @author Serkan Korkmaz
 #' @export
-line <- function(
+pline <- function(
     price = "close",
     ...) {
 

@@ -69,6 +69,7 @@ Other chart indicators:
 \code{\link{zlema}()}
 
 Other main chart indicators: 
+\code{\link{add_event}()},
 \code{\link{alma}()},
 \code{\link{dema}()},
 \code{\link{ema}()},

@@ -4,25 +4,25 @@
 # objective:
 # script start;
 
+#' @title
 #' Chart the Fear and Greed Index
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::plot_ly()]-wrapper function. The function adds a subchart with the `fear and greed`-index.
 #'
 #' @param index A [xts::xts()]-object. See [get_fgindex()] for more details.
 #'
-#' @example man/examples/scr_FGIndex.R
-#'
 #' @inherit kline
 #' @inherit get_fgindex
+#'
+#' @example man/examples/scr_chartFGIndex.R
 #'
 #' @family chart indicators
 #' @family sentiment indicators
 #' @family subchart indicators
-#'
+#' @author Serkan Korkmaz
 #' @export
 fgi <- function(
     index,

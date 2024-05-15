@@ -2,7 +2,7 @@
 % Please edit documentation in R/chart_event.R
 \name{add_event}
 \alias{add_event}
-\title{add eventlines to the chart}
+\title{Add eventlines to the chart}
 \usage{
 add_event(data, ...)
 }
@@ -130,9 +130,30 @@ Other chart indicators:
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
+
+Other subchart indicators: 
+\code{\link{fgi}()},
+\code{\link{lsr}()},
+\code{\link{macd}()},
+\code{\link{rsi}()},
+\code{\link{volume}()}
+
+Other main chart indicators: 
+\code{\link{alma}()},
+\code{\link{bollinger_bands}()},
+\code{\link{dema}()},
+\code{\link{ema}()},
+\code{\link{evwma}()},
+\code{\link{hma}()},
+\code{\link{sma}()},
+\code{\link{vwap}()},
+\code{\link{wma}()},
+\code{\link{zlema}()}
 }
 \author{
 Serkan Korkmaz
 }
 \concept{chart indicators}
+\concept{main chart indicators}
+\concept{subchart indicators}
 \keyword{internal}

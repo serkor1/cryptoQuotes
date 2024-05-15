@@ -1,7 +1,7 @@
-#' add eventlines to the chart
+#' @title
+#' Add eventlines to the chart
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::layout()]-function. The function adds `shapes` and `annotations` to the main [chart()].
@@ -9,8 +9,9 @@
 #' @param data a [data.frame]-type object with `index`, `event` and `color` columns.
 #' @param ... For internal use. Please ignore.
 #'
-#' @details
+#' @returns A [plotly::plot_ly()]-object with `shapes` and `annotations`
 #'
+#' @details
 #' The [data.frame] must include the following columns,
 #'
 #' * `index` [integer] or [date]: corresponding to the event timing.
@@ -20,11 +21,10 @@
 #' @example man/examples/scr_addEvents.R
 #'
 #' @family chart indicators
-#' @keywords internal
-#'
+#' @family subchart indicators
+#' @family main chart indicators
 #' @author Serkan Korkmaz
-#'
-#' @returns A [plotly::plot_ly()]-object with `shapes` and `annotations`
+#' @keywords internal
 add_event <- function(
     data,
     ...
