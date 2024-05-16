@@ -72,16 +72,6 @@ bollinger_bands <- function(
       # # of the args
       # data <- args$data
 
-      # 0) construct arguments
-      # via chart function
-      args <- list(
-        ...
-      )
-
-      # # 1) unpack all elements
-      # # of the args
-      # data <- args$data
-
       # 0.4) linewidth
       linewidth <- 0.90
 

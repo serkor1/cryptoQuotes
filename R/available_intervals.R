@@ -1,3 +1,4 @@
+#' @title
 #' Get available intervals
 #'
 #' @description
@@ -16,7 +17,6 @@
 #'
 #' @inherit available_exchanges
 #'
-#' @example man/examples/scr_availableIntervals.R
 #'
 #' @returns
 #'
@@ -32,11 +32,10 @@
 #'    )
 #' )
 #' ```
-#'
-#' @author Serkan Korkmaz
+#' @example man/examples/scr_availableIntervals.R
 #'
 #' @family supported calls
-#'
+#' @author Serkan Korkmaz
 #' @export
 available_intervals <- function(
     source = 'binance',

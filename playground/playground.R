@@ -16,8 +16,10 @@ rm(list = ls()); gc(); devtools::load_all()
 #   auto.assign = FALSE
 # )
 custom_indicator <- function(
-    FUN = TTR::DonchianChannel
+    FUN,
+    type
 ) {
+
 
 }
 

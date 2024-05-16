@@ -1,3 +1,4 @@
+#' @title
 #' Get actively traded cryptocurrency pairs
 #'
 #' @description
@@ -7,14 +8,10 @@
 #'
 #' @inheritParams get_quote
 #'
-#' @example man/examples/scr_availableTickers.R
-#'
 #' @returns
-#'
 #' A [character]-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
 #'
 #' **Sample output**
-#'
 #' ```{r output, echo = FALSE}
 #' head(
 #'    cryptoQuotes::available_tickers(
@@ -24,16 +21,14 @@
 #' )
 #' ```
 #'
-#'
 #' @details
-#'
 #' The naming-conventions across, and within, [available_exchanges()] are not necessarily the same. This function lists
 #' all actively traded tickers.
 #'
-#' @author Serkan Korkmaz
+#' @example man/examples/scr_availableTickers.R
 #'
 #' @family supported calls
-#'
+#' @author Serkan Korkmaz
 #' @export
 available_tickers <- function(
     source  = 'binance',
