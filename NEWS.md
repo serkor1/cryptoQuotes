@@ -37,6 +37,11 @@ needs to be resolved on `stable`- and `experimental`-functions.
 
 ## Bugfixes
 
+* Fixed a bug where `get_fgindex()` where labelled as `deprecated`
+* Fixed a bug in the `limitations`-article where the desired number of observations werent compatible with the `kraken`-exchange.
+* Fixed a warning in the `get_lsratio()`-function with `source = "binance"`
+* Fixed a bug in the `lsr()`-indicator which broke the `chart()`-function when included.
+
 # cryptoQuotes 1.3.0
 
 ## Improvements

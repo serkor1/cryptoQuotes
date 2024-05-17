@@ -11,14 +11,14 @@ testthat::test_that(
     # 1) create chart
     # with klines
     test_chart <- chart(
-      ticker     = BTC,
+      ticker     = cryptoQuotes:::control_data$quote,
       main       = kline(),
       sub        = list(
         volume(),
         rsi(),
-        macd()
-        # ,
-        # fgi(index = FGIndex)
+        macd(),
+        fgi(index = cryptoQuotes:::control_data$fgindex),
+        lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
       indicator  = list(
         dema(),
@@ -54,19 +54,69 @@ testthat::test_that(
 
 
 testthat::test_that(
+  desc = "Charting with klines and indicators",
+  code = {
+
+    # 1) create chart
+    # with klines
+    test_chart <- chart(
+      ticker     = cryptoQuotes:::control_data$quote,
+      main       = pline(),
+      sub        = list(
+        volume(),
+        rsi(),
+        macd(),
+        fgi(index = cryptoQuotes:::control_data$fgindex),
+        lsr(ratio = cryptoQuotes:::control_data$lsratio)
+      ),
+      indicator  = list(
+        dema(),
+        ema(),
+        evwma(),
+        hma(),
+        zlema(),
+        sma(),
+        wma(),
+        evwma(),
+        vwap(),
+        bollinger_bands()
+
+      )
+    )
+
+    # 2) check that there is no erros
+    testthat::expect_no_error(
+      test_chart
+    )
+
+    # 3) check that its a plotly
+    # object
+    testthat::expect_true(
+      object = inherits(
+        x =  test_chart,
+        what = "plotly"
+      ),
+    )
+
+  }
+)
+
+
+testthat::test_that(
   desc = "Charting with ohlc bars and indicators",
   code = {
 
     # 1) create chart
     # with klines
     test_chart <- chart(
-      ticker     = BTC,
+      ticker     = cryptoQuotes:::control_data$quote,
       main       = ohlc(),
       sub        = list(
         volume(),
         rsi(),
         macd(),
-        fgi(index = FGIndex)
+        fgi(index = cryptoQuotes:::control_data$fgindex),
+        lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
       indicator  = list(
         dema(),

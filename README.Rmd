@@ -12,10 +12,10 @@ Sys.setenv(OPENSSL_CONF="/dev/null")
 
 knitr::opts_chunk$set(
   collapse = FALSE,
-  comment = "#>",
+  comment  = "#>",
   fig.path = "man/figures/README-",
-  message = FALSE,
-  warning = FALSE
+  message  = FALSE,
+  warning  = FALSE
 )
 ```
 

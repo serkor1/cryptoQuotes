@@ -5,9 +5,14 @@ subtitle: "What about data integrity?"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = TRUE,
-  message = FALSE
-  )
+  collapse   = TRUE,
+  message    = FALSE,
+  echo       = TRUE, 
+  comment    = "#>",
+  out.width  = "100%",
+  out.height = "620px",
+  fig.align  = "center"
+)
 ```
 
 ```{r, message = FALSE}

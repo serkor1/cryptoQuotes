@@ -4,10 +4,13 @@ title: "Cryptocurrency Market Data with quantmod and TTR"
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  message = FALSE,
-  out.width = "100%"
+  collapse   = TRUE,
+  message    = FALSE,
+  echo       = TRUE, 
+  comment    = "#>",
+  out.width  = "100%",
+  out.height = "620px",
+  fig.align  = "center"
 )
 ```
 

@@ -5,12 +5,12 @@ subtitle: "The cryptoQuotes way"
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  message = FALSE,
-  comment = "#>",
-  out.width = "100%",
-  out.height = "1000",
-  fig.align = "center"
+  collapse   = TRUE,
+  message    = FALSE,
+  comment    = "#>",
+  out.width  = "100%",
+  out.height = "620px",
+  fig.align  = "center"
 )
 ```
 
