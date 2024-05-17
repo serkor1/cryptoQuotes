@@ -130,20 +130,20 @@ same data structure as the <code>xts</code>,</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 3) head data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tbl</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 6</span></span></span>
-<span><span class="co">##   Index                open  high   low close volume</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> 2023-12-29 <span style="color: #949494;">23:00:00</span>  10.9  10.9  10.9  10.9  <span style="text-decoration: underline;">3</span>260.</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> 2023-12-29 <span style="color: #949494;">23:15:00</span>  10.9  11.0  10.9  11.0  <span style="text-decoration: underline;">1</span>863.</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> 2023-12-29 <span style="color: #949494;">23:30:00</span>  11.0  11.0  10.9  11.0  <span style="text-decoration: underline;">1</span>861.</span></span></code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tbl</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 6</span></span></span>
+<span><span class="co">#&gt;   Index                open  high   low close volume</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-12-29 <span style="color: #949494;">23:00:00</span>  10.9  10.9  10.9  10.9  <span style="text-decoration: underline;">3</span>260.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-12-29 <span style="color: #949494;">23:15:00</span>  10.9  11.0  10.9  11.0  <span style="text-decoration: underline;">1</span>863.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-12-29 <span style="color: #949494;">23:30:00</span>  11.0  11.0  10.9  11.0  <span style="text-decoration: underline;">1</span>861.</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="converting-xts-and-zoo-to-data-table">Converting xts and zoo to data.table<a class="anchor" aria-label="anchor" href="#converting-xts-and-zoo-to-data-table"></a>
 </h2>
 <p>Converting to <code>data.table</code> is straightforward as
 <code>as.data.table()</code> handles everything under the hood,</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) convert to data.table</span></span>
 <span><span class="co"># using as.data.table</span></span>
 <span><span class="va">DT</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span></span>
@@ -154,12 +154,12 @@ same data structure as the <code>xts</code>,</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">DT</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'Index'</span></span>
 <span></span>
 <span><span class="co"># 3) head data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">DT</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##                  Index    open    high     low   close   volume</span></span>
-<span><span class="co">##                 &lt;POSc&gt;   &lt;num&gt;   &lt;num&gt;   &lt;num&gt;   &lt;num&gt;    &lt;num&gt;</span></span>
-<span><span class="co">## 1: 2023-12-30 00:00:00 10.8778 10.9133 10.8775 10.9089 3259.760</span></span>
-<span><span class="co">## 2: 2023-12-30 00:15:00 10.9089 10.9530 10.9008 10.9512 1862.697</span></span>
-<span><span class="co">## 3: 2023-12-30 00:30:00 10.9512 10.9884 10.9373 10.9832 1861.493</span></span></code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">DT</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                  Index    open    high     low   close   volume</span></span>
+<span><span class="co">#&gt;                 &lt;POSc&gt;   &lt;num&gt;   &lt;num&gt;   &lt;num&gt;   &lt;num&gt;    &lt;num&gt;</span></span>
+<span><span class="co">#&gt; 1: 2023-12-30 00:00:00 10.8778 10.9133 10.8775 10.9089 3259.760</span></span>
+<span><span class="co">#&gt; 2: 2023-12-30 00:15:00 10.9089 10.9530 10.9008 10.9512 1862.697</span></span>
+<span><span class="co">#&gt; 3: 2023-12-30 00:30:00 10.9512 10.9884 10.9373 10.9832 1861.493</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="checking-data-integrity">Checking data integrity<a class="anchor" aria-label="anchor" href="#checking-data-integrity"></a>
@@ -170,7 +170,7 @@ same data structure as the <code>xts</code>,</p>
 <p>It is important that the date.time has not been converted to a
 different timezone in the process, without explicitly coding it as
 such,</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) store date.time objects</span></span>
 <span><span class="va">time_objects</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  tbl <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">Index</span>,</span>
@@ -190,8 +190,8 @@ such,</p>
 <span>      </span>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="checking-ohlcv-values">Checking OHLCV values<a class="anchor" aria-label="anchor" href="#checking-ohlcv-values"></a>
@@ -200,16 +200,17 @@ such,</p>
 with the order of the data during conversion without a warning in the
 documentation, but nonetheless for the sake of argument, we will check
 the OHLCV values,</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) store price objects</span></span>
 <span><span class="co"># Open price here</span></span>
 <span><span class="va">open_price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  tbl <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">Open</span>,</span>
 <span>  DT  <span class="op">=</span> <span class="va">DT</span><span class="op">$</span><span class="va">Open</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Unknown or uninitialised column: `Open`.</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 2) check if they are all equal</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Unknown or uninitialised column: `Open`.</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># 2) check if they are all equal</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span></span>
 <span>    <span class="va">open_price</span>,</span>
@@ -222,8 +223,8 @@ the OHLCV values,</p>
 <span>      </span>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
