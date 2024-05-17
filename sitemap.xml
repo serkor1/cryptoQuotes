@@ -31,7 +31,13 @@
     <loc>https://serkor1.github.io/cryptoQuotes/articles/cryptoQuotes.html</loc>
   </url>
   <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/articles/custom_indicators.html</loc>
+  </url>
+  <url>
     <loc>https://serkor1.github.io/cryptoQuotes/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/articles/usecase.html</loc>
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/authors.html</loc>
@@ -92,6 +98,9 @@
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/chart.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/chart_layout.html</loc>
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/convert_date.html</loc>
@@ -164,6 +173,9 @@
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/ohlc.html</loc>
+  </url>
+  <url>
+    <loc>https://serkor1.github.io/cryptoQuotes/reference/pline.html</loc>
   </url>
   <url>
     <loc>https://serkor1.github.io/cryptoQuotes/reference/remove_bound.html</loc>

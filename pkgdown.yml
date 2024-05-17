@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   00-introduction: 00-introduction.html
@@ -8,7 +8,9 @@ articles:
   04-converting: 04-converting.html
   05-quantmod: 05-quantmod.html
   cryptoQuotes: cryptoQuotes.html
-last_built: 2024-03-15T05:09Z
+  custom_indicators: custom_indicators.html
+  usecase: usecase.html
+last_built: 2024-05-17T05:12Z
 urls:
   reference: https://serkor1.github.io/cryptoQuotes/reference
   article: https://serkor1.github.io/cryptoQuotes/articles
