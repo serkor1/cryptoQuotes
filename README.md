@@ -6,9 +6,9 @@
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://www.cran-e.com/package/cryptoQuotes)
+status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
 [![CRAN RStudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://www.cran-e.com/package/cryptoQuotes)
+downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/serkor1/cryptoQuotes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/serkor1/cryptoQuotes?branch=main)
@@ -32,7 +32,7 @@ exchanges,
 
 <div align="center">
 
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Supported exchanges, markets and intervals.
 </caption>
@@ -186,7 +186,7 @@ BTC <- cryptoQuotes::get_quote(
 
 <div align="center">
 
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Bitcoin (BTC) OHLC-prices
 </caption>
@@ -215,122 +215,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-07 04:00:00
+2024-05-17 02:30:00
 </td>
 <td style="text-align:center;">
-63895.72
+65414.27
 </td>
 <td style="text-align:center;">
-63953.34
+65508.7
 </td>
 <td style="text-align:center;">
-63700
+65266.66
 </td>
 <td style="text-align:center;">
-63825.08
+65508.69
 </td>
 <td style="text-align:left;">
-272.932
+360.12113
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-07 04:30:00
+2024-05-17 03:00:00
 </td>
 <td style="text-align:center;">
-63825.09
+65508.7
 </td>
 <td style="text-align:center;">
-63840
+65510.22
 </td>
 <td style="text-align:center;">
-63620.03
+65106.38
 </td>
 <td style="text-align:center;">
-63702.76
+65216.39
 </td>
 <td style="text-align:left;">
-242.64831
+329.0259
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-07 05:00:00
+2024-05-17 03:30:00
 </td>
 <td style="text-align:center;">
-63702.76
+65216.39
 </td>
 <td style="text-align:center;">
-63733.16
+65407.11
 </td>
 <td style="text-align:center;">
-62897.21
+65216.39
 </td>
 <td style="text-align:center;">
-62962.2
+65340.84
 </td>
 <td style="text-align:left;">
-789.70395
+191.20862
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-07 05:30:00
+2024-05-17 04:00:00
 </td>
 <td style="text-align:center;">
-62962.21
+65340.83
 </td>
 <td style="text-align:center;">
-63326.72
+65370.46
 </td>
 <td style="text-align:center;">
-62832.6
+65188
 </td>
 <td style="text-align:center;">
-63239.49
+65248.53
 </td>
 <td style="text-align:left;">
-686.9201
+189.01467
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-07 06:00:00
+2024-05-17 04:30:00
 </td>
 <td style="text-align:center;">
-63239.5
+65248.53
 </td>
 <td style="text-align:center;">
-63421.63
+65450.07
 </td>
 <td style="text-align:center;">
-63092.76
+65230
 </td>
 <td style="text-align:center;">
-63382.01
+65386.01
 </td>
 <td style="text-align:left;">
-389.20613
+181.40422
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-07 06:30:00
+2024-05-17 05:00:00
 </td>
 <td style="text-align:center;">
-63382.01
+65386
 </td>
 <td style="text-align:center;">
-63470.58
+65648.63
 </td>
 <td style="text-align:center;">
-63298.85
+65354.23
 </td>
 <td style="text-align:center;">
-63466.26
+65634.06
 </td>
 <td style="text-align:left;">
-271.66403
+342.23246
 </td>
 </tr>
 </tbody>
