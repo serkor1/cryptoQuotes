@@ -29,7 +29,9 @@ the exchange, market and endpoint.
 
 \strong{Sample output}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "1m"  "3m"  "5m"  "15m" "30m" "1h"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> i Available Intervals at "bybit" (futures):
+#> v 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 12h, 1d, 1M, 1w
+#> [1] "1m"  "3m"  "5m"  "15m" "30m" "1h"
 }\if{html}{\out{</div>}}
 }
 \description{

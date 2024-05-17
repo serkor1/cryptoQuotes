@@ -16,8 +16,8 @@ A \link{character}-vector of actively traded cryptocurrency pairs on the exchang
 
 \strong{Sample output}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10000000AIDOGEUSDT" "10000COQUSDT"       "10000LADYSUSDT"    
-#> [4] "10000NFTUSDT"       "10000SATSUSDT"      "10000STARLUSDT"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10000000AIDOGEUSDT" "1000000MOGUSDT"     "10000COQUSDT"      
+#> [4] "10000LADYSUSDT"     "10000NFTUSDT"       "10000SATSUSDT"
 }\if{html}{\out{</div>}}
 }
 \description{

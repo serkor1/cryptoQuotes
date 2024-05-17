@@ -85,11 +85,11 @@ What differentiates the two `classes` of indicators, is the addition of `indicat
 
 The indicator logic is important for the correct charting of your custom indicator. As the `cryptoQuotes`-package uses `plotly` as backend for charting, your `class` of indicator has to be consistent with the use of `plotly`-functions. More specifically; `subchart`-indicators uses `plotly::plot_ly()`-functions, while main chart `indicator` uses `add_*`-functions.
 
-When creating the custom indicators there is a couple of additional steps needed which will be covered in an example.
+When creating the custom indicators there is a couple of additional steps needed which will be covered in the examples.
 
 ## Donchian Channels (Example)
 
-Assume a trading strategy based on Donchian Channels (`TTR::DonchianChannel()`) is needed to optimize your profits. This indicator is main chart indicator, similar to that of `TTR::BBands()`,
+Assume a trading strategy based on Donchian Channels (`TTR::DonchianChannel()`) is needed to optimize your profits. This indicator is a main chart indicator, similar to that of `TTR::BBands()`,
 
 ```{r}
 tail(
@@ -99,7 +99,7 @@ tail(
 )
 ```
 
-This indicator has three elements; `high`, `mid` and `low`. To chart this indicator, we would need to call the `plotly::add_lines()`-functions three times to chart it properly. Each of these elements are defined as `layers` in the `cryptoQuotes`-package. All layers get built with the `cryptoQuotes:::build()`-function.
+This indicator has three features; `high`, `mid` and `low`. To chart this indicator, we would need to call the `plotly::add_lines()`-function three times to chart it properly. Each of these features are defined as `layers` in the `cryptoQuotes`-package. All layers get built with the `cryptoQuotes:::build()`-function.
 
 ```{r}
 ## define custom TA
@@ -267,7 +267,7 @@ chart(
 
 ## Commodity Channel Index (Example)
 
-Assume a trading strategy based on Commodity Channel Indices (`TTR::CCI()`) is needed to optimize your profits. This indicator is subchart indicator, similar to that of `TTR::RSI()`,
+Assume a trading strategy based on Commodity Channel Indices (`TTR::CCI()`) is needed to optimize your profits. This indicator is subchart indicator similar to that of `TTR::RSI()`,
 
 ```{r}
 tail(
@@ -277,15 +277,15 @@ tail(
 )
 ```
 
-This indicator has a single element; `cci`. As this indicator is a subchart indicator, we only need a single layer built with `plot_ly()`. To create this indicator, we follow the same structure as in the previous example,
+This indicator has a single feature; `cci`. As this indicator is a subchart indicator with a single feature, we only need a single `layer` built with `plot_ly()`,
 
 
 ```{r}
 ## define custom TA
-## donchian_channel
+## Commodity Channel Index (CCI)
 cc_index <- function(
     ## these arguments are the
-    ## available arguments in the TTR::DonchianChannel
+    ## available arguments in the TTR::CCI
     ## function
     n = 20,
     maType,
@@ -345,7 +345,7 @@ cc_index <- function(
             type = "scatter",
             mode = "lines",
             line = list(
-              color = "steelblue",
+              color = cryptoQuotes:::as_rgb(alpha = 1, hex_color = "#d38b68"),
               width = 0.9
             )
           )
@@ -394,4 +394,20 @@ chart(
   )
 )
 ```
+
+## Summary
+
+Creating custom indicators for the `chart()`-functions can be daunting. Two examples of how these are developed in th e `cryptoQuotes`-packages have been covered.
+
+> **Note:** A full pipeline of charting indicators, custom and built-in, will be released sometime in the future.
+
+To summarise the example,
+
+1. Define the `indicator`-function (e.g `TTR::CCI()`)
+2. Define the `chart`-function for the indicator (e.g `cc_index()`)
+    1. Wrap the `indicator`-function in `cryptoQuotes:::indicator()`
+    2. Define the `layers` according to features, and wether its a subchart or main chart indicator
+    3. Build the chart using `cryptoQuotes:::build()`
+3. Add the `chart`-function for the indicator in the appropriate argument in the `chart()`-function
+
 
