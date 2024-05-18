@@ -33,9 +33,8 @@
 #'
 #' ```{r output, echo = FALSE}
 #' ## fear and greed index
-#'
 #' tail(
-#'    cryptoQuotes::get_fgindex()
+#'    cryptoQuotes:::control_data$fgindex
 #' )
 #' ```
 #'

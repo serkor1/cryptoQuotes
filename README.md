@@ -175,11 +175,11 @@ Get USDT denominated Bitcoin spot market price from Binance with
 ## from Binance spot market
 ## in 30 minute intervals
 BTC <- cryptoQuotes::get_quote(
-  ticker = 'BTCUSDT',
-  source = 'binance',
-  futures = FALSE,
+  ticker   = 'BTCUSDT',
+  source   = 'binance',
+  futures  = FALSE,
   interval = '30m',
-  from    = Sys.Date() - 1 
+  from     = Sys.Date() - 1 
 )
 ```
 
@@ -214,122 +214,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-17 15:00:00
+2024-05-18 08:30:00
 </td>
 <td style="text-align:center;">
-66379.97
+66753.62
 </td>
 <td style="text-align:center;">
-66458.63
+66963.86
 </td>
 <td style="text-align:center;">
-66155.12
+66730
 </td>
 <td style="text-align:center;">
-66333.16
+66920.03
 </td>
 <td style="text-align:left;">
-541.84776
+350.87501
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-17 15:30:00
+2024-05-18 09:00:00
 </td>
 <td style="text-align:center;">
-66333.15
+66920.03
 </td>
 <td style="text-align:center;">
-66393.59
+67240.69
 </td>
 <td style="text-align:center;">
-65828.03
+66839.12
 </td>
 <td style="text-align:center;">
-65944.02
+67190.01
 </td>
 <td style="text-align:left;">
-788.85641
+420.24327
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-17 16:00:00
+2024-05-18 09:30:00
 </td>
 <td style="text-align:center;">
-65944.02
+67190
 </td>
 <td style="text-align:center;">
-66422.31
+67190.01
 </td>
 <td style="text-align:center;">
-65914.81
+66829
 </td>
 <td style="text-align:center;">
-66348.05
+66887
 </td>
 <td style="text-align:left;">
-559.0893
+448.78951
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-17 16:30:00
+2024-05-18 10:00:00
 </td>
 <td style="text-align:center;">
-66348.04
+66887.01
 </td>
 <td style="text-align:center;">
-66850
+67085.19
 </td>
 <td style="text-align:center;">
-66281.27
+66840
 </td>
 <td style="text-align:center;">
-66806.66
+67010
 </td>
 <td style="text-align:left;">
-1035.00651
+281.41346
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-17 17:00:00
+2024-05-18 10:30:00
 </td>
 <td style="text-align:center;">
-66806.67
+67009.99
 </td>
 <td style="text-align:center;">
-67404.22
+67037.45
 </td>
 <td style="text-align:center;">
-66552.53
+66923.87
 </td>
 <td style="text-align:center;">
-67392.01
+67027.59
 </td>
 <td style="text-align:left;">
-2386.36993
+178.27045
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-17 17:30:00
+2024-05-18 11:00:00
 </td>
 <td style="text-align:center;">
-67392.01
+67027.59
 </td>
 <td style="text-align:center;">
-67451.2
+67119.04
 </td>
 <td style="text-align:center;">
-67033.83
+66999.99
 </td>
 <td style="text-align:center;">
-67195.1
+67018.19
 </td>
 <td style="text-align:left;">
-1411.25731
+369.53234
 </td>
 </tr>
 </tbody>

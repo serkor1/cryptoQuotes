@@ -33,11 +33,9 @@
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}
+#' ## Get daily quote
 #' tail(
-#'    cryptoQuotes::get_quote(
-#'      ticker = "BTCUSDT",
-#'      source = "bybit"
-#'    )
+#'    cryptoQuotes:::control_data$quote
 #' )
 #' ```
 #'

@@ -214,11 +214,11 @@ Get USDT denominated Bitcoin spot market price from Binance with `30m`-intervals
 ## from Binance spot market
 ## in 30 minute intervals
 BTC <- cryptoQuotes::get_quote(
-  ticker = 'BTCUSDT',
-  source = 'binance',
-  futures = FALSE,
+  ticker   = 'BTCUSDT',
+  source   = 'binance',
+  futures  = FALSE,
   interval = '30m',
-  from    = Sys.Date() - 1 
+  from     = Sys.Date() - 1 
 )
 ```
 

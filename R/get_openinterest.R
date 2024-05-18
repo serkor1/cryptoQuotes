@@ -32,11 +32,9 @@
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}
+#' ## Open Interest
 #' tail(
-#'    cryptoQuotes::get_openinterest(
-#'      ticker = "BTCUSDT",
-#'      source = "bybit"
-#'    )
+#'    cryptoQuotes:::control_data$openinterest
 #' )
 #' ```
 #'

@@ -31,11 +31,9 @@
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}
+#' ## funding rate
 #' tail(
-#'    cryptoQuotes::get_fundingrate(
-#'      ticker = "BTCUSDT",
-#'      source = "bybit"
-#'    )
+#'    cryptoQuotes:::control_data$fundingrate
 #' )
 #' ```
 #'

@@ -34,11 +34,9 @@
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}
+#' ## Long-Short Ratio
 #' tail(
-#'    cryptoQuotes::get_lsratio(
-#'      ticker = "BTCUSDT",
-#'      source = "bybit"
-#'    )
+#'    cryptoQuotes:::control_data$lsratio
 #' )
 #' ```
 #'
