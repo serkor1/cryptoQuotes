@@ -150,7 +150,7 @@ get_quote <- function(
       "i" = paste(
         "Run",
         cli::code_highlight(
-          code = sprintf("cryptoQuotes::available_intervals(source = '%s', futures = '%s')", source, futures),
+          code = sprintf("cryptoQuotes::available_intervals(source = '%s', type = 'ohlc, futures = '%s')", source, futures),
           code_theme = "Chaos"
         ),
         "for supported intervals"

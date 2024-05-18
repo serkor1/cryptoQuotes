@@ -134,7 +134,7 @@ get_lsratio <- function(
       "i" = paste(
         "Run",
         cli::code_highlight(
-          code = "cryptoQuotes::available_intervals(type = 'interest', source = source)",
+          code = "cryptoQuotes::available_intervals(type = 'lsratio', source = source)",
           code_theme = "Chaos"
         ),
         "for supported intervals"

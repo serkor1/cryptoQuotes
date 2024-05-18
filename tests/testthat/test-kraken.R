@@ -73,6 +73,9 @@ testthat::test_that(
 )
 
 
+
+
+
 # 2) Futures
 testthat::test_that(
   desc = "Test get_quote() for Kraken (FUTURES)",
@@ -110,6 +113,56 @@ testthat::test_that(
         output$open <= output$high,
         output$close >= output$low,
         output$close <= output$high
+      )
+    )
+
+
+    # 3) test if dates are reasonable
+    # within range
+    date_range <- as.numeric(
+      format(
+        range(
+          zoo::index(output)
+        ),
+        format = "%Y"
+      )
+    )
+
+    testthat::expect_true(
+      object = all(
+        min(date_range) >= 2000,
+        max(date_range) <= as.numeric(format(Sys.Date(), "%Y"))
+      )
+    )
+
+  }
+)
+
+
+
+# 2) Long-Short Ration
+testthat::test_that(
+  desc = "Test get_lsr() for Kraken (FUTURES)",
+  code = {
+
+    # 0) skip if offline
+    # and on github
+    testthat::skip_if_offline();
+
+    # 1) get available tickers
+    testthat::expect_no_condition(
+      ticker <- cryptoQuotes::available_tickers(
+        source  = "kraken",
+        futures = TRUE
+      )
+    )
+
+    # 2) get quote from kraken
+    testthat::expect_no_condition(
+      output <- get_lsratio(
+        ticker   = sample(ticker,size = 1),
+        source   = "kraken",
+        interval = "2d"
       )
     )
 
