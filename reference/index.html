@@ -21,19 +21,23 @@
       <ul class="navbar-nav me-auto"><li class="nav-item">
   <a class="nav-link" href="../articles/cryptoQuotes.html">Get started</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/usecase.html">Usecase</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/custom_indicators.html">Custom Indicators</a>
+</li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/00-introduction.html">Cryptocurrency Market Data in R</a>
-    <a class="dropdown-item" href="../articles/02-charting.html">Interactive Cryptocurrency Charts in R</a>
-    <a class="dropdown-item" href="../articles/03-timezones.html">Time Zones</a>
-    <a class="dropdown-item" href="../articles/04-converting.html">Converting XTS and ZOO objects</a>
-    <a class="dropdown-item" href="../articles/05-quantmod.html">Cryptocurrency Market Data with quantmod and TTR</a>
-    <a class="dropdown-item" href="../articles/custom_indicators.html">Custom Indicators</a>
-    <a class="dropdown-item" href="../articles/usecase.html">Usecase</a>
+    <a class="dropdown-item" href="../articles/01-article.html">Cryptocurrency Market Data</a>
+    <a class="dropdown-item" href="../articles/02-article.html">Cryptocurrency Charts</a>
+    <a class="dropdown-item" href="../articles/03-article.html">Time Zones</a>
+    <a class="dropdown-item" href="../articles/04-article.html">Converting xts-objects</a>
+    <a class="dropdown-item" href="../articles/05-article.html">cryptoQuotes x quantmod and TTR</a>
   </div>
 </li>
 <li class="nav-item">
@@ -95,9 +99,9 @@
         </dt>
         <dd>Get the Open, High, Low, Close and Volume data on a cryptocurrency pair</dd>
       </dl></div><div class="section level2">
-      <h2 id="available-argument-values">Available Argument Values<a class="anchor" aria-label="anchor" href="#available-argument-values"></a></h2>
+      <h2 id="supported-calls">Supported Calls<a class="anchor" aria-label="anchor" href="#supported-calls"></a></h2>
       
-      <div class="section-desc"><p>The collection of functions of supported argument values.</p></div>
+      <div class="section-desc"><p>The collection of functions to list available argument values in the <code>interval</code>-, <code>source</code>- and <code>interval</code>-arguments.</p></div>
 
       
     </div><div id="" class="section level2">
@@ -121,9 +125,9 @@
         </dt>
         <dd>Get actively traded cryptocurrency pairs</dd>
       </dl></div><div class="section level2">
-      <h2 id="main-charts">Main charts<a class="anchor" aria-label="anchor" href="#main-charts"></a></h2>
+      <h2 id="charting">Charting<a class="anchor" aria-label="anchor" href="#charting"></a></h2>
       
-      <div class="section-desc"><p>The collection of Price Charts</p></div>
+      <div class="section-desc"><p>The collection of <code>chart</code>-functions are split 3; main charts (price chart), main chart indicators and subchart indicators. All <code>charts</code> are initialised using the <code>chart</code>-function.</p></div>
 
       
     </div><div id="" class="section level2">
@@ -136,7 +140,18 @@
           <code><a href="chart.html">chart()</a></code> 
         </dt>
         <dd>Build an interactive financial chart</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      
+      <h3 id="main-charts">Main Charts<a class="anchor" aria-label="anchor" href="#main-charts"></a></h3>
+      <div class="section-desc"><p>The collection of main chart functions for charting prices.</p></div>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="kline.html">kline()</a></code> 
         </dt>
@@ -152,45 +167,9 @@
         </dt>
         <dd>Line Chart</dd>
       </dl></div><div class="section level2">
-      <h2 id="subchart-indicators">Subchart Indicators<a class="anchor" aria-label="anchor" href="#subchart-indicators"></a></h2>
       
-      <div class="section-desc"><p>The collection of subchart indicators.</p></div>
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
-          
-          <code><a href="fgi.html">fgi()</a></code> 
-        </dt>
-        <dd>Chart the Fear and Greed Index</dd>
-      </dl><dl><dt>
-          
-          <code><a href="lsr.html">lsr()</a></code> 
-        </dt>
-        <dd>Chart the long-short ratio</dd>
-      </dl><dl><dt>
-          
-          <code><a href="macd.html">macd()</a></code> 
-        </dt>
-        <dd>Chart the Moving Average Convergence Divergence (MACD) indicator</dd>
-      </dl><dl><dt>
-          
-          <code><a href="rsi.html">rsi()</a></code> 
-        </dt>
-        <dd>Chart the Relative Strength Index (RSI)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="volume.html">volume()</a></code> 
-        </dt>
-        <dd>Chart the trading volume</dd>
-      </dl></div><div class="section level2">
-      <h2 id="main-chart-indicators">Main Chart Indicators<a class="anchor" aria-label="anchor" href="#main-chart-indicators"></a></h2>
-      
-      <div class="section-desc"><p>The collection of main chart indicators.</p></div>
+      <h3 id="main-chart-indicators">Main Chart Indicators<a class="anchor" aria-label="anchor" href="#main-chart-indicators"></a></h3>
+      <div class="section-desc"><p>The collection of main chart indicators which are overlaid the main chart.</p></div>
 
       
     </div><div id="" class="section level2">
@@ -248,6 +227,42 @@
           <code><a href="zlema.html">zlema()</a></code> 
         </dt>
         <dd>Add Zero Lag Exponential Moving Average (ZLEMA) to the chart</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="subchart-indicators">Subchart Indicators<a class="anchor" aria-label="anchor" href="#subchart-indicators"></a></h3>
+      <div class="section-desc"><p>The collection of subchart indicators which are charted as a subchart.</p></div>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="fgi.html">fgi()</a></code> 
+        </dt>
+        <dd>Chart the Fear and Greed Index</dd>
+      </dl><dl><dt>
+          
+          <code><a href="lsr.html">lsr()</a></code> 
+        </dt>
+        <dd>Chart the long-short ratio</dd>
+      </dl><dl><dt>
+          
+          <code><a href="macd.html">macd()</a></code> 
+        </dt>
+        <dd>Chart the Moving Average Convergence Divergence (MACD) indicator</dd>
+      </dl><dl><dt>
+          
+          <code><a href="rsi.html">rsi()</a></code> 
+        </dt>
+        <dd>Chart the Relative Strength Index (RSI)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="volume.html">volume()</a></code> 
+        </dt>
+        <dd>Chart the trading volume</dd>
       </dl></div><div class="section level2">
       <h2 id="utilities">Utilities<a class="anchor" aria-label="anchor" href="#utilities"></a></h2>
       
