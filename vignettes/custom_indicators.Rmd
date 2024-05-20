@@ -1,9 +1,9 @@
 ---
-title: "Custom Indicators"
+title: "A Guide on Custom Indicators"
 subtitle: "How to build and chart it"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Custom Indicators}
+  %\VignetteIndexEntry{A Guide on Custom Indicators}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

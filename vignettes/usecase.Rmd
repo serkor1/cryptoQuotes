@@ -90,7 +90,7 @@ We can illustrate this with candlestick charts using the ```chart()```- and ```k
 cryptoQuotes::chart(
   ticker     = DOGE,
   main       = cryptoQuotes::kline(),
-  indicator = list(
+  indicator  = list(
     cryptoQuotes::bollinger_bands()
   ),
   sub  = list(
@@ -140,10 +140,10 @@ cryptoQuotes::chart(
   ticker     = DOGE,
   event_data = event_data,
   main       = cryptoQuotes::kline(),
-  indicator = list(
+  indicator  = list(
     cryptoQuotes::bollinger_bands()
   ),
-  sub  = list(
+  sub = list(
     cryptoQuotes::volume()
   ),
   options = list(

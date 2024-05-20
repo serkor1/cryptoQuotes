@@ -712,7 +712,7 @@ default_dates <-function(
 
   starting_point <- as.POSIXct(
     trunc(as.double(starting_point_time)/(15*60))*(15*60),
-    tz = 'UTC',
+    tz = Sys.timezone(),
     origin = origin_date
   )
 
@@ -783,7 +783,7 @@ default_dates <-function(
       max(interval_seq),
       as.POSIXct(
         current_time,
-        tz = "UTC",
+        tz = Sys.timezone(),
         origin = origin_date
       )
     )

@@ -1,6 +1,5 @@
 ---
 title: "Converting XTS and ZOO objects"
-subtitle: "What about data integrity?"
 ---
 
 ```{r setup, include=FALSE}
@@ -36,12 +35,12 @@ library(magrittr)
 # using as_tibble
 tbl <- tibble::as_tibble(
   x = cbind(
-    Index = zoo::index(ATOM),
+    index = zoo::index(ATOM),
     zoo::coredata(ATOM)
   )
 ) %>% dplyr::mutate(
-  Index = lubridate::as_datetime(
-    Index
+  index = lubridate::as_datetime(
+    index
   )
 )
 
@@ -60,10 +59,7 @@ DT <- data.table::as.data.table(
   ATOM
 ) 
 
-# 2) set column name to upper
-colnames(DT)[1] <- 'Index'
-
-# 3) head data
+# 2) head data
 head(DT, 3)
 ```
 
@@ -125,7 +121,6 @@ all(
 )
 
 ```
-
 
 ## Why even convert?
 

@@ -1,6 +1,5 @@
 ---
 title: "Interactive Cryptocurrency Charts in R"
-subtitle: "The cryptoQuotes way"
 ---
 
 ```{r, include = FALSE}
@@ -28,11 +27,11 @@ Throughout this article we will analyze Bitcoin on the hourly chart called by th
 ## SPOT price of 
 ## Bitcoin on the hourly
 BTC <- get_quote(
-  ticker  = "BTCUSD",
-  source  = "kraken",
-  futures = FALSE,
+  ticker   = "BTCUSD",
+  source   = "kraken",
+  futures  = FALSE,
   interval = "1h",
-  from = Sys.Date() - 7
+  from     = Sys.Date() - 7
 )
 ```
 
@@ -148,7 +147,6 @@ event_data <- as.data.frame(
 # case insensitive
 event_data$index <- index
 
-
 # 1.4) add events to the data.
 # here we use Buys and Sells.
 event_data$event <- 'Bull Cross'
@@ -166,8 +164,8 @@ Finally, the crosses can be plotted using the `chart()` and `addEvents()` functi
 ## and the Bollinger Bands
 ## in a candlestick chart
 chart(
-  ticker = BTC,
-  main   = kline(),
+  ticker    = BTC,
+  main      = kline(),
   indicator = list(
     bollinger_bands(),
     sma(n = 7),

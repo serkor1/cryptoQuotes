@@ -185,7 +185,7 @@ get_lsratio <- function(
         coerce_date(
           Sys.Date() - 28
         ),
-        tz = "UTC"
+        tz = Sys.timezone()
       )
 
     )

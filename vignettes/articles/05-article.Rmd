@@ -26,11 +26,11 @@ The `cryptoQuotes` were built with `quantmod` and `TTR` in mind. To demonstrate 
 ## Bitcoin from 
 ## the spot market
 BTC <- get_quote(
-  ticker  = "BTCUSD",
-  source  = "kraken",
-  futures = FALSE,
-  interval= "1d",
-  from    = "2024-01-01"
+  ticker   = "BTCUSD",
+  source   = "kraken",
+  futures  = FALSE,
+  interval = "1d",
+  from     = "2024-01-01"
 )
 ```
 
@@ -46,20 +46,20 @@ Below is an example on how to use the `quantmod::tradeModel` with `BTC`,
 ```{r}
 ## 1) specify
 ## the model
-BTC_model <-  quantmod::specifyModel(
-  quantmod::Next(quantmod::OpCl(BTC)) ~ quantmod::Lag(quantmod::OpHi(BTC),0:3)
-  )
+BTC_model <- quantmod::specifyModel(
+  formula = quantmod::Next(quantmod::OpCl(BTC)) ~ quantmod::Lag(quantmod::OpHi(BTC),0:3)
+)
 
 ## 2) build the
 ## model
 built_model <-  quantmod::buildModel(
-  x = BTC_model,
-  method ='lm',
+  x            = BTC_model,
+  method       = 'lm',
   training.per = range(head(zoo::index(BTC), 10))
-  )
+)
 
 ## 3) trade the model
-quantmod::tradeModel(built_model,leverage=2)
+quantmod::tradeModel(built_model, leverage = 2)
 ```
 
 ### Charting Cryptocurrency with quantmod
@@ -69,9 +69,9 @@ quantmod::tradeModel(built_model,leverage=2)
 ## BTC with candlesticks
 ## and Bollinger BAnds
 quantmod::chartSeries(
-  x = BTC,
+  x    = BTC,
   type = "candlesticks",
-  TA = c(
+  TA   = c(
     quantmod::addBBands()
   )
 )
@@ -111,5 +111,4 @@ knitr::kable(
   ),
   format = 'html'
 )
-
 ```

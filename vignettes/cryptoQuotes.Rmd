@@ -1,8 +1,8 @@
 ---
-title: "Guide: Cryptocurrency Market Data in R"
+title: "Introduction: Cryptocurrency Market Data in R"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Guide: Cryptocurrency Market Data in R}
+  %\VignetteIndexEntry{Introduction: Cryptocurrency Market Data in R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -33,9 +33,8 @@ Throughout this `vignette` we will explore the Bitcoin market data using the `Kr
 # the available tickers
 sample(
   x = available_tickers(
-    source = "kraken",
+    source  = "kraken",
     futures = FALSE
-    
   ),
   size = 5
 )
@@ -125,9 +124,8 @@ The `ticker` specific to the perpetual futures market can be extracted using the
 # the available tickers
 sample(
   x = available_tickers(
-    source = "kraken",
+    source  = "kraken",
     futures = TRUE
-    
   ),
   size = 5
 )
@@ -143,11 +141,9 @@ The Bitcoin market data can be charted using the `chart()`-function, which uses 
 chart(
   ticker = BTC,
   main   = kline(),
-  sub = list(
+  sub    = list(
     volume(),
-    lsr(
-      ratio = LS_BTC
-    )
+    lsr(ratio = LS_BTC)
   ),
   options = list(
     dark = FALSE
@@ -165,11 +161,9 @@ The `cryptoQuotes`-package also acts as an API-client to the `TTR`-package, and 
 chart(
   ticker = BTC,
   main   = kline(),
-  sub = list(
+  sub    = list(
     volume(),
-    lsr(
-      ratio = LS_BTC
-    )
+    lsr(ratio = LS_BTC)
   ),
   indicator = list(
     sma(n = 7),

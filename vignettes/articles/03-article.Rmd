@@ -65,11 +65,11 @@ BTC_utc <- get_quote(
 
 In each case the returned `index` is, alongside the OHLC-V data, different,
 
-```{r,echo=FALSE}
+```{r, echo=FALSE}
 # 1) create a kable
 # and print
   knitr::kable(
-        caption = 'Time zone comparsion',
+    caption = 'Time zone comparsion',
     align = 'lr',
     table.attr = "style='width:100%;'",
     col.names = c('BTC_local', 'BTC_utc'),
@@ -100,11 +100,11 @@ BTC_tzone <- BTC_utc
 xts::tzone(BTC_tzone) <- "UTC"
 ```
 
-```{r,echo=FALSE}
+```{r, echo=FALSE}
 # 1) create a kable
 # and print
   knitr::kable(
-        caption = 'Time zone comparsion',
+    caption = 'Time zone comparsion',
     align = 'lr',
     table.attr = "style='width:100%;'",
     col.names = c('Original Index', 'Converted Index'),
