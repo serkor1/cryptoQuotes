@@ -1,5 +1,11 @@
 # cryptoQuotes 1.3.1
 
+## General
+
+* Removed deprecated functions `getQuote()`-, `getFGIndex()`- and `getLSRatio()`-functions.
+
+* Removed decprecated functions `availableExchanges()`-, `availableIntervals()`- and `availableTickers()`-functions.
+
 ## Improvements
 
 ### Charting
