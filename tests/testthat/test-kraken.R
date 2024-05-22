@@ -17,7 +17,7 @@ testthat::test_that(
 
     # 0) skip if offline
     # and on github
-    testthat::skip_if_offline();
+    testthat::skip_if_offline()
 
     # 1) get available tickers
     testthat::expect_no_condition(
@@ -83,7 +83,7 @@ testthat::test_that(
 
     # 0) skip if offline
     # and on github
-    testthat::skip_if_offline();
+    testthat::skip_if_offline()
 
     # 1) get available tickers
     testthat::expect_no_condition(
@@ -147,7 +147,7 @@ testthat::test_that(
 
     # 0) skip if offline
     # and on github
-    testthat::skip_if_offline();
+    testthat::skip_if_offline()
 
     # 1) get available tickers
     testthat::expect_no_condition(
