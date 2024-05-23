@@ -10,7 +10,8 @@ remove_bound(xts, bounds = c("upper"))
 \arguments{
 \item{xts}{A xts-object that needs its bounds modified.}
 
-\item{bounds}{A character vector of length 1. Has to be one of \code{c('upper','lower','both')}. Defaults to Upper.}
+\item{bounds}{A character vector of length 1.
+Has to be one of \code{c('upper','lower','both')}. Defaults to Upper.}
 }
 \value{
 Returns an xts-class object with its bounds removed.

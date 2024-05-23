@@ -40,8 +40,9 @@ chart_ma <- function(
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::add_lines()]-wrapper function that interacts with [TTR]'s moving average family of functions. The function
-#' adds moving average indicators to the main [chart()].
+#' A high-level [plotly::add_lines()]-wrapper function that
+#' interacts with [TTR]'s moving average family of functions.
+#' The function adds moving average indicators to the main [chart()].
 #'
 #' @usage sma(
 #'  price  = "close",
@@ -50,7 +51,8 @@ chart_ma <- function(
 #' )
 #'
 #' @inheritParams TTR::SMA
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::SMA].
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::SMA].
 #' @param ... For internal use. Please ignore.
 #'
 #' @example man/examples/scr_MAindicator.R
@@ -138,7 +140,8 @@ sma <- function(
 #'  ...
 #' )
 #'
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::EMA].
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::EMA].
 #' @inheritParams TTR::EMA
 #' @param ... For internal use. Please ignore.
 #'
@@ -228,7 +231,8 @@ ema <- function(
 #'  ...
 #' )
 #'
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::DEMA].
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::DEMA].
 #' @inheritParams TTR::DEMA
 #' @param ... For internal use. Please ignore.
 #'
@@ -320,7 +324,8 @@ dema <- function(
 #'  ...
 #' )
 #'
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::WMA].
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::WMA].
 #' @inheritParams TTR::WMA
 #' @param ... For internal use. Please ignore.
 #'
@@ -408,7 +413,8 @@ wma <- function(
 #'  ...
 #' )
 #'
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::EVWMA]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::EVWMA]
 #' @inheritParams TTR::EVWMA
 #' @param ... For internal use. Please ignore.
 #'
@@ -492,7 +498,8 @@ evwma <- function(
 #'  ...
 #' )
 #'
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::ZLEMA].
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::ZLEMA].
 #' @inheritParams TTR::ZLEMA
 #' @param ... For internal use. Please ignore.
 #'
@@ -577,7 +584,8 @@ zlema <- function(
 #'  ...
 #' )
 #'
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::VWAP]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::VWAP]
 #' @inheritParams TTR::VWAP
 #' @param ... For internal use. Please ignore.
 #'
@@ -665,7 +673,8 @@ vwap <- function(
 #'  ...
 #' )
 #'
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::HMA].
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::HMA].
 #' @inheritParams TTR::HMA
 #' @param ... For internal use. Please ignore.
 #'
@@ -748,7 +757,8 @@ hma <- function(
 #'  ...
 #' )
 #'
-#' @param price A [character]-vector of [length] 1. "close" by default. The name of the vector to passed into [TTR::ALMA].
+#' @param price A [character]-vector of [length] 1. "close" by default
+#' The name of the vector to passed into [TTR::ALMA].
 #' @inheritParams TTR::ALMA
 #' @param ... For internal use. Please ignore.
 #'

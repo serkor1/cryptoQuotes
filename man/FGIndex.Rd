@@ -3,7 +3,8 @@
 \docType{data}
 \name{FGIndex}
 \alias{FGIndex}
-\title{Fear and Greed Index (FGI) values for the cryptocurrency market in daily intervals}
+\title{Fear and Greed Index (FGI) values for the
+cryptocurrency market in daily intervals}
 \format{
 An \code{\link[xts:xts]{xts::xts()}}-object with 364 rows and 1 columns,
 
@@ -16,7 +17,8 @@ An \code{\link[xts:xts]{xts::xts()}}-object with 364 rows and 1 columns,
 FGIndex
 }
 \description{
-This dataset contains daily values of the Fear and Greed Index for the year 2023, which is used to measure the sentiments of investors in the market.
+This dataset contains daily values of the Fear and Greed Index for the year
+2023, which is used to measure the sentiments of investors in the market.
 The data spans from January 1, 2023, to December 31, 2023.
 }
 \details{

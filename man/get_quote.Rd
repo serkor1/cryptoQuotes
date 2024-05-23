@@ -14,17 +14,23 @@ get_quote(
 )
 }
 \arguments{
-\item{ticker}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
+\item{ticker}{A \link{character}-vector of \link{length} 1.
+See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
-\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default.
+See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default. Returns futures market if \link{TRUE}, spot market otherwise.}
+\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default.
+Returns futures market if \link{TRUE}, spot market otherwise.}
 
-\item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
+\item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default.
+See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
-\item{from}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
 An \link{xts}-object containing,
@@ -50,19 +56,23 @@ An \link{xts}-object containing,
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-Get a quote on a cryptocurrency pair from the \code{\link[=available_exchanges]{available_exchanges()}} in various \code{\link[=available_intervals]{available_intervals()}} for any actively traded \code{\link[=available_tickers]{available_tickers()}}.
+Get a quote on a cryptocurrency pair from the \code{\link[=available_exchanges]{available_exchanges()}} in
+various \code{\link[=available_intervals]{available_intervals()}} for any
+actively traded \code{\link[=available_tickers]{available_tickers()}}.
 }
 \details{
 \subsection{On time-zones and dates}{
 
-Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}}, or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or \code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default
-all dates are passed and returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
+Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}},
+or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or
+\code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default all dates are passed and
+returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
 }
 
 \subsection{On returns}{
 
-If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}. If only \code{to} is provided 200 pips up to the specified date
-is returned.
+If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}.
+If only \code{to} is provided 200 pips up to the specified date is returned.
 }
 }
 \examples{

@@ -13,8 +13,9 @@ is.date(x)
 \link{TRUE} if its either POSIXct, POSIXt or Date. \link{FALSE} otherwise.
 }
 \description{
-This function check is equivalent to \code{\link[=is.numeric]{is.numeric()}}, \code{\link[=is.logical]{is.logical()}}, and checks for the date type classes
-POSIXct, POSIXt and Date. And wether the character vector can be formatted to dates.
+This function check is equivalent to \code{\link[=is.numeric]{is.numeric()}}, \code{\link[=is.logical]{is.logical()}},
+and checks for the date type classes POSIXct, POSIXt and Date.
+And wether the character vector can be formatted to dates.
 }
 \seealso{
 Other development tools: 

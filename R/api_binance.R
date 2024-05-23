@@ -24,21 +24,23 @@ binanceUrl <- function(
 }
 
 binanceEndpoint <- function(
-    type = 'ohlc',
+    type    = 'ohlc',
     futures = TRUE,
-    top = FALSE
-) {
+    top     = FALSE) {
 
   endPoint <- switch(
     EXPR = type,
     ohlc = {
-      if (futures) 'fapi/v1/klines' else 'api/v3/klines'
+      if (futures) 'fapi/v1/klines' else
+        'api/v3/klines'
     },
     ticker ={
-      if (futures) 'fapi/v1/exchangeInfo' else 'api/v3/exchangeInfo'
+      if (futures) 'fapi/v1/exchangeInfo' else
+        'api/v3/exchangeInfo'
     },
     lsratio = {
-      if (top) 'futures/data/topLongShortAccountRatio' else 'futures/data/globalLongShortAccountRatio'
+      if (top) 'futures/data/topLongShortAccountRatio' else
+        'futures/data/globalLongShortAccountRatio'
     },
     interest = {
       'futures/data/openInterestHist'
@@ -61,8 +63,7 @@ binanceIntervals <- function(
     interval,
     all = FALSE,
     type,
-    ...
-) {
+    ...) {
 
   #  0) wrap all intercals
   #  in switch
@@ -70,8 +71,42 @@ binanceIntervals <- function(
     EXPR = type,
     'ohlc' = {
       data.frame(
-        labels = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'),
-        values = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M')
+        labels = c(
+          '1s',
+          '1m',
+          '3m',
+          '5m',
+          '15m',
+          '30m',
+          '1h',
+          '2h',
+          '4h',
+          '6h',
+          '8h',
+          '12h',
+          '1d',
+          '3d',
+          '1w',
+          '1M'
+        ),
+        values = c(
+          '1s',
+          '1m',
+          '3m',
+          '5m',
+          '15m',
+          '30m',
+          '1h',
+          '2h',
+          '4h',
+          '6h',
+          '8h',
+          '12h',
+          '1d',
+          '3d',
+          '1w',
+          '1M'
+        )
       )
     },
 
@@ -82,21 +117,19 @@ binanceIntervals <- function(
     )
   )
 
-  # # Define all intervals in a data frame
-  # allIntervals <- data.frame(
-  #   labels = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M'),
-  #   values = c('1s', '1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M')
-  # )
-
   if (all) {
+
     return(all_intervals$labels)
+
   } else {
+
     # Select the specified interval
     selectedInterval <- all_intervals$values[
       grepl(paste0('^', interval, '$'), all_intervals$values)
     ]
 
     return(selectedInterval)
+
   }
 }
 
@@ -104,8 +137,7 @@ binanceIntervals <- function(
 binanceResponse <- function(
     type = 'ohlc',
     futures,
-    ...
-) {
+    ...) {
 
   # mock response
   # to avoid check error in
@@ -226,8 +258,7 @@ binanceParameters <- function(
     interval,
     from = NULL,
     to = NULL,
-    ...
-) {
+    ...) {
 
   # Basic parameters common to both futures and non-futures
   params <- list(

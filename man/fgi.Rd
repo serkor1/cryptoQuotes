@@ -17,7 +17,8 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function. The function adds a subchart with the \verb{fear and greed}-index.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function.
+The function adds a subchart with the \verb{fear and greed}-index.
 }
 \details{
 \subsection{Classification}{
@@ -35,13 +36,18 @@ The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
 \subsection{About the Fear and Greed Index}{
 
-The fear and greed index is a market sentiment indicator that measures investor emotions to
-gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm).
+The fear and greed index is a market sentiment indicator that measures
+investor emotions to gauge whether they are generally fearful
+(indicating potential selling pressure) or
+greedy (indicating potential buying enthusiasm).
 }
 
 \subsection{Source}{
 
-This index is fetched from \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me}, and can be different from the one provided by \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
+This index is fetched from
+\href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me},
+and can be different from the one provided by
+\href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
 }
 }
 \examples{

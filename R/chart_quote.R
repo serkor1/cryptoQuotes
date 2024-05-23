@@ -4,7 +4,8 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]-function for charting Open, High, Low and Close prices.
+#' A high-level [plotly::plot_ly()]-function for charting
+#' Open, High, Low and Close prices.
 #'
 #' @param ... For internal use. Please ignore.
 #'
@@ -61,11 +62,13 @@ kline <- function(
         high = ~high,
         low = ~low,
         increasing = list(
-          line = list(color = "black", width = bot),  # Border color and width
+          # Border color and width
+          line = list(color = "black", width = bot),
           fillcolor = "black"
         ),
         decreasing = list(
-          line = list(color = "black", width = bot),  # Border color and width
+          # Border color and width
+          line = list(color = "black", width = bot),
           fillcolor = "black"
         ),
         showlegend = FALSE,
@@ -84,11 +87,13 @@ kline <- function(
         high = ~high,
         low = ~low,
         increasing = list(
-          line = list(color = args$candle_color$bullish, width = bot - 1.75),  # Main candle color and narrower width
+          # Main candle color and narrower width
+          line = list(color = args$candle_color$bullish, width = bot - 1.75),
           fillcolor = args$candle_color$bullish
         ),
         decreasing = list(
-          line = list(color = args$candle_color$bearish, width = bot - 1.75),    # Main candle color and narrower width
+          # Main candle color and narrower width
+          line = list(color = args$candle_color$bearish, width = bot - 1.75),
           fillcolor = args$candle_color$bearish
         ),
         showlegend = TRUE,
@@ -156,7 +161,6 @@ ohlc <- function(
   structure(
     .Data = {
 
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -164,7 +168,6 @@ ohlc <- function(
       )
 
       data <- indicator(args$data)
-
 
       #   # 1) bottom trace
       bot <- 5
@@ -177,19 +180,19 @@ ohlc <- function(
         high = ~high,
         low = ~low,
         increasing = list(
-          line = list(color = "black", width = bot),  # Border color and width
+          # Border color and width
+          line = list(color = "black", width = bot),
           fillcolor = "black"
         ),
         decreasing = list(
-          line = list(color = "black", width = bot),  # Border color and width
+          # Border color and width
+          line = list(color = "black", width = bot),
           fillcolor = "black"
         ),
         showlegend = FALSE,
         name = "Border",
         legendgroup = "price"
       )
-
-
 
       p <- plotly::add_trace(
         p,
@@ -200,18 +203,19 @@ ohlc <- function(
         high = ~high,
         low = ~low,
         increasing = list(
-          line = list(color = args$candle_color$bullish, width = bot - 3),  # Main candle color and narrower width
+          # Main candle color and narrower width
+          line = list(color = args$candle_color$bullish, width = bot - 3),
           fillcolor = args$candle_color$bullish
         ),
         decreasing = list(
-          line = list(color = args$candle_color$bearish, width = bot - 3),    # Main candle color and narrower width
+          # Main candle color and narrower width
+          line = list(color = args$candle_color$bearish, width = bot - 3),
           fillcolor = args$candle_color$bearish
         ),
         showlegend = TRUE,
         name = args$interval,
         legendgroup = "price"
       )
-
 
       plotly::layout(
         p = p,
@@ -222,14 +226,10 @@ ohlc <- function(
           )
         )
       )
-
-
-
     },
+
     class = c("pricechart", "plotly", "htmlwidget")
   )
-
-
 }
 
 #' @title

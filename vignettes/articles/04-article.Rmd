@@ -79,16 +79,17 @@ time_objects <- list(
 
 # 2) check if they are all equal
 all(
-  sapply(
-    time_objects,
-    function(x) {
+  vapply(
+    X   = time_objects,
+    FUN = function(x) {
       
       setequal(
         x = x,
         y = zoo::index(ATOM)
         )
       
-    }
+    },
+    FUN.VALUE = logical(1)
   )
 )
 ```
@@ -107,16 +108,17 @@ open_price <- list(
 
 # 2) check if they are all equal
 all(
-  sapply(
-    open_price,
-    function(x) {
+  vapply(
+    X   = open_price,
+    FUN = function(x) {
       
       setequal(
         x = x,
         y = ATOM$Open
         )
       
-    }
+    },
+    FUN.VALUE = logical(1)
   )
 )
 

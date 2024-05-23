@@ -52,11 +52,16 @@
 #' }
 #'
 #' ## About the Fear and Greed Index
-#' The fear and greed index is a market sentiment indicator that measures investor emotions to
-#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm).
+#' The fear and greed index is a market sentiment indicator that measures
+#' investor emotions to gauge whether they are generally fearful
+#' (indicating potential selling pressure) or
+#' greedy (indicating potential buying enthusiasm).
 #'
 #' ## Source
-#' This index is fetched from \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me}, and can be different from the one provided by \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
+#' This index is fetched from
+#' \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me},
+#' and can be different from the one provided by
+#' \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
 #'
 #' @example man/examples/scr_FGIndex.R
 #'
@@ -78,17 +83,17 @@ get_fgindex <- function(
   check_internet_connection()
 
   assert(
-    "Valid {.arg from} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
-              format(
-                Sys.time()
-              )
-            )}}" = (is.null(from) || (is.date(from) & length(from) == 1)),
+    "
+    Valid {.arg from} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(from) || (is.date(from) & length(from) == 1)),
 
-    "Valid {.arg to} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
-              format(
-                Sys.time()
-              )
-            )}}" = (is.null(to) || (is.date(to) & length(to) == 1))
+    "
+    Valid {.arg to} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(to) || (is.date(to) & length(to) == 1))
   )
 
 

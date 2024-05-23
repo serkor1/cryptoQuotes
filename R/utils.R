@@ -204,8 +204,8 @@ endPoint <- function(
 #' @param ... additional parameters passed down the endpoint
 #'
 #' @details
-#' This function can only be used to fetch time-based objects, and can therefore
-#' not be used to get, for example, [available_tickers()].
+#' This function can only be used to fetch time-based objects,
+#' and can therefore not be used to get, for example, [available_tickers()].
 #'
 #' @family development tools
 #'

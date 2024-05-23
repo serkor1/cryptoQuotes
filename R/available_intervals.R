@@ -4,7 +4,8 @@
 #' @description
 #' `r lifecycle::badge("stable")`
 #'
-#' Get available intervals for the [available_tickers()] on the [available_exchanges()].
+#' Get available intervals for the [available_tickers()]
+#' on the [available_exchanges()].
 #'
 #' @usage available_intervals(
 #'    source = "binance",
@@ -42,12 +43,8 @@ available_intervals <- function(
     type   = 'ohlc',
     futures = TRUE) {
 
-
   # 0) define available
   # exchanges
-
-
-
   assert(
     type %in% c("ohlc", "lsratio", "fundingrate", "interest"),
     error_message = c(
@@ -58,7 +55,10 @@ available_intervals <- function(
       "i" = sprintf(
         "Has to be one of %s",
         paste(
-          paste0("{.val ",c("ohlc", "lsratio", "fundingrate", "interest") ,"}"),
+          paste0("{.val ",
+                 c("ohlc", "lsratio", "fundingrate", "interest")
+                 ,"}"
+          ),
           collapse = ", "
         )
       )
@@ -100,7 +100,11 @@ available_intervals <- function(
   # intervals by exchange and market
   cli::cli_inform(
     message = c(
-      'i' = paste0('Available Intervals at ', "{.val {source}}", ifelse(futures, ' (futures):', no = ' (spot):')),
+      'i' = paste0(
+        'Available Intervals at ',
+        "{.val {source}}",
+        ifelse(futures, ' (futures):', no = ' (spot):')
+      ),
       'v' = paste(
         all_intervals,
         collapse = ', '

@@ -43,22 +43,18 @@ indicator <- function(
       ),
       nm = if (is.null(columns))  names(x) else columns
     )
-
-
   )
-
 
   # 1) get the indicator function
   # for each
   if (!is.null(.f)) {
 
-    x = .f(
+    x <- .f(
       x,
       ...
     )
 
   }
-
 
   names(x) <- tolower(names(x))
 
@@ -69,14 +65,10 @@ indicator <- function(
     )
   )
 
-
 }
 
-
-
-
 # var_ly <- function(
-#     variable) {
+    #     variable) {
 #
 #   # 0) extract variable
 #   # from the source
@@ -124,15 +116,21 @@ build <- function(
   ) {
 
     # Generalize function calling based on the 'type' attribute
-    fun_name <- layer$type  # The Plotly function to call, e.g., "add_lines", "add_ribbons"
-    layer$params$p <- plot  # Ensure the plot is passed as the first argument
+
+    # The Plotly function to call, e.g., "add_lines", "add_ribbons"
+    fun_name <- layer$type
+
+    # Ensure the plot is passed as the first argument
+    layer$params$p <- plot
 
     if (!"data" %in% names(layer$params)) {
-      # If 'data' is not explicitly provided, assume the plot's original data should be used
+      # If 'data' is not explicitly provided,
+      #  assume the plot's original data should be used
       layer$params$data <- plot$x$data
     }
 
-    # Dynamically call the Plotly function with the parameters specified in 'layer$params'
+    # Dynamically call the Plotly function with
+    #  the parameters specified in 'layer$params'
     do.call(
       get(
         fun_name,
@@ -251,8 +249,9 @@ infer_interval <- function(
 #' Check if values are valid dates
 #'
 #' @description
-#' This function check is equivalent to [is.numeric()], [is.logical()], and checks for the date type classes
-#' POSIXct, POSIXt and Date. And wether the character vector can be formatted to dates.
+#' This function check is equivalent to [is.numeric()], [is.logical()],
+#' and checks for the date type classes POSIXct, POSIXt and Date.
+#' And wether the character vector can be formatted to dates.
 #'
 #' @param x object to be tested
 #'
@@ -261,7 +260,6 @@ infer_interval <- function(
 #' @keywords internal
 #' @returns [TRUE] if its either POSIXct, POSIXt or Date. [FALSE] otherwise.
 is.date <- function(x){
-
 
   # check if its
   # a date
@@ -278,7 +276,11 @@ is.date <- function(x){
       expr = {
         # Either of these have to be
         # non-NA to work
-        !is.na(as.POSIXct(x)) | !is.na(as.POSIXct(x,format = "%Y-%m-%d %H:%M:%S"))
+        !is.na(as.POSIXct(x)) | !is.na(
+          as.POSIXct(
+            x,
+            format = "%Y-%m-%d %H:%M:%S")
+        )
       },
       error = function(error){
 
@@ -297,10 +299,10 @@ is.date <- function(x){
 #'
 #'
 #' @description
-#' This function is a wrapper of [stopifnot()], [tryCatch()] and [cli::cli_abort()] and asserts
-#' the truthfulness of the passed expression(s).
-#' @param ... expressions >= 1. If named the names are used as error messages, otherwise
-#' R's internal error-messages are thrown
+#' This function is a wrapper of [stopifnot()], [tryCatch()] and
+#' [cli::cli_abort()] and asserts the truthfulness of the passed expression(s).
+#' @param ... expressions >= 1. If named the names are used
+#' as error messages, otherwise R's internal error-messages are thrown
 #'
 #' @param error_message character. An error message, supports [cli]-formatting.
 #' @example man/examples/scr_assert.R
@@ -388,7 +390,9 @@ assert <- function(..., error_message = NULL) {
         # is forced to be the internal otherwise
         # the assert function will throw the same error-message
         # for any error.
-        message = if (is.null(error_message) || number_expressions != 1) error$message else error_message,
+        message = if (is.null(error_message) || number_expressions != 1)
+          error$message else
+            error_message,
         call    = sys.call(
           1 - length(sys.calls())
         )
@@ -542,7 +546,9 @@ coerce_date <- function(x){
 #' @keywords internal
 flatten <- function(x) {
 
-  if (!inherits(x, "list")) return(list(x)) else return(unlist(c(lapply(x, flatten)), recursive = FALSE))
+  if (!inherits(x, "list"))
+    return(list(x)) else
+      return(unlist(c(lapply(x, flatten)), recursive = FALSE))
 }
 
 
@@ -631,7 +637,9 @@ convert_date <- function(
         assert(
           FALSE,
           error_message = sprintf(
-            fmt = "Unexpected error. Contact the package maintainer or submit a %s.",
+            fmt = "
+            Unexpected error. Contact the package maintainer or submit a %s.
+            ",
             cli::style_hyperlink(
               text = cli::col_br_red("bug report"),
               url = "https://github.com/serkor1/cryptoQuotes"
@@ -669,7 +677,8 @@ convert_date <- function(
 #' compliance on the limits
 #'
 #' @inheritParams get_quote
-#' @param length a [numeric]-value of [length] 1. The desired distance between `from` and `to`.
+#' @param length a [numeric]-value of [length] 1.
+#' The desired distance between `from` and `to`.
 #'
 #'
 #' @returns
@@ -878,8 +887,10 @@ pkg_header <- function(
 #' Create a list of layout elements on subcharts
 #'
 #' @param x [integer]-vector of [length] 1.
-#' @param layout_element [character]-vector of [length] 1. [plotly::layout] elements. See example.
-#' @param layout_attribute [character]-vector of [length] 1. [plotly::layout] element value. See example.
+#' @param layout_element [character]-vector of [length] 1.
+#' [plotly::layout] elements. See example.
+#' @param layout_attribute [character]-vector of [length] 1.
+#' [plotly::layout] element value. See example.
 #'
 #' @examples
 #' \dontrun{
@@ -947,31 +958,25 @@ bar <- function(
     date_range,
     ...) {
 
-
   # 0) chart theme
   theme <- chart_theme(
     dark = dark
   )
 
-
-
-
   title_text <- ifelse(
     !is.null(market),
     yes = sprintf(
-      fmt = "<b>Ticker:</b> %s <b>Market:</b> %s<br><sub><b>Period:</b> %s</sub>",
+      "<b>Ticker:</b> %s <b>Market:</b> %s<br><sub><b>Period:</b> %s</sub>",
       name,
       market,
       date_range
     ),
     no = sprintf(
-      fmt = "<b>Ticker:</b> %s<br><sub><b>Period:</b> %s</sub>",
+      "<b>Ticker:</b> %s<br><sub><b>Period:</b> %s</sub>",
       name,
       date_range
     )
-
   )
-
 
   plot <- plotly::layout(
     p = plot,

@@ -12,13 +12,17 @@ get_fundingrate(
 )
 }
 \arguments{
-\item{ticker}{A \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
+\item{ticker}{A \link{character}-vector of \link{length} 1.
+See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
-\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default.
+See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{from}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
 An \link{xts}-object containing,
@@ -40,7 +44,9 @@ An \link{xts}-object containing,
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-Get the funding rate on a cryptocurrency pair from the \code{\link[=available_exchanges]{available_exchanges()}} in any actively traded \code{\link[=available_tickers]{available_tickers()}} on the futures markets.
+Get the funding rate on a cryptocurrency pair from
+the \code{\link[=available_exchanges]{available_exchanges()}} in any actively
+traded \code{\link[=available_tickers]{available_tickers()}} on the futures markets.
 }
 \examples{
 \dontrun{

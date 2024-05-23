@@ -11,10 +11,14 @@ available_exchanges(
 \arguments{
 \item{type}{\link{character}-vector of \link{length} 1. One of,
 \itemize{
-\item \code{"ohlc"} - Available exchanges for Open, High, Low, Close and Volume market data. See the \code{\link[=get_quote]{get_quote()}}-function.
-\item \code{"lsratio"} - Available exchanges for Long-Short ratios See the \code{\link[=get_lsratio]{get_lsratio()}}-function.
-\item \code{"fundingrate"} - Available exchanges for Funding rates. See the \code{\link[=get_fundingrate]{get_fundingrate()}}-function.
-\item \code{"interest"} - Available exchanges for Open interest on perpetual contracts on both sides. See the \code{\link[=get_openinterest]{get_openinterest()}}-function.
+\item \code{"ohlc"} - Available exchanges for Open, High, Low, Close and
+Volume market data. See the \code{\link[=get_quote]{get_quote()}}-function.
+\item \code{"lsratio"} - Available exchanges for Long-Short ratios.
+See the \code{\link[=get_lsratio]{get_lsratio()}}-function.
+\item \code{"fundingrate"} - Available exchanges for Funding rates.
+See the \code{\link[=get_fundingrate]{get_fundingrate()}}-function.
+\item \code{"interest"} - Available exchanges for Open interest on perpetual
+contracts on both sides. See the \code{\link[=get_openinterest]{get_openinterest()}}-function.
 }}
 }
 \value{
@@ -28,7 +32,8 @@ argument of the get-functions.
 }
 \details{
 The endpoints supported by the \code{\link[=available_exchanges]{available_exchanges()}} are not uniform,
-so exchanges available for, say, \code{\link[=get_lsratio]{get_lsratio()}} is not necessarily the same as those available for \code{\link[=get_quote]{get_quote()}}
+so exchanges available for, say, \code{\link[=get_lsratio]{get_lsratio()}} is not necessarily
+the same as those available for \code{\link[=get_quote]{get_quote()}}
 }
 \examples{
 # script start;

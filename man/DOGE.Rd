@@ -20,8 +20,9 @@ An \code{\link[xts:xts]{xts::xts()}}-object  with 61 rows and 5 columns,
 DOGE
 }
 \description{
-This dataset contains time-series data for the DOGECOIN (DOGE) denominated in USDT (Tether),
-captured in 1-minute intervals (OHLC-V format). The data spans 2022-01-14 07:00:00 CET to 2022-01-14 08:00:00 CET.
+This dataset contains time-series data for the DOGECOIN (DOGE)
+denominated in USDT (Tether), captured in 1-minute intervals.
+The data spans 2022-01-14 07:00:00 CET to 2022-01-14 08:00:00 CET.
 }
 \examples{
 # Load the dataset

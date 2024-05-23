@@ -31,10 +31,12 @@ krakenEndpoint <- function(
   endPoint <- switch(
     EXPR = type,
     ohlc = {
-      if (futures) 'api/charts/v1/' else '0/public/OHLC/'
+      if (futures) 'api/charts/v1/' else
+        '0/public/OHLC/'
     },
     ticker ={
-      if (futures) 'derivatives/api/v3/instruments/' else '0/public/AssetPairs/'
+      if (futures) 'derivatives/api/v3/instruments/' else
+        '0/public/AssetPairs/'
     },
     # Was lsratio
     lsratio = {
@@ -43,12 +45,7 @@ krakenEndpoint <- function(
     interest = {
       'api/charts/v1/analytics/'
     }
-
-
-
   )
-
-
 
   # 2) return endPoint url
   endPoint
@@ -66,18 +63,6 @@ krakenIntervals <- function(
   # 0) construct intervals
   all_intervals <- switch(
     EXPR = type,
-    # 'interest' = {
-    #   data.frame(
-    #     labels = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "2d", "8d"),
-    #     values = c(60, 300, 900, 1800, 3600, 14400, 43200, 86400, 604800)
-    #   )
-    # },
-    # 'lsratio' = {
-    #   data.frame(
-    #     labels = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "2d", "8d"),
-    #     values = c(60, 300, 900, 1800, 3600, 14400, 43200, 86400, 604800)
-    #   )
-    # },
     'ohlc' = {
       if (futures) {
         # For futures, labels and values are the same
@@ -117,7 +102,6 @@ krakenIntervals <- function(
     ]
 
   }
-
 
   interval
 
@@ -232,7 +216,6 @@ krakenDates <- function(
 
 }
 
-
 # 5) Parameters passed to endpoints; ####
 krakenParameters <- function(
     futures = TRUE,
@@ -270,67 +253,62 @@ krakenParameters <- function(
 
     # Set specific parameters for futures or non-futures
     if (futures) {
-      params$symbol = params$ticker
-      params$resolution = params$interval
-      params$tick_type = 'long-short-ratiotrade'
-      params$from = date_params[1]
-      params$to = date_params[2]
-      params$query = list(
+      params$symbol <-  params$ticker
+      params$resolution <-  params$interval
+      params$tick_type <-  'long-short-ratiotrade'
+      params$from <- date_params[1]
+      params$to <-  date_params[2]
+      params$query <-  list(
         interval = params$interval,
         since = date_params[1],
         to    =  date_params[2]
       )
-      params$path = list(
+      params$path <-  list(
         symbol = params$symbol,
         tick_type = "open-interest"
       )
     } else {
 
-      params$pair = params$ticker
-      params$query = list(
+      params$pair <-  params$ticker
+      params$query <-  list(
         since = date_params[1],
         pair = params$pair,
         interval = params$interval
       )
-      params$path = NULL
+      params$path <-  NULL
     }
-
-
-
   }
-
 
   if (type == 'ohlc') {
 
     # Set specific parameters for futures or non-futures
     if (futures) {
-      params$symbol = params$ticker
-      params$resolution = params$interval
-      params$tick_type = 'trade'
-      params$from = date_params[1]
-      params$to = date_params[2]
-      params$query = list(
+      params$symbol <- params$ticker
+      params$resolution <-  params$interval
+      params$tick_type <-  'trade'
+      params$from <-  date_params[1]
+      params$to <-  date_params[2]
+      params$query <-  list(
         interval = params$interval,
         from = date_params[1],
         to =date_params[2]
       )
-      params$path = list(
+      params$path <- list(
         tick_type = 'trade',
         symbol = params$symbol,
         resolution = params$resolution
       )
     } else {
 
-      params$pair = params$ticker
-      params$query = list(
+      params$pair <-  params$ticker
+      params$query <-  list(
         since = date_params[1],
         to    = date_params[2],
         pair = params$pair,
         interval = params$interval
       )
-      params$path = NULL
+      params$path <-  NULL
     }
-
 
   }
 
@@ -338,40 +316,36 @@ krakenParameters <- function(
 
     # Set specific parameters for futures or non-futures
     if (futures) {
-      params$symbol = params$ticker
-      params$resolution = params$interval
-      params$tick_type = 'long-short-ratiotrade'
-      params$from = date_params[1]
-      params$to = date_params[2]
-      params$query = list(
+      params$symbol <-  params$ticker
+      params$resolution <- params$interval
+      params$tick_type <-  'long-short-ratiotrade'
+      params$from <-  date_params[1]
+      params$to <-  date_params[2]
+      params$query <-  list(
         interval = params$interval,
         since = date_params[1],
         to    =  date_params[2]
       )
-      params$path = list(
+      params$path <-  list(
         symbol = params$symbol,
         tick_type = 'long-short-info'
       )
     } else {
 
-      params$pair = params$ticker
-      params$query = list(
+      params$pair <-  params$ticker
+      params$query <-  list(
         since = date_params[1],
         pair = params$pair,
         interval = params$interval
       )
-      params$path = NULL
+      params$path <-  NULL
     }
 
   }
 
   # Common parameters for both futures and non-futures
-  params$futures = futures
-  params$source = 'kraken'
-
-
-
-
+  params$futures <-  futures
+  params$source <-  'kraken'
 
   # Return the structured list
   params

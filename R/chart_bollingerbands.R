@@ -4,7 +4,6 @@
 # objective: Create expressions to be evaluted in
 # the charting function
 # script start;
-
 #' @title
 #' Add Bollinger Bands
 #' to the chart
@@ -12,8 +11,9 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::add_lines()]-wrapper function that interacts with the [TTR::BBands()]-function. The function
-#' adds bollinger bands to the main [chart()].
+#' A high-level [plotly::add_lines()]-wrapper function that interacts
+#' with the [TTR::BBands()]-function. The function adds bollinger bands
+#' to the main [chart()].
 #'
 #' @usage bollinger_bands(
 #'    n = 20,

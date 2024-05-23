@@ -17,7 +17,8 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function for charting Open, High, Low and Close prices.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function for charting
+Open, High, Low and Close prices.
 }
 \examples{
 # script start;

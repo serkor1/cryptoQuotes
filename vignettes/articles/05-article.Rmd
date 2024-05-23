@@ -46,8 +46,11 @@ Below is an example on how to use the `quantmod::tradeModel` with `BTC`,
 ```{r}
 ## 1) specify
 ## the model
+lhs <- quantmod::Next(quantmod::OpCl(BTC))
+rhs <- quantmod::Lag(quantmod::OpHi(BTC),0:3)
+
 BTC_model <- quantmod::specifyModel(
-  formula = quantmod::Next(quantmod::OpCl(BTC)) ~ quantmod::Lag(quantmod::OpHi(BTC),0:3)
+  formula = lhs ~ rhs
 )
 
 ## 2) build the

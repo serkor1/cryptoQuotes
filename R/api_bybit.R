@@ -26,23 +26,36 @@ bybitUrl <- function(
 bybitEndpoint <- function(
     type = 'ohlc',
     futures = TRUE,
-    top = FALSE
-) {
+    top = FALSE) {
 
   endPoint <- switch(
     EXPR = type,
+
     ohlc = {
-      if (futures) 'v5/market/kline' else 'v5/market/kline'
+      if (futures)
+        'v5/market/kline'
+      else
+        'v5/market/kline'
     },
-    ticker ={
-      if (futures) 'v5/market/instruments-info?category=linear' else 'v5/market/instruments-info?category=spot'
+
+    ticker = {
+      if (futures)
+        'v5/market/instruments-info?category=linear'
+      else
+        'v5/market/instruments-info?category=spot'
     },
+
     lsratio = {
-      if (top) 'v5/market/account-ratio' else 'v5/market/account-ratio'
+      if (top)
+        'v5/market/account-ratio'
+      else
+        'v5/market/account-ratio'
     },
+
     fundingrate = {
       'v5/market/funding/history'
     },
+
     interest = {
       '/v5/market/open-interest'
     }
@@ -56,7 +69,6 @@ bybitEndpoint <- function(
 }
 
 # 2) Available intervals; #####
-
 bybitIntervals <- function(
     type,
     interval,
@@ -67,21 +79,52 @@ bybitIntervals <- function(
   # 0) Define intervals
   all_intervals <- switch(
     EXPR = type,
+
     'lsratio' = {
       data.frame(
-        labels = c('5m', '15m', '30m', '1h',  '4h',  '1d'),
-        values = c("5min",  "15min",  "30min", "1h", "4h",  "1d")
+        labels = c('5m', '15m', '30m', '1h', '4h', '1d'),
+        values = c("5min", "15min", "30min", "1h", "4h", "1d")
       )
     },
+
     'interest' = {
       data.frame(
-        labels = c('5m', '15m', '30m', '1h',  '4h',  '1d'),
-        values = c("5min",  "15min",  "30min", "1h" ,"4h",  "1d")
+        labels = c('5m', '15m', '30m', '1h', '4h', '1d'),
+        values = c("5min", "15min", "30min", "1h" , "4h", "1d")
       )
     },
+
     data.frame(
-      labels = c('1m', '3m', '5m', '15m', '30m', '1h',  '2h',  '4h',  '6h',  '12h', '1d', '1M', '1w'),
-      values = c("1" ,  "3",  "5",  "15",  "30", "60", "120", "240", "360", "720",   "D",  "M", "W")
+      labels = c(
+        '1m',
+        '3m',
+        '5m',
+        '15m',
+        '30m',
+        '1h',
+        '2h',
+        '4h',
+        '6h',
+        '12h',
+        '1d',
+        '1M',
+        '1w'
+      ),
+      values = c(
+        "1" ,
+        "3",
+        "5",
+        "15",
+        "30",
+        "60",
+        "120",
+        "240",
+        "360",
+        "720",
+        "D",
+        "M",
+        "W"
+      )
     )
   )
 
@@ -106,9 +149,7 @@ bybitIntervals <- function(
 
   }
 
-
   interval
-
 
 }
 
@@ -268,7 +309,7 @@ bybitParameters <- function(
 
   if (type == "interest") {
 
-    names(params)[3] ='intervalTime'
+    names(params)[3] <- 'intervalTime'
     names(date_params) <- c("startTime", "endTime")
     params$limit <- 200
   }

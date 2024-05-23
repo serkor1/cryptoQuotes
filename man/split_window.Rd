@@ -11,7 +11,8 @@ split_window(xts, by, bounds = "upper")
 
 \item{by}{A reference \code{\link[zoo:index]{zoo::index()}}-object, to be split by.}
 
-\item{bounds}{A character vector of length 1. Has to be one of \code{c('upper','lower','both')}. Defaults to Upper.}
+\item{bounds}{A character vector of length 1.
+Has to be one of \code{c('upper','lower','both')}. Defaults to Upper.}
 }
 \value{
 Returns a list of iteratively restricted xts objects
@@ -19,8 +20,9 @@ Returns a list of iteratively restricted xts objects
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The \code{\link[=split_window]{split_window()}}-function is a high level wrapper of the \code{\link[stats:window]{stats::window()}}-function which restricts
-the intervals between the first and second index value iteratively
+The \code{\link[=split_window]{split_window()}}-function is a high level wrapper
+of the \code{\link[stats:window]{stats::window()}}-function which restricts the intervals between
+the first and second index value iteratively
 }
 \examples{
 # script start;

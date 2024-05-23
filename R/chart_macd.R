@@ -12,7 +12,8 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-function that interacts with the [TTR::MACD()]-function. The function adds subchart with a
+#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-function that
+#' interacts with the [TTR::MACD()]-function. The function adds subchart with a
 #' [TTR::MACD()]-indicator.
 #'
 #' @usage macd(
@@ -155,7 +156,9 @@ macd <- function(
         layers = layers,
         annotations = list(
           list(
-            text = paste0("MACD(",paste(c(nFast, nSlow,nSig), collapse = ', '), ")"),
+            text = paste0(
+              "MACD(",paste(c(nFast, nSlow,nSig), collapse = ', '), ")"
+              ),
             x = 0,
             y = 1,
             font = list(

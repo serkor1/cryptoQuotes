@@ -17,7 +17,8 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function. The function adds a subchart to the \link{chart} with \verb{long-short ratio}.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function.
+The function adds a subchart to the \link{chart} with \verb{long-short ratio}.
 }
 \examples{
 \dontrun{

@@ -1,8 +1,9 @@
 #' USDT Denominated DOGECOIN (DOGEUSDT) 1-Minute Intervals
 #'
 #' @description
-#' This dataset contains time-series data for the DOGECOIN (DOGE) denominated in USDT (Tether),
-#' captured in 1-minute intervals (OHLC-V format). The data spans 2022-01-14 07:00:00 CET to 2022-01-14 08:00:00 CET.
+#' This dataset contains time-series data for the DOGECOIN (DOGE)
+#' denominated in USDT (Tether), captured in 1-minute intervals.
+#' The data spans 2022-01-14 07:00:00 CET to 2022-01-14 08:00:00 CET.
 #'
 #' @format An [xts::xts()]-object  with 61 rows and 5 columns,
 #'

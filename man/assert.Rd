@@ -7,8 +7,8 @@
 assert(..., error_message = NULL)
 }
 \arguments{
-\item{...}{expressions >= 1. If named the names are used as error messages, otherwise
-R's internal error-messages are thrown}
+\item{...}{expressions >= 1. If named the names are used
+as error messages, otherwise R's internal error-messages are thrown}
 
 \item{error_message}{character. An error message, supports \link{cli}-formatting.}
 }
@@ -16,8 +16,8 @@ R's internal error-messages are thrown}
 \link{NULL} if all statements in ... are \link{TRUE}
 }
 \description{
-This function is a wrapper of \code{\link[=stopifnot]{stopifnot()}}, \code{\link[=tryCatch]{tryCatch()}} and \code{\link[cli:cli_abort]{cli::cli_abort()}} and asserts
-the truthfulness of the passed expression(s).
+This function is a wrapper of \code{\link[=stopifnot]{stopifnot()}}, \code{\link[=tryCatch]{tryCatch()}} and
+\code{\link[cli:cli_abort]{cli::cli_abort()}} and asserts the truthfulness of the passed expression(s).
 }
 \examples{
 \dontrun{

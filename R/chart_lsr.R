@@ -9,7 +9,8 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]-wrapper function. The function adds a subchart to the [chart] with `long-short ratio`.
+#' A high-level [plotly::plot_ly()]-wrapper function.
+#' The function adds a subchart to the [chart] with `long-short ratio`.
 #'
 #' @param ratio A [xts::xts()]-object. See [get_lsratio()] for more details.
 #' @inherit kline

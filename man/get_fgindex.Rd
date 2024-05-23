@@ -11,9 +11,11 @@ get_fgindex(
 )
 }
 \arguments{
-\item{from}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional \link{character}-, \link{date}- or \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
 An \link{xts}-object containing,
@@ -53,13 +55,18 @@ The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
 \subsection{About the Fear and Greed Index}{
 
-The fear and greed index is a market sentiment indicator that measures investor emotions to
-gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm).
+The fear and greed index is a market sentiment indicator that measures
+investor emotions to gauge whether they are generally fearful
+(indicating potential selling pressure) or
+greedy (indicating potential buying enthusiasm).
 }
 
 \subsection{Source}{
 
-This index is fetched from \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me}, and can be different from the one provided by \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
+This index is fetched from
+\href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me},
+and can be different from the one provided by
+\href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
 }
 }
 \examples{

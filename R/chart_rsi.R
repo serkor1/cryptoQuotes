@@ -11,8 +11,9 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-function that interacts with the [TTR::RSI()]-function. The function adds a subchart with a
-#' [TTR::RSI()]-indicator.
+#' A high-level [plotly::plot_ly()]- and [plotly::add_lines()]-function that
+#' interacts with the [TTR::RSI()]-function.
+#' The function adds a subchart with a [TTR::RSI()]-indicator.
 #'
 #' @usage rsi(
 #'  price       = "close",
@@ -25,8 +26,10 @@
 #' )
 #'
 #' @inheritParams TTR::RSI
-#' @param upper_limit A [numeric]-vector of [length] 1. 80 by default. Sets the upper limit of the [TTR::RSI].
-#' @param lower_limit A [numeric]-vector of [length] 1. 20 by default. Sets the lower limit of the [TTR::RSI].
+#' @param upper_limit A [numeric]-vector of [length] 1. 80 by default.
+#' Sets the upper limit of the [TTR::RSI].
+#' @param lower_limit A [numeric]-vector of [length] 1. 20 by default.
+#' Sets the lower limit of the [TTR::RSI].
 #' @param color A [character]-vector of [length] 1. "#F100F1" by default.
 #' @param ... For internal use. Please ignore.
 #'

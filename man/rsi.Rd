@@ -27,9 +27,11 @@ rsi(
     See Examples.
 }}
 
-\item{upper_limit}{A \link{numeric}-vector of \link{length} 1. 80 by default. Sets the upper limit of the \link[TTR:RSI]{TTR::RSI}.}
+\item{upper_limit}{A \link{numeric}-vector of \link{length} 1. 80 by default.
+Sets the upper limit of the \link[TTR:RSI]{TTR::RSI}.}
 
-\item{lower_limit}{A \link{numeric}-vector of \link{length} 1. 20 by default. Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
+\item{lower_limit}{A \link{numeric}-vector of \link{length} 1. 20 by default.
+Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
 
 \item{color}{A \link{character}-vector of \link{length} 1. "#F100F1" by default.}
 
@@ -41,8 +43,9 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that interacts with the \code{\link[TTR:RSI]{TTR::RSI()}}-function. The function adds a subchart with a
-\code{\link[TTR:RSI]{TTR::RSI()}}-indicator.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that
+interacts with the \code{\link[TTR:RSI]{TTR::RSI()}}-function.
+The function adds a subchart with a \code{\link[TTR:RSI]{TTR::RSI()}}-indicator.
 }
 \examples{
 # script start;

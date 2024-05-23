@@ -30,7 +30,8 @@ testthat::test_that(
         wma(),
         evwma(),
         vwap(),
-        bollinger_bands()
+        bollinger_bands(),
+        alma()
 
       )
     )
@@ -79,7 +80,8 @@ testthat::test_that(
         wma(),
         evwma(),
         vwap(),
-        bollinger_bands()
+        bollinger_bands(),
+        alma()
 
       )
     )
@@ -128,7 +130,8 @@ testthat::test_that(
         wma(),
         evwma(),
         vwap(),
-        bollinger_bands()
+        bollinger_bands(),
+        alma()
 
       )
     )
@@ -157,7 +160,9 @@ testthat::test_that(
 
     set.seed(1903)
     event_data <- ATOM[
-      sample(1:nrow(ATOM), size = 2)
+      sample(
+        seq_len(nrow(ATOM)),
+        size = 2)
     ]
 
     # 1.1) Extract the index
@@ -191,7 +196,8 @@ testthat::test_that(
       event_data$event == 'Buy',
       yes = 'darkgrey',
       no  = ifelse(
-        subset(event_data, event == 'Buy')$Close < subset(event_data, event == 'Sell')$Close,
+        subset(event_data, event == 'Buy')$Close <
+          subset(event_data, event == 'Sell')$Close,
         yes = 'green',
         no  = 'red'
       )

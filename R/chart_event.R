@@ -4,9 +4,11 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::layout()]-function. The function adds `shapes` and `annotations` to the main [chart()].
+#' A high-level [plotly::layout()]-function.
+#' The function adds `shapes` and `annotations` to the main [chart()].
 #'
-#' @param data a [data.frame]-type object with `index`, `event` and `color` columns.
+#' @param data a [data.frame]-type object with `index`, `event`
+#' and `color` columns.
 #' @param ... For internal use. Please ignore.
 #'
 #' @returns A [plotly::plot_ly()]-object with `shapes` and `annotations`
@@ -28,7 +30,7 @@
 add_event <- function(
     data,
     ...
-    ) {
+) {
 
   call_stack <- as.character(
     lapply(sys.calls(), `[[`, 1)
@@ -68,7 +70,8 @@ add_event <- function(
       assert(
         all(c("index", "event", "color") %in% colnames(data)),
         error_message = c(
-          "x" = "Expected columns {.val index}, {.val event}, {.val color}. None found."
+          "x" = "Expected columns {.val index},
+          {.val event}, {.val color}. None found."
         )
       )
 
@@ -83,7 +86,7 @@ add_event <- function(
         annotations = do.call(
           list,
           lapply(
-            1:nrow(data),
+            seq_len(nrow(data)),
             function(i) {
 
               annotations(
@@ -97,7 +100,7 @@ add_event <- function(
         shapes = do.call(
           list,
           lapply(
-            1:nrow(data),
+            seq_len(nrow(data)),
             function(i) {
 
               vline(

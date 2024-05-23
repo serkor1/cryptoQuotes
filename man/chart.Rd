@@ -14,7 +14,8 @@ chart(
 )
 }
 \arguments{
-\item{ticker}{An object with Open, High, Low, Close and Volume columns that can be coerced to a \code{\link[xts:xts]{xts::xts()}}-object.}
+\item{ticker}{An object with Open, High, Low, Close and Volume columns that
+can be coerced to a \code{\link[xts:xts]{xts::xts()}}-object.}
 
 \item{main}{A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function. \code{\link[=kline]{kline()}} by default.}
 
@@ -22,7 +23,8 @@ chart(
 
 \item{indicator}{An optional \link{list} of \code{\link[plotly:add_trace]{plotly::add_lines()}}-function(s).}
 
-\item{event_data}{An optional \link{data.frame} with event line(s) to be added to the \code{\link[=chart]{chart()}}. See \code{\link[=add_event]{add_event()}} for more details.}
+\item{event_data}{An optional \link{data.frame} with event line(s) to be added
+to the \code{\link[=chart]{chart()}}. See \code{\link[=add_event]{add_event()}} for more details.}
 
 \item{options}{An optional \link{list} of \code{\link[=chart]{chart()}}-options. See details below.}
 }
@@ -31,7 +33,11 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
 
 \strong{Sample Output}
 \if{html}{
-  \out{<div style="text-align: center">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</div>}
+  \out{<div style="text-align: center">}
+   \figure{README-chartquote-1.png}{
+   options: style="width:750px;max-width:75\%;"
+   }
+  \out{</div>}
 }
 \if{latex}{
   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
@@ -40,23 +46,32 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:subplot]{plotly::subplot()}}-wrapper function for building interactive financial charts using the affiliated \link{chart}-functions. The \link{chart} consists
-of a main chart, and an optional subchart. The main chart supports overlaying various trading indicators like \link{sma} and \link{bollinger_bands}.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:subplot]{plotly::subplot()}}-wrapper function
+for building interactive financial charts using
+the affiliated \link{chart}-functions. The \link{chart} consists of a main chart, and
+an optional subchart. The main chart supports overlaying various trading
+indicators like \link{sma} and \link{bollinger_bands}.
 }
 \details{
 \subsection{Options}{
 \itemize{
-\item \code{dark} A <\link{logical}>-value of \link{length} 1. \link{TRUE} by default. Sets the overall theme of the \code{\link[=chart]{chart()}}
-\item \code{slider} A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added
-\item \code{deficiency}  A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default. If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
-\item \code{size} A <\link{numeric}>-value of \link{length} 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
+\item \code{dark} A <\link{logical}>-value of \link{length} 1. \link{TRUE} by default.
+Sets the overall theme of the \code{\link[=chart]{chart()}}
+\item \code{slider} A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default.
+If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added
+\item \code{deficiency}  A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default.
+If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
+\item \code{size} A <\link{numeric}>-value of \link{length} 1. The relative size of the
+main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
 }
 }
 
 \subsection{Charting Events}{
 
-If \code{event_data} is passed, vertical eventlines with appropriate labels and coloring are added
-to the \code{\link[=chart]{chart()}}. This function is rigid, as it will fail if event, label and index columns are not passed.
+If \code{event_data} is passed, vertical eventlines with appropriate labels and
+coloring are added to the \code{\link[=chart]{chart()}}.
+This function is rigid, as it will fail if event, label and
+index columns are not passed.
 
 For more details please see \code{\link[=add_event]{add_event()}}.
 }

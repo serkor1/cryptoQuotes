@@ -9,7 +9,8 @@
 #' @inheritParams get_quote
 #'
 #' @returns
-#' A [character]-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
+#' A [character]-vector of actively traded cryptocurrency pairs on the exchange,
+#' and the specified market.
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}
@@ -22,8 +23,8 @@
 #' ```
 #'
 #' @details
-#' The naming-conventions across, and within, [available_exchanges()] are not necessarily the same. This function lists
-#' all actively traded tickers.
+#' The naming-conventions across, and within, [available_exchanges()] are not
+#' necessarily the same. This function lists all actively traded tickers.
 #'
 #' @example man/examples/scr_availableTickers.R
 #'
@@ -37,8 +38,10 @@ available_tickers <- function(
   # 0) Assert truthfulness
   # and validity of all inputs
   assert(
-    "Argument {.arg source} has to be {.cls character} of length {1}" = (is.character(source) & length(source) == 1),
-    "Argument {.arg futures} has to be {.cls logical} of length {1}" = (is.logical(futures) & length(futures) == 1)
+    "Argument {.arg source} has to be {.cls character} of length {1}" =
+      (is.character(source) & length(source) == 1),
+    "Argument {.arg futures} has to be {.cls logical} of length {1}" =
+      (is.logical(futures) & length(futures) == 1)
   )
 
   assert(

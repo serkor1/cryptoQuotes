@@ -9,9 +9,11 @@ chart_layout(x, layout_element, layout_attribute)
 \arguments{
 \item{x}{\link{integer}-vector of \link{length} 1.}
 
-\item{layout_element}{\link{character}-vector of \link{length} 1. \link[plotly:layout]{plotly::layout} elements. See example.}
+\item{layout_element}{\link{character}-vector of \link{length} 1.
+\link[plotly:layout]{plotly::layout} elements. See example.}
 
-\item{layout_attribute}{\link{character}-vector of \link{length} 1. \link[plotly:layout]{plotly::layout} element value. See example.}
+\item{layout_attribute}{\link{character}-vector of \link{length} 1.
+\link[plotly:layout]{plotly::layout} element value. See example.}
 }
 \value{
 A \link{list} of layout elements.

@@ -11,17 +11,23 @@ available_intervals(
 )
 }
 \arguments{
-\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default.
+See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
 \item{type}{\link{character}-vector of \link{length} 1. One of,
 \itemize{
-\item \code{"ohlc"} - Available exchanges for Open, High, Low, Close and Volume market data. See the \code{\link[=get_quote]{get_quote()}}-function.
-\item \code{"lsratio"} - Available exchanges for Long-Short ratios See the \code{\link[=get_lsratio]{get_lsratio()}}-function.
-\item \code{"fundingrate"} - Available exchanges for Funding rates. See the \code{\link[=get_fundingrate]{get_fundingrate()}}-function.
-\item \code{"interest"} - Available exchanges for Open interest on perpetual contracts on both sides. See the \code{\link[=get_openinterest]{get_openinterest()}}-function.
+\item \code{"ohlc"} - Available exchanges for Open, High, Low, Close and
+Volume market data. See the \code{\link[=get_quote]{get_quote()}}-function.
+\item \code{"lsratio"} - Available exchanges for Long-Short ratios.
+See the \code{\link[=get_lsratio]{get_lsratio()}}-function.
+\item \code{"fundingrate"} - Available exchanges for Funding rates.
+See the \code{\link[=get_fundingrate]{get_fundingrate()}}-function.
+\item \code{"interest"} - Available exchanges for Open interest on perpetual
+contracts on both sides. See the \code{\link[=get_openinterest]{get_openinterest()}}-function.
 }}
 
-\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default. Returns futures market if \link{TRUE}, spot market otherwise.}
+\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default.
+Returns futures market if \link{TRUE}, spot market otherwise.}
 }
 \value{
 An \code{\link[=invisible]{invisible()}} \link{character}-vector containing the  available intervals on
@@ -37,11 +43,13 @@ the exchange, market and endpoint.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-Get available intervals for the \code{\link[=available_tickers]{available_tickers()}} on the \code{\link[=available_exchanges]{available_exchanges()}}.
+Get available intervals for the \code{\link[=available_tickers]{available_tickers()}}
+on the \code{\link[=available_exchanges]{available_exchanges()}}.
 }
 \details{
 The endpoints supported by the \code{\link[=available_exchanges]{available_exchanges()}} are not uniform,
-so exchanges available for, say, \code{\link[=get_lsratio]{get_lsratio()}} is not necessarily the same as those available for \code{\link[=get_quote]{get_quote()}}
+so exchanges available for, say, \code{\link[=get_lsratio]{get_lsratio()}} is not necessarily
+the same as those available for \code{\link[=get_quote]{get_quote()}}
 }
 \examples{
 \dontrun{

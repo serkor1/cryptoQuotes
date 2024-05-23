@@ -20,7 +20,8 @@
 #'
 #'
 #' @param xts A xts-object that needs its bounds modified.
-#' @param bounds A character vector of length 1. Has to be one of `c('upper','lower','both')`. Defaults to Upper.
+#' @param bounds A character vector of length 1.
+#' Has to be one of `c('upper','lower','both')`. Defaults to Upper.
 #'
 #' @example man/examples/scr_FUN.R
 #' @family utility
@@ -73,12 +74,14 @@ remove_bound <- function(
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' The [split_window()]-function is a high level wrapper of the [stats::window()]-function which restricts
-#' the intervals between the first and second index value iteratively
+#' The [split_window()]-function is a high level wrapper
+#' of the [stats::window()]-function which restricts the intervals between
+#' the first and second index value iteratively
 #'
 #' @param xts A xts-object that needs needs to be split.
 #' @param by A reference [zoo::index()]-object, to be split by.
-#' @param bounds A character vector of length 1. Has to be one of `c('upper','lower','both')`. Defaults to Upper.
+#' @param bounds A character vector of length 1.
+#' Has to be one of `c('upper','lower','both')`. Defaults to Upper.
 #'
 #' @example man/examples/scr_FUN.R
 #' @family utility

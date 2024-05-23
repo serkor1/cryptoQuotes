@@ -12,7 +12,9 @@
 #' @description
 #' `r lifecycle::badge("stable")`
 #'
-#' Get the open interest on a cryptocurrency pair from the [available_exchanges()] in any actively traded [available_tickers()] on the FUTURES markets.
+#' Get the open interest on a cryptocurrency pair from the
+#' [available_exchanges()] in any actively traded [available_tickers()]
+#' on the FUTURES markets.
 #'
 #' @usage get_openinterest(
 #'  ticker,
@@ -28,7 +30,7 @@
 #' An [xts]-object containing,
 #'
 #' \item{index}{<[POSIXct]> the time-index}
-#' \item{open_interest}{<[numeric]> total open perpetual contracts on both both sides}
+#' \item{open_interest}{<[numeric]> open perpetual contracts on both both sides}
 #'
 #' **Sample output**
 #' ```{r output, echo = FALSE}
@@ -58,19 +60,27 @@ get_openinterest <- function(
   # 1) assert argument
   # inputs
   assert(
-    "Argument {.arg ticker} is missing with no default" =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
-    "Argument {.arg source} has to be {.cls character} of length {1}" = (is.character(source) & length(source) == 1),
-    "Argument {.arg interval} has to be {.cls character} of length {1}" = (is.character(interval) & length(interval) == 1),
-    "Valid {.arg from} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
-              format(
-                Sys.time()
-              )
-            )}}" = (is.null(from) || (is.date(from) & length(from) == 1)),
-    "Valid {.arg to} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
-              format(
-                Sys.time()
-              )
-            )}}" = (is.null(to) || (is.date(to) & length(to) == 1))
+    "
+    Argument {.arg ticker} is missing with no default
+    " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+    "
+    Argument {.arg source} has to be {.cls character} of length {1}
+    " = (is.character(source) & length(source) == 1),
+
+    "
+    Argument {.arg interval} has to be {.cls character} of length {1}
+    " = (is.character(interval) & length(interval) == 1),
+
+    "
+    Valid {.arg from} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(from) || (is.date(from) & length(from) == 1)),
+
+    "Valid {.arg to} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(to) || (is.date(to) & length(to) == 1))
   )
 
   # 2) assert validity
@@ -113,7 +123,9 @@ get_openinterest <- function(
       "i" = paste(
         "Run",
         cli::code_highlight(
-          code = "cryptoQuotes::available_intervals(type = 'interest', source = source)",
+          code = "
+          cryptoQuotes::available_intervals(type = 'interest', source = source)
+          ",
           code_theme = "Chaos"
         ),
         "for supported intervals"
@@ -143,7 +155,6 @@ get_openinterest <- function(
     # to variables
     from <- forced_dates$from
     to   <- forced_dates$to
-
   }
 
   # NOTE: binance only supports
@@ -158,11 +169,8 @@ get_openinterest <- function(
         ),
         tz = Sys.timezone()
       )
-
     )
-
   }
-
 
   fetch(
     ticker = ticker,
@@ -173,8 +181,6 @@ get_openinterest <- function(
     to     = to,
     from   = from
   )
-
-
 }
 
 

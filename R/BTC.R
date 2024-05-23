@@ -1,8 +1,9 @@
 #' USDT Denominated Bitcoin (BTCUSDT) Weekly Intervals
 #'
 #' @description
-#' This dataset contains time-series data for Bitcoin (BTC) denominated in USDT (Tether),
-#' captured in weekly intervals (OHLC-V format). The data spans from January 1, 2023, to December 31, 2023.
+#' This dataset contains time-series data for Bitcoin (BTC)
+#' denominated in USDT (Tether), captured in weekly intervals.
+#' The data spans from January 1, 2023, to December 31, 2023.
 #'
 #' @format An [xts::xts()]-object with 52 rows and 5 columns,
 #'

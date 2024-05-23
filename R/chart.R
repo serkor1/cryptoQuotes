@@ -12,21 +12,30 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::plot_ly()]- and [plotly::subplot()]-wrapper function for building interactive financial charts using the affiliated [chart]-functions. The [chart] consists
-#' of a main chart, and an optional subchart. The main chart supports overlaying various trading indicators like [sma] and [bollinger_bands].
+#' A high-level [plotly::plot_ly()]- and [plotly::subplot()]-wrapper function
+#' for building interactive financial charts using
+#' the affiliated [chart]-functions. The [chart] consists of a main chart, and
+#' an optional subchart. The main chart supports overlaying various trading
+#' indicators like [sma] and [bollinger_bands].
 #'
-#' @param ticker An object with Open, High, Low, Close and Volume columns that can be coerced to a [xts::xts()]-object.
+#' @param ticker An object with Open, High, Low, Close and Volume columns that
+#' can be coerced to a [xts::xts()]-object.
 #' @param main A [plotly::plot_ly()]-function. [kline()] by default.
 #' @param sub An optional [list] of [plotly::plot_ly()]-function(s).
 #' @param indicator An optional [list] of [plotly::add_lines()]-function(s).
-#' @param event_data An optional [data.frame] with event line(s) to be added to the [chart()]. See [add_event()] for more details.
+#' @param event_data An optional [data.frame] with event line(s) to be added
+#' to the [chart()]. See [add_event()] for more details.
 #' @param options An optional [list] of [chart()]-options. See details below.
 #'
 #' @returns A [plotly::plot_ly()] object.
 #'
 #' **Sample Output**
 #' \if{html}{
-#'   \out{<div style="text-align: center">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</div>}
+#'   \out{<div style="text-align: center">}
+#'    \figure{README-chartquote-1.png}{
+#'    options: style="width:750px;max-width:75\%;"
+#'    }
+#'   \out{</div>}
 #' }
 #' \if{latex}{
 #'   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
@@ -35,15 +44,21 @@
 #' @details
 #' ## Options
 #'
-#' * \code{dark} A <[logical]>-value of [length] 1. [TRUE] by default. Sets the overall theme of the [chart()]
-#' * \code{slider} A <[logical]>-value of [length] 1. [FALSE] by default. If [TRUE], a [plotly::rangeslider()] is added
-#' * \code{deficiency}  A <[logical]>-value of [length] 1. [FALSE] by default. If [TRUE], all [chart()]-elements are colorblind friendly
-#' * \code{size} A <[numeric]>-value of [length] 1. The relative size of the main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
+#' * \code{dark} A <[logical]>-value of [length] 1. [TRUE] by default.
+#' Sets the overall theme of the [chart()]
+#' * \code{slider} A <[logical]>-value of [length] 1. [FALSE] by default.
+#' If [TRUE], a [plotly::rangeslider()] is added
+#' * \code{deficiency}  A <[logical]>-value of [length] 1. [FALSE] by default.
+#' If [TRUE], all [chart()]-elements are colorblind friendly
+#' * \code{size} A <[numeric]>-value of [length] 1. The relative size of the
+#' main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
 #'
 #' ## Charting Events
 #'
-#' If `event_data` is passed, vertical eventlines with appropriate labels and coloring are added
-#' to the [chart()]. This function is rigid, as it will fail if event, label and index columns are not passed.
+#' If `event_data` is passed, vertical eventlines with appropriate labels and
+#' coloring are added to the [chart()].
+#' This function is rigid, as it will fail if event, label and
+#' index columns are not passed.
 #'
 #' For more details please see [add_event()].
 #'

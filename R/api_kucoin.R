@@ -7,8 +7,7 @@
 # 1) URLs and Endpoint; ####
 kucoinUrl <- function(
     futures = TRUE,
-    ...
-) {
+    ...) {
 
   # 1) define baseURL
   # for each API
@@ -29,24 +28,22 @@ kucoinUrl <- function(
 kucoinEndpoint <- function(
     type = 'ohlc',
     futures = TRUE,
-    ...
-) {
-
+    ...) {
 
   endPoint <- switch(
     EXPR = type,
     ohlc = {
-      if (futures) 'api/v1/kline/query' else 'api/v1/market/candles'
+      if (futures) 'api/v1/kline/query' else
+        'api/v1/market/candles'
     },
     ticker ={
-      if (futures) 'api/v1/contracts/active' else 'api/v1/market/allTickers'
+      if (futures) 'api/v1/contracts/active' else
+        'api/v1/market/allTickers'
     },
     fundingrate = {
       'api/v1/contract/funding-rates'
     }
   )
-
-
 
   # 2) return endPoint url
   return(
@@ -59,27 +56,70 @@ kucoinIntervals <- function(
     interval,
     futures,
     all = FALSE,
-    ...
-) {
+    ...) {
+
   if (futures) {
     allIntervals <- data.frame(
-      labels = c('1m', '5m', '15m', '30m', '1h', '2h', '4h', '8h', '12h', '1d', '1w'),
+      labels = c(
+        '1m',
+        '5m',
+        '15m',
+        '30m',
+        '1h',
+        '2h',
+        '4h',
+        '8h',
+        '12h',
+        '1d',
+        '1w'
+      ),
       values = c(1, 5, 15, 30, 60, 120, 240, 480, 720, 1440, 10080)
     )
   } else {
     allIntervals <- data.frame(
-      labels = c('1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '1w'),
-      values = c('1min', '3min', '5min', '15min', '30min', '1hour', '2hour', '4hour', '6hour', '8hour', '12hour', '1day', '1week')
+      labels = c(
+        '1m',
+        '3m',
+        '5m',
+        '15m',
+        '30m',
+        '1h',
+        '2h',
+        '4h',
+        '6h',
+        '8h',
+        '12h',
+        '1d',
+        '1w'
+      ),
+      values = c(
+        '1min',
+        '3min',
+        '5min',
+        '15min',
+        '30min',
+        '1hour',
+        '2hour',
+        '4hour',
+        '6hour',
+        '8hour',
+        '12hour',
+        '1day',
+        '1week'
+      )
     )
   }
 
   if (all) {
+
     return(allIntervals$labels)
+
   } else {
     # Select the specified interval
     selectedInterval <- allIntervals$values[
       grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)
     ]
+
     return(selectedInterval)
   }
 }
@@ -88,8 +128,7 @@ kucoinIntervals <- function(
 kucoinResponse <- function(
     type = 'ohlc',
     futures,
-    ...
-) {
+    ...) {
 
   response <- NULL
 
@@ -102,34 +141,36 @@ kucoinResponse <- function(
     EXPR = type,
     ohlc = {
       list(
-        colum_names = if (futures) c('open', 'high', 'low', 'close', 'volume') else c('open', 'close', 'high', 'low', 'volume'),
+        colum_names = if (futures)
+          c('open', 'high', 'low', 'close', 'volume')
+        else
+          c('open', 'close', 'high', 'low', 'volume'),
         colum_location = 2:6,
         index_location = 1
       )
     },
     ticker = {
       list(
-        foo = function(response, futures){
-
+        foo = function(response, futures) {
           if (futures) {
-            subset(
-              x = response$data,
-              grepl(pattern = 'open', ignore.case = TRUE, x = response$data$status)
-            )$symbol
+            subset(x = response$data,
+                   grepl(
+                     pattern = 'open',
+                     ignore.case = TRUE,
+                     x = response$data$status
+                   ))$symbol
+
           } else {
-
             response$data$ticker$symbol
-          }
 
+          }
         }
       )
-
-
     },
 
     fundingrate = {
       list(
-        colum_names     = "funding_rate",
+        colum_names    = "funding_rate",
         index_location = c(3),
         colum_location = c(2)
       )
@@ -143,8 +184,7 @@ kucoinDates <- function(
     futures,
     dates,
     is_response = FALSE,
-    ...
-) {
+    ...) {
 
   # 0) set multiplier based
   # on market

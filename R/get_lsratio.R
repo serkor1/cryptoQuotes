@@ -10,7 +10,8 @@
 #' @description
 #' `r lifecycle::badge("stable")`
 #'
-#' Get the long-short ratio for any [available_tickers()] from the [available_exchanges()]
+#' Get the long-short ratio for any [available_tickers()]
+#' from the [available_exchanges()]
 #'
 #' @usage get_lsratio(
 #'    ticker,
@@ -22,7 +23,8 @@
 #' )
 #'
 #' @inheritParams get_quote
-#' @param top A [logical] vector. [FALSE] by default. If [TRUE] it returns the top traders Long-Short ratios.
+#' @param top A [logical] vector. [FALSE] by default.
+#' If [TRUE] it returns the top traders Long-Short ratios.
 #'
 #'
 #' @returns An [xts]-object containing,
@@ -65,19 +67,23 @@ get_lsratio <- function(
   {{
 
     assert(
-      "Argument {.arg ticker} is missing with no default" =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
-      "Argument {.arg source} has to be {.cls character} of length {1}" = (is.character(source) & length(source) == 1),
-      "Argument {.arg interval} has to be {.cls character} of length {1}" = (is.character(interval) & length(interval) == 1),
-      "Valid {.arg from} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
-              format(
-                Sys.time()
-              )
-            )}}" = (is.null(from) || (is.date(from) & length(from) == 1)),
-      "Valid {.arg to} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
-              format(
-                Sys.time()
-              )
-            )}}" = (is.null(to) || (is.date(to) & length(to) == 1))
+      "
+      Argument {.arg ticker} is missing with no default
+      " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+      "
+      Argument {.arg source} has to be {.cls character} of length {1}
+      " = (is.character(source) & length(source) == 1),
+      "
+      Argument {.arg interval} has to be {.cls character} of length {1}
+      " = (is.character(interval) & length(interval) == 1),
+      "Valid {.arg from} input is on the form
+      {.val {paste(as.character(Sys.Date()))}} or
+      {.val {as.character(format(Sys.time()))}
+      }" = (is.null(from) || (is.date(from) & length(from) == 1)),
+      "Valid {.arg to} input is on the form
+      {.val {paste(as.character(Sys.Date()))}} or
+      {.val {as.character(format(Sys.time()))}}
+      " = (is.null(to) || (is.date(to) & length(to) == 1))
     )
 
   }}
@@ -134,7 +140,9 @@ get_lsratio <- function(
       "i" = paste(
         "Run",
         cli::code_highlight(
-          code = "cryptoQuotes::available_intervals(type = 'lsratio', source = source)",
+          code = "cryptoQuotes::available_intervals(
+          type = 'lsratio', source = source
+          )",
           code_theme = "Chaos"
         ),
         "for supported intervals"

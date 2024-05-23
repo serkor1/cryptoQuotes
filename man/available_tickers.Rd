@@ -7,12 +7,15 @@
 available_tickers(source = "binance", futures = TRUE)
 }
 \arguments{
-\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default.
+See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default. Returns futures market if \link{TRUE}, spot market otherwise.}
+\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default.
+Returns futures market if \link{TRUE}, spot market otherwise.}
 }
 \value{
-A \link{character}-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
+A \link{character}-vector of actively traded cryptocurrency pairs on the exchange,
+and the specified market.
 
 \strong{Sample output}
 
@@ -26,8 +29,8 @@ A \link{character}-vector of actively traded cryptocurrency pairs on the exchang
 Get actively traded cryptocurrency pairs on the \code{\link[=available_exchanges]{available_exchanges()}}.
 }
 \details{
-The naming-conventions across, and within, \code{\link[=available_exchanges]{available_exchanges()}} are not necessarily the same. This function lists
-all actively traded tickers.
+The naming-conventions across, and within, \code{\link[=available_exchanges]{available_exchanges()}} are not
+necessarily the same. This function lists all actively traded tickers.
 }
 \examples{
 \dontrun{

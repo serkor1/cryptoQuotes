@@ -1,5 +1,5 @@
 testthat::test_that(
-  desc = "availablePairs on Binance returns a vector of characters, with lenght > 1",
+  desc = "Test that available_tickers from binance returns a non-empty vector",
   code = {
 
     # 0) skip if online;
@@ -42,7 +42,7 @@ testthat::test_that(
 
 
 testthat::test_that(
-  desc = "availablePairs on Kraken returns a vector of characters, with lenght > 1",
+  desc = "Test that available_tickers from kraken returns a non-empty vector",
   code = {
 
     # 0) skip if online;
@@ -85,7 +85,7 @@ testthat::test_that(
 
 
 testthat::test_that(
-  desc = "availablePairs on Bitmart returns a vector of characters, with lenght > 1",
+  desc = "Test that available_tickers from bitmart returns a non-empty vector",
   code = {
 
     # 0) skip if online;
@@ -128,7 +128,7 @@ testthat::test_that(
 
 
 testthat::test_that(
-  desc = "availablePairs on Kucoin returns a vector of characters, with lenght > 1",
+  desc = "Test that available_tickers from kucoin returns a non-empty vector",
   code = {
 
     # 0) skip if online;
