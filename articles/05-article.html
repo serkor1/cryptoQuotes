@@ -132,13 +132,13 @@ used in the <code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" cla
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1) specify</span></span>
 <span><span class="co">## the model</span></span>
+<span><span class="va">lhs</span> <span class="op">&lt;-</span> <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/Next.html" class="external-link">Next</a></span><span class="op">(</span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/OHLC.Transformations.html" class="external-link">OpCl</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">rhs</span> <span class="op">&lt;-</span> <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/Lag.html" class="external-link">Lag</a></span><span class="op">(</span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/OHLC.Transformations.html" class="external-link">OpHi</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span>,<span class="fl">0</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">BTC_model</span> <span class="op">&lt;-</span> <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/specifyModel.html" class="external-link">specifyModel</a></span><span class="op">(</span></span>
-<span>  formula <span class="op">=</span> <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/Next.html" class="external-link">Next</a></span><span class="op">(</span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/OHLC.Transformations.html" class="external-link">OpCl</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span><span class="op">)</span> <span class="op">~</span> <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/Lag.html" class="external-link">Lag</a></span><span class="op">(</span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/OHLC.Transformations.html" class="external-link">OpHi</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span>,<span class="fl">0</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+<span>  formula <span class="op">=</span> <span class="va">lhs</span> <span class="op">~</span> <span class="va">rhs</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in formula.character(object, env = baseenv()): Using formula(x) is deprecated when x is a character vector of length &gt; 1.</span></span>
-<span><span class="co">#&gt;   Consider formula(paste(x, collapse = " ")) instead.</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="co">## 2) build the</span></span>
 <span><span class="co">## model</span></span>
 <span><span class="va">built_model</span> <span class="op">&lt;-</span>  <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/buildModel.html" class="external-link">buildModel</a></span><span class="op">(</span></span>
@@ -150,29 +150,29 @@ used in the <code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" cla
 <span><span class="co">## 3) trade the model</span></span>
 <span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" class="external-link">tradeModel</a></span><span class="op">(</span><span class="va">built_model</span>, leverage <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Model:  lm1716268495.58835 </span></span>
+<span><span class="co">#&gt;   Model:  lm1716468333.75144 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   C.A.G.R.:  70.81%  H.P.R.:  31.81% </span></span>
+<span><span class="co">#&gt;   C.A.G.R.:  61.13%  H.P.R.:  28.39% </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Returns by period summary:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;              weekly monthly quarterly yearly</span></span>
-<span><span class="co">#&gt;     Max.     25.77%  48.73%    31.94% 55.65%</span></span>
-<span><span class="co">#&gt;     3rd Qu.   8.02%  45.10%    28.45% 55.65%</span></span>
-<span><span class="co">#&gt;     Mean      2.80%  12.82%    24.96% 55.65%</span></span>
-<span><span class="co">#&gt;     Median   -1.31%   1.88%    24.96% 55.65%</span></span>
-<span><span class="co">#&gt;     2rd Qu.  -4.97% -12.93%    21.47% 55.65%</span></span>
-<span><span class="co">#&gt;     Min.    -14.61% -18.69%    17.98% 55.65%</span></span>
+<span><span class="co">#&gt;     Max.     25.77%  48.73%    31.94% 51.62%</span></span>
+<span><span class="co">#&gt;     3rd Qu.   8.02%  41.33%    27.68% 51.62%</span></span>
+<span><span class="co">#&gt;     Mean      2.65%  12.07%    23.43% 51.62%</span></span>
+<span><span class="co">#&gt;     Median   -1.31%   1.88%    23.43% 51.62%</span></span>
+<span><span class="co">#&gt;     2rd Qu.  -4.97% -12.93%    19.17% 51.62%</span></span>
+<span><span class="co">#&gt;     Min.    -14.61% -18.69%    14.91% 51.62%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Period to date returns:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;              weekly monthly quarterly yearly</span></span>
-<span><span class="co">#&gt;              17.01%  45.10%    17.98% 55.65%</span></span></code></pre></div>
+<span><span class="co">#&gt;              13.97%  41.33%    14.91% 51.62%</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="charting-cryptocurrency-with-quantmod">Charting Cryptocurrency with quantmod<a class="anchor" aria-label="anchor" href="#charting-cryptocurrency-with-quantmod"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## chart the</span></span>
 <span><span class="co">## BTC with candlesticks</span></span>
 <span><span class="co">## and Bollinger BAnds</span></span>
@@ -191,7 +191,7 @@ used in the <code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" cla
 </h2>
 <p>Below is an example on how to use the <code>BBands()</code>-function
 from the <code>TTR</code>-package,</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) calculate</span></span>
 <span><span class="co"># Bollinger Bands</span></span>
 <span><span class="va">indicator</span> <span class="op">&lt;-</span> <span class="fu">TTR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TTR/man/bollingerBands.html" class="external-link">BBands</a></span><span class="op">(</span></span>
@@ -241,70 +241,6 @@ pctB
 </th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-2024-05-16
-</td>
-<td style="text-align:center;">
-66233.1
-</td>
-<td style="text-align:center;">
-66700
-</td>
-<td style="text-align:center;">
-64557
-</td>
-<td style="text-align:center;">
-65228.4
-</td>
-<td style="text-align:center;">
-2547.44
-</td>
-<td style="text-align:center;">
-58873.539
-</td>
-<td style="text-align:center;">
-62328.205
-</td>
-<td style="text-align:center;">
-65782.871
-</td>
-<td style="text-align:right;">
-0.958
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-05-17
-</td>
-<td style="text-align:center;">
-65228.4
-</td>
-<td style="text-align:center;">
-67443
-</td>
-<td style="text-align:center;">
-65121.1
-</td>
-<td style="text-align:center;">
-67043.5
-</td>
-<td style="text-align:center;">
-2179.142
-</td>
-<td style="text-align:center;">
-58594.212
-</td>
-<td style="text-align:center;">
-62493.088
-</td>
-<td style="text-align:center;">
-66391.965
-</td>
-<td style="text-align:right;">
-1.018
-</td>
-</tr>
 <tr>
 <td style="text-align:left;">
 2024-05-18
@@ -412,25 +348,89 @@ pctB
 71896.4
 </td>
 <td style="text-align:center;">
-70750
+69202
 </td>
 <td style="text-align:center;">
-70942.8
+70145.1
 </td>
 <td style="text-align:center;">
-760.134
+2366.526
 </td>
 <td style="text-align:center;">
-57832.979
+57975.636
 </td>
 <td style="text-align:center;">
-63890.388
+63851.293
 </td>
 <td style="text-align:center;">
-69947.798
+69726.95
 </td>
 <td style="text-align:right;">
-1.103
+1.059
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-05-22
+</td>
+<td style="text-align:center;">
+70145.1
+</td>
+<td style="text-align:center;">
+70594.2
+</td>
+<td style="text-align:center;">
+68725.2
+</td>
+<td style="text-align:center;">
+69144
+</td>
+<td style="text-align:center;">
+2667.192
+</td>
+<td style="text-align:center;">
+58561.555
+</td>
+<td style="text-align:center;">
+64398.082
+</td>
+<td style="text-align:center;">
+70234.608
+</td>
+<td style="text-align:right;">
+0.936
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-05-23
+</td>
+<td style="text-align:center;">
+69144.1
+</td>
+<td style="text-align:center;">
+70500
+</td>
+<td style="text-align:center;">
+69144
+</td>
+<td style="text-align:center;">
+69800
+</td>
+<td style="text-align:center;">
+1524.396
+</td>
+<td style="text-align:center;">
+58656.23
+</td>
+<td style="text-align:center;">
+64804.507
+</td>
+<td style="text-align:center;">
+70952.783
+</td>
+<td style="text-align:right;">
+0.907
 </td>
 </tr>
 </tbody>

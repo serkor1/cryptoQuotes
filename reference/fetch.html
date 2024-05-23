@@ -82,35 +82,45 @@ and should reduce the amount of coding.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>ticker</dt>
-<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. See <code><a href="available_tickers.html">available_tickers()</a></code> for available tickers.</p></dd>
+<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1.
+See <code><a href="available_tickers.html">available_tickers()</a></code> for available tickers.</p></dd>
 
 
 <dt>source</dt>
-<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <code>binance</code> by default. See <code><a href="available_exchanges.html">available_exchanges()</a></code> for available exchanges.</p></dd>
+<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <code>binance</code> by default.
+See <code><a href="available_exchanges.html">available_exchanges()</a></code> for available exchanges.</p></dd>
 
 
 <dt>futures</dt>
-<dd><p>A <a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <a href="https://rdrr.io/r/base/logical.html" class="external-link">TRUE</a> by default. Returns futures market if <a href="https://rdrr.io/r/base/logical.html" class="external-link">TRUE</a>, spot market otherwise.</p></dd>
+<dd><p>A <a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <a href="https://rdrr.io/r/base/logical.html" class="external-link">TRUE</a> by default.
+Returns futures market if <a href="https://rdrr.io/r/base/logical.html" class="external-link">TRUE</a>, spot market otherwise.</p></dd>
 
 
 <dt>interval</dt>
-<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <code>1d</code> by default. See <code><a href="available_intervals.html">available_intervals()</a></code> for available intervals.</p></dd>
+<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <code>1d</code> by default.
+See <code><a href="available_intervals.html">available_intervals()</a></code> for available intervals.</p></dd>
 
 
 <dt>type</dt>
-<dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. One of,</p><ul><li><p><code>"ohlc"</code> - Available exchanges for Open, High, Low, Close and Volume market data. See the <code><a href="get_quote.html">get_quote()</a></code>-function.</p></li>
-<li><p><code>"lsratio"</code> - Available exchanges for Long-Short ratios See the <code><a href="get_lsratio.html">get_lsratio()</a></code>-function.</p></li>
-<li><p><code>"fundingrate"</code> - Available exchanges for Funding rates. See the <code><a href="get_fundingrate.html">get_fundingrate()</a></code>-function.</p></li>
-<li><p><code>"interest"</code> - Available exchanges for Open interest on perpetual contracts on both sides. See the <code><a href="get_openinterest.html">get_openinterest()</a></code>-function.</p></li>
+<dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. One of,</p><ul><li><p><code>"ohlc"</code> - Available exchanges for Open, High, Low, Close and
+Volume market data. See the <code><a href="get_quote.html">get_quote()</a></code>-function.</p></li>
+<li><p><code>"lsratio"</code> - Available exchanges for Long-Short ratios.
+See the <code><a href="get_lsratio.html">get_lsratio()</a></code>-function.</p></li>
+<li><p><code>"fundingrate"</code> - Available exchanges for Funding rates.
+See the <code><a href="get_fundingrate.html">get_fundingrate()</a></code>-function.</p></li>
+<li><p><code>"interest"</code> - Available exchanges for Open interest on perpetual
+contracts on both sides. See the <code><a href="get_openinterest.html">get_openinterest()</a></code>-function.</p></li>
 </ul></dd>
 
 
 <dt>to</dt>
-<dd><p>An optional <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-, <a href="https://rdrr.io/r/base/date.html" class="external-link">date</a>- or <a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> by default.</p></dd>
+<dd><p>An optional <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-, <a href="https://rdrr.io/r/base/date.html" class="external-link">date</a>- or
+<a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> by default.</p></dd>
 
 
 <dt>from</dt>
-<dd><p>An optional <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-, <a href="https://rdrr.io/r/base/date.html" class="external-link">date</a>- or <a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> by default.</p></dd>
+<dd><p>An optional <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a>-, <a href="https://rdrr.io/r/base/date.html" class="external-link">date</a>- or
+<a href="https://rdrr.io/r/base/DateTimeClasses.html" class="external-link">POSIXct</a>-vector of <a href="https://rdrr.io/r/base/length.html" class="external-link">length</a> 1. <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> by default.</p></dd>
 
 
 <dt>...</dt>
@@ -125,8 +135,8 @@ and should reduce the amount of coding.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function can only be used to fetch time-based objects, and can therefore
-not be used to get, for example, <code><a href="available_tickers.html">available_tickers()</a></code>.</p>
+    <p>This function can only be used to fetch time-based objects,
+and can therefore not be used to get, for example, <code><a href="available_tickers.html">available_tickers()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
