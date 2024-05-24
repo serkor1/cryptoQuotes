@@ -48,6 +48,7 @@ needs to be resolved on `stable`- and `experimental`-functions.
 * Fixed a warning in the `get_lsratio()`-function with `source = "binance"`
 * Fixed a bug in the `lsr()`-indicator which broke the `chart()`-function when included.
 * Fixed a bug in the `get_quote()`-function where if `to = NULL` and `from != NULL` the returned `quote` would be filtered according to `UCT` and not `Sys.timezone()`
+* Fixed a bug in the `chart()`-function where the inferred intervals would be incorrect for leap years, and months different from 30 days.
 
 # cryptoQuotes 1.3.0
 
