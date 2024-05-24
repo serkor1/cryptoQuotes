@@ -10,7 +10,7 @@ testthat::test_that(
   code = {
 
     # Pre-calculate dates
-    start_date <- Sys.Date() - 7
+    start_date <- Sys.Date() - 3
     end_date <- Sys.Date() - 1
     current_year <- as.numeric(format(Sys.Date(), '%Y'))
 
@@ -27,9 +27,11 @@ testthat::test_that(
       # Run without any errors
       testthat::expect_no_condition(
         output <- get_openinterest(
-          ticker = "BTCUSDT",
+          ticker = cryptoQuotes::available_tickers(
+            source = exchange,futures = TRUE
+          )[50],
           source = exchange,
-          interval = '1d',
+          interval = '1h',
           from = start_date,
           to = end_date
         ),message = error_label
@@ -38,7 +40,7 @@ testthat::test_that(
       # Check if interval is equal to input interval
       testthat::expect_equal(
         object = infer_interval(output),
-        expected = '1d',
+        expected = '1h',
         label = error_label
       )
 

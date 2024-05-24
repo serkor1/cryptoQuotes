@@ -280,7 +280,6 @@ fetch <- function(
         type   = type,
         futures = futures,
         ...
-
       ),
       query = parameters$query,
       path  = parameters$path
@@ -304,7 +303,6 @@ fetch <- function(
     what = c('array', 'matrix', 'data.frame')
   )
 
-
   # 2.2) extract data
   # from reponse:
   #
@@ -312,16 +310,21 @@ fetch <- function(
   # then it is likely
   # that we are dealing with
   # an error, or Kraken
+  #
+  # This could be done using do.call
+  # maybe
   response <- tryCatch(
     expr = {
       response[[which(idx)]]
     },
     error = function(error){
-      as.data.frame(response)
+      do.call(
+        data.frame,
+        response
+      )
+      #as.data.frame(response)
     }
   )
-
-
 
   # 3) Extract source specific
   # response parameters

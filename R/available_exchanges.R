@@ -73,7 +73,7 @@ available_exchanges <- function(
       ohlc        = c('binance', 'kucoin', 'kraken', 'bitmart', 'bybit'),
       fundingrate = c('binance', 'bybit', 'kucoin'),
       lsratio     = c('binance', 'bybit', 'kraken'),
-      interest    = c('binance', 'bybit')
+      interest    = c('binance', 'bybit') # Working on Kraken at the moment.
     )
   )
 

@@ -138,8 +138,6 @@ testthat::test_that(
   }
 )
 
-
-
 # 2) Long-Short Ration
 testthat::test_that(
   desc = "Test get_lsr() for Kraken (FUTURES)",
