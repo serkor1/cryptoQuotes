@@ -116,6 +116,7 @@
 <li>Fixed a bug in the <code><a href="../reference/lsr.html">lsr()</a></code>-indicator which broke the <code><a href="../reference/chart.html">chart()</a></code>-function when included.</li>
 <li>Fixed a bug in the <code><a href="../reference/get_quote.html">get_quote()</a></code>-function where if <code>to = NULL</code> and <code>from != NULL</code> the returned <code>quote</code> would be filtered according to <code>UCT</code> and not <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code>
 </li>
+<li>Fixed a bug in the <code><a href="../reference/chart.html">chart()</a></code>-function where the inferred intervals would be incorrect for leap years, and months different from 30 days.</li>
 </ul></div>
 </div>
     <div class="section level2">
