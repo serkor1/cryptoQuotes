@@ -23,13 +23,15 @@ knitr::opts_chunk$set(
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://codecov.io/gh/serkor1/cryptoQuotes)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/serkor1/cryptoQuotes/development)
 <!-- badges: end -->
 
-The `cryptoQuotes` package provides open access to cryptocurrency market data in `R` by utilizing public market data endpoints through `curl`. This package does not require any `API` keys, making it straightforward and easy to use for accessing real-time and historical cryptocurrency data.
+The `cryptoQuotes`-package is a high-level API client for accessing public market data endpoints on major cryptocurrency exchanges. It supports open, high, low, close and volume (OHLC-V) data and a variety of sentiment indicators; the market data is high quality and can be retrieved in intervals ranging from *seconds* to *months*. All the market data is accessed and processed without relying on crawlers, or API keys, ensuring an open, and reliable, access for researchers, traders and students alike. 
 
 ## Example: Bitcoin OHLC-V with Long-Short Ratios
 
+<div align="center">
 ```{r print table, echo=FALSE, fig.alt="cryptocurrency prices in R"}
 ## get OHLC-V in 30 minute intervals
 ## for Bitcoin from Binance
@@ -81,12 +83,12 @@ kable_output <- kableExtra::kable_styling(
   full_width = TRUE,
   position = 'center',
   bootstrap_options = c("responsive", "bordered"),
-  font_size = 16
+  font_size = 14
 )
 
 kable_output
 ```
-
+</div>
 
 <details>
 <summary>Source</summary>
@@ -121,22 +123,26 @@ BTC <- merge(
 ```
 </details>
 
-## Installation
+## :information_source: Installation
 
-### Stable version
+### :shield: Stable version
 ```{r stable version guide, eval = FALSE}
-# install from CRAN
+## install from CRAN
 install.packages(
   pkgs = 'cryptoQuotes',
   dependencies = TRUE
 )
 ```
 
-### Development version
+### :hammer_and_wrench: Development version
 ```{r development version guide, eval = FALSE}
-# install from github
+## install from github
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
   ref  = 'development'
 )
 ```
+
+## :information_source: Code of Conduct
+
+Please note that the `cryptoQuotes` project is released with a [Contributor Code of Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

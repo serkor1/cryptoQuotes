@@ -12,18 +12,25 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://codecov.io/gh/serkor1/cryptoQuotes)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+![GitHub last commit
+(branch)](https://img.shields.io/github/last-commit/serkor1/cryptoQuotes/development)
 <!-- badges: end -->
 
-The `cryptoQuotes` package provides open access to cryptocurrency market
-data in `R` by utilizing public market data endpoints through `curl`.
-This package does not require any `API` keys, making it straightforward
-and easy to use for accessing real-time and historical cryptocurrency
-data.
+The `cryptoQuotes`-package is a high-level API client for accessing
+public market data endpoints on major cryptocurrency exchanges. It
+supports open, high, low, close and volume (OHLC-V) data and a variety
+of sentiment indicators; the market data is high quality and can be
+retrieved in intervals ranging from *seconds* to *months*. All the
+market data is accessed and processed without relying on crawlers, or
+API keys, ensuring an open, and reliable, access for researchers,
+traders and students alike.
 
 ## Example: Bitcoin OHLC-V with Long-Short Ratios
 
-<table style="width: fit-content; font-size: 16px; color: black; margin-left: auto; margin-right: auto;" class="table table-responsive table-bordered">
+<div align="center">
+
+<table style="width: fit-content; font-size: 14px; color: black; margin-left: auto; margin-right: auto;" class="table table-responsive table-bordered">
 <caption style="font-size: initial !important;">
 Bitcoin (BTC) in 30 minute intervals with Long-Short Ratios.
 </caption>
@@ -61,180 +68,183 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-20 13:00:00
+2024-05-25 12:00:00
 </td>
 <td style="text-align:center;">
-67072.7
+69118
 </td>
 <td style="text-align:center;">
-67278.4
+69133.8
 </td>
 <td style="text-align:center;">
-67012.9
+69040.8
 </td>
 <td style="text-align:center;">
-67174.1
+69061.1
 </td>
 <td style="text-align:left;">
-3421.493
+1229.377
 </td>
 <td style="text-align:center;">
-0.498
+0.587
 </td>
 <td style="text-align:center;">
-0.502
+0.413
 </td>
 <td style="text-align:center;">
-0.993
+1.42
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-20 13:30:00
+2024-05-25 12:30:00
 </td>
 <td style="text-align:center;">
-67174
+69061
 </td>
 <td style="text-align:center;">
-67200
+69492.1
 </td>
 <td style="text-align:center;">
-66868.6
+69058.8
 </td>
 <td style="text-align:center;">
-66974
+69397.6
 </td>
 <td style="text-align:left;">
-3401.276
+5130.885
 </td>
 <td style="text-align:center;">
-0.494
+0.585
 </td>
 <td style="text-align:center;">
-0.506
+0.415
 </td>
 <td style="text-align:center;">
-0.977
+1.411
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-20 14:00:00
+2024-05-25 13:00:00
 </td>
 <td style="text-align:center;">
-66974
+69397.7
 </td>
 <td style="text-align:center;">
-67063
+69622.8
 </td>
 <td style="text-align:center;">
-66859.3
+69345.8
 </td>
 <td style="text-align:center;">
-66883.9
+69560.1
 </td>
 <td style="text-align:left;">
-2277.018
+5232.397
 </td>
 <td style="text-align:center;">
-0.492
+0.589
 </td>
 <td style="text-align:center;">
-0.508
+0.411
 </td>
 <td style="text-align:center;">
-0.97
+1.434
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-20 14:30:00
+2024-05-25 13:30:00
 </td>
 <td style="text-align:center;">
-66883.9
+69560
 </td>
 <td style="text-align:center;">
-66994.7
+69563.3
 </td>
 <td style="text-align:center;">
-66760
+69112.4
 </td>
 <td style="text-align:center;">
-66903.5
+69112.5
 </td>
 <td style="text-align:left;">
-4318.688
+5320.138
 </td>
 <td style="text-align:center;">
-0.492
+0.589
 </td>
 <td style="text-align:center;">
-0.508
+0.411
 </td>
 <td style="text-align:center;">
-0.969
+1.434
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-20 15:00:00
+2024-05-25 14:00:00
 </td>
 <td style="text-align:center;">
-66903.5
+69112.4
 </td>
 <td style="text-align:center;">
-67073.9
+69323.9
 </td>
 <td style="text-align:center;">
-66866
+69031.4
 </td>
 <td style="text-align:center;">
-66960
+69234.1
 </td>
 <td style="text-align:left;">
-3334.157
+4699.305
 </td>
 <td style="text-align:center;">
-0.49
+0.581
 </td>
 <td style="text-align:center;">
-0.51
+0.419
 </td>
 <td style="text-align:center;">
-0.961
+1.386
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-20 15:30:00
+2024-05-25 14:30:00
 </td>
 <td style="text-align:center;">
-66959.9
+69234
 </td>
 <td style="text-align:center;">
-67059.7
+69260.4
 </td>
 <td style="text-align:center;">
-66929.9
+69103.6
 </td>
 <td style="text-align:center;">
-67059.6
+69131.9
 </td>
 <td style="text-align:left;">
-526.914
+1183.558
 </td>
 <td style="text-align:center;">
-0.492
+0.585
 </td>
 <td style="text-align:center;">
-0.508
+0.416
 </td>
 <td style="text-align:center;">
-0.967
+1.407
 </td>
 </tr>
 </tbody>
 </table>
+
+</div>
+
 <details>
 <summary>
 Source
@@ -272,24 +282,31 @@ BTC <- merge(
 
 </details>
 
-## Installation
+## :information_source: Installation
 
-### Stable version
+### :shield: Stable version
 
 ``` r
-# install from CRAN
+## install from CRAN
 install.packages(
   pkgs = 'cryptoQuotes',
   dependencies = TRUE
 )
 ```
 
-### Development version
+### :hammer_and_wrench: Development version
 
 ``` r
-# install from github
+## install from github
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
   ref  = 'development'
 )
 ```
+
+## :information_source: Code of Conduct
+
+Please note that the `cryptoQuotes` project is released with a
+[Contributor Code of
+Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
