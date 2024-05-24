@@ -313,18 +313,17 @@ fetch <- function(
   #
   # This could be done using do.call
   # maybe
-  response <- tryCatch(
-    expr = {
-      response[[which(idx)]]
-    },
-    error = function(error){
-      do.call(
+  switch (source,
+    kraken = {
+      response <- do.call(
         data.frame,
         response
       )
-      #as.data.frame(response)
-    }
+    },
+    response <- response[[which(idx)]]
   )
+
+
 
   # 3) Extract source specific
   # response parameters

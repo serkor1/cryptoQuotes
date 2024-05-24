@@ -171,7 +171,7 @@ krakenResponse <- function(
 
     interest = {
       list(
-        colum_names     = c('first', 'second', 'third', "fourth"),
+        colum_names     = c('open', 'high', 'low', "close"),
         index_location = c(1),
         colum_location = c(2,3,4,5)
       )

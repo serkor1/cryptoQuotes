@@ -172,7 +172,7 @@ get_openinterest <- function(
     )
   }
 
-  fetch(
+  output <- fetch(
     ticker = ticker,
     source = source,
     futures= TRUE,
@@ -181,6 +181,17 @@ get_openinterest <- function(
     to     = to,
     from   = from
   )
+
+  if (source %in% 'kraken') {
+
+    output <- output$high
+
+    names(output)[1] <- "open_interest"
+
+  }
+
+  output
+
 }
 
 

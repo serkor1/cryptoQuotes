@@ -8,6 +8,10 @@
 
 ## Improvements
 
+### Expanded Support
+
+* `get_openinterest()` is now supported by `kraken`
+
 ### Charting
 
 * The `chart()`-function now has proper `light`-theme available that isn't the default `plotly`-values.
