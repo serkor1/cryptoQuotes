@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
+# cryptoQuotes: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
 
@@ -12,16 +12,151 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://codecov.io/gh/serkor1/cryptoQuotes)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+![GitHub last commit
+(branch)](https://img.shields.io/github/last-commit/serkor1/cryptoQuotes/development)
 <!-- badges: end -->
 
-## :information_source: Overview
+The `cryptoQuotes`-package is a high-level API-client to get current and
+historical cryptocurrency market data in `R`, without using web-crawlers
+or API keys. This `R`-package uses `xts` and `zoo` under the hood and
+are compatible with `quantmod` and `TTR` out of the box.
 
-The `cryptoQuotes`-package is a high-level API-client to get current,
-and historical, cryptocurrency OHLC-V market and sentiment data in `R`,
-without using web-crawlers or API keys. This `R`-package uses `xts` and
-`zoo` under the hood and are compatible with `quantmod` and `TTR` out of
-the box.
+<div align="center">
+
+<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
+<caption>
+Available tickers by exchange and markets
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Endpoint
+</th>
+<th style="text-align:center;">
+Binance
+</th>
+<th style="text-align:center;">
+Bitmart
+</th>
+<th style="text-align:center;">
+Bybit
+</th>
+<th style="text-align:center;">
+Kraken
+</th>
+<th style="text-align:center;">
+Kucoin
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Spot
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Futures
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Long-Short Ratio
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Open Interest
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Funding Rate
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+## :information_source: Overview
 
 ### Supported exchanges and markets
 
@@ -214,122 +349,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-18 08:30:00
+2024-05-24 17:30:00
 </td>
 <td style="text-align:center;">
-66753.62
+68219.44
 </td>
 <td style="text-align:center;">
-66963.86
+68396.77
 </td>
 <td style="text-align:center;">
-66730
+68130.43
 </td>
 <td style="text-align:center;">
-66920.03
+68326.46
 </td>
 <td style="text-align:left;">
-350.87501
+803.84837
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-18 09:00:00
+2024-05-24 18:00:00
 </td>
 <td style="text-align:center;">
-66920.03
+68326.46
 </td>
 <td style="text-align:center;">
-67240.69
+68473.85
 </td>
 <td style="text-align:center;">
-66839.12
+67924.39
 </td>
 <td style="text-align:center;">
-67190.01
+68112.12
 </td>
 <td style="text-align:left;">
-420.24327
+975.72647
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-18 09:30:00
+2024-05-24 18:30:00
 </td>
 <td style="text-align:center;">
-67190
+68112.13
 </td>
 <td style="text-align:center;">
-67190.01
+68396.51
 </td>
 <td style="text-align:center;">
-66829
+68105.07
 </td>
 <td style="text-align:center;">
-66887
+68394.33
 </td>
 <td style="text-align:left;">
-448.78951
+680.33966
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-18 10:00:00
+2024-05-24 19:00:00
 </td>
 <td style="text-align:center;">
-66887.01
+68394.32
 </td>
 <td style="text-align:center;">
-67085.19
+68676.77
 </td>
 <td style="text-align:center;">
-66840
+68394.32
 </td>
 <td style="text-align:center;">
-67010
+68555.98
 </td>
 <td style="text-align:left;">
-281.41346
+1064.08397
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-18 10:30:00
+2024-05-24 19:30:00
 </td>
 <td style="text-align:center;">
-67009.99
+68555.99
 </td>
 <td style="text-align:center;">
-67037.45
+68931.31
 </td>
 <td style="text-align:center;">
-66923.87
+68555.98
 </td>
 <td style="text-align:center;">
-67027.59
+68919.02
 </td>
 <td style="text-align:left;">
-178.27045
+806.76798
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-18 11:00:00
+2024-05-24 20:00:00
 </td>
 <td style="text-align:center;">
-67027.59
+68919.02
 </td>
 <td style="text-align:center;">
-67119.04
+69178.06
 </td>
 <td style="text-align:center;">
-66999.99
+68856
 </td>
 <td style="text-align:center;">
-67018.19
+69165.14
 </td>
 <td style="text-align:left;">
-369.53234
+967.59605
 </td>
 </tr>
 </tbody>
@@ -384,14 +519,6 @@ devtools::install_github(
   ref  = 'development'
 )
 ```
-
-## :warning: Disclaimer
-
-This `library` is still considered `experimental` but no breaking
-changes will be made on functions labelled as `stable` without
-appropriate action; please refer to the [release notes](NEWS.md), or
-submit an [issue](https://github.com/serkor1/cryptoQuotes/issues) if
-that promise is broken.
 
 ## :information_source: Code of Conduct
 

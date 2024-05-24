@@ -17,19 +17,88 @@ knitr::opts_chunk$set(
 )
 ```
 
-# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
+# cryptoQuotes: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://codecov.io/gh/serkor1/cryptoQuotes)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/serkor1/cryptoQuotes/development)
 <!-- badges: end -->
 
-## :information_source: Overview
 
-The `cryptoQuotes`-package is a high-level API-client to get current, and historical, cryptocurrency OHLC-V market and sentiment data in ```R```, without using web-crawlers or API keys. This ```R```-package uses `xts` and `zoo` under the hood and are compatible with `quantmod` and `TTR` out of the box.
+The `cryptoQuotes`-package is a high-level API-client to get current and historical cryptocurrency market data in `R`, without using web-crawlers or API keys. This ```R```-package uses `xts` and `zoo` under the hood and are compatible with `quantmod` and `TTR` out of the box.
+
+
+<div align="center">
+```{r, echo = FALSE}
+## 1) list all available
+## exchanges and the links
+available_endpoint <- data.frame(
+  Endpoint = c(
+    "Spot",
+    "Futures",
+    "Long-Short Ratio",
+    "Open Interest",
+    "Funding Rate"
+    ),
+  Binance  = c(
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:"
+    ),
+  Bitmart  = c(
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":x:",
+    ":x:",
+    ":x:"
+    ),
+  Bybit    = c(
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:"
+    ),
+  Kraken    = c(
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":x:"
+    ),
+  Kucoin    = c(
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":x:",
+    ":x:",
+    ":white_check_mark:"
+    )
+)
+
+## 4) present table
+## for as is
+kableExtra::kable_styling(
+  knitr::kable(
+    digits = 0,
+    caption = 'Available tickers by exchange and markets',
+    align = 'lccccc',
+    table.attr = "style='width:100%;'",
+    x = available_endpoint,
+    format = 'markdown'
+  ),
+  full_width = TRUE,
+  position = 'center'
+)
+```
+</div>
+
+## :information_source: Overview
 
 ### Supported exchanges and markets
 
@@ -286,10 +355,6 @@ devtools::install_github(
   ref  = 'development'
 )
 ```
-
-## :warning: Disclaimer
-
-This `library` is still considered `experimental` but no breaking changes will be made on functions labelled as `stable` without appropriate action; please refer to the [release notes](NEWS.md), or submit an [issue](https://github.com/serkor1/cryptoQuotes/issues) if that promise is broken.
 
 ## :information_source: Code of Conduct
 
