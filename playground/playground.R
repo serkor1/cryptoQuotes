@@ -9,4 +9,19 @@
 # setup;
 rm(list = ls()); gc(); devtools::load_all()
 
+
+chart(
+  ticker = BTC,
+  main   = ohlc(),
+  indicator = list(
+    sma(n = 10),
+    sma(n = 15)
+  ),
+  options = list(
+    deficiency = FALSE
+  )
+)
+
+
+
 # script end;

@@ -160,8 +160,6 @@ chart <- function(
     deficiency = deficiency
   )
 
-
-
   # 1) generate list
   # of calls for lazy
   # evaluation
@@ -175,47 +173,22 @@ chart <- function(
     indicator = as.list(
       substitute(indicator)
     )[-1]
-
   )
 
-
-
-  # # 2) modify
-  # # calls of the main
-  # and subcharts
-  modify_call <- lapply(
-    flatten(
-      list(
-        call_list$main,
-        call_list$sub
-      )
-
-    ),
-    FUN = function(.f){
-
+  # 2) modify the calls
+  # of the main and subcharts
+  # end with evaluation
+  plot_list <- Map(
+    f = function(.f) {
       .f$data <- ticker
       .f$slider <- slider
       .f$interval <- interval
       .f$candle_color <- candle_color
       .f$deficiency <- deficiency
-
-      .f
-    }
+      eval(.f)
+    },
+    flatten(list(call_list$main, call_list$sub))
   )
-
-
-
-  # 3) evaluate main
-  # and subcharts
-  #
-  # The plot list determines
-  # the number of plot
-  plot_list <- lapply(
-    modify_call,
-    eval
-  )
-
-
 
   # 3.1) Get length
   # of the plot_list
@@ -223,32 +196,24 @@ chart <- function(
     plot_list
   )
 
-
   if (!identical(call_list$indicator, list())) {
 
-    plot_list[1] <- lapply(
-      X = call_list$indicator,
-      function(.f) {
-
-        # 0) modify the call list
+     plot_list[1] <- list(Reduce(
+      f    = function(plot, .f) {
+        # Modify the call list
         .f$data <- ticker
         .f$candle_color <- candle_color
-        .f$plot <- plot_list[[1]]
-
-
-
-        plot_list[[1]] <<- eval(.f)
-
-        plot_list[[1]]
-
-      }
-    )[length(call_list$indicator)]
+        .f$plot <- plot
+        eval(.f)
+      },
+      x    = call_list$indicator,
+      init = plot_list[[1]]
+    ))
 
   }
 
 
   if (!is.null(event_data)) {
-
 
     # 1) convert function
     # to call
@@ -258,21 +223,18 @@ chart <- function(
       )
     )
 
-    plot_list <- lapply(
-      X = plot_list,
-      FUN = function(x) {
+    plot_list <- Map(
+      f = function(x) {
 
         # 1) add the plot to
         # the function
         .f$plot <- x
 
-        eval(
-          .f
-        )
+        eval(.f)
 
-      }
+      },
+      plot_list
     )
-
 
   }
 

@@ -44,12 +44,8 @@ kline <- function(
 
       # 0) construct arguments
       # via chart function
-      args <- list(
-        ...
-      )
-
+      args <- list(...)
       data <- indicator(args$data)
-
 
       #   # 1) bottom trace
       bot <- 3
@@ -57,6 +53,7 @@ kline <- function(
         data = data,
         x = ~index,
         type = 'candlestick',
+        hoverinfo = "none",
         open = ~open,
         close = ~close,
         high = ~high,
@@ -80,6 +77,7 @@ kline <- function(
 
       p <- plotly::add_trace(
         p,
+        inherit = FALSE,
         x = ~index,
         type = "candlestick",
         open = ~open,
@@ -163,66 +161,65 @@ ohlc <- function(
 
       # 0) construct arguments
       # via chart function
-      args <- list(
-        ...
-      )
-
+      args <- list(...)
       data <- indicator(args$data)
 
       #   # 1) bottom trace
       bot <- 5
       p <- plotly::plot_ly(
-        data = data,
-        x = ~index,
-        type = 'ohlc',
-        open = ~open,
-        close = ~close,
-        high = ~high,
-        low = ~low,
-        increasing = list(
+        data        = data,
+        x           = ~ index,
+        type        = 'ohlc',
+        open        = ~ open,
+        hoverinfo   = "none",
+        close       = ~ close,
+        high        = ~ high,
+        low         = ~ low,
+        increasing  = list(
           # Border color and width
-          line = list(color = "black", width = bot),
+          line      = list(color = "black", width = bot),
           fillcolor = "black"
         ),
-        decreasing = list(
+        decreasing  = list(
           # Border color and width
-          line = list(color = "black", width = bot),
+          line      = list(color = "black", width = bot),
           fillcolor = "black"
         ),
-        showlegend = FALSE,
-        name = "Border",
+        showlegend  = FALSE,
+        name        = "Border",
         legendgroup = "price"
       )
 
       p <- plotly::add_trace(
-        p,
-        x = ~index,
-        type = "ohlc",
-        open = ~open,
-        close = ~close,
-        high = ~high,
-        low = ~low,
-        increasing = list(
+        p           = p,
+        x           = ~ index,
+        inherit     = FALSE,
+        type        = "ohlc",
+        open        = ~ open,
+        close       = ~ close,
+        high        = ~ high,
+        low         = ~ low,
+        increasing  = list(
           # Main candle color and narrower width
-          line = list(color = args$candle_color$bullish, width = bot - 3),
+          line      = list(color = args$candle_color$bullish, width = bot - 3),
           fillcolor = args$candle_color$bullish
         ),
-        decreasing = list(
+        decreasing  = list(
           # Main candle color and narrower width
-          line = list(color = args$candle_color$bearish, width = bot - 3),
+          line      = list(color = args$candle_color$bearish, width = bot - 3),
           fillcolor = args$candle_color$bearish
         ),
-        showlegend = TRUE,
+        showlegend  = TRUE,
         name = args$interval,
         legendgroup = "price"
       )
 
       plotly::layout(
-        p = p,
+        p     = p,
         xaxis = list(
           rangeslider = list(
-            visible = args$slider,
-            thickness    = 0.05
+            visible   = args$slider,
+            thickness = 0.05
           )
         )
       )
@@ -272,9 +269,7 @@ pline <- function(
 
       # 0) arguments passed
       # via the chart function
-      args <- list(
-        ...
-      )
+      args <- list(...)
 
       data <- indicator(args$data, columns = price)
 

@@ -557,32 +557,16 @@ flatten <- function(x) {
 
 
 # base-chart colors; ####
+movement_color <- function(
+    deficiency = FALSE) {
 
-movement_color <- function(deficiency = FALSE){
+  palette  <- c("#d3ba68","#d5695d","#5d8ca8","#65a479")
+  location <- if (deficiency) c(3,1) else c(4,2)
 
-  palette <- c(
-    "#d3ba68",
-    "#d5695d",
-    "#5d8ca8",
-    "#65a479"
+  list(
+    bullish = palette[location[1]],
+    bearish = palette[location[2]]
   )
-
-
-
-  if (deficiency) {
-
-    list(
-      bullish = palette[3],
-      bearish = palette[1]
-    )
-
-  } else {
-
-    list(
-      bullish = palette[4],
-      bearish = palette[2]
-    )
-  }
 
 }
 
@@ -1033,14 +1017,8 @@ bar <- function(
           gridcolor = theme$grid_color# was C3
         )
       )
-
-
-
     )
-
   )
-
-
 
 }
 
