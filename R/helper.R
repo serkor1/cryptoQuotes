@@ -1062,4 +1062,41 @@ as_rgb <- function(
   rgb_string
 }
 
+normalize <- function(
+    x,
+    range,
+    value
+    ) {
+
+  # 0) get the minimum/maximum
+  # of the vector
+  min_x <- min(value, na.rm = TRUE)
+  max_x <- max(value, na.rm = TRUE)
+
+  # 1) scale x within
+  # the range
+  scaled_x <- abs(
+    (x - min_x) / (max_x - min_x)
+  )
+
+  # factor
+  factor_x <- (max(range) - min(range))
+
+  # 3) create range
+  # and return
+  pmin(
+    pmax(
+      ceiling(
+        scaled_x * factor_x
+      ),
+      1
+    ),
+    30
+  )
+
+
+
+
+}
+
 # script end;

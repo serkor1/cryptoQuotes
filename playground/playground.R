@@ -10,6 +10,7 @@
 rm(list = ls()); gc(); devtools::load_all()
 
 
+
 chart(
   ticker = cryptoQuotes:::control_data$quote,
   main   = ohlc(),
@@ -29,6 +30,7 @@ chart(
     deficiency = FALSE
   )
 )
+
 
 
 

@@ -65,31 +65,19 @@ fgi <- function(
 
       # 1.1) define available
       # colors
-      color_scale <- grDevices::palette(
-        grDevices::hcl.colors(
-          n = 30,
-          palette = "RdYlGn"
-        )
+      color_scale <- grDevices::hcl.colors(
+        n = 30,
+        palette = ifelse(color_deficiency, "Cividis", "RdYlGn"),
+        rev = color_deficiency
       )
 
-      if (color_deficiency) {
-        color_scale <- rev(
-          grDevices::palette(
-            grDevices::hcl.colors(
-              n = 30,
-              palette = "Cividis"
-            )
-          )
-        )
-      }
-
-      # 1.1.1) map the values
-      # to  the color scale
-      data$color_scale <- ceiling(
-        (1-30) * (data$fgi)/(100) + 30
+      data$color_scale <- normalize(
+        x = data$fgi,
+        range = c(0,30),
+        value = c(0,100)
       )
 
-      data$color_scale <- rev(color_scale)[
+      data$color_scale <- color_scale[
         data$color_scale
       ]
 
