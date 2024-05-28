@@ -162,6 +162,9 @@ rsi <- function(
         annotations = list(
           list(
             text = paste0("RSI(", n, ")"),
+            font = list(
+              size = 16
+            ),
             x = 0,
             y = 1,
             xref = 'paper',

@@ -946,9 +946,7 @@ bar <- function(
     ...) {
 
   # 0) chart theme
-  theme <- chart_theme(
-    dark = dark
-  )
+  theme <- chart_theme(dark = dark)
 
   title_text <- ifelse(
     !is.null(market),
@@ -982,14 +980,14 @@ bar <- function(
       title = list(
         text = "<b>Indicators:</b>",
         font = list(
-          size = 18
+          size = 16
         )
       )
     ),
     title = list(
       text = title_text,
       font = list(
-        size = 24
+        size = 20
       ),
       x = 1,
       xref = "paper",

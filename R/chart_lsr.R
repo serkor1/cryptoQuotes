@@ -117,7 +117,7 @@ lsr <- function(
         annotations = list(
           text = "Long-Short Ratio",
           font = list(
-            size = 18
+            size = 16
           ),
           showarrow = FALSE,
           x = 0,

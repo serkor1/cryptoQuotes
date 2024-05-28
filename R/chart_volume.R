@@ -82,7 +82,7 @@ volume <- function(
       annotations = list(
         text = "Volume",
         font = list(
-          size = 18
+          size = 16
         ),
         showarrow = FALSE,
         x = 0,

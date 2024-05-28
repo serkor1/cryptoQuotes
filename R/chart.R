@@ -88,9 +88,7 @@ chart <- function(
       # to ensure consisten
       # behaviour across
       # chart functions
-      ticker <- xts::as.xts(
-        ticker
-      )
+      ticker <- xts::as.xts(ticker)
 
       ticker <- do.call(
         cbind,
@@ -145,8 +143,8 @@ chart <- function(
   )
 
   options <- utils::modifyList(
-    x   = default_options,
-    val = options,
+    x         = default_options,
+    val       = options,
     keep.null = TRUE
   )
 
@@ -156,23 +154,15 @@ chart <- function(
   size   <- options$size
 
 
-  candle_color <- movement_color(
-    deficiency = deficiency
-  )
+  candle_color <- movement_color(deficiency = deficiency)
 
   # 1) generate list
   # of calls for lazy
   # evaluation
   call_list <- list(
-    main = substitute(
-      main
-    ),
-    sub = as.list(
-      substitute(sub)
-    )[-1],
-    indicator = as.list(
-      substitute(indicator)
-    )[-1]
+    main      = substitute(main),
+    sub       = as.list(substitute(sub))[-1],
+    indicator = as.list(substitute(indicator))[-1]
   )
 
   # 2) modify the calls
@@ -238,9 +228,27 @@ chart <- function(
 
   }
 
+  # apply colors to to all
+  # to charts
+  #
+  # hcl.colors are colorblind friendly. See:
+  # https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible
+  n_colors <- length(unlist(call_list))
+  colorway <- grDevices::hcl.colors(n = n_colors)
 
-  suppressWarnings(
-    plot <- plotly::subplot(
+  plot_list <- lapply(
+    X = plot_list,
+    FUN = function(plot) {
+      plotly::layout(
+        p = plot,
+        colorway = colorway
+      )
+    }
+  )
+
+
+  plot <- suppressWarnings(
+    plotly::subplot(
       plot_list,
       nrows = plot_list_length,
       shareX = TRUE,
@@ -251,11 +259,10 @@ chart <- function(
         c(
           size,
           rep(
-            x          = (1-size)/ (plot_list_length - 1),
+            x          = (1-size) / (plot_list_length - 1),
             length.out = plot_list_length - 1
           )
         )
-
 
       } else {
 
