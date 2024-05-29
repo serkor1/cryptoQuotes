@@ -19,12 +19,12 @@
 #'    n = 20,
 #'    sd = 2,
 #'    maType = "SMA",
-#'    color  = '#F100F1',
+#'    color  = '#4682b4',
 #'    ...
 #' )
 #'
 #' @inheritParams TTR::BBands
-#' @param color A [character]-vector of [length] 1. "#F100F1" by default.
+#' @param color A [character]-vector of [length] 1. "#4682b4" by default.
 #'
 #' @inherit kline
 #'
@@ -36,7 +36,7 @@ bollinger_bands <- function(
     n = 20,
     sd = 2,
     maType = "SMA",
-    color  = '#F100F1',
+    color  = '#4682b4',
     ...){
 
   # check if the indicator is called

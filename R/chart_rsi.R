@@ -21,7 +21,7 @@
 #'  maType      = "SMA",
 #'  upper_limit = 80,
 #'  lower_limit = 20,
-#'  color       = '#F100F1',
+#'  color       = '#4682b4',
 #'  ...
 #' )
 #'
@@ -30,7 +30,7 @@
 #' Sets the upper limit of the [TTR::RSI].
 #' @param lower_limit A [numeric]-vector of [length] 1. 20 by default.
 #' Sets the lower limit of the [TTR::RSI].
-#' @param color A [character]-vector of [length] 1. "#F100F1" by default.
+#' @param color A [character]-vector of [length] 1. "#4682b4" by default.
 #' @param ... For internal use. Please ignore.
 #'
 #' @inherit kline
@@ -48,7 +48,7 @@ rsi <- function(
     maType      = "SMA",
     upper_limit = 80,
     lower_limit = 20,
-    color       = '#F100F1',
+    color       = '#4682b4',
     ...){
 
   # check if the indicator is called

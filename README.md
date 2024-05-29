@@ -279,122 +279,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-25 09:00:00
+2024-05-29 09:30:00
 </td>
 <td style="text-align:center;">
-68660.39
+68150
 </td>
 <td style="text-align:center;">
-68811.89
+68253.21
 </td>
 <td style="text-align:center;">
-68639.69
+67936.35
 </td>
 <td style="text-align:center;">
-68780.6
+67946.9
 </td>
 <td style="text-align:left;">
-161.06955
+707.03639
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 09:30:00
+2024-05-29 10:00:00
 </td>
 <td style="text-align:center;">
-68780.6
+67946.89
 </td>
 <td style="text-align:center;">
-68780.61
+67999.92
 </td>
 <td style="text-align:center;">
-68704
+67602.34
 </td>
 <td style="text-align:center;">
-68753.92
+67934.01
 </td>
 <td style="text-align:left;">
-165.27328
+1058.47079
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 10:00:00
+2024-05-29 10:30:00
 </td>
 <td style="text-align:center;">
-68753.93
+67934
 </td>
 <td style="text-align:center;">
-68959.56
+67958.31
 </td>
 <td style="text-align:center;">
-68749.2
+67761.06
 </td>
 <td style="text-align:center;">
-68936.01
+67872.41
 </td>
 <td style="text-align:left;">
-263.01747
+435.65756
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 10:30:00
+2024-05-29 11:00:00
 </td>
 <td style="text-align:center;">
-68936.02
+67872.41
 </td>
 <td style="text-align:center;">
-69059.35
+68033.33
 </td>
 <td style="text-align:center;">
-68811.02
+67705
 </td>
 <td style="text-align:center;">
-68876.69
+67775.32
 </td>
 <td style="text-align:left;">
-358.20131
+601.93919
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 11:00:00
+2024-05-29 11:30:00
 </td>
 <td style="text-align:center;">
-68876.69
+67775.33
 </td>
 <td style="text-align:center;">
-69090.9
+67950
 </td>
 <td style="text-align:center;">
-68850
+67685.45
 </td>
 <td style="text-align:center;">
-69072.01
+67905.72
 </td>
 <td style="text-align:left;">
-195.3573
+483.04744
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 11:30:00
+2024-05-29 12:00:00
 </td>
 <td style="text-align:center;">
-69072
+67905.72
 </td>
 <td style="text-align:center;">
-69156.28
+68024
 </td>
 <td style="text-align:center;">
-69072
+67802.95
 </td>
 <td style="text-align:center;">
-69138.99
+68008.69
 </td>
 <td style="text-align:left;">
-122.19701
+462.73735
 </td>
 </tr>
 </tbody>
@@ -562,86 +562,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-25 09:00:00
+2024-05-29 10:00:00
 </td>
 <td style="text-align:center;">
-0.585
+0.632
 </td>
 <td style="text-align:center;">
-0.415
+0.368
 </td>
 <td style="text-align:center;">
-1.408
+1.716
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 09:30:00
+2024-05-29 10:30:00
 </td>
 <td style="text-align:center;">
-0.587
+0.648
 </td>
 <td style="text-align:center;">
-0.413
+0.352
 </td>
 <td style="text-align:center;">
-1.42
+1.838
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 10:00:00
+2024-05-29 11:00:00
 </td>
 <td style="text-align:center;">
-0.588
+0.653
 </td>
 <td style="text-align:center;">
-0.412
+0.347
 </td>
 <td style="text-align:center;">
-1.426
+1.879
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 10:30:00
+2024-05-29 11:30:00
 </td>
 <td style="text-align:center;">
-0.59
+0.655
 </td>
 <td style="text-align:center;">
-0.41
+0.345
 </td>
 <td style="text-align:center;">
-1.437
+1.899
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 11:00:00
+2024-05-29 12:00:00
 </td>
 <td style="text-align:center;">
-0.587
+0.657
 </td>
 <td style="text-align:center;">
-0.413
+0.343
 </td>
 <td style="text-align:center;">
-1.42
+1.919
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 11:30:00
+2024-05-29 12:30:00
 </td>
 <td style="text-align:center;">
-0.589
+0.662
 </td>
 <td style="text-align:center;">
-0.411
+0.338
 </td>
 <td style="text-align:center;">
-1.431
+1.963
 </td>
 </tr>
 </tbody>

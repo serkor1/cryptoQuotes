@@ -63,6 +63,7 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{zlema}()}

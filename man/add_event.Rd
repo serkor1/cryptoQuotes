@@ -128,6 +128,7 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
@@ -138,6 +139,7 @@ Other subchart indicators:
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},
+\code{\link{smi}()},
 \code{\link{volume}()}
 
 Other main chart indicators: 

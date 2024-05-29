@@ -10,7 +10,7 @@ rsi(
  maType      = "SMA",
  upper_limit = 80,
  lower_limit = 20,
- color       = '#F100F1',
+ color       = '#4682b4',
  ...
 )
 }
@@ -33,7 +33,7 @@ Sets the upper limit of the \link[TTR:RSI]{TTR::RSI}.}
 \item{lower_limit}{A \link{numeric}-vector of \link{length} 1. 20 by default.
 Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
 
-\item{color}{A \link{character}-vector of \link{length} 1. "#F100F1" by default.}
+\item{color}{A \link{character}-vector of \link{length} 1. "#4682b4" by default.}
 
 \item{...}{For internal use. Please ignore.}
 }
@@ -87,6 +87,7 @@ Other chart indicators:
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
@@ -97,10 +98,12 @@ Other subchart indicators:
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
+\code{\link{smi}()},
 \code{\link{volume}()}
 
 Other momentum indicators: 
-\code{\link{macd}()}
+\code{\link{macd}()},
+\code{\link{smi}()}
 }
 \author{
 Serkan Korkmaz

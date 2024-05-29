@@ -59,6 +59,7 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
@@ -68,7 +69,8 @@ Other subchart indicators:
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
-\code{\link{rsi}()}
+\code{\link{rsi}()},
+\code{\link{smi}()}
 }
 \author{
 Serkan Korkmaz

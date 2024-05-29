@@ -17,6 +17,7 @@ testthat::test_that(
         volume(),
         rsi(),
         macd(),
+        smi(),
         fgi(index = cryptoQuotes:::control_data$fgindex),
         lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
@@ -67,6 +68,7 @@ testthat::test_that(
         volume(),
         rsi(),
         macd(),
+        smi(),
         fgi(index = cryptoQuotes:::control_data$fgindex),
         lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
@@ -117,6 +119,7 @@ testthat::test_that(
         volume(),
         rsi(),
         macd(),
+        smi(),
         fgi(index = cryptoQuotes:::control_data$fgindex),
         lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),

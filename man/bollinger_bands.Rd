@@ -9,7 +9,7 @@ bollinger_bands(
    n = 20,
    sd = 2,
    maType = "SMA",
-   color  = '#F100F1',
+   color  = '#4682b4',
    ...
 )
 }
@@ -20,7 +20,7 @@ bollinger_bands(
 
 \item{maType}{A function or a string naming the function to be called.}
 
-\item{color}{A \link{character}-vector of \link{length} 1. "#F100F1" by default.}
+\item{color}{A \link{character}-vector of \link{length} 1. "#4682b4" by default.}
 
 \item{...}{Other arguments to be passed to the \code{maType} function.}
 }
@@ -64,6 +64,7 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
