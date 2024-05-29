@@ -1066,7 +1066,7 @@ normalize <- function(
     x,
     range,
     value
-    ) {
+) {
 
   # 0) get the minimum/maximum
   # of the vector
@@ -1094,8 +1094,54 @@ normalize <- function(
     30
   )
 
+}
 
 
+check_indicator_call <- function(
+    system_calls = sys.calls(),
+    caller       = match.call(envir = parent.frame())
+    ) {
+
+  # 0) get the entire call stack
+  # to determine the calling function
+  call_stack <- as.character(
+    lapply(system_calls, `[[`, 1)
+  )
+
+  # 1) get the calling calling
+  # function, ie. SMA, EMA etc
+  calling_function <- as.character(
+    sys.call(-1)[[1]]
+  )
+
+  # 2) check the location
+  # of chart
+  location_chart <- which(call_stack == "chart")
+  location_indicator <- which(call_stack == calling_function)
+
+
+  # 3) assert that the indicator
+  # is being called from the charting
+  # function, or some wrapper around
+  # chart
+  assert(
+    any(call_stack == "chart") & location_chart < location_indicator,
+    error_message = c(
+      "x" = sprintf(
+        "The {.fn %s}-function is called outside {.fn chart}",
+        call_stack
+      ),
+
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
 
 }
 

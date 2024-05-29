@@ -45,24 +45,11 @@ macd <- function(
     percent = TRUE,
     ...){
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data = {

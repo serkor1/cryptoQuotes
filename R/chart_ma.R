@@ -71,24 +71,11 @@ sma <- function(
     n = 10,
     ...) {
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data = {
@@ -159,24 +146,11 @@ ema <- function(
     ratio = NULL,
     ...) {
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data  = {
@@ -251,24 +225,11 @@ dema <- function(
     ratio = NULL,
     ...) {
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data  = {
@@ -345,24 +306,11 @@ wma <- function(
   # TODO: Submit PR, WMA has an issue
   # too in the naming.
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data  = {
@@ -430,24 +378,11 @@ evwma <- function(
     n = 10,
     ...) {
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data  = {
@@ -516,24 +451,11 @@ zlema <- function(
     ratio = NULL,
     ...) {
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data  = {
@@ -602,24 +524,11 @@ vwap <- function(
     ratio = NULL,
     ...) {
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data  = {
@@ -690,24 +599,11 @@ hma <- function(
     n = 20,
     ...) {
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data  = {
@@ -776,24 +672,11 @@ alma <- function(
     sigma  = 6,
     ...) {
 
-  call_stack <- as.character(
-    lapply(sys.calls(), `[[`, 1)
-  )
-
-  assert(
-    call_stack[1] != as.character(match.call()),
-    error_message = c(
-      "x" = "Error",
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::chart(...)",
-          code_theme = "Chaos"
-        ),
-        "to build charts."
-      )
-    )
-  )
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
     .Data  = {
