@@ -42,10 +42,10 @@ calculation?}
 calculating FastK. See Details.}
 
 \item{upper_limit}{A \link{numeric}-vector of \link{length} 1. 40 by default.
-Sets the upper limit of the \link[TTR:RSI]{TTR::RSI}.}
+Sets the upper limit of the \link[TTR:stochastics]{TTR::SMI}.}
 
 \item{lower_limit}{A \link{numeric}-vector of \link{length} 1. -40 by default.
-Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
+Sets the lower limit of the \link[TTR:stochastics]{TTR::SMI}.}
 
 \item{color}{A \link{character}-vector of \link{length} 1. "#4682b4" by default.}
 
@@ -94,6 +94,7 @@ Other chart indicators:
 \code{\link{bollinger_bands}()},
 \code{\link{chart}()},
 \code{\link{dema}()},
+\code{\link{donchian_channel}()},
 \code{\link{ema}()},
 \code{\link{evwma}()},
 \code{\link{fgi}()},

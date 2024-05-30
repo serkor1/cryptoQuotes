@@ -22,6 +22,7 @@ testthat::test_that(
         lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
       indicator  = list(
+        donchian_channel(),
         dema(),
         ema(),
         evwma(),
@@ -73,6 +74,7 @@ testthat::test_that(
         lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
       indicator  = list(
+        donchian_channel(),
         dema(),
         ema(),
         evwma(),
@@ -124,6 +126,7 @@ testthat::test_that(
         lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
       indicator  = list(
+        donchian_channel(),
         dema(),
         ema(),
         evwma(),

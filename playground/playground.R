@@ -16,6 +16,7 @@ chart(
   main   = kline(),
   indicator = list(
     bollinger_bands(),
+    donchian_channel(color = "red"),
     sma(n = 10),
     sma(n = 15),
     sma(n = 14)
