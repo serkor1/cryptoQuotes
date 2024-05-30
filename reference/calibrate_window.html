@@ -140,7 +140,7 @@ list</p></dd>
 <span class="r-in"><span><span class="co"># it needs to passed into calibrateWindow</span></span></span>
 <span class="r-in"><span><span class="co"># to ensure comparability</span></span></span>
 <span class="r-in"><span><span class="va">FGIndex</span> <span class="op">&lt;-</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="fu">calibrate_window</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  list <span class="op">=</span> <span class="fu">cryptoQuotes</span><span class="fu">::</span><span class="va"><a href="FGIndex.html">FGIndex</a></span>,</span></span>
+<span class="r-in"><span>  list <span class="op">=</span> <span class="va">FGIndex</span>,</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># As each element in the list can include</span></span></span>
 <span class="r-in"><span>  <span class="co"># more than one row, each element needs to be aggregated</span></span></span>
@@ -154,11 +154,13 @@ list</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 3) check if candles aligns</span></span></span>
 <span class="r-in"><span><span class="co"># accordingly</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setequal</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/index.html" class="external-link">index</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/index.html" class="external-link">index</a></span><span class="op">(</span><span class="va">FGIndex</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setequal</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/index.html" class="external-link">index</a></span><span class="op">(</span><span class="va">BTC</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/index.html" class="external-link">index</a></span><span class="op">(</span><span class="va">FGIndex</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># script end;</span></span></span>
 </code></pre></div>
