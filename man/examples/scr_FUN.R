@@ -28,7 +28,7 @@ FGIndex <- cryptoQuotes::split_window(
 # it needs to passed into calibrateWindow
 # to ensure comparability
 FGIndex <- cryptoQuotes::calibrate_window(
-  list = cryptoQuotes::FGIndex,
+  list = FGIndex,
 
   # As each element in the list can include
   # more than one row, each element needs to be aggregated
@@ -42,9 +42,12 @@ FGIndex <- cryptoQuotes::calibrate_window(
 
 # 3) check if candles aligns
 # accordingly
-setequal(
-  zoo::index(BTC),
-  zoo::index(FGIndex)
+stopifnot(
+  setequal(
+    zoo::index(BTC),
+    zoo::index(FGIndex)
+  )
 )
+
 
 # script end;

@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# cryptoQuotes: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
+# cryptoQuotes: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="154" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
@@ -436,8 +436,9 @@ cryptoQuotes::chart(
 )
 ```
 
+
 <details>
-<summary>Colorblind friendly</summary>
+<summary>Colorblind friendly version</summary>
 #### Charting with indicators (colorblind friendly)
 
 ```{r chartquote(deficiency), fig.align='center', fig.dpi=180, fig.alt="cryptocurrency charts in R"}
@@ -463,6 +464,7 @@ cryptoQuotes::chart(
   )
 )
 ```
+
 __________
 </details>
 

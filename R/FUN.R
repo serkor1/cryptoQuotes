@@ -94,6 +94,16 @@ split_window <- function(
     by,
     bounds = 'upper') {
 
+  assert(
+    inherits(xts, "xts"),
+    error_message = c(
+      "x" = sprintf(
+        "Has to be {.cls xts}. Got {.cls %s}",
+        class(xts)
+      )
+    )
+  )
+
   # this function splits
   # the xts object in lists
   # in intervals that are comparable
@@ -150,6 +160,16 @@ calibrate_window <- function(
     list,
     FUN,
     ...) {
+
+  assert(
+    inherits(list, "list"),
+    error_message = c(
+      "x" = sprintf(
+        "Has to be {.cls list}. Got {.cls %s}",
+        class(list)
+      )
+    )
+  )
 
   # This function calibrates
   # the window and returns

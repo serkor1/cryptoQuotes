@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cryptoQuotes: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
+# cryptoQuotes: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="154" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
 
@@ -279,122 +279,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-30 10:00:00
+2024-05-30 16:00:00
 </td>
 <td style="text-align:center;">
-67584.57
+68623.99
 </td>
 <td style="text-align:center;">
-67643.99
+68826.31
 </td>
 <td style="text-align:center;">
-67128
+68472.35
 </td>
 <td style="text-align:center;">
-67376.01
+68671.02
 </td>
 <td style="text-align:left;">
-1287.97865
+1274.59558
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 10:30:00
+2024-05-30 16:30:00
 </td>
 <td style="text-align:center;">
-67376.01
+68671.02
 </td>
 <td style="text-align:center;">
-67769.11
+68756.41
 </td>
 <td style="text-align:center;">
-67376
+68256.29
 </td>
 <td style="text-align:center;">
-67688.96
+68359.6
 </td>
 <td style="text-align:left;">
-644.27659
+758.51827
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 11:00:00
+2024-05-30 17:00:00
 </td>
 <td style="text-align:center;">
-67688.96
+68359.6
 </td>
 <td style="text-align:center;">
-67759.99
+68460.84
 </td>
 <td style="text-align:center;">
-67579.04
+68144
 </td>
 <td style="text-align:center;">
-67579.05
+68424
 </td>
 <td style="text-align:left;">
-414.02039
+638.09219
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 11:30:00
+2024-05-30 17:30:00
 </td>
 <td style="text-align:center;">
-67579.04
+68424.01
 </td>
 <td style="text-align:center;">
-67753.71
+68612
 </td>
 <td style="text-align:center;">
-67459.96
+68367.65
 </td>
 <td style="text-align:center;">
-67745.94
+68530.76
 </td>
 <td style="text-align:left;">
-468.4199
+911.26349
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 12:00:00
+2024-05-30 18:00:00
 </td>
 <td style="text-align:center;">
-67745.94
+68530.77
 </td>
 <td style="text-align:center;">
-67751
+68600
 </td>
 <td style="text-align:center;">
-67541.82
+68384
 </td>
 <td style="text-align:center;">
-67683.69
+68427.18
 </td>
 <td style="text-align:left;">
-314.39417
+411.48792
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 12:30:00
+2024-05-30 18:30:00
 </td>
 <td style="text-align:center;">
-67683.68
+68427.19
 </td>
 <td style="text-align:center;">
-67991
+68460
 </td>
 <td style="text-align:center;">
-67683.68
+68417.81
 </td>
 <td style="text-align:center;">
-67948.01
+68459.99
 </td>
 <td style="text-align:left;">
-468.59159
+71.38386
 </td>
 </tr>
 </tbody>
@@ -562,86 +562,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-30 10:00:00
+2024-05-30 16:00:00
 </td>
 <td style="text-align:center;">
-0.65
+0.636
 </td>
 <td style="text-align:center;">
-0.35
+0.364
 </td>
 <td style="text-align:center;">
-1.858
+1.746
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 10:30:00
+2024-05-30 16:30:00
 </td>
 <td style="text-align:center;">
-0.66
+0.624
 </td>
 <td style="text-align:center;">
-0.34
+0.376
 </td>
 <td style="text-align:center;">
-1.944
+1.662
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 11:00:00
+2024-05-30 17:00:00
 </td>
 <td style="text-align:center;">
-0.661
+0.623
 </td>
 <td style="text-align:center;">
-0.339
+0.378
 </td>
 <td style="text-align:center;">
-1.947
+1.649
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 11:30:00
+2024-05-30 17:30:00
 </td>
 <td style="text-align:center;">
-0.656
+0.624
 </td>
 <td style="text-align:center;">
-0.344
+0.376
 </td>
 <td style="text-align:center;">
-1.911
+1.662
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 12:00:00
+2024-05-30 18:00:00
 </td>
 <td style="text-align:center;">
-0.657
+0.623
 </td>
 <td style="text-align:center;">
-0.342
+0.377
 </td>
 <td style="text-align:center;">
-1.92
+1.65
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 12:30:00
+2024-05-30 18:30:00
 </td>
 <td style="text-align:center;">
-0.658
+0.62
 </td>
 <td style="text-align:center;">
-0.342
+0.38
 </td>
 <td style="text-align:center;">
-1.924
+1.632
 </td>
 </tr>
 </tbody>
@@ -690,7 +690,7 @@ cryptoQuotes::chart(
 
 <details>
 <summary>
-Colorblind friendly
+Colorblind friendly version
 </summary>
 
 #### Charting with indicators (colorblind friendly)
@@ -720,7 +720,9 @@ cryptoQuotes::chart(
 ```
 
 <img src="man/figures/README-chartquote(deficiency)-1.png" alt="cryptocurrency charts in R" style="display: block; margin: auto;" />
-\_\_\_\_\_\_\_\_\_\_
+
+------------------------------------------------------------------------
+
 </details>
 
 ## :information_source: Installation

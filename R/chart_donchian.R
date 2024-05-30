@@ -14,7 +14,8 @@
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::add_lines()]-wrapper function that interacts
-#' with the [TTR::DonchianChannel()]-function. The function adds Donchian Channels
+#' with the [TTR::DonchianChannel()]-function.
+#' The function adds Donchian Channels
 #' to the main [chart()].
 #'
 #' @usage donchian_channel(
