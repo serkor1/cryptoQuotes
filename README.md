@@ -10,7 +10,7 @@ status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-proje
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://codecov.io/gh/serkor1/cryptoQuotes)
+[![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://app.codecov.io/gh/serkor1/cryptoQuotes)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 ![GitHub last commit
@@ -279,122 +279,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-30 16:00:00
+2024-05-31 18:00:00
 </td>
 <td style="text-align:center;">
-68623.99
+67215.58
 </td>
 <td style="text-align:center;">
-68826.31
+67352.41
 </td>
 <td style="text-align:center;">
-68472.35
+66670
 </td>
 <td style="text-align:center;">
-68671.02
+67000.01
 </td>
 <td style="text-align:left;">
-1274.59558
+2093.77494
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 16:30:00
+2024-05-31 18:30:00
 </td>
 <td style="text-align:center;">
-68671.02
+67000.01
 </td>
 <td style="text-align:center;">
-68756.41
+67221.53
 </td>
 <td style="text-align:center;">
-68256.29
+66876.8
 </td>
 <td style="text-align:center;">
-68359.6
+67200.01
 </td>
 <td style="text-align:left;">
-758.51827
+788.25693
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 17:00:00
+2024-05-31 19:00:00
 </td>
 <td style="text-align:center;">
-68359.6
+67200.01
 </td>
 <td style="text-align:center;">
-68460.84
+67459.66
 </td>
 <td style="text-align:center;">
-68144
+67160.3
 </td>
 <td style="text-align:center;">
-68424
+67417.98
 </td>
 <td style="text-align:left;">
-638.09219
+598.68095
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 17:30:00
+2024-05-31 19:30:00
 </td>
 <td style="text-align:center;">
-68424.01
+67417.98
 </td>
 <td style="text-align:center;">
-68612
+67455.93
 </td>
 <td style="text-align:center;">
-68367.65
+67287.97
 </td>
 <td style="text-align:center;">
-68530.76
+67342.77
 </td>
 <td style="text-align:left;">
-911.26349
+287.26257
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 18:00:00
+2024-05-31 20:00:00
 </td>
 <td style="text-align:center;">
-68530.77
+67342.77
 </td>
 <td style="text-align:center;">
-68600
+67444.47
 </td>
 <td style="text-align:center;">
-68384
+67288.2
 </td>
 <td style="text-align:center;">
-68427.18
+67305.5
 </td>
 <td style="text-align:left;">
-411.48792
+383.04002
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 18:30:00
+2024-05-31 20:30:00
 </td>
 <td style="text-align:center;">
-68427.19
+67305.5
 </td>
 <td style="text-align:center;">
-68460
+67427.68
 </td>
 <td style="text-align:center;">
-68417.81
+67170
 </td>
 <td style="text-align:center;">
-68459.99
+67400
 </td>
 <td style="text-align:left;">
-71.38386
+468.98276
 </td>
 </tr>
 </tbody>
@@ -562,86 +562,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-30 16:00:00
+2024-05-31 18:00:00
 </td>
 <td style="text-align:center;">
-0.636
+0.679
 </td>
 <td style="text-align:center;">
-0.364
+0.321
 </td>
 <td style="text-align:center;">
-1.746
+2.114
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 16:30:00
+2024-05-31 18:30:00
 </td>
 <td style="text-align:center;">
-0.624
+0.687
 </td>
 <td style="text-align:center;">
-0.376
+0.313
 </td>
 <td style="text-align:center;">
-1.662
+2.199
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 17:00:00
+2024-05-31 19:00:00
 </td>
 <td style="text-align:center;">
-0.623
+0.696
 </td>
 <td style="text-align:center;">
-0.378
+0.304
 </td>
 <td style="text-align:center;">
-1.649
+2.289
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 17:30:00
+2024-05-31 19:30:00
 </td>
 <td style="text-align:center;">
-0.624
+0.699
 </td>
 <td style="text-align:center;">
-0.376
+0.301
 </td>
 <td style="text-align:center;">
-1.662
+2.323
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 18:00:00
+2024-05-31 20:00:00
 </td>
 <td style="text-align:center;">
-0.623
+0.696
 </td>
 <td style="text-align:center;">
-0.377
+0.304
 </td>
 <td style="text-align:center;">
-1.65
+2.288
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-30 18:30:00
+2024-05-31 20:30:00
 </td>
 <td style="text-align:center;">
-0.62
+0.696
 </td>
 <td style="text-align:center;">
-0.38
+0.304
 </td>
 <td style="text-align:center;">
-1.632
+2.293
 </td>
 </tr>
 </tbody>
