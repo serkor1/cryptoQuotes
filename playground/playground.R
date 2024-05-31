@@ -9,62 +9,36 @@
 # setup;
 rm(list = ls()); gc(); devtools::load_all()
 
-ticker <- cryptoQuotes:::control_data$quote
-
-
-setequal(
-  window(
-    ticker,
-    start = "2024-02-09 01:00:00",
-    end   = "2024-02-16 01:00:00"
-  ),
-  ticker[paste(c("2024-02-09 01:00:00", "2024-02-16 01:00:00"), collapse = "/")]
-
+BTC <- cryptoQuotes::get_quote(
+  ticker   = 'BTCUSD',
+  interval = '1d',
+  source   = 'kraken',
+  futures  = FALSE,
+  from     = Sys.Date() - 1000,
+  to       = Sys.Date()
 )
 
-
-foo <- function() {
-
-  window(
-    ticker,
-    start = "2024-02-09 01:00:00",
-    end   = "2024-02-16 01:00:00"
-  )
-
-}
+nrow(BTC)
 
 
-bar <- function() {
-
-  ticker[paste(c("2024-02-09 01:00:00", "2024-02-16 01:00:00"), collapse = "/")]
-
-}
+head(BTC)
+head(BTC)
 
 
-microbenchmark::microbenchmark(
-  foo(),
-  bar()
-)
 
-
-chart(
-  ticker = ticker,
-  main   = kline(),
-  indicator = list(
-    bollinger_bands(),
-    donchian_channel(color = "red"),
-    sma(n = 10),
-    sma(n = 15),
-    sma(n = 14)
-  ),
-  sub = list(
-    smi(),
-    rsi()
-  ),
-  options = list(
-    deficiency = FALSE
+length(
+  seq(
+    from = coerce_date(Sys.Date() - 10),
+    to   = coerce_date(Sys.Date() - 1),
+    by   = "+15 mins"
   )
 )
 
+
+default_dates(
+  interval = "15m",
+  from = coerce_date(Sys.Date() - 10),
+  to   = coerce_date(Sys.Date() - 1)
+)
 
 # script end;
