@@ -67,9 +67,14 @@
 <h2 class="pkg-version" data-toc-text="1.3.1" id="cryptoquotes-131">cryptoQuotes 1.3.1<a class="anchor" aria-label="anchor" href="#cryptoquotes-131"></a></h2>
 <div class="section level3">
 <h3 id="general-1-3-1">General<a class="anchor" aria-label="anchor" href="#general-1-3-1"></a></h3>
+<blockquote>
+<p><strong>NOTE:</strong> With this update the package is no longer considered <code>experimental</code>.</p>
+</blockquote>
 <ul><li><p>Removed deprecated functions <code>getQuote()</code>-, <code>getFGIndex()</code>- and <code>getLSRatio()</code>-functions.</p></li>
 <li><p>Removed decprecated functions <code>availableExchanges()</code>-, <code>availableIntervals()</code>- and <code>availableTickers()</code>-functions.</p></li>
-</ul></div>
+</ul><p>These functions were planned to be deleted in <code>1.4.0</code> - however, we have decided to aim for an <code>JOSS</code>- and <code>rOpenSci</code>-subscription which requires some degree of stability. Hence the deletion of these function at <code>1.3.0</code>.</p>
+<p>We expect <code>1.4.0</code> to be released <em>after</em> <code>rOpenSci</code>-submission and acceptance <span class="emoji" data-emoji="pray">🙏</span></p>
+</div>
 <div class="section level3">
 <h3 id="improvements-1-3-1">Improvements<a class="anchor" aria-label="anchor" href="#improvements-1-3-1"></a></h3>
 <div class="section level4">
@@ -78,20 +83,71 @@
 <code><a href="../reference/smi.html">smi()</a></code>-function, a <code>subchart</code>-indicator built on the <code><a href="https://rdrr.io/pkg/TTR/man/stochastics.html" class="external-link">TTR::SMI()</a></code>-function.</li>
 <li>
 <code><a href="../reference/donchian_channel.html">donchian_channel()</a></code>-function, a <code>main chart</code>-indicator built on the <code><a href="https://rdrr.io/pkg/TTR/man/DonchianChannel.html" class="external-link">TTR::DonchianChannel()</a></code>-function</li>
-</ul></div>
+</ul><details><summary>
+Usage
+</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/chart.html">chart</a></span><span class="op">(</span></span>
+<span>  ticker <span class="op">=</span> <span class="va">BTC</span>,</span>
+<span>  main   <span class="op">=</span> <span class="fu"><a href="../reference/kline.html">kline</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  indicator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../reference/donchian_channel.html">donchian_channel</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  sub <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../reference/smi.html">smi</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<img src="reference/figures/NEWS-unnamed-chunk-2-1.png" style="display: block; margin: auto;"></details></div>
 <div class="section level4">
 <h4 id="expanded-support-1-3-1">Expanded Support<a class="anchor" aria-label="anchor" href="#expanded-support-1-3-1"></a></h4>
 <ul><li>
 <code><a href="../reference/get_openinterest.html">get_openinterest()</a></code> is now supported by <code>kraken</code>
 </li>
-</ul></div>
+</ul><details><summary>
+Usage
+</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/get_openinterest.html">get_openinterest</a></span><span class="op">(</span></span>
+<span>    ticker   <span class="op">=</span> <span class="st">"PF_XBTUSD"</span>,</span>
+<span>    interval <span class="op">=</span> <span class="st">"1h"</span>,</span>
+<span>    source   <span class="op">=</span> <span class="st">"kraken"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#&gt;                     open_interest</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 14:00:00      3018.442</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 15:00:00      3013.342</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 16:00:00      2957.343</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 17:00:00      2960.819</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 18:00:00      2954.668</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 19:00:00      2981.381</span></span></code></pre></div>
+</details></div>
 <div class="section level4">
 <h4 id="charting-1-3-1">Charting<a class="anchor" aria-label="anchor" href="#charting-1-3-1"></a></h4>
 <ul><li>The <code><a href="../reference/chart.html">chart()</a></code>-function now has proper <code>light</code>-theme available that isn’t the default <code>plotly</code>-values.</li>
 <li>The charts now displays date ranges as a subtitles.</li>
 <li>The <code><a href="../reference/bollinger_bands.html">bollinger_bands()</a></code>-function now accepts a <code>color</code>-argument. These can be passed as <code>Hexadecimal</code>-colors or as is, <code>"blue"</code> for example.</li>
 <li>A new main chart function has been introduced. <code><a href="../reference/pline.html">pline()</a></code> which is a univariate price chart based on either open, high, low or close prices.</li>
-</ul></div>
+</ul><details><summary>
+Usage
+</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/chart.html">chart</a></span><span class="op">(</span></span>
+<span>  ticker <span class="op">=</span> <span class="va">BTC</span>,</span>
+<span>  main   <span class="op">=</span> <span class="fu"><a href="../reference/pline.html">pline</a></span><span class="op">(</span>price <span class="op">=</span> <span class="st">"close"</span><span class="op">)</span>,</span>
+<span>  indicator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../reference/bollinger_bands.html">bollinger_bands</a></span><span class="op">(</span></span>
+<span>    color <span class="op">=</span> <span class="st">"steelblue"</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  sub <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="../reference/volume.html">volume</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    dark <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<img src="reference/figures/NEWS-unnamed-chunk-4-1.png" style="display: block; margin: auto;"></details></div>
 <div class="section level4">
 <h4 id="documentation-1-3-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-3-1"></a></h4>
 <ul><li>The documentation has been extensively reworked. This is includes, but not limited to, sample outputs for all <code>get_*</code>-functions.</li>
@@ -117,7 +173,7 @@
 </div>
 <div class="section level3">
 <h3 id="breaking-changes-1-3-1">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-3-1"></a></h3>
-<ul><li>The <code>get_FGIndex()</code>- and <code><a href="../reference/get_fgindex.html">get_fgindex()</a></code>-function now returns columns in lower case.</li>
+<ul><li>The <code><a href="../reference/get_fgindex.html">get_fgindex()</a></code>-function now returns columns in lower case.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bugfixes-1-3-1">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes-1-3-1"></a></h3>
@@ -140,7 +196,7 @@
 <h4 id="general-function-improvements-1-3-0">General function improvements<a class="anchor" aria-label="anchor" href="#general-function-improvements-1-3-0"></a></h4>
 <ul><li><p><code>get_lsratio</code> and <code>getLSratio()</code> supports <code>kraken</code> and <code>bybit</code> as <code>source</code></p></li>
 <li><p><code>available_</code>-functions are more adaptive to the calling environments</p></li>
-</ul><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+</ul><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## charting the klines</span></span>
 <span><span class="co">## with indicators as</span></span>
@@ -163,17 +219,16 @@
 <ul><li>The <code>charts</code> now has a <code>dark</code> and <code>light</code> theme. Its passed into the <code>options = list(dark = TRUE)</code> of the <code><a href="../reference/chart.html">chart()</a></code>-function.</li>
 <li>The <code>charts</code> are now more color deficiency compliant, and the <code>deficiency</code> parameter in <code>options = list(deficiency = TRUE)</code> now applies to all <code>chart</code>-elements</li>
 <li>The <code>charts</code> are now constructed without <code>%&gt;%</code> and, should, be more intuitive to navigate in. See example below,</li>
-</ul><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+</ul><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## charting the klines</span></span>
 <span><span class="co">## with indicators as</span></span>
 <span><span class="co">## subcharts</span></span>
 <span><span class="fu"><a href="../reference/chart.html">chart</a></span><span class="op">(</span></span>
-<span>  ticker     <span class="op">=</span> <span class="va">BTCUSDT</span>,</span>
+<span>  ticker     <span class="op">=</span> <span class="va">BTC</span>,</span>
 <span>  main       <span class="op">=</span> <span class="fu"><a href="../reference/kline.html">kline</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  sub        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="../reference/volume.html">volume</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="../reference/macd.html">macd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../reference/volume.html">volume</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  indicator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="../reference/bollinger_bands.html">bollinger_bands</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -181,10 +236,11 @@
 <span>    <span class="fu"><a href="../reference/alma.html">alma</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    dark <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    dark       <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    deficiency <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/NEWS-unnamed-chunk-5-1.png" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
 <h4 id="exchange-support-1-3-0">Exchange Support<a class="anchor" aria-label="anchor" href="#exchange-support-1-3-0"></a></h4>
@@ -193,23 +249,47 @@
 </ul></div>
 <div class="section level4">
 <h4 id="new-features-1-3-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-3-0"></a></h4>
-<ul><li>Funding rates</li>
-</ul><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<ul><li>Funding rates, <code><a href="../reference/get_fundingrate.html">get_fundingrate()</a></code>
+</li>
+</ul><details><summary>
+Usage
+</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## get funding rate</span></span>
-<span><span class="fu"><a href="../reference/get_fundingrate.html">get_fundingrate</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/get_fundingrate.html">get_fundingrate</a></span><span class="op">(</span></span>
 <span>    ticker <span class="op">=</span> <span class="st">"BTCUSDT"</span>,</span>
 <span>    source <span class="op">=</span> <span class="st">"binance"</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<ul><li>Open interest</li>
-</ul><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#&gt;                     funding_rate</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; 2024-05-30 02:00:00   0.00010000</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; 2024-05-30 10:00:00   0.00010000</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt; 2024-05-30 18:00:00   0.00010000</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 02:00:00   0.00014599</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 10:00:00   0.00012268</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 18:00:00   0.00010000</span></span></code></pre></div>
+</details><ul><li>Open interest, <code><a href="../reference/get_openinterest.html">get_openinterest()</a></code>
+</li>
+</ul><details><summary>
+Usage
+</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co">## get open interest</span></span>
-<span><span class="fu"><a href="../reference/get_openinterest.html">get_openinterest</a></span><span class="op">(</span></span>
-<span>      ticker <span class="op">=</span> <span class="st">"BTCUSDT"</span>,</span>
-<span>      source <span class="op">=</span> <span class="st">"binance"</span></span>
-<span>    <span class="op">)</span></span></code></pre></div>
-</div>
+<span><span class="co">## get funding rate</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/get_openinterest.html">get_openinterest</a></span><span class="op">(</span></span>
+<span>    ticker <span class="op">=</span> <span class="st">"BTCUSDT"</span>,</span>
+<span>    source <span class="op">=</span> <span class="st">"binance"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#&gt;                     open_interest</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; 2024-05-26 02:00:00      72347.36</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; 2024-05-27 02:00:00      71077.10</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; 2024-05-28 02:00:00      71580.71</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; 2024-05-29 02:00:00      71880.38</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; 2024-05-30 02:00:00      76232.59</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; 2024-05-31 02:00:00      74250.55</span></span></code></pre></div>
+</details></div>
 </div>
 <div class="section level3">
 <h3 id="breaking-changes-1-3-0">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-3-0"></a></h3>
@@ -246,24 +326,25 @@
 <ul><li><p>All <code>from</code> and <code>to</code> arguments are now more flexible, and supports passing <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code> and <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time()</a></code> directly into the <code>get</code>-functions.</p></li>
 <li><p><code>getQuote()</code> now returns up to 100 pips preceding the specified <code>to</code> date, when <code>from = NULL</code>. It returns 100 pips, or up to <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code>, from the specified <code>from</code> date.</p></li>
 </ul><p>The <code>getQuote()</code>-function can now be used as follows;</p>
-<pre><code>## Specifying from
-## date only;
-##
-## Returns 10 pips
-getQuote(
- ticker   = 'BTCUSDT',
- interval = '1d'
- from     = as.character(Sys.Date() - 10)
- )</code></pre>
-<pre><code>## Specifying to
-## date only;
-##
-## Returns 100 pips
-getQuote(
- ticker   = 'BTCUSDT',
- interval = '1d'
- to     = as.character(Sys.Date())
- )</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="do">## Specifying from</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="do">## date only;</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="do">## Returns 10 pips</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="fu">getQuote</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a> <span class="at">ticker   =</span> <span class="st">'BTCUSDT'</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a> <span class="at">interval =</span> <span class="st">'1d'</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a> <span class="at">from     =</span> <span class="fu">as.character</span>(<span class="fu">Sys.Date</span>() <span class="sc">-</span> <span class="dv">10</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a> )</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="do">## Specifying to</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="do">## date only;</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="do">## Returns 100 pips</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="fu">getQuote</span>(</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a> <span class="at">ticker   =</span> <span class="st">'BTCUSDT'</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a> <span class="at">interval =</span> <span class="st">'1d'</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a> <span class="at">to     =</span> <span class="fu">as.character</span>(<span class="fu">Sys.Date</span>())</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a> )</span></code></pre></div>
 <div class="section level3">
 <h3 id="market-sentiment-1-2-0">Market Sentiment<a class="anchor" aria-label="anchor" href="#market-sentiment-1-2-0"></a></h3>
 <p>Four new functions are added,</p>
@@ -305,7 +386,8 @@ getQuote(
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="cryptoquotes-100">cryptoQuotes 1.0.0<a class="anchor" aria-label="anchor" href="#cryptoquotes-100"></a></h2><p class="text-muted">CRAN release: 2023-12-13</p>
-<ul><li>Initial CRAN submission.</li>
+<ul><li>Initial CRAN submission <span class="emoji" data-emoji="rocket">🚀</span>
+</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
