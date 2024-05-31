@@ -1,17 +1,33 @@
-#' USDT denominated ATOMS with 15m intervals
+#' USDT Denominated ATOM (ATOMUSDT) 15-Minute Intervals
 #'
-#' A xts object with 15m OHLCV of USDT denominated ATOM with 97 rows and 5 columns, from 2023-12-30 to 2023-12-31.
+#' @description
+#' This dataset contains time-series data for the ATOM (ATOM)
+#' denominated in USDT (Tether), captured in 15-minute intervals.
+#' The data spans from December 30 to December 31, 2023.
+#'
+#' @format An [xts::xts()]-object with 97 rows and 5 columns,
 #'
 #' \describe{
-#'   \item{Open}{Opening price}
-#'   \item{High}{Highest price}
-#'   \item{Low}{Lowest price}
-#'   \item{Close}{Closing price}
-#'   \item{Volume}{Volume}
+#'  \item{index}{<[POSIXct]> The time-index}
+#'  \item{open}{<[numeric]> Opening price}
+#'  \item{high}{<[numeric]> Highest price}
+#'  \item{low}{<[numeric]> Lowest price}
+#'  \item{close}{<[numeric]> Closing price}
+#'  \item{volume}{<[numeric]> Trading volume}
 #' }
 #'
-#' @family data
+#' @examples
+#' # Load the dataset
+#' data("ATOM")
+#'
+#' # chart
+#' chart(
+#'   ticker = ATOM,
+#'   main = kline(),
+#'   sub = list(volume())
+#' )
 "ATOM"
+
 
 
 

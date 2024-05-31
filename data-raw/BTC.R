@@ -4,7 +4,7 @@
 # with weekly candles
 BTC <- cryptoQuotes::get_quote(
   ticker   = "BTCUSDT",
-  source   = "binance",
+  source   = "bybit",
   futures  = FALSE,
   interval = "1w",
   from     = "2023-01-01",

@@ -2,12 +2,19 @@
 % Please edit documentation in R/chart_ma.R
 \name{alma}
 \alias{alma}
-\title{Add Arnaud Legoux Moving Average to the chart}
+\title{Add Arnaud Legoux Moving Average (ALMA) to the chart}
 \usage{
-alma(price = "close", n = 9, offset = 0.85, sigma = 6, internal = list(), ...)
+alma(
+ price  = "close",
+ n      = 9,
+ offset = 0.85,
+ sigma  = 6,
+ ...
+)
 }
 \arguments{
-\item{price}{A \link{character}-vector of \link{length} 1. Close by default. The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ALMA}}
+\item{price}{A \link{character}-vector of \link{length} 1. "close" by default
+The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ALMA}.}
 
 \item{n}{Number of periods to average over. Must be between 1 and
 \code{nrow(x)}, inclusive.}
@@ -16,62 +23,28 @@ alma(price = "close", n = 9, offset = 0.85, sigma = 6, internal = list(), ...)
 
 \item{sigma}{Standard deviation of the distribution.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
-
-\item{...}{any other passthrough parameters}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts with \link{TTR}'s moving average family of functions.
+A high-level \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that
+interacts with \link{TTR}'s moving average family of functions.
+The function adds moving average indicators to the main \code{\link[=chart]{chart()}}.
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
-## charting the klines
-## with indicators as
-## subcharts
-chart(
-  ticker     = BTC,
-  main       = kline(),
-  sub        = list(
-    volume(),
-    macd()
-  ),
+cryptoQuotes::chart(
+  ticker = BTC,
+  main   = kline(),
   indicator = list(
-    bollinger_bands(),
-    sma(),
-    alma()
-  ),
-  options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
-  ),
-  options = list(
-    dark = TRUE,
-    deficiency = FALSE
+    cryptoQuotes::ema(n = 7),
+    cryptoQuotes::sma(n = 14),
+    cryptoQuotes::wma(n = 21)
   )
 )
 
@@ -83,6 +56,7 @@ Other chart indicators:
 \code{\link{bollinger_bands}()},
 \code{\link{chart}()},
 \code{\link{dema}()},
+\code{\link{donchian_channel}()},
 \code{\link{ema}()},
 \code{\link{evwma}()},
 \code{\link{fgi}()},
@@ -91,6 +65,7 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
@@ -102,8 +77,26 @@ Other moving average indicators:
 \code{\link{evwma}()},
 \code{\link{hma}()},
 \code{\link{sma}()},
+\code{\link{vwap}()},
+\code{\link{wma}()},
+\code{\link{zlema}()}
+
+Other main chart indicators: 
+\code{\link{add_event}()},
+\code{\link{bollinger_bands}()},
+\code{\link{dema}()},
+\code{\link{donchian_channel}()},
+\code{\link{ema}()},
+\code{\link{evwma}()},
+\code{\link{hma}()},
+\code{\link{sma}()},
+\code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
 }
+\author{
+Serkan Korkmaz
+}
 \concept{chart indicators}
+\concept{main chart indicators}
 \concept{moving average indicators}

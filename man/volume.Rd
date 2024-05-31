@@ -2,66 +2,42 @@
 % Please edit documentation in R/chart_volume.R
 \name{volume}
 \alias{volume}
-\title{Add volume indicators
-to the chart}
+\title{Chart the trading volume}
 \usage{
-volume(internal = list())
+volume(...)
 }
 \arguments{
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Volume indicators are technical analysis tools used to analyze trading volume, which represents the number of shares or contracts traded in a financial market over a specific period of time.
-These indicators provide valuable insights into the strength and significance of price movements.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function.
+The function adds a subchart with the trading \code{trading}.
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
-## charting the klines
-## with indicators as
-## subcharts
-chart(
+# 1) charting weekly
+# BTC using candlesticks
+# and indicators
+cryptoQuotes::chart(
   ticker     = BTC,
-  main       = kline(),
+  main       = cryptoQuotes::kline(),
   sub        = list(
-    volume(),
-    macd()
+    cryptoQuotes::volume(),
+    cryptoQuotes::macd()
   ),
   indicator = list(
-    bollinger_bands(),
-    sma(),
-    alma()
+    cryptoQuotes::bollinger_bands(),
+    cryptoQuotes::sma(),
+    cryptoQuotes::alma()
   ),
   options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
-  ),
-  options = list(
-    dark = TRUE,
+    dark       = TRUE,
     deficiency = FALSE
   )
 )
@@ -75,6 +51,7 @@ Other chart indicators:
 \code{\link{bollinger_bands}()},
 \code{\link{chart}()},
 \code{\link{dema}()},
+\code{\link{donchian_channel}()},
 \code{\link{ema}()},
 \code{\link{evwma}()},
 \code{\link{fgi}()},
@@ -83,16 +60,21 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
-\code{\link{rsi}()}
+\code{\link{rsi}()},
+\code{\link{smi}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
-\concept{subcharts}
+\concept{subchart indicators}

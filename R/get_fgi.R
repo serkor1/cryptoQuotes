@@ -6,29 +6,40 @@
 # index from alternative.met
 # script start;
 
+#' @title
 #' Get the daily Fear and Greed Index
-#' for the cryptocurrency market
+#' in the cryptocurrency market
 #'
 #' @description
+#' `r lifecycle::badge("stable")`
 #'
-#' `r lifecycle::badge("deprecated")`
+#' Get the daily fear and greed index.
 #'
-#' The fear and greed index is a market sentiment indicator that measures investor emotions to
-#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+#' @usage get_fgindex(
+#'  from = NULL,
+#'  to   = NULL
+#' )
 #'
 #' @inheritParams get_quote
 #'
-#' @example man/examples/scr_FGIndex.R
-#'
 #' @inherit get_quote details
-#'
-#' @family get-function
 #'
 #' @returns An [xts]-object containing,
 #'
-#' * fgi ([numeric]): The daily fear and greed index value
+#' \item{index}{<[POSIXct]> the time-index}
+#' \item{fgi}{<[numeric]> the daily fear and greed index value}
 #'
-#' @note
+#' **Sample output**
+#'
+#' ```{r output, echo = FALSE}
+#' ## fear and greed index
+#' tail(
+#'    cryptoQuotes:::control_data$fgindex
+#' )
+#' ```
+#'
+#' @details
+#' ## Classification
 #'
 #' The Fear and Greed Index goes from 0-100, and can be classified as follows,
 #'
@@ -40,8 +51,22 @@
 #'   \item 76-100, Extreme Greed
 #' }
 #'
-#' @author Serkan Korkmaz
+#' ## About the Fear and Greed Index
+#' The fear and greed index is a market sentiment indicator that measures
+#' investor emotions to gauge whether they are generally fearful
+#' (indicating potential selling pressure) or
+#' greedy (indicating potential buying enthusiasm).
 #'
+#' ## Source
+#' This index is fetched from
+#' \href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me},
+#' and can be different from the one provided by
+#' \href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
+#'
+#' @example man/examples/scr_FGIndex.R
+#'
+#' @family get-functions
+#' @author Serkan Korkmaz
 #' @export
 get_fgindex <- function(
     from = NULL,
@@ -58,17 +83,17 @@ get_fgindex <- function(
   check_internet_connection()
 
   assert(
-    "Valid {.arg from} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
-              format(
-                Sys.time()
-              )
-            )}}" = (is.null(from) || (is.date(from) & length(from) == 1)),
+    "
+    Valid {.arg from} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(from) || (is.date(from) & length(from) == 1)),
 
-    "Valid {.arg to} input is on the form {.val {paste(as.character(Sys.Date()))}} or {.val {as.character(
-              format(
-                Sys.time()
-              )
-            )}}" = (is.null(to) || (is.date(to) & length(to) == 1))
+    "
+    Valid {.arg to} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(to) || (is.date(to) & length(to) == 1))
   )
 
 
@@ -146,7 +171,7 @@ get_fgindex <- function(
 
   # 8) set colnames
   # to FGI
-  colnames(response) <- 'FGI'
+  colnames(response) <- 'fgi'
 
   # 9) subset according
   # to from and to

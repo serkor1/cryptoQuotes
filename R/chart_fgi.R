@@ -4,119 +4,115 @@
 # objective:
 # script start;
 
+#' @title
 #' Chart the Fear and Greed Index
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
-#' The fear and greed index is a market sentiment indicator that measures investor emotions to
-#' gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+#' A high-level [plotly::plot_ly()]-wrapper function.
+#' The function adds a subchart with the `fear and greed`-index.
 #'
-#' @param index The Fear and Greed Index created by [getFGIndex()]
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param index A [xts::xts()]-object. See [get_fgindex()] for more details.
 #'
-#' @example man/examples/scr_FGIndex.R
+#' @inherit kline
+#' @inherit get_fgindex
 #'
-#' @details
-#' The Fear and Greed Index goes from 0-100, and can be classifed as follows
-#'
-#' \itemize{
-#'   \item 0-24, Extreme Fear
-#'   \item 25-44, Fear
-#'   \item 45-55, Neutral
-#'   \item 56-75, Greed
-#'   \item 76-100, Extreme Greed
-#' }
+#' @example man/examples/scr_chartFGIndex.R
 #'
 #' @family chart indicators
 #' @family sentiment indicators
-#' @family subcharts
-#'
-#' @returns Invisbly returns a plotly object.
+#' @family subchart indicators
+#' @author Serkan Korkmaz
 #' @export
 fgi <- function(
     index,
-    internal = list()) {
+    ...) {
+
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
+    .Data = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
-        deficiency <- internal_args$deficiency
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
+      # 1) unpack values
+      # from chart
+      data <- zoo::fortify.zoo(index, names = "index")
+      color_deficiency <- args$deficiency
 
 
-        DT <- toDF(
-          quote = !!index
-        )
+      # 1.1) define available
+      # colors
+      color_scale <- grDevices::hcl.colors(
+        n = 30,
+        palette = ifelse(color_deficiency, "Cividis", "RdYlGn"),
+        rev = color_deficiency
+      )
 
+      data$color_scale <- normalize(
+        x = data$fgi,
+        range = c(0,30),
+        value = c(0,100)
+      )
 
-        color_scale <- if (deficiency){
+      data$color_scale <- color_scale[
+        data$color_scale
+      ]
 
-
-          rev(paletteer::paletteer_c("grDevices::Cividis", 30))
-
-
-        } else {
-          paletteer::paletteer_c("grDevices::RdYlGn", 30)
-
-        }
-
-        value <- DT$fgi
-
-        DT$color_scale <- ceiling(
-          (1-30) * (value -0)/(100 - 0) + 30
-        )
-
-        DT$color_scale <- rev(color_scale)[
-          DT$color_scale
-        ]
-
-        plotly::layout(
-          yaxis = list(
-            title = 'Fear and Greed Index'
+      plotly::layout(
+        plotly::plot_ly(
+          showlegend = FALSE,
+          name = "FGI",
+          data = data,
+          y = ~fgi,
+          x = ~index,
+          type = 'scatter',
+          mode = 'lines+markers',
+          line = list(
+            color = 'gray',
+            dash = 'dash',
+            shape = 'spline',
+            smoothing = 1.5
           ),
-          p = plotly::plot_ly(
-            showlegend = TRUE,
-            name = "FGI",
-            data = DT,
-            y = ~fgi,
-            x = ~index,
-            type = 'scatter',
-            mode = 'lines+markers',
+          marker = list(
+            size = 10,
+            color = ~color_scale,
             line = list(
-              color = 'gray',
-              dash = 'dash',
-              shape = 'spline',
-              smoothing = 1.5
-            ),
-            marker = list(
-              size = 10,
-              color = ~color_scale,
-              line = list(
-                color = 'black',
-                width = 2
-              )
+              color = 'black',
+              width = 2
             )
           )
+        ),
+        annotations = list(
+          text = "Fear and Greed Index",
+          font = list(
+            size = 16
+          ),
+          showarrow = FALSE,
+          x = 0,
+          y = 1,
+          xref = "paper",
+          yref = "paper"
         )
+      )
 
 
-
-      }
-    ),
-    class = "subchart"
+    },
+    class = c(
+      "subchart",
+      "plotly",
+      "htmlwidget"
+    )
   )
-
 
 }
 # script end;

@@ -1,11 +1,16 @@
 ---
 title: "Cryptocurrency Market Data in R"
-subtitle: "The cryptoQuotes way"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = TRUE
+  collapse   = TRUE,
+  message    = FALSE,
+  echo       = TRUE, 
+  comment    = "#>",
+  out.width  = "100%",
+  out.height = "620px",
+  fig.align  = "center"
 )
 ```
 
@@ -31,27 +36,28 @@ To get `OHLC` data the `get_quote()`-function is the go-to function,
 ## SPOT price of 
 ## Bitcoin on the hourly
 BTC <- get_quote(
-  ticker  = "BTCUSD",
-  source  = "kraken",
-  futures = FALSE,
+  ticker   = "BTCUSD",
+  source   = "kraken",
+  futures  = FALSE,
   interval = "1h",
-  from = Sys.Date() - 1
+  from     = Sys.Date() - 1
 )
 ```
 
 
-```{r, echo =FALSE, fig.alt="Cryptocurrency Market Data in R"}
+```{r, echo = FALSE, fig.alt="Cryptocurrency Market Data in R"}
 ## print table as a kable
 ## for a neat presentationb
 knitr::kable(
-  caption = 'Hourly Bitcoin OHLC-V data',
-  align = 'lcccc',
+  caption    = 'Hourly Bitcoin OHLC-V data',
+  align      = 'lcccc',
   table.attr = "style='width:100%;'",
   x = data.frame(
     cbind(
-      Index = paste(tail(zoo::index(BTC))),
+      index = paste(tail(zoo::index(BTC))),
       round(tail(zoo::coredata(BTC)),3)
-    ),row.names = NULL
+    ),
+    row.names = NULL
   ),
   format = 'html'
 )
@@ -67,10 +73,10 @@ One sentiment indicator for Bitcoin is the long-short ratio, which can be retrie
 ## long-short ratio of 
 ## Bitcoin on the hourly
 LS_BTC <- get_lsratio(
-  ticker  = "PF_XBTUSD",
-  source  = "kraken",
+  ticker   = "PF_XBTUSD",
+  source   = "kraken",
   interval = "1h",
-  from = Sys.Date() - 1
+  from     = Sys.Date() - 1
 )
 ```
 
@@ -79,12 +85,12 @@ LS_BTC <- get_lsratio(
 ## print table as a kable
 ## for a neat presentationb
 knitr::kable(
-  caption = 'Hourly Bitcoin OHLC-V data',
-  align = 'lcccc',
+  caption    = 'Hourly Long-Short Ratio on Bitcoin',
+  align      = 'lcccc',
   table.attr = "style='width:100%;'",
   x = data.frame(
     cbind(
-      Index = paste(tail(zoo::index(LS_BTC))),
+      index = paste(tail(zoo::index(LS_BTC))),
       round(tail(zoo::coredata(LS_BTC)),3)
     ),row.names = NULL
   ),
@@ -93,24 +99,28 @@ knitr::kable(
 
 ```
 
-
 ## Limitations
 
-There is a limit to the amount of market data that can be extracted in one call. The [Kraken](https://www.kraken.com/) exchange, for example, has a limit on `720` rows of data per call in the spot market,
+There is a limit to the amount of market data that can be extracted in one call. The [Kraken](https://www.kraken.com/) exchange, for example, has a limit on `5000` rows of data per call in the futures market,
 
 ```{r}
 ## Get the SPOT
 ## market for over 
 ## 2000 rows
-nrow(
-  BTC <- get_quote(
-    ticker  = "BTCUSD",
-    source  = "kraken",
-    futures = FALSE,
-    interval = "30m",
-    from = Sys.Date() - 30,
-    to   = Sys.Date()
-  )
+tryCatch(
+  get_quote(
+    ticker   = "PF_XBTUSD",
+    source   = "kraken",
+    futures  = TRUE,
+    interval = "5m",
+    from     = Sys.Date() - 25,
+    to       = Sys.Date()
+  ),
+  error = function(error) {
+    
+    error
+    
+  }
 )
 ```
 
@@ -120,9 +130,9 @@ If you need more data than this, you need to do multiple calls. One such solutio
 ## 1) create date
 ## sequence
 dates <- seq(
-  from = as.POSIXct(Sys.Date()),
-  by = "-30 mins",
-  length.out = 1440
+  from       = as.POSIXct(Sys.Date()),
+  by         = "-5 mins",
+  length.out = 10000
 )
 
 ## 2) split the sequence
@@ -130,8 +140,8 @@ dates <- seq(
 ## by assigning numbers
 ## to each indices of 100
 idx <- rep(
-  x = 1:2,
-  each = 720
+  x    = 1:2,
+  each = 5000
 )
 
 ## 3) use the idx to split
@@ -145,28 +155,28 @@ split_dates <- split(
 ## calls in a list
 ## using lapply
 ohlc <- lapply(
-  X = split_dates,
+  X   = split_dates,
   FUN = function(dates){
-    
     
     Sys.sleep(1)
     
     cryptoQuotes::get_quote(
-      ticker = "BTCUSD",
-      source = "kraken",
-      futures = FALSE,
-      interval = "30m",
-      from = min(dates),
-      to   = max(dates)
+      ticker   = "PF_XBTUSD",
+      source   = "kraken",
+      futures  = TRUE,
+      interval = "5m",
+      from     = min(dates),
+      to       = max(dates)
     )
     
-  })
+  }
+)
 
 ## 4.1) rbind all
 ## elements
 nrow(
   ohlc <- do.call(
-    what = rbind, 
+    what = rbind,
     args = ohlc
   )
 )

@@ -2,67 +2,33 @@
 % Please edit documentation in R/chart_quote.R
 \name{kline}
 \alias{kline}
-\title{Candlestick chart}
+\title{Candlestick Chart}
 \usage{
-kline(internal = list())
+kline(...)
 }
 \arguments{
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}.
+An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Candlestick charts are highly visual and provide a quick and intuitive way to assess market sentiment and price action.
-Traders and analysts use them in conjunction with other technical analysis tools to make informed trading decisions.
-These charts are particularly useful for identifying key support and resistance levels, trend changes, and potential entry and exit points in financial markets.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function for charting
+Open, High, Low and Close prices.
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
-## charting the klines
-## with indicators as
-## subcharts
-chart(
-  ticker     = BTC,
-  main       = kline(),
-  sub        = list(
-    volume(),
-    macd()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma(),
-    alma()
-  ),
-  options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
-  ),
-  options = list(
-    dark = TRUE,
-    deficiency = FALSE
+# Charting BTC using
+# candlesticks as main
+# chart
+cryptoQuotes::chart(
+  ticker = BTC,
+  main   = cryptoQuotes::kline(),
+  sub    = list(
+    cryptoQuotes::volume()
   )
 )
 
@@ -71,7 +37,8 @@ chart(
 \seealso{
 Other price charts: 
 \code{\link{chart}()},
-\code{\link{ohlc}()}
+\code{\link{ohlc}()},
+\code{\link{pline}()}
 }
 \author{
 Serkan Korkmaz

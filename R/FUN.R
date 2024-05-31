@@ -20,10 +20,11 @@
 #'
 #'
 #' @param xts A xts-object that needs its bounds modified.
-#' @param bounds A character vector of length 1. Has to be one of `c('upper','lower','both')`. Defaults to Upper.
+#' @param bounds A character vector of length 1.
+#' Has to be one of `c('upper','lower','both')`. Defaults to Upper.
 #'
 #' @example man/examples/scr_FUN.R
-#' @family convinience
+#' @family utility
 #'
 #' @returns Returns an xts-class object with its bounds removed.
 #' @export
@@ -34,16 +35,16 @@ remove_bound <- function(
 
   # check if bounds are correctly
   # specified
-  if (!grepl(x = bounds, pattern = 'upper|lower|both')) {
-
-    rlang::abort(
-      message = c(
-        'Incorrectly specfied bounds',
-        'v' = 'Has to be "upper", "lower" or "both"'
-      )
-    )
-
-  }
+  # if (!grepl(x = bounds, pattern = 'upper|lower|both')) {
+  #
+  #   rlang::abort(
+  #     message = c(
+  #       'Incorrectly specfied bounds',
+  #       'v' = 'Has to be "upper", "lower" or "both"'
+  #     )
+  #   )
+  #
+  # }
 
   # this function
   # removes the upper
@@ -73,15 +74,17 @@ remove_bound <- function(
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' The [split_window()]-function is a high level wrapper of the [stats::window()]-function which restricts
-#' the intervals between the first and second index value iteratively
+#' The [split_window()]-function is a high level wrapper
+#' of the [stats::window()]-function which restricts the intervals between
+#' the first and second index value iteratively
 #'
 #' @param xts A xts-object that needs needs to be split.
 #' @param by A reference [zoo::index()]-object, to be split by.
-#' @param bounds A character vector of length 1. Has to be one of `c('upper','lower','both')`. Defaults to Upper.
+#' @param bounds A character vector of length 1.
+#' Has to be one of `c('upper','lower','both')`. Defaults to Upper.
 #'
 #' @example man/examples/scr_FUN.R
-#' @family convinience
+#' @family utility
 #'
 #' @returns Returns a list of iteratively restricted xts objects
 #'
@@ -90,6 +93,16 @@ split_window <- function(
     xts,
     by,
     bounds = 'upper') {
+
+  assert(
+    inherits(xts, "xts"),
+    error_message = c(
+      "x" = sprintf(
+        "Has to be {.cls xts}. Got {.cls %s}",
+        class(xts)
+      )
+    )
+  )
 
   # this function splits
   # the xts object in lists
@@ -138,7 +151,7 @@ split_window <- function(
 #' @param ... optional arguments passed to `FUN`.
 #'
 #' @example man/examples/scr_FUN.R
-#' @family convinience
+#' @family utility
 #'
 #' @returns Returns a xts object.
 #'
@@ -147,6 +160,16 @@ calibrate_window <- function(
     list,
     FUN,
     ...) {
+
+  assert(
+    inherits(list, "list"),
+    error_message = c(
+      "x" = sprintf(
+        "Has to be {.cls list}. Got {.cls %s}",
+        class(list)
+      )
+    )
+  )
 
   # This function calibrates
   # the window and returns

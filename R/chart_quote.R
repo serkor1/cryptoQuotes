@@ -1,158 +1,273 @@
-#' Candlestick chart
+#' @title
+#' Candlestick Chart
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
-#' Candlestick charts are highly visual and provide a quick and intuitive way to assess market sentiment and price action.
-#' Traders and analysts use them in conjunction with other technical analysis tools to make informed trading decisions.
-#' These charts are particularly useful for identifying key support and resistance levels, trend changes, and potential entry and exit points in financial markets.
+#' A high-level [plotly::plot_ly()]-function for charting
+#' Open, High, Low and Close prices.
 #'
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @family price charts
-#'
-#' @example man/examples/scr_charting.R
+#' @example man/examples/scr_klinechart.R
 #'
 #' @returns
+#' An [invisible] [plotly::plot_ly()]-object.
 #'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
-#'
+#' @family price charts
 #' @author Serkan Korkmaz
-#'
 #' @export
 kline <- function(
-    internal = list()) {
+    ...) {
+
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+    .Data = {
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 0) construct arguments
+      # via chart function
+      args <- list(...)
+      data <- indicator(args$data)
 
-        ticker     <- internal_args$ticker
-        interval   <- internal_args$interval
-        deficiency <- internal_args$deficiency
+      #   # 1) bottom trace
+      bot <- 3
+      p <- plotly::plot_ly(
+        data = data,
+        x = ~index,
+        type = 'candlestick',
+        hoverinfo = "none",
+        open = ~open,
+        close = ~close,
+        high = ~high,
+        low = ~low,
+        increasing = list(
+          # Border color and width
+          line = list(color = "black", width = bot),
+          fillcolor = "black"
+        ),
+        decreasing = list(
+          # Border color and width
+          line = list(color = "black", width = bot),
+          fillcolor = "black"
+        ),
+        showlegend = FALSE,
+        legendgroup = "price",
+        name = "Border"
+      )
 
 
 
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
+      p <- plotly::add_trace(
+        p,
+        inherit = FALSE,
+        x = ~index,
+        type = "candlestick",
+        open = ~open,
+        close = ~close,
+        high = ~high,
+        low = ~low,
+        increasing = list(
+          # Main candle color and narrower width
+          line = list(color = args$candle_color$bullish, width = bot - 1.75),
+          fillcolor = args$candle_color$bullish
+        ),
+        decreasing = list(
+          # Main candle color and narrower width
+          line = list(color = args$candle_color$bearish, width = bot - 1.75),
+          fillcolor = args$candle_color$bearish
+        ),
+        showlegend = TRUE,
+        legendgroup = "price",
+        name = args$interval
+      )
 
 
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-        plotly::layout(
-          p =  plotly::plot_ly(
-            data = ticker,
-            showlegend = TRUE,
-            name = interval,
-            yaxis = 'y',
-            x    = ~index,
-            type = 'candlestick',
-            open = ~open,
-            close = ~close,
-            high  = ~high,
-            low   = ~low,
-            increasing = list(
-              line = list(
-                color = candle_color$bullish
-              ),
-              fillcolor = candle_color$bullish
-            ),
-            decreasing = list(
-              line = list(
-                color =candle_color$bearish
-              ),
-              fillcolor = candle_color$bearish
+      invisible(
+        {
+          plotly::layout(
+            p = p,
+            xaxis = list(
+              rangeslider = list(
+                visible = args$slider,
+                thickness    = 0.05
+              )
             )
-          ),
-          yaxis = list(
-            title = "Price"
           )
-        )
+        }
+      )
 
 
 
 
-
-
-      }
-    ),
-    class = c("pricechart", "chartelement")
+    },
+    class = c("pricechart", "plotly", "htmlwidget")
   )
 
 }
 
 
-#' OHLC chart
+#' @title
+#' OHLC Barchart
 #'
 #' @inherit kline
+#'
+#' @example man/examples/scr_ohlcchart.R
+#'
 #' @family price charts
+#' @author Serkan Korkmaz
 #' @export
 ohlc <- function(
-    internal = list()) {
+    ...) {
+
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
-    rlang::expr(
-      {
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+    .Data = {
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 0) construct arguments
+      # via chart function
+      args <- list(...)
+      data <- indicator(args$data)
 
-        ticker <- internal_args$ticker
-        interval   <- internal_args$interval
-        deficiency <- internal_args$deficiency
+      #   # 1) bottom trace
+      bot <- 5
+      p <- plotly::plot_ly(
+        data        = data,
+        x           = ~ index,
+        type        = 'ohlc',
+        open        = ~ open,
+        hoverinfo   = "none",
+        close       = ~ close,
+        high        = ~ high,
+        low         = ~ low,
+        increasing  = list(
+          # Border color and width
+          line      = list(color = "black", width = bot),
+          fillcolor = "black"
+        ),
+        decreasing  = list(
+          # Border color and width
+          line      = list(color = "black", width = bot),
+          fillcolor = "black"
+        ),
+        showlegend  = FALSE,
+        name        = "Border",
+        legendgroup = "price"
+      )
 
+      p <- plotly::add_trace(
+        p           = p,
+        x           = ~ index,
+        inherit     = FALSE,
+        type        = "ohlc",
+        open        = ~ open,
+        close       = ~ close,
+        high        = ~ high,
+        low         = ~ low,
+        increasing  = list(
+          # Main candle color and narrower width
+          line      = list(color = args$candle_color$bullish, width = bot - 3),
+          fillcolor = args$candle_color$bullish
+        ),
+        decreasing  = list(
+          # Main candle color and narrower width
+          line      = list(color = args$candle_color$bearish, width = bot - 3),
+          fillcolor = args$candle_color$bearish
+        ),
+        showlegend  = TRUE,
+        name = args$interval,
+        legendgroup = "price"
+      )
 
-
-        candle_color <- movement_color(
-          deficiency = deficiency
+      plotly::layout(
+        p     = p,
+        xaxis = list(
+          rangeslider = list(
+            visible   = args$slider,
+            thickness = 0.05
+          )
         )
+      )
+    },
 
-        plotly::layout(
-          p =  plotly::plot_ly(
-            data = ticker,
-            showlegend = TRUE,
-            name = interval,
-            yaxis = 'y',
-            x    = ~index,
-            type = 'ohlc',
-            open = ~open,
-            close = ~close,
-            high  = ~high,
-            low   = ~low,
-            increasing = list(
-              line = list(
-                color = candle_color$bullish
-              )
-            ),
-            decreasing = list(
-              line = list(
-                color =candle_color$bearish
-              )
-            )
-          ),
-          yaxis = list(title = "Price")
-        )
-
-
-
-
-      }
-
-    ),
-    class = c("pricechart", "chartelement")
+    class = c("pricechart", "plotly", "htmlwidget")
   )
+}
 
+#' @title
+#' Line Chart
+#'
+#' @inherit kline
+#'
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#'
+#' @example man/examples/scr_plinechart.R
+#'
+#' @family price charts
+#' @author Serkan Korkmaz
+#' @export
+pline <- function(
+    price = "close",
+    ...) {
+
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
+  structure(
+    .Data = {
+
+      # 0) arguments passed
+      # via the chart function
+      args <- list(...)
+
+      data <- indicator(args$data, columns = price)
+
+      p <- plotly::plot_ly(
+        data = data,
+        x    = ~index,
+        y    = stats::as.formula(
+          paste("~", price)
+        ),
+        type = "scatter",
+        mode = "lines",
+        showlegend = TRUE,
+        legendgroup = "price",
+        name        = paste0(
+          to_title(price),
+          " (", args$interval, ")"
+        ),
+        line = list(
+          width = 1.2,
+          color = "#d38b68"# was: "#d3ba68"
+        )
+      )
+
+      invisible({
+        plotly::layout(
+          p = p,
+          xaxis = list(
+            rangeslider = list(
+              visible = args$slider,
+              thickness    = 0.05
+            )
+          )
+        )
+      })
+
+    },
+    class = c("pricechart", "plotly", "htmlwidget")
+  )
 
 }

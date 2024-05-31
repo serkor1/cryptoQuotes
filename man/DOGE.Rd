@@ -3,30 +3,36 @@
 \docType{data}
 \name{DOGE}
 \alias{DOGE}
-\title{USDT denominated DOGECOIN in 1m intervals}
+\title{USDT Denominated DOGECOIN (DOGEUSDT) 1-Minute Intervals}
 \format{
-An object of class \code{xts} (inherits from \code{zoo}) with 61 rows and 5 columns.
+An \code{\link[xts:xts]{xts::xts()}}-object  with 61 rows and 5 columns,
+
+\describe{
+\item{index}{<\link{POSIXct}> The time-index}
+\item{open}{<\link{numeric}> Opening price}
+\item{high}{<\link{numeric}> Highest price}
+\item{low}{<\link{numeric}> Lowest price}
+\item{close}{<\link{numeric}> Closing price}
+\item{volume}{<\link{numeric}> Trading volume}
+}
 }
 \usage{
 DOGE
 }
 \description{
-A xts object with 1m OHLCV of USDT denominated Dogecoin with 61 rows and 5 columns.
+This dataset contains time-series data for the DOGECOIN (DOGE)
+denominated in USDT (Tether), captured in 1-minute intervals.
+The data spans 2022-01-14 07:00:00 CET to 2022-01-14 08:00:00 CET.
 }
-\details{
-\describe{
-\item{Open}{Opening price}
-\item{High}{Highest price}
-\item{Low}{Lowest price}
-\item{Close}{Closing price}
-\item{Volume}{Volume}
+\examples{
+# Load the dataset
+data("DOGE")
+
+# chart
+chart(
+  ticker = DOGE,
+  main = kline(),
+  sub = list(volume())
+)
 }
-}
-\seealso{
-Other data: 
-\code{\link{ATOM}},
-\code{\link{BTC}},
-\code{\link{FGIndex}}
-}
-\concept{data}
 \keyword{datasets}

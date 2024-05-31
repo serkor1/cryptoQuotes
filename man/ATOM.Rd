@@ -3,30 +3,36 @@
 \docType{data}
 \name{ATOM}
 \alias{ATOM}
-\title{USDT denominated ATOMS with 15m intervals}
+\title{USDT Denominated ATOM (ATOMUSDT) 15-Minute Intervals}
 \format{
-An object of class \code{xts} (inherits from \code{zoo}) with 97 rows and 5 columns.
+An \code{\link[xts:xts]{xts::xts()}}-object with 97 rows and 5 columns,
+
+\describe{
+\item{index}{<\link{POSIXct}> The time-index}
+\item{open}{<\link{numeric}> Opening price}
+\item{high}{<\link{numeric}> Highest price}
+\item{low}{<\link{numeric}> Lowest price}
+\item{close}{<\link{numeric}> Closing price}
+\item{volume}{<\link{numeric}> Trading volume}
+}
 }
 \usage{
 ATOM
 }
 \description{
-A xts object with 15m OHLCV of USDT denominated ATOM with 97 rows and 5 columns, from 2023-12-30 to 2023-12-31.
+This dataset contains time-series data for the ATOM (ATOM)
+denominated in USDT (Tether), captured in 15-minute intervals.
+The data spans from December 30 to December 31, 2023.
 }
-\details{
-\describe{
-\item{Open}{Opening price}
-\item{High}{Highest price}
-\item{Low}{Lowest price}
-\item{Close}{Closing price}
-\item{Volume}{Volume}
+\examples{
+# Load the dataset
+data("ATOM")
+
+# chart
+chart(
+  ticker = ATOM,
+  main = kline(),
+  sub = list(volume())
+)
 }
-}
-\seealso{
-Other data: 
-\code{\link{BTC}},
-\code{\link{DOGE}},
-\code{\link{FGIndex}}
-}
-\concept{data}
 \keyword{datasets}

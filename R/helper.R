@@ -4,6 +4,104 @@
 # objective: A class of helper
 # function
 # script start;
+indicator <- function(
+    x,
+    columns = NULL,
+    .f = NULL,
+    ...) {
+
+  x <- tryCatch(
+    expr = {
+
+      xts::as.xts(
+        x
+      )
+
+    },
+    error = function(error) {
+
+      assert(
+        FALSE,
+        error_message = c(
+          "x" = "Could not coerce to {.cls xts}",
+          "i" = error$message
+        )
+      )
+
+    }
+  )
+
+  x <- do.call(
+    cbind,
+    # Set  names here
+    # and remove from pull
+    stats::setNames(
+      lapply(
+        X = if (is.null(columns)) names(x) else columns,
+        FUN = pull,
+        from = x
+      ),
+      nm = if (is.null(columns))  names(x) else columns
+    )
+  )
+
+  # 1) get the indicator function
+  # for each
+  if (!is.null(.f)) {
+
+    x <- .f(
+      x,
+      ...
+    )
+
+  }
+
+  names(x) <- tolower(names(x))
+
+  zoo::fortify.zoo(
+    x,
+    names = c(
+      "index"
+    )
+  )
+
+}
+
+# var_ly <- function(
+    #     variable) {
+#
+#   # 0) extract variable
+#   # from the source
+#   variable <- grep(
+#     pattern     = variable,
+#     x           = names(get("data",envir = parent.frame())),
+#     ignore.case = TRUE,
+#     value       = TRUE
+#   )
+#
+#   # 1) assert variable
+#   # existance
+#   assert(
+#     !identical(
+#       variable,
+#       character(0)
+#     ) & length(variable) == 1,
+#     error_message = c(
+#       "x" = "Error in {.val variable}"
+#     )
+#   )
+#
+#   # 2) return as formula
+#   as.formula(
+#     paste(
+#       '~', variable
+#     )
+#   )
+#
+# }
+
+
+
 
 build <- function(
     plot,
@@ -18,15 +116,21 @@ build <- function(
   ) {
 
     # Generalize function calling based on the 'type' attribute
-    fun_name <- layer$type  # The Plotly function to call, e.g., "add_lines", "add_ribbons"
-    layer$params$p <- plot  # Ensure the plot is passed as the first argument
+
+    # The Plotly function to call, e.g., "add_lines", "add_ribbons"
+    fun_name <- layer$type
+
+    # Ensure the plot is passed as the first argument
+    layer$params$p <- plot
 
     if (!"data" %in% names(layer$params)) {
-      # If 'data' is not explicitly provided, assume the plot's original data should be used
+      # If 'data' is not explicitly provided,
+      #  assume the plot's original data should be used
       layer$params$data <- plot$x$data
     }
 
-    # Dynamically call the Plotly function with the parameters specified in 'layer$params'
+    # Dynamically call the Plotly function with
+    #  the parameters specified in 'layer$params'
     do.call(
       get(
         fun_name,
@@ -60,37 +164,63 @@ to_title <- function(
 }
 
 
-infer_interval <- function(
+
+
+find_mode <- function(
     x) {
 
+  # 1) create a trable
+  # of values
+  frequency_table <- table(
+    x
+  )
+
+  # 2) find the mode
+  # and return as character
+  value <- as.character(
+    names(frequency_table)[which.max(frequency_table)]
+  )
+
+  value
+
+}
+
+
+infer_interval <- function(
+    x) {
 
 
   # 0) extract
   # index
   index <- zoo::index(
-    x
+    utils::head(
+      x = x,
+      # n should be the minimum
+      # of available rows and 7. 7
+      # was chosen randomly, but its important
+      # that its odd numbered so consensus can be
+      # reached. This application is 20x faster
+      # than using the entire dataset
+      # and reaches the same conclusion
+      n = min(nrow(x), 7)
+    )
   )
 
   # 1) calculate
   # differences
-  x <- unique(
-    as.numeric(
-      difftime(
-        time1 = index[-1],
-        time2 = index[-length(index)],
-        units = "secs"
-      )
+  x <- as.numeric(
+    difftime(
+      time1 = index[-1],
+      time2 = index[-length(index)],
+      units = "secs"
     )
   )
 
-  assert(
-    length(x) == 1,
-    error_message = "error in time-index"
-  )
+  x <- find_mode(x)
 
 
   switch(
-    as.character(x),
+    x,
     "1" = "1s",
     "60" = "1m",
     "180" = "3m",
@@ -107,7 +237,11 @@ infer_interval <- function(
     "259200" = "3d",
     "604800" = "1w",
     "1209600" = "2w",
-    "1M"
+    "2678400" = "1M",
+    "2592000" = "1M",
+    "2419200" = "1M",
+    "2505600" = "1M",
+    NULL
   )
 
 
@@ -118,8 +252,9 @@ infer_interval <- function(
 #' Check if values are valid dates
 #'
 #' @description
-#' This function check is equivalent to [is.numeric()], [is.logical()], and checks for the date type classes
-#' POSIXct, POSIXt and Date. And wether the character vector can be formatted to dates.
+#' This function check is equivalent to [is.numeric()], [is.logical()],
+#' and checks for the date type classes POSIXct, POSIXt and Date.
+#' And wether the character vector can be formatted to dates.
 #'
 #' @param x object to be tested
 #'
@@ -128,7 +263,6 @@ infer_interval <- function(
 #' @keywords internal
 #' @returns [TRUE] if its either POSIXct, POSIXt or Date. [FALSE] otherwise.
 is.date <- function(x){
-
 
   # check if its
   # a date
@@ -145,7 +279,11 @@ is.date <- function(x){
       expr = {
         # Either of these have to be
         # non-NA to work
-        !is.na(as.POSIXct(x)) | !is.na(as.POSIXct(x,format = "%Y-%m-%d %H:%M:%S"))
+        !is.na(as.POSIXct(x)) | !is.na(
+          as.POSIXct(
+            x,
+            format = "%Y-%m-%d %H:%M:%S")
+        )
       },
       error = function(error){
 
@@ -164,10 +302,10 @@ is.date <- function(x){
 #'
 #'
 #' @description
-#' This function is a wrapper of [stopifnot()], [tryCatch()] and [cli::cli_abort()] and asserts
-#' the truthfulness of the passed expression(s).
-#' @param ... expressions >= 1. If named the names are used as error messages, otherwise
-#' R's internal error-messages are thrown
+#' This function is a wrapper of [stopifnot()], [tryCatch()] and
+#' [cli::cli_abort()] and asserts the truthfulness of the passed expression(s).
+#' @param ... expressions >= 1. If named the names are used
+#' as error messages, otherwise R's internal error-messages are thrown
 #'
 #' @param error_message character. An error message, supports [cli]-formatting.
 #' @example man/examples/scr_assert.R
@@ -255,7 +393,9 @@ assert <- function(..., error_message = NULL) {
         # is forced to be the internal otherwise
         # the assert function will throw the same error-message
         # for any error.
-        message = if (is.null(error_message) || number_expressions != 1) error$message else error_message,
+        message = if (is.null(error_message) || number_expressions != 1)
+          error$message else
+            error_message,
         call    = sys.call(
           1 - length(sys.calls())
         )
@@ -266,67 +406,47 @@ assert <- function(..., error_message = NULL) {
 
 }
 
-toDF <- function(quote) {
 
 
-  # this function converts
-  # the quote to a data.frame
-  # for the plotting and reshaping
 
-  attr_list <- attributes(quote)$source
-  # 2) convert to
-  # data.frame
-  DF <- as.data.frame(
-    zoo::coredata(quote),
-    row.names = NULL
+pull <- function(
+    from,
+    what = "Open") {
+
+
+  # 0) identify column
+  # by name
+  column <- grep(
+    pattern = what,
+    x       = colnames(from),
+    ignore.case = TRUE,
+    value = TRUE
   )
 
-  colnames(DF) <- tolower(
-    colnames(DF)
-  )
-
-  # 3) add the index;
-  DF$index <- zoo::index(
-    quote
-  )
-
-  # 1) determine
-  # wether the the day is closed
-  # green
-  if (all(c('open', 'close') %in% colnames(DF))) {
-
-    DF$direction <- ifelse(
-      test = DF$close > DF$open,
-      yes  = 'Increasing',
-      no   = 'Decreasing'
+  assert(
+    !identical(character(0), column),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Could not find column {.val %s}",
+        what
+      )
     )
+  )
 
-  }
 
-
-  attributes(DF)$source <- attr_list
-
-  return(
-    DF
+  stats::setNames(
+    do.call(
+      what = `$`,
+      args = list(
+        from,
+        column
+      )
+    ),
+    nm = tolower(what)
   )
 
 }
 
-
-toQuote <- function(DF) {
-
-  quote <- xts::as.xts(
-    DF[,grep(pattern = 'open|high|low|close|volume|index',x = colnames(DF), ignore.case = TRUE)]
-  )
-
-  zoo::index(quote) <- as.POSIXct(
-    DF$index
-  )
-
-  attributes(quote)$source <- attributes(DF)$source
-
-  quote
-}
 
 # Plotly parameters; ####
 vline <- function(
@@ -429,33 +549,24 @@ coerce_date <- function(x){
 #' @keywords internal
 flatten <- function(x) {
 
-  if (!inherits(x, "list")) return(list(x)) else return(unlist(c(lapply(x, flatten)), recursive = FALSE))
+  if (!inherits(x, "list"))
+    return(list(x)) else
+      return(unlist(c(lapply(x, flatten)), recursive = FALSE))
 }
 
 
 
 # base-chart colors; ####
+movement_color <- function(
+    deficiency = FALSE) {
 
-movement_color <- function(deficiency = FALSE){
+  palette  <- c("#d3ba68","#d5695d","#5d8ca8","#65a479")
+  location <- if (deficiency) c(3,1) else c(4,2)
 
-  palette <- paletteer::paletteer_d("ggthemes::wsj_rgby")
-
-
-
-  if (deficiency) {
-
-    list(
-      bullish = palette[3],
-      bearish = palette[1]
-    )
-
-  } else {
-
-    list(
-      bullish = palette[4],
-      bearish = palette[2]
-    )
-  }
+  list(
+    bullish = palette[location[1]],
+    bearish = palette[location[2]]
+  )
 
 }
 
@@ -513,7 +624,9 @@ convert_date <- function(
         assert(
           FALSE,
           error_message = sprintf(
-            fmt = "Unexpected error. Contact the package maintainer or submit a %s.",
+            fmt = "
+            Unexpected error. Contact the package maintainer or submit a %s.
+            ",
             cli::style_hyperlink(
               text = cli::col_br_red("bug report"),
               url = "https://github.com/serkor1/cryptoQuotes"
@@ -551,7 +664,8 @@ convert_date <- function(
 #' compliance on the limits
 #'
 #' @inheritParams get_quote
-#' @param length a [numeric]-value of [length] 1. The desired distance between `from` and `to`.
+#' @param length a [numeric]-value of [length] 1.
+#' The desired distance between `from` and `to`.
 #'
 #'
 #' @returns
@@ -594,7 +708,7 @@ default_dates <-function(
 
   starting_point <- as.POSIXct(
     trunc(as.double(starting_point_time)/(15*60))*(15*60),
-    tz = 'UTC',
+    tz = Sys.timezone(),
     origin = origin_date
   )
 
@@ -665,7 +779,7 @@ default_dates <-function(
       max(interval_seq),
       as.POSIXct(
         current_time,
-        tz = "UTC",
+        tz = Sys.timezone(),
         origin = origin_date
       )
     )
@@ -677,6 +791,358 @@ default_dates <-function(
 
 }
 
-# script end;
+
+# pkg-startup; ####
+
+# This information contains
+# links to the development blog, github source code
+# and guides
+pkg_information <- function(){
+
+  # 1) wrattep in format
+  # inline to ensure that the
+  # message be supressed at startup
+  cli::format_inline(
+    c(
+      paste(
+        cli::col_br_red(cli::symbol$heart),
+        cli::style_hyperlink(
+          text = cli::col_br_blue('release notes'),
+          url = 'https://serkor1.github.io/cryptoQuotes/news/index.html'
+        ),
+        "\n"
+      ),
+      # Source code  link
+      paste(
+        cli::col_br_yellow(cli::symbol$star),
+        "Browse the",
+        cli::style_hyperlink(
+          text = cli::col_br_blue("source code"),
+          url = "https://github.com/serkor1/cryptoQuotes/"
+        ),
+        "\n"
+      ),
+
+      # link to pkgdown website
+      paste(
+        cli::col_br_yellow(cli::symbol$star),
+        "Read the",
+        cli::style_hyperlink(
+          text = cli::col_br_blue("documentation"),
+          url = 'https://serkor1.github.io/cryptoQuotes/'
+        ),
+        "\n"
+      ),
+
+      paste(
+        cli::col_br_yellow(cli::symbol$star),
+        "Join the",
+        cli::style_hyperlink(
+          text = cli::col_br_blue("discussion"),
+          url = 'https://github.com/serkor1/cryptoQuotes/discussions'
+        )
+      )
+    )
+  )
+
+}
+
+
+# This is the cryptoQuotes
+# header that prints the line
+# with pkgname and version
+pkg_header <- function(
+    pkgname) {
+
+
+  cli::cli(
+    cli::cli_h1(
+      text =  paste(
+        pkgname,
+        utils::packageVersion(
+          pkgname
+        )
+      )
+    )
+
+  )
+
+}
+
+
+
+#' Create a list of layout elements on subcharts
+#'
+#' @param x [integer]-vector of [length] 1.
+#' @param layout_element [character]-vector of [length] 1.
+#' [plotly::layout] elements. See example.
+#' @param layout_attribute [character]-vector of [length] 1.
+#' [plotly::layout] element value. See example.
+#'
+#' @examples
+#' \dontrun{
+#' chart_layout(
+#'   x = 1:plot_list_length,
+#'   layout_element = "yaxis",
+#'   layout_attribute = list(
+#'   gridcolor = if (dark) "#40454c" else  '#D3D3D3' # Was CCCCCC
+#'     )
+#' )
+#' }
+#'
+#'
+#' @return A [list] of layout elements.
+#' @keywords internal
+#' @family development tools
+chart_layout <- function(
+    x,
+    layout_element,
+    layout_attribute) {
+
+  stats::setNames(
+    lapply(
+      0:x,
+      function(i){
+
+        layout_attribute
+
+      }
+
+
+    ),
+    nm = paste0(layout_element, c("", 1:x))
+  )
+
+}
+
+
+chart_theme <- function(
+    dark) {
+
+  if (dark) {
+    list(
+      paper_bgcolor = '#2b3139',
+      plot_bgcolor  = '#2b3139',
+      font_color    = '#848e9c',
+      grid_color    = '#40454c'
+    )
+  } else {
+    list(
+      paper_bgcolor = '#E3E3E3',
+      plot_bgcolor  = '#E3E3E3',
+      font_color    = '#A3A3A3',
+      grid_color    = '#D3D3D3'
+    )
+  }
+}
+
+
+bar <- function(
+    dark,
+    plot,
+    name,
+    market,
+    date_range,
+    ...) {
+
+  # 0) chart theme
+  theme <- chart_theme(dark = dark)
+
+  title_text <- ifelse(
+    !is.null(market),
+    yes = sprintf(
+      "<b>Ticker:</b> %s <b>Market:</b> %s<br><sub><b>Period:</b> %s</sub>",
+      name,
+      market,
+      date_range
+    ),
+    no = sprintf(
+      "<b>Ticker:</b> %s<br><sub><b>Period:</b> %s</sub>",
+      name,
+      date_range
+    )
+  )
+
+  plot <- plotly::layout(
+    p = plot,
+    margin = list(l = 5, r = 5, b = 5, t = 65),
+    paper_bgcolor = theme$paper_bgcolor,
+    plot_bgcolor  = theme$plot_bgcolor,
+    font = list(
+      size = 14,
+      color = theme$font_color
+    ),
+    legend = list(
+      orientation = 'h',
+      x = 0,
+      y = 100,
+      yref="container",
+      title = list(
+        text = "<b>Indicators:</b>",
+        font = list(
+          size = 16
+        )
+      )
+    ),
+    title = list(
+      text = title_text,
+      font = list(
+        size = 20
+      ),
+      x = 1,
+      xref = "paper",
+      xanchor = "right"
+    )
+
+  )
+
+
+  do.call(
+    what = plotly::layout,
+    args = c(
+      list(plot),
+      chart_layout(
+        x = length(plot),
+        layout_element = "yaxis",
+        layout_attribute = list(
+          gridcolor = theme$grid_color # Was CCCCCC
+        )
+      ),
+      chart_layout(
+        x = length(plot),
+        layout_element = "xaxis",
+        layout_attribute = list(
+          gridcolor = theme$grid_color# was C3
+        )
+      )
+    )
+  )
+
+}
+
+
+as_rgb <- function(
+    hex_color,
+    alpha = NULL) {
+
+  # Remove the '#' if present and convert to RGB values
+  rgb_values <- grDevices::col2rgb(hex_color)
+
+  # Format RGB values
+  rgb_string <- sprintf(
+    fmt = "rgb(%d, %d, %d)",
+    rgb_values[1, ],
+    rgb_values[2, ],
+    rgb_values[3, ]
+  )
+
+  # Check if alpha is provided
+  if (!is.null(alpha)) {
+
+    assert(
+      alpha >= 0 & alpha <= 1,
+      error_message = c(
+        "x" = sprintf(
+          fmt = "{.arg alpha} has to be in ]0, 1[-range. Got {.val %s}.",
+          alpha
+        )
+      )
+    )
+
+    # Append alpha for rgba() format
+    rgb_string <- sprintf(
+      "rgba(%d, %d, %d, %.2f)",
+      rgb_values[1, ],
+      rgb_values[2, ],
+      rgb_values[3, ],
+      alpha
+    )
+  }
+
+  rgb_string
+}
+
+normalize <- function(
+    x,
+    range,
+    value
+) {
+
+  # 0) get the minimum/maximum
+  # of the vector
+  min_x <- min(value, na.rm = TRUE)
+  max_x <- max(value, na.rm = TRUE)
+
+  # 1) scale x within
+  # the range
+  scaled_x <- abs(
+    (x - min_x) / (max_x - min_x)
+  )
+
+  # factor
+  factor_x <- (max(range) - min(range))
+
+  # 3) create range
+  # and return
+  pmin(
+    pmax(
+      ceiling(
+        scaled_x * factor_x
+      ),
+      1
+    ),
+    30
+  )
+
+}
+
+
+check_indicator_call <- function(
+    system_calls = sys.calls(),
+    caller       = match.call(envir = parent.frame())
+    ) {
+
+  # 0) get the entire call stack
+  # to determine the calling function
+  call_stack <- as.character(
+    lapply(system_calls, `[[`, 1)
+  )
+
+  # 1) get the calling calling
+  # function, ie. SMA, EMA etc
+  calling_function <- as.character(
+    sys.call(-1)[[1]]
+  )
+
+  # 2) check the location
+  # of chart
+  location_chart <- which(call_stack == "chart")
+  location_indicator <- which(call_stack == calling_function)
+
+
+  # 3) assert that the indicator
+  # is being called from the charting
+  # function, or some wrapper around
+  # chart
+  assert(
+    any(call_stack == "chart") & location_chart < location_indicator,
+    error_message = c(
+      "x" = sprintf(
+        "The {.fn %s}-function is called outside {.fn chart}",
+        call_stack
+      ),
+
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "cryptoQuotes::chart(...)",
+          code_theme = "Chaos"
+        ),
+        "to build charts."
+      )
+    )
+  )
+
+}
 
 # script end;

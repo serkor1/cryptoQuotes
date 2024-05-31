@@ -1,45 +1,22 @@
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
-## charting the klines
-## with indicators as
-## subcharts
-chart(
+# 1) charting weekly
+# BTC using candlesticks
+# and indicators
+cryptoQuotes::chart(
   ticker     = BTC,
-  main       = kline(),
+  main       = cryptoQuotes::kline(),
   sub        = list(
-    volume(),
-    macd()
+    cryptoQuotes::volume(),
+    cryptoQuotes::macd()
   ),
   indicator = list(
-    bollinger_bands(),
-    sma(),
-    alma()
+    cryptoQuotes::bollinger_bands(),
+    cryptoQuotes::sma(),
+    cryptoQuotes::alma()
   ),
   options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
-  ),
-  options = list(
-    dark = TRUE,
+    dark       = TRUE,
     deficiency = FALSE
   )
 )

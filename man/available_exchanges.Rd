@@ -4,50 +4,51 @@
 \alias{available_exchanges}
 \title{Get available exchanges}
 \usage{
-## available exchanges
-## by type
 available_exchanges(
    type = "ohlc"
 )
 }
 \arguments{
-\item{type}{\link{character}-vector of length 1. See details}
+\item{type}{\link{character}-vector of \link{length} 1. One of,
+\itemize{
+\item \code{"ohlc"} - Available exchanges for Open, High, Low, Close and
+Volume market data. See the \code{\link[=get_quote]{get_quote()}}-function.
+\item \code{"lsratio"} - Available exchanges for Long-Short ratios.
+See the \code{\link[=get_lsratio]{get_lsratio()}}-function.
+\item \code{"fundingrate"} - Available exchanges for Funding rates.
+See the \code{\link[=get_fundingrate]{get_fundingrate()}}-function.
+\item \code{"interest"} - Available exchanges for Open interest on perpetual
+contracts on both sides. See the \code{\link[=get_openinterest]{get_openinterest()}}-function.
+}}
 }
 \value{
-An \code{\link[=invisible]{invisible()}} \link{character} vector containing available exchanges
+An \code{\link[=invisible]{invisible()}} \link{character}-vector containing available exchanges
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-Get a vector of all available exchanges passed into the source
+Get a \link{vector} of all available exchanges passed into the \code{source}
 argument of the get-functions.
 }
 \details{
-\subsection{Available types}{
-\itemize{
-\item ohlc: Open, High, Low, Close and Volume
-\item lsratio: Long-Short ratio
-\item fundingrate: Funding rates
-\item interest: Open perpetual contracts on both sides
-}
-}
-
-\subsection{Limits}{
-
 The endpoints supported by the \code{\link[=available_exchanges]{available_exchanges()}} are not uniform,
-so exchanges available for, say, \code{\link[=get_lsratio]{get_lsratio()}} is not necessarily the same as those available for \code{\link[=get_quote]{get_quote()}}
-}
+so exchanges available for, say, \code{\link[=get_lsratio]{get_lsratio()}} is not necessarily
+the same as those available for \code{\link[=get_quote]{get_quote()}}
 }
 \examples{
-# script:
-# date: 2023-10-06
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective:
 # script start;
 
-## return all
-## available exchanges
-cryptoQuotes::available_exchanges()
+# 1) available exchanges
+# on ohlc-v endpoint
+cryptoQuotes::available_exchanges(
+  type = "ohlc"
+  )
+
+# 2) available exchanges
+# on long-short ratios
+cryptoQuotes::available_exchanges(
+  type = "lsratio"
+)
 
 # script end;
 }

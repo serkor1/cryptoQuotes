@@ -1,177 +1,114 @@
-#' add eventlines to
-#' the chart
+#' @title
+#' Add eventlines to the chart
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
-#' Common types of event indicators include earnings release dates, dividend payouts, central bank interest rate decisions, chart pattern breakouts, and geopolitical events like elections or geopolitical tensions.
-#' The choice of event indicators depends on the trader's or analyst's specific objectives and the factors they believe are most relevant to the asset's price movements.
+#' A high-level [plotly::layout()]-function.
+#' The function adds `shapes` and `annotations` to the main [chart()].
 #'
+#' @param data a [data.frame]-type object with `index`, `event`
+#' and `color` columns.
+#' @param ... For internal use. Please ignore.
 #'
-#' # Note
-#' The eventlines are drawn using [plotly::layout()], so all existing
-#' eventlines will be replaced each time you call [add_event()].
-#'
-#'
-#' @param event_data a [data.frame] with index, event and colors.
-#' @param ... arguments pass interally by [chart], ignore.
-#'
+#' @returns A [plotly::plot_ly()]-object with `shapes` and `annotations`
 #'
 #' @details
+#' The [data.frame] must include the following columns,
 #'
-#' TBA
-#'
-#'
+#' * `index` [integer] or [date]: corresponding to the event timing.
+#' * `event` [character]: the event label.
+#' * `color` [character]: the color of the event
 #'
 #' @example man/examples/scr_addEvents.R
 #'
 #' @family chart indicators
-#' @family subcharts
-#'
-#' @returns Invisbly returns a plotly object.
-#' @export
+#' @family subchart indicators
+#' @family main chart indicators
+#' @author Serkan Korkmaz
+#' @keywords internal
 add_event <- function(
-    event_data,
+    data,
     ...
-    # chart,
-    # event_data,
-    # label = TRUE
-    ) {
+) {
+
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
-    rlang::expr(
-      {
+    .Data = {
 
-        # 0) store the data
-        # so it can be passed in the remainder
-        # of the function with !!
-        event_data <- !!event_data
-        internal_args <- lapply(!!rlang::enquos(...), rlang::eval_tidy)
-        chart <- internal_args$chart
-        label <- internal_args$label
-
-
-        # 1) check if the data is
-        # passed as data.frame, tibble or data.table
-        # etc.
-        if (!rlang::inherits_any(x = event_data, class = "data.frame")) {
-
-          cli::cli_abort(
-            message = c(
-              "{.var event_data} must be a {.cls data.frame}",
-              "x" = "You've supplied a {.cls {class(event_data)}}."
-            )
-          )
-
-        }
-
-        # 2) check if expected columns
-        # have been passed correctly
-        expected_colnames <- c('index', 'event', 'color')
-
-        # check if the column names
-        # include event, labels, color
-        colnames(event_data) <- tolower(
-          colnames(
-            event_data
+      # 0) check data validity
+      # has to be of type data.frame and contain
+      # event, color and index columns
+      assert(
+        inherits(x = data, what = "data.frame"),
+        error_message = c(
+          "x" = sprintf(
+            fmt = "Expected {.cls data.frame} got {.cls %s}",
+            class(data)
           )
         )
+      )
 
-        if (sum(grepl(x = colnames(event_data),pattern = paste(expected_colnames, collapse = "|"))) != 3) {
-
-          # determine the missing column names
-          # from the data
-          missing_cols <- setdiff(
-            expected_colnames,
-            colnames(event_data)
-          )
-
-          cli::cli_abort(
-            message = c(
-              paste("Expected columns:",  paste0("{.val ", expected_colnames, "}", collapse = ", ")),
-              "x" = paste("Missing columns:",  paste0("{.val ", missing_cols, "}", collapse = ", ")),
-              "i" = "Check your spelling, or add the columns."
-            )
-          )
-
-        }
+      assert(
+        all(c("index", "event", "color") %in% colnames(data)),
+        error_message = c(
+          "x" = "Expected columns {.val index},
+          {.val event}, {.val color}. None found."
+        )
+      )
 
 
-        # 3) modify the layout
-        # of the data to add
-        # the event lines
-        #
-        #
-        # TODO: Open issue at Github
-        # when calling layout + shapes twice,
-        # the first lines doesnt draw.
+      args <- list(
+        ...
+      )
 
-        if (label) {
 
-          chart <- plotly::layout(
-            p = chart,
-            annotations = do.call(
-              list,
-              lapply(
-                1:nrow(event_data),
-                function(i) {
+      plotly::layout(
+        p = args$plot,
+        annotations = do.call(
+          list,
+          lapply(
+            seq_len(nrow(data)),
+            function(i) {
 
-                  annotations(
-                    x = event_data$index[i],
-                    text = event_data$event[i]
-                  )
-                }
-
+              annotations(
+                x = data$index[i],
+                text = data$event[i]
               )
-            ),
-            shapes = do.call(
-              list,
-              lapply(
-                1:nrow(event_data),
-                function(i) {
+            }
 
-                  vline(
-                    x = event_data$index[i],
-                    col = event_data$color[i]
-                  )
-
-                }
-
-              )
-            )
           )
+        ),
+        shapes = do.call(
+          list,
+          lapply(
+            seq_len(nrow(data)),
+            function(i) {
 
-        } else {
-
-
-          chart <- plotly::layout(
-            p = chart,
-            shapes = do.call(
-              list,
-              lapply(
-                1:nrow(event_data),
-                function(i) {
-
-                  vline(
-                    x = event_data$index[i],
-                    col = event_data$color[i]
-                  )
-
-                }
-
+              vline(
+                x = data$index[i],
+                col = data$color[i]
               )
-            )
+
+            }
+
           )
+        )
+      )
 
 
-        }
 
-        chart
-
-      }
-    ),
-    class = "event"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }

@@ -1,103 +1,149 @@
 ---
-title: "cryptoQuotes: Cryptocurrency Market Data in R"
-subtitle: "What happens when Elon Musk Tweets about Dogecoin?"
+title: "Introduction: Cryptocurrency Market Data in R"
 output: rmarkdown::html_vignette
-always_allow_html: true
 vignette: >
-  %\VignetteIndexEntry{cryptoQuotes: Cryptocurrency Market Data in R}
+  %\VignetteIndexEntry{Introduction: Cryptocurrency Market Data in R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-  
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = FALSE,
-  out.width = "100%",
-  comment = "#>",
-  message = FALSE
+  collapse      = TRUE,
+  comment       = "#>",
+  out.width     = "100%",
+  out.height    = "680",
+  fig.align     = "center"
 )
 ```
 
-```{css, echo=FALSE}
-body, .main-container, .container-fluid {
-  max-width: 920px !important; /* or a specific pixel width, e.g., 1200px */
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-```
-
-
-```{r, message=FALSE}
+```{r setup, message = FALSE}
 library(cryptoQuotes)
 ```
 
-## Introduction
+This `vignette`  is a short introduction to the `cryptoQuotes`-package, for a more extensive introduction on its usecase and limitations please refer to the [wiki](https://github.com/serkor1/cryptoQuotes/wiki).
 
-This high-level `API`-client provides open access to cryptocurrency market data without relying on low-level coding and `API`-keys. Currently all actively traded cryptocurrencies on either `binance`, `bybit`, `bitmart`, `kucoin` and `kraken` are available.
+> **NOTE:** This `vignette` is limited by geolocation due to various country specific
+> cryptocurrency laws. The introduction, therefore, is limited to what is available in the US. 
 
-In this vignette we will explore a case study to showcase the capabilities of the `cryptoQuotes`-package; how did the `Dogecoin`-market react to Elon Musks following tweet,
-
-<div align="center">
-```{r, echo=FALSE, out.width="80%", fig.cap="Tweet by Elon Musk - the timezone is CET.",fig.align='center'}
-## include tweet from
-## Elon Musk
-knitr::include_graphics(
-  path = "elonTweet.png"
-)
-```
-</div>
-
-## Cryptocurrency Market Analysis in R
-
-Elon Musk tweeted (Well, now he X'ed) about `Dogecoin` January 14, 06.18 AM (UTC) - and `Dogecoin` rallied. To determine how fast the markets reacted to his tweets, we could get the market data for Dogecoin in 1 minute intervals the day he tweeeted using the ```getQuotes()```,
-
-
+Throughout this `vignette` we will explore the Bitcoin market data using the `Kraken` exchange. All available `tickers` and its notation various across exchangs, so if you are unfamiliar with the exchange specific notation please use the `available_intervals()`-functions,
 
 ```{r}
-## DOGEUSDT the day
-## of the tweet on the
-## 1m chart
-DOGE <- cryptoQuotes::get_quote(
-  ticker   = 'DOGE-USDT',
-  interval = '1m',
-  source   = 'kucoin',
-  futures  = FALSE,
-  from     = '2022-01-14 07:00:00',
-  to       = '2022-01-14 08:00:00'
+# show a sample of 
+# the available tickers
+sample(
+  x = available_tickers(
+    source  = "kraken",
+    futures = FALSE
+  ),
+  size = 5
 )
 ```
 
-This returns an object of class `r paste(class(DOGE),collapse = ' and ')` with `r nrow(DOGE)` rows. To calculate the rally within the first minute of the tweet, we can use `xts`-syntax to determine the how much it rallied,
+These available tickers can be passed into the `ticker`-argument of all the `get_*`-functions with the appropriate `source` and `futures`-argument which, in this case, is `kraken` and `FALSE`.
 
+## Cryptocurrency market data in R
+
+### Open, High, Low, Close an Volume
+
+We will extract the Bitcoin market data in `hourly` intervals, and store it as `BTC`,
 
 ```{r}
-## extrat the
-## tweet moment
-tweet_moment <- DOGE["2022-01-14 07:18:00"]
-
-## calculate 
-## rally
-cat(
-  "Doge closed:", round((tweet_moment$close/tweet_moment$open - 1),4) * 100, "%"
+## extract Bitcoin
+## market on the hourly 
+## chart
+BTC <- get_quote(
+  ticker   = "XBTUSDT",
+  source   = "kraken",
+  futures  = FALSE, 
+  interval = "1h"
 )
 ```
 
+```{r, echo=FALSE}
+tail(
+ BTC 
+)
+```
 
-`Dogecoin` rallied `r paste0(round((tweet_moment$close/tweet_moment$open - 1),4) * 100, "%")` within the minute Elon Musk tweeted. 
+The market data can be extracted in different intervals using the `interval`-argument. To see available intervals, the `available_intervals()`-function can be used,
 
-### Charting price action with candlesticks
+```{r}
+## get available
+## intervals for OHLC
+## on Kraken
+available_intervals(
+  source  = "kraken",
+  type    = "ohlc",
+  futures = FALSE
+)
+```
 
-We can illustrate this with candlestick charts using the ```chart()```- and ```kline()```-function, 
+### Sentiment Data
 
-```{r, fig.align='center', out.height=800}
-## chart the
-## price action
-## using klines
-cryptoQuotes::chart(
-  ticker     = DOGE,
-  main       = cryptoQuotes::kline(),
-  sub  = list(
-    cryptoQuotes::volume()
+To put the Bitcoin price action in perspective, an interesting sentiment indicator like the `long` to `short` ratio can be extracted,
+
+```{r}
+## extract long-short
+## ratio on Bitcoin
+## using the hourly chart
+LS_BTC <- try(
+   get_lsratio(
+    ticker   = "XBTUSDT",
+    source   = "kraken",
+    interval = "1h"
+  )
+)
+```
+
+This gives an `error`. The source of the error is the ticker-naming convention; as the `long` to `short` ratio is specific to the perpetual futures market, and the current ticker is specific to the spot-market, the endpoint throws an error.
+
+To circumvent this, we can either use perpetual futures throughout the `script`, or modify the `ticker`-argument as follows,
+
+```{r}
+## extract long-short
+## ratio on Bitcoin
+## using the hourly chart
+LS_BTC <- get_lsratio(
+  ticker   = "PF_XBTUSD",
+  source   = "kraken",
+  interval = "1h"
+)
+```
+
+```{r, echo=FALSE}
+tail(
+ LS_BTC 
+)
+```
+
+The `ticker` specific to the perpetual futures market can be extracted using the `available_tickers` with `futures = TRUE` as follows,
+
+```{r}
+# show a sample of 
+# the available tickers
+sample(
+  x = available_tickers(
+    source  = "kraken",
+    futures = TRUE
+  ),
+  size = 5
+)
+```
+
+## Charting cryptocurrency market data
+
+The Bitcoin market data can be charted using the `chart()`-function, which uses `plotly` as backend,
+
+```{r, fig.alt="cryptocurrency market data with R"}
+# candlestick chart with
+# volume and Long to Short Ratio
+chart(
+  ticker = BTC,
+  main   = kline(),
+  sub    = list(
+    volume(),
+    lsr(ratio = LS_BTC)
   ),
   options = list(
     dark = FALSE
@@ -105,68 +151,27 @@ cryptoQuotes::chart(
 )
 ```
 
-### Charting price action with event lines
+### Adding indicators
 
-To create a, presumably, better visual overview we can add event lines using the  ```event_data```-argument, which takes a ```data.frame``` of any kind as argument,
+The `cryptoQuotes`-package also acts as an API-client to the `TTR`-package, and supports most of its functions. We can add Moving Average indicators, and bollinger bands to the chart using the `indicator`-argument,
 
-```{r}
-## 1) create event data.frame
-## by subsetting the data
-event_data <- as.data.frame(
-  zoo::coredata(
-    DOGE["2022-01-14 07:18:00"]
-  )
-)
-
-## 1.1) add the index 
-## to the event_data
-event_data$index <- zoo::index(
-  DOGE["2022-01-14 07:18:00"]
-)
-
-# 1.2) add event label
-# to the data
-event_data$event <- 'Elon Musk Tweets'
-
-# 1.3) add color to the
-# event label
-event_data$color <- 'steelblue'
-```
-
-This event data, can be passed into the chart as follows,
-
-```{r, out.height = 800}
-## 1) create event data.frame
-## by subsetting the data
-event_data <- as.data.frame(
-  zoo::coredata(
-    DOGE["2022-01-14 07:18:00"]
-  )
-)
-
-## 1.1) add the index 
-## to the event_data
-event_data$index <- zoo::index(
-  DOGE["2022-01-14 07:18:00"]
-)
-
-# 1.2) add event label
-# to the data
-event_data$event <- 'Elon Musk Tweets'
-
-# 1.3) add color to the
-# event label
-event_data$color <- 'steelblue'
-
-## 1) chart the
-## price action
-## using klines
-cryptoQuotes::chart(
-  ticker     = DOGE,
-  event_data = event_data,
-  main       = cryptoQuotes::kline(),
-  sub  = list(
-    cryptoQuotes::volume()
+```{r, fig.alt="cryptocurrency market data with R"}
+# candlestick chart with
+# volume and Long to Short Ratio
+chart(
+  ticker = BTC,
+  main   = kline(),
+  sub    = list(
+    volume(),
+    lsr(ratio = LS_BTC)
+  ),
+  indicator = list(
+    sma(n = 7),
+    sma(n = 14),
+    sma(n = 21),
+    bollinger_bands(
+      color = "steelblue"
+    )
   ),
   options = list(
     dark = FALSE

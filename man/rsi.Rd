@@ -2,19 +2,21 @@
 % Please edit documentation in R/chart_rsi.R
 \name{rsi}
 \alias{rsi}
-\title{Add RSI indicators to your
-chart}
+\title{Chart the Relative Strength Index (RSI)}
 \usage{
 rsi(
-  n = 14,
-  maType = "SMA",
-  upper_limit = 80,
-  lower_limit = 20,
-  internal = list(),
-  ...
+ price       = "close",
+ n           = 14,
+ maType      = "SMA",
+ upper_limit = 80,
+ lower_limit = 20,
+ color       = '#4682b4',
+ ...
 )
 }
 \arguments{
+\item{price}{Price series that is coercible to xts or matrix.}
+
 \item{n}{Number of periods for moving averages.}
 
 \item{maType}{Either:
@@ -25,67 +27,46 @@ rsi(
     See Examples.
 }}
 
-\item{upper_limit}{A \link{numeric}-vector of \link{length} 1. 80 by default. Sets the upper limit of the \link[TTR:RSI]{TTR::RSI}.}
+\item{upper_limit}{A \link{numeric}-vector of \link{length} 1. 80 by default.
+Sets the upper limit of the \link[TTR:RSI]{TTR::RSI}.}
 
-\item{lower_limit}{A \link{numeric}-vector of \link{length} 1. 20 by default. Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
+\item{lower_limit}{A \link{numeric}-vector of \link{length} 1. 20 by default.
+Sets the lower limit of the \link[TTR:RSI]{TTR::RSI}.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{color}{A \link{character}-vector of \link{length} 1. "#4682b4" by default.}
 
-\item{...}{Other arguments to be passed to the \code{maType} function in
-case (1) above.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The RSI can be customized with different look-back periods to suit various trading strategies and timeframes.
-It is a valuable tool for assessing the momentum and relative strength of an asset, helping traders make more informed decisions in financial markets.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that
+interacts with the \code{\link[TTR:RSI]{TTR::RSI()}}-function.
+The function adds a subchart with a \code{\link[TTR:RSI]{TTR::RSI()}}-indicator.
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
-## charting the klines
-## with indicators as
-## subcharts
-chart(
+# 1) charting weekly
+# BTC using candlesticks
+# and indicators
+cryptoQuotes::chart(
   ticker     = BTC,
-  main       = kline(),
+  main       = cryptoQuotes::kline(),
   sub        = list(
-    volume(),
-    macd()
+    cryptoQuotes::volume(),
+    cryptoQuotes::macd()
   ),
   indicator = list(
-    bollinger_bands(),
-    sma(),
-    alma()
+    cryptoQuotes::bollinger_bands(),
+    cryptoQuotes::sma(),
+    cryptoQuotes::alma()
   ),
   options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
-  ),
-  options = list(
-    dark = TRUE,
+    dark       = TRUE,
     deficiency = FALSE
   )
 )
@@ -99,6 +80,7 @@ Other chart indicators:
 \code{\link{bollinger_bands}()},
 \code{\link{chart}()},
 \code{\link{dema}()},
+\code{\link{donchian_channel}()},
 \code{\link{ema}()},
 \code{\link{evwma}()},
 \code{\link{fgi}()},
@@ -106,17 +88,27 @@ Other chart indicators:
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
+\code{\link{smi}()},
 \code{\link{volume}()}
+
+Other momentum indicators: 
+\code{\link{macd}()},
+\code{\link{smi}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
-\concept{subcharts}
+\concept{momentum indicators}
+\concept{subchart indicators}

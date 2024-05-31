@@ -3,41 +3,45 @@
 \name{get_fgindex}
 \alias{get_fgindex}
 \title{Get the daily Fear and Greed Index
-for the cryptocurrency market}
+in the cryptocurrency market}
 \usage{
-get_fgindex(from = NULL, to = NULL)
+get_fgindex(
+ from = NULL,
+ to   = NULL
+)
 }
 \arguments{
-\item{from}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
 An \link{xts}-object containing,
-\itemize{
-\item fgi (\link{numeric}): The daily fear and greed index value
-}
+
+\item{index}{<\link{POSIXct}> the time-index}
+\item{fgi}{<\link{numeric}> the daily fear and greed index value}
+
+\strong{Sample output}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#>                     fgi
+#> 2024-05-12 02:00:00  56
+#> 2024-05-13 02:00:00  57
+#> 2024-05-14 02:00:00  66
+#> 2024-05-15 02:00:00  64
+#> 2024-05-16 02:00:00  70
+#> 2024-05-17 02:00:00  74
+}\if{html}{\out{</div>}}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-The fear and greed index is a market sentiment indicator that measures investor emotions to
-gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+Get the daily fear and greed index.
 }
 \details{
-\subsection{On time-zones and dates}{
+\subsection{Classification}{
 
-Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}}, or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or \code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default
-all dates are passed and returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
-}
-
-\subsection{On returns}{
-
-If only \code{from} is provided 200 pips are returned up to \code{Sys.time()}. If only \code{to} is provided 200 pips up to the specified date
-is returned.
-}
-}
-\note{
 The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
 \itemize{
@@ -48,13 +52,25 @@ The Fear and Greed Index goes from 0-100, and can be classified as follows,
 \item 76-100, Extreme Greed
 }
 }
+
+\subsection{About the Fear and Greed Index}{
+
+The fear and greed index is a market sentiment indicator that measures
+investor emotions to gauge whether they are generally fearful
+(indicating potential selling pressure) or
+greedy (indicating potential buying enthusiasm).
+}
+
+\subsection{Source}{
+
+This index is fetched from
+\href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me},
+and can be different from the one provided by
+\href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
+}
+}
 \examples{
 \dontrun{
-  # script: Fear and Greed Index
-  # date: 2023-12-26
-  # author: Serkan Korkmaz, serkor1@duck.com
-  # objective: Retrieve and Plot the
-  # index
   # script start;
 
   # 1) get the fear and greed index
@@ -70,7 +86,7 @@ The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
 }
 \seealso{
-Other get-function: 
+Other get-functions: 
 \code{\link{get_fundingrate}()},
 \code{\link{get_lsratio}()},
 \code{\link{get_openinterest}()},
@@ -79,4 +95,4 @@ Other get-function:
 \author{
 Serkan Korkmaz
 }
-\concept{get-function}
+\concept{get-functions}

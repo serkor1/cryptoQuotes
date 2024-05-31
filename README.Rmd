@@ -2,36 +2,79 @@
 output: github_document
 always_allow_html: true
 ---
-
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
 # set options
+Sys.setenv(OPENSSL_CONF="/dev/null")
+
 knitr::opts_chunk$set(
   collapse = FALSE,
-  comment = "#>",
+  comment  = "#>",
   fig.path = "man/figures/README-",
-  message = FALSE,
-  warning = FALSE
+  message  = FALSE,
+  warning  = FALSE
 )
 ```
 
-# cryptoQuotes: A streamlined access to OHLC-V market data and sentiment indicators in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
+# cryptoQuotes: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="154" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://www.cran-e.com/package/cryptoQuotes)
-[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://www.cran-e.com/package/cryptoQuotes)
+[![CRAN status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/serkor1/cryptoQuotes/branch/main/graph/badge.svg)](https://app.codecov.io/gh/serkor1/cryptoQuotes?branch=main)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://app.codecov.io/gh/serkor1/cryptoQuotes)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/serkor1/cryptoQuotes/development)
 <!-- badges: end -->
+
+## :information_source: About
+
+The `cryptoQuotes`-package is a high-level API client for accessing public market data endpoints on major cryptocurrency exchanges. It supports open, high, low, close and volume (OHLC-V) data and a variety of sentiment indicators; the market data is high quality and can be retrieved in intervals ranging from *seconds* to *months*. All the market data is accessed and processed without relying on crawlers, or API keys, ensuring an open, and reliable, access for researchers, traders and students alike. There are currently `r length(invisible(cryptoQuotes::available_exchanges(type = "ohlc")))` supported cryptocurrency exchanges,
+
+<div align="center">
+```{r, echo=FALSE}
+## available exchanges
+invisible(
+  all_exchanges <- cryptoQuotes::available_exchanges()
+)
+
+# Convert the character vector to a single-row data frame
+exchanges_df <- data.frame(t(all_exchanges))
+
+# Set column names to be the exchange names
+colnames(exchanges_df) <- all_exchanges
+
+# Create a horizontal table
+kableExtra::kable_styling(
+  knitr::kable(
+    x = exchanges_df, 
+    digits = 2,
+    col.names = NULL,
+    caption = 'Supported exchanges',
+    align = 'c',
+    table.attr = "style='width:100%;'",
+    format = 'html'
+  ),
+  full_width = TRUE,
+  position = 'center'
+)
+```
+</div>
+
+All data is returned as [`xts`](https://github.com/joshuaulrich/xts)-objects which enables seamless interaction with with [`quantmod`](https://github.com/joshuaulrich/quantmod) and [`TTR`](https://github.com/joshuaulrich/TTR), for developing and evaluating trading strategies or general purpose cryptocurrency market analysis with a historical or temporal perspective. 
 
 ## :information_source: Overview
 
-The `cryptoQuotes`-package is a high-level API-client to get current, and historical, cryptocurrency OHLC-V market and sentiment data in ```R```, without using web-crawlers or API keys. This ```R```-package uses `xts` and `zoo` under the hood and are compatible with `quantmod` and `TTR` out of the box.
+The `cryptoQuotes`-package has *two* main features; retrieving cryptocurrency market data, and charting. The market data consists of *OHLC-V* data and sentiment indicators; including, but not limited to, cryptocurrency *fear and greed index*, *long-short ratio* and *open interest*. All market data is retrieved using the family of `get_*`-functions. To get a full overview of the package and functionality please see the documentation on [pkgdown](https://serkor1.github.io/cryptoQuotes/).
 
-### Supported exchanges and markets
+> **Note:** Given the nature of crypotcurrency data and general legislative restrictions, some `exchanges` may not work in your geolocation.
+
+Below is a quick overview of the package and basic usage examples on retrieving and charting Bitcoin (BTC) *OHLC-V* and *long-short ratio* in 30 minute intervals.
+
+### :information_source: Cryptocurrency market data
+
+#### OHLC-V
 
 All supported exchanges and markets are listed in the table below, alongside the available range of intervals available from the respective exchanges,
 
@@ -189,8 +232,8 @@ kableExtra::kable_styling(
     x = data.frame(
       row.names = NULL,
       Exchange  = exchange,
-      Spot = rep(x = cli::symbol$tick,length(exchange)),
-      Futures = rep(x = cli::symbol$tick,length(exchange)),
+      Spot = rep(x = ":white_check_mark:",length(exchange)),
+      Futures = rep(x = ":white_check_mark:",length(exchange)),
       `Available Intervals` = c(intervals),
       `Smallest Interval` = c(granularity(TRUE)),
       `Biggest Interval` = c(granularity(FALSE))
@@ -203,22 +246,21 @@ kableExtra::kable_styling(
 ```
 </div>
 
-### :information_source: Basic Usage
+<details>
+<summary>Example: Bitcoin OHLC-V</summary>
 
-#### OHLC-V Market Data 
-
-Get USDT denominated Bitcoin spot market price from Binance with `30m`-intervals using the `get_quote()`-function,
+Get USDT denominated Bitcoin (BTC) on the spot market from Binance in `30m`-intervals using the `get_quote()`-function,
 
 ```{r cryptocurrency market data in R, eval=TRUE}
 ## BTC OHLC prices
 ## from Binance spot market
 ## in 30 minute intervals
 BTC <- cryptoQuotes::get_quote(
-  ticker = 'BTCUSDT',
-  source = 'binance',
-  futures = FALSE,
+  ticker   = 'BTCUSDT',
+  source   = 'binance',
+  futures  = FALSE,
   interval = '30m',
-  from    = Sys.Date() - 1 
+  from     = Sys.Date() - 1 
 )
 ```
 
@@ -226,12 +268,12 @@ BTC <- cryptoQuotes::get_quote(
 ```{r print table, echo=FALSE, fig.alt="cryptocurrency prices in R"}
 kableExtra::kable_styling(
   knitr::kable(
-    caption = 'Bitcoin (BTC) OHLC-prices',
+    caption = 'Bitcoin (BTC) OHLC-V data',
     align = 'lcccc',
     table.attr = "style='width:100%;'",
     x = data.frame(
       cbind(
-        Index = paste(tail(zoo::index(BTC))),
+        index = paste(tail(zoo::index(BTC))),
         tail(zoo::coredata(BTC))
       ),row.names = NULL
     ),
@@ -242,12 +284,112 @@ kableExtra::kable_styling(
 )
 ```
 </div>
+__________
+</details>
 
-#### Charting OHLC-V 
+#### Sentiment indicators
 
-The `BTC`-object can be charted using the `chart()`-function,
+The sentiment indicators available in the `cryptoQuotes`-package can be divided in two; *derived indicators* and *market indicators*. The former is calculated based on, for example, the price actions such as the *Moving Average Convergence Divergence* (MACD) indicator. The latter are public indicators such as the *long-short ratio* or *fear and greed index*; these are retrieved using the family of `get_*`-functions, while the derived indicators can be created using, for example, [`TTR`](https://github.com/joshuaulrich/TTR).
 
-```{r chartquote, fig.align='center',fig.dpi=180, fig.alt="cryptocurrency charts in R"}
+In this overview we are focusing on *market indicators* made public by the cryptocurrency exchanges. For a full overview of sentiment indicators please refer to the documentation on [pkgdown](https://serkor1.github.io/cryptoQuotes/). All supported *market indicators* by exchange are listed in the table below,
+
+<div align="center">
+```{r, echo = FALSE}
+## 1) list all available
+## exchanges and the links
+available_endpoint <- data.frame(
+  Endpoint = c(
+    "Long-Short Ratio",
+    "Open Interest",
+    "Funding Rate"
+    ),
+  Binance  = c(
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:"
+    ),
+  Bitmart  = c(
+    ":x:",
+    ":x:",
+    ":x:"
+    ),
+  Bybit    = c(
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":white_check_mark:"
+    ),
+  Kraken    = c(
+    ":white_check_mark:",
+    ":white_check_mark:",
+    ":x:"
+    ),
+  Kucoin    = c(
+    ":x:",
+    ":x:",
+    ":white_check_mark:"
+    )
+)
+
+## 4) present table
+## for as is
+kableExtra::kable_styling(
+  knitr::kable(
+    digits = 0,
+    caption = 'Available sentiment indicators by exchange',
+    align = 'lccccc',
+    table.attr = "style='width:100%;'",
+    x = available_endpoint,
+    format = 'markdown'
+  ),
+  full_width = TRUE,
+  position = 'center'
+)
+```
+</div>
+
+<details>
+<summary>Example: Bitcoin Long-Short Ratio</summary>
+
+Get the *long-short ratio* on Bitcoin (BTC) using the `get_lsratio()`-function,
+
+```{r cryptocurrency sentiment indicators in R, eval=TRUE}
+## BTC OHLC prices
+## from Binance spot market
+## in 30 minute intervals
+BTC_LS <- cryptoQuotes::get_lsratio(
+  ticker   = 'BTCUSDT',
+  source   = 'binance',
+  interval = '30m',
+  from     = Sys.Date() - 1 
+)
+```
+
+<div align="center">
+```{r print LS table, echo=FALSE, fig.alt="cryptocurrency prices in R"}
+kableExtra::kable_styling(
+  knitr::kable(
+    caption = 'Long-Short Ratio on Bitcoin (BTC)',
+    align = 'lccc',
+    table.attr = "style='width:100%;'",
+    x = data.frame(
+      cbind(
+        index = paste(tail(zoo::index(BTC_LS))),
+        tail(zoo::coredata(round(BTC_LS,3)))
+      ),row.names = NULL
+    ),
+    format = 'html'
+  ),
+  full_width = TRUE,
+  position = 'center'
+)
+```
+</div>
+__________
+</details>
+
+### :information_source: Charting
+
+```{r, echo=FALSE, include=FALSE}
 ## Chart BTC
 ## using klines, SMA, 
 ## MACD and Bollinger Bands
@@ -255,8 +397,8 @@ cryptoQuotes::chart(
   ticker = BTC,
   main   = cryptoQuotes::kline(),
   sub    = list(
-    cryptoQuotes::volume(),
-    cryptoQuotes::macd()
+    cryptoQuotes::lsr(ratio = BTC_LS),
+    cryptoQuotes::volume()
   ),
   indicator = list(
     cryptoQuotes::sma(n = 7),
@@ -267,29 +409,84 @@ cryptoQuotes::chart(
 )
 ```
 
+Charting in the `cryptoQuotes`-package is built on [`plotly`](https://github.com/plotly/plotly.R) for interactivity. It supports *light* and *dark* themes, and accounts for *color-deficiency* via the `options`-argument in the `chart()`-function.
+
+#### Charting with indicators
+
+The OHLC-V data and the sentiment indicator can be charted using the `chart()`-function,
+
+```{r chartquote, fig.align='center',fig.dpi=180, fig.alt="cryptocurrency charts in R"}
+## Chart BTC
+## using klines, SMA
+## Bollinger Bands and
+## long-short ratio
+cryptoQuotes::chart(
+  ticker = BTC,
+  main   = cryptoQuotes::kline(),
+  sub    = list(
+    cryptoQuotes::lsr(ratio = BTC_LS),
+    cryptoQuotes::volume()
+  ),
+  indicator = list(
+    cryptoQuotes::sma(n = 7),
+    cryptoQuotes::sma(n = 14),
+    cryptoQuotes::sma(n = 21),
+    cryptoQuotes::bollinger_bands()
+  )
+)
+```
+
+
+<details>
+<summary>Colorblind friendly version</summary>
+#### Charting with indicators (colorblind friendly)
+
+```{r chartquote(deficiency), fig.align='center', fig.dpi=180, fig.alt="cryptocurrency charts in R"}
+## Chart BTC
+## using klines, SMA
+## Bollinger Bands and 
+## ling-short ratio with color-deficiency
+cryptoQuotes::chart(
+  ticker = BTC,
+  main   = cryptoQuotes::kline(),
+  sub    = list(
+    cryptoQuotes::lsr(ratio = BTC_LS),
+    cryptoQuotes::volume()
+  ),
+  indicator = list(
+    cryptoQuotes::sma(n = 7),
+    cryptoQuotes::sma(n = 14),
+    cryptoQuotes::sma(n = 21),
+    cryptoQuotes::bollinger_bands()
+  ),
+  options = list(
+    deficiency = TRUE
+  )
+)
+```
+
+__________
+</details>
+
 ## :information_source: Installation
 
-### Stable version
+### :shield: Stable version
 ```{r stable version guide, eval = FALSE}
-# install from CRAN
+## install from CRAN
 install.packages(
   pkgs = 'cryptoQuotes',
   dependencies = TRUE
 )
 ```
 
-### Development version
+### :hammer_and_wrench: Development version
 ```{r development version guide, eval = FALSE}
-# install from github
+## install from github
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
   ref  = 'development'
 )
 ```
-
-## :warning: Disclaimer
-
-This `library` is still considered `experimental` but no breaking changes will be made on functions labelled as `stable` without appropriate action; please refer to the [release notes](NEWS.md), or submit an [issue](https://github.com/serkor1/cryptoQuotes/issues) if that promise is broken.
 
 ## :information_source: Code of Conduct
 

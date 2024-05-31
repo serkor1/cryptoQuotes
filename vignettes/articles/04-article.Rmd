@@ -1,13 +1,17 @@
 ---
 title: "Converting XTS and ZOO objects"
-subtitle: "What about data integrity?"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = TRUE,
-  message = FALSE
-  )
+  collapse   = TRUE,
+  message    = FALSE,
+  echo       = TRUE, 
+  comment    = "#>",
+  out.width  = "100%",
+  out.height = "620px",
+  fig.align  = "center"
+)
 ```
 
 ```{r, message = FALSE}
@@ -31,12 +35,12 @@ library(magrittr)
 # using as_tibble
 tbl <- tibble::as_tibble(
   x = cbind(
-    Index = zoo::index(ATOM),
+    index = zoo::index(ATOM),
     zoo::coredata(ATOM)
   )
 ) %>% dplyr::mutate(
-  Index = lubridate::as_datetime(
-    Index
+  index = lubridate::as_datetime(
+    index
   )
 )
 
@@ -55,10 +59,7 @@ DT <- data.table::as.data.table(
   ATOM
 ) 
 
-# 2) set column name to upper
-colnames(DT)[1] <- 'Index'
-
-# 3) head data
+# 2) head data
 head(DT, 3)
 ```
 
@@ -78,16 +79,17 @@ time_objects <- list(
 
 # 2) check if they are all equal
 all(
-  sapply(
-    time_objects,
-    function(x) {
+  vapply(
+    X   = time_objects,
+    FUN = function(x) {
       
       setequal(
         x = x,
         y = zoo::index(ATOM)
         )
       
-    }
+    },
+    FUN.VALUE = logical(1)
   )
 )
 ```
@@ -106,21 +108,21 @@ open_price <- list(
 
 # 2) check if they are all equal
 all(
-  sapply(
-    open_price,
-    function(x) {
+  vapply(
+    X   = open_price,
+    FUN = function(x) {
       
       setequal(
         x = x,
         y = ATOM$Open
         )
       
-    }
+    },
+    FUN.VALUE = logical(1)
   )
 )
 
 ```
-
 
 ## Why even convert?
 

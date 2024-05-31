@@ -2,16 +2,15 @@
 % Please edit documentation in R/chart_macd.R
 \name{macd}
 \alias{macd}
-\title{Add MACD indicators to the chart}
+\title{Chart the Moving Average Convergence Divergence (MACD) indicator}
 \usage{
 macd(
-  nFast = 12,
-  nSlow = 26,
-  nSig = 9,
-  maType = "SMA",
-  percent = TRUE,
-  internal = list(),
-  ...
+ nFast   = 12,
+ nSlow   = 26,
+ nSig    = 9,
+ maType  = "SMA",
+ percent = TRUE,
+ ...
 )
 }
 \arguments{
@@ -33,63 +32,38 @@ macd(
 fast and slow moving averages is returned, otherwise the difference between
 the respective averages is returned.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
-
-\item{...}{Other arguments to be passed to the \code{maType} function in
-case (1) above.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Traders and investors use the MACD indicator to identify trend changes, potential reversals, and overbought or oversold conditions in the market.
-It is a versatile tool that can be applied to various timeframes and asset classes, making it a valuable part of technical analysis for many traders.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that
+interacts with the \code{\link[TTR:MACD]{TTR::MACD()}}-function. The function adds subchart with a
+\code{\link[TTR:MACD]{TTR::MACD()}}-indicator.
 }
 \examples{
-# script: scr_charting
-# date: 2023-10-25
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Charting in general
 # script start;
 
-## charting the klines
-## with indicators as
-## subcharts
-chart(
+# 1) charting weekly
+# BTC using candlesticks
+# and indicators
+cryptoQuotes::chart(
   ticker     = BTC,
-  main       = kline(),
+  main       = cryptoQuotes::kline(),
   sub        = list(
-    volume(),
-    macd()
+    cryptoQuotes::volume(),
+    cryptoQuotes::macd()
   ),
   indicator = list(
-    bollinger_bands(),
-    sma(),
-    alma()
+    cryptoQuotes::bollinger_bands(),
+    cryptoQuotes::sma(),
+    cryptoQuotes::alma()
   ),
   options = list(
-    dark = TRUE,
-    deficiency = FALSE
-  )
-)
-
-## charting the MACD-indicator
-## with klines as subcharts
-chart(
-  ticker     = BTC,
-  main       = macd(),
-  sub        = list(
-    volume(),
-    kline()
-  ),
-  indicator = list(
-    bollinger_bands(),
-    sma()
-  ),
-  options = list(
-    dark = TRUE,
+    dark       = TRUE,
     deficiency = FALSE
   )
 )
@@ -103,6 +77,7 @@ Other chart indicators:
 \code{\link{bollinger_bands}()},
 \code{\link{chart}()},
 \code{\link{dema}()},
+\code{\link{donchian_channel}()},
 \code{\link{ema}()},
 \code{\link{evwma}()},
 \code{\link{fgi}()},
@@ -110,17 +85,27 @@ Other chart indicators:
 \code{\link{lsr}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{rsi}()},
+\code{\link{smi}()},
 \code{\link{volume}()}
+
+Other momentum indicators: 
+\code{\link{rsi}()},
+\code{\link{smi}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
-\concept{subcharts}
+\concept{momentum indicators}
+\concept{subchart indicators}

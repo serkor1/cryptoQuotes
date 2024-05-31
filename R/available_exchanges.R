@@ -5,49 +5,42 @@
 # exchanges in library
 # script start;
 
+#' @title
 #' Get available exchanges
 #'
 #' @description
 #' `r lifecycle::badge("stable")`
 #'
-#' Get a vector of all available exchanges passed into the source
+#' Get a [vector] of all available exchanges passed into the `source`
 #' argument of the get-functions.
 #'
 #' @usage
-#' ## available exchanges
-#' ## by type
 #' available_exchanges(
 #'    type = "ohlc"
 #' )
 #'
-#' @param type [character]-vector of length 1. See details
+#' @param type [character]-vector of [length] 1. One of,
+#'  * \code{"ohlc"} - Available exchanges for Open, High, Low, Close and
+#'  Volume market data. See the [get_quote()]-function.
+#'  * \code{"lsratio"} - Available exchanges for Long-Short ratios.
+#'  See the [get_lsratio()]-function.
+#'  * \code{"fundingrate"} - Available exchanges for Funding rates.
+#'  See the [get_fundingrate()]-function.
+#'  * \code{"interest"} - Available exchanges for Open interest on perpetual
+#'  contracts on both sides. See the [get_openinterest()]-function.
+#'
+#' @returns
+#' An [invisible()] [character]-vector containing available exchanges
+#'
+#' @details
+#' The endpoints supported by the [available_exchanges()] are not uniform,
+#' so exchanges available for, say, [get_lsratio()] is not necessarily
+#' the same as those available for [get_quote()]
 #'
 #' @example man/examples/scr_availableExchanges.R
 #'
-#' @details
-#'
-#' ## Available types
-#'
-#'
-#'  * ohlc: Open, High, Low, Close and Volume
-#'  * lsratio: Long-Short ratio
-#'  * fundingrate: Funding rates
-#'  * interest: Open perpetual contracts on both sides
-#'
-#'
-#' ## Limits
-#'
-#' The endpoints supported by the [available_exchanges()] are not uniform,
-#' so exchanges available for, say, [get_lsratio()] is not necessarily the same as those available for [get_quote()]
-#'
-#' @author Serkan Korkmaz
-#'
 #' @family supported calls
-#'
-#' @returns
-#'
-#' An [invisible()] [character] vector containing available exchanges
-#'
+#' @author Serkan Korkmaz
 #' @export
 available_exchanges <- function(
     type = "ohlc"){
@@ -64,7 +57,10 @@ available_exchanges <- function(
       "i" = sprintf(
         "Has to be one of %s",
         paste(
-          paste0("{.val ",c("ohlc", "lsratio", "fundingrate", "interest") ,"}"),
+          paste0(
+            "{.val ",
+            c("ohlc", "lsratio", "fundingrate", "interest") ,"}"
+          ),
           collapse = ", "
         )
       )
@@ -73,12 +69,12 @@ available_exchanges <- function(
 
   exchanges <- sort(
     switch(
-    type,
-    ohlc        = c('binance', 'kucoin', 'kraken', 'bitmart', 'bybit'),
-    fundingrate = c('binance', 'bybit', 'kucoin'),
-    lsratio     = c('binance', 'bybit', 'kraken'),
-    interest    = c('binance', 'bybit')
-  )
+      type,
+      ohlc        = c('binance', 'kucoin', 'kraken', 'bitmart', 'bybit'),
+      fundingrate = c('binance', 'bybit', 'kucoin'),
+      lsratio     = c('binance', 'bybit', 'kraken'),
+      interest    = c('binance', 'bybit', 'kraken')
+    )
   )
 
   # 1) retun a message
@@ -90,7 +86,7 @@ available_exchanges <- function(
       'v' = paste(
         exchanges,
         collapse = ', '
-        )
+      )
     )
   )
 

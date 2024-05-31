@@ -9,16 +9,17 @@ testthat::test_that(
     testthat::skip_on_ci()
 
     # 2) load FGI
-    FGI <- get_fgindex(
+    FGI <- testthat::expect_no_condition(get_fgindex(
       to = Sys.Date() - 1
       )
+    )
 
     # 3) test that its an
     # xts object
     testthat::expect_true(
-      object = rlang::inherits_any(
+      object = inherits(
         x = FGI,
-        class = c('xts')
+        what = c('xts')
       )
     )
 

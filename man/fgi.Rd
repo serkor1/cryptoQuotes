@@ -4,24 +4,26 @@
 \alias{fgi}
 \title{Chart the Fear and Greed Index}
 \usage{
-fgi(index, internal = list())
+fgi(index, ...)
 }
 \arguments{
-\item{index}{The Fear and Greed Index created by \code{\link[=getFGIndex]{getFGIndex()}}}
+\item{index}{A \code{\link[xts:xts]{xts::xts()}}-object. See \code{\link[=get_fgindex]{get_fgindex()}} for more details.}
 
-\item{internal}{An empty \link{list}. Used for internal purposes. Ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The fear and greed index is a market sentiment indicator that measures investor emotions to
-gauge whether they are generally fearful (indicating potential selling pressure) or greedy (indicating potential buying enthusiasm)
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function.
+The function adds a subchart with the \verb{fear and greed}-index.
 }
 \details{
-The Fear and Greed Index goes from 0-100, and can be classifed as follows
+\subsection{Classification}{
+
+The Fear and Greed Index goes from 0-100, and can be classified as follows,
 
 \itemize{
 \item 0-24, Extreme Fear
@@ -31,20 +33,52 @@ The Fear and Greed Index goes from 0-100, and can be classifed as follows
 \item 76-100, Extreme Greed
 }
 }
+
+\subsection{About the Fear and Greed Index}{
+
+The fear and greed index is a market sentiment indicator that measures
+investor emotions to gauge whether they are generally fearful
+(indicating potential selling pressure) or
+greedy (indicating potential buying enthusiasm).
+}
+
+\subsection{Source}{
+
+This index is fetched from
+\href{https://alternative.me/crypto/fear-and-greed-index/}{alternative.me},
+and can be different from the one provided by
+\href{https://coinmarketcap.com/charts/#fear-and-greed-index}{coinmarketcap}.
+}
+}
 \examples{
 \dontrun{
-  # script: Fear and Greed Index
-  # date: 2023-12-26
-  # author: Serkan Korkmaz, serkor1@duck.com
-  # objective: Retrieve and Plot the
-  # index
   # script start;
 
   # 1) get the fear and greed index
-  # for the last 7 days
-  tail(
-    fgi <- cryptoQuotes::get_fgindex(
-      from = Sys.Date() - 7
+  # for the last 14 days
+  FGIndex <- cryptoQuotes::get_fgindex(
+    from = Sys.Date() - 14
+  )
+
+  # 2) get the BTC price
+  # for the last 14 days
+  BTC <- cryptoQuotes::get_quote(
+    ticker  = "BTCUSDT",
+    source  = "bybit",
+    futures = FALSE,
+    from    = Sys.Date() - 14
+  )
+
+  # 3) chart the daily BTC
+  # along side the Fear and
+  # Greed Index
+  cryptoQuotes::chart(
+    ticker = BTC,
+    main   = kline(),
+    sub    = list(
+      fgi(
+        FGIndex
+      )
     )
   )
 
@@ -59,6 +93,7 @@ Other chart indicators:
 \code{\link{bollinger_bands}()},
 \code{\link{chart}()},
 \code{\link{dema}()},
+\code{\link{donchian_channel}()},
 \code{\link{ema}()},
 \code{\link{evwma}()},
 \code{\link{hma}()},
@@ -66,6 +101,7 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
@@ -74,13 +110,17 @@ Other chart indicators:
 Other sentiment indicators: 
 \code{\link{lsr}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{add_event}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},
+\code{\link{smi}()},
 \code{\link{volume}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{sentiment indicators}
-\concept{subcharts}
+\concept{subchart indicators}

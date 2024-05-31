@@ -7,19 +7,35 @@
 fetch(ticker, source, futures, interval, type, to, from, ...)
 }
 \arguments{
-\item{ticker}{An \link{character}-vector of \link{length} 1. See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
+\item{ticker}{A \link{character}-vector of \link{length} 1.
+See \code{\link[=available_tickers]{available_tickers()}} for available tickers.}
 
-\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default.
+See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default. Returns futures market if \link{TRUE}, spot market otherwise.}
+\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default.
+Returns futures market if \link{TRUE}, spot market otherwise.}
 
-\item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default. See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
+\item{interval}{A \link{character}-vector of \link{length} 1. \verb{1d} by default.
+See \code{\link[=available_intervals]{available_intervals()}} for available intervals.}
 
-\item{type}{\link{character}-vector of length 1. See details}
+\item{type}{\link{character}-vector of \link{length} 1. One of,
+\itemize{
+\item \code{"ohlc"} - Available exchanges for Open, High, Low, Close and
+Volume market data. See the \code{\link[=get_quote]{get_quote()}}-function.
+\item \code{"lsratio"} - Available exchanges for Long-Short ratios.
+See the \code{\link[=get_lsratio]{get_lsratio()}}-function.
+\item \code{"fundingrate"} - Available exchanges for Funding rates.
+See the \code{\link[=get_fundingrate]{get_fundingrate()}}-function.
+\item \code{"interest"} - Available exchanges for Open interest on perpetual
+contracts on both sides. See the \code{\link[=get_openinterest]{get_openinterest()}}-function.
+}}
 
-\item{to}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{to}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
-\item{from}{An optional \link{character}, \link{date} or \link{POSIXct} vector of \link{length} 1. \link{NULL} by default.}
+\item{from}{An optional \link{character}-, \link{date}- or
+\link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 
 \item{...}{additional parameters passed down the endpoint}
 }
@@ -33,12 +49,13 @@ This function is a high-level wrapper around the development tools available
 and should reduce the amount of coding.
 }
 \details{
-This function can only be used to fetch time-based objects, and can therefore
-not be used to get, for example, \code{\link[=available_tickers]{available_tickers()}}.
+This function can only be used to fetch time-based objects,
+and can therefore not be used to get, for example, \code{\link[=available_tickers]{available_tickers()}}.
 }
 \seealso{
 Other development tools: 
 \code{\link{GET}()},
+\code{\link{chart_layout}()},
 \code{\link{convert_date}()},
 \code{\link{default_dates}()},
 \code{\link{flatten}()},

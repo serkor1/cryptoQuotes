@@ -32,13 +32,14 @@ bitmartEndpoint <- function(
   endPoint <- switch(
     EXPR = type,
     ohlc = {
-      if (futures) 'contract/public/kline' else 'spot/quotation/v3/lite-klines'
+      if (futures) 'contract/public/kline' else
+        'spot/quotation/v3/lite-klines'
     },
     ticker ={
-      if (futures) 'contract/public/details' else 'spot/v1/symbols'
+      if (futures) 'contract/public/details' else
+        'spot/v1/symbols'
     }
   )
-
 
   # 2) return endPoint url
   endPoint
@@ -50,13 +51,40 @@ bitmartIntervals <- function(
     futures,
     interval,
     all = FALSE,
-    ...
-) {
+    ...) {
 
   # Define all intervals in a data frame
   allIntervals <- data.frame(
-    labels = c('1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '12h', '1d', '3d', '1w'),
-    values = c(1, 3, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080)
+    labels = c(
+      '1m',
+      '3m',
+      '5m',
+      '15m',
+      '30m',
+      '1h',
+      '2h',
+      '4h',
+      '6h',
+      '12h',
+      '1d',
+      '3d',
+      '1w'
+    ),
+    values = c(
+      1,
+      3,
+      5,
+      15,
+      30,
+      60,
+      120,
+      240,
+      360,
+      720,
+      1440,
+      4320,
+      10080
+    )
   )
 
   if (all) {
@@ -77,11 +105,9 @@ bitmartIntervals <- function(
 bitmartResponse <- function(
     type = 'ohlc',
     futures,
-    ...
-) {
+    ...) {
 
   response <- NULL
-
 
   # mock response
   # to avoid check error in
@@ -92,16 +118,29 @@ bitmartResponse <- function(
     EXPR = type,
     ohlc = {
       list(
-        colum_names = if (futures) c('low', 'high', 'open', 'close', 'volume') else c('open', 'high', 'low', 'close', 'volume'),
-        colum_location = if (futures) 1:5 else c(2:5,7),
-        index_location = if (futures) 6 else 1
+
+        colum_names = if (futures)
+          c('low', 'high', 'open', 'close', 'volume')
+        else
+          c('open', 'high', 'low', 'close', 'volume'),
+
+        colum_location = if (futures)
+          1:5
+        else
+          c(2:5, 7),
+
+        index_location = if (futures)
+          6
+        else
+          1
       )
     },
     ticker = {
       list(
         foo = function(response, futures){
 
-          if (futures) response$data$symbol$symbol else response$data$symbols
+          if (futures) response$data$symbol$symbol else
+            response$data$symbols
 
         }
       )
@@ -116,8 +155,7 @@ bitmartDates <- function(
     futures,
     dates,
     is_response = FALSE,
-    ...
-) {
+    ...) {
 
   if (is_response) {
 
@@ -131,7 +169,7 @@ bitmartDates <- function(
     dates <- convert_date(
       x = dates,
       multiplier = 1
-      )
+    )
 
     dates <- vapply(
       dates,
@@ -140,9 +178,10 @@ bitmartDates <- function(
       FUN.VALUE = character(1)
     )
 
-    names(dates) <- if (futures) c('start_time', 'end_time') else c('after', 'before')
-
-
+    names(dates) <- if (futures)
+      c('start_time', 'end_time')
+    else
+      c('after', 'before')
 
   }
 
@@ -158,8 +197,7 @@ bitmartParameters <- function(
     interval,
     from = NULL,
     to = NULL,
-    ...
-) {
+    ...) {
 
   # Basic parameters
   params <- list(

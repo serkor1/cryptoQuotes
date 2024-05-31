@@ -1,27 +1,35 @@
-#' Get available cryptocurrency pairs
+#' @title
+#' Get actively traded cryptocurrency pairs
 #'
 #' @description
 #' `r lifecycle::badge("stable")`
 #'
-#' Get available cryptocurrency pairs
+#' Get actively traded cryptocurrency pairs on the [available_exchanges()].
 #'
 #' @inheritParams get_quote
 #'
-#' @example man/examples/scr_availableTickers.R
-#'
 #' @returns
+#' A [character]-vector of actively traded cryptocurrency pairs on the exchange,
+#' and the specified market.
 #'
-#' A [character]-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
+#' **Sample output**
+#' ```{r output, echo = FALSE}
+#' head(
+#'    cryptoQuotes::available_tickers(
+#'      source  = "bybit",
+#'      futures = TRUE
+#'    )
+#' )
+#' ```
 #'
 #' @details
+#' The naming-conventions across, and within, [available_exchanges()] are not
+#' necessarily the same. This function lists all actively traded tickers.
 #'
-#' The naming-conventions across, and within, [available_exchanges()] are not necessarily the same. This function lists
-#' all actively traded tickers.
-#'
-#' @author Serkan Korkmaz
+#' @example man/examples/scr_availableTickers.R
 #'
 #' @family supported calls
-#'
+#' @author Serkan Korkmaz
 #' @export
 available_tickers <- function(
     source  = 'binance',
@@ -30,8 +38,10 @@ available_tickers <- function(
   # 0) Assert truthfulness
   # and validity of all inputs
   assert(
-    "Argument {.arg source} has to be {.cls character} of length {1}" = (is.character(source) & length(source) == 1),
-    "Argument {.arg futures} has to be {.cls logical} of length {1}" = (is.logical(futures) & length(futures) == 1)
+    "Argument {.arg source} has to be {.cls character} of length {1}" =
+      (is.character(source) & length(source) == 1),
+    "Argument {.arg futures} has to be {.cls logical} of length {1}" =
+      (is.logical(futures) & length(futures) == 1)
   )
 
   assert(

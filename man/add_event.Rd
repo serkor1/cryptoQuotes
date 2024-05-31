@@ -2,43 +2,35 @@
 % Please edit documentation in R/chart_event.R
 \name{add_event}
 \alias{add_event}
-\title{add eventlines to
-the chart}
+\title{Add eventlines to the chart}
 \usage{
-add_event(event_data, ...)
+add_event(data, ...)
 }
 \arguments{
-\item{event_data}{a \link{data.frame} with index, event and colors.}
+\item{data}{a \link{data.frame}-type object with \code{index}, \code{event}
+and \code{color} columns.}
 
-\item{...}{arguments pass interally by \link{chart}, ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-Invisbly returns a plotly object.
+A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object with \code{shapes} and \code{annotations}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Common types of event indicators include earnings release dates, dividend payouts, central bank interest rate decisions, chart pattern breakouts, and geopolitical events like elections or geopolitical tensions.
-The choice of event indicators depends on the trader's or analyst's specific objectives and the factors they believe are most relevant to the asset's price movements.
+A high-level \code{\link[plotly:layout]{plotly::layout()}}-function.
+The function adds \code{shapes} and \code{annotations} to the main \code{\link[=chart]{chart()}}.
 }
 \details{
-TBA
+The \link{data.frame} must include the following columns,
+\itemize{
+\item \code{index} \link{integer} or \link{date}: corresponding to the event timing.
+\item \code{event} \link{character}: the event label.
+\item \code{color} \link{character}: the color of the event
 }
-\section{Note}{
-The eventlines are drawn using \code{\link[plotly:layout]{plotly::layout()}}, so all existing
-eventlines will be replaced each time you call \code{\link[=add_event]{add_event()}}.
 }
-
 \examples{
-# script: scr_addEvents
-# date: 2023-12-07
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Describe the usage
-# of addEvents
 # script start;
-
-# laod library
-library(cryptoQuotes)
 
 # 1) Generate random events
 # of buys and sells and convert
@@ -48,8 +40,11 @@ library(cryptoQuotes)
 # but only base R is shown here to avoid
 # too many dependencies
 set.seed(1903)
-event_data <- ATOM[
-  sample(1:nrow(ATOM), size = 2)
+event_data <- cryptoQuotes::ATOM[
+  sample(
+    x = 1:nrow(cryptoQuotes::ATOM),
+    size = 2
+  )
 ]
 
 # 1.1) Extract the index
@@ -61,7 +56,9 @@ index <- zoo::index(
 # 1.2) Convert the coredata
 # into a data.frame
 event_data <- as.data.frame(
-  zoo::coredata(event_data)
+  zoo::coredata(
+    event_data
+  )
 )
 
 # 1.3) Add the index into the data.frame
@@ -83,28 +80,30 @@ event_data$color <- ifelse(
   event_data$event == 'Buy',
   yes = 'darkgrey',
   no  = ifelse(
-    subset(event_data, event == 'Buy')$Close < subset(event_data, event == 'Sell')$Close,
-    yes = 'green',
-    no  = 'red'
+    test = subset(
+        x = event_data,
+        event == 'Buy')$close < subset(x = event_data, event == 'Sell')$close,
+    yes  = 'green',
+    no   = 'red'
   )
 )
 
 # 1.6) modify the event to add
 # closing price at each event
 event_data$event <- paste0(
-  event_data$event, ' @', event_data$Close
+  event_data$event, ' @', event_data$close
 )
 
 # 2) Chart the the klines
 # and add the buy and sell events
-chart(
-  ticker     = ATOM,
-  main       = kline(),
+cryptoQuotes::chart(
+  ticker     = cryptoQuotes::ATOM,
+  main       = cryptoQuotes::kline(),
   sub        = list(
-    volume()
+    cryptoQuotes::volume()
   ),
   indicator = list(
-    bollinger_bands()
+    cryptoQuotes::bollinger_bands()
   ),
   event_data = event_data,
   options = list(
@@ -121,6 +120,7 @@ Other chart indicators:
 \code{\link{bollinger_bands}()},
 \code{\link{chart}()},
 \code{\link{dema}()},
+\code{\link{donchian_channel}()},
 \code{\link{ema}()},
 \code{\link{evwma}()},
 \code{\link{fgi}()},
@@ -129,17 +129,37 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{fgi}()},
 \code{\link{lsr}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},
+\code{\link{smi}()},
 \code{\link{volume}()}
+
+Other main chart indicators: 
+\code{\link{alma}()},
+\code{\link{bollinger_bands}()},
+\code{\link{dema}()},
+\code{\link{donchian_channel}()},
+\code{\link{ema}()},
+\code{\link{evwma}()},
+\code{\link{hma}()},
+\code{\link{sma}()},
+\code{\link{vwap}()},
+\code{\link{wma}()},
+\code{\link{zlema}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
-\concept{subcharts}
+\concept{main chart indicators}
+\concept{subchart indicators}
+\keyword{internal}

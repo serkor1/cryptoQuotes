@@ -4,78 +4,89 @@
 # objective:
 # script start;
 
-#' Add volume indicators
-#' to the chart
+#' @title
+#' Chart the trading volume
 #'
 #' @description
-#'
 #' `r lifecycle::badge("experimental")`
 #'
-#' Volume indicators are technical analysis tools used to analyze trading volume, which represents the number of shares or contracts traded in a financial market over a specific period of time.
-#' These indicators provide valuable insights into the strength and significance of price movements.
+#' A high-level [plotly::plot_ly()]-function.
+#' The function adds a subchart with the trading `trading`.
 #'
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
-#'
-#' @returns Invisbly returns a plotly object.
+#' @inherit kline
 #'
 #' @example man/examples/scr_charting.R
 #'
 #' @family chart indicators
-#' @family subcharts
-#'
+#' @family subchart indicators
+#' @author Serkan Korkmaz
 #' @export
-volume <- function(internal = list()){
+volume <- function(
+    ...){
+
+
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
-    rlang::expr(
-      {
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+    .Data = {
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
+      # 0.4) linewidth
+      linewidth <- 0.90
 
+      data <- indicator(
+        x = args$data
+      )
 
-
-        candle_color <- movement_color(
-          deficiency = deficiency
+      plot <- plotly::layout(
+        plotly::plot_ly(
+        data = data,
+        name = "Volume",
+        x    = ~index,
+        y    = ~volume,
+        showlegend = FALSE,
+        color = ~ as.factor(candle),
+        type  = "bar",
+        colors = c(
+          args$candle_color$bearish,
+          args$candle_color$bullish
+        ),
+        marker = list(
+          line = list(
+            color = "black",
+            width = 0.5)
         )
+      ),
+      annotations = list(
+        text = "Volume",
+        font = list(
+          size = 16
+        ),
+        showarrow = FALSE,
+        x = 0,
+        y = 1,
+        xref = "paper",
+        yref = "paper"
+      )
+      )
 
-        # 0.4) linewidth
-        linewidth <- 0.90
+    },
+    class = c(
+      "subchart",
+      "plotly",
+      "htmlwidget"
+      )
 
-        plot <- plotly::plot_ly(
-          data = ticker,
-          name = "Volume",
-          x    = ~index,
-          y    = ~volume,
-          showlegend = FALSE,
-          color = ~direction,
-          type  = "bar",
-          colors = c(
-            candle_color$bearish,
-            candle_color$bullish
-
-          ),
-          marker = list(
-            line = list(
-              color = "black",
-              width = 0.5)
-          )
-        )
-      }
-    ),
-    class = "subchart"
   )
-
-
-
-
-
 
 }
 

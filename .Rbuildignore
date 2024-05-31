@@ -15,3 +15,5 @@ playground
 ^CRAN-SUBMISSION$
 ^CODE_OF_CONDUCT\.md$
 ^data-raw$
+^codemeta\.json$
+NEWS.Rmd

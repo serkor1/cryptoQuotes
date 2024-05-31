@@ -11,15 +11,18 @@ testthat::test_that(
     # 1) create chart
     # with klines
     test_chart <- chart(
-      ticker     = BTC,
+      ticker     = cryptoQuotes:::control_data$quote,
       main       = kline(),
       sub        = list(
         volume(),
         rsi(),
         macd(),
-        fgi(index = FGIndex)
+        smi(),
+        fgi(index = cryptoQuotes:::control_data$fgindex),
+        lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
       indicator  = list(
+        donchian_channel(),
         dema(),
         ema(),
         evwma(),
@@ -29,7 +32,8 @@ testthat::test_that(
         wma(),
         evwma(),
         vwap(),
-        bollinger_bands()
+        bollinger_bands(),
+        alma()
 
       )
     )
@@ -42,9 +46,62 @@ testthat::test_that(
     # 3) check that its a plotly
     # object
     testthat::expect_true(
-      object = rlang::inherits_any(
+      object = inherits(
         x =  test_chart,
-        class = "plotly"),
+        what = "plotly"
+        ),
+    )
+
+  }
+)
+
+
+testthat::test_that(
+  desc = "Charting with klines and indicators",
+  code = {
+
+    # 1) create chart
+    # with klines
+    test_chart <- chart(
+      ticker     = cryptoQuotes:::control_data$quote,
+      main       = pline(),
+      sub        = list(
+        volume(),
+        rsi(),
+        macd(),
+        smi(),
+        fgi(index = cryptoQuotes:::control_data$fgindex),
+        lsr(ratio = cryptoQuotes:::control_data$lsratio)
+      ),
+      indicator  = list(
+        donchian_channel(),
+        dema(),
+        ema(),
+        evwma(),
+        hma(),
+        zlema(),
+        sma(),
+        wma(),
+        evwma(),
+        vwap(),
+        bollinger_bands(),
+        alma()
+
+      )
+    )
+
+    # 2) check that there is no erros
+    testthat::expect_no_error(
+      test_chart
+    )
+
+    # 3) check that its a plotly
+    # object
+    testthat::expect_true(
+      object = inherits(
+        x =  test_chart,
+        what = "plotly"
+      ),
     )
 
   }
@@ -58,15 +115,18 @@ testthat::test_that(
     # 1) create chart
     # with klines
     test_chart <- chart(
-      ticker     = BTC,
+      ticker     = cryptoQuotes:::control_data$quote,
       main       = ohlc(),
       sub        = list(
         volume(),
         rsi(),
         macd(),
-        fgi(index = FGIndex)
+        smi(),
+        fgi(index = cryptoQuotes:::control_data$fgindex),
+        lsr(ratio = cryptoQuotes:::control_data$lsratio)
       ),
       indicator  = list(
+        donchian_channel(),
         dema(),
         ema(),
         evwma(),
@@ -76,7 +136,8 @@ testthat::test_that(
         wma(),
         evwma(),
         vwap(),
-        bollinger_bands()
+        bollinger_bands(),
+        alma()
 
       )
     )
@@ -89,9 +150,10 @@ testthat::test_that(
     # 3) check that its a plotly
     # object
     testthat::expect_true(
-      object = rlang::inherits_any(
+      object = inherits(
         x =  test_chart,
-        class = "plotly"),
+        what = "plotly"
+      )
     )
 
   }
@@ -104,7 +166,9 @@ testthat::test_that(
 
     set.seed(1903)
     event_data <- ATOM[
-      sample(1:nrow(ATOM), size = 2)
+      sample(
+        seq_len(nrow(ATOM)),
+        size = 2)
     ]
 
     # 1.1) Extract the index
@@ -138,7 +202,8 @@ testthat::test_that(
       event_data$event == 'Buy',
       yes = 'darkgrey',
       no  = ifelse(
-        subset(event_data, event == 'Buy')$Close < subset(event_data, event == 'Sell')$Close,
+        subset(event_data, event == 'Buy')$Close <
+          subset(event_data, event == 'Sell')$Close,
         yes = 'green',
         no  = 'red'
       )
@@ -153,7 +218,7 @@ testthat::test_that(
     # 2) Chart the the klines
     # and add the buy and sell events
     testthat::expect_true(
-      object = rlang::inherits_any(chart(
+      object = inherits(chart(
         ticker     = ATOM,
         main       = kline(),
         sub        = list(
@@ -168,7 +233,7 @@ testthat::test_that(
           deficiency = FALSE
         )
       ),
-      class = "plotly"
+      what = "plotly"
       )
     )
 

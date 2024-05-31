@@ -1,12 +1,4 @@
-# script: scr_addEvents
-# date: 2023-12-07
-# author: Serkan Korkmaz, serkor1@duck.com
-# objective: Describe the usage
-# of addEvents
 # script start;
-
-# laod library
-library(cryptoQuotes)
 
 # 1) Generate random events
 # of buys and sells and convert
@@ -16,8 +8,11 @@ library(cryptoQuotes)
 # but only base R is shown here to avoid
 # too many dependencies
 set.seed(1903)
-event_data <- ATOM[
-  sample(1:nrow(ATOM), size = 2)
+event_data <- cryptoQuotes::ATOM[
+  sample(
+    x = 1:nrow(cryptoQuotes::ATOM),
+    size = 2
+  )
 ]
 
 # 1.1) Extract the index
@@ -29,7 +24,9 @@ index <- zoo::index(
 # 1.2) Convert the coredata
 # into a data.frame
 event_data <- as.data.frame(
-  zoo::coredata(event_data)
+  zoo::coredata(
+    event_data
+  )
 )
 
 # 1.3) Add the index into the data.frame
@@ -51,28 +48,30 @@ event_data$color <- ifelse(
   event_data$event == 'Buy',
   yes = 'darkgrey',
   no  = ifelse(
-    subset(event_data, event == 'Buy')$Close < subset(event_data, event == 'Sell')$Close,
-    yes = 'green',
-    no  = 'red'
+    test = subset(
+        x = event_data,
+        event == 'Buy')$close < subset(x = event_data, event == 'Sell')$close,
+    yes  = 'green',
+    no   = 'red'
   )
 )
 
 # 1.6) modify the event to add
 # closing price at each event
 event_data$event <- paste0(
-  event_data$event, ' @', event_data$Close
+  event_data$event, ' @', event_data$close
 )
 
 # 2) Chart the the klines
 # and add the buy and sell events
-chart(
-  ticker     = ATOM,
-  main       = kline(),
+cryptoQuotes::chart(
+  ticker     = cryptoQuotes::ATOM,
+  main       = cryptoQuotes::kline(),
   sub        = list(
-    volume()
+    cryptoQuotes::volume()
   ),
   indicator = list(
-    bollinger_bands()
+    cryptoQuotes::bollinger_bands()
   ),
   event_data = event_data,
   options = list(

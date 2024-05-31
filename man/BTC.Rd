@@ -3,30 +3,36 @@
 \docType{data}
 \name{BTC}
 \alias{BTC}
-\title{USDT denominated Bitcoin(BTC) with 1 week intervals}
+\title{USDT Denominated Bitcoin (BTCUSDT) Weekly Intervals}
 \format{
-An object of class \code{xts} (inherits from \code{zoo}) with 52 rows and 5 columns.
+An \code{\link[xts:xts]{xts::xts()}}-object with 52 rows and 5 columns,
+
+\describe{
+\item{index}{<\link{POSIXct}> The time-index}
+\item{open}{<\link{numeric}> Opening price}
+\item{high}{<\link{numeric}> Highest price}
+\item{low}{<\link{numeric}> Lowest price}
+\item{close}{<\link{numeric}> Closing price}
+\item{volume}{<\link{numeric}> Trading volume}
+}
 }
 \usage{
 BTC
 }
 \description{
-A xts object with weekly OHLCV of USDT denominated Bitcoin with 52 rows and 5 columns, from 2023-01-01 to 2023-12-31.
+This dataset contains time-series data for Bitcoin (BTC)
+denominated in USDT (Tether), captured in weekly intervals.
+The data spans from January 1, 2023, to December 31, 2023.
 }
-\details{
-\describe{
-\item{Open}{Opening price}
-\item{High}{Highest price}
-\item{Low}{Lowest price}
-\item{Close}{Closing price}
-\item{Volume}{Volume}
+\examples{
+# Load the dataset
+data("BTC")
+
+# chart
+chart(
+  ticker = BTC,
+  main = kline(),
+  sub = list(volume())
+)
 }
-}
-\seealso{
-Other data: 
-\code{\link{ATOM}},
-\code{\link{DOGE}},
-\code{\link{FGIndex}}
-}
-\concept{data}
 \keyword{datasets}

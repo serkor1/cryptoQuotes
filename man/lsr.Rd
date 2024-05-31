@@ -2,52 +2,45 @@
 % Please edit documentation in R/chart_lsr.R
 \name{lsr}
 \alias{lsr}
-\title{Chart the long-short ratios}
+\title{Chart the long-short ratio}
 \usage{
-lsr(ratio, internal = list())
+lsr(ratio, ...)
 }
 \arguments{
-\item{ratio}{A \code{\link[xts:xts]{xts::xts()}}-object with the column LSRatio. See \code{\link[=get_lsratio]{get_lsratio()}} for more details.}
+\item{ratio}{A \code{\link[xts:xts]{xts::xts()}}-object. See \code{\link[=get_lsratio]{get_lsratio()}} for more details.}
 
-\item{internal}{An empty \code{\link[=list]{list()}}. This is an internal helper-argument, ignore.}
+\item{...}{For internal use. Please ignore.}
 }
 \value{
-A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object wrapped in \code{\link[rlang:expr]{rlang::expr()}}
+An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The \code{\link[=lsr]{lsr()}}-function adds a scatter plot as a subplot to the chart colored by ratio size.
-}
-\details{
-The long-short ratio is a market sentiment indicator on expected price movement.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-wrapper function.
+The function adds a subchart to the \link{chart} with \verb{long-short ratio}.
 }
 \examples{
 \dontrun{
-  # Example on loading
-  # long-short ratio
-  # for the last days
-  # on the 15 minute candle
-  # wrapped in try to avoid
-  # failure on Github
+  # script start;
 
   # 1) long-short ratio
   # on BTCUSDT pair
-  ls_ratio <- cryptoQuotes::get_lsratio(
-    ticker = 'BTCUSDT',
+  LS_BTC <- cryptoQuotes::get_lsratio(
+    ticker   = 'BTCUSDT',
     interval = '15m',
-    from = Sys.Date() - 1,
-    to   = Sys.Date()
+    from     = Sys.Date() - 1,
+    to       = Sys.Date()
   )
 
   # 2) BTCSDT in same period
   # as the long-short ratio;
   BTC <- cryptoQuotes::get_quote(
-    ticker = 'BTCUSDT',
-    futures = TRUE,
+    ticker   = 'BTCUSDT',
+    futures  = TRUE,
     interval = '15m',
-    from = Sys.Date() - 1,
-    to   = Sys.Date()
+    from     = Sys.Date() - 1,
+    to       = Sys.Date()
   )
 
   # 3) plot BTCUSDT-pair
@@ -56,18 +49,15 @@ The long-short ratio is a market sentiment indicator on expected price movement.
     ticker = BTC,
     main   = cryptoQuotes::kline(),
     sub    = list(
-      cryptoQuotes::lsr(ratio = ls_ratio),
-      cryptoQuotes::volume()
-    ),
-    indicator = list(
-      cryptoQuotes::bollinger_bands()
+      cryptoQuotes::lsr(
+        ratio = LS_BTC
+      )
     )
   )
+
+  # end of scrtipt;
 }
 
-
-
-# end of scrtipt;
 }
 \seealso{
 Other chart indicators: 
@@ -76,6 +66,7 @@ Other chart indicators:
 \code{\link{bollinger_bands}()},
 \code{\link{chart}()},
 \code{\link{dema}()},
+\code{\link{donchian_channel}()},
 \code{\link{ema}()},
 \code{\link{evwma}()},
 \code{\link{fgi}()},
@@ -83,6 +74,7 @@ Other chart indicators:
 \code{\link{macd}()},
 \code{\link{rsi}()},
 \code{\link{sma}()},
+\code{\link{smi}()},
 \code{\link{volume}()},
 \code{\link{vwap}()},
 \code{\link{wma}()},
@@ -91,13 +83,17 @@ Other chart indicators:
 Other sentiment indicators: 
 \code{\link{fgi}()}
 
-Other subcharts: 
+Other subchart indicators: 
 \code{\link{add_event}()},
 \code{\link{fgi}()},
 \code{\link{macd}()},
 \code{\link{rsi}()},
+\code{\link{smi}()},
 \code{\link{volume}()}
+}
+\author{
+Serkan Korkmaz
 }
 \concept{chart indicators}
 \concept{sentiment indicators}
-\concept{subcharts}
+\concept{subchart indicators}

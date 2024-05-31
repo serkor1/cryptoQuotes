@@ -1,38 +1,50 @@
+#' @title
 #' Get available intervals
 #'
 #' @description
 #' `r lifecycle::badge("stable")`
 #'
-#' Get available intervals for the [available_tickers()] on the [available_exchanges()].
+#' Get available intervals for the [available_tickers()]
+#' on the [available_exchanges()].
+#'
+#' @usage available_intervals(
+#'    source = "binance",
+#'    type   = "ohlc",
+#'    futures = TRUE
+#' )
 #'
 #' @inheritParams get_quote
 #' @inheritParams available_exchanges
 #'
 #' @inherit available_exchanges
 #'
-#' @example man/examples/scr_availableIntervals.R
 #'
 #' @returns
 #'
-#' An [invisible()] [character] vector containing the  available intervals on
-#' the exchange, market and endpoint
+#' An [invisible()] [character]-vector containing the  available intervals on
+#' the exchange, market and endpoint.
 #'
-#' @author Serkan Korkmaz
+#' **Sample output**
+#'
+#' ```{r output, echo = FALSE}
+#' head(
+#'    cryptoQuotes::available_intervals(
+#'      source = "bybit"
+#'    )
+#' )
+#' ```
+#' @example man/examples/scr_availableIntervals.R
 #'
 #' @family supported calls
-#'
+#' @author Serkan Korkmaz
 #' @export
 available_intervals <- function(
     source = 'binance',
     type   = 'ohlc',
     futures = TRUE) {
 
-
   # 0) define available
   # exchanges
-
-
-
   assert(
     type %in% c("ohlc", "lsratio", "fundingrate", "interest"),
     error_message = c(
@@ -43,7 +55,10 @@ available_intervals <- function(
       "i" = sprintf(
         "Has to be one of %s",
         paste(
-          paste0("{.val ",c("ohlc", "lsratio", "fundingrate", "interest") ,"}"),
+          paste0("{.val ",
+                 c("ohlc", "lsratio", "fundingrate", "interest")
+                 ,"}"
+          ),
           collapse = ", "
         )
       )
@@ -85,7 +100,11 @@ available_intervals <- function(
   # intervals by exchange and market
   cli::cli_inform(
     message = c(
-      'i' = paste0('Available Intervals at ', "{.val {source}}", ifelse(futures, ' (futures):', no = ' (spot):')),
+      'i' = paste0(
+        'Available Intervals at ',
+        "{.val {source}}",
+        ifelse(futures, ' (futures):', no = ' (spot):')
+      ),
       'v' = paste(
         all_intervals,
         collapse = ', '

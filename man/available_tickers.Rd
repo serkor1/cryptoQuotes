@@ -2,43 +2,52 @@
 % Please edit documentation in R/available_tickers.R
 \name{available_tickers}
 \alias{available_tickers}
-\title{Get available cryptocurrency pairs}
+\title{Get actively traded cryptocurrency pairs}
 \usage{
 available_tickers(source = "binance", futures = TRUE)
 }
 \arguments{
-\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default. See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
+\item{source}{A \link{character}-vector of \link{length} 1. \code{binance} by default.
+See \code{\link[=available_exchanges]{available_exchanges()}} for available exchanges.}
 
-\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default. Returns futures market if \link{TRUE}, spot market otherwise.}
+\item{futures}{A \link{logical}-vector of \link{length} 1. \link{TRUE} by default.
+Returns futures market if \link{TRUE}, spot market otherwise.}
 }
 \value{
-A \link{character}-vector of actively traded cryptocurrency pairs on the exchange, and the specified market.
+A \link{character}-vector of actively traded cryptocurrency pairs on the exchange,
+and the specified market.
+
+\strong{Sample output}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10000000AIDOGEUSDT" "1000000MOGUSDT"     "10000COQUSDT"      
+#> [4] "10000LADYSUSDT"     "10000NFTUSDT"       "10000SATSUSDT"
+}\if{html}{\out{</div>}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-Get available cryptocurrency pairs
+Get actively traded cryptocurrency pairs on the \code{\link[=available_exchanges]{available_exchanges()}}.
 }
 \details{
-The naming-conventions across, and within, \code{\link[=available_exchanges]{available_exchanges()}} are not necessarily the same. This function lists
-all actively traded tickers.
+The naming-conventions across, and within, \code{\link[=available_exchanges]{available_exchanges()}} are not
+necessarily the same. This function lists all actively traded tickers.
 }
 \examples{
 \dontrun{
-  ## available tickers
-  ## in Binance spot market
+  # 1) available tickers
+  # in Binance spot market
   head(
     cryptoQuotes::available_tickers(
-      source = 'binance',
+      source  = 'binance',
       futures = FALSE
     )
   )
 
-  ## available tickers
-  ## on Kraken futures market
+  # 2) available tickers
+  # on Kraken futures market
   head(
     cryptoQuotes::available_tickers(
-      source = 'kraken',
+      source  = 'kraken',
       futures = TRUE
     )
   )

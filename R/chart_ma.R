@@ -5,205 +5,217 @@
 # the charting function
 # script start;
 
-#' Add Simple Moving Averages to the charts
+chart_ma <- function(
+    data,
+    plot,
+    name,
+    y
+) {
+
+  plotly::add_lines(
+    p    = plot,
+    data = data,
+    inherit = FALSE,
+    showlegend = TRUE,
+    name = name,
+    x    = ~index,
+    y    = stats::as.formula(
+      # NOTE: to avoid possible naming
+      # bugs in TTR use names(data)[2].
+      # names(data)[1] is index as per
+      # zoo.fortify
+      paste("~",names(data)[2])
+      ),
+    line = list(
+      width = 0.9
+    )
+  )
+
+}
+
+#' @title
+#' Add Simple Moving Average (SMA) indicators to the chart
 #'
 #' @description
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' A high-level [plotly::add_lines()]-wrapper function that interacts with [TTR]'s moving average family of functions.
+#' A high-level [plotly::add_lines()]-wrapper function that
+#' interacts with [TTR]'s moving average family of functions.
+#' The function adds moving average indicators to the main [chart()].
+#'
+#' @usage sma(
+#'  price  = "close",
+#'  n      = 10,
+#'  ...
+#' )
 #'
 #' @inheritParams TTR::SMA
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::SMA]
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::SMA].
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
+#' @example man/examples/scr_MAindicator.R
 #'
 #' @returns
 #'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' A [plotly::plot_ly()]-object
 #'
 #' @family chart indicators
 #' @family moving average indicators
-#'
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 sma <- function(
     price = "close",
     n = 10,
-    internal = list(),
     ...) {
 
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
+    .Data = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
-
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
-
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::SMA,
+        n = n
+      )
 
 
-        # 0.4) linewidth
-        linewidth <- 0.90
+      # 3) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("SMA(", n, ")"),
+        y    = "sma"
 
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::SMA(
-            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            n = !!n,
-            ... = !!rlang::enquos(...)
-          )
-        )
+      )
 
 
-
-        # 2) add middle band
-        chart <- plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~sma,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("SMA(", !!n, ")")
-        )
-
-
-
-        chart
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }
 
-
-#' Add Exponentially Weighted Moving Average to the charts
+#' @title
+#' Add Exponentially-Weighted Moving Average (EMA) to the chart
 #'
-#' @inherit sma description
+#' @usage ema(
+#'  price  = "close",
+#'  n      = 10,
+#'  wilder = FALSE,
+#'  ratio  = NULL,
+#'  ...
+#' )
 #'
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::EMA]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::EMA].
 #' @inheritParams TTR::EMA
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' @inherit sma
 #'
 #' @family chart indicators
 #' @family moving average indicators
-#'
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 ema <- function(
-    price = "Close",
+    price = "close",
     n = 10,
     wilder = FALSE,
     ratio = NULL,
-    internal = list(),
     ...) {
 
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
+    .Data  = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::EMA,
+        n = n,
+        wilder = wilder,
+        ratio = ratio,
+      )
 
+      # 2) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("EMA(", n, ")"),
+        y    = "ema"
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
-
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::EMA(
-            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            n = !!n,
-            wilder = !!wilder,
-            ratio = !!ratio,
-            ... = !!rlang::enquos(...)
-          )
-        )
+      )
 
 
 
-        # 2) add middle band
-        plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~ema,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("EMA(", !!n, ")")
-        )
-
-
-
-
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }
 
-#' Add Double Exponential Moving Average to the chart
+#' @title
+#' Add Double Exponential Moving Average (DEMA) to the chart
 #'
-#' @inherit sma description
+#' @usage dema(
+#'  price  = "close",
+#'  n      = 10,
+#'  v      = 1,
+#'  wilder = FALSE,
+#'  ratio  = NULL,
+#'  ...
+#' )
 #'
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::DEMA]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::DEMA].
 #' @inheritParams TTR::DEMA
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' @inherit sma
 #'
 #' @family chart indicators
 #' @family moving average indicators
-#'
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 dema <- function(
     price = "close",
@@ -211,601 +223,498 @@ dema <- function(
     v = 1,
     wilder = FALSE,
     ratio = NULL,
-    internal = list()) {
+    ...) {
+
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
 
   structure(
-    rlang::expr(
-      {
+    .Data  = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::DEMA,
+        n = n,
+        v = v,
+        wilder = wilder,
+        ratio = ratio
+      )
 
+      # 2) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("DEMA(", n, ")"),
+        y    = "dema"
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
-
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::DEMA(
-            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            n = !!n,
-            v = !!v,
-            wilder = !!wilder,
-            ratio = !!ratio
-          )
-        )
+      )
 
 
 
-        # 2) add middle band
-        plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~dema,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("DEMA(", !!n, ")")
-        )
-
-
-
-        chart
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
+
 
 }
 
 
-#' Add Weighted Moving Average to the chart
+#' @title
+#' Add Weighted Moving Average (WMA) to the chart
 #'
-#' @inherit sma description
+#' @usage wma(
+#'  price  = "close",
+#'  n      = 10,
+#'  wts    = 1:n,
+#'  ...
+#' )
 #'
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::WMA]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::WMA].
 #' @inheritParams TTR::WMA
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' @inherit sma
 #'
 #' @family chart indicators
 #' @family moving average indicators
-#'
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 wma <- function(
     price = "close",
     n = 10,
     wts = 1:n,
-    internal = list(),
     ...) {
 
+  # TODO: Submit PR, WMA has an issue
+  # too in the naming.
+
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
+    .Data  = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::WMA,
+        n = n,
+        wts = wts
+      )
 
+      # 2) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("WMA(", n, ")"),
+        y    = "wma"
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
-
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::WMA(
-            x = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            n   = !!n,
-            wts = !!wts,
-            ... = !!rlang::enquos(...)
-          )
-        )
-
-        # NOTE: The column
-        # name of WMA is broken
-        # TODO: Submit a PR
+      )
 
 
 
-        # 2) add middle band
-        plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~v1,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("WMA(", !!n, ")")
-        )
-
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }
 
-
-#' Add Elastic Volume-weighted Moving Average to the chart
+#' @title
+#' Add Elastic Volume-Weighted Moving Average (EVWMA) to the chart
 #'
-#' @inherit sma description
+#' @usage evwma(
+#'  price  = "close",
+#'  n      = 10,
+#'  ...
+#' )
 #'
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::EVWMA]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::EVWMA]
 #' @inheritParams TTR::EVWMA
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' @inherit sma
 #'
 #' @family chart indicators
 #' @family moving average indicators
-#'
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 evwma <- function(
-    price = "Close",
+    price = "close",
     n = 10,
-    internal = list(),
     ...) {
 
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
+    .Data  = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::EVWMA,
+        volume = args$data$volume,
+        n = n
+      )
 
+      # 2) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("EVWMA(", n, ")"),
+        y    = "evwma"
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
+      )
 
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::EVWMA(
-            price  = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            volume = toQuote(ticker)$volume,
-            n   = !!n,
-            ... = !!rlang::enquos(...)
-          )
-        )
-
-        # NOTE: The column
-        # name of WMA is broken
-        # TODO: Submit a PR
-
-
-
-        # 2) add middle band
-        plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~v1,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("EVWMA(", !!n, ")")
-        )
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }
 
 
-#' Add Zero Lag Exponential Moving Average to the chart
+#' @title
+#' Add Zero Lag Exponential Moving Average (ZLEMA) to the chart
 #'
+#' @usage zlema(
+#'  price  = "close",
+#'  n      = 10,
+#'  ratio = NULL,
+#'  ...
+#' )
 #'
-#' @inherit sma description
-#'
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::ZLEMA]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::ZLEMA].
 #' @inheritParams TTR::ZLEMA
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' @inherit sma
 #'
 #' @family chart indicators
 #' @family moving average indicators
-#'
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 zlema <- function(
     price = "close",
     n = 10,
     ratio = NULL,
-    internal = list(),
     ...) {
 
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
+    .Data  = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::ZLEMA,
+        n = n,
+        ratio = ratio
+      )
 
+      # 2) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("ZLEMA(", n, ")"),
+        y    = "zlema"
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
+      )
 
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::ZLEMA(
-            x  = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            ratio = !!ratio,
-            n   = !!n,
-            ... = !!rlang::enquos(...)
-          )
-        )
-
-        # NOTE: The column
-        # name of WMA is broken
-        # TODO: Submit a PR
-
-
-
-        # 2) add middle band
-        plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~v1,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("ZLEMA(", !!n, ")")
-        )
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }
 
 
-#' Add Volume-weighted Moving Average to the chart
+#' @title
+#' Add Volume-Weighted Moving Average (VWAP) to the chart
 #'
-#' @inherit sma description
+#' @usage vwap(
+#'  price  = "close",
+#'  n      = 10,
+#'  ratio = NULL,
+#'  ...
+#' )
 #'
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::VWAP]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::VWAP]
 #' @inheritParams TTR::VWAP
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' @inherit sma
 #'
 #' @family chart indicators
+#' @family moving average indicators
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 vwap <- function(
     price = "close",
     n = 10,
     ratio = NULL,
-    internal = list(),
     ...) {
 
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
+    .Data  = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::VWAP,
+        n = n,
+        ratio = ratio,
+        volume = args$data$volume
+      )
 
+      # 2) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("VWAP(", n, ")"),
+        y    = "vwap"
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
+      )
 
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::VWAP(
-            price  = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            volume = toQuote(ticker)$volume,
-            n   = !!n,
-            ... = !!rlang::enquos(...)
-          )
-        )
-
-        # 2) add middle band
-        plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~vwap,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("VWAP(", !!n, ")")
-        )
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
+
+
 
 }
 
 
 
-#' Add Hull Moving Average to the chart
+#' @title
+#' Add Hull Moving Average (HMA) to the chart
 #'
-#' @inherit sma description
+#' @usage hma(
+#'  price  = "close",
+#'  n      = 20,
+#'  ...
+#' )
 #'
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::HMA]
+#' @param price A [character]-vector of [length] 1. "close" by default.
+#' The name of the vector to passed into [TTR::HMA].
 #' @inheritParams TTR::HMA
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' @inherit sma
 #'
 #' @family chart indicators
 #' @family moving average indicators
-#'
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 hma <- function(
-    price = "Close",
+    price = "close",
     n = 20,
-    internal = list(),
     ...) {
 
+  # check if the indicator is called
+  # from the chart-function
+  #
+  # stops the function if not
+  check_indicator_call()
+
   structure(
-    rlang::expr(
-      {
+    .Data  = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::HMA,
+        n = n
+      )
 
+      # 2) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("HMA(", n, ")"),
+        y    = "hma"
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart      <- internal_args$chart
+      )
 
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::HMA(
-            x  = toQuote(ticker)[,grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            n   = !!n,
-            ... = !!rlang::enquos(...)
-          )
-        )
-
-        # 2) add middle band
-        plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~v1,
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("HMA(", !!n, ")")
-        )
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }
 
-
-#' Add Arnaud Legoux Moving Average to the chart
+#' @title
+#' Add Arnaud Legoux Moving Average (ALMA) to the chart
 #'
-#' @inherit sma description
+#' @usage alma(
+#'  price  = "close",
+#'  n      = 9,
+#'  offset = 0.85,
+#'  sigma  = 6,
+#'  ...
+#' )
 #'
-#' @param price A [character]-vector of [length] 1. Close by default. The name of the vector to passed into [TTR::ALMA]
+#' @param price A [character]-vector of [length] 1. "close" by default
+#' The name of the vector to passed into [TTR::ALMA].
 #' @inheritParams TTR::ALMA
-#' @param internal An empty [list]. Used for internal purposes. Ignore.
+#' @param ... For internal use. Please ignore.
 #'
-#' @example man/examples/scr_charting.R
-#'
-#' @returns
-#'
-#' A [plotly::plot_ly()]-object wrapped in [rlang::expr()].
+#' @inherit sma
 #'
 #' @family chart indicators
 #' @family moving average indicators
-#'
+#' @family main chart indicators
+#' @author Serkan Korkmaz
 #' @export
 alma <- function(
     price = "close",
     n = 9,
     offset = 0.85,
     sigma  = 6,
-    internal = list(),
     ...) {
 
-  # NOTE: ALMA doesnt return a
-  # column with ALMA name nor V1
+  # check if the indicator is called
+  # from the chart-function
   #
-  # It returns the same column name as
-  # passed
-  # TODO: Submit PR
+  # stops the function if not
+  check_indicator_call()
 
   structure(
-    rlang::expr(
-      {
+    .Data  = {
 
-        # 0) locate global
-        # parameters to be passed
-        # into the charting functions;
+      # 0) construct arguments
+      # via chart function
+      args <- list(
+        ...
+      )
 
-        # internal_args <- flatten(lapply(!!rlang::enquos(internal), rlang::eval_tidy))
-        internal_args <- flatten(lapply(!!rlang::enexpr(internal), rlang::eval_tidy))
+      # 1) calculate MACD
+      # indicator
+      data <- indicator(
+        x = args$data,
+        columns = price,
+        .f = TTR::ALMA,
+        n = n,
+        offset = offset,
+        sigma  = sigma
+      )
 
+      # 2) add ma chart
+      chart_ma(
+        data = data,
+        plot = args$plot,
+        name = paste0("ALMA(", n, ")"),
+        y    = "alma"
 
-        ticker <- internal_args$ticker
-        deficiency <- internal_args$deficiency
-        chart  <- internal_args$chart
+      )
 
-
-
-        candle_color <- movement_color(
-          deficiency = deficiency
-        )
-
-
-        # 0.4) linewidth
-        linewidth <- 0.90
-
-        # 1) calculate MACD
-        # indicator
-        indicator <- toDF(
-          TTR::ALMA(
-            x  = toQuote(ticker)[, grep(pattern = !!price, x = colnames(ticker),ignore.case = TRUE)],
-            n   = !!n,
-            offset = !!offset,
-            sigma = !!sigma,
-            ... = !!rlang::enquos(...)
-          )
-        )
-
-        # 2) add middle band
-        plotly::add_lines(
-          showlegend = TRUE,
-          p = chart,
-          inherit = FALSE,
-          data = indicator,
-          x = ~index,
-          y = ~!!rlang::sym(price),
-          line = list(
-            width = linewidth
-          ),
-          name = paste0("ALMA(", !!n, ")")
-        )
-
-      }
-    ),
-    class = "indicator"
+    },
+    class = c(
+      "indicator",
+      "plotly",
+      "htmlwidget"
+    )
   )
 
 }
-
 
 # script end;

@@ -204,8 +204,8 @@ endPoint <- function(
 #' @param ... additional parameters passed down the endpoint
 #'
 #' @details
-#' This function can only be used to fetch time-based objects, and can therefore
-#' not be used to get, for example, [available_tickers()].
+#' This function can only be used to fetch time-based objects,
+#' and can therefore not be used to get, for example, [available_tickers()].
 #'
 #' @family development tools
 #'
@@ -280,7 +280,6 @@ fetch <- function(
         type   = type,
         futures = futures,
         ...
-
       ),
       query = parameters$query,
       path  = parameters$path
@@ -304,7 +303,6 @@ fetch <- function(
     what = c('array', 'matrix', 'data.frame')
   )
 
-
   # 2.2) extract data
   # from reponse:
   #
@@ -312,13 +310,17 @@ fetch <- function(
   # then it is likely
   # that we are dealing with
   # an error, or Kraken
-  response <- tryCatch(
-    expr = {
-      response[[which(idx)]]
+  #
+  # This could be done using do.call
+  # maybe
+  switch (source,
+    kraken = {
+      response <- do.call(
+        data.frame,
+        response
+      )
     },
-    error = function(error){
-      as.data.frame(response)
-    }
+    response <- response[[which(idx)]]
   )
 
 

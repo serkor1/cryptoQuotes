@@ -32,7 +32,7 @@ testthat::test_that(
       )
 
       # 1) run without any errors
-      testthat::expect_no_error(
+      testthat::expect_no_condition(
         output <- get_fundingrate(
           ticker = ticker,
           source = exchange,
@@ -49,10 +49,14 @@ testthat::test_that(
       year_range <- as.numeric(format(range(zoo::index(output)), "%Y"))
 
       # The minimum year has to be greater than 2000
-      testthat::expect_gte(min(year_range), expected = 2000, label = error_label)
+      testthat::expect_gte(
+        min(year_range), expected = 2000, label = error_label
+        )
 
       # The maximum year has to be less than the current system year.
-      testthat::expect_lte(max(year_range), expected = current_year, label = error_label)
+      testthat::expect_lte(
+        max(year_range), expected = current_year, label = error_label
+        )
 
     }
 
