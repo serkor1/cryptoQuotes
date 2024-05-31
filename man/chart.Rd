@@ -33,11 +33,7 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
 
 \strong{Sample Output}
 \if{html}{
-  \out{<div style="text-align: center">}
-   \figure{README-chartquote-1.png}{
-   options: style="width:750px;max-width:75\%;"
-   }
-  \out{</div>}
+  \out{<span style="text-align: center; display: block;">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</span>}
 }
 \if{latex}{
   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
@@ -103,7 +99,7 @@ cryptoQuotes::chart(
 # script end;
 }
 \seealso{
-Other chart indicators: 
+Other chart indicators:
 \code{\link{add_event}()},
 \code{\link{alma}()},
 \code{\link{bollinger_bands}()},
@@ -123,7 +119,7 @@ Other chart indicators:
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other price charts: 
+Other price charts:
 \code{\link{kline}()},
 \code{\link{ohlc}()},
 \code{\link{pline}()}

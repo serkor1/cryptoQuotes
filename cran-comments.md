@@ -2,22 +2,10 @@
 
 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 
-### The note
-
-```
-  The Title field should be in title case. Current version is:
-  'A Streamlined Access to Cryptocurrency OHLC-V Market Data and Sentiment Indicators'
-  In title case that is:
-  'A Streamlined Access to Cryptocurrency OHLC-v Market Data and Sentiment Indicators'
-```
-
-This `note` is related to `OHLC-V`, and since `OHLC-V` is an accepted shorthand for Open, High, Low, Close and Volume I believe this `note` should
-be ignored.
-
-## Resubmission
-
-This is a resubmission. In this version I have updated many elements in the library, but
-most importantly the unittests are being conducted in a manner that is robust to timing
-errors.
-
-
+❯ checking installed package size ... NOTE
+    installed size is 13.1Mb
+    sub-directories of 1Mb or more:
+      doc  11.9Mb
+      
+This is beyond my technical knowledge, but here is a related SO-post:
+https://stackoverflow.com/questions/38639266/r-cmd-check-unusual-checking-installed-package-size-note
