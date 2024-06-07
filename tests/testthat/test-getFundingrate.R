@@ -26,14 +26,16 @@ testthat::test_that(
       error_label <- exchange
 
       ticker <- switch (exchange,
-        'binance' = "BTCUSDT",
-        "bybit"   = "BTCUSDT",
-        "kucoin"  = "XBTUSDTM"
+        'binance'    = "BTCUSDT",
+        "bybit"      = "BTCUSDT",
+        "kucoin"     = "XBTUSDTM",
+        "crypto.com" = "BTCUSD-PERP",
+        "mexc"       = "BTC_USDT"
       )
 
       # 1) run without any errors
-      testthat::expect_no_condition(
-        output <- get_fundingrate(
+      output <- testthat::expect_no_condition(
+        get_fundingrate(
           ticker = ticker,
           source = exchange,
           # Use yesterdays date

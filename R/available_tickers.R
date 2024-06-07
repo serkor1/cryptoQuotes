@@ -80,7 +80,6 @@ available_tickers <- function(
     )
   )
 
-
   # 2) get source_response
   # objects
   source_response <- get(
