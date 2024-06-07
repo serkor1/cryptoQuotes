@@ -122,9 +122,7 @@ get_quote <- function(
   source <- tolower(
     trimws(source)
   )
-  ticker <- toupper(
-    trimws(ticker)
-  )
+  ticker <- trimws(ticker)
 
 
   # 1) check wether
@@ -238,6 +236,11 @@ get_quote <- function(
   attributes(ohlc)$source <- paste0(
     to_title(source), if (futures) " (PERPETUALS)" else " (SPOT)"
   )
+
+  ohlc <- ohlc[
+    ,
+    c("open", "high", "low", "close", "volume")
+  ]
 
   ohlc
 }
