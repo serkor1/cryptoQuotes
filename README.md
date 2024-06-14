@@ -26,7 +26,7 @@ of sentiment indicators; the market data is high quality and can be
 retrieved in intervals ranging from *seconds* to *months*. All the
 market data is accessed and processed without relying on crawlers, or
 API keys, ensuring an open, and reliable, access for researchers,
-traders and students alike. There are currently 5 supported
+traders and students alike. There are currently 8 supported
 cryptocurrency exchanges,
 
 <div align="center">
@@ -47,10 +47,21 @@ bitmart
 bybit
 </td>
 <td style="text-align:center;">
+crypto.com
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+huobi
+</td>
+<td style="text-align:center;">
 kraken
 </td>
 <td style="text-align:center;">
 kucoin
+</td>
+<td style="text-align:center;">
+mexc
 </td>
 </tr>
 </tbody>
@@ -184,6 +195,46 @@ Bybit
 </tr>
 <tr>
 <td style="text-align:left;">
+Crypto.com
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+1 minute(s)
+</td>
+<td style="text-align:center;">
+1 month(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Huobi
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+1 minute(s)
+</td>
+<td style="text-align:center;">
+1 month(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Kraken
 </td>
 <td style="text-align:center;">
@@ -220,6 +271,26 @@ Kucoin
 </td>
 <td style="text-align:center;">
 1 week(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mexc
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+1 minute(s)
+</td>
+<td style="text-align:center;">
+1 month(s)
 </td>
 </tr>
 </tbody>
@@ -279,122 +350,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-31 18:00:00
+2024-06-14 22:30:00
 </td>
 <td style="text-align:center;">
-67215.58
+65904.02
 </td>
 <td style="text-align:center;">
-67352.41
+65970.23
 </td>
 <td style="text-align:center;">
-66670
+65684.51
 </td>
 <td style="text-align:center;">
-67000.01
+65766.41
 </td>
 <td style="text-align:left;">
-2093.77494
+359.54263
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-31 18:30:00
+2024-06-14 23:00:00
 </td>
 <td style="text-align:center;">
-67000.01
+65766.41
 </td>
 <td style="text-align:center;">
-67221.53
+66116
 </td>
 <td style="text-align:center;">
-66876.8
+65725.77
 </td>
 <td style="text-align:center;">
-67200.01
+66115.99
 </td>
 <td style="text-align:left;">
-788.25693
+471.45724
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-31 19:00:00
+2024-06-14 23:30:00
 </td>
 <td style="text-align:center;">
-67200.01
+66116
 </td>
 <td style="text-align:center;">
-67459.66
+66627.52
 </td>
 <td style="text-align:center;">
-67160.3
+66024.05
 </td>
 <td style="text-align:center;">
-67417.98
+66196.01
 </td>
 <td style="text-align:left;">
-598.68095
+1371.69275
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-31 19:30:00
+2024-06-15
 </td>
 <td style="text-align:center;">
-67417.98
+66196.01
 </td>
 <td style="text-align:center;">
-67455.93
+66252
 </td>
 <td style="text-align:center;">
-67287.97
+65882.35
 </td>
 <td style="text-align:center;">
-67342.77
+65965.2
 </td>
 <td style="text-align:left;">
-287.26257
+652.98617
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-31 20:00:00
+2024-06-15 00:30:00
 </td>
 <td style="text-align:center;">
-67342.77
+65965.2
 </td>
 <td style="text-align:center;">
-67444.47
+66059.13
 </td>
 <td style="text-align:center;">
-67288.2
+65932.01
 </td>
 <td style="text-align:center;">
-67305.5
+66014.01
 </td>
 <td style="text-align:left;">
-383.04002
+216.04381
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-31 20:30:00
+2024-06-15 01:00:00
 </td>
 <td style="text-align:center;">
-67305.5
+66014.01
 </td>
 <td style="text-align:center;">
-67427.68
+66014.01
 </td>
 <td style="text-align:center;">
-67170
+65920.01
 </td>
 <td style="text-align:center;">
-67400
+65927.72
 </td>
 <td style="text-align:left;">
-468.98276
+84.35921
 </td>
 </tr>
 </tbody>
@@ -449,6 +520,15 @@ Kraken
 <th style="text-align:center;">
 Kucoin
 </th>
+<th style="text-align:left;">
+Crypto.com
+</th>
+<th style="text-align:center;">
+mexc
+</th>
+<th style="text-align:center;">
+huobi
+</th>
 </tr>
 </thead>
 <tbody>
@@ -467,6 +547,15 @@ Long-Short Ratio
 </td>
 <td style="text-align:center;">
 :white_check_mark:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
+<td style="text-align:left;">
+:x:
+</td>
+<td style="text-align:center;">
+:x:
 </td>
 <td style="text-align:center;">
 :x:
@@ -491,6 +580,15 @@ Open Interest
 <td style="text-align:center;">
 :x:
 </td>
+<td style="text-align:left;">
+:x:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
+<td style="text-align:center;">
+:x:
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -510,6 +608,15 @@ Funding Rate
 </td>
 <td style="text-align:center;">
 :white_check_mark:
+</td>
+<td style="text-align:left;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:white_check_mark:
+</td>
+<td style="text-align:center;">
+:x:
 </td>
 </tr>
 </tbody>
@@ -562,49 +669,77 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-31 18:00:00
+2024-06-14 22:30:00
 </td>
 <td style="text-align:center;">
-0.679
+0.703
 </td>
 <td style="text-align:center;">
-0.321
+0.297
 </td>
 <td style="text-align:center;">
-2.114
+2.362
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-31 18:30:00
+2024-06-14 23:00:00
 </td>
 <td style="text-align:center;">
-0.687
+0.7
 </td>
 <td style="text-align:center;">
-0.313
+0.3
 </td>
 <td style="text-align:center;">
-2.199
+2.338
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-31 19:00:00
+2024-06-14 23:30:00
 </td>
 <td style="text-align:center;">
-0.696
+0.703
 </td>
 <td style="text-align:center;">
-0.304
+0.297
 </td>
 <td style="text-align:center;">
-2.289
+2.365
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-31 19:30:00
+2024-06-15
+</td>
+<td style="text-align:center;">
+0.7
+</td>
+<td style="text-align:center;">
+0.3
+</td>
+<td style="text-align:center;">
+2.33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-06-15 00:30:00
+</td>
+<td style="text-align:center;">
+0.699
+</td>
+<td style="text-align:center;">
+0.301
+</td>
+<td style="text-align:center;">
+2.319
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-06-15 01:00:00
 </td>
 <td style="text-align:center;">
 0.699
@@ -614,34 +749,6 @@ ls_ratio
 </td>
 <td style="text-align:center;">
 2.323
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-05-31 20:00:00
-</td>
-<td style="text-align:center;">
-0.696
-</td>
-<td style="text-align:center;">
-0.304
-</td>
-<td style="text-align:center;">
-2.288
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-05-31 20:30:00
-</td>
-<td style="text-align:center;">
-0.696
-</td>
-<td style="text-align:center;">
-0.304
-</td>
-<td style="text-align:center;">
-2.293
 </td>
 </tr>
 </tbody>

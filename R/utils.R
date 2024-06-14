@@ -111,10 +111,7 @@ GET <- function(
     }
   )
 
-    response
-
-
-
+  response
 }
 
 
@@ -126,8 +123,7 @@ source_parameters <- function(
     interval,
     from,
     to,
-    ...
-) {
+    ...) {
 
   get(
     paste0(
@@ -157,7 +153,7 @@ baseUrl <- function(
   baseUrl <- get(paste0(source, 'Url'))(
     futures = futures,
     ...
-    )
+  )
 
   # 2) return the baseUrl
   return(
@@ -313,14 +309,35 @@ fetch <- function(
   #
   # This could be done using do.call
   # maybe
-  switch (source,
-    kraken = {
-      response <- do.call(
-        data.frame,
-        response
-      )
-    },
-    response <- response[[which(idx)]]
+  response <- switch (source,
+                      kraken = {
+                        do.call(
+                          data.frame,
+                          response
+                        )
+                      },
+                      mexc = {
+
+                        tryCatch(
+                          response[[which(idx)]],
+                          error = function(error) {
+                            do.call(
+                              data.frame,
+                              response[
+                                grepl(
+                                  pattern = "data",
+                                  x = names(response),
+                                  ignore.case = TRUE
+                                )
+                              ]
+                            )
+
+                          }
+                        )
+
+
+                      },
+                      response[[which(idx)]]
   )
 
 

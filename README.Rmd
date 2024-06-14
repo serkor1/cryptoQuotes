@@ -39,11 +39,13 @@ invisible(
   all_exchanges <- cryptoQuotes::available_exchanges()
 )
 
-# Convert the character vector to a single-row data frame
-exchanges_df <- data.frame(t(all_exchanges))
+if (length(all_exchanges) %% 2 != 0) {
+  # If odd, append an empty string to make it even
+  all_exchanges <- c(all_exchanges, "")
+}
 
-# Set column names to be the exchange names
-colnames(exchanges_df) <- all_exchanges
+# Convert the character vector to a single-row data frame
+exchanges_df <- data.frame(matrix(data = all_exchanges, ncol = 4,byrow = TRUE))
 
 # Create a horizontal table
 kableExtra::kable_styling(
@@ -327,7 +329,16 @@ available_endpoint <- data.frame(
     ":x:",
     ":x:",
     ":white_check_mark:"
-    )
+    ),
+  `Crypto.com` = c(
+    ":x:", ":x:", ":white_check_mark:"
+  ),
+  mexc = c(
+    ":x:", ":x:", ":white_check_mark:"
+  ),
+  huobi = c(
+    ":x:", ":x:", ":x:"
+  )
 )
 
 ## 4) present table

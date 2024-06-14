@@ -31,7 +31,8 @@
 #'
 #' **Sample Output**
 #' \if{html}{
-#'   \out{<span style="text-align: center; display: block;">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</span>}
+#'   \out{<span style="text-align: center; display: block;">}
+#'   \figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</span>}
 #' }
 #' \if{latex}{
 #'   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
