@@ -183,7 +183,7 @@ mexcDates <- function(
   #
   # If fundingrate the multiplier
   # is 1e3
-  multiplier <- 1e3 / if (futures) 1e3 else 1
+  multiplier <- 1e3 / if (futures & !grepl("fundingrate", type)) 1e3 else 1
 
   # Convert and format dates
   dates <- convert_date(

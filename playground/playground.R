@@ -10,6 +10,7 @@
 rm(list = ls()); gc(); devtools::load_all()
 
 
+
 get_quote(
   ticker = "BTC-USDT",
   source = "huobi",
@@ -22,6 +23,5 @@ get_quote(
   source = "huobi",
   futures = FALSE
 )
-
 
 # script end;
