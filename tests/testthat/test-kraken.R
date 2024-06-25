@@ -15,13 +15,14 @@ testthat::test_that(
   desc = "Test get_quote() for Kraken (SPOT)",
   code = {
 
+    set.seed(1903)
     # 0) skip if offline
     # and on github
     testthat::skip_if_offline()
 
     # 1) get available tickers
     testthat::expect_no_condition(
-      ticker <- cryptoQuotes::available_tickers(
+      ticker <- available_tickers(
         source  = "kraken",
         futures = FALSE
       )
@@ -81,13 +82,14 @@ testthat::test_that(
   desc = "Test get_quote() for Kraken (FUTURES)",
   code = {
 
+    set.seed(1903)
     # 0) skip if offline
     # and on github
     testthat::skip_if_offline()
 
     # 1) get available tickers
     testthat::expect_no_condition(
-      ticker <- cryptoQuotes::available_tickers(
+      ticker <- available_tickers(
         source  = "kraken",
         futures = TRUE
       )
@@ -143,13 +145,14 @@ testthat::test_that(
   desc = "Test get_lsr() for Kraken (FUTURES)",
   code = {
 
+    set.seed(1903)
     # 0) skip if offline
     # and on github
     testthat::skip_if_offline()
 
     # 1) get available tickers
     testthat::expect_no_condition(
-      ticker <- cryptoQuotes::available_tickers(
+      ticker <- available_tickers(
         source  = "kraken",
         futures = TRUE
       )
@@ -191,13 +194,14 @@ testthat::test_that(
   desc = "Test open_interest() for Kraken (FUTURES)",
   code = {
 
+    set.seed(1903)
     # 0) skip if offline
     # and on github
     testthat::skip_if_offline()
 
     # 1) get available tickers
     testthat::expect_no_condition(
-      ticker <- cryptoQuotes::available_tickers(
+      ticker <- available_tickers(
         source  = "kraken",
         futures = TRUE
       )

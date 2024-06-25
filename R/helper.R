@@ -972,6 +972,7 @@ bar <- function(
       size = 14,
       color = theme$font_color
     ),
+    showlegend = TRUE,
     legend = list(
       orientation = 'h',
       x = 0,
@@ -1099,8 +1100,7 @@ normalize <- function(
 
 check_indicator_call <- function(
     system_calls = sys.calls(),
-    caller       = match.call(envir = parent.frame())
-    ) {
+    caller       = match.call(envir = parent.frame())) {
 
   # 0) get the entire call stack
   # to determine the calling function
@@ -1110,9 +1110,11 @@ check_indicator_call <- function(
 
   # 1) get the calling calling
   # function, ie. SMA, EMA etc
+  calling_function <- sys.call(-1)
+
   calling_function <- as.character(
-    sys.call(-1)[[1]]
-  )
+    calling_function[[1]]
+    )[length(calling_function)]
 
   # 2) check the location
   # of chart

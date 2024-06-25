@@ -23,13 +23,13 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-# cryptoQuotes 1.4.0
+# cryptoQuotes (Development version)
 
 ## General
 
 ## Improvements
 
-### Supported Exchanges [#14](https://github.com/serkor1/cryptoQuotes/issues/14)
+### Supported Exchanges (Issue [#14](https://github.com/serkor1/cryptoQuotes/issues/14))
 
 {cryptoQuotes} now supports the following exchanges:
 
@@ -41,6 +41,10 @@ library(cryptoQuotes)
 ## Breaking Changes
 
 ## Bugfixes
+
+* Fixed a bug in the `chart()`-function where a warning would be given if called using namespace qualified function calls (Issue [#13](https://github.com/serkor1/cryptoQuotes/issues/13))
+* Fixed a bug in the `chart()`-function where a `legend` wouldn't show unless a main-chart indicator
+were included. (Issue [#13](https://github.com/serkor1/cryptoQuotes/issues/13))
 
 
 

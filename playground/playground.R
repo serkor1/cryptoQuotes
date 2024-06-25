@@ -10,18 +10,15 @@
 rm(list = ls()); gc(); devtools::load_all()
 
 
+output <- get_quote("BTC_USDT", source = "bitmart", futures = FALSE, interval = "1h")
 
-get_quote(
-  ticker = "BTC-USDT",
-  source = "huobi",
-  futures = TRUE,
-  interval = "1h"
-)
 
-get_quote(
-  ticker = "btcusdt",
-  source = "huobi",
-  futures = FALSE
-)
+output[!output$open >= output$low]
+
+# Error on Bitmart hourly
+# open     high   low    close   volume
+# 2024-06-23 08:00:00 64379.98 64413.59 64380 64386.48 121228.1
+
+
 
 # script end;

@@ -1,13 +1,13 @@
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-# cryptoQuotes 1.4.0
+# cryptoQuotes (Development version)
 
 ## General
 
 ## Improvements
 
-### Supported Exchanges [\#14](https://github.com/serkor1/cryptoQuotes/issues/14)
+### Supported Exchanges (Issue [\#14](https://github.com/serkor1/cryptoQuotes/issues/14))
 
 {cryptoQuotes} now supports the following exchanges:
 
@@ -18,6 +18,13 @@
 ## Breaking Changes
 
 ## Bugfixes
+
+- Fixed a bug in the `chart()`-function where a warning would be given
+  if called using namespace qualified function calls (Issue
+  [\#13](https://github.com/serkor1/cryptoQuotes/issues/13))
+- Fixed a bug in the `chart()`-function where a `legend` wouldn’t show
+  unless a main-chart indicator were included. (Issue
+  [\#13](https://github.com/serkor1/cryptoQuotes/issues/13))
 
 # cryptoQuotes 1.3.1
 
@@ -90,12 +97,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-14 19:00:00      2370.776
-    #> 2024-06-14 20:00:00      2378.169
-    #> 2024-06-14 21:00:00      2391.505
-    #> 2024-06-14 22:00:00      2308.559
-    #> 2024-06-14 23:00:00      2286.311
-    #> 2024-06-15 00:00:00      2248.278
+    #> 2024-06-25 15:00:00      2352.477
+    #> 2024-06-25 16:00:00      2449.550
+    #> 2024-06-25 17:00:00      2410.773
+    #> 2024-06-25 18:00:00      2375.286
+    #> 2024-06-25 19:00:00      2330.929
+    #> 2024-06-25 20:00:00      2327.498
 
 </details>
 
@@ -276,12 +283,12 @@ tail(
 ```
 
     #>                     funding_rate
-    #> 2024-06-13 02:00:00        1e-04
-    #> 2024-06-13 10:00:00        1e-04
-    #> 2024-06-13 18:00:00        1e-04
-    #> 2024-06-14 02:00:00        1e-04
-    #> 2024-06-14 10:00:00        1e-04
-    #> 2024-06-14 18:00:00        1e-04
+    #> 2024-06-24 02:00:00    9.534e-05
+    #> 2024-06-24 10:00:00    1.000e-04
+    #> 2024-06-24 18:00:00    7.488e-05
+    #> 2024-06-25 02:00:00    7.447e-05
+    #> 2024-06-25 10:00:00    5.949e-05
+    #> 2024-06-25 18:00:00    7.752e-05
 
 </details>
 
@@ -303,12 +310,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-09 02:00:00      83482.29
-    #> 2024-06-10 02:00:00      83577.76
-    #> 2024-06-11 02:00:00      85572.68
-    #> 2024-06-12 02:00:00      82672.34
-    #> 2024-06-13 02:00:00      81189.44
-    #> 2024-06-14 02:00:00      82145.94
+    #> 2024-06-20 02:00:00      75443.81
+    #> 2024-06-21 02:00:00      74377.63
+    #> 2024-06-22 02:00:00      76738.13
+    #> 2024-06-23 02:00:00      78036.86
+    #> 2024-06-24 02:00:00      77593.99
+    #> 2024-06-25 02:00:00      76111.90
 
 </details>
 
