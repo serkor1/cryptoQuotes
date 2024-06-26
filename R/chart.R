@@ -48,7 +48,11 @@
 #' * \code{deficiency}  A <[logical]>-value of [length] 1. [FALSE] by default.
 #' If [TRUE], all [chart()]-elements are colorblind friendly
 #' * \code{size} A <[numeric]>-value of [length] 1. The relative size of the
-#' main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
+#' main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
+#' * \code{modebar} A <[logical]>-value of [length] 1. [TRUE] by default. If [FALSE]
+#' a [plotly] modebar will be displayed.
+#' * \code{palette} A <[character]>-vector of [length] 1. "hawaii" by default. See [hcl.pals()] for
+#' all possible color palettes.
 #'
 #' ## Charting Events
 #'
@@ -67,9 +71,7 @@
 #' @export
 chart <- function(
     ticker,
-    main = list(
-      kline()
-    ),
+    main = kline(),
     sub = list(),
     indicator = list(),
     event_data = NULL,
@@ -136,6 +138,8 @@ chart <- function(
     dark       = TRUE,
     slider     = FALSE,
     deficiency = FALSE,
+    modebar    = TRUE,
+    palette    = "hawaii",
     size       = 0.6
   )
 
@@ -149,7 +153,8 @@ chart <- function(
   deficiency <- options$deficiency
   slider <- options$slider
   size   <- options$size
-
+  modebar <- options$modebar
+  palette <- options$palette
 
   candle_color <- movement_color(deficiency = deficiency)
 
@@ -231,7 +236,11 @@ chart <- function(
   # hcl.colors are colorblind friendly. See:
   # https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible
   n_colors <- length(unlist(call_list))
-  colorway <- grDevices::hcl.colors(n = n_colors)
+  # colorway <- grDevices::hcl.colors(n = n_colors)
+  colorway <- grDevices::hcl.colors(
+    n       = n_colors,
+    palette = palette
+  )
 
   plot_list <- lapply(
     X = plot_list,
@@ -269,13 +278,32 @@ chart <- function(
     )
   )
 
-  bar(
-    dark = dark,
-    plot = plot,
-    name = name,
-    market = market,
-    date_range = paste(range(zoo::index(ticker)), collapse = " - ")
+  plotly::config(
+    p = bar(
+      dark = dark,
+      plot = plot,
+      name = name,
+      market = market,
+      date_range = paste(range(zoo::index(ticker)), collapse = " - "),
+      modebar = modebar
+    ),
+    editable = TRUE,
+    responsive = TRUE,
+    displayModeBar = modebar,
+    modeBarButtonsToAdd = c(
+      "drawline",
+      "drawrect",
+      "eraseshape"
+    ),
+    toImageButtonOptions = list(
+      format   = "svg",
+      filename = "chart",
+      height   = 2160,
+      width    = 3840,
+      scale    = 1
+    )
   )
+
 
 }
 

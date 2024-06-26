@@ -7,6 +7,69 @@
 
 ## Improvements
 
+### Charting
+
+- The `chart()`-function are now exported as `.svg`-images in 4k
+  resolution via the `modebar`.
+- The `chart()`-function are now more interactive and supports drawing
+  lines and rectangles via the `modebar`. It is also possible to
+  interactively change the `title` and `subtitle` by double clicking
+  these (Thank you @andreltr for the suggestion. See
+  [Discussion](https://github.com/serkor1/cryptoQuotes/discussions/19).
+- The `chart()`-function now has a new option `modebar` that is equal to
+  `TRUE` by default. If `FALSE` no `modebar` will appear on the `chart`
+- The `chart()`-function now has a new option `palette` that is set to
+  “hawaii” by default. See \[hcl.pals()\] for accepted values.
+
+<details>
+<summary>
+Without modebar (Default Palette)
+</summary>
+
+``` r
+# modebar = FALSE
+chart(
+  ticker  = BTC,
+  main    = kline(),
+    indicator = line(
+    sma(n = 7),
+    sma(n = 14),
+    sma(n = 21)
+  ),
+  options = list(
+    modebar = FALSE,
+    palette = "hawaii"
+  ) 
+)
+```
+
+<img src="man/figures/NEWS-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+</details>
+<details>
+<summary>
+With modebar (“Set 3” palette)
+</summary>
+
+``` r
+# modebar = TRUE
+chart(
+  ticker  = BTC,
+  main    = kline(),
+  indicator = line(
+    sma(n = 7),
+    sma(n = 14),
+    sma(n = 21)
+  ),
+  options = list(
+    modebar = TRUE,
+    palette = "Set 3"
+  ) 
+)
+```
+
+<img src="man/figures/NEWS-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+</details>
+
 ### Supported Exchanges (Issue [\#14](https://github.com/serkor1/cryptoQuotes/issues/14))
 
 {cryptoQuotes} now supports the following exchanges:
@@ -74,7 +137,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 </details>
 
 ### Expanded Support
@@ -97,12 +160,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-25 15:00:00      2352.477
-    #> 2024-06-25 16:00:00      2449.550
-    #> 2024-06-25 17:00:00      2410.773
-    #> 2024-06-25 18:00:00      2375.286
-    #> 2024-06-25 19:00:00      2330.929
-    #> 2024-06-25 20:00:00      2327.498
+    #> 2024-06-26 08:00:00      2355.272
+    #> 2024-06-26 09:00:00      2414.858
+    #> 2024-06-26 10:00:00      2411.043
+    #> 2024-06-26 11:00:00      2390.814
+    #> 2024-06-26 12:00:00      2379.619
+    #> 2024-06-26 13:00:00      2363.744
 
 </details>
 
@@ -140,7 +203,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 </details>
 
 ### Documentation
@@ -254,7 +317,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 ### Exchange Support
 
@@ -283,12 +346,12 @@ tail(
 ```
 
     #>                     funding_rate
-    #> 2024-06-24 02:00:00    9.534e-05
-    #> 2024-06-24 10:00:00    1.000e-04
     #> 2024-06-24 18:00:00    7.488e-05
     #> 2024-06-25 02:00:00    7.447e-05
     #> 2024-06-25 10:00:00    5.949e-05
     #> 2024-06-25 18:00:00    7.752e-05
+    #> 2024-06-26 02:00:00    1.000e-04
+    #> 2024-06-26 10:00:00    1.000e-04
 
 </details>
 
@@ -310,12 +373,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-20 02:00:00      75443.81
     #> 2024-06-21 02:00:00      74377.63
     #> 2024-06-22 02:00:00      76738.13
     #> 2024-06-23 02:00:00      78036.86
     #> 2024-06-24 02:00:00      77593.99
     #> 2024-06-25 02:00:00      76111.90
+    #> 2024-06-26 02:00:00      75584.46
 
 </details>
 

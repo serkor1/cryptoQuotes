@@ -6,7 +6,7 @@
 \usage{
 chart(
   ticker,
-  main = list(kline()),
+  main = kline(),
   sub = list(),
   indicator = list(),
   event_data = NULL,
@@ -59,7 +59,11 @@ If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is add
 \item \code{deficiency}  A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default.
 If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
 \item \code{size} A <\link{numeric}>-value of \link{length} 1. The relative size of the
-main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
+main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
+\item \code{modebar} A <\link{logical}>-value of \link{length} 1. \link{TRUE} by default. If \link{FALSE}
+a \link{plotly} modebar will be displayed.
+\item \code{palette} A <\link{character}>-vector of \link{length} 1. "hawaii" by default. See \code{\link[=hcl.pals]{hcl.pals()}} for
+all possible color palettes.
 }
 }
 
@@ -100,7 +104,7 @@ cryptoQuotes::chart(
 # script end;
 }
 \seealso{
-Other chart indicators: 
+Other chart indicators:
 \code{\link{add_event}()},
 \code{\link{alma}()},
 \code{\link{bollinger_bands}()},
@@ -120,7 +124,7 @@ Other chart indicators:
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other price charts: 
+Other price charts:
 \code{\link{kline}()},
 \code{\link{ohlc}()},
 \code{\link{pline}()}

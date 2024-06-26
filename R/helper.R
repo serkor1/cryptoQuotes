@@ -943,6 +943,7 @@ bar <- function(
     name,
     market,
     date_range,
+    modebar,
     ...) {
 
   # 0) chart theme
@@ -965,7 +966,7 @@ bar <- function(
 
   plot <- plotly::layout(
     p = plot,
-    margin = list(l = 5, r = 5, b = 5, t = 65),
+    margin = list(l = 5, r = 5, b = 5, t = if(modebar) 85 else 55),
     paper_bgcolor = theme$paper_bgcolor,
     plot_bgcolor  = theme$plot_bgcolor,
     font = list(

@@ -29,6 +29,53 @@ library(cryptoQuotes)
 
 ## Improvements
 
+### Charting
+
+* The `chart()`-function are now exported as `.svg`-images in 4k resolution via the `modebar`.
+* The `chart()`-function are now more interactive and supports drawing lines and rectangles via the `modebar`. It is also possible to interactively change the `title` and `subtitle` by double clicking these (Thank you @andreltr for the suggestion. See [Discussion](https://github.com/serkor1/cryptoQuotes/discussions/19).
+* The `chart()`-function now has a new option `modebar` that is equal to `TRUE` by default. If `FALSE` no `modebar` will appear on the `chart`
+* The `chart()`-function now has a new option `palette` that is set to "hawaii" by default. See [hcl.pals()] for accepted values.
+
+<details>
+<summary>Without modebar (Default Palette) </summary>
+```{r}
+# modebar = FALSE
+chart(
+  ticker  = BTC,
+  main    = kline(),
+    indicator = line(
+    sma(n = 7),
+    sma(n = 14),
+    sma(n = 21)
+  ),
+  options = list(
+    modebar = FALSE,
+    palette = "hawaii"
+  ) 
+)
+```
+</details>
+
+<details>
+<summary>With modebar ("Set 3" palette)</summary>
+```{r}
+# modebar = TRUE
+chart(
+  ticker  = BTC,
+  main    = kline(),
+  indicator = line(
+    sma(n = 7),
+    sma(n = 14),
+    sma(n = 21)
+  ),
+  options = list(
+    modebar = TRUE,
+    palette = "Set 3"
+  ) 
+)
+```
+</details>
+
 ### Supported Exchanges (Issue [#14](https://github.com/serkor1/cryptoQuotes/issues/14))
 
 {cryptoQuotes} now supports the following exchanges:
