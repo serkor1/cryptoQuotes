@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-# cryptoQuotes (Development version)
+# cryptoQuotes 1.3.2
 
 ## General
 

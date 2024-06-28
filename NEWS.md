@@ -1,7 +1,7 @@
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-# cryptoQuotes (Development version)
+# cryptoQuotes 1.3.2
 
 ## General
 
@@ -168,7 +168,7 @@ tail(
     #> 2024-06-28 20:00:00      2408.566
     #> 2024-06-28 21:00:00      2409.375
     #> 2024-06-28 22:00:00      2399.027
-    #> 2024-06-28 23:00:00      2396.589
+    #> 2024-06-28 23:00:00      2397.890
 
 </details>
 
