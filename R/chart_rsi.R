@@ -150,7 +150,7 @@ rsi <- function(
           list(
             text = paste0("RSI(", n, ")"),
             font = list(
-              size = 16
+              size = 16 * args$scale
             ),
             x = 0,
             y = 1,

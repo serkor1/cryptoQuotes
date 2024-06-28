@@ -63,7 +63,7 @@ testthat::test_that(
 
         # 2) for each market we
         # test two intervals
-        intervals <- c("1d", "1h")
+        intervals <- c("1d", "15m")
 
         for (interval in intervals) {
 
@@ -85,7 +85,7 @@ testthat::test_that(
               interval = interval,
               futures  = futures
             ),
-            message = error_label
+            message = paste(error_label, "(Test 0)")
           )
 
           # 2) test wether the
@@ -98,7 +98,7 @@ testthat::test_that(
               output$close >= output$low,
               output$close <= output$high
             ),
-            label = error_label
+            label = paste(error_label, "(Test 1)")
           )
 
           # 2) check if the returned
@@ -107,7 +107,7 @@ testthat::test_that(
             object = nrow(output),
             tolerance = 1,
             expected = 200,
-            label = error_label
+            label = paste(error_label, "(Test 2)")
           )
 
           # 3) test if dates are reasonable
@@ -126,7 +126,7 @@ testthat::test_that(
               min(date_range) >= 2000,
               max(date_range) <= as.numeric(format(Sys.Date(), "%Y"))
             ),
-            label = error_label
+            label = paste(error_label, "(Test 3)")
           )
 
 

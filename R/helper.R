@@ -943,6 +943,8 @@ bar <- function(
     name,
     market,
     date_range,
+    modebar,
+    scale,
     ...) {
 
   # 0) chart theme
@@ -965,13 +967,14 @@ bar <- function(
 
   plot <- plotly::layout(
     p = plot,
-    margin = list(l = 5, r = 5, b = 5, t = 65),
+    margin = list(l = 5, r = 5, b = 5, t = if(modebar) 85 else 55),
     paper_bgcolor = theme$paper_bgcolor,
     plot_bgcolor  = theme$plot_bgcolor,
     font = list(
-      size = 14,
+      size = 14 * scale,
       color = theme$font_color
     ),
+    showlegend = TRUE,
     legend = list(
       orientation = 'h',
       x = 0,
@@ -980,14 +983,14 @@ bar <- function(
       title = list(
         text = "<b>Indicators:</b>",
         font = list(
-          size = 16
+          size = 16 * scale
         )
       )
     ),
     title = list(
       text = title_text,
       font = list(
-        size = 20
+        size = 20 * scale
       ),
       x = 1,
       xref = "paper",
@@ -1099,8 +1102,7 @@ normalize <- function(
 
 check_indicator_call <- function(
     system_calls = sys.calls(),
-    caller       = match.call(envir = parent.frame())
-    ) {
+    caller       = match.call(envir = parent.frame())) {
 
   # 0) get the entire call stack
   # to determine the calling function
@@ -1110,9 +1112,11 @@ check_indicator_call <- function(
 
   # 1) get the calling calling
   # function, ie. SMA, EMA etc
+  calling_function <- sys.call(-1)
+
   calling_function <- as.character(
-    sys.call(-1)[[1]]
-  )
+    calling_function[[1]]
+    )[length(calling_function)]
 
   # 2) check the location
   # of chart

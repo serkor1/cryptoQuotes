@@ -31,7 +31,7 @@ cryptocurrency exchanges,
 
 <div align="center">
 
-<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Supported exchanges
 </caption>
@@ -106,7 +106,7 @@ exchanges,
 
 <div align="center">
 
-<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Supported exchanges, markets and intervals.
 </caption>
@@ -321,7 +321,7 @@ BTC <- cryptoQuotes::get_quote(
 
 <div align="center">
 
-<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Bitcoin (BTC) OHLC-V data
 </caption>
@@ -350,122 +350,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-06-14 22:30:00
+2024-06-26 09:30:00
 </td>
 <td style="text-align:center;">
-65904.02
+61616.15
 </td>
 <td style="text-align:center;">
-65970.23
+61800
 </td>
 <td style="text-align:center;">
-65684.51
+61530
 </td>
 <td style="text-align:center;">
-65766.41
+61720.02
 </td>
 <td style="text-align:left;">
-359.54263
+563.44065
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-14 23:00:00
+2024-06-26 10:00:00
 </td>
 <td style="text-align:center;">
-65766.41
+61720.02
 </td>
 <td style="text-align:center;">
-66116
+61754.6
 </td>
 <td style="text-align:center;">
-65725.77
+61370.44
 </td>
 <td style="text-align:center;">
-66115.99
+61516.76
 </td>
 <td style="text-align:left;">
-471.45724
+526.99201
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-14 23:30:00
+2024-06-26 10:30:00
 </td>
 <td style="text-align:center;">
-66116
+61516.76
 </td>
 <td style="text-align:center;">
-66627.52
+61574.82
 </td>
 <td style="text-align:center;">
-66024.05
+61420.6
 </td>
 <td style="text-align:center;">
-66196.01
+61472.48
 </td>
 <td style="text-align:left;">
-1371.69275
+333.3796
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-15
+2024-06-26 11:00:00
 </td>
 <td style="text-align:center;">
-66196.01
+61472.48
 </td>
 <td style="text-align:center;">
-66252
+61510
 </td>
 <td style="text-align:center;">
-65882.35
+61345.3
 </td>
 <td style="text-align:center;">
-65965.2
+61506.01
 </td>
 <td style="text-align:left;">
-652.98617
+380.72475
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-15 00:30:00
+2024-06-26 11:30:00
 </td>
 <td style="text-align:center;">
-65965.2
+61506.01
 </td>
 <td style="text-align:center;">
-66059.13
+61524.34
 </td>
 <td style="text-align:center;">
-65932.01
+61310
 </td>
 <td style="text-align:center;">
-66014.01
+61376.73
 </td>
 <td style="text-align:left;">
-216.04381
+281.9244
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-15 01:00:00
+2024-06-26 12:00:00
 </td>
 <td style="text-align:center;">
-66014.01
+61376.73
 </td>
 <td style="text-align:center;">
-66014.01
+61418.82
 </td>
 <td style="text-align:center;">
-65920.01
+61331.17
 </td>
 <td style="text-align:center;">
-65927.72
+61345.79
 </td>
 <td style="text-align:left;">
-84.35921
+57.90815
 </td>
 </tr>
 </tbody>
@@ -496,7 +496,7 @@ indicators please refer to the documentation on
 
 <div align="center">
 
-<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 Available sentiment indicators by exchange
 </caption>
@@ -646,7 +646,7 @@ BTC_LS <- cryptoQuotes::get_lsratio(
 
 <div align="center">
 
-<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Long-Short Ratio on Bitcoin (BTC)
 </caption>
@@ -669,86 +669,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-06-14 22:30:00
+2024-06-26 09:30:00
 </td>
 <td style="text-align:center;">
-0.703
+0.713
 </td>
 <td style="text-align:center;">
-0.297
+0.287
 </td>
 <td style="text-align:center;">
-2.362
+2.483
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-14 23:00:00
+2024-06-26 10:00:00
 </td>
 <td style="text-align:center;">
-0.7
+0.713
 </td>
 <td style="text-align:center;">
-0.3
+0.287
 </td>
 <td style="text-align:center;">
-2.338
+2.481
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-14 23:30:00
+2024-06-26 10:30:00
 </td>
 <td style="text-align:center;">
-0.703
+0.709
 </td>
 <td style="text-align:center;">
-0.297
+0.292
 </td>
 <td style="text-align:center;">
-2.365
+2.431
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-15
+2024-06-26 11:00:00
 </td>
 <td style="text-align:center;">
-0.7
+0.707
 </td>
 <td style="text-align:center;">
-0.3
+0.293
 </td>
 <td style="text-align:center;">
-2.33
+2.413
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-15 00:30:00
+2024-06-26 11:30:00
 </td>
 <td style="text-align:center;">
-0.699
+0.706
 </td>
 <td style="text-align:center;">
-0.301
+0.294
 </td>
 <td style="text-align:center;">
-2.319
+2.396
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-15 01:00:00
+2024-06-26 12:00:00
 </td>
 <td style="text-align:center;">
-0.699
+0.704
 </td>
 <td style="text-align:center;">
-0.301
+0.296
 </td>
 <td style="text-align:center;">
-2.323
+2.383
 </td>
 </tr>
 </tbody>
