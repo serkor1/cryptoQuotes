@@ -33,11 +33,13 @@ library(cryptoQuotes)
 
 * The `chart()`-function are now exported as `.svg`-images in 4k resolution via the `modebar`.
 * The `chart()`-function are now more interactive and supports drawing lines and rectangles via the `modebar`. It is also possible to interactively change the `title` and `subtitle` by double clicking these (Thank you @andreltr for the suggestion. See [Discussion](https://github.com/serkor1/cryptoQuotes/discussions/19).
-* The `chart()`-function now has a new option `modebar` that is equal to `TRUE` by default. If `FALSE` no `modebar` will appear on the `chart`
+* The `chart()`-function now has a new option `static` that is equal to `FALSE` by default. If `FALSE` the chart can be edited, annotated and explored interactively.
 * The `chart()`-function now has a new option `palette` that is set to "hawaii" by default. See [hcl.pals()] for accepted values.
+* The `chart()`-function now has a new option `scale` that is set to 1 by default. Scales
+#' all fonts on the chart.
 
 <details>
-<summary>Without modebar (Default Palette) </summary>
+<summary>Static set to FALSE (Default Palette) </summary>
 ```{r}
 # modebar = FALSE
 chart(
@@ -49,7 +51,7 @@ chart(
     sma(n = 21)
   ),
   options = list(
-    modebar = FALSE,
+    static = FALSE,
     palette = "hawaii"
   ) 
 )
@@ -57,7 +59,7 @@ chart(
 </details>
 
 <details>
-<summary>With modebar ("Set 3" palette)</summary>
+<summary>Static set to TRUE ("Set 3" palette)</summary>
 ```{r}
 # modebar = TRUE
 chart(
@@ -69,7 +71,7 @@ chart(
     sma(n = 21)
   ),
   options = list(
-    modebar = TRUE,
+    static  = TRUE,
     palette = "Set 3"
   ) 
 )

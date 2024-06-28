@@ -55,13 +55,15 @@ indicators like \link{sma} and \link{bollinger_bands}.
 \item \code{dark} A <\link{logical}>-value of \link{length} 1. \link{TRUE} by default.
 Sets the overall theme of the \code{\link[=chart]{chart()}}
 \item \code{slider} A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default.
-If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added
+If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added.
 \item \code{deficiency}  A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default.
 If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
 \item \code{size} A <\link{numeric}>-value of \link{length} 1. The relative size of the
 main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
-\item \code{modebar} A <\link{logical}>-value of \link{length} 1. \link{TRUE} by default. If \link{FALSE}
-a \link{plotly} modebar will be displayed.
+\item \code{scale} A <\link{numeric}>-value of \link{length} 1. 1 by default. Scales
+all fonts on the chart.
+\item \code{static} A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default. If \link{FALSE}
+the chart can be edited, annotated and explored interactively.
 \item \code{palette} A <\link{character}>-vector of \link{length} 1. "hawaii" by default. See \code{\link[=hcl.pals]{hcl.pals()}} for
 all possible color palettes.
 }
@@ -104,7 +106,7 @@ cryptoQuotes::chart(
 # script end;
 }
 \seealso{
-Other chart indicators:
+Other chart indicators: 
 \code{\link{add_event}()},
 \code{\link{alma}()},
 \code{\link{bollinger_bands}()},
@@ -124,7 +126,7 @@ Other chart indicators:
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other price charts:
+Other price charts: 
 \code{\link{kline}()},
 \code{\link{ohlc}()},
 \code{\link{pline}()}

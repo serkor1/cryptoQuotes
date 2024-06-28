@@ -944,6 +944,7 @@ bar <- function(
     market,
     date_range,
     modebar,
+    scale,
     ...) {
 
   # 0) chart theme
@@ -970,7 +971,7 @@ bar <- function(
     paper_bgcolor = theme$paper_bgcolor,
     plot_bgcolor  = theme$plot_bgcolor,
     font = list(
-      size = 14,
+      size = 14 * scale,
       color = theme$font_color
     ),
     showlegend = TRUE,
@@ -982,14 +983,14 @@ bar <- function(
       title = list(
         text = "<b>Indicators:</b>",
         font = list(
-          size = 16
+          size = 16 * scale
         )
       )
     ),
     title = list(
       text = title_text,
       font = list(
-        size = 20
+        size = 20 * scale
       ),
       x = 1,
       xref = "paper",

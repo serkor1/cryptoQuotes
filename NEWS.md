@@ -16,14 +16,17 @@
   interactively change the `title` and `subtitle` by double clicking
   these (Thank you @andreltr for the suggestion. See
   [Discussion](https://github.com/serkor1/cryptoQuotes/discussions/19).
-- The `chart()`-function now has a new option `modebar` that is equal to
-  `TRUE` by default. If `FALSE` no `modebar` will appear on the `chart`
+- The `chart()`-function now has a new option `static` that is equal to
+  `FALSE` by default. If `FALSE` the chart can be edited, annotated and
+  explored interactively.
 - The `chart()`-function now has a new option `palette` that is set to
   “hawaii” by default. See \[hcl.pals()\] for accepted values.
+- The `chart()`-function now has a new option `scale` that is set to 1
+  by default. Scales \#’ all fonts on the chart.
 
 <details>
 <summary>
-Without modebar (Default Palette)
+Static set to FALSE (Default Palette)
 </summary>
 
 ``` r
@@ -37,7 +40,7 @@ chart(
     sma(n = 21)
   ),
   options = list(
-    modebar = FALSE,
+    static = FALSE,
     palette = "hawaii"
   ) 
 )
@@ -47,7 +50,7 @@ chart(
 </details>
 <details>
 <summary>
-With modebar (“Set 3” palette)
+Static set to TRUE (“Set 3” palette)
 </summary>
 
 ``` r
@@ -61,7 +64,7 @@ chart(
     sma(n = 21)
   ),
   options = list(
-    modebar = TRUE,
+    static  = TRUE,
     palette = "Set 3"
   ) 
 )
@@ -160,12 +163,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-26 08:00:00      2355.272
-    #> 2024-06-26 09:00:00      2414.858
-    #> 2024-06-26 10:00:00      2411.043
-    #> 2024-06-26 11:00:00      2390.814
-    #> 2024-06-26 12:00:00      2379.619
-    #> 2024-06-26 13:00:00      2363.744
+    #> 2024-06-28 18:00:00      2422.880
+    #> 2024-06-28 19:00:00      2419.634
+    #> 2024-06-28 20:00:00      2408.566
+    #> 2024-06-28 21:00:00      2409.375
+    #> 2024-06-28 22:00:00      2399.027
+    #> 2024-06-28 23:00:00      2396.589
 
 </details>
 
@@ -346,12 +349,12 @@ tail(
 ```
 
     #>                     funding_rate
-    #> 2024-06-24 18:00:00    7.488e-05
-    #> 2024-06-25 02:00:00    7.447e-05
-    #> 2024-06-25 10:00:00    5.949e-05
-    #> 2024-06-25 18:00:00    7.752e-05
-    #> 2024-06-26 02:00:00    1.000e-04
-    #> 2024-06-26 10:00:00    1.000e-04
+    #> 2024-06-27 02:00:00        1e-04
+    #> 2024-06-27 10:00:00        1e-04
+    #> 2024-06-27 18:00:00        1e-04
+    #> 2024-06-28 02:00:00        1e-04
+    #> 2024-06-28 10:00:00        1e-04
+    #> 2024-06-28 18:00:00        1e-04
 
 </details>
 
@@ -373,12 +376,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-21 02:00:00      74377.63
-    #> 2024-06-22 02:00:00      76738.13
     #> 2024-06-23 02:00:00      78036.86
     #> 2024-06-24 02:00:00      77593.99
     #> 2024-06-25 02:00:00      76111.90
     #> 2024-06-26 02:00:00      75584.46
+    #> 2024-06-27 02:00:00      74876.90
+    #> 2024-06-28 02:00:00      74906.65
 
 </details>
 

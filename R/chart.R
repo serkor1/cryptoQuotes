@@ -43,14 +43,22 @@
 #'
 #' * \code{dark} A <[logical]>-value of [length] 1. [TRUE] by default.
 #' Sets the overall theme of the [chart()]
+#'
 #' * \code{slider} A <[logical]>-value of [length] 1. [FALSE] by default.
-#' If [TRUE], a [plotly::rangeslider()] is added
+#' If [TRUE], a [plotly::rangeslider()] is added.
+#'
 #' * \code{deficiency}  A <[logical]>-value of [length] 1. [FALSE] by default.
 #' If [TRUE], all [chart()]-elements are colorblind friendly
+#'
 #' * \code{size} A <[numeric]>-value of [length] 1. The relative size of the
 #' main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
-#' * \code{modebar} A <[logical]>-value of [length] 1. [TRUE] by default. If [FALSE]
-#' a [plotly] modebar will be displayed.
+#'
+#' * \code{scale} A <[numeric]>-value of [length] 1. 1 by default. Scales
+#' all fonts on the chart.
+#'
+#' * \code{static} A <[logical]>-value of [length] 1. [FALSE] by default. If [FALSE]
+#' the chart can be edited, annotated and explored interactively.
+#'
 #' * \code{palette} A <[character]>-vector of [length] 1. "hawaii" by default. See [hcl.pals()] for
 #' all possible color palettes.
 #'
@@ -135,11 +143,12 @@ chart <- function(
   ## 1) set chart options
   ## globally (locally)
   default_options <- list(
+    static     = FALSE,
     dark       = TRUE,
     slider     = FALSE,
     deficiency = FALSE,
-    modebar    = TRUE,
     palette    = "hawaii",
+    scale      = 1,
     size       = 0.6
   )
 
@@ -149,14 +158,67 @@ chart <- function(
     keep.null = TRUE
   )
 
-  dark <- options$dark
-  deficiency <- options$deficiency
-  slider <- options$slider
-  size   <- options$size
-  modebar <- options$modebar
-  palette <- options$palette
-
+  dark         <- options$dark
+  deficiency   <- options$deficiency
+  slider       <- options$slider
+  size         <- options$size
+  palette      <- options$palette
+  static       <- options$static
   candle_color <- movement_color(deficiency = deficiency)
+  scale        <- options$scale
+
+  if (static) {
+
+    # if the plot is static
+    # then turn off modebar
+    # slider and editable
+
+    modebar <- slider <- editable <- FALSE
+
+  } else {
+
+    # the modebar and editable
+    # part of the plot should
+    # always be set to true
+    # for "real" interactivitiy
+    modebar <- editable <- TRUE
+
+
+  }
+
+  # assert inputs and options
+  assert(
+    any(grepl(pattern = palette,x = grDevices::hcl.pals(),ignore.case = TRUE)),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Palette {.val %s} is not valid.",
+        palette
+      ),
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "hcl.pals()",
+          code_theme = "chaos"
+        ),
+        "for valid values."
+      )
+    )
+  )
+
+  assert(
+    size > 0 & size < 1,
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Got {.arg size} %s.",
+        size
+      ),
+      "i" = sprintf(
+        fmt = "{.arg size} has to be between 0 and 1, non-inclusive."
+      )
+    )
+  )
+
+
 
   # 1) generate list
   # of calls for lazy
@@ -177,6 +239,7 @@ chart <- function(
       .f$interval <- interval
       .f$candle_color <- candle_color
       .f$deficiency <- deficiency
+      .f$scale <- scale
       eval(.f)
     },
     flatten(list(call_list$main, call_list$sub))
@@ -285,10 +348,12 @@ chart <- function(
       name = name,
       market = market,
       date_range = paste(range(zoo::index(ticker)), collapse = " - "),
-      modebar = modebar
+      modebar = modebar,
+      scale = scale
     ),
-    editable = TRUE,
-    responsive = TRUE,
+    staticPlot     = static,
+    editable       = editable,
+    responsive     = TRUE,
     displayModeBar = modebar,
     modeBarButtonsToAdd = c(
       "drawline",

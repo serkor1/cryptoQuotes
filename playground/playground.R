@@ -13,28 +13,24 @@ chart(
   ticker = BTC,
   main   = kline(),
   indicator = list(
-    sma(n = 11),
-    sma(n = 12),
-    sma(n = 13),
-    sma(n = 14),
-    sma(n = 15),
-    sma(n = 16),
-    sma(n = 17),
-    sma(n = 18),
-    sma(n = 19),
-    sma(n = 20),
-    sma(n = 21),
-    sma(n = 22),
-    sma(n = 23)
+    sma()
   ),
   sub    = list(
-    volume()
+    volume(),
+    macd()
   ),
   options = list(
-    dark    = FALSE
+    dark    = TRUE,
+    size = 0.7,
+    modebar = FALSE,
+    slider = TRUE,
+    static = FALSE,
+    scale = 1
   )
 )
 
+
+"hawii" %in% hcl.pals()
 
 
 grDevices::palette.colors(
@@ -60,3 +56,15 @@ output[!output$open >= output$low]
 
 
 # script end;
+
+
+
+library(plotly)
+library(magrittr)
+
+df <- data.frame(Date = seq(as.Date("2016-01-01"), as.Date("2016-08-31"), by="days"),
+                 Value = sample(100:200, size = 244, replace = T))
+
+p <- plot_ly(data = df, x = ~Date, y = ~Value, type = "scatter") %>%
+  layout(xaxis = list(rangeslider = list(type = "date", traces = FALSE, thickness = 0.1)  ))
+p
