@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cryptoQuotes: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="154" alt="cryptocurrency in R"/></a>
+# {cryptoQuotes}: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="154" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
 
@@ -19,19 +19,19 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 ## :information_source: About
 
-The `cryptoQuotes`-package is a high-level API client for accessing
-public market data endpoints on major cryptocurrency exchanges. It
-supports open, high, low, close and volume (OHLC-V) data and a variety
-of sentiment indicators; the market data is high quality and can be
-retrieved in intervals ranging from *seconds* to *months*. All the
-market data is accessed and processed without relying on crawlers, or
-API keys, ensuring an open, and reliable, access for researchers,
-traders and students alike. There are currently 8 supported
-cryptocurrency exchanges,
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) is a
+high-level API client for accessing public market data endpoints on
+major cryptocurrency exchanges. It supports open, high, low, close and
+volume (OHLC-V) data and a variety of sentiment indicators; the market
+data is high quality and can be retrieved in intervals ranging from
+*seconds* to *months*. All the market data is accessed and processed
+without relying on crawlers, or API keys, ensuring an open, and
+reliable, access for researchers, traders and students alike. There are
+currently 8 supported cryptocurrency exchanges,
 
 <div align="center">
 
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Supported exchanges
 </caption>
@@ -70,27 +70,28 @@ mexc
 </div>
 
 All data is returned as
-[`xts`](https://github.com/joshuaulrich/xts)-objects which enables
+[{xts}](https://github.com/joshuaulrich/xts)-objects which enables
 seamless interaction with with
-[`quantmod`](https://github.com/joshuaulrich/quantmod) and
-[`TTR`](https://github.com/joshuaulrich/TTR), for developing and
+[{quantmod}](https://github.com/joshuaulrich/quantmod) and
+[{TTR}](https://github.com/joshuaulrich/TTR), for developing and
 evaluating trading strategies or general purpose cryptocurrency market
 analysis with a historical or temporal perspective.
 
 ## :information_source: Overview
 
-The `cryptoQuotes`-package has *two* main features; retrieving
-cryptocurrency market data, and charting. The market data consists of
-*OHLC-V* data and sentiment indicators; including, but not limited to,
-cryptocurrency *fear and greed index*, *long-short ratio* and *open
-interest*. All market data is retrieved using the family of
-`get_*`-functions. To get a full overview of the package and
-functionality please see the documentation on
-[pkgdown](https://serkor1.github.io/cryptoQuotes/).
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) has *two* main
+features; retrieving cryptocurrency market data, and charting. The
+market data consists of *OHLC-V* data and sentiment indicators;
+including, but not limited to, cryptocurrency *fear and greed index*,
+*long-short ratio* and *open interest*. All market data is retrieved
+using the family of `get_*`-functions. To get a full overview of the
+package and functionality please see the documentation via
+[{pkgdown}](https://serkor1.github.io/cryptoQuotes/).
 
-> **Note:** Given the nature of crypotcurrency data and general
-> legislative restrictions, some `exchanges` may not work in your
-> geolocation.
+> \[!WARNING\]
+>
+> Given the nature of crypotcurrency data and general legislative
+> restrictions, some `exchanges` may not work in your geolocation.
 
 Below is a quick overview of the package and basic usage examples on
 retrieving and charting Bitcoin (BTC) *OHLC-V* and *long-short ratio* in
@@ -106,7 +107,7 @@ exchanges,
 
 <div align="center">
 
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Supported exchanges, markets and intervals.
 </caption>
@@ -321,7 +322,7 @@ BTC <- cryptoQuotes::get_quote(
 
 <div align="center">
 
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Bitcoin (BTC) OHLC-V data
 </caption>
@@ -350,122 +351,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-06-26 09:30:00
+2024-06-28 22:30:00
 </td>
 <td style="text-align:center;">
-61616.15
+60286.02
 </td>
 <td style="text-align:center;">
-61800
+60339.6
 </td>
 <td style="text-align:center;">
-61530
+60209.15
 </td>
 <td style="text-align:center;">
-61720.02
+60229.92
 </td>
 <td style="text-align:left;">
-563.44065
+228.45504
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 10:00:00
+2024-06-28 23:00:00
 </td>
 <td style="text-align:center;">
-61720.02
+60229.92
 </td>
 <td style="text-align:center;">
-61754.6
+60373.56
 </td>
 <td style="text-align:center;">
-61370.44
+60132.83
 </td>
 <td style="text-align:center;">
-61516.76
+60282.12
 </td>
 <td style="text-align:left;">
-526.99201
+316.79215
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 10:30:00
+2024-06-28 23:30:00
 </td>
 <td style="text-align:center;">
-61516.76
+60282.12
 </td>
 <td style="text-align:center;">
-61574.82
+60400
 </td>
 <td style="text-align:center;">
-61420.6
+60270.05
 </td>
 <td style="text-align:center;">
-61472.48
+60366.01
 </td>
 <td style="text-align:left;">
-333.3796
+146.84163
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 11:00:00
+2024-06-29
 </td>
 <td style="text-align:center;">
-61472.48
+60366
 </td>
 <td style="text-align:center;">
-61510
+60412.4
 </td>
 <td style="text-align:center;">
-61345.3
+60305.01
 </td>
 <td style="text-align:center;">
-61506.01
+60306.01
 </td>
 <td style="text-align:left;">
-380.72475
+268.93211
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 11:30:00
+2024-06-29 00:30:00
 </td>
 <td style="text-align:center;">
-61506.01
+60306.01
 </td>
 <td style="text-align:center;">
-61524.34
+60391.16
 </td>
 <td style="text-align:center;">
-61310
+60293.88
 </td>
 <td style="text-align:center;">
-61376.73
+60367.99
 </td>
 <td style="text-align:left;">
-281.9244
+140.04982
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 12:00:00
+2024-06-29 01:00:00
 </td>
 <td style="text-align:center;">
-61376.73
+60367.99
 </td>
 <td style="text-align:center;">
-61418.82
+60427.97
 </td>
 <td style="text-align:center;">
-61331.17
+60360
 </td>
 <td style="text-align:center;">
-61345.79
+60420
 </td>
 <td style="text-align:left;">
-57.90815
+82.08988
 </td>
 </tr>
 </tbody>
@@ -479,24 +480,25 @@ volume
 
 #### Sentiment indicators
 
-The sentiment indicators available in the `cryptoQuotes`-package can be
-divided in two; *derived indicators* and *market indicators*. The former
-is calculated based on, for example, the price actions such as the
-*Moving Average Convergence Divergence* (MACD) indicator. The latter are
-public indicators such as the *long-short ratio* or *fear and greed
-index*; these are retrieved using the family of `get_*`-functions, while
-the derived indicators can be created using, for example,
-[`TTR`](https://github.com/joshuaulrich/TTR).
+The sentiment indicators available in
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) can be divided
+in two; *derived indicators* and *market indicators*. The former is
+calculated based on, for example, the price actions such as the *Moving
+Average Convergence Divergence* (MACD) indicator. The latter are public
+indicators such as the *long-short ratio* or *fear and greed index*;
+these are retrieved using the family of `get_*`-functions, while the
+derived indicators can be created using, for example,
+[{TTR}](https://github.com/joshuaulrich/TTR).
 
 In this overview we are focusing on *market indicators* made public by
 the cryptocurrency exchanges. For a full overview of sentiment
-indicators please refer to the documentation on
-[pkgdown](https://serkor1.github.io/cryptoQuotes/). All supported
+indicators please refer to the documentation via
+[{pkgdown}](https://serkor1.github.io/cryptoQuotes/). All supported
 *market indicators* by exchange are listed in the table below,
 
 <div align="center">
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <caption>
 Available sentiment indicators by exchange
 </caption>
@@ -524,10 +526,10 @@ Kucoin
 Crypto.com
 </th>
 <th style="text-align:center;">
-mexc
+MEXC
 </th>
 <th style="text-align:center;">
-huobi
+Huobi
 </th>
 </tr>
 </thead>
@@ -646,7 +648,7 @@ BTC_LS <- cryptoQuotes::get_lsratio(
 
 <div align="center">
 
-<table style="width:100%; margin-left: auto; margin-right: auto;" class="table">
+<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
 Long-Short Ratio on Bitcoin (BTC)
 </caption>
@@ -669,86 +671,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-06-26 09:30:00
+2024-06-28 22:30:00
 </td>
 <td style="text-align:center;">
-0.713
+0.751
 </td>
 <td style="text-align:center;">
-0.287
+0.249
 </td>
 <td style="text-align:center;">
-2.483
+3.011
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 10:00:00
+2024-06-28 23:00:00
 </td>
 <td style="text-align:center;">
-0.713
+0.751
 </td>
 <td style="text-align:center;">
-0.287
+0.249
 </td>
 <td style="text-align:center;">
-2.481
+3.021
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 10:30:00
+2024-06-28 23:30:00
 </td>
 <td style="text-align:center;">
-0.709
+0.752
 </td>
 <td style="text-align:center;">
-0.292
+0.248
 </td>
 <td style="text-align:center;">
-2.431
+3.036
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 11:00:00
+2024-06-29
 </td>
 <td style="text-align:center;">
-0.707
+0.754
 </td>
 <td style="text-align:center;">
-0.293
+0.246
 </td>
 <td style="text-align:center;">
-2.413
+3.062
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 11:30:00
+2024-06-29 00:30:00
 </td>
 <td style="text-align:center;">
-0.706
+0.753
 </td>
 <td style="text-align:center;">
-0.294
+0.247
 </td>
 <td style="text-align:center;">
-2.396
+3.052
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-26 12:00:00
+2024-06-29 01:00:00
 </td>
 <td style="text-align:center;">
-0.704
+0.755
 </td>
 <td style="text-align:center;">
-0.296
+0.245
 </td>
 <td style="text-align:center;">
-2.383
+3.088
 </td>
 </tr>
 </tbody>
@@ -762,10 +764,10 @@ ls_ratio
 
 ### :information_source: Charting
 
-Charting in the `cryptoQuotes`-package is built on
-[`plotly`](https://github.com/plotly/plotly.R) for interactivity. It
-supports *light* and *dark* themes, and accounts for *color-deficiency*
-via the `options`-argument in the `chart()`-function.
+Charting in [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) is
+built on [{plotly}](https://github.com/plotly/plotly.R) for
+interactivity. It supports *light* and *dark* themes, and accounts for
+*color-deficiency* via the `options`-argument in the `chart()`-function.
 
 #### Charting with indicators
 
@@ -789,6 +791,9 @@ cryptoQuotes::chart(
     cryptoQuotes::sma(n = 14),
     cryptoQuotes::sma(n = 21),
     cryptoQuotes::bollinger_bands()
+  ),
+  options = list(
+    static     = TRUE
   )
 )
 ```
@@ -821,7 +826,8 @@ cryptoQuotes::chart(
     cryptoQuotes::bollinger_bands()
   ),
   options = list(
-    deficiency = TRUE
+    deficiency = TRUE,
+    static     = TRUE
   )
 )
 ```
@@ -856,7 +862,8 @@ devtools::install_github(
 
 ## :information_source: Code of Conduct
 
-Please note that the `cryptoQuotes` project is released with a
-[Contributor Code of
+Please note that the
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) project is
+released with a [Contributor Code of
 Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

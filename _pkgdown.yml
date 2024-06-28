@@ -5,7 +5,8 @@ home:
 
   # description for google
   description: >
-    An open and unified access to cryptocurrency market data in R.
+    {cryptoQuotes}: Open access to cryptocurrency market data and
+    charts in R.
 
 navbar:
   type: inverse
