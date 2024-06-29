@@ -1,7 +1,7 @@
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-# cryptoQuotes 1.3.2
+# Version 1.3.2
 
 ## General
 
@@ -30,7 +30,7 @@ Static set to FALSE (Default Palette)
 </summary>
 
 ``` r
-# modebar = FALSE
+# static = FALSE
 chart(
   ticker  = BTC,
   main    = kline(),
@@ -54,7 +54,7 @@ Static set to TRUE (“Set 3” palette)
 </summary>
 
 ``` r
-# modebar = TRUE
+# static = TRUE
 chart(
   ticker  = BTC,
   main    = kline(),
@@ -75,7 +75,8 @@ chart(
 
 ### Supported Exchanges (Issue [\#14](https://github.com/serkor1/cryptoQuotes/issues/14))
 
-{cryptoQuotes} now supports the following exchanges:
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) now supports
+the following exchanges:
 
 - Crypto.com
 - Huobi
@@ -92,7 +93,7 @@ chart(
   unless a main-chart indicator were included. (Issue
   [\#13](https://github.com/serkor1/cryptoQuotes/issues/13))
 
-# cryptoQuotes 1.3.1
+# Version 1.3.1
 
 ## General
 
@@ -163,12 +164,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-28 18:00:00      2422.880
-    #> 2024-06-28 19:00:00      2419.634
-    #> 2024-06-28 20:00:00      2408.566
-    #> 2024-06-28 21:00:00      2409.375
-    #> 2024-06-28 22:00:00      2399.027
-    #> 2024-06-28 23:00:00      2397.890
+    #> 2024-06-29 06:00:00      2379.125
+    #> 2024-06-29 07:00:00      2378.733
+    #> 2024-06-29 08:00:00      2382.911
+    #> 2024-06-29 09:00:00      2387.832
+    #> 2024-06-29 10:00:00      2384.746
+    #> 2024-06-29 11:00:00      2372.406
 
 </details>
 
@@ -225,9 +226,10 @@ chart(
 - Removed dependency on `conflicted`-package.
 
 Prior to version `1.3.0` the `get*`-functions were following the syntax
-of `quantmod` closely, and this goes for the function naming too. With
-the adoption of the `tidyverse` style guide, there is no conflicts that
-needs to be resolved on `stable`- and `experimental`-functions.
+of [{quantmod}](https://github.com/joshuaulrich/quantmod) closely, and
+this goes for the function naming too. With the adoption of the
+`tidyverse` style guide, there is no conflicts that needs to be resolved
+on `stable`- and `experimental`-functions.
 
 ### New developper tools
 
@@ -254,7 +256,7 @@ needs to be resolved on `stable`- and `experimental`-functions.
 - Fixed a bug in the `chart()`-function where the inferred intervals
   would be incorrect for leap years, and months different from 30 days.
 
-# cryptoQuotes 1.3.0
+# Version 1.3.0
 
 ## Improvements
 
@@ -349,12 +351,12 @@ tail(
 ```
 
     #>                     funding_rate
-    #> 2024-06-27 02:00:00        1e-04
-    #> 2024-06-27 10:00:00        1e-04
     #> 2024-06-27 18:00:00        1e-04
     #> 2024-06-28 02:00:00        1e-04
     #> 2024-06-28 10:00:00        1e-04
     #> 2024-06-28 18:00:00        1e-04
+    #> 2024-06-29 02:00:00        1e-04
+    #> 2024-06-29 10:00:00        1e-04
 
 </details>
 
@@ -376,12 +378,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-23 02:00:00      78036.86
     #> 2024-06-24 02:00:00      77593.99
     #> 2024-06-25 02:00:00      76111.90
     #> 2024-06-26 02:00:00      75584.46
     #> 2024-06-27 02:00:00      74876.90
     #> 2024-06-28 02:00:00      74906.65
+    #> 2024-06-29 02:00:00      78522.05
 
 </details>
 
@@ -402,11 +404,13 @@ tail(
 
 ## Warning
 
-As the `cryptoQuotes`-package has moved to the `tidyverse` style guide,
-the `getFoo`-functions are now `deprecated`. These will be permanently
-deleted, and removed from the `cryptoQuotes`-package, at version 1.4.0!
+As [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) has moved
+to the `tidyverse` style guide, the `getFoo`-functions are now
+`deprecated`. These will be permanently deleted, and removed from the
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/), at version
+1.4.0!
 
-# cryptoQuotes 1.2.1
+# Version 1.2.1
 
 ### Minor Updates
 
@@ -422,7 +426,7 @@ deleted, and removed from the `cryptoQuotes`-package, at version 1.4.0!
 - Fixed an error on the `Bitmart` API where weekly candles would throw
   an error.
 
-# cryptoQuotes 1.2.0
+# Version 1.2.0
 
 - All `from` and `to` arguments are now more flexible, and supports
   passing `Sys.Date()` and `Sys.time()` directly into the
@@ -434,25 +438,29 @@ deleted, and removed from the `cryptoQuotes`-package, at version 1.4.0!
 
 The `getQuote()`-function can now be used as follows;
 
-    ## Specifying from
-    ## date only;
-    ##
-    ## Returns 10 pips
-    getQuote(
-     ticker   = 'BTCUSDT',
-     interval = '1d'
-     from     = as.character(Sys.Date() - 10)
-     )
+``` r
+## Specifying from
+## date only;
+##
+## Returns 10 pips
+getQuote(
+ ticker   = 'BTCUSDT',
+ interval = '1d'
+ from     = as.character(Sys.Date() - 10)
+ )
+```
 
-    ## Specifying to
-    ## date only;
-    ##
-    ## Returns 100 pips
-    getQuote(
-     ticker   = 'BTCUSDT',
-     interval = '1d'
-     to     = as.character(Sys.Date())
-     )
+``` r
+## Specifying to
+## date only;
+##
+## Returns 100 pips
+getQuote(
+ ticker   = 'BTCUSDT',
+ interval = '1d'
+ to     = as.character(Sys.Date())
+ )
+```
 
 ## Market Sentiment
 
@@ -474,7 +482,7 @@ Three new convinience functions are added applicable to some situations,
 - `splitWindow()`
 - `calibrateWindow()`
 
-# cryptoQuotes 1.1.0
+# Version 1.1.0
 
 ## Frontend
 
@@ -482,8 +490,9 @@ Three new convinience functions are added applicable to some situations,
 
 ## Backend
 
-- All code has been rewritten so its compatible with `httr2`, the
-  package used `httr` at version `1.0.0`.
+- All code has been rewritten so its compatible with
+  [{httr2}](https://github.com/r-lib/httr2), the package used
+  [{httr}](https://github.com/r-lib/httr) at version `1.0.0`.
 
 ## Future releases
 
@@ -494,6 +503,6 @@ In the next release, three more exchanges will be supported.
 The returned `quotes` are in local timezone, this is an unintentional
 feature and will be fixed in a bugfix.
 
-# cryptoQuotes 1.0.0
+# Version 1.0.0
 
 - Initial CRAN submission :rocket:

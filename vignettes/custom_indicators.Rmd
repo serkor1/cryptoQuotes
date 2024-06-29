@@ -22,16 +22,16 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-Trading indicators comes in various forms. From the alignment of the moon relative to the sun, to sophisticated trading rules based on neural networks which incorporates classified features. It is not possible to cover them all in an `R` package.
+Trading indicators comes in various forms; from the alignment of the moon relative to the sun, to sophisticated trading rules based on neural networks which incorporates classified features - It is not possible to cover them all in an `R` package.
 
-In this `vignette` an introduction to the construction of charting indicators are given, and is recommended for those who would want to chart indicators not otherwise found in the `cryptoQuotes`-package.
+In this `vignette` an introduction to the construction of charting indicators are given, and is recommended for those who would want to chart indicators not otherwise found in [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/).
 
 > **Note:** Feel free to make a `PR` with your indicators that you wish to share with the
 > rest of the community.
 
 ## Charting indicators
 
-Below is a chart, with the indicators `macd()` and `bollinger_bands()`. Each indicator is created using the `TTR`-package.
+Below is a chart, with the indicators `macd()` and `bollinger_bands()`. Each indicator is created using [{TTR}](https://github.com/joshuaulrich/TTR).
 
 ```{r}
 chart(
@@ -83,7 +83,9 @@ structure(
 
 What differentiates the two `classes` of indicators, is the addition of `indicator` or `subchart` in the `yourclass`-placeholder.
 
-The indicator logic is important for the correct charting of your custom indicator. As the `cryptoQuotes`-package uses `plotly` as backend for charting, your `class` of indicator has to be consistent with the use of `plotly`-functions. More specifically; `subchart`-indicators uses `plotly::plot_ly()`-functions, while main chart `indicator` uses `add_*`-functions.
+The indicator logic is important for the correct charting of your custom indicator. As 
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) uses 
+[{plotly}](hhttps://github.com/plotly/plotly.R) as backend for charting, your `class` of indicator has to be consistent with the use of [{plotly}](hhttps://github.com/plotly/plotly.R)-functions. More specifically; `subchart`-indicators uses `plotly::plot_ly()`-functions, while main chart `indicator` uses the `plotly::add_*`-family of functions.
 
 When creating the custom indicators there is a couple of additional steps needed which will be covered in the examples.
 
@@ -99,7 +101,7 @@ tail(
 )
 ```
 
-This indicator has three features; `high`, `mid` and `low`. To chart this indicator, we would need to call the `plotly::add_lines()`-function three times to chart it properly. Each of these features are defined as `layers` in the `cryptoQuotes`-package. All layers get built with the `cryptoQuotes:::build()`-function.
+This indicator has three features; `high`, `mid` and `low`. To chart this indicator, we would need to call the `plotly::add_lines()`-function three times to chart it properly. Each of these features are defined as `layers` in [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/). All layers get built with the `cryptoQuotes:::build()`-function.
 
 ```{r}
 ## define custom TA
@@ -397,7 +399,7 @@ chart(
 
 ## Summary
 
-Creating custom indicators for the `chart()`-functions can be daunting. Two examples of how these are developed in th e `cryptoQuotes`-packages have been covered.
+Creating custom indicators for the `chart()`-functions can be daunting. Two examples of how these are developed in [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) have been covered.
 
 > **Note:** A full pipeline of charting indicators, custom and built-in, will be released sometime in the future.
 

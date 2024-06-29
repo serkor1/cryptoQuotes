@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-# cryptoQuotes 1.3.2
+# Version 1.3.2
 
 ## General
 
@@ -41,7 +41,7 @@ library(cryptoQuotes)
 <details>
 <summary>Static set to FALSE (Default Palette) </summary>
 ```{r}
-# modebar = FALSE
+# static = FALSE
 chart(
   ticker  = BTC,
   main    = kline(),
@@ -61,7 +61,7 @@ chart(
 <details>
 <summary>Static set to TRUE ("Set 3" palette)</summary>
 ```{r}
-# modebar = TRUE
+# static = TRUE
 chart(
   ticker  = BTC,
   main    = kline(),
@@ -80,7 +80,7 @@ chart(
 
 ### Supported Exchanges (Issue [#14](https://github.com/serkor1/cryptoQuotes/issues/14))
 
-{cryptoQuotes} now supports the following exchanges:
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) now supports the following exchanges:
 
 * Crypto.com
 * Huobi
@@ -97,7 +97,7 @@ were included. (Issue [#13](https://github.com/serkor1/cryptoQuotes/issues/13))
 
 
 
-# cryptoQuotes 1.3.1
+# Version 1.3.1
 
 ## General
 
@@ -192,7 +192,7 @@ chart(
 
 * Removed dependency on `conflicted`-package.
 
-Prior to version `1.3.0` the `get*`-functions were following the syntax of `quantmod` closely, and this goes for the function naming too. With the adoption of the `tidyverse` style guide, there is no conflicts that
+Prior to version `1.3.0` the `get*`-functions were following the syntax of [{quantmod}](https://github.com/joshuaulrich/quantmod) closely, and this goes for the function naming too. With the adoption of the `tidyverse` style guide, there is no conflicts that
 needs to be resolved on `stable`- and `experimental`-functions.
 
 ### New developper tools
@@ -214,7 +214,7 @@ needs to be resolved on `stable`- and `experimental`-functions.
 * Fixed a bug in the `get_quote()`-function where if `to = NULL` and `from != NULL` the returned `quote` would be filtered according to `UTC` and not `Sys.timezone()`
 * Fixed a bug in the `chart()`-function where the inferred intervals would be incorrect for leap years, and months different from 30 days.
 
-# cryptoQuotes 1.3.0
+# Version 1.3.0
 
 ## Improvements
 
@@ -321,10 +321,10 @@ tail(
 
 ## Warning
 
-As the `cryptoQuotes`-package has moved to the `tidyverse` style guide, the `getFoo`-functions are now `deprecated`. These will be permanently deleted, and removed from the `cryptoQuotes`-package, at version 1.4.0!
+As [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) has moved to the `tidyverse` style guide, the `getFoo`-functions are now `deprecated`. These will be permanently deleted, and removed from the [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/), at version 1.4.0!
 
 
-# cryptoQuotes 1.2.1
+# Version 1.2.1
 
 ### Minor Updates
 
@@ -337,7 +337,7 @@ As the `cryptoQuotes`-package has moved to the `tidyverse` style guide, the `get
 * All returned Quotes are now in `UTC`, again.
 * Fixed an error on the `Bitmart` API where weekly candles would throw an error.
 
-# cryptoQuotes 1.2.0
+# Version 1.2.0
 
 * All `from` and `to` arguments are now more flexible, and supports passing `Sys.Date()` and `Sys.time()` directly into the `get`-functions.
 
@@ -345,7 +345,7 @@ As the `cryptoQuotes`-package has moved to the `tidyverse` style guide, the `get
 
 The `getQuote()`-function can now be used as follows;
 
-```
+```r
 ## Specifying from
 ## date only;
 ##
@@ -357,7 +357,7 @@ getQuote(
  )
 ```
 
-```
+```r
 ## Specifying to
 ## date only;
 ##
@@ -386,7 +386,7 @@ Three new convinience functions are added applicable to some situations,
 * `splitWindow()`
 * `calibrateWindow()`
 
-# cryptoQuotes 1.1.0
+# Version 1.1.0
 
 ## Frontend
 
@@ -394,7 +394,7 @@ Three new convinience functions are added applicable to some situations,
 
 ## Backend
 
-* All code has been rewritten so its compatible with `httr2`, the package used `httr` at version `1.0.0`.
+* All code has been rewritten so its compatible with [{httr2}](https://github.com/r-lib/httr2), the package used [{httr}](https://github.com/r-lib/httr) at version `1.0.0`.
 
 ## Future releases
 
@@ -405,6 +405,6 @@ In the next release, three more exchanges will be supported.
 The returned `quotes` are in local timezone, this is an unintentional feature and will be fixed in a bugfix.
 
 
-# cryptoQuotes 1.0.0
+# Version 1.0.0
 
 * Initial CRAN submission :rocket:
