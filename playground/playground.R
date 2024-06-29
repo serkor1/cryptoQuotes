@@ -29,6 +29,69 @@ chart(
   )
 )
 
+get_quote(
+  ticker = "BTCUSD-PERP",
+  source = "crypto.com"
+)
+
+get_quote(
+  ticker = sample(available_tickers("kraken"), size = 1),
+  source = "kraken"
+)
+
+get_quote(
+  ticker = sample(available_tickers("mexc"), size = 1),
+  source = "mexc"
+)
+
+get_quote(
+  ticker = "ICP-USDT",
+  source = "huobi"
+)
+
+get_quote(
+  ticker = sample(available_tickers("kucoin"), size = 1),
+  source = "kucoin"
+)
+
+
+get_quote(
+  ticker = "BTCUSDT",
+  source = "mexc",
+  futures = FALSE,
+  interval = "1d"
+)
+
+
+get_quote(
+  ticker = "BTCUSDT",
+  source = "mexc",
+  futures = FALSE,
+  interval = "15m"
+)
+
+
+get_quote(
+  ticker = "BTC_USDT",
+  source = "mexc",
+  futures = TRUE,
+  interval = "1d"
+)
+
+get_quote(
+  ticker = "BTC_USDT",
+  source = "mexc",
+  futures = TRUE,
+  interval = "15m"
+)
+
+
+available_exchanges()
+
+available_tickers(
+  "crypto.com",futures = FALSE
+)
+
 
 "hawii" %in% hcl.pals()
 

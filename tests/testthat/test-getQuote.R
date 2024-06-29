@@ -20,7 +20,10 @@ testthat::test_that(
       'bitmart',
       'bybit',
       'kraken',
-      'kucoin'
+      'kucoin',
+      "crypto.com",
+      "mexc",
+      "huobi"
     )
 
     # 2) start loop
@@ -41,22 +44,28 @@ testthat::test_that(
 
           ticker <- switch(
             exchange,
-            "binance" = "BTCUSDT",
-            "bybit"   = "BTCUSDT",
-            "bitmart" = "BTCUSDT",
-            "kraken"  = "PF_XBTUSD",
-            "kucoin"  = "XBTUSDTM"
+            "binance"    = "BTCUSDT",
+            "bybit"      = "BTCUSDT",
+            "bitmart"    = "BTCUSDT",
+            "kraken"     = "PF_XBTUSD",
+            "kucoin"     = "XBTUSDTM",
+            "crypto.com" = "BTCUSD-PERP",
+            "mexc"       = "BTC_USDT",
+            "huobi"      = "BTC-USDT"
           )
 
         } else {
 
           ticker <- switch(
             exchange,
-            "binance" = "BTCUSDT",
-            "bybit"   = "BTCUSDT",
-            "bitmart" = "BTC_USDT",
-            "kraken"  = "XBTUSDT",
-            "kucoin"  = "BTC-USDT"
+            "binance"    = "BTCUSDT",
+            "bybit"      = "BTCUSDT",
+            "bitmart"    = "BTC_USDT",
+            "kraken"     = "XBTUSDT",
+            "kucoin"     = "BTC-USDT",
+            "crypto.com" = "BTC_USDT",
+            "mexc"       = "BTCUSDT",
+            "huobi"      = "btcusdt"
           )
 
         }
@@ -66,6 +75,7 @@ testthat::test_that(
         intervals <- c("1d", "15m")
 
         for (interval in intervals) {
+
 
           error_label <- paste(
             "Error in get_quote for",
