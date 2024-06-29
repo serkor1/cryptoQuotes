@@ -108,13 +108,24 @@ huobiResponse <- function(
     EXPR = type,
     ohlc = {
       list(
-        colum_names = c(
-          'open',
-          'close',
-          'low',
-          'high',
-          'volume'
-        ),
+        colum_names = if (futures)
+          c(
+            'open',
+            'close',
+            'high',
+            'low',
+            'volume'
+          )
+
+        else {
+          c(
+            'open',
+            'close',
+            'low',
+            'high',
+            'volume'
+          )
+        },
         colum_location = if (futures) c(2:5,7) else c(2:6),
         index_location = c(
           1
