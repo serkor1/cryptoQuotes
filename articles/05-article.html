@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="cryptoQuotes">
-<title>Cryptocurrency Market Data with quantmod and TTR • cryptoQuotes</title>
+<title>Cryptocurrency Market Data with {quantmod} and {TTR} • cryptoQuotes</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<script src="../extra.js"></script><meta property="og:title" content="Cryptocurrency Market Data with quantmod and TTR">
+<script src="../extra.js"></script><meta property="og:title" content="Cryptocurrency Market Data with {quantmod} and {TTR}">
 <meta property="og:description" content="cryptoQuotes">
 <meta property="og:image" content="https://serkor1.github.io/cryptoQuotes/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -62,7 +62,7 @@
     <a class="dropdown-item" href="../articles/02-article.html">Cryptocurrency Charts</a>
     <a class="dropdown-item" href="../articles/03-article.html">Time Zones</a>
     <a class="dropdown-item" href="../articles/04-article.html">Converting xts-objects</a>
-    <a class="dropdown-item" href="../articles/05-article.html">cryptoQuotes x quantmod and TTR</a>
+    <a class="dropdown-item" href="../articles/05-article.html">{cryptoQuotes} x {quantmod} and {TTR}</a>
   </div>
 </li>
 <li class="nav-item">
@@ -92,7 +92,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Cryptocurrency Market Data with quantmod and TTR</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Cryptocurrency Market Data with {quantmod} and {TTR}</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/serkor1/cryptoQuotes/blob/HEAD/vignettes/articles/05-article.Rmd" class="external-link"><code>vignettes/articles/05-article.Rmd</code></a></small>
@@ -104,10 +104,10 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## load libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://serkor1.github.io/cryptoQuotes/">cryptoQuotes</a></span><span class="op">)</span></span></code></pre></div>
-<p>The <code>cryptoQuotes</code> were built with <code>quantmod</code>
-and <code>TTR</code> in mind. To demonstrate how
-<code>cryptoQuotes</code> works with these packages, we will use the
-following data,</p>
+<p><a href="https://github.com/serkor1/cryptoQuotes" class="external-link">{cryptoQuotes}</a>
+were built with <a href="https://github.com/joshuaulrich/quantmod" class="external-link">{quantmod}</a> and <a href="https://github.com/joshuaulrich/TTR" class="external-link">{TTR}</a> in mind. To
+demonstrate how <a href="https://github.com/serkor1/cryptoQuotes" class="external-link">{cryptoQuotes}</a> works
+with these packages, we will use the following data,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Get daily </span></span>
 <span><span class="co">## Bitcoin from </span></span>
@@ -128,7 +128,8 @@ used in the <code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" cla
 <h3 id="building-cryptocurrency-trade-models">Building Cryptocurrency Trade Models<a class="anchor" aria-label="anchor" href="#building-cryptocurrency-trade-models"></a>
 </h3>
 <p>Below is an example on how to use the
-<code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" class="external-link">quantmod::tradeModel</a></code> with <code>BTC</code>,</p>
+<code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" class="external-link">quantmod::tradeModel()</a></code>-function with the
+<code>BTC</code>-object,</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1) specify</span></span>
 <span><span class="co">## the model</span></span>
@@ -150,27 +151,27 @@ used in the <code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" cla
 <span><span class="co">## 3) trade the model</span></span>
 <span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" class="external-link">tradeModel</a></span><span class="op">(</span><span class="va">built_model</span>, leverage <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Model:  lm1719611180.02362 </span></span>
+<span><span class="co">#&gt;   Model:  lm1719698551.11153 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   C.A.G.R.:  8.11%   H.P.R.:  5.34% </span></span>
+<span><span class="co">#&gt;   C.A.G.R.:  12.09%  H.P.R.:  7.96% </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Returns by period summary:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;              weekly monthly quarterly yearly</span></span>
-<span><span class="co">#&gt;     Max.     25.77%  48.73%    31.94% 24.39%</span></span>
-<span><span class="co">#&gt;     3rd Qu.   5.57%  35.68%    22.52% 24.39%</span></span>
-<span><span class="co">#&gt;     Mean      1.44%   7.47%    13.11% 24.39%</span></span>
-<span><span class="co">#&gt;     Median   -1.86%  -5.52%    13.11% 24.39%</span></span>
-<span><span class="co">#&gt;     2rd Qu.  -5.78% -17.25%     3.70% 24.39%</span></span>
-<span><span class="co">#&gt;     Min.    -14.61% -21.09%    -5.72% 24.39%</span></span>
+<span><span class="co">#&gt;     Max.     25.77%  48.73%    31.94% 27.49%</span></span>
+<span><span class="co">#&gt;     3rd Qu.   5.57%  35.68%    23.11% 27.49%</span></span>
+<span><span class="co">#&gt;     Mean      1.53%   7.80%    14.28% 27.49%</span></span>
+<span><span class="co">#&gt;     Median   -1.86%  -5.52%    14.28% 27.49%</span></span>
+<span><span class="co">#&gt;     2rd Qu.  -5.78% -17.25%     5.45% 27.49%</span></span>
+<span><span class="co">#&gt;     Min.    -14.61% -19.13%    -3.37% 27.49%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Period to date returns:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;              weekly monthly quarterly yearly</span></span>
-<span><span class="co">#&gt;              -9.53% -21.09%    -5.72% 24.39%</span></span></code></pre></div>
+<span><span class="co">#&gt;              -7.28% -19.13%    -3.37% 27.49%</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="charting-cryptocurrency-with-quantmod">Charting Cryptocurrency with quantmod<a class="anchor" aria-label="anchor" href="#charting-cryptocurrency-with-quantmod"></a>
+<h3 id="charting-cryptocurrency-with-quantmod">Charting Cryptocurrency with {quantmod}<a class="anchor" aria-label="anchor" href="#charting-cryptocurrency-with-quantmod"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## chart the</span></span>
@@ -187,10 +188,10 @@ used in the <code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" cla
 </div>
 </div>
 <div class="section level2">
-<h2 id="cryptocurrency-and-ttr">Cryptocurrency and TTR<a class="anchor" aria-label="anchor" href="#cryptocurrency-and-ttr"></a>
+<h2 id="cryptocurrency-and-ttr">Cryptocurrency and {TTR}<a class="anchor" aria-label="anchor" href="#cryptocurrency-and-ttr"></a>
 </h2>
 <p>Below is an example on how to use the <code>BBands()</code>-function
-from the <code>TTR</code>-package,</p>
+from <a href="https://github.com/joshuaulrich/TTR" class="external-link">{TTR}</a>,</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) calculate</span></span>
 <span><span class="co"># Bollinger Bands</span></span>
@@ -210,7 +211,7 @@ Bitcoin with Bollinger Bands using TTR
 </caption>
 <thead><tr>
 <th style="text-align:left;">
-Index
+index
 </th>
 <th style="text-align:center;">
 open
@@ -241,38 +242,6 @@ pctB
 </th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-2024-06-23
-</td>
-<td style="text-align:center;">
-64253
-</td>
-<td style="text-align:center;">
-64496.6
-</td>
-<td style="text-align:center;">
-63176
-</td>
-<td style="text-align:center;">
-63176.1
-</td>
-<td style="text-align:center;">
-554.131
-</td>
-<td style="text-align:center;">
-62675.479
-</td>
-<td style="text-align:center;">
-67305.503
-</td>
-<td style="text-align:center;">
-71935.528
-</td>
-<td style="text-align:right;">
-0.102
-</td>
-</tr>
 <tr>
 <td style="text-align:left;">
 2024-06-24
@@ -415,22 +384,54 @@ pctB
 59942.7
 </td>
 <td style="text-align:center;">
-60206.9
+60319.6
 </td>
 <td style="text-align:center;">
-850.032
+880.357
 </td>
 <td style="text-align:center;">
-59559.611
+59567.348
 </td>
 <td style="text-align:center;">
-65034.098
+65035.977
 </td>
 <td style="text-align:center;">
-70508.585
+70504.605
 </td>
 <td style="text-align:right;">
-0.109
+0.112
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-06-29
+</td>
+<td style="text-align:center;">
+60319.6
+</td>
+<td style="text-align:center;">
+61102.1
+</td>
+<td style="text-align:center;">
+60307.7
+</td>
+<td style="text-align:center;">
+60951.7
+</td>
+<td style="text-align:center;">
+471.605
+</td>
+<td style="text-align:center;">
+59241.525
+</td>
+<td style="text-align:center;">
+64598.418
+</td>
+<td style="text-align:center;">
+69955.311
+</td>
+<td style="text-align:right;">
+0.144
 </td>
 </tr>
 </tbody>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="cryptoQuotes">
-<title>Time Zones • cryptoQuotes</title>
+<title>Dealing with Time Zones • cryptoQuotes</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<script src="../extra.js"></script><meta property="og:title" content="Time Zones">
+<script src="../extra.js"></script><meta property="og:title" content="Dealing with Time Zones">
 <meta property="og:description" content="cryptoQuotes">
 <meta property="og:image" content="https://serkor1.github.io/cryptoQuotes/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -62,7 +62,7 @@
     <a class="dropdown-item" href="../articles/02-article.html">Cryptocurrency Charts</a>
     <a class="dropdown-item" href="../articles/03-article.html">Time Zones</a>
     <a class="dropdown-item" href="../articles/04-article.html">Converting xts-objects</a>
-    <a class="dropdown-item" href="../articles/05-article.html">cryptoQuotes x quantmod and TTR</a>
+    <a class="dropdown-item" href="../articles/05-article.html">{cryptoQuotes} x {quantmod} and {TTR}</a>
   </div>
 </li>
 <li class="nav-item">
@@ -92,7 +92,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Time Zones</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Dealing with Time Zones</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/serkor1/cryptoQuotes/blob/HEAD/vignettes/articles/03-article.Rmd" class="external-link"><code>vignettes/articles/03-article.Rmd</code></a></small>
@@ -104,118 +104,72 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://serkor1.github.io/cryptoQuotes/">cryptoQuotes</a></span><span class="op">)</span></span></code></pre></div>
-<p>By <code>default</code> all data is returned with
-<code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code> and, if not specified otherwise, all
-<code>dates</code> passed into the <code>get</code>-functions are
+<p>By <code>default</code> all data from the <code>get_*</code>-family
+of functions is returned with <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code> and, if not
+specified otherwise, all <code>dates</code> passed into the
+<code>from</code> and <code>to</code> parameters are assumed to be
 <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code> too.</p>
+<blockquote>
+<p><strong>NOTE:</strong> As the <a href="https://github.com/r-lib/pkgdown" class="external-link">{pkgdown}</a>-documentation gets
+built on Github-servers we manually specify the timezone of the
+<code>from</code> and <code>to</code> parameters.</p>
+</blockquote>
+<p>In this article we will demonstrate the <em>time zone</em> aspect of
+<a href="https://github.com/serkor1/cryptoQuotes" class="external-link">{cryptoQuotes}</a>.</p>
 <div class="section level2">
-<h2 id="different-time-zones">Different time zones<a class="anchor" aria-label="anchor" href="#different-time-zones"></a>
+<h2 id="open-high-low-close-and-volume-ohlc-v-with-cet">Open, High, Low, Close and Volume (OHLC-V) with CET<a class="anchor" aria-label="anchor" href="#open-high-low-close-and-volume-ohlc-v-with-cet"></a>
 </h2>
-<div class="section level3">
-<h3 id="ohlc-local">OHLC (Local)<a class="anchor" aria-label="anchor" href="#ohlc-local"></a>
-</h3>
-<p>If <code>from</code> and <code>to</code> are passed as valid
-<code>date</code>-type <code>characters</code>, <code>sys.time()</code>
-or <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct()</a></code> without specifying the <code>TZ</code> the
-returned <code>xts::index()</code> is ‘as is’,</p>
+<p>Assume that you are interested in the hourly <code>Bitcoin</code>
+price action from yesterday between 16.00 and 18.00 <em>central European
+time</em> (CET). We start the example by defining the <code>from</code>
+and <code>to</code> parameters,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Get hourly</span></span>
-<span><span class="co">## BTC between</span></span>
-<span><span class="co">## 20.00 and 22.00 from</span></span>
-<span><span class="co">## yesterday</span></span>
-<span><span class="va">BTC_local</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_quote.html">get_quote</a></span><span class="op">(</span></span>
-<span>  ticker   <span class="op">=</span> <span class="st">"BTCUSD"</span>,</span>
-<span>  source   <span class="op">=</span> <span class="st">"kraken"</span>,</span>
-<span>  interval <span class="op">=</span> <span class="st">"1h"</span>,</span>
-<span>  futures  <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  from     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>, <span class="st">"20:00:00"</span><span class="op">)</span>,</span>
-<span>  to       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>, <span class="st">"22:00:00"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># define from</span></span>
+<span><span class="co"># and to</span></span>
+<span><span class="va">from</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, <span class="st">"16:00:00"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  tz <span class="op">=</span> <span class="st">"CET"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">to</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, <span class="st">"18:00:00"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  tz <span class="op">=</span> <span class="st">"CET"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-</div>
 <div class="section level3">
-<h3 id="ohlc-utc">OHLC (UTC)<a class="anchor" aria-label="anchor" href="#ohlc-utc"></a>
+<h3 id="ohlc-v">OHLC-V<a class="anchor" aria-label="anchor" href="#ohlc-v"></a>
 </h3>
-<p>If <code>from</code> and <code>to</code> are passed as
-<code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct()</a></code> while specifying the <code>TZ</code> the
-returned <code>xts::index()</code> is internally converted,</p>
+<p>As the <em>time zone</em> on Github servers are <code>CET</code>, the
+returned OHLC-V data is <code>UTC</code> as demonstrated below,</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Get hourly</span></span>
 <span><span class="co">## BTC between</span></span>
-<span><span class="co">## 20.00 and 22.00 from</span></span>
+<span><span class="co">## 16:00 and 18:00 from</span></span>
 <span><span class="co">## yesterday</span></span>
-<span><span class="va">BTC_utc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_quote.html">get_quote</a></span><span class="op">(</span></span>
-<span>  ticker   <span class="op">=</span> <span class="st">"BTCUSD"</span>,</span>
-<span>  source   <span class="op">=</span> <span class="st">"kraken"</span>,</span>
-<span>  interval <span class="op">=</span> <span class="st">"1h"</span>,</span>
-<span>  futures  <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  from     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>, <span class="st">"20:00:00"</span><span class="op">)</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span>,</span>
-<span>  to       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>, <span class="st">"22:00:00"</span><span class="op">)</span>, tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="difference">Difference<a class="anchor" aria-label="anchor" href="#difference"></a>
-</h3>
-<p>In each case the returned <code>index</code> is, alongside the OHLC-V
-data, different,</p>
-<table style="width:100%;" class="table">
-<caption>
-Time zone comparsion
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-BTC_local
-</th>
-<th style="text-align:right;">
-BTC_utc
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-2024-06-27 20:00:00
-</td>
-<td style="text-align:right;">
-2024-06-27 20:00:00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-06-27 21:00:00
-</td>
-<td style="text-align:right;">
-2024-06-27 21:00:00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-06-27 22:00:00
-</td>
-<td style="text-align:right;">
-2024-06-27 22:00:00
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section level2">
-<h2 id="changing-the-time-zones">Changing the time zones<a class="anchor" aria-label="anchor" href="#changing-the-time-zones"></a>
-</h2>
+<span><span class="fu">xts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xts/man/tzone.html" class="external-link">tzone</a></span><span class="op">(</span></span>
+<span>  <span class="va">BTC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_quote.html">get_quote</a></span><span class="op">(</span></span>
+<span>    ticker   <span class="op">=</span> <span class="st">"BTCUSD"</span>,</span>
+<span>    source   <span class="op">=</span> <span class="st">"kraken"</span>,</span>
+<span>    interval <span class="op">=</span> <span class="st">"1h"</span>,</span>
+<span>    futures  <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    from     <span class="op">=</span> <span class="va">from</span>,</span>
+<span>    to       <span class="op">=</span> <span class="va">to</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "UTC"</span></span></code></pre></div>
 <p>All time zones can be converted using the
 <code><a href="https://rdrr.io/pkg/xts/man/tzone.html" class="external-link">xts::tzone()</a></code>-function. Below is an example of converting
-the <code>BTC</code> to <code>UTC</code>,</p>
+the <code>BTC</code> to <code>CET</code>,</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## 1) Change time</span></span>
-<span><span class="co">## zone to UTC</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Store BTC_utc in</span></span>
-<span><span class="co">## a new variable to avoid</span></span>
-<span><span class="co">## replacing it. Not necessary in the </span></span>
-<span><span class="co">## real world - its just for </span></span>
-<span><span class="co">## demonstrations</span></span>
-<span><span class="va">BTC_tzone</span> <span class="op">&lt;-</span> <span class="va">BTC_utc</span></span>
-<span></span>
-<span><span class="fu">xts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xts/man/tzone.html" class="external-link">tzone</a></span><span class="op">(</span><span class="va">BTC_tzone</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"UTC"</span></span></code></pre></div>
+<span><span class="co">## zone to CET</span></span>
+<span><span class="va">BTC_CET</span> <span class="op">&lt;-</span> <span class="va">BTC</span></span>
+<span><span class="fu">xts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/xts/man/tzone.html" class="external-link">tzone</a></span><span class="op">(</span><span class="va">BTC_CET</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"CET"</span></span></code></pre></div>
+<p>Below is table with the original <em>index</em> in <code>UTC</code>
+and the converted <em>index</em> in <code>CET</code>,</p>
 <table style="width:100%;" class="table">
 <caption>
 Time zone comparsion
@@ -231,32 +185,31 @@ Converted Index
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-06-27 20:00:00
+2024-06-28 14:00:00
 </td>
 <td style="text-align:right;">
-2024-06-27 20:00:00
+2024-06-28 16:00:00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-27 21:00:00
+2024-06-28 15:00:00
 </td>
 <td style="text-align:right;">
-2024-06-27 21:00:00
+2024-06-28 17:00:00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-27 22:00:00
+2024-06-28 16:00:00
 </td>
 <td style="text-align:right;">
-2024-06-27 22:00:00
+2024-06-28 18:00:00
 </td>
 </tr>
 </tbody>
 </table>
-<p>The converted time zones now match the original
-<code>argument</code>-input in <code>BTC_utc</code>.</p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

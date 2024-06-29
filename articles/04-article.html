@@ -62,7 +62,7 @@
     <a class="dropdown-item" href="../articles/02-article.html">Cryptocurrency Charts</a>
     <a class="dropdown-item" href="../articles/03-article.html">Time Zones</a>
     <a class="dropdown-item" href="../articles/04-article.html">Converting xts-objects</a>
-    <a class="dropdown-item" href="../articles/05-article.html">cryptoQuotes x quantmod and TTR</a>
+    <a class="dropdown-item" href="../articles/05-article.html">{cryptoQuotes} x {quantmod} and {TTR}</a>
   </div>
 </li>
 <li class="nav-item">
@@ -104,11 +104,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://serkor1.github.io/cryptoQuotes/">cryptoQuotes</a></span><span class="op">)</span></span></code></pre></div>
-<p>If you want to use the simplicity of <code>tidverse</code> or the
-power of <code>data.table</code>, the <code>xts</code>-object can be
+<p>If you want to use the simplicity of <a href="https://github.com/tidyverse/tidyverse" class="external-link">{tidyverse}</a> or the
+power of <a href="https://github.com/Rdatatable/data.table" class="external-link">{data.table}</a>, the <a href="https://github.com/joshuaulrich/xts" class="external-link">{xts}</a>-object can be
 easily converted.</p>
 <p>However, its important to maintain data integrity, especially, if the
-date and timezone is important for you.</p>
+date and time zone is important for you.</p>
 <div class="section level2">
 <h2 id="converting-xts-and-zoo-to-tibble">Converting xts and zoo to tibble<a class="anchor" aria-label="anchor" href="#converting-xts-and-zoo-to-tibble"></a>
 </h2>
@@ -127,23 +127,24 @@ same data structure as the <code>xts</code>,</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>  index <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html" class="external-link">as_datetime</a></span><span class="op">(</span></span>
-<span>    <span class="va">index</span></span>
+<span>    x  <span class="op">=</span> <span class="va">index</span>,</span>
+<span>    tz <span class="op">=</span> <span class="st">"Europe/Copenhagen"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># 3) head data</span></span>
+<span><span class="co"># 3) tail data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tbl</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 6</span></span></span>
 <span><span class="co">#&gt;   index                open  high   low close volume</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-12-29 <span style="color: #949494;">23:00:00</span>  10.9  10.9  10.9  10.9  <span style="text-decoration: underline;">3</span>260.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-12-29 <span style="color: #949494;">23:15:00</span>  10.9  11.0  10.9  11.0  <span style="text-decoration: underline;">1</span>863.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-12-29 <span style="color: #949494;">23:30:00</span>  11.0  11.0  10.9  11.0  <span style="text-decoration: underline;">1</span>861.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-12-30 <span style="color: #949494;">00:00:00</span>  10.9  10.9  10.9  10.9  <span style="text-decoration: underline;">3</span>260.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-12-30 <span style="color: #949494;">00:15:00</span>  10.9  11.0  10.9  11.0  <span style="text-decoration: underline;">1</span>863.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-12-30 <span style="color: #949494;">00:30:00</span>  11.0  11.0  10.9  11.0  <span style="text-decoration: underline;">1</span>861.</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="converting-xts-and-zoo-to-data-table">Converting xts and zoo to data.table<a class="anchor" aria-label="anchor" href="#converting-xts-and-zoo-to-data-table"></a>
 </h2>
-<p>Converting to <code>data.table</code> is straightforward as
+<p>Converting to a <code>data.table</code> is straightforward as
 <code>as.data.table()</code> handles everything under the hood,</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) convert to data.table</span></span>
@@ -172,12 +173,10 @@ such,</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) store date.time objects</span></span>
 <span><span class="va">time_objects</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  tbl <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">Index</span>,</span>
-<span>  DT  <span class="op">=</span> <span class="va">DT</span><span class="op">$</span><span class="va">Index</span></span>
+<span>  tbl <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">index</span>,</span>
+<span>  DT  <span class="op">=</span> <span class="va">DT</span><span class="op">$</span><span class="va">index</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Unknown or uninitialised column: `Index`.</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="co"># 2) check if they are all equal</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply</a></span><span class="op">(</span></span>
@@ -193,7 +192,7 @@ such,</p>
 <span>    FUN.VALUE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="checking-ohlcv-values">Checking OHLCV values<a class="anchor" aria-label="anchor" href="#checking-ohlcv-values"></a>
@@ -202,16 +201,14 @@ such,</p>
 with the order of the data during conversion without a warning in the
 documentation, but nonetheless for the sake of argument, we will check
 the OHLCV values,</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1) store price objects</span></span>
 <span><span class="co"># Open price here</span></span>
 <span><span class="va">open_price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  tbl <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">Open</span>,</span>
-<span>  DT  <span class="op">=</span> <span class="va">DT</span><span class="op">$</span><span class="va">Open</span></span>
+<span>  tbl <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">open</span>,</span>
+<span>  DT  <span class="op">=</span> <span class="va">DT</span><span class="op">$</span><span class="va">open</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Unknown or uninitialised column: `Open`.</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span></span>
 <span><span class="co"># 2) check if they are all equal</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply</a></span><span class="op">(</span></span>
@@ -220,7 +217,7 @@ the OHLCV values,</p>
 <span>      </span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setequal</a></span><span class="op">(</span></span>
 <span>        x <span class="op">=</span> <span class="va">x</span>,</span>
-<span>        y <span class="op">=</span> <span class="va">ATOM</span><span class="op">$</span><span class="va">Open</span></span>
+<span>        y <span class="op">=</span> <span class="va">ATOM</span><span class="op">$</span><span class="va">open</span></span>
 <span>        <span class="op">)</span></span>
 <span>      </span>
 <span>    <span class="op">}</span>,</span>
@@ -233,12 +230,12 @@ the OHLCV values,</p>
 <div class="section level2">
 <h2 id="why-even-convert">Why even convert?<a class="anchor" aria-label="anchor" href="#why-even-convert"></a>
 </h2>
-<p>Even though numerical operations on <code>xts</code>-objects are
-lightning fast (12% faster than <code>data.table</code>), it comes with
-a cost; it doesn’t support <code>factors</code> or
-<code>characters</code>.</p>
-<p>Converting the <code>xts</code>-object is a simple and trivial
-process, and simplifies grouped operations in a verbose manner.</p>
+<p>Even though numerical operations on <a href="https://github.com/joshuaulrich/xts" class="external-link">{xts}</a>-objects are
+lightning fast, it comes with a cost; it doesn’t support
+<code>factors</code> or <code>characters</code>.</p>
+<p>Converting the <a href="https://github.com/joshuaulrich/xts" class="external-link">{xts}</a>-object is a simple
+and trivial process, and simplifies grouped operations in a verbose
+manner.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

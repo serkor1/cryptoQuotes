@@ -62,7 +62,7 @@
     <a class="dropdown-item" href="../articles/02-article.html">Cryptocurrency Charts</a>
     <a class="dropdown-item" href="../articles/03-article.html">Time Zones</a>
     <a class="dropdown-item" href="../articles/04-article.html">Converting xts-objects</a>
-    <a class="dropdown-item" href="../articles/05-article.html">cryptoQuotes x quantmod and TTR</a>
+    <a class="dropdown-item" href="../articles/05-article.html">{cryptoQuotes} x {quantmod} and {TTR}</a>
   </div>
 </li>
 <li class="nav-item">
@@ -104,10 +104,11 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://serkor1.github.io/cryptoQuotes/">cryptoQuotes</a></span><span class="op">)</span></span></code></pre></div>
-<p>The main goal of the <code>cryptoQuotes</code>-package is to bridge
-the gap between <code>R</code> and the cryptocurrency market data. Its a
-high-level <code>API</code>-client that connects to major cryptocurrency
-exchanges and their respective public market data endpoints.</p>
+<p>The main goal of the <a href="https://github.com/serkor1/cryptoQuotes" class="external-link">{cryptoQuotes}</a> is to
+bridge the gap between <code>R</code> and the cryptocurrency market
+data. Its a high-level <code>API</code>-client that connects to major
+cryptocurrency exchanges and their respective public market data
+endpoints.</p>
 <p>In this article we will focus on <code>price</code> and
 <code>sentiment</code> data made available by the <a href="https://www.kraken.com/" class="external-link">Kraken</a> exchange.</p>
 <div class="section level2">
@@ -116,9 +117,9 @@ exchanges and their respective public market data endpoints.</p>
 <p>In this section we will focus on market data from the last 24 hours,
 on the hourly chart.</p>
 <div class="section level3">
-<h3 id="ohlc-data">OHLC data<a class="anchor" aria-label="anchor" href="#ohlc-data"></a>
+<h3 id="open-highl-low-close-and-volume-ohlc-v-data">Open, Highl Low, Close and Volume (OHLC-V) data<a class="anchor" aria-label="anchor" href="#open-highl-low-close-and-volume-ohlc-v-data"></a>
 </h3>
-<p>To get <code>OHLC</code> data the <code><a href="../reference/get_quote.html">get_quote()</a></code>-function
+<p>To get <code>OHLC-V</code> data the <code><a href="../reference/get_quote.html">get_quote()</a></code>-function
 is the go-to function,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Get the</span></span>
@@ -158,122 +159,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-06-28 16:00:00
+2024-06-29 17:00:00
 </td>
 <td style="text-align:center;">
-60967
+60894.2
 </td>
 <td style="text-align:center;">
-60993.8
+60956.3
 </td>
 <td style="text-align:center;">
-60591.3
+60853.1
 </td>
 <td style="text-align:center;">
-60760.7
+60943.9
 </td>
 <td style="text-align:left;">
-58.556
+3.838
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-28 17:00:00
+2024-06-29 18:00:00
 </td>
 <td style="text-align:center;">
-60783.7
+60943.9
 </td>
 <td style="text-align:center;">
-60948.5
+60961.3
 </td>
 <td style="text-align:center;">
-60654.6
+60890.4
 </td>
 <td style="text-align:center;">
-60707.9
+60907
 </td>
 <td style="text-align:left;">
-29.048
+5.267
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-28 18:00:00
+2024-06-29 19:00:00
 </td>
 <td style="text-align:center;">
-60708
+60907.1
 </td>
 <td style="text-align:center;">
-60743.7
+60954.1
 </td>
 <td style="text-align:center;">
-60569.3
+60840.4
 </td>
 <td style="text-align:center;">
-60736.7
+60954.1
 </td>
 <td style="text-align:left;">
-22.854
+4.203
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-28 19:00:00
+2024-06-29 20:00:00
 </td>
 <td style="text-align:center;">
-60736.7
+60954.1
 </td>
 <td style="text-align:center;">
-60736.7
+60954.1
 </td>
 <td style="text-align:center;">
-59942.7
+60886.5
 </td>
 <td style="text-align:center;">
-59979.9
+60948.8
 </td>
 <td style="text-align:left;">
-146.358
+5.6
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-28 20:00:00
+2024-06-29 21:00:00
 </td>
 <td style="text-align:center;">
-59979.9
+60948.8
 </td>
 <td style="text-align:center;">
-60236.1
+60980
 </td>
 <td style="text-align:center;">
-59949.1
+60854.5
 </td>
 <td style="text-align:center;">
-60127.9
+60951.7
 </td>
 <td style="text-align:left;">
-52.236
+9.983
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-06-28 21:00:00
+2024-06-29 22:00:00
 </td>
 <td style="text-align:center;">
-60128
+60951.7
 </td>
 <td style="text-align:center;">
-60246.1
+60951.7
 </td>
 <td style="text-align:center;">
-60028.5
+60951.6
 </td>
 <td style="text-align:center;">
-60206.8
+60951.7
 </td>
 <td style="text-align:left;">
-25.959
+0.033
 </td>
 </tr>
 </tbody>
@@ -315,77 +316,7 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-06-28 16:00:00
-</td>
-<td style="text-align:center;">
-0.743
-</td>
-<td style="text-align:center;">
-0.257
-</td>
-<td style="text-align:center;">
-2.893
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-06-28 17:00:00
-</td>
-<td style="text-align:center;">
-0.742
-</td>
-<td style="text-align:center;">
-0.258
-</td>
-<td style="text-align:center;">
-2.88
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-06-28 18:00:00
-</td>
-<td style="text-align:center;">
-0.74
-</td>
-<td style="text-align:center;">
-0.26
-</td>
-<td style="text-align:center;">
-2.846
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-06-28 19:00:00
-</td>
-<td style="text-align:center;">
-0.732
-</td>
-<td style="text-align:center;">
-0.268
-</td>
-<td style="text-align:center;">
-2.726
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-06-28 20:00:00
-</td>
-<td style="text-align:center;">
-0.737
-</td>
-<td style="text-align:center;">
-0.263
-</td>
-<td style="text-align:center;">
-2.798
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-06-28 21:00:00
+2024-06-29 17:00:00
 </td>
 <td style="text-align:center;">
 0.734
@@ -394,7 +325,77 @@ ls_ratio
 0.266
 </td>
 <td style="text-align:center;">
-2.758
+2.757
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-06-29 18:00:00
+</td>
+<td style="text-align:center;">
+0.734
+</td>
+<td style="text-align:center;">
+0.266
+</td>
+<td style="text-align:center;">
+2.757
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-06-29 19:00:00
+</td>
+<td style="text-align:center;">
+0.73
+</td>
+<td style="text-align:center;">
+0.27
+</td>
+<td style="text-align:center;">
+2.709
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-06-29 20:00:00
+</td>
+<td style="text-align:center;">
+0.73
+</td>
+<td style="text-align:center;">
+0.27
+</td>
+<td style="text-align:center;">
+2.711
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-06-29 21:00:00
+</td>
+<td style="text-align:center;">
+0.73
+</td>
+<td style="text-align:center;">
+0.27
+</td>
+<td style="text-align:center;">
+2.706
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-06-29 22:00:00
+</td>
+<td style="text-align:center;">
+0.731
+</td>
+<td style="text-align:center;">
+0.269
+</td>
+<td style="text-align:center;">
+2.722
 </td>
 </tr>
 </tbody>
@@ -504,7 +505,8 @@ such solution is the following,</p>
 <span><span class="co">#&gt; [1] 10000</span></span></code></pre></div>
 <blockquote>
 <p><strong>Note:</strong> For an indepth analysis of the various
-limitations and workarounds please see the <code>cryptoQuotes</code> <a href="https://github.com/serkor1/cryptoQuotes/wiki" class="external-link">wiki</a> on <a href="https://github.com/serkor1/cryptoQuotes" class="external-link">Github</a></p>
+limitations and workarounds please see the <a href="https://github.com/serkor1/cryptoQuotes" class="external-link">{cryptoQuotes}</a> <a href="https://github.com/serkor1/cryptoQuotes/wiki/Limits-and-Restrictions" class="external-link">wiki</a>
+on <a href="https://github.com/serkor1/cryptoQuotes" class="external-link">Github</a></p>
 </blockquote>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
