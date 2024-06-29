@@ -27,9 +27,9 @@ library(cryptoQuotes)
 
 ## Introduction
 
-This high-level `API`-client provides open access to cryptocurrency market data without relying on low-level coding and `API`-keys. Currently all actively traded cryptocurrencies on either `binance`, `bybit`, `bitmart`, `kucoin` and `kraken` are available.
+This high-level `API`-client provides open access to cryptocurrency market data without relying on low-level coding and `API`-keys. Currently all actively traded cryptocurrencies on `r paste(length(invisible(available_exchanges)))` major exchanges are available, see the [wiki](https://github.com/serkor1/cryptoQuotes/wiki/Available-Exchanges) for more details.
 
-In this vignette we will explore a case study to showcase the capabilities of the `cryptoQuotes`-package; how did the `Dogecoin`-market react to Elon Musks following tweet,
+In this vignette we will explore a case study to showcase the capabilities of [{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes); how did the `Dogecoin`-market react to Elon Musks following tweet,
 
 <div align="center">
 ```{r, echo=FALSE, out.width="80%", fig.cap="Tweet by Elon Musk - the timezone is CET.",fig.align='center'}
@@ -43,7 +43,7 @@ knitr::include_graphics(
 
 ## Cryptocurrency Market Analysis in R
 
-Elon Musk tweeted (Well, now he X'ed) about `Dogecoin` January 14, 06.18 AM (UTC) - and `Dogecoin` rallied. To determine how fast the markets reacted to his tweets, we could get the market data for Dogecoin in 1 minute intervals the day he tweeeted using the ```getQuotes()```,
+Elon Musk tweeted (Well, now he X'ed) about `Dogecoin` January 14, 06.18 AM (UTC) - and `Dogecoin` rallied. To determine how fast the markets reacted to his tweets, we could get the market data for Dogecoin in 1 minute intervals the day he tweeeted using the `get_quotes()`-function,
 
 
 
@@ -61,7 +61,7 @@ DOGE <- cryptoQuotes::get_quote(
 )
 ```
 
-This returns an object of class `r paste(class(DOGE),collapse = ' and ')` with `r nrow(DOGE)` rows. To calculate the rally within the first minute of the tweet, we can use `xts`-syntax to determine the how much it rallied,
+This returns an object of class `r paste(class(DOGE),collapse = ' and ')` with `r nrow(DOGE)` rows. To calculate the rally within the first minute of the tweet, we can use [{xts}](https://github.com/joshuaulrich/xts)-syntax to determine its magnitude,
 
 
 ```{r}
@@ -81,7 +81,7 @@ cat(
 
 ### Charting price action with candlesticks
 
-We can illustrate this with candlestick charts using the ```chart()```- and ```kline()```-function, 
+We can visualize the rally this with candlestick charts using the `chart()`- and `kline()`-function, 
 
 ```{r, fig.align='center', fig.alt= "Elon Musk DOGE"}
 ## chart the
@@ -104,7 +104,7 @@ cryptoQuotes::chart(
 
 ### Charting price action with event lines
 
-To create a, presumably, better visual overview we can add event lines using the  ```event_data```-argument, which takes a ```data.frame``` of any kind as argument,
+To create a, presumably, better visual overview we can add event lines using the  `event_data`-argument, which takes a `data.frame` of any kind as argument,
 
 ```{r}
 ## 1) create event data.frame

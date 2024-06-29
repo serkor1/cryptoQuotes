@@ -1,5 +1,5 @@
 ---
-title: "Time Zones"
+title: "Dealing with Time Zones"
 ---
 
 ```{r setup, include=FALSE}
@@ -19,102 +19,81 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-By `default` all data is returned with `Sys.timezone()` and, if not specified otherwise, all `dates` passed into the `get`-functions are `Sys.timezone()` too.
+By `default` all data from the `get_*`-family of functions is returned with `Sys.timezone()` and, if not specified otherwise, all `dates` passed into the `from` and `to` parameters are assumed to be `Sys.timezone()` too.
 
-## Different time zones
+> **NOTE:**
+> As the [{pkgdown}](https://github.com/r-lib/pkgdown)-documentation gets built on Github-servers we manually
+> specify the timezone of the `from` and `to` parameters.
 
-### OHLC (Local)
+In this article we will demonstrate the *time zone* aspect of [{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes).
 
-If `from` and `to` are passed as valid `date`-type `characters`, `sys.time()` or `as.POSIXct()` without specifying the `TZ` the returned `xts::index()` is 'as is',
+## Open, High, Low, Close and Volume (OHLC-V) with CET
+
+Assume that you are interested in the hourly `Bitcoin` price action from yesterday between 16.00 and 18.00 *central European time* (CET). We start the example by defining the `from` and `to` parameters,
+
+```{r}
+# define from
+# and to
+from <- as.POSIXct(
+  x = paste(
+    Sys.Date() - 1, "16:00:00"
+  ),
+  tz = "CET"
+)
+
+to <- as.POSIXct(
+  x = paste(
+    Sys.Date() - 1, "18:00:00"
+  ),
+  tz = "CET"
+)
+```
+
+### OHLC-V
+
+As the *time zone* on Github servers are `CET`, the returned OHLC-V data is `UTC` as demonstrated below,
 
 ```{r}
 ## Get hourly
 ## BTC between
-## 20.00 and 22.00 from
+## 16:00 and 18:00 from
 ## yesterday
-BTC_local <- get_quote(
-  ticker   = "BTCUSD",
-  source   = "kraken",
-  interval = "1h",
-  futures  = FALSE,
-  from     = paste(Sys.Date()-1, "20:00:00"),
-  to       = paste(Sys.Date()-1, "22:00:00")
-)
-```
-
-### OHLC (UTC)
-
-If `from` and `to` are passed as `as.POSIXct()` while specifying the `TZ` the returned `xts::index()` is internally converted,
-
-```{r}
-## Get hourly
-## BTC between
-## 20.00 and 22.00 from
-## yesterday
-BTC_utc <- get_quote(
-  ticker   = "BTCUSD",
-  source   = "kraken",
-  interval = "1h",
-  futures  = FALSE,
-  from     = as.POSIXct(paste(Sys.Date()-1, "20:00:00"), tz = "UTC"),
-  to       = as.POSIXct(paste(Sys.Date()-1, "22:00:00"), tz = "UTC")
-)
-```
-
-### Difference
-
-In each case the returned `index` is, alongside the OHLC-V data, different,
-
-```{r, echo=FALSE}
-# 1) create a kable
-# and print
-  knitr::kable(
-    caption = 'Time zone comparsion',
-    align = 'lr',
-    table.attr = "style='width:100%;'",
-    col.names = c('BTC_local', 'BTC_utc'),
-    x =  cbind(
-      paste(zoo::index(BTC_local)),
-      paste(zoo::index(BTC_utc))
-      ),
-    format = 'html'
+xts::tzone(
+  BTC <- get_quote(
+    ticker   = "BTCUSD",
+    source   = "kraken",
+    interval = "1h",
+    futures  = FALSE,
+    from     = from,
+    to       = to
   )
+)
 ```
 
-
-## Changing the time zones
-
-All time zones can be converted using the `xts::tzone()`-function. Below is an example of converting the `BTC` to `UTC`,
+All time zones can be converted using the `xts::tzone()`-function. Below is an example of converting the `BTC` to `CET`,
 
 ```{r}
 ## 1) Change time
-## zone to UTC
-## 
-## Store BTC_utc in
-## a new variable to avoid
-## replacing it. Not necessary in the 
-## real world - its just for 
-## demonstrations
-BTC_tzone <- BTC_utc
-
-xts::tzone(BTC_tzone) <- "UTC"
+## zone to CET
+BTC_CET <- BTC
+xts::tzone(BTC_CET) <- "CET"
 ```
+
+Below is table with the original *index* in `UTC` and the converted *index* in `CET`,
 
 ```{r, echo=FALSE}
 # 1) create a kable
 # and print
-  knitr::kable(
-    caption = 'Time zone comparsion',
-    align = 'lr',
-    table.attr = "style='width:100%;'",
-    col.names = c('Original Index', 'Converted Index'),
-    x =  cbind(
-        paste(zoo::index(BTC_utc)),
-        paste(zoo::index(BTC_tzone))
-      ),
-    format = 'html'
-  )
+knitr::kable(
+  caption = 'Time zone comparsion',
+  align = 'lr',
+  table.attr = "style='width:100%;'",
+  col.names = c('Original Index', 'Converted Index'),
+  x =  cbind(
+    paste(zoo::index(BTC)),
+    paste(zoo::index(BTC_CET))
+  ),
+  format = 'html'
+)
 ```
-
-The converted time zones now match the original `argument`-input in `BTC_utc`.
 

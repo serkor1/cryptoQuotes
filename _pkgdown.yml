@@ -33,7 +33,7 @@ navbar:
           href: articles/03-article.html
         - text: Converting xts-objects
           href: articles/04-article.html
-        - text: cryptoQuotes x quantmod and TTR
+        - text: '{cryptoQuotes} x {quantmod} and {TTR}'
           href: articles/05-article.html
 
 url: https://serkor1.github.io/cryptoQuotes/
