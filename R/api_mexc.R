@@ -86,7 +86,7 @@ mexcIntervals <- function(
         '15m',
         '30m',
         '1h',
-        '4h',
+        # '4h',
         '1d',
         '1w',
         '1M'
@@ -96,10 +96,10 @@ mexcIntervals <- function(
         '5m',
         '15m',
         '30m',
-        '1h',
-        '4h',
+        '60m',
+        # '4h',
         '1d',
-        '1w',
+        '1W',
         '1M'
       )
     )
@@ -112,7 +112,7 @@ mexcIntervals <- function(
   } else {
     # Select the specified interval
     selectedInterval <- allIntervals$values[
-      grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)
+      grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = FALSE)
     ]
 
     return(selectedInterval)
@@ -192,13 +192,17 @@ mexcDates <- function(
     )
 
   if (!is_response) {
+
     dates <- format(dates, scientific = FALSE)
 
     if (!futures) {
       # Adjust for mexc spot and set names
       dates <- as.numeric(dates)
       dates[2] <- dates[2] + 15 * 60
+
+
       names(dates) <- c('startTime', 'endTime')
+
     } else {
       # Set names for futures
       names(dates) <- c('start', 'end')

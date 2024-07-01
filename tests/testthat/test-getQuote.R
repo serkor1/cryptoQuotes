@@ -11,7 +11,8 @@ testthat::test_that(
 
     # 0) skip if offline
     # and on github
-    testthat::skip_if_offline(); testthat::skip_on_ci()
+    testthat::skip_if_offline()
+    testthat::skip_on_ci()
 
     # 1) create a vector
     # of available exchanges
@@ -46,7 +47,7 @@ testthat::test_that(
             exchange,
             "binance"    = "BTCUSDT",
             "bybit"      = "BTCUSDT",
-            "bitmart"    = "BTCUSDT",
+            "bitmart"    = "ETHUSDT",
             "kraken"     = "PF_XBTUSD",
             "kucoin"     = "XBTUSDTM",
             "crypto.com" = "BTCUSD-PERP",
@@ -60,7 +61,7 @@ testthat::test_that(
             exchange,
             "binance"    = "BTCUSDT",
             "bybit"      = "BTCUSDT",
-            "bitmart"    = "BTC_USDT",
+            "bitmart"    = "ETH_USDT",
             "kraken"     = "XBTUSDT",
             "kucoin"     = "BTC-USDT",
             "crypto.com" = "BTC_USDT",
@@ -72,10 +73,14 @@ testthat::test_that(
 
         # 2) for each market we
         # test two intervals
-        intervals <- c("1d", "15m")
+        suppressMessages(
+          intervals <- available_intervals(
+            source  = exchange,
+            futures = futures
+          )
+        )
 
         for (interval in intervals) {
-
 
           error_label <- paste(
             "Error in get_quote for",
@@ -86,31 +91,46 @@ testthat::test_that(
             interval
           )
 
-          # 1) Return quote on
-          # from exchanges
-          testthat::expect_no_condition(
-            output <- get_quote(
+
+          output <- try(
+            get_quote(
               ticker   = ticker,
               source   = exchange,
               interval = interval,
               futures  = futures
+            )
+          )
+
+          # 1) Return quote on
+          # from exchanges
+          testthat::expect_false(
+            object = inherits(
+              x = output,
+              what = "try-error"
             ),
-            message = paste(error_label, "(Test 0)")
+            label = paste(error_label, "(Test 0)")
           )
 
           # 2) test wether the
           # ohlc is logical
           testthat::expect_true(
             all(
-              output$high >= output$low,
-              output$open >= output$low,
-              output$open <= output$high,
+              output$high  >= output$low,
+              output$open  >= output$low,
+              output$open  <= output$high,
               output$close >= output$low,
               output$close <= output$high
             ),
             label = paste(error_label, "(Test 1)")
           )
 
+          testthat::expect_true(
+            setequal(
+              x = infer_interval(output),
+              y = interval
+            ),
+            label = paste(error_label, "(Expected Interval)")
+          )
           # 2) check if the returned
           # quote is 100 +/-
           testthat::expect_equal(
@@ -148,3 +168,4 @@ testthat::test_that(
 
   }
 )
+

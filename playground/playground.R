@@ -9,6 +9,131 @@
 # setup;
 rm(list = ls()); gc(); devtools::load_all()
 
+
+get_quote(
+  ticker = "BTC_USDT",
+  source = "mexc",
+  interval = "1h"
+)
+
+
+get_quote(
+  ticker = "BTCUSDT",
+  source = "mexc",
+  interval = "1h",
+  futures = FALSE
+)
+sapply(
+  X = available_intervals(
+    source = "mexc",
+    futures = TRUE
+  ),
+  FUN = function(x) {
+
+    Sys.sleep(2)
+
+    tryCatch(
+      {
+        get_quote(
+          ticker   = "BTC_USDT",
+          interval = x,
+          source   = "mexc",
+          futures  = TRUE
+        )
+
+        paste("OK in", x)
+      }
+
+      ,
+      error = function(error_msg) {
+
+        paste("Error in", x)
+
+      },
+      finally = "sd"
+    )
+
+  }
+)
+#>            1m            5m           15m           30m            1h
+#> "Error in 1m"    "OK in 5m"   "OK in 15m"   "OK in 30m"    "OK in 1h"
+#>            4h            8h            1d            1w            1M
+#>    "OK in 4h"    "OK in 8h"    "OK in 1d"    "OK in 1w" "Error in 1M"
+
+
+sapply(
+  X = available_intervals(
+    source = "mexc",
+    futures = FALSE
+  ),
+  FUN = function(x) {
+
+    Sys.sleep(2)
+
+    tryCatch(
+      {
+        get_quote(
+          ticker   = "BTCUSDT",
+          interval = x,
+          source   = "mexc",
+          futures  = FALSE
+        )
+
+        paste("OK in", x)
+      }
+
+      ,
+      error = function(error_msg) {
+
+        paste("Error in", x)
+
+      }
+    )
+
+  }
+)
+
+#>            1m            5m           15m           30m            1h
+#> "Error in 1m"    "OK in 5m"   "OK in 15m"   "OK in 30m" "Error in 1h"
+#>            4h            1d            1w            1M
+#>    "OK in 4h"    "OK in 1d" "Error in 1w" "Error in 1M"
+
+
+
+
+test <- get_quote("XBTUSDT", "kraken", FALSE, "2w")
+
+
+
+index <- zoo::index(
+  utils::head(
+    x = test,
+    # n should be the minimum
+    # of available rows and 7. 7
+    # was chosen randomly, but its important
+    # that its odd numbered so consensus can be
+    # reached. This application is 20x faster
+    # than using the entire dataset
+    # and reaches the same conclusion
+    n = min(nrow(test), 7)
+  )
+)
+
+# 1) calculate
+# differences
+x <- as.numeric(
+  difftime(
+    time1 = index[-1],
+    time2 = index[-length(index)],
+    units = "secs"
+  )
+)
+
+x <- find_mode(x)
+
+
+infer_interval(test)
+x
 chart(
   ticker = BTC,
   main   = kline(),
@@ -29,10 +154,13 @@ chart(
   )
 )
 
-get_quote(
-  ticker = "BTCUSD-PERP",
-  source = "crypto.com"
+system.time(
+  get_quote(
+    ticker = "BTCUSD-PERP",
+    source = "crypto.com"
+  )
 )
+
 
 get_quote(
   ticker = sample(available_tickers("kraken"), size = 1),
