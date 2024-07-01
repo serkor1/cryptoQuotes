@@ -19,13 +19,13 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-If you want to use the simplicity of ```tidverse``` or the power of ```data.table```, the ```xts```-object can be easily converted.
+If you want to use the simplicity of [{tidyverse}](https://github.com/tidyverse/tidyverse)  or the power of [{data.table}](https://github.com/Rdatatable/data.table), the [{xts}](https://github.com/joshuaulrich/xts)-object can be easily converted.
 
-However, its important to maintain data integrity, especially, if the date and timezone is important for you.
+However, its important to maintain data integrity, especially, if the date and time zone is important for you.
 
 ## Converting xts and zoo to tibble
 
-Converting to ```tibble``` requires a few steps to achieve the same data structure as the ```xts```,
+Converting to `tibble` requires a few steps to achieve the same data structure as the `xts`,
 
 ```{r tibble}
 # 1) load pipe
@@ -40,17 +40,18 @@ tbl <- tibble::as_tibble(
   )
 ) %>% dplyr::mutate(
   index = lubridate::as_datetime(
-    index
+    x  = index,
+    tz = "Europe/Copenhagen"
   )
 )
 
-# 3) head data
+# 3) tail data
 head(tbl, 3)
 ```
 
 ## Converting xts and zoo to data.table
 
-Converting to ```data.table``` is straightforward as ```as.data.table()``` handles everything under the hood,
+Converting to a `data.table` is straightforward as `as.data.table()` handles everything under the hood,
 
 ```{r data.table}
 # 1) convert to data.table
@@ -73,8 +74,8 @@ It is important that the date.time has not been converted to a different timezon
 ```{r}
 # 1) store date.time objects
 time_objects <- list(
-  tbl = tbl$Index,
-  DT  = DT$Index
+  tbl = tbl$index,
+  DT  = DT$index
 )
 
 # 2) check if they are all equal
@@ -96,14 +97,14 @@ all(
 
 ### Checking OHLCV values
 
-It goes without saying that ```R```-functions wouldn't tamper with the order of the data during conversion without a warning in the documentation, but nonetheless for the sake of argument, we will check the OHLCV values,
+It goes without saying that `R`-functions wouldn't tamper with the order of the data during conversion without a warning in the documentation, but nonetheless for the sake of argument, we will check the OHLCV values,
 
 ```{r}
 # 1) store price objects
 # Open price here
 open_price <- list(
-  tbl = tbl$Open,
-  DT  = DT$Open
+  tbl = tbl$open,
+  DT  = DT$open
 )
 
 # 2) check if they are all equal
@@ -114,7 +115,7 @@ all(
       
       setequal(
         x = x,
-        y = ATOM$Open
+        y = ATOM$open
         )
       
     },
@@ -126,7 +127,7 @@ all(
 
 ## Why even convert?
 
-Even though numerical operations on ```xts```-objects are lightning fast (12% faster than ```data.table```), it comes with a cost; it doesn't support ```factors``` or ```characters```.
+Even though numerical operations on [{xts}](https://github.com/joshuaulrich/xts)-objects are lightning fast, it comes with a cost; it doesn't support `factors` or `characters`.
 
-Converting the ```xts```-object is a simple and trivial process, and simplifies grouped operations in a verbose manner.
+Converting the [{xts}](https://github.com/joshuaulrich/xts)-object is a simple and trivial process, and simplifies grouped operations in a verbose manner.
 

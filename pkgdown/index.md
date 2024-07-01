@@ -10,21 +10,21 @@ status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-proje
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://codecov.io/gh/serkor1/cryptoQuotes)
+[![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://app.codecov.io/gh/serkor1/cryptoQuotes)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 ![GitHub last commit
 (branch)](https://img.shields.io/github/last-commit/serkor1/cryptoQuotes/development)
 <!-- badges: end -->
 
-The `cryptoQuotes`-package is a high-level API client for accessing
-public market data endpoints on major cryptocurrency exchanges. It
-supports open, high, low, close and volume (OHLC-V) data and a variety
-of sentiment indicators; the market data is high quality and can be
-retrieved in intervals ranging from *seconds* to *months*. All the
-market data is accessed and processed without relying on crawlers, or
-API keys, ensuring an open, and reliable, access for researchers,
-traders and students alike.
+[{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) is a
+high-level API client for accessing public market data endpoints on
+major cryptocurrency exchanges. It supports open, high, low, close and
+volume (OHLC-V) data and a variety of sentiment indicators; the market
+data is high quality and can be retrieved in intervals ranging from
+*seconds* to *months*. All the market data is accessed and processed
+without relying on crawlers, or API keys, ensuring an open, and
+reliable, access for researchers, traders and students alike.
 
 ## Example: Bitcoin OHLC-V with Long-Short Ratios
 
@@ -68,176 +68,176 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-05-25 12:00:00
+2024-06-29 07:30:00
 </td>
 <td style="text-align:center;">
-69118
+60756.7
 </td>
 <td style="text-align:center;">
-69133.8
+60778.9
 </td>
 <td style="text-align:center;">
-69040.8
+60720.4
 </td>
 <td style="text-align:center;">
-69061.1
+60756.1
 </td>
 <td style="text-align:left;">
-1229.377
+678.876
 </td>
 <td style="text-align:center;">
-0.587
+0.753
 </td>
 <td style="text-align:center;">
-0.413
+0.247
 </td>
 <td style="text-align:center;">
-1.42
+3.049
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 12:30:00
+2024-06-29 08:00:00
 </td>
 <td style="text-align:center;">
-69061
+60756
 </td>
 <td style="text-align:center;">
-69492.1
+60794.7
 </td>
 <td style="text-align:center;">
-69058.8
+60736.1
 </td>
 <td style="text-align:center;">
-69397.6
+60793.4
 </td>
 <td style="text-align:left;">
-5130.885
+765.759
 </td>
 <td style="text-align:center;">
-0.585
+0.752
 </td>
 <td style="text-align:center;">
-0.415
+0.248
 </td>
 <td style="text-align:center;">
-1.411
+3.04
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 13:00:00
+2024-06-29 08:30:00
 </td>
 <td style="text-align:center;">
-69397.7
+60793.5
 </td>
 <td style="text-align:center;">
-69622.8
+60864
 </td>
 <td style="text-align:center;">
-69345.8
+60764.2
 </td>
 <td style="text-align:center;">
-69560.1
+60838
 </td>
 <td style="text-align:left;">
-5232.397
+1053.097
 </td>
 <td style="text-align:center;">
-0.589
+0.753
 </td>
 <td style="text-align:center;">
-0.411
+0.247
 </td>
 <td style="text-align:center;">
-1.434
+3.044
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 13:30:00
+2024-06-29 09:00:00
 </td>
 <td style="text-align:center;">
-69560
+60838
 </td>
 <td style="text-align:center;">
-69563.3
+61120
 </td>
 <td style="text-align:center;">
-69112.4
+60822
 </td>
 <td style="text-align:center;">
-69112.5
+61103.2
 </td>
 <td style="text-align:left;">
-5320.138
+4611.515
 </td>
 <td style="text-align:center;">
-0.589
+0.753
 </td>
 <td style="text-align:center;">
-0.411
+0.247
 </td>
 <td style="text-align:center;">
-1.434
+3.055
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 14:00:00
+2024-06-29 09:30:00
 </td>
 <td style="text-align:center;">
-69112.4
+61103.1
 </td>
 <td style="text-align:center;">
-69323.9
+61128.1
 </td>
 <td style="text-align:center;">
-69031.4
+61038.2
 </td>
 <td style="text-align:center;">
-69234.1
+61049.8
 </td>
 <td style="text-align:left;">
-4699.305
+2455.215
 </td>
 <td style="text-align:center;">
-0.581
+0.75
 </td>
 <td style="text-align:center;">
-0.419
+0.25
 </td>
 <td style="text-align:center;">
-1.386
+2.992
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-05-25 14:30:00
+2024-06-29 10:00:00
 </td>
 <td style="text-align:center;">
-69234
+61049.8
 </td>
 <td style="text-align:center;">
-69260.4
+61073.3
 </td>
 <td style="text-align:center;">
-69103.6
+60942
 </td>
 <td style="text-align:center;">
-69131.9
+60947.2
 </td>
 <td style="text-align:left;">
-1183.558
+1678.662
 </td>
 <td style="text-align:center;">
-0.585
+0.746
 </td>
 <td style="text-align:center;">
-0.416
+0.254
 </td>
 <td style="text-align:center;">
-1.407
+2.929
 </td>
 </tr>
 </tbody>
@@ -306,7 +306,8 @@ devtools::install_github(
 
 ## :information_source: Code of Conduct
 
-Please note that the `cryptoQuotes` project is released with a
-[Contributor Code of
+Please note that the
+[{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) project is
+released with a [Contributor Code of
 Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-As an `experimental` feature, the `cryptoQuotes`-package has a variety of `chart`-functions built on top of `plotly` and `TTR` to visualize cryptocurrency market data and trading indicators interactively.
+As an `experimental` feature [{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) has a variety of `chart`-functions built on top of [{plotly}](https://github.com/plotly/plotly.R) and [{TTR}](https://github.com/joshuaulrich/TTR) to visualize cryptocurrency market data and trading indicators interactively.
 
-Throughout this article we will analyze Bitcoin on the hourly chart called by the `get_quotes`-function,
+Throughout this article we will analyze Bitcoin on the hourly chart called by the `get_quotes()`-function,
 
 ```{r}
 ## Get the
@@ -38,8 +38,6 @@ BTC <- get_quote(
 ## Price charts
 
 There are two main price charts. The Japanese candlestick chart, ```kline()```, and the basic OHLC chart, ```ohlc()```, charts. A chart has to be wrapped in the ```chart()```-function.
-
-> All charts comes with `volume` and `bollinger bands` by `default`.
 
 ### Candlestick charts
 
@@ -70,7 +68,7 @@ chart(
 
 ## Charting indicators
 
-All the charts supports various indicators such as `RSI`, `MACD` and `MA`. These can be passed into their respective arguments as follows,
+All the charts supports various indicators such as the *relative strenght index* (`rsi()`)-, *Moving Average Convergence Divergence* (`macd()`)- and various *moving average* indicators. These can be passed into their respective arguments as follows,
 
 ```{r, fig.alt="cryptocurrency charts in R"}
 ## chart BTC
@@ -155,7 +153,7 @@ event_data$color <- 'darkgray'
 ```
 
 
-Finally, the crosses can be plotted using the `chart()` and `addEvents()` functions, like below,
+Finally, the crosses can be plotted using the `chart()` as follows,
 
 ```{r}
 ## add the events
@@ -178,4 +176,4 @@ chart(
 
 ## Limitations
 
-The charting functions are still at an `experimental`-phase as per version `1.3.0`, and might therefore include various bugs of all sizes.
+The charting functions are still at an `experimental`-phase as per version `1.3.0`, and might therefore include various bugs of all sizes and species.

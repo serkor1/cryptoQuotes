@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-The main goal of the `cryptoQuotes`-package is to bridge the gap between `R` and the cryptocurrency market data. Its a high-level `API`-client that connects to major cryptocurrency exchanges and their respective public market data endpoints.
+The main goal of the [{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) is to bridge the gap between `R` and the cryptocurrency market data. Its a high-level `API`-client that connects to major cryptocurrency exchanges and their respective public market data endpoints.
 
 In this article we will focus on `price` and `sentiment` data made available by the [Kraken](https://www.kraken.com/) exchange.
 
@@ -27,9 +27,9 @@ In this article we will focus on `price` and `sentiment` data made available by 
 
 In this section we will focus on market data from the last 24 hours, on the hourly chart.
 
-### OHLC data
+### Open, Highl Low, Close and Volume (OHLC-V) data
 
-To get `OHLC` data the `get_quote()`-function is the go-to function,
+To get `OHLC-V` data the `get_quote()`-function is the go-to function,
 
 ```{r}
 ## Get the
@@ -182,7 +182,7 @@ nrow(
 )
 ```
 
-> **Note:** For an indepth analysis of the various limitations and workarounds please see the `cryptoQuotes` [wiki](https://github.com/serkor1/cryptoQuotes/wiki) on
+> **Note:** For an indepth analysis of the various limitations and workarounds please see the [{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) [wiki](https://github.com/serkor1/cryptoQuotes/wiki/Limits-and-Restrictions) on
 > [Github](https://github.com/serkor1/cryptoQuotes)
 
 

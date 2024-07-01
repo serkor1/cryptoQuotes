@@ -82,6 +82,7 @@ testthat::test_that(
 
         for (interval in intervals) {
 
+
           error_label <- paste(
             "Error in get_quote for",
             exchange,
