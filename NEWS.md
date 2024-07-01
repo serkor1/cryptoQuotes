@@ -86,12 +86,22 @@ the following exchanges:
 
 ## Bugfixes
 
+### Charting
+
 - Fixed a bug in the `chart()`-function where a warning would be given
   if called using namespace qualified function calls (Issue
   [\#13](https://github.com/serkor1/cryptoQuotes/issues/13))
 - Fixed a bug in the `chart()`-function where a `legend` wouldn’t show
   unless a main-chart indicator were included. (Issue
   [\#13](https://github.com/serkor1/cryptoQuotes/issues/13))
+
+### Quotes
+
+- Removed `1s` from *Binance spot*
+- Removed `3m`, `6h` and `3d` in *Bitmart spot*
+
+These intervals have been removed as they have either been discontinued,
+or were non-existent.
 
 # Version 1.3.1
 
@@ -164,12 +174,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-29 06:00:00      2379.125
-    #> 2024-06-29 07:00:00      2378.733
-    #> 2024-06-29 08:00:00      2382.911
-    #> 2024-06-29 09:00:00      2387.832
-    #> 2024-06-29 10:00:00      2384.746
-    #> 2024-06-29 11:00:00      2372.406
+    #> 2024-07-01 19:00:00      2517.698
+    #> 2024-07-01 20:00:00      2538.052
+    #> 2024-07-01 21:00:00      2532.170
+    #> 2024-07-01 22:00:00      2523.813
+    #> 2024-07-01 23:00:00      2530.148
+    #> 2024-07-02 00:00:00      2519.876
 
 </details>
 
@@ -351,12 +361,12 @@ tail(
 ```
 
     #>                     funding_rate
-    #> 2024-06-27 18:00:00        1e-04
-    #> 2024-06-28 02:00:00        1e-04
-    #> 2024-06-28 10:00:00        1e-04
-    #> 2024-06-28 18:00:00        1e-04
-    #> 2024-06-29 02:00:00        1e-04
-    #> 2024-06-29 10:00:00        1e-04
+    #> 2024-06-30 02:00:00        1e-04
+    #> 2024-06-30 10:00:00        1e-04
+    #> 2024-06-30 18:00:00        1e-04
+    #> 2024-07-01 02:00:00        1e-04
+    #> 2024-07-01 10:00:00        1e-04
+    #> 2024-07-01 18:00:00        1e-04
 
 </details>
 
@@ -378,12 +388,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-24 02:00:00      77593.99
-    #> 2024-06-25 02:00:00      76111.90
     #> 2024-06-26 02:00:00      75584.46
     #> 2024-06-27 02:00:00      74876.90
     #> 2024-06-28 02:00:00      74906.65
     #> 2024-06-29 02:00:00      78522.05
+    #> 2024-06-30 02:00:00      80535.81
+    #> 2024-07-01 02:00:00      85675.69
 
 </details>
 

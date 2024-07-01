@@ -88,7 +88,7 @@ crypto.comIntervals <- function(
   } else {
     # Select the specified interval
     selectedInterval <- allIntervals$values[
-      grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)
+       allIntervals$labels %in% interval
     ]
 
     return(selectedInterval)
