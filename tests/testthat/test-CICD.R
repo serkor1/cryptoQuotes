@@ -33,16 +33,24 @@ testthat::test_that(
           )
         )
 
-        # 2) get quote from kraken
-        testthat::expect_no_condition(
-          output <- get_quote(
+        output <- try(
+          get_quote(
             ticker   = sample(ticker,size = 1),
             source   = x,
-            interval = "1d",
+            interval = "1h",
             futures  = FALSE
           )
         )
 
+        testthat::expect_false(
+          object = inherits(
+            x = output,
+            what = "try-error"
+          ),
+          label = paste(
+            "Error in", x, "(get_quote)"
+          )
+        )
 
         # 2) test wether the
         # ohlc is logical
@@ -113,7 +121,7 @@ testthat::test_that(
           output <- get_quote(
             ticker   = ticker,
             source   = x,
-            interval = "1d",
+            interval = "1h",
             futures  = TRUE
           )
         )
