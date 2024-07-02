@@ -149,6 +149,7 @@ get_quote <- function(
       )
     )
   )
+
   # 2) check wether the
   # interval is supported by
   # the exchange API
@@ -169,17 +170,13 @@ get_quote <- function(
         "Run",
         cli::code_highlight(
           code = sprintf(
-            "cryptoQuotes::available_intervals(
-               source = '%s',
-               type = 'ohlc,
-               futures = '%s'
-            )",
+            "cryptoQuotes::available_intervals(source = '%s', type = 'ohlc', futures = %s)",
             source,
             futures
-            ),
+          ),
           code_theme = "Chaos"
         ),
-        "for supported intervals"
+        "for supported intervals."
       )
     )
   )
@@ -215,23 +212,20 @@ get_quote <- function(
 
   }
 
-  ohlc <- fetch(
-    ticker = ticker,
-    source = source,
-    futures= futures,
-    interval = interval,
-    type   = "ohlc",
-    to     = to,
-    from   = from
-  )[paste(c(from, to), collapse = "/")]
+  ohlc <- stats::window(
+    x = fetch(
+      ticker   = ticker,
+      source   = source,
+      futures  = futures,
+      interval = interval,
+      type     = "ohlc",
+      to       = to,
+      from     = from
+    ),
+    start = from,
+    end   = to
+  )
 
-  # Kraken doesnt have a to
-  # parameter on spot market
-  if (source == "kraken") {
-
-    ohlc <- ohlc[paste(c(from, to), collapse = "/")]
-
-  }
 
   attributes(ohlc)$source <- paste0(
     to_title(source), if (futures) " (PERPETUALS)" else " (SPOT)"

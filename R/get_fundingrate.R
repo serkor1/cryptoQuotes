@@ -87,27 +87,6 @@ get_fundingrate <- function(
     trimws(ticker)
   )
 
-
-  assert(
-    source %in% suppressMessages(
-      available_exchanges(type = "fundingrate")
-    ),
-    error_message = c(
-      "x" = sprintf(
-        fmt = "Exchange {.val %s} is not supported.",
-        source
-      ),
-      "i" = paste(
-        "Run",
-        cli::code_highlight(
-          code = "cryptoQuotes::available_exchanges(type = 'fundingrate')",
-          code_theme = "Chaos"
-        ),
-        "for supported exhanges"
-      )
-    )
-  )
-
   from <- coerce_date(from); to <- coerce_date(to)
 
   # 3) if either of the
@@ -136,14 +115,18 @@ get_fundingrate <- function(
 
   }
 
-  fetch(
-    ticker   = ticker,
-    source   = source,
-    futures  = TRUE,
-    interval = '1d',
-    type     = "fundingrate",
-    to       = to,
-    from     = from
+  stats::window(
+    x = fetch(
+      ticker   = ticker,
+      source   = source,
+      futures  = TRUE,
+      interval = '1d',
+      type     = "fundingrate",
+      to       = to,
+      from     = from
+    ),
+    start = from,
+    end   = to
   )
 
 }
