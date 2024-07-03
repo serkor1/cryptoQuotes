@@ -186,7 +186,7 @@ binanceIntervals <- function(
   if (all) { return(interval_label) }
 
   interval_actual[
-    interval_actual %in% interval
+    interval_label %in% interval
   ]
 
 }
