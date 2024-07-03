@@ -71,59 +71,53 @@ get_quote <- function(
     interval  = '1d',
     from      = NULL,
     to        = NULL) {
-  # This function returns
-  # the ticker with the desired intervals
-  # and such
-
-  # 0) check internet connection and passed
-  # argumnents before anything
+  # # This function returns
+  # # the ticker with the desired intervals
+  # # and such
+  #
+  # # 0) check internet connection and passed
+  # # argumnents before anything
   check_internet_connection()
 
   # 1) check all arguments
   # what are missing, and are
   # the classes correct?
-  {{
+  assert(
+    "
+    Argument {.arg ticker} is missing with no default
+    " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
 
-    assert(
-      "
-      Argument {.arg ticker} is missing with no default
-      " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+    "
+    Argument {.arg source} has to be {.cls character} of length {1}
+    " = (is.character(source) & length(source) == 1),
 
-      "
-      Argument {.arg source} has to be {.cls character} of length {1}
-      " = (is.character(source) & length(source) == 1),
+    "
+    Argument {.arg futures} has to be {.cls logical} of length {1}
+    " = (is.logical(futures) & length(futures) == 1),
 
-      "
-      Argument {.arg futures} has to be {.cls logical} of length {1}
-      " = (is.logical(futures) & length(futures) == 1),
+    "
+    Argument {.arg interval} has to be {.cls character} of length {1}
+    " = (is.character(interval) & length(interval) == 1),
 
-      "
-      Argument {.arg interval} has to be {.cls character} of length {1}
-      " = (is.character(interval) & length(interval) == 1),
+    "
+    Valid {.arg from} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(from) || (is.date(from) & length(from) == 1)),
 
-      "
-      Valid {.arg from} input is on the form
-      {.val {paste(as.character(Sys.Date()))}} or
-      {.val {as.character(format(Sys.time()))}}
-      " = (is.null(from) || (is.date(from) & length(from) == 1)),
-
-      "Valid {.arg to} input is on the form
-      {.val {paste(as.character(Sys.Date()))}} or
-      {.val {as.character(format(Sys.time()))}}
-      " = (is.null(to) || (is.date(to) & length(to) == 1))
-    )
-
-  }}
+    "
+    Valid {.arg to} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(to) || (is.date(to) & length(to) == 1))
+  )
 
   # recode the exchange
   # source to avoid errors
   # based on capitalization
   # and whitespace
-  source <- tolower(
-    trimws(source)
-  )
+  source <- tolower(trimws(source))
   ticker <- trimws(ticker)
-
 
   # 1) check wether
   # the chosen exchange
@@ -225,7 +219,6 @@ get_quote <- function(
     start = from,
     end   = to
   )
-
 
   attributes(ohlc)$source <- paste0(
     to_title(source), if (futures) " (PERPETUALS)" else " (SPOT)"
