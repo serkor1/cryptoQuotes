@@ -11,11 +11,10 @@ huobiUrl <- function(
 
   # 1) define baseURL
   # for each API
-  base::ifelse(
-    test = futures,
-    yes  = 'https://api.hbdm.com',
-    no   = 'https://api.huobi.pro'
-  )
+  if (futures)
+    'https://api.hbdm.com'
+  else
+    'https://api.huobi.pro'
 
 }
 
@@ -24,19 +23,19 @@ huobiEndpoint <- function(
     futures = TRUE,
     top     = FALSE) {
 
- switch(
+  switch(
     EXPR = type,
-    ohlc = {
-      if (futures)
-        'linear-swap-ex/market/history/kline'
-      else
-        'market/history/kline'
-    },
     ticker ={
       if (futures)
         "linear-swap-api/v1/swap_api_state"
       else
         "v2/settings/common/symbols"
+    },
+    {
+      if (futures)
+        'linear-swap-ex/market/history/kline'
+      else
+        'market/history/kline'
     }
   )
 }
@@ -52,46 +51,40 @@ huobiIntervals <- function(
   # 0) define intervals
   # NOTE: These are common for
   # both endpoints
-  all_intervals <- data.frame(
-    labels = c(
-      '1m',
-      '5m',
-      '15m',
-      '30m',
-      '1h',
-      '4h',
-      '1d',
-      '1w',
-      '1M'
-    ),
-    values =  c(
-      "1min",
-      "5min",
-      "15min",
-      "30min",
-      "60min",
-      "4hour",
-      "1day",
-      "1week",
-      "1mon"
-    )
+
+  interval_label <- c(
+    '1m',
+    '5m',
+    '15m',
+    '30m',
+    '1h',
+    '4h',
+    '1d',
+    '1w',
+    '1M'
+  )
+
+  interval_actual <-  c(
+    "1min",
+    "5min",
+    "15min",
+    "30min",
+    "60min",
+    "4hour",
+    "1day",
+    "1week",
+    "1mon"
   )
 
 
-  if (all) {
+  if (all) { return(interval_label) }
 
-    all_intervals$labels
+  interval_actual[
+    interval_label %in% interval
+  ]
 
-  } else {
-
-    # Select the specified interval
-    selectedInterval <- all_intervals$values[
-      grepl(paste0('^', interval, '$'), all_intervals$labels)
-    ]
-
-    selectedInterval
-  }
 }
+
 
 # 3) define response object and format; ####
 huobiResponse <- function(
@@ -106,7 +99,32 @@ huobiResponse <- function(
 
   switch(
     EXPR = type,
-    ohlc = {
+    ticker = {
+      list(
+        foo = function(
+    response,
+    futures = NULL){
+
+          if (futures) {
+
+            subset(
+              response$data
+            )$contract_code
+
+          } else {
+
+            subset(
+              response$data,
+              response$data$state == "online" & response$data$te == TRUE
+            )$sc
+
+          }
+
+        }
+      )
+    },
+    {
+
       list(
         colum_names = if (futures)
           c(
@@ -132,32 +150,9 @@ huobiResponse <- function(
         )
 
       )
-    },
 
-    ticker = {
-      list(
-        foo = function(
-    response,
-    futures = NULL){
-
-          if (futures) {
-
-            subset(
-              response$data
-            )$contract_code
-
-          } else {
-
-            subset(
-              response$data,
-              response$data$state == "online" & response$data$te == TRUE
-            )$sc
-
-          }
-
-        }
-      )
     }
+
   )
 
 }
@@ -186,20 +181,15 @@ huobiDates <- function(
 
   } else {
 
-    dates <- convert_date(
-      x = dates,
-      multiplier = multiplier)
-
-    dates <- vapply(
-      dates,
-      format,
-      scientific = FALSE,
-      FUN.VALUE = character(1)
+    dates <- format(
+      convert_date(
+        x = dates,
+        multiplier = multiplier
+      ),
+      scientific = FALSE
     )
 
     names(dates) <- c('from', 'to')
-
-
 
   }
 
@@ -229,6 +219,7 @@ huobiParameters <- function(
   )
 
   if (futures) names(params)[1] <- "contract_code"
+
   # Add date parameters
   date_params <- huobiDates(
     futures = futures,
@@ -245,11 +236,11 @@ huobiParameters <- function(
   # Return a structured list with additional common parameters
   return(
     list(
-      query = params,
-      path = NULL,
-      futures = futures,
-      source = 'huobi',
-      ticker = ticker,
+      query    = params,
+      path     = NULL,
+      futures  = futures,
+      source   = 'huobi',
+      ticker   = ticker,
       interval = interval
     )
   )
