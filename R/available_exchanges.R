@@ -69,16 +69,6 @@ available_exchanges <- function(
 
   exchanges <- sort(switch(
     type,
-    ohlc        = c(
-      'binance',
-      'kucoin',
-      'kraken',
-      'bitmart',
-      'bybit',
-      'crypto.com',
-      'huobi',
-      'mexc'
-    ),
     fundingrate = c(
       'binance',
       'bybit',
@@ -95,7 +85,19 @@ available_exchanges <- function(
       'binance',
       'bybit',
       'kraken'
-    )
+    ),
+    {
+      c(
+        'binance',
+        'kucoin',
+        'kraken',
+        'bitmart',
+        'bybit',
+        'crypto.com',
+        'huobi',
+        'mexc'
+      )
+    }
   )
   )
 
