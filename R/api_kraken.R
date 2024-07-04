@@ -61,20 +61,20 @@ krakenIntervals <- function(
     if (futures) {
       # For futures, labels and values are the same
 
-      interval_label = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
-      interval_actual = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
+      interval_label <- c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
+      interval_actual <- c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
 
     } else {
       # For non-futures, labels and values are different
 
-      interval_label = c("1m", "5m", "15m", "30m", "1h", "4h", "1d", "1w", "2w")
-      interval_actual = c(1   , 5   , 15   , 30    , 60   , 240 , 1440, 10080, 21600)
+      interval_label <- c("1m", "5m", "15m", "30m", "1h", "4h", "1d", "1w", "2w")
+      interval_actual <-  c(1   , 5   , 15   , 30    , 60   , 240 , 1440, 10080, 21600)
 
     }
   }, # default values
   {
-    interval_label = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "2d", "8d")
-    interval_actual = c(60, 300, 900, 1800, 3600, 14400, 43200, 86400, 604800)
+    interval_label <- c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "2d", "8d")
+    interval_actual <- c(60, 300, 900, 1800, 3600, 14400, 43200, 86400, 604800)
   })
 
   if (all) { return(interval_label) }
