@@ -29,6 +29,10 @@ library(cryptoQuotes)
 
 ## Improvements
 
+## Read and Write `xts`-objects
+
+* `read_xts()` and `write_xts`() reads and stores `xts`-objects. These functions are essentially just wrappers of `zoo::read.zoo()` and `zoo::write.zoo()`.
+
 ### Charting
 
 * The `chart()`-function are now exported as `.svg`-images in 4k resolution via the `modebar`.
