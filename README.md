@@ -33,35 +33,35 @@ currently 8 supported cryptocurrency exchanges,
 
 <table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
 <caption>
-Supported exchanges
+All supported exchanges.
 </caption>
 <tbody>
 <tr>
 <td style="text-align:center;">
-binance
+Binance
 </td>
 <td style="text-align:center;">
-bitmart
+BitMart
 </td>
 <td style="text-align:center;">
-bybit
+Bybit
 </td>
 <td style="text-align:center;">
-crypto.com
+Crypto.com
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-huobi
+Huobi (HTX)
 </td>
 <td style="text-align:center;">
-kraken
+Kraken
 </td>
 <td style="text-align:center;">
-kucoin
+KuCoin
 </td>
 <td style="text-align:center;">
-mexc
+MEXC
 </td>
 </tr>
 </tbody>
@@ -107,195 +107,120 @@ exchanges,
 
 <div align="center">
 
-<table style="width:100%; color: black; margin-left: auto; margin-right: auto;" class="table">
-<caption>
-Supported exchanges, markets and intervals.
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Exchange
-</th>
-<th style="text-align:center;">
-Spot
-</th>
-<th style="text-align:center;">
-Futures
-</th>
-<th style="text-align:center;">
-Available Intervals
-</th>
-<th style="text-align:center;">
-Smallest Interval
-</th>
-<th style="text-align:center;">
-Biggest Interval
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Binance
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-16
-</td>
-<td style="text-align:center;">
-1 second(s)
-</td>
-<td style="text-align:center;">
-1 month(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Bitmart
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-13
-</td>
-<td style="text-align:center;">
-1 minute(s)
-</td>
-<td style="text-align:center;">
-1 week(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Bybit
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-13
-</td>
-<td style="text-align:center;">
-1 minute(s)
-</td>
-<td style="text-align:center;">
-1 month(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Crypto.com
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-12
-</td>
-<td style="text-align:center;">
-1 minute(s)
-</td>
-<td style="text-align:center;">
-1 month(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Huobi
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-9
-</td>
-<td style="text-align:center;">
-1 minute(s)
-</td>
-<td style="text-align:center;">
-1 month(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Kraken
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-10
-</td>
-<td style="text-align:center;">
-1 minute(s)
-</td>
-<td style="text-align:center;">
-2 week(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Kucoin
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-13
-</td>
-<td style="text-align:center;">
-1 minute(s)
-</td>
-<td style="text-align:center;">
-1 week(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mexc
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-10
-</td>
-<td style="text-align:center;">
-1 minute(s)
-</td>
-<td style="text-align:center;">
-1 month(s)
-</td>
-</tr>
-</tbody>
+<div id="psmyhlxmwj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
+  <caption>Supported exchanges by spot and futures markets with available intervals.</caption>
+  <thead style="border-style: none;">
+    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Exchange" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" bgcolor="#FFFFFF" valign="bottom" align="left">Exchange</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Spot" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Spot</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Futures" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Futures</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Available Intervals" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Available Intervals</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Smallest Interval" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Smallest Interval</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Biggest Interval" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Biggest Interval</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">Binance</p>
+</div></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">16</p>
+</div></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 second(s)</p>
+</div></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 month(s)</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">BitMart</p>
+</div></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">13</p>
+</div></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 minute(s)</p>
+</div></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 week(s)</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">Bybit</p>
+</div></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">13</p>
+</div></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 minute(s)</p>
+</div></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 month(s)</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">Crypto.com</p>
+</div></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">12</p>
+</div></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 minute(s)</p>
+</div></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 month(s)</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">Huobi (HTX)</p>
+</div></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">9</p>
+</div></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 minute(s)</p>
+</div></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 month(s)</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">Kraken</p>
+</div></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">10</p>
+</div></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 minute(s)</p>
+</div></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">2 week(s)</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">KuCoin</p>
+</div></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">13</p>
+</div></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 minute(s)</p>
+</div></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 week(s)</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">MEXC</p>
+</div></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">10</p>
+</div></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 minute(s)</p>
+</div></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">1 month(s)</p>
+</div></td></tr>
+  </tbody>
+  &#10;  
 </table>
+</div>
 
 </div>
 
@@ -316,7 +241,7 @@ BTC <- cryptoQuotes::get_quote(
   source   = 'binance',
   futures  = FALSE,
   interval = '30m',
-  from     = Sys.Date() - 1 
+  from     = Sys.Date() - 2
 )
 ```
 
@@ -351,122 +276,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-07-01 21:30:00
+2024-07-07 10:00:00
 </td>
 <td style="text-align:center;">
-63392.07
+57369.99
 </td>
 <td style="text-align:center;">
-63411.41
+57540
 </td>
 <td style="text-align:center;">
-63071.36
+57369.98
 </td>
 <td style="text-align:center;">
-63226.78
+57485.12
 </td>
 <td style="text-align:left;">
-854.33693
+352.10478
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-01 22:00:00
+2024-07-07 10:30:00
 </td>
 <td style="text-align:center;">
-63226.78
+57485.12
 </td>
 <td style="text-align:center;">
-63423.48
+57661.58
 </td>
 <td style="text-align:center;">
-63162.06
+57439.99
 </td>
 <td style="text-align:center;">
-63348.01
+57650.45
 </td>
 <td style="text-align:left;">
-364.18394
+355.56531
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-01 22:30:00
+2024-07-07 11:00:00
 </td>
 <td style="text-align:center;">
-63348.01
+57650.45
 </td>
 <td style="text-align:center;">
-63380
+57720.35
 </td>
 <td style="text-align:center;">
-63290
+57565.94
 </td>
 <td style="text-align:center;">
-63292.53
+57702.01
 </td>
 <td style="text-align:left;">
-179.12302
+265.19989
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-01 23:00:00
+2024-07-07 11:30:00
 </td>
 <td style="text-align:center;">
-63292.53
+57702
 </td>
 <td style="text-align:center;">
-63292.53
+57733.99
 </td>
 <td style="text-align:center;">
-63111.25
+57602
 </td>
 <td style="text-align:center;">
-63138
+57733.4
 </td>
 <td style="text-align:left;">
-180.11508
+143.65146
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-01 23:30:00
+2024-07-07 12:00:00
 </td>
 <td style="text-align:center;">
-63138
+57733.41
 </td>
 <td style="text-align:center;">
-63198.26
+57783.8
 </td>
 <td style="text-align:center;">
-63036.82
+57584.01
 </td>
 <td style="text-align:center;">
-63130.01
+57746
 </td>
 <td style="text-align:left;">
-162.41002
+210.40092
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-02
+2024-07-07 12:30:00
 </td>
 <td style="text-align:center;">
-63130.01
+57745.99
 </td>
 <td style="text-align:center;">
-63162.5
+57911.71
 </td>
 <td style="text-align:center;">
-63019.38
+57745.99
 </td>
 <td style="text-align:center;">
-63121.2
+57751.47
 </td>
 <td style="text-align:left;">
-146.10718
+186.96287
 </td>
 </tr>
 </tbody>
@@ -498,131 +423,81 @@ indicators please refer to the documentation via
 
 <div align="center">
 
-<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
-<caption>
-Available sentiment indicators by exchange
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Endpoint
-</th>
-<th style="text-align:center;">
-Binance
-</th>
-<th style="text-align:center;">
-Bitmart
-</th>
-<th style="text-align:center;">
-Bybit
-</th>
-<th style="text-align:center;">
-Kraken
-</th>
-<th style="text-align:center;">
-Kucoin
-</th>
-<th style="text-align:left;">
-Crypto.com
-</th>
-<th style="text-align:center;">
-MEXC
-</th>
-<th style="text-align:center;">
-Huobi
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Long-Short Ratio
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-<td style="text-align:left;">
-:x:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Open Interest
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-<td style="text-align:left;">
-:x:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Funding Rate
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:left;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:white_check_mark:
-</td>
-<td style="text-align:center;">
-:x:
-</td>
-</tr>
-</tbody>
+<div id="efckmrneey" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
+  <caption>Available sentiment indicators by exchange</caption>
+  <thead style="border-style: none;">
+    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Endpoint" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" bgcolor="#FFFFFF" valign="bottom" align="left">Endpoint</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Binance" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Binance</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="BitMart" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">BitMart</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Bybit" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Bybit</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Crypto.com" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Crypto.com</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Huobi (HTX)" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Huobi (HTX)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Kraken" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Kraken</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="KuCoin" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">KuCoin</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="MEXC" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">MEXC</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
+    <tr style="border-style: none;"><td headers="Endpoint" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">Long-Short Ratio</p>
+</div></td>
+<td headers="Binance" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="BitMart" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="Bybit" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Crypto.com" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="Huobi (HTX)" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="Kraken" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="KuCoin" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="MEXC" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Endpoint" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">Open Interest</p>
+</div></td>
+<td headers="Binance" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="BitMart" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="Bybit" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Crypto.com" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="Huobi (HTX)" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="Kraken" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="KuCoin" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="MEXC" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td></tr>
+    <tr style="border-style: none;"><td headers="Endpoint" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">Fundingrate</p>
+</div></td>
+<td headers="Binance" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="BitMart" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="Bybit" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Crypto.com" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="Huobi (HTX)" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="Kraken" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:x:</p>
+</div></td>
+<td headers="KuCoin" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td>
+<td headers="MEXC" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><div class="gt_from_md"><p style="margin: 0; padding: 0; margin-top: 0; margin-bottom: 0;">:white_check_mark:</p>
+</div></td></tr>
+  </tbody>
+  &#10;  
 </table>
+</div>
 
 </div>
 
@@ -642,7 +517,7 @@ BTC_LS <- cryptoQuotes::get_lsratio(
   ticker   = 'BTCUSDT',
   source   = 'binance',
   interval = '30m',
-  from     = Sys.Date() - 1 
+  from     = Sys.Date() - 2
 )
 ```
 
@@ -671,86 +546,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-07-01 21:30:00
+2024-07-07 10:00:00
 </td>
 <td style="text-align:center;">
-0.65
+0.669
 </td>
 <td style="text-align:center;">
-0.35
+0.331
 </td>
 <td style="text-align:center;">
-1.855
+2.021
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-01 22:00:00
+2024-07-07 10:30:00
 </td>
 <td style="text-align:center;">
-0.653
+0.666
 </td>
 <td style="text-align:center;">
-0.346
+0.334
 </td>
 <td style="text-align:center;">
-1.886
+1.997
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-01 22:30:00
+2024-07-07 11:00:00
 </td>
 <td style="text-align:center;">
-0.654
+0.668
 </td>
 <td style="text-align:center;">
-0.346
+0.332
 </td>
 <td style="text-align:center;">
-1.893
+2.013
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-01 23:00:00
+2024-07-07 11:30:00
 </td>
 <td style="text-align:center;">
-0.651
+0.669
 </td>
 <td style="text-align:center;">
-0.349
+0.331
 </td>
 <td style="text-align:center;">
-1.868
+2.018
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-01 23:30:00
+2024-07-07 12:00:00
 </td>
 <td style="text-align:center;">
-0.649
+0.67
 </td>
 <td style="text-align:center;">
-0.351
+0.33
 </td>
 <td style="text-align:center;">
-1.851
+2.028
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-02
+2024-07-07 12:30:00
 </td>
 <td style="text-align:center;">
-0.65
+0.67
 </td>
 <td style="text-align:center;">
-0.35
+0.33
 </td>
 <td style="text-align:center;">
-1.857
+2.028
 </td>
 </tr>
 </tbody>
@@ -773,6 +648,13 @@ interactivity. It supports *light* and *dark* themes, and accounts for
 
 The OHLC-V data and the sentiment indicator can be charted using the
 `chart()`-function,
+
+<img src="man/figures/README-chartquote-1.png" alt="cryptocurrency charts in R" style="display: block; margin: auto;" />
+
+<details>
+<summary>
+Source
+</summary>
 
 ``` r
 ## Chart BTC
@@ -797,44 +679,6 @@ cryptoQuotes::chart(
   )
 )
 ```
-
-<img src="man/figures/README-chartquote-1.png" alt="cryptocurrency charts in R" style="display: block; margin: auto;" />
-
-<details>
-<summary>
-Colorblind friendly version
-</summary>
-
-#### Charting with indicators (colorblind friendly)
-
-``` r
-## Chart BTC
-## using klines, SMA
-## Bollinger Bands and 
-## ling-short ratio with color-deficiency
-cryptoQuotes::chart(
-  ticker = BTC,
-  main   = cryptoQuotes::kline(),
-  sub    = list(
-    cryptoQuotes::lsr(ratio = BTC_LS),
-    cryptoQuotes::volume()
-  ),
-  indicator = list(
-    cryptoQuotes::sma(n = 7),
-    cryptoQuotes::sma(n = 14),
-    cryptoQuotes::sma(n = 21),
-    cryptoQuotes::bollinger_bands()
-  ),
-  options = list(
-    deficiency = TRUE,
-    static     = TRUE
-  )
-)
-```
-
-<img src="man/figures/README-chartquote(deficiency)-1.png" alt="cryptocurrency charts in R" style="display: block; margin: auto;" />
-
-------------------------------------------------------------------------
 
 </details>
 

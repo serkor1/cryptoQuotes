@@ -13,7 +13,8 @@ knitr::opts_chunk$set(
   comment  = "#>",
   fig.path = "man/figures/README-",
   message  = FALSE,
-  warning  = FALSE
+  warning  = FALSE,
+  echo     = FALSE 
 )
 ```
 
@@ -32,28 +33,61 @@ knitr::opts_chunk$set(
 
 [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) is a high-level API client for accessing public market data endpoints on major cryptocurrency exchanges. It supports open, high, low, close and volume (OHLC-V) data and a variety of sentiment indicators; the market data is high quality and can be retrieved in intervals ranging from *seconds* to *months*. All the market data is accessed and processed without relying on crawlers, or API keys, ensuring an open, and reliable, access for researchers, traders and students alike. There are currently `r length(invisible(cryptoQuotes::available_exchanges(type = "ohlc")))` supported cryptocurrency exchanges,
 
-<div align="center">
-```{r, echo=FALSE}
-## available exchanges
-invisible(
-  all_exchanges <- cryptoQuotes::available_exchanges()
+```{r Exchanges (Raw),include=FALSE, echo=FALSE}
+# 1) create a data.table of available
+# exchanges and store as dat.table
+DT <- data.table::data.table(
+  value = suppressMessages(
+    cryptoQuotes::available_exchanges()
+  )
 )
 
-if (length(all_exchanges) %% 2 != 0) {
+# 2) add labels
+# to the data data
+DT[
+  ,
+  label := data.table::fcase(
+    value == "binance", "Binance",
+    value == "kraken", "Kraken",
+    value == "crypto.com", "Crypto.com",
+    value == "kucoin", "KuCoin",
+    value == "bitmart", "BitMart",
+    value == "huobi", "Huobi (HTX)",
+    value == "mexc", "MEXC",
+    value == "bybit", "Bybit"
+  )
+  ,
+]
+
+```
+
+
+<div align="center">
+```{r Exchanges (Table), echo=FALSE}
+# 1) define all available
+# exchanges
+all_exchanges <- DT$label
+
+if (length(DT$label) %% 2 != 0) {
   # If odd, append an empty string to make it even
-  all_exchanges <- c(all_exchanges, "")
+  all_exchanges <- c(DT$label, "")
 }
 
 # Convert the character vector to a single-row data frame
-exchanges_df <- data.frame(matrix(data = all_exchanges, ncol = 4,byrow = TRUE))
+all_exchanges <- data.table::data.table(
+  matrix(
+    data = all_exchanges, 
+    ncol = 4,
+    byrow = TRUE)
+)
 
 # Create a horizontal table
 kableExtra::kable_styling(
   knitr::kable(
-    x = exchanges_df, 
+    x = all_exchanges, 
     digits = 2,
     col.names = NULL,
-    caption = 'Supported exchanges',
+    caption = 'All supported exchanges.',
     align = 'c',
     table.attr = "style='width:100%;'",
     format = 'html'
@@ -128,7 +162,7 @@ exchange <- firstup(
 # 2) calculate available
 # intervals
 intervals <- sapply(
-  exchange,
+  DT$value,
   function(x){
     suppressMessages(
       {
@@ -162,7 +196,7 @@ granularity <- function(
 )
 {
   sapply(
-    exchange,
+    DT$value,
     function(x){
       suppressMessages(
         {
@@ -226,26 +260,33 @@ granularity <- function(
 
 # 2) create
 # table
-kableExtra::kable_styling(
-  knitr::kable(
-    digits = 2,
-    caption = 'Supported exchanges, markets and intervals.',
-    align = 'lccccc',
-    table.attr = "style='width:100%;'",
-    col.names = c('Exchange', 'Spot', 'Futures', 'Available Intervals' ,'Smallest Interval', 'Biggest Interval'),
-    x = data.frame(
-      row.names = NULL,
-      Exchange  = exchange,
-      Spot = rep(x = ":white_check_mark:",length(exchange)),
-      Futures = rep(x = ":white_check_mark:",length(exchange)),
-      `Available Intervals` = c(intervals),
-      `Smallest Interval` = c(granularity(TRUE)),
-      `Biggest Interval` = c(granularity(FALSE))
+gt::as_raw_html(
+  gt::fmt_markdown(
+    gt::cols_label(
+     gt::cols_align(
+      data = gt::gt(
+        data.frame(
+          row.names = NULL,
+          Exchange  = DT$label,
+          Spot = rep(x = ":white_check_mark:",length(exchange)),
+          Futures = rep(x = ":white_check_mark:",length(exchange)),
+          `Available Intervals` = c(intervals),
+          `Smallest Interval` = c(granularity(TRUE)),
+          `Biggest Interval` = c(granularity(FALSE))
+        ),
+        auto_align = FALSE,
+        caption = 'Supported exchanges by spot and futures markets with available intervals.'),
+      align = "left",
+      columns = "Exchange"
+      
     ),
-    format = 'html'
-  ),
-  full_width = TRUE,
-  position = 'center'
+    Available.Intervals = "Available Intervals",
+    Smallest.Interval   = "Smallest Interval",
+    Biggest.Interval    = "Biggest Interval"
+    )
+    
+    
+  )
 )
 ```
 </div>
@@ -255,7 +296,7 @@ kableExtra::kable_styling(
 
 Get USDT denominated Bitcoin (BTC) on the spot market from Binance in `30m`-intervals using the `get_quote()`-function,
 
-```{r cryptocurrency market data in R, eval=TRUE}
+```{r cryptocurrency market data in R, eval=TRUE, echo=TRUE}
 ## BTC OHLC prices
 ## from Binance spot market
 ## in 30 minute intervals
@@ -264,7 +305,7 @@ BTC <- cryptoQuotes::get_quote(
   source   = 'binance',
   futures  = FALSE,
   interval = '30m',
-  from     = Sys.Date() - 1 
+  from     = Sys.Date() - 2
 )
 ```
 
@@ -298,64 +339,80 @@ The sentiment indicators available in [{cryptoQuotes}](https://serkor1.github.io
 In this overview we are focusing on *market indicators* made public by the cryptocurrency exchanges. For a full overview of sentiment indicators please refer to the documentation via [{pkgdown}](https://serkor1.github.io/cryptoQuotes/). All supported *market indicators* by exchange are listed in the table below,
 
 <div align="center">
-```{r, echo = FALSE}
-## 1) list all available
-## exchanges and the links
-available_endpoint <- data.frame(
-  Endpoint = c(
-    "Long-Short Ratio",
-    "Open Interest",
-    "Funding Rate"
-    ),
-  Binance  = c(
-    ":white_check_mark:",
-    ":white_check_mark:",
-    ":white_check_mark:"
-    ),
-  Bitmart  = c(
-    ":x:",
-    ":x:",
-    ":x:"
-    ),
-  Bybit    = c(
-    ":white_check_mark:",
-    ":white_check_mark:",
-    ":white_check_mark:"
-    ),
-  Kraken    = c(
-    ":white_check_mark:",
-    ":white_check_mark:",
-    ":x:"
-    ),
-  Kucoin    = c(
-    ":x:",
-    ":x:",
-    ":white_check_mark:"
-    ),
-  `Crypto.com` = c(
-    ":x:", ":x:", ":white_check_mark:"
-  ),
-  MEXC = c(
-    ":x:", ":x:", ":white_check_mark:"
-  ),
-  Huobi = c(
-    ":x:", ":x:", ":x:"
+```{r Available Endpoints by Exchange, echo = FALSE}
+## 0) Get all available
+## endpoints
+endpoint_label <- c("Long-Short Ratio", "Open Interest", "Fundingrate")
+endpoint_value <- c(         "lsratio",      "interest", "fundingrate")
+all_exchanges  <- DT$value
+
+DT_ <- data.table::rbindlist(
+  lapply(
+    seq_along(all_exchanges),
+    FUN = function(i) {
+      
+      # 0) extract exchange
+      exchange <- all_exchanges[i]
+      
+      data.table::rbindlist(
+        lapply(
+          seq_along(endpoint_value),
+          FUN = function(j) {
+            
+            
+            # 0) generate table
+            DT <- data.table::data.table(
+              order    = j,
+              Exchange = DT$label[i],
+              Endpoint = endpoint_label[j]
+            )
+            
+            DT[
+              ,
+              available := data.table::fifelse(
+                test = exchange %in% suppressMessages(cryptoQuotes::available_exchanges(endpoint_value[j])),
+                yes  = ":white_check_mark:",
+                no   =  ":x:"
+              )
+              ,
+            ]
+            
+            DT
+            
+            
+          }
+        )
+      )
+      
+      
+      
+      
+    }
   )
 )
 
+DT_ <- data.table::dcast(
+  data = DT_,
+  formula = order +  Endpoint ~ Exchange,
+  value.var = "available"
+)
+DT_$order <- NULL
+
 ## 4) present table
 ## for as is
-kableExtra::kable_styling(
-  knitr::kable(
-    digits = 0,
-    caption = 'Available sentiment indicators by exchange',
-    align = 'lccccc',
-    table.attr = "style='width:100%;'",
-    x = available_endpoint,
-    format = 'markdown'
-  ),
-  full_width = TRUE,
-  position = 'center'
+gt::as_raw_html(
+  gt::fmt_markdown(
+    gt::cols_align(
+      data = gt::gt(
+        DT_,
+        auto_align = FALSE,
+        caption = 'Available sentiment indicators by exchange'),
+      align = "left",
+      columns = "Endpoint"
+      
+    )
+    
+  )
 )
 ```
 </div>
@@ -365,7 +422,7 @@ kableExtra::kable_styling(
 
 Get the *long-short ratio* on Bitcoin (BTC) using the `get_lsratio()`-function,
 
-```{r cryptocurrency sentiment indicators in R, eval=TRUE}
+```{r cryptocurrency sentiment indicators in R, eval=TRUE, echo=TRUE}
 ## BTC OHLC prices
 ## from Binance spot market
 ## in 30 minute intervals
@@ -373,7 +430,7 @@ BTC_LS <- cryptoQuotes::get_lsratio(
   ticker   = 'BTCUSDT',
   source   = 'binance',
   interval = '30m',
-  from     = Sys.Date() - 1 
+  from     = Sys.Date() - 2
 )
 ```
 
@@ -452,16 +509,14 @@ cryptoQuotes::chart(
 )
 ```
 
-
 <details>
-<summary>Colorblind friendly version</summary>
-#### Charting with indicators (colorblind friendly)
+<summary>Source</summary>
 
-```{r chartquote(deficiency), fig.align='center', fig.dpi=180, fig.alt="cryptocurrency charts in R"}
+```{r chartquote (Source),echo=TRUE, fig.align='center',fig.dpi=180, fig.alt="cryptocurrency charts in R", eval=FALSE}
 ## Chart BTC
 ## using klines, SMA
-## Bollinger Bands and 
-## ling-short ratio with color-deficiency
+## Bollinger Bands and
+## long-short ratio
 cryptoQuotes::chart(
   ticker = BTC,
   main   = cryptoQuotes::kline(),
@@ -476,19 +531,17 @@ cryptoQuotes::chart(
     cryptoQuotes::bollinger_bands()
   ),
   options = list(
-    deficiency = TRUE,
     static     = TRUE
   )
 )
 ```
 
-__________
 </details>
 
 ## :information_source: Installation
 
 ### :shield: Stable version
-```{r stable version guide, eval = FALSE}
+```{r stable version guide, eval = FALSE, echo=TRUE}
 ## install from CRAN
 install.packages(
   pkgs = 'cryptoQuotes',
@@ -497,7 +550,7 @@ install.packages(
 ```
 
 ### :hammer_and_wrench: Development version
-```{r development version guide, eval = FALSE}
+```{r development version guide, eval = FALSE,echo=TRUE}
 ## install from github
 devtools::install_github(
   repo = 'https://github.com/serkor1/cryptoQuotes/',
