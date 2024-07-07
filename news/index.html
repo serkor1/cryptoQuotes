@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cryptoQuotes</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,13 +70,18 @@
 </div>
 <div class="section level3">
 <h3 id="improvements-1-3-2">Improvements<a class="anchor" aria-label="anchor" href="#improvements-1-3-2"></a></h3>
-<div class="section level4">
+</div>
+<div class="section level3">
+<h3 id="read-and-write-xts-objects-1-3-2">Read and Write <code>xts</code>-objects<a class="anchor" aria-label="anchor" href="#read-and-write-xts-objects-1-3-2"></a></h3>
+<ul><li>
+<code><a href="../reference/write_xts.html">read_xts()</a></code> and <code><a href="../reference/write_xts.html">write_xts()</a></code> reads and stores <code>xts</code>-objects. These functions are essentially just wrappers of <code><a href="https://rdrr.io/pkg/zoo/man/read.zoo.html" class="external-link">zoo::read.zoo()</a></code> and <code><a href="https://rdrr.io/pkg/zoo/man/read.zoo.html" class="external-link">zoo::write.zoo()</a></code>. Thank you <a href="https://github.com/gokberkcan7" class="external-link">@gokberkcan7</a> for the suggestion.</li>
+</ul><div class="section level4">
 <h4 id="charting-1-3-2">Charting<a class="anchor" aria-label="anchor" href="#charting-1-3-2"></a></h4>
 <ul><li>The <code><a href="../reference/chart.html">chart()</a></code>-function are now exported as <code>.svg</code>-images in 4k resolution via the <code>modebar</code>.</li>
-<li>The <code><a href="../reference/chart.html">chart()</a></code>-function are now more interactive and supports drawing lines and rectangles via the <code>modebar</code>. It is also possible to interactively change the <code>title</code> and <code>subtitle</code> by double clicking these (Thank you <a href="https://github.com/andreltr" class="external-link">@andreltr</a> for the suggestion. See <a href="https://github.com/serkor1/cryptoQuotes/discussions/19" class="external-link">Discussion</a>.</li>
+<li>The <code><a href="../reference/chart.html">chart()</a></code>-function are now more interactive and supports drawing lines and rectangles via the <code>modebar</code>. It is also possible to interactively change the <code>title</code> and <code>subtitle</code> by double clicking these (Thank you <a href="https://github.com/andreltr" class="external-link">@andreltr</a> for the suggestion. See <a href="https://github.com/serkor1/cryptoQuotes/discussions/19" class="external-link">Discussion</a>).</li>
 <li>The <code><a href="../reference/chart.html">chart()</a></code>-function now has a new option <code>static</code> that is equal to <code>FALSE</code> by default. If <code>FALSE</code> the chart can be edited, annotated and explored interactively.</li>
-<li>The <code><a href="../reference/chart.html">chart()</a></code>-function now has a new option <code>palette</code> that is set to “hawaii” by default. See [hcl.pals()] for accepted values.</li>
-<li>The <code><a href="../reference/chart.html">chart()</a></code>-function now has a new option <code>scale</code> that is set to 1 by default. Scales #’ all fonts on the chart.</li>
+<li>The <code><a href="../reference/chart.html">chart()</a></code>-function now has a new option <code>palette</code> that is set to “hawaii” by default. See <code><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">hcl.pals()</a></code> for accepted values.</li>
+<li>The <code><a href="../reference/chart.html">chart()</a></code>-function now has a new option <code>scale</code> that is set to 1 by default. Scales all fonts on the chart.</li>
 </ul><details><summary>
 Static set to FALSE (Default Palette)
 </summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -194,12 +199,12 @@ Usage
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#&gt;                     open_interest</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 19:00:00      2517.698</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 20:00:00      2538.052</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 21:00:00      2532.170</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 22:00:00      2523.813</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 23:00:00      2530.148</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; 2024-07-02 00:00:00      2519.876</span></span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 10:00:00      2474.917</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 11:00:00      2522.876</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 12:00:00      2522.405</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 13:00:00      2520.337</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 14:00:00      2514.162</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 15:00:00      2512.482</span></span></code></pre></div>
 </details></div>
 <div class="section level4">
 <h4 id="charting-1-3-1">Charting<a class="anchor" aria-label="anchor" href="#charting-1-3-1"></a></h4>
@@ -342,12 +347,12 @@ Usage
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#&gt;                     funding_rate</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; 2024-06-30 02:00:00        1e-04</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; 2024-06-30 10:00:00        1e-04</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; 2024-06-30 18:00:00        1e-04</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 02:00:00        1e-04</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 10:00:00        1e-04</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 18:00:00        1e-04</span></span></code></pre></div>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; 2024-07-05 18:00:00    1.762e-05</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; 2024-07-06 02:00:00    5.729e-05</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; 2024-07-06 10:00:00    7.512e-05</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; 2024-07-06 18:00:00    3.250e-05</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 02:00:00    8.164e-05</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 10:00:00    1.000e-04</span></span></code></pre></div>
 </details><ul><li>Open interest, <code><a href="../reference/get_openinterest.html">get_openinterest()</a></code>
 </li>
 </ul><details><summary>
@@ -362,12 +367,12 @@ Usage
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co">#&gt;                     open_interest</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; 2024-06-26 02:00:00      75584.46</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; 2024-06-27 02:00:00      74876.90</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; 2024-06-28 02:00:00      74906.65</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; 2024-06-29 02:00:00      78522.05</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; 2024-06-30 02:00:00      80535.81</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 2024-07-01 02:00:00      85675.69</span></span></code></pre></div>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; 2024-07-02 02:00:00      81856.18</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; 2024-07-03 02:00:00      84473.52</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; 2024-07-04 02:00:00      88025.51</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; 2024-07-05 02:00:00      88552.55</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; 2024-07-06 02:00:00      83117.83</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 2024-07-07 02:00:00      80177.38</span></span></code></pre></div>
 </details></div>
 </div>
 <div class="section level3">
