@@ -81,6 +81,7 @@ stopifnot(
 \seealso{
 Other utility: 
 \code{\link{remove_bound}()},
-\code{\link{split_window}()}
+\code{\link{split_window}()},
+\code{\link{write_xts}()}
 }
 \concept{utility}

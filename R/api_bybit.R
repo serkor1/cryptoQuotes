@@ -9,17 +9,10 @@ bybitUrl <- function(
     futures = TRUE,
     ...) {
 
-  # 1) define baseURL
-  # for each API
-  baseUrl <- base::ifelse(
-    test = futures,
-    yes  = 'https://api.bybit.com',
-    no   = 'https://api.bybit.com'
-  )
-
-  # 2) return the
-  # baseURL
-  baseUrl
+  if (futures)
+    'https://api.bybit.com'
+  else
+    'https://api.bybit.com'
 
 }
 
@@ -30,34 +23,29 @@ bybitEndpoint <- function(
 
   endPoint <- switch(
     EXPR = type,
-
-    ohlc = {
-      if (futures)
-        'v5/market/kline'
-      else
-        'v5/market/kline'
-    },
-
     ticker = {
       if (futures)
         'v5/market/instruments-info?category=linear'
       else
         'v5/market/instruments-info?category=spot'
     },
-
     lsratio = {
       if (top)
         'v5/market/account-ratio'
       else
         'v5/market/account-ratio'
     },
-
     fundingrate = {
       'v5/market/funding/history'
     },
-
     interest = {
       '/v5/market/open-interest'
+    },
+    {
+      if (futures)
+        'v5/market/kline'
+      else
+        'v5/market/kline'
     }
   )
 
@@ -77,79 +65,47 @@ bybitIntervals <- function(
     ...) {
 
   # 0) Define intervals
-  all_intervals <- switch(
-    EXPR = type,
-
-    'lsratio' = {
-      data.frame(
-        labels = c('5m', '15m', '30m', '1h', '4h', '1d'),
-        values = c("5min", "15min", "30min", "1h", "4h", "1d")
-      )
-    },
-
-    'interest' = {
-      data.frame(
-        labels = c('5m', '15m', '30m', '1h', '4h', '1d'),
-        values = c("5min", "15min", "30min", "1h" , "4h", "1d")
-      )
-    },
-
-    data.frame(
-      labels = c(
-        '1m',
-        '3m',
-        '5m',
-        '15m',
-        '30m',
-        '1h',
-        '2h',
-        '4h',
-        '6h',
-        '12h',
-        '1d',
-        '1M',
-        '1w'
-      ),
-      values = c(
-        "1" ,
-        "3",
-        "5",
-        "15",
-        "30",
-        "60",
-        "120",
-        "240",
-        "360",
-        "720",
-        "D",
-        "M",
-        "W"
-      )
+  if (type == "ohlc") {
+    interval_label  <-  c(
+      '1m',
+      '3m',
+      '5m',
+      '15m',
+      '30m',
+      '1h',
+      '2h',
+      '4h',
+      '6h',
+      '12h',
+      '1d',
+      '1M',
+      '1w'
     )
-  )
 
-
-
-  # 2.1) if not ALL
-  # then return interval
-  # selected
-  if (all) {
-
-    # 2) return all
-    # intervals
-    interval <- all_intervals$labels
-
-
-
-  } else {
-
-    interval <- all_intervals$values[
-      grepl(pattern = paste0('^', interval, '$'), x = all_intervals$labels)
-    ]
-
+    interval_actual <- c(
+      "1" ,
+      "3",
+      "5",
+      "15",
+      "30",
+      "60",
+      "120",
+      "240",
+      "360",
+      "720",
+      "D",
+      "M",
+      "W"
+    ) } else {
+    interval_label  <- c('5m', '15m', '30m', '1h', '4h', '1d')
+    interval_actual <- c("5min", "15min", "30min", "1h", "4h", "1d")
   }
 
-  interval
+  if (all) { return(interval_label) }
+
+  interval_actual[
+    interval_label %in% interval
+  ]
 
 }
 
@@ -176,12 +132,8 @@ bybitResponse <- function(
           'close',
           'volume'
         ),
-        colum_location = c(
-          2:6
-        ),
-        index_location = c(
-          1
-        )
+        colum_location = 2:6,
+        index_location = 1
 
       )
     },
@@ -197,25 +149,24 @@ bybitResponse <- function(
     },
     interest = {
       list(
-        colum_names     = c('open_interest'),
-        index_location = c(2),
-        colum_location = c(1)
+        colum_names    = 'open_interest',
+        index_location = 2,
+        colum_location = 1
       )
     },
 
     fundingrate = {
       list(
         colum_names     = "funding_rate",
-        index_location = c(3),
-        colum_location = c(2)
+        index_location  = 3,
+        colum_location  = 2
       )
     },
-
-    lsratio <- {
+    {
       list(
         colum_names     = c('long', 'short'),
-        index_location = c(4),
-        colum_location = c(2:3)
+        index_location  = 4,
+        colum_location  = 2:3
       )
     }
 
@@ -246,22 +197,15 @@ bybitDates <- function(
 
   } else {
 
-    dates <- convert_date(
-      x = dates,
-      multiplier = multiplier)
-
-    dates <- vapply(
-      dates,
-      format,
-      scientific = FALSE,
-      FUN.VALUE = character(1)
+    dates <- format(
+      convert_date(
+        x = dates,
+        multiplier = multiplier
+      ),
+      scientific = FALSE
     )
 
-
-
     names(dates) <-c('start', 'end')
-
-
 
   }
 
@@ -300,32 +244,36 @@ bybitParameters <- function(
     is_response = FALSE
   )
 
+  if (type != "ohlc") {
 
-  if (type == "fundingrate"){
+    switch(
+      EXPR = type,
+      "fundingrate" = {
 
-    names(date_params) <- c("startTime", "endTime")
+        names(date_params) <- c("startTime", "endTime")
 
-  }
+      },
+      "interest" = {
 
-  if (type == "interest") {
+        names(params)[3] <- 'intervalTime'
+        names(date_params) <- c("startTime", "endTime")
+        params$limit <- 200
 
-    names(params)[3] <- 'intervalTime'
-    names(date_params) <- c("startTime", "endTime")
-    params$limit <- 200
-  }
+      },
+      "lsratio" = {
+        # 4.1) This is a standalone
+        # parameter; was called interval
+        # but is named period in the API calls
+        names(params)[3] <- 'period'
 
-  if (type == 'lsratio') {
-    # 4.1) This is a standalone
-    # parameter; was called interval
-    # but is named period in the API calls
-    names(params)[3] <- 'period'
-
-    # 4.1) Return only
-    # 100 such that this function
-    # aligns with the remaining
-    # functions which
-    # also returns 100
-    params$limit <- 500
+        # 4.1) Return only
+        # 100 such that this function
+        # aligns with the remaining
+        # functions which
+        # also returns 100
+        params$limit <- 500
+      }
+    )
 
   }
 

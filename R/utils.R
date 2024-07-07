@@ -57,61 +57,28 @@ GET <- function(
 
   # 4) set URL
   # to handle
-  curl::handle_setopt(
-    handle = handle,
-    url    = url
-  )
+  # curl::handle_setopt(
+  #   handle = handle,
+  #   url = url
+  # )
 
   # 5) store
   # response in memory
   # and catch connection
   # errors
-  response <- tryCatch(
-    expr = {
-      curl::curl_fetch_memory(
-        url = url,
-        handle = handle
-      )
-    },
-    error = function(error) {
-
-      cli::cli_abort(
-        message = error$message,
-        call    =  sys.call(
-          1 - length(sys.calls())
-        )
-      )
-
-    }
+  response <- curl::curl_fetch_memory(
+    url = url,
+    handle = handle
   )
 
-  response <- tryCatch(
-    expr = {
-      jsonlite::fromJSON(
-        txt = rawToChar(
-          x = response$content
-        ),
-        simplifyVector = TRUE,
-        flatten = TRUE
-      )
-    },
-    error = function(error) {
-
-      cli::cli_abort(
-        message = c(
-          "x" = rawToChar(
-            x = response$content
-          )
-        ),
-        call =  sys.call(
-          1 - length(sys.calls())
-        )
-      )
-
-    }
+  jsonlite::fromJSON(
+    txt = rawToChar(
+      x = response$content
+    ),
+    simplifyVector = TRUE,
+    flatten = TRUE
   )
 
-  response
 }
 
 
@@ -309,37 +276,47 @@ fetch <- function(
   #
   # This could be done using do.call
   # maybe
-  response <- switch (source,
-                      kraken = {
-                        do.call(
-                          data.frame,
-                          response
-                        )
-                      },
-                      mexc = {
+  response <- tryCatch(
+    expr = {
+      switch (
+        source,
+        kraken = {
+          do.call(
+            data.frame,
+            response
+          )
+        },
+        mexc = {
 
-                        tryCatch(
-                          response[[which(idx)]],
-                          error = function(error) {
-                            do.call(
-                              data.frame,
-                              response[
-                                grepl(
-                                  pattern = "data",
-                                  x = names(response),
-                                  ignore.case = TRUE
-                                )
-                              ]
-                            )
+          tryCatch(
+            response[[which(idx)]],
+            error = function(error) {
+              do.call(
+                data.frame,
+                response[
+                  grepl(
+                    pattern = "data",
+                    x = names(response),
+                    ignore.case = TRUE
+                  )
+                ]
+              )
 
-                          }
-                        )
+            }
+          )
 
 
-                      },
-                      response[[which(idx)]]
+        },
+        response[[which(idx)]]
+      )
+    },
+    error = function(error) {
+      assert(
+        FALSE,
+        error_message = error_message
+      )
+    }
   )
-
 
 
   # 3) Extract source specific
@@ -356,35 +333,48 @@ fetch <- function(
   # 3.1) wrap parameters
   # in tryCatch to check wether
   # the columns exists
-  column_list <- tryCatch(
-    expr = {
-      list(
-        index = response[, parameters$index_location],
-        core  = rbind(response[,parameters$colum_location])
-      )
-    },
-    error = function(error) {
+  # column_list <- tryCatch(
+  #   expr = {
+  #     list(
+  #       index = response[, parameters$index_location],
+  #       core  = rbind(response[,parameters$colum_location])
+  #     )
+  #   },
+  #   error = function(error) {
+  #
+  #     assert(
+  #       FALSE,
+  #       error_message = error_message
+  #     )
+  #
+  #   }
+  # )
 
-      assert(
-        FALSE,
-        error_message = error_message
-      )
-
-    }
-  )
+  # column_list <- list(
+  #   index = response[, parameters$index_location],
+  #   core  = rbind(response[,parameters$colum_location])
+  # )
 
   # 3.1.1) extract the values
   # from the list
-  index <- column_list$index
-  core  <- column_list$core
+
+  # core  <- vapply(
+  #   X         = column_list$core,
+  #   FUN       = as.numeric,
+  #   FUN.VALUE = numeric(1)
+  # )
 
   # 3.1.2) convert
   # all to as.numeric
-  core <- apply(
-    X = core,
-    MARGIN = 2,
-    FUN = as.numeric
+  core <- zoo::as.zoo(
+    apply(
+      X = rbind(response[,parameters$colum_location]),
+      MARGIN = 2,
+      FUN = as.numeric
+    )
   )
+
+
 
   # 3.1.3) convert dates
   # to positxct
@@ -394,23 +384,18 @@ fetch <- function(
     )
   )(
     futures = futures,
-    dates   = index,
+    dates   = response[, parameters$index_location],
     is_response = TRUE,
     type    = type
   )
-
-
-
 
   # 4) convert to xts
   # from data.frame
   # NOTE: This throws an error
   # for KRAKEN no idea why
   response <- xts::as.xts(
-    zoo::as.zoo(
-      core
-    ),
-    index
+    x = core,
+    order.by = index
   )
   # 4.1) set column
   # names

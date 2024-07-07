@@ -81,6 +81,7 @@ stopifnot(
 \seealso{
 Other utility: 
 \code{\link{calibrate_window}()},
-\code{\link{split_window}()}
+\code{\link{split_window}()},
+\code{\link{write_xts}()}
 }
 \concept{utility}

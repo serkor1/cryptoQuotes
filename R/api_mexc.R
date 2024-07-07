@@ -11,11 +11,10 @@ mexcUrl <- function(
 
   # 1) define baseURL
   # for each API
-  base::ifelse(
-    test = futures,
-    yes  = 'https://contract.mexc.com',
-    no   = 'https://api.mexc.com'
-  )
+  if (futures)
+    'https://contract.mexc.com'
+  else
+    'https://api.mexc.com'
 
 }
 
@@ -26,13 +25,7 @@ mexcEndpoint <- function(
 
   switch(
     EXPR = type,
-    ohlc = {
-      if (futures)
-        'api/v1/contract/kline/'
-      else
-        'api/v3/klines'
-    },
-    ticker ={
+    ticker = {
       if (futures)
         'api/v1/contract/detail'
       else
@@ -40,6 +33,14 @@ mexcEndpoint <- function(
     },
     fundingrate = {
       'api/v1/contract/funding_rate/history'
+    },
+    # Default values is
+    # the ohlc
+    {
+      if (futures)
+        'api/v1/contract/kline/'
+      else
+        'api/v3/klines'
     }
   )
 
@@ -53,70 +54,66 @@ mexcIntervals <- function(
     ...) {
 
   if (futures) {
-    allIntervals <- data.frame(
-      labels = c(
-        '1m',
-        '5m',
-        '15m',
-        '30m',
-        '1h',
-        '4h',
-        '8h',
-        '1d',
-        '1w',
-        "1M"
-      ),
-      values = c(
-        "Min1",
-        "Min5",
-        "Min15",
-        "Min30",
-        "Min60",
-        "Hour4",
-        "Hour8",
-        "Day1",
-        "Week1",
-        "Month1")
-    )
-  } else {
-    allIntervals <- data.frame(
-      labels = c(
-        '1m',
-        '5m',
-        '15m',
-        '30m',
-        '1h',
-        # '4h',
-        '1d',
-        '1w',
-        '1M'
-      ),
-      values = c(
-        '1m',
-        '5m',
-        '15m',
-        '30m',
-        '60m',
-        # '4h',
-        '1d',
-        '1W',
-        '1M'
-      )
-    )
-  }
 
-  if (all) {
+    interval_label <- c(
+      '1m',
+      '5m',
+      '15m',
+      '30m',
+      '1h',
+      '4h',
+      '8h',
+      '1d',
+      '1w',
+      "1M"
+    )
 
-    return(allIntervals$labels)
+    interval_actual <- c(
+      "Min1",
+      "Min5",
+      "Min15",
+      "Min30",
+      "Min60",
+      "Hour4",
+      "Hour8",
+      "Day1",
+      "Week1",
+      "Month1"
+    )
 
   } else {
-    # Select the specified interval
-    selectedInterval <- allIntervals$values[
-      grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = FALSE)
-    ]
 
-    return(selectedInterval)
+    interval_label <- c(
+      '1m',
+      '5m',
+      '15m',
+      '30m',
+      '1h',
+      '4h',
+      '1d',
+      '1w',
+      '1M'
+    )
+
+    interval_actual <- c(
+      '1m',
+      '5m',
+      '15m',
+      '30m',
+      '60m',
+      '4h',
+      '1d',
+      '1W',
+      '1M'
+    )
+
   }
+
+  if (all) { return(interval_label) }
+
+  interval_actual[
+    interval_label %in% interval
+  ]
 }
 
 # 3) define response object and format; ####
@@ -132,16 +129,6 @@ mexcResponse <- function(
 
   switch(
     EXPR = type,
-    ohlc = {
-      list(
-        colum_names = if (futures)
-          c('open', 'close', 'high', 'low', 'volume')
-        else
-          c('open', 'high', 'low', 'close', 'volume'),
-        colum_location = c(2:6),
-        index_location = 1
-      )
-    },
     ticker = {
       list(
         foo = function(response, futures) {
@@ -165,6 +152,16 @@ mexcResponse <- function(
         colum_names    = "funding_rate",
         index_location = c(3),
         colum_location = c(2)
+      )
+    },
+    {
+      list(
+        colum_names = if (futures)
+          c('open', 'close', 'high', 'low', 'volume')
+        else
+          c('open', 'high', 'low', 'close', 'volume'),
+        colum_location = c(2:6),
+        index_location = 1
       )
     }
   )
@@ -192,14 +189,11 @@ mexcDates <- function(
     )
 
   if (!is_response) {
-
-    dates <- format(dates, scientific = FALSE)
+    # Adjust for mexc spot and set names
+    dates <- as.numeric(dates)
+    dates[2] <- dates[2] + 15 * 60
 
     if (!futures) {
-      # Adjust for mexc spot and set names
-      dates <- as.numeric(dates)
-      dates[2] <- dates[2] + 15 * 60
-
 
       names(dates) <- c('startTime', 'endTime')
 
@@ -207,6 +201,9 @@ mexcDates <- function(
       # Set names for futures
       names(dates) <- c('start', 'end')
     }
+
+    dates <- format(dates, scientific = FALSE)
+
   }
 
   dates

@@ -82,6 +82,7 @@ stopifnot(
 \seealso{
 Other utility: 
 \code{\link{calibrate_window}()},
-\code{\link{remove_bound}()}
+\code{\link{remove_bound}()},
+\code{\link{write_xts}()}
 }
 \concept{utility}

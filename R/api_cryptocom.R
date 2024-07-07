@@ -11,11 +11,10 @@ crypto.comUrl <- function(
 
   # 1) define baseURL
   # for each API
-  baseURL <- 'https://api.crypto.com/exchange/v1/public'
-
-  # 2) return the
-  # baseURL
-  baseURL
+  if (futures)
+    'https://api.crypto.com/exchange/v1/public'
+  else
+    'https://api.crypto.com/exchange/v1/public'
 
 }
 
@@ -24,21 +23,21 @@ crypto.comEndpoint <- function(
     futures = TRUE,
     ...) {
 
-  endPoint <- switch(
+  switch(
     EXPR = type,
-    ohlc = {
-      'get-candlestick'
-    },
     ticker ={
       'get-instruments'
     },
     fundingrate = {
       'get-valuations'
+    },
+    # default value:
+    # klines
+    {
+      'get-candlestick'
     }
   )
 
-  # 2) return endPoint url
-  endPoint
 }
 
 # 2) Available intervals; #####
@@ -48,51 +47,46 @@ crypto.comIntervals <- function(
     all = FALSE,
     ...) {
 
-  allIntervals <- data.frame(
-    labels = c(
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "4h",
-      "12h",
-      "1d",
-      "1w",
-      "2w",
-      "1M"
-    ),
-    values = c(
-      "M1",
-      "M5",
-      "M15",
-      "M30",
-      "H1",
-      "H2",
-      "H4",
-      "H12",
-      "1D",
-      "7D",
-      "14D",
-      "1M"
-    )
-
-
+  # interval labels
+  # user-facing
+  interval_label <- c(
+    "1m",
+    "5m",
+    "15m",
+    "30m",
+    "1h",
+    "2h",
+    "4h",
+    "12h",
+    "1d",
+    "1w",
+    "2w",
+    "1M"
   )
 
-  if (all) {
+  # API intervals
+  interval_actual <- c(
+    "M1",
+    "M5",
+    "M15",
+    "M30",
+    "H1",
+    "H2",
+    "H4",
+    "H12",
+    "1D",
+    "7D",
+    "14D",
+    "1M"
+  )
 
-    return(allIntervals$labels)
 
-  } else {
-    # Select the specified interval
-    selectedInterval <- allIntervals$values[
-       allIntervals$labels %in% interval
-    ]
+  if (all) { return(interval_label) }
 
-    return(selectedInterval)
-  }
+  interval_actual[
+    interval_label %in% interval
+  ]
+
 }
 
 # 3) define response object and format; ####
@@ -101,8 +95,6 @@ crypto.comResponse <- function(
     futures,
     ...) {
 
-  response <- NULL
-
   # mock response
   # to avoid check error in
   # unevaluated expressions
@@ -110,13 +102,6 @@ crypto.comResponse <- function(
 
   switch(
     EXPR = type,
-    ohlc = {
-      list(
-        colum_names = c('open', 'high', 'low', 'close', 'volume'),
-        colum_location = 1:5,
-        index_location = 6
-      )
-    },
     ticker = {
       list(
         foo = function(response, futures) {
@@ -140,6 +125,13 @@ crypto.comResponse <- function(
         colum_names    = "funding_rate",
         index_location = c(2),
         colum_location = c(1)
+      )
+    },
+    {
+      list(
+        colum_names = c('open', 'high', 'low', 'close', 'volume'),
+        colum_location = 1:5,
+        index_location = 6
       )
     }
   )
@@ -165,19 +157,14 @@ crypto.comDates <- function(
       multiplier = multiplier
     )
 
-
   } else {
 
-
     # Convert dates and format
-
-    dates <- convert_date(
-      x = dates,
-      multiplier = multiplier
-    )
-
     dates <- format(
-      dates,
+      convert_date(
+        x = dates,
+        multiplier = multiplier
+      ),
       scientific = FALSE
     )
 

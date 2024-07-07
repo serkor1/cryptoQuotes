@@ -60,9 +60,7 @@ indicator <- function(
 
   zoo::fortify.zoo(
     x,
-    names = c(
-      "index"
-    )
+    names = "index"
   )
 
 }
@@ -331,7 +329,7 @@ assert <- function(..., error_message = NULL) {
     # 2.1) store all conditions
     # in a list alongside its
     # names
-    conditions <- list(...)
+    conditions <- c(...)
 
     # 2.2) if !is.null(condition_names) the
     # above condition never gets evaluated and
@@ -340,31 +338,25 @@ assert <- function(..., error_message = NULL) {
     # The condition is the names(list()), and is
     # the error messages written on lhs of the the assert
     # function
-    for (condition in named_expressions) {
+    if (all(conditions)) {
 
-      # if TRUE abort
-      # function
-      if (!eval.parent(conditions[[condition]])) {
+      # Stop the funciton
+      # here if all conditions
+      # are [TRUE]
+      return(NULL)
 
-        cli::cli_abort(
-          c("x" = condition),
+    } else {
 
-          # the call will reference the caller
-          # by default, so we need the second
-          # topmost caller
-          call = sys.call(
-            1 - length(sys.calls())
-          )
+      cli::cli_abort(
+        message = c(
+          "x" = named_expressions[which.min(conditions)]
+        ),
+        call = sys.call(
+          1 - length(sys.calls())
         )
-
-
-      }
+      )
 
     }
-
-    # stop the function
-    # here
-    return(NULL)
 
   }
 
@@ -406,8 +398,6 @@ assert <- function(..., error_message = NULL) {
   )
 
 }
-
-
 
 
 pull <- function(
@@ -551,8 +541,9 @@ coerce_date <- function(x){
 flatten <- function(x) {
 
   if (!inherits(x, "list"))
-    return(list(x)) else
-      return(unlist(c(lapply(x, flatten)), recursive = FALSE))
+    list(x)
+  else
+    unlist(c(lapply(x, flatten)), recursive = FALSE)
 }
 
 
@@ -606,7 +597,7 @@ convert_date <- function(
   # If the values are numeric
   # it is returned from the
   # API
-  scale_factor <- multiplier ** ifelse(is_numeric, -1, 1)
+  scale_factor <- multiplier ** if (is_numeric) -1 else 1
 
   if (is_numeric) {
 
@@ -951,20 +942,19 @@ bar <- function(
   # 0) chart theme
   theme <- chart_theme(dark = dark)
 
-  title_text <- ifelse(
-    !is.null(market),
-    yes = sprintf(
+  title_text <- if (!is.null(market))
+    sprintf(
       "<b>Ticker:</b> %s <b>Market:</b> %s<br><sub><b>Period:</b> %s</sub>",
       name,
       market,
       date_range
-    ),
-    no = sprintf(
+    )
+  else
+    sprintf(
       "<b>Ticker:</b> %s<br><sub><b>Period:</b> %s</sub>",
       name,
       date_range
     )
-  )
 
   plot <- plotly::layout(
     p = plot,
