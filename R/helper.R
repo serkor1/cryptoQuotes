@@ -60,9 +60,7 @@ indicator <- function(
 
   zoo::fortify.zoo(
     x,
-    names = c(
-      "index"
-    )
+    names = "index"
   )
 
 }
@@ -543,8 +541,9 @@ coerce_date <- function(x){
 flatten <- function(x) {
 
   if (!inherits(x, "list"))
-    return(list(x)) else
-      return(unlist(c(lapply(x, flatten)), recursive = FALSE))
+    list(x)
+  else
+    unlist(c(lapply(x, flatten)), recursive = FALSE)
 }
 
 

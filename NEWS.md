@@ -9,9 +9,9 @@
 
 ## Read and Write `xts`-objects
 
-- `read_xts()` and `write_xts`() reads and stores `xts`-objects. These
+- `read_xts()` and `write_xts()` reads and stores `xts`-objects. These
   functions are essentially just wrappers of `zoo::read.zoo()` and
-  `zoo::write.zoo()`.
+  `zoo::write.zoo()`. Thank you @gokberkcan7 for the suggestion.
 
 ### Charting
 
@@ -21,14 +21,14 @@
   lines and rectangles via the `modebar`. It is also possible to
   interactively change the `title` and `subtitle` by double clicking
   these (Thank you @andreltr for the suggestion. See
-  [Discussion](https://github.com/serkor1/cryptoQuotes/discussions/19).
+  [Discussion](https://github.com/serkor1/cryptoQuotes/discussions/19)).
 - The `chart()`-function now has a new option `static` that is equal to
   `FALSE` by default. If `FALSE` the chart can be edited, annotated and
   explored interactively.
 - The `chart()`-function now has a new option `palette` that is set to
-  “hawaii” by default. See \[hcl.pals()\] for accepted values.
+  “hawaii” by default. See `hcl.pals()` for accepted values.
 - The `chart()`-function now has a new option `scale` that is set to 1
-  by default. Scales \#’ all fonts on the chart.
+  by default. Scales all fonts on the chart.
 
 <details>
 <summary>
@@ -180,12 +180,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-07-04 16:00:00      2456.705
-    #> 2024-07-04 17:00:00      2484.597
-    #> 2024-07-04 18:00:00      2483.890
-    #> 2024-07-04 19:00:00      2461.894
-    #> 2024-07-04 20:00:00      2444.416
-    #> 2024-07-04 21:00:00      2436.440
+    #> 2024-07-07 10:00:00      2474.917
+    #> 2024-07-07 11:00:00      2522.876
+    #> 2024-07-07 12:00:00      2522.405
+    #> 2024-07-07 13:00:00      2520.337
+    #> 2024-07-07 14:00:00      2514.162
+    #> 2024-07-07 15:00:00      2512.482
 
 </details>
 
@@ -367,12 +367,12 @@ tail(
 ```
 
     #>                     funding_rate
-    #> 2024-07-03 02:00:00        1e-04
-    #> 2024-07-03 10:00:00        1e-04
-    #> 2024-07-03 18:00:00        1e-04
-    #> 2024-07-04 02:00:00        1e-04
-    #> 2024-07-04 10:00:00        1e-04
-    #> 2024-07-04 18:00:00        1e-04
+    #> 2024-07-05 18:00:00    1.762e-05
+    #> 2024-07-06 02:00:00    5.729e-05
+    #> 2024-07-06 10:00:00    7.512e-05
+    #> 2024-07-06 18:00:00    3.250e-05
+    #> 2024-07-07 02:00:00    8.164e-05
+    #> 2024-07-07 10:00:00    1.000e-04
 
 </details>
 
@@ -394,12 +394,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-06-29 02:00:00      78522.05
-    #> 2024-06-30 02:00:00      80535.81
-    #> 2024-07-01 02:00:00      85675.69
     #> 2024-07-02 02:00:00      81856.18
     #> 2024-07-03 02:00:00      84473.52
     #> 2024-07-04 02:00:00      88025.51
+    #> 2024-07-05 02:00:00      88552.55
+    #> 2024-07-06 02:00:00      83117.83
+    #> 2024-07-07 02:00:00      80177.38
 
 </details>
 

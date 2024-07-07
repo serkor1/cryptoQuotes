@@ -132,12 +132,8 @@ bybitResponse <- function(
           'close',
           'volume'
         ),
-        colum_location = c(
-          2:6
-        ),
-        index_location = c(
-          1
-        )
+        colum_location = 2:6,
+        index_location = 1
 
       )
     },
@@ -153,24 +149,24 @@ bybitResponse <- function(
     },
     interest = {
       list(
-        colum_names     = c('open_interest'),
-        index_location = c(2),
-        colum_location = c(1)
+        colum_names    = 'open_interest',
+        index_location = 2,
+        colum_location = 1
       )
     },
 
     fundingrate = {
       list(
         colum_names     = "funding_rate",
-        index_location = c(3),
-        colum_location = c(2)
+        index_location  = 3,
+        colum_location  = 2
       )
     },
     {
       list(
         colum_names     = c('long', 'short'),
-        index_location = c(4),
-        colum_location = c(2:3)
+        index_location  = 4,
+        colum_location  = 2:3
       )
     }
 

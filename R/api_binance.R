@@ -224,23 +224,23 @@ binanceResponse <- function(
     fundingrate = {
       list(
         colum_names     = "funding_rate",
-        index_location = c(2),
-        colum_location = c(3)
+        index_location  = 2,
+        colum_location  = 2
       )
     },
 
     interest = {
       list(
-        colum_names     = c("open_interest"),
-        index_location = c(4),
-        colum_location = c(2)
+        colum_names     = "open_interest",
+        index_location  = 4,
+        colum_location  = 2
       )
     },
 
     lsratio = {
       list(
         colum_names    = c('long', 'short'),
-        index_location = c(5),
+        index_location = 5,
         colum_location = c(2,4)
       )
     },
@@ -253,12 +253,8 @@ binanceResponse <- function(
           'close',
           'volume'
         ),
-        colum_location = c(
-          2:6
-        ),
-        index_location = c(
-          1
-        )
+        colum_location = 2:6,
+        index_location = 1
 
       )
     }
