@@ -1,195 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/404.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/01-article.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/02-article.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/03-article.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/04-article.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/05-article.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/cryptoQuotes.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/custom_indicators.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/articles/usecase.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/index.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/ATOM.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/BTC.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/DOGE.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/FGIndex.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/GET.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/add_event.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/alma.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/assert.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/available_exchanges.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/available_intervals.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/available_tickers.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/bollinger_bands.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/calibrate_window.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/chart.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/chart_layout.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/convert_date.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/cryptoQuotes-package.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/default_dates.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/dema.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/donchian_channel.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/ema.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/evwma.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/fetch.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/fgi.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/flatten.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/get_fgindex.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/get_fundingrate.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/get_lsratio.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/get_openinterest.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/get_quote.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/hma.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/is.date.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/kline.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/lsr.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/macd.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/ohlc.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/pline.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/remove_bound.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/rsi.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/sma.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/smi.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/split_window.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/volume.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/vwap.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/wma.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/write_xts.html</loc>
-  </url>
-  <url>
-    <loc>https://serkor1.github.io/cryptoQuotes/reference/zlema.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://serkor1.github.io/cryptoQuotes/404.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/CONTRIBUTING.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/LICENSE.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/01-article.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/02-article.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/03-article.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/04-article.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/05-article.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/cryptoQuotes.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/custom_indicators.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/index.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/articles/usecase.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/authors.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/index.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/news/index.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/ATOM.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/BTC.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/DOGE.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/FGIndex.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/GET.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/add_event.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/alma.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/assert.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/available_exchanges.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/available_intervals.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/available_tickers.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/bollinger_bands.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/calibrate_window.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/chart.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/chart_layout.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/convert_date.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/cryptoQuotes-package.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/default_dates.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/dema.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/donchian_channel.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/ema.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/evwma.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/fetch.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/fgi.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/flatten.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/get_fgindex.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/get_fundingrate.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/get_lsratio.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/get_openinterest.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/get_quote.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/hma.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/index.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/is.date.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/kline.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/lsr.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/macd.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/ohlc.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/pline.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/remove_bound.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/rsi.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/sma.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/smi.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/split_window.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/volume.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/vwap.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/wma.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/write_xts.html</loc></url>
+<url><loc>https://serkor1.github.io/cryptoQuotes/reference/zlema.html</loc></url>
 </urlset>
+
