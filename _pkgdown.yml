@@ -9,11 +9,11 @@ home:
     charts in R.
 
 navbar:
-  type: inverse
+  inverse: true
 
   structure:
     left:  [intro, usecase, custom-indicators, reference, articles, news]
-    right: [github]
+    right: [search, lightswitch, github]
 
   components:
     usecase:
@@ -40,7 +40,12 @@ url: https://serkor1.github.io/cryptoQuotes/
 
 template:
   bootstrap: 5
-  bootswatch: flatly
+  light-switch: true
+  bslib:
+    primary: "#0054AD"
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
+    danger: "#A6081A"
 
 reference:
 - title: Cryptocurrency Market Data

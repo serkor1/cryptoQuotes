@@ -66,7 +66,7 @@ quantmod::tradeModel(built_model, leverage = 2)
 
 ### Charting Cryptocurrency with {quantmod}
 
-```{r}
+```{r, fig.alt="Cryptocurrency Market Data in Quantmod"}
 ## chart the
 ## BTC with candlesticks
 ## and Bollinger BAnds
