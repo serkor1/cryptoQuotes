@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="inverse" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">cryptoQuotes</a>
 
@@ -53,6 +53,17 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/serkor1/cryptoQuotes/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
@@ -125,24 +136,24 @@ used in the <code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" cla
 <span><span class="co">## 3) trade the model</span></span>
 <span><span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" class="external-link">tradeModel</a></span><span class="op">(</span><span class="va">built_model</span>, leverage <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Model:  lm1720382243.88215 </span></span>
+<span><span class="co">#&gt;   Model:  lm1720553023.48741 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   C.A.G.R.:  -8.09%  H.P.R.:  -5.75% </span></span>
+<span><span class="co">#&gt;   C.A.G.R.:  -5.53%  H.P.R.:  -3.96% </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Returns by period summary:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;              weekly monthly quarterly yearly</span></span>
-<span><span class="co">#&gt;     Max.     25.77%  48.73%    31.94% 11.30%</span></span>
-<span><span class="co">#&gt;     3rd Qu.   4.76%  24.42%    17.02% 11.30%</span></span>
-<span><span class="co">#&gt;     Mean      1.01%   4.86%     5.55% 11.30%</span></span>
-<span><span class="co">#&gt;     Median   -1.94% -12.93%     2.10% 11.30%</span></span>
-<span><span class="co">#&gt;     2rd Qu.  -5.60% -15.96%    -7.64% 11.30%</span></span>
-<span><span class="co">#&gt;     Min.    -17.38% -18.69%   -17.38% 11.30%</span></span>
+<span><span class="co">#&gt;     Max.     25.77%  48.73%    31.94% 13.41%</span></span>
+<span><span class="co">#&gt;     3rd Qu.   6.09%  24.42%    17.02% 13.41%</span></span>
+<span><span class="co">#&gt;     Mean      1.08%   5.08%     6.08% 13.41%</span></span>
+<span><span class="co">#&gt;     Median   -1.86% -12.93%     2.10% 13.41%</span></span>
+<span><span class="co">#&gt;     2rd Qu.  -5.42% -15.18%    -6.85% 13.41%</span></span>
+<span><span class="co">#&gt;     Min.    -21.19% -18.69%   -15.81% 13.41%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Period to date returns:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;               weekly monthly quarterly yearly</span></span>
-<span><span class="co">#&gt;              -17.38% -17.38%   -17.38% 11.30%</span></span></code></pre></div>
+<span><span class="co">#&gt;              weekly monthly quarterly yearly</span></span>
+<span><span class="co">#&gt;               6.82% -15.81%   -15.81% 13.41%</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="charting-cryptocurrency-with-quantmod">Charting Cryptocurrency with {quantmod}<a class="anchor" aria-label="anchor" href="#charting-cryptocurrency-with-quantmod"></a>
@@ -158,7 +169,7 @@ used in the <code><a href="https://rdrr.io/pkg/quantmod/man/tradeModel.html" cla
 <span>    <span class="fu">quantmod</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantmod/man/addBBands.html" class="external-link">addBBands</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="05-article_files/figure-html/unnamed-chunk-5-1.png" width="100%" height="620px" style="display: block; margin: auto;"></p>
+<p><img src="05-article_files/figure-html/unnamed-chunk-5-1.png" alt="Cryptocurrency Market Data in Quantmod" width="100%" height="620px" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -216,70 +227,6 @@ pctB
 </th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-2024-07-02
-</td>
-<td style="text-align:center;">
-62858.6
-</td>
-<td style="text-align:center;">
-63168.6
-</td>
-<td style="text-align:center;">
-61747
-</td>
-<td style="text-align:center;">
-62019.9
-</td>
-<td style="text-align:center;">
-924.081
-</td>
-<td style="text-align:center;">
-59391.707
-</td>
-<td style="text-align:center;">
-63686.832
-</td>
-<td style="text-align:center;">
-67981.956
-</td>
-<td style="text-align:right;">
-0.34
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2024-07-03
-</td>
-<td style="text-align:center;">
-62020
-</td>
-<td style="text-align:center;">
-62178.9
-</td>
-<td style="text-align:center;">
-59341.6
-</td>
-<td style="text-align:center;">
-60146.6
-</td>
-<td style="text-align:center;">
-1615.057
-</td>
-<td style="text-align:center;">
-59163.229
-</td>
-<td style="text-align:center;">
-63357.727
-</td>
-<td style="text-align:center;">
-67552.225
-</td>
-<td style="text-align:right;">
-0.166
-</td>
-</tr>
 <tr>
 <td style="text-align:left;">
 2024-07-04
@@ -387,25 +334,89 @@ pctB
 58396.7
 </td>
 <td style="text-align:center;">
-56600
+55727.7
 </td>
 <td style="text-align:center;">
-57136
+55845.4
 </td>
 <td style="text-align:center;">
-675.585
+940.574
 </td>
 <td style="text-align:center;">
-56230.733
+56073.663
 </td>
 <td style="text-align:center;">
-61552.157
+61516.108
 </td>
 <td style="text-align:center;">
-66873.581
+66958.553
 </td>
 <td style="text-align:right;">
-0.108
+0.054
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-07-08
+</td>
+<td style="text-align:center;">
+55845.4
+</td>
+<td style="text-align:center;">
+58129.8
+</td>
+<td style="text-align:center;">
+54301.3
+</td>
+<td style="text-align:center;">
+56699.3
+</td>
+<td style="text-align:center;">
+2283.59
+</td>
+<td style="text-align:center;">
+55476.266
+</td>
+<td style="text-align:center;">
+61072.012
+</td>
+<td style="text-align:center;">
+66667.757
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2024-07-09
+</td>
+<td style="text-align:center;">
+56699.3
+</td>
+<td style="text-align:center;">
+58245.2
+</td>
+<td style="text-align:center;">
+56325.2
+</td>
+<td style="text-align:center;">
+57734.9
+</td>
+<td style="text-align:center;">
+1247.548
+</td>
+<td style="text-align:center;">
+55200.446
+</td>
+<td style="text-align:center;">
+60688.615
+</td>
+<td style="text-align:center;">
+66176.784
+</td>
+<td style="text-align:right;">
+0.204
 </td>
 </tr>
 </tbody>

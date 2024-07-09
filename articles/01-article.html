@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="inverse" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">cryptoQuotes</a>
 
@@ -53,6 +53,17 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/serkor1/cryptoQuotes/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
@@ -133,122 +144,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-07-07 14:00:00
+2024-07-09 14:00:00
 </td>
 <td style="text-align:center;">
-56856.7
+57287.2
 </td>
 <td style="text-align:center;">
-56912.9
+58112.1
 </td>
 <td style="text-align:center;">
-56600
+57107.8
 </td>
 <td style="text-align:center;">
-56748.6
+57107.8
 </td>
 <td style="text-align:left;">
-90.475
+119.371
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 15:00:00
+2024-07-09 15:00:00
 </td>
 <td style="text-align:center;">
-56747.4
+57101
 </td>
 <td style="text-align:center;">
-57032.5
+57465.2
 </td>
 <td style="text-align:center;">
-56730
+56923.2
 </td>
 <td style="text-align:center;">
-56811.3
+57465.2
 </td>
 <td style="text-align:left;">
-24.948
+159.294
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 16:00:00
+2024-07-09 16:00:00
 </td>
 <td style="text-align:center;">
-56811.3
+57465.2
 </td>
 <td style="text-align:center;">
-57138.6
+57813.3
 </td>
 <td style="text-align:center;">
-56788
+57437.6
 </td>
 <td style="text-align:center;">
-57100
+57677.3
 </td>
 <td style="text-align:left;">
-24.427
+150.394
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 17:00:00
+2024-07-09 17:00:00
 </td>
 <td style="text-align:center;">
-57100
+57677.3
 </td>
 <td style="text-align:center;">
-57261.3
+57783.3
 </td>
 <td style="text-align:center;">
-56807.1
+57399.8
 </td>
 <td style="text-align:center;">
-57224.9
+57538.7
 </td>
 <td style="text-align:left;">
-42.258
+45.841
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 18:00:00
+2024-07-09 18:00:00
 </td>
 <td style="text-align:center;">
-57222.2
+57538.7
 </td>
 <td style="text-align:center;">
-57361.9
+58245.2
 </td>
 <td style="text-align:center;">
-57113.5
+57466.3
 </td>
 <td style="text-align:center;">
-57168
+57900
 </td>
 <td style="text-align:left;">
-33.981
+153.773
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 19:00:00
+2024-07-09 19:00:00
 </td>
 <td style="text-align:center;">
-57158.8
+57900
 </td>
 <td style="text-align:center;">
-57168.3
+57914.4
 </td>
 <td style="text-align:center;">
-57031.1
+57734.9
 </td>
 <td style="text-align:center;">
-57136
+57739.5
 </td>
 <td style="text-align:left;">
-9.633
+31.726
 </td>
 </tr>
 </tbody>
@@ -290,86 +301,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-07-07 14:00:00
+2024-07-09 14:00:00
 </td>
 <td style="text-align:center;">
-0.702
+0.725
 </td>
 <td style="text-align:center;">
-0.298
+0.275
 </td>
 <td style="text-align:center;">
-2.359
+2.632
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 15:00:00
+2024-07-09 15:00:00
 </td>
 <td style="text-align:center;">
-0.704
+0.709
 </td>
 <td style="text-align:center;">
-0.296
+0.291
 </td>
 <td style="text-align:center;">
-2.378
+2.433
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 16:00:00
+2024-07-09 16:00:00
 </td>
 <td style="text-align:center;">
-0.701
+0.713
 </td>
 <td style="text-align:center;">
-0.299
+0.287
 </td>
 <td style="text-align:center;">
-2.348
+2.488
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 17:00:00
+2024-07-09 17:00:00
 </td>
 <td style="text-align:center;">
-0.703
+0.715
 </td>
 <td style="text-align:center;">
-0.297
+0.285
 </td>
 <td style="text-align:center;">
-2.37
+2.511
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 18:00:00
+2024-07-09 18:00:00
 </td>
 <td style="text-align:center;">
-0.708
+0.709
 </td>
 <td style="text-align:center;">
-0.292
+0.291
 </td>
 <td style="text-align:center;">
-2.429
+2.435
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-07-07 19:00:00
+2024-07-09 19:00:00
 </td>
 <td style="text-align:center;">
-0.704
+0.712
 </td>
 <td style="text-align:center;">
-0.296
+0.288
 </td>
 <td style="text-align:center;">
-2.378
+2.477
 </td>
 </tr>
 </tbody>
