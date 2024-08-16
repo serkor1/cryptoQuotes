@@ -40,6 +40,7 @@ library(cryptoQuotes)
 * The `chart()`-function now has a new option `static` that is equal to `FALSE` by default. If `FALSE` the chart can be edited, annotated and explored interactively.
 * The `chart()`-function now has a new option `palette` that is set to "hawaii" by default. See `hcl.pals()` for accepted values.
 * The `chart()`-function now has a new option `scale` that is set to 1 by default. Scales all fonts on the chart.
+* The `chart()`-function now has a new option `width` that is set to 0.9 by default. Sets the overall `linewidth` of the chart. (Thank you @andreltr for the suggestion. See [Discussion](https://github.com/serkor1/cryptoQuotes/discussions/30))
 
 <details>
 <summary>Static set to FALSE (Default Palette) </summary>

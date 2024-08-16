@@ -56,6 +56,9 @@
 #' * \code{scale} A <[numeric]>-value of [length] 1. 1 by default. Scales
 #' all fonts on the chart.
 #'
+#' * \code{width} A <[numeric]>-value of [length] 1. 0.9 by default. Sets
+#' the width of all line elements on the chart.
+#'
 #' * \code{static} A <[logical]>-value of [length] 1. [FALSE] by default. If [FALSE]
 #' the chart can be edited, annotated and explored interactively.
 #'
@@ -149,7 +152,8 @@ chart <- function(
     deficiency = FALSE,
     palette    = "hawaii",
     scale      = 1,
-    size       = 0.6
+    size       = 0.6,
+    width      = 0.9
   )
 
   options <- utils::modifyList(
@@ -166,6 +170,7 @@ chart <- function(
   static       <- options$static
   candle_color <- movement_color(deficiency = deficiency)
   scale        <- options$scale
+  width        <- options$width
 
   if (static) {
 
@@ -253,7 +258,7 @@ chart <- function(
 
   if (!identical(call_list$indicator, list())) {
 
-     plot_list[1] <- list(Reduce(
+    plot_list[1] <- list(Reduce(
       f    = function(plot, .f) {
         # Modify the call list
         .f$data <- ticker
@@ -339,9 +344,26 @@ chart <- function(
 
       }
     )
+
   )
 
-  plotly::config(
+  scatter_indices <- which(
+    sapply(
+      X = plot$x$data,
+      FUN = function(x) {
+        x$type == "scatter"
+      }
+    )
+  )
+
+  plot <- plotly::style(
+    p = plot,
+    line.width = width,
+    traces = scatter_indices
+  )
+
+
+  plot <- plotly::config(
     p = bar(
       dark = dark,
       plot = plot,
@@ -369,6 +391,7 @@ chart <- function(
     )
   )
 
+  plot
 
 }
 
