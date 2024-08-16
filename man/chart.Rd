@@ -62,6 +62,8 @@ If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friend
 main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
 \item \code{scale} A <\link{numeric}>-value of \link{length} 1. 1 by default. Scales
 all fonts on the chart.
+\item \code{width} A <\link{numeric}>-value of \link{length} 1. 0.9 by default. Sets
+the width of all line elements on the chart.
 \item \code{static} A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default. If \link{FALSE}
 the chart can be edited, annotated and explored interactively.
 \item \code{palette} A <\link{character}>-vector of \link{length} 1. "hawaii" by default. See \code{\link[=hcl.pals]{hcl.pals()}} for

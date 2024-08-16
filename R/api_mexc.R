@@ -138,7 +138,7 @@ mexcResponse <- function(
           } else {
             subset(
               x = response$symbols,
-              response$symbols$status == "ENABLED"
+              response$symbols$status == "1"
             )$symbol
 
 
