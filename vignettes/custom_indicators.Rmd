@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(cryptoQuotes)
+library(dplyr)
 ```
 
 Trading indicators comes in various forms; from the alignment of the moon relative to the sun, to sophisticated trading rules based on neural networks which incorporates classified features; It is not possible to cover them all in an `R` package.
@@ -39,7 +40,7 @@ We start by creating a simple `chart`-object with `volume` as it's only indicato
 # 1) create a simple chart
 # object
 chart_object <- chart(
-  ticker = BTC,
+  ticker = BTC ,
   main   = kline(),
   sub    = list(
     volume()
@@ -47,7 +48,10 @@ chart_object <- chart(
   options = list(
     dark = FALSE
   )
-)
+)%>%
+  layout(xaxis = list(showticklabels=FALSE))
+
+
 
 # 2) display the chart
 chart_object
