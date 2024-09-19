@@ -50,7 +50,16 @@ chart_object <- chart(
 )
 
 # 2) display the chart
-chart_object
+# and remove the xaxis
+# labels, so it doesnt
+# get duplicated when the
+# custom indicators are added
+plotly::layout(
+  p = chart_object,
+  xaxis = list(
+    showticklabels=FALSE
+  )
+)
 ```
 
 ### Sine-oscillator
