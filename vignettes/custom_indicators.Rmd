@@ -38,26 +38,24 @@ We start by creating a simple `chart`-object with `volume` as it's only indicato
 ```{r}
 # 1) create a simple chart
 # object
-chart_object <- chart(
-  ticker = BTC,
-  main   = kline(),
-  sub    = list(
-    volume()
-  ),
-  options = list(
-    dark = FALSE
-  )
-)
-
-# 2) display the chart
-# and remove the xaxis
-# labels, so it doesnt
-# get duplicated when the
+# 
+# NOTE: The chart is wrapped in
+# plotly::layout() to avoid
+# duplicating xaxis when the
 # custom indicators are added
-plotly::layout(
-  p = chart_object,
+chart_object <- plotly::layout(
+  chart(
+    ticker = BTC,
+    main   = kline(),
+    sub    = list(
+      volume()
+    ),
+    options = list(
+      dark = FALSE
+    )
+  ),
   xaxis = list(
-    showticklabels=FALSE
+    showticklabels = FALSE
   )
 )
 ```
