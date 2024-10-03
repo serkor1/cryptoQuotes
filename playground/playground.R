@@ -9,6 +9,18 @@
 # setup;
 rm(list = ls()); gc(); devtools::load_all()
 
+mcap <- get_mcap("4h",altcoin = TRUE)
+
+
+plot(mcap$marketcap)
+chart(
+  ticker = mcap,
+  main   = pline("marketcap"),
+  indicator = NULL,
+  sub    = NULL
+)
+
+
 chart(
   ticker = BTC,
   indicator = list(

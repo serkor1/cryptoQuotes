@@ -29,7 +29,18 @@ library(cryptoQuotes)
 
 ## Improvements
 
-## Read and Write `xts`-objects
+## [NEW FEATURE] Global Market Capitalization
+
+* The `get_mktcap()`-function returns the global market capitalization of the cryptocurrency market. It also has the option to return altcoin market capitalization.
+
+```{r}
+# get market
+# capitalization
+tail(get_mktcap())
+```
+
+
+## [NEW FEATURE] Read and Write `xts`-objects
 
 * `read_xts()` and `write_xts()` reads and stores `xts`-objects. These functions are essentially just wrappers of `zoo::read.zoo()` and `zoo::write.zoo()`. Thank you @gokberkcan7 for the suggestion.
 
