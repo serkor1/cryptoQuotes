@@ -160,6 +160,17 @@ testthat::test_that(
             label = paste(error_label, "(Test 3)")
           )
 
+          # 4) test that the inferred interval
+          # corresponds to the passed interval
+          testthat::expect_true(
+            setequal(
+              interval,
+              cryptoQuotes:::infer_interval(
+                output
+              )
+            )
+          )
+
 
         }
 

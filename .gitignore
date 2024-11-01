@@ -52,3 +52,5 @@ inst/doc
 /Meta/
 docs
 playground/
+
+*.html
