@@ -52,7 +52,9 @@
 <h2 class="pkg-version" data-toc-text="1.3.2" id="version-132">Version 1.3.2<a class="anchor" aria-label="anchor" href="#version-132"></a></h2>
 <div class="section level3">
 <h3 id="general-1-3-2">General<a class="anchor" aria-label="anchor" href="#general-1-3-2"></a></h3>
-</div>
+<ul><li><p><code>bitmart</code> has updated their futures API. The backend have been updated accordingly.</p></li>
+<li><p>Unit-tests have been updated and now all <code><a href="../reference/get_quote.html">get_quote()</a></code>-functions are being tested for equality in passed and inferred interval.</p></li>
+</ul></div>
 <div class="section level3">
 <h3 id="improvements-1-3-2">Improvements<a class="anchor" aria-label="anchor" href="#improvements-1-3-2"></a></h3>
 </div>
@@ -125,7 +127,7 @@ Static set to TRUE (“Set 3” palette)
 <h4 id="quotes-1-3-2">Quotes<a class="anchor" aria-label="anchor" href="#quotes-1-3-2"></a></h4>
 <ul><li>Removed <code>1s</code> from <em>Binance spot</em>
 </li>
-<li>Removed <code>3m</code>, <code>6h</code> and <code>3d</code> in <em>Bitmart spot</em>
+<li>Removed <code>6h</code> and <code>3d</code> in <em>Bitmart spot</em>
 </li>
 </ul><p>These intervals have been removed as they have either been discontinued, or were non-existent.</p>
 </div>
@@ -181,12 +183,12 @@ Usage
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#&gt;                     open_interest</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 10:00:00      1840.775</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 11:00:00      1845.837</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 12:00:00      1837.801</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 13:00:00      1836.295</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 14:00:00      1836.202</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 15:00:00      1838.612</span></span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; 2024-11-01 01:00:00      2468.037</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; 2024-11-01 02:00:00      2439.700</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; 2024-11-01 03:00:00      2472.806</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; 2024-11-01 04:00:00      2468.223</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; 2024-11-01 05:00:00      2400.722</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; 2024-11-01 06:00:00      2396.795</span></span></code></pre></div>
 </details></div>
 <div class="section level4">
 <h4 id="charting-1-3-1">Charting<a class="anchor" aria-label="anchor" href="#charting-1-3-1"></a></h4>
@@ -325,12 +327,12 @@ Usage
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#&gt;                     funding_rate</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; 2024-08-14 18:00:00  -0.00007811</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; 2024-08-15 02:00:00  -0.00008488</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; 2024-08-15 10:00:00   0.00006339</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; 2024-08-15 18:00:00  -0.00006181</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 02:00:00  -0.00011235</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 10:00:00  -0.00007387</span></span></code></pre></div>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; 2024-10-30 09:00:00 1.730275e+12</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; 2024-10-30 17:00:00 1.730304e+12</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; 2024-10-31 01:00:00 1.730333e+12</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; 2024-10-31 09:00:00 1.730362e+12</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; 2024-10-31 17:00:00 1.730390e+12</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; 2024-11-01 01:00:00 1.730419e+12</span></span></code></pre></div>
 </details><ul><li>Open interest, <code><a href="../reference/get_openinterest.html">get_openinterest()</a></code>
 </li>
 </ul><details><summary>
@@ -344,12 +346,12 @@ Usage
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co">#&gt;                     open_interest</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; 2024-08-11 02:00:00      71072.43</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; 2024-08-12 02:00:00      70092.78</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; 2024-08-13 02:00:00      68490.56</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; 2024-08-14 02:00:00      72127.82</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; 2024-08-15 02:00:00      78050.79</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 2024-08-16 02:00:00      83767.54</span></span></code></pre></div>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; 2024-10-27 02:00:00      80968.74</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; 2024-10-28 01:00:00      82206.35</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; 2024-10-29 01:00:00      89115.04</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; 2024-10-30 01:00:00      90242.98</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; 2024-10-31 01:00:00      89315.49</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 2024-11-01 01:00:00      89544.93</span></span></code></pre></div>
 </details></div>
 </div>
 <div class="section level3">
