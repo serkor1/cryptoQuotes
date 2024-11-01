@@ -27,6 +27,10 @@ library(cryptoQuotes)
 
 ## General
 
+* `bitmart` has updated their futures API. The backend have been updated accordingly.
+
+* Unit-tests have been updated and now all `get_quote()`-functions are being tested for equality in passed and inferred interval.
+
 ## Improvements
 
 ## Read and Write `xts`-objects
@@ -104,7 +108,7 @@ were included. (Issue [#13](https://github.com/serkor1/cryptoQuotes/issues/13))
 ### Quotes
 
 * Removed `1s` from *Binance spot*
-* Removed `3m`, `6h` and `3d` in *Bitmart spot*
+* Removed `6h` and `3d` in *Bitmart spot*
 
 These intervals have been removed as they have either been discontinued, or were non-existent.
 
