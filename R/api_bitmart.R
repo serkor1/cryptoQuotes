@@ -12,7 +12,7 @@ bitmartUrl <- function(
   # 1) define baseURL
   # for each API
   if (futures)
-    'https://api-cloud.bitmart.com'
+    'https://api-cloud-v2.bitmart.com'
   else
     'https://api-cloud.bitmart.com'
 
