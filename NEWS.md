@@ -114,7 +114,7 @@ the following exchanges:
 
 ### Quotes
 
-  - Removed `1s` from *Binance spot*
+  - Removed `1s` and `3m` from *Binance spot*
   - Removed `6h` and `3d` in *Bitmart spot*
 
 These intervals have been removed as they have either been discontinued,

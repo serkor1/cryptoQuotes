@@ -87,7 +87,7 @@ bitmartIntervals <- function(
 
     interval_label <- c(
       '1m',
-      '3m',
+      # '3m',
       '5m',
       '15m',
       '30m',
@@ -103,7 +103,7 @@ bitmartIntervals <- function(
 
     interval_actual <- c(
       1,
-      3,
+      # 3,
       5,
       15,
       30,

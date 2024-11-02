@@ -50,11 +50,38 @@ testthat::test_that(
           X   = intervals,
           FUN = function(x) {
 
+            # 2.0) setup values 
+            
+            # extract granularity
+            # from the interval
+            granularity <- gsub(
+              pattern = "([0-9]*)",
+              x = x,
+              replacement = ""
+            )
+
+            granularity <- switch(
+              EXPR = granularity,
+              s = "secs",
+              m = "mins",
+              h = "hours",
+              w = "weeks",
+              d = "days",
+              M = "months"
+            )
+
+            # extract the value
+            # so it fits the granularity
+            # 1m, 2m etc.
+            value <- as.integer(
+              gsub("([a-zA-Z]+)", "", x)
+            )
+
             # 2.1) Generate
             # date intervals using default_dates
             date_interval <- cryptoQuotes:::default_dates(
               interval =  x,
-              length   = 2
+              length   = 200
             )
 
             # 2.2) extrapolate
@@ -67,8 +94,9 @@ testthat::test_that(
               # the default_date adds 1 day if chosen
               # to avoid errors due to conversion
               # on API level
-              length.out = 2 + as.numeric(x == "1d" | x == "3d")
-            )[1:2]
+              # on API level
+              by = paste0("+", value, " ", granularity)
+            )
 
             # 2.3) assert that
             # the passed interval x is
@@ -77,7 +105,7 @@ testthat::test_that(
               x = x,
               y = cryptoQuotes:::infer_interval(
                 x = xts::xts(
-                  x        = seq_len(2),
+                  x        = seq_len(length(dates)),
                   order.by = dates
                 )
 
