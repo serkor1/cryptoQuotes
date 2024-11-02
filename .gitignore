@@ -53,4 +53,4 @@ inst/doc
 docs
 /playground/
 
-*.html
+/*.html
