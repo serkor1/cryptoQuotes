@@ -110,7 +110,8 @@ get_fgindex <- function(
     forced_dates <- default_dates(
       interval = '1d',
       from     = from,
-      to       = to
+      to       = to,
+      length   = 201
     )
 
     # generate from
