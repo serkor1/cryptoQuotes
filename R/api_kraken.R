@@ -116,16 +116,14 @@ krakenResponse <- function(
 
           } else {
 
-            names(
-              lapply(
-                response$result,
-                function(x) {
-                  if (x$status == 'online'){
-                    x$altname
-                  }
-                }
-              )
-            )
+            unname(
+              obj = sapply(
+                response$result, function(x){
+                  x$altname},
+                simplify = TRUE,
+                USE.NAMES = FALSE),
+              force = TRUE)
+
           }
 
         }

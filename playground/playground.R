@@ -7,7 +7,58 @@
 # script start;
 
 # setup;
-rm(list = ls()); gc(); devtools::load_all()
+{rm(list = ls()); gc(); devtools::load_all()}
+
+available_tickers(
+  "kraken",
+  FALSE
+)
+
+source <- "kraken"
+futures <- FALSE
+
+response <- GET(
+  url = baseUrl(
+    source  = source,
+    futures = futures
+  ),
+  endpoint = endPoint(
+    source  = source,
+    futures = futures,
+    type    = 'ticker'
+  )
+)
+
+
+do.call(
+  `c`,
+  (
+    X   = response$result,
+    FUN = function(x){
+      if (x$status == "online"){
+        x$altname
+      }},
+    USE.NAMES = FALSE,
+    simplify = TRUE)
+)
+
+
+
+
+
+class(
+  
+)
+
+
+response$result[[1]]
+
+
+  vapply(response$result, function(x){
+    x$altname
+  }, 
+  FUN.VALUE = character(1),USE.NAMES = FALSE
+  )
 
 chart(
   ticker = BTC,
