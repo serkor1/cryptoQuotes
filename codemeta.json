@@ -4,7 +4,7 @@
   "identifier": "cryptoQuotes",
   "description": " This high-level API client provides open access to cryptocurrency market data, sentiment indicators, and interactive charting tools. The data is sourced from major cryptocurrency exchanges via cURL and processed using the xts package. The data comes in open, high, low, and close (OHLC) format with flexible granularity, ranging from seconds to months. This flexibility makes it ideal for developing and backtesting trading strategies or conducting detailed market analysis.",
   "name": "cryptoQuotes: Open Access to Cryptocurrency Market Data, Sentiment Indicators and Interactive Charts",
-  "relatedLink": "https://serkor1.github.io/cryptoQuotes/",
+  "relatedLink": ["https://serkor1.github.io/cryptoQuotes/", "https://CRAN.R-project.org/package=cryptoQuotes"],
   "codeRepository": "https://github.com/serkor1/cryptoQuotes",
   "issueTracker": "https://github.com/serkor1/cryptoQuotes/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
@@ -257,5 +257,10 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1504.773KB"
+  "fileSize": "1476.579KB",
+  "releaseNotes": "https://github.com/serkor1/cryptoQuotes/blob/master/NEWS.md",
+  "readme": "https://github.com/serkor1/cryptoQuotes/blob/main/README.md",
+  "contIntegration": ["https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/serkor1/cryptoQuotes"],
+  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#stable",
+  "keywords": ["cryptocurrencies", "cryptocurrency", "cryptocurrency-exchanges", "r", "binance", "binance-api", "kucoin", "kucoin-api", "kraken-api", "kraken-exchange-api", "bitmart", "bybit", "bybit-api", "rstats", "rstats-package", "huobi", "huobi-api"]
 }
