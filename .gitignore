@@ -55,3 +55,4 @@ docs
 
 /*.html
 .vdoc.r
+*.Rproj

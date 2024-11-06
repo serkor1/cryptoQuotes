@@ -40,7 +40,7 @@ contracts on both sides. See the \code{\link[=get_openinterest]{get_openinterest
 \item{...}{additional parameters passed down the endpoint}
 }
 \value{
-It returns an \link{xts}-object from the desired endpoint.
+It returns an \link[xts:xts]{xts::xts}-object from the desired endpoint.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

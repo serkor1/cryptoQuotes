@@ -27,7 +27,7 @@
 #' @inheritParams get_quote
 #'
 #' @returns
-#' An [xts]-object containing,
+#' An [xts::xts]-object containing,
 #'
 #' \item{index}{<[POSIXct]> the time-index}
 #' \item{open_interest}{<[numeric]> open perpetual contracts on both both sides}

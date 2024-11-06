@@ -306,7 +306,7 @@ is.date <- function(x){
 #' @param ... expressions >= 1. If named the names are used
 #' as error messages, otherwise R's internal error-messages are thrown
 #'
-#' @param error_message character. An error message, supports [cli]-formatting.
+#' @param error_message character. An error message, supports [cli::cli]-formatting.
 #' @example man/examples/scr_assert.R
 #' @seealso [stopifnot()], [cli::cli_abort()], [tryCatch()]
 #' @keywords internal

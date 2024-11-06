@@ -24,7 +24,7 @@
 #'
 #' @inherit get_quote details
 #'
-#' @returns An [xts]-object containing,
+#' @returns An [xts::xts]-object containing,
 #'
 #' \item{index}{<[POSIXct]> the time-index}
 #' \item{fgi}{<[numeric]> the daily fear and greed index value}

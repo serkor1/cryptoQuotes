@@ -22,12 +22,12 @@
 #'  ...
 #' )
 #'
-#' @param x An <[xts]>-object.
+#' @param x An <[xts::xts]>-object.
 #' @inheritParams zoo::write.zoo
 #' @inheritParams zoo::read.zoo
 #'
 #' @details
-#' When reading and writing <[xts]>-objects the [attributes] does not follow the object.
+#' When reading and writing <[xts::xts]>-objects the [attributes] does not follow the object.
 #'
 #'
 #' @author

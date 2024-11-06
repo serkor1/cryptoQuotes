@@ -18,7 +18,7 @@ file
 )
 }
 \arguments{
-\item{x}{An <\link{xts}>-object.}
+\item{x}{An <\link[xts:xts]{xts::xts}>-object.}
 
 \item{file}{character string or strings giving the name of the file(s) 
     which the data
@@ -40,7 +40,7 @@ file
 The \code{\link[=write_xts]{write_xts()}}- and \code{\link[=read_xts]{read_xts()}}-functions are  \code{\link[zoo:read.zoo]{zoo::write.zoo()}}- and \code{\link[zoo:read.zoo]{zoo::read.zoo()}}-wrapper functions.
 }
 \details{
-When reading and writing <\link{xts}>-objects the \link{attributes} does not follow the object.
+When reading and writing <\link[xts:xts]{xts::xts}>-objects the \link{attributes} does not follow the object.
 }
 \seealso{
 Other utility: 

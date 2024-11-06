@@ -13,7 +13,7 @@ zlema(
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. "close" by default.
-The name of the vector to passed into \link[TTR:MovingAverages]{TTR::ZLEMA}.}
+The name of the vector to passed into \code{\link[TTR:MovingAverages]{TTR::ZLEMA()}}.}
 
 \item{n}{Number of periods to average over. Must be between 1 and
 \code{nrow(x)}, inclusive.}

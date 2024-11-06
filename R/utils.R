@@ -176,7 +176,7 @@ endPoint <- function(
 #'
 #' @returns
 #'
-#' It returns an [xts]-object from the desired endpoint.
+#' It returns an [xts::xts]-object from the desired endpoint.
 #'
 #'
 #' @author Serkan Korkmaz

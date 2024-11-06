@@ -24,7 +24,7 @@
 #'
 #' @inheritParams get_quote
 #'
-#' @returns An [xts]-object containing,
+#' @returns An [xts::xts]-object containing,
 #'
 #' \item{index}{<[POSIXct]> the time-index}
 #' \item{funding_rate}{<[numeric]> the current funding rate}

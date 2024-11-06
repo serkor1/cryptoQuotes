@@ -27,7 +27,7 @@
 #' If [TRUE] it returns the top traders Long-Short ratios.
 #'
 #'
-#' @returns An [xts]-object containing,
+#' @returns An [xts::xts]-object containing,
 #'
 #' \item{index}{<[POSIXct]> the time-index}
 #' \item{long}{<[numeric]> the share of longs}
