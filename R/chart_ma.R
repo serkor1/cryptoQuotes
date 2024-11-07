@@ -41,7 +41,7 @@ chart_ma <- function(
 #' `r lifecycle::badge("experimental")`
 #'
 #' A high-level [plotly::add_lines()]-wrapper function that
-#' interacts with [TTR]'s moving average family of functions.
+#' interacts with \{TTR\}'s moving average family of functions.
 #' The function adds moving average indicators to the main [chart()].
 #'
 #' @usage sma(

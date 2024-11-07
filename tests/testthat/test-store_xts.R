@@ -35,6 +35,10 @@ testthat::test_that(
         )
       )
     )
+    
+    # 3) delete file
+    # after the test is run
+    unlink(temp_file)
 
   }
 )

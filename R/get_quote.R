@@ -30,7 +30,7 @@
 #' @param to An optional [character]-, [date]- or
 #' [POSIXct]-vector of [length] 1. [NULL] by default.
 #'
-#' @returns An [xts::xts]-object containing,
+#' @returns An <[\link[xts]{xts}]>-object containing,
 #'
 #' \item{index}{<[POSIXct]> The time-index}
 #' \item{open}{<[numeric]> Opening price}
