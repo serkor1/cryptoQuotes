@@ -9,3 +9,7 @@
       help   1.2Mb
 
 
+There is not provided a link to the API in the description as there is (currently) 8 different APIs embedded in the
+package. All API are documented in the wiki, pkgdown and vignettes.
+
+
