@@ -19,8 +19,8 @@ and the specified market.
 
 \strong{Sample output}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10000000AIDOGEUSDT" "1000000MOGUSDT"     "10000COQUSDT"      
-#> [4] "10000LADYSUSDT"     "10000NFTUSDT"       "10000SATSUSDT"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "10000000AIDOGEUSDT"  "1000000BABYDOGEUSDT" "1000000MOGUSDT"     
+#> [4] "1000000PEIPEIUSDT"   "10000COQUSDT"        "10000LADYSUSDT"
 }\if{html}{\out{</div>}}
 }
 \description{

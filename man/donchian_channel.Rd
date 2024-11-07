@@ -28,7 +28,7 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts
+A high-level \code{\link[plotly:add_lines]{plotly::add_lines()}}-wrapper function that interacts
 with the \code{\link[TTR:DonchianChannel]{TTR::DonchianChannel()}}-function.
 The function adds Donchian Channels
 to the main \code{\link[=chart]{chart()}}.

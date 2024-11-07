@@ -51,4 +51,8 @@ inst/doc
 /doc/
 /Meta/
 docs
-/playground
+/playground/
+
+/*.html
+.vdoc.r
+*.Rproj

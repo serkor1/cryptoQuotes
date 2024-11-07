@@ -70,16 +70,15 @@ available_tickers <- function(
   # to ticker-information
   response <- GET(
     url = baseUrl(
-      source = source,
+      source  = source,
       futures = futures
     ),
     endpoint = endPoint(
-      source = source,
+      source  = source,
       futures = futures,
-      type = 'ticker'
+      type    = 'ticker'
     )
   )
-
 
   # 2) get source_response
   # objects
@@ -88,18 +87,16 @@ available_tickers <- function(
       source, 'Response'
     )
   )(
-    type = 'ticker',
+    type    = 'ticker',
     futures = futures
   )
 
-  ticker <- sort(
+  sort(
     source_response$foo(
       response = response,
       futures  = futures
     )
   )
-
-  ticker
 
 }
 

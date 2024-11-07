@@ -60,9 +60,7 @@ indicator <- function(
 
   zoo::fortify.zoo(
     x,
-    names = c(
-      "index"
-    )
+    names = "index"
   )
 
 }
@@ -237,6 +235,7 @@ infer_interval <- function(
     "259200" = "3d",
     "604800" = "1w",
     "1209600" = "2w",
+    "1296000" = "2w",
     "2678400" = "1M",
     "2592000" = "1M",
     "2419200" = "1M",
@@ -307,7 +306,7 @@ is.date <- function(x){
 #' @param ... expressions >= 1. If named the names are used
 #' as error messages, otherwise R's internal error-messages are thrown
 #'
-#' @param error_message character. An error message, supports [cli]-formatting.
+#' @param error_message character. An error message, supports [cli::cli]-formatting.
 #' @example man/examples/scr_assert.R
 #' @seealso [stopifnot()], [cli::cli_abort()], [tryCatch()]
 #' @keywords internal
@@ -330,7 +329,7 @@ assert <- function(..., error_message = NULL) {
     # 2.1) store all conditions
     # in a list alongside its
     # names
-    conditions <- list(...)
+    conditions <- c(...)
 
     # 2.2) if !is.null(condition_names) the
     # above condition never gets evaluated and
@@ -339,31 +338,25 @@ assert <- function(..., error_message = NULL) {
     # The condition is the names(list()), and is
     # the error messages written on lhs of the the assert
     # function
-    for (condition in named_expressions) {
+    if (all(conditions)) {
 
-      # if TRUE abort
-      # function
-      if (!eval.parent(conditions[[condition]])) {
+      # Stop the funciton
+      # here if all conditions
+      # are [TRUE]
+      return(NULL)
 
-        cli::cli_abort(
-          c("x" = condition),
+    } else {
 
-          # the call will reference the caller
-          # by default, so we need the second
-          # topmost caller
-          call = sys.call(
-            1 - length(sys.calls())
-          )
+      cli::cli_abort(
+        message = c(
+          "x" = named_expressions[which.min(conditions)]
+        ),
+        call = sys.call(
+          1 - length(sys.calls())
         )
-
-
-      }
+      )
 
     }
-
-    # stop the function
-    # here
-    return(NULL)
 
   }
 
@@ -405,8 +398,6 @@ assert <- function(..., error_message = NULL) {
   )
 
 }
-
-
 
 
 pull <- function(
@@ -550,8 +541,9 @@ coerce_date <- function(x){
 flatten <- function(x) {
 
   if (!inherits(x, "list"))
-    return(list(x)) else
-      return(unlist(c(lapply(x, flatten)), recursive = FALSE))
+    list(x)
+  else
+    unlist(c(lapply(x, flatten)), recursive = FALSE)
 }
 
 
@@ -605,7 +597,7 @@ convert_date <- function(
   # If the values are numeric
   # it is returned from the
   # API
-  scale_factor <- multiplier ** ifelse(is_numeric, -1, 1)
+  scale_factor <- multiplier ** if (is_numeric) -1 else 1
 
   if (is_numeric) {
 
@@ -943,35 +935,37 @@ bar <- function(
     name,
     market,
     date_range,
+    modebar,
+    scale,
     ...) {
 
   # 0) chart theme
   theme <- chart_theme(dark = dark)
 
-  title_text <- ifelse(
-    !is.null(market),
-    yes = sprintf(
+  title_text <- if (!is.null(market))
+    sprintf(
       "<b>Ticker:</b> %s <b>Market:</b> %s<br><sub><b>Period:</b> %s</sub>",
       name,
       market,
       date_range
-    ),
-    no = sprintf(
+    )
+  else
+    sprintf(
       "<b>Ticker:</b> %s<br><sub><b>Period:</b> %s</sub>",
       name,
       date_range
     )
-  )
 
   plot <- plotly::layout(
     p = plot,
-    margin = list(l = 5, r = 5, b = 5, t = 65),
+    margin = list(l = 5, r = 5, b = 5, t = if(modebar) 85 else 55),
     paper_bgcolor = theme$paper_bgcolor,
     plot_bgcolor  = theme$plot_bgcolor,
     font = list(
-      size = 14,
+      size = 14 * scale,
       color = theme$font_color
     ),
+    showlegend = TRUE,
     legend = list(
       orientation = 'h',
       x = 0,
@@ -980,14 +974,14 @@ bar <- function(
       title = list(
         text = "<b>Indicators:</b>",
         font = list(
-          size = 16
+          size = 16 * scale
         )
       )
     ),
     title = list(
       text = title_text,
       font = list(
-        size = 20
+        size = 20 * scale
       ),
       x = 1,
       xref = "paper",
@@ -1099,8 +1093,7 @@ normalize <- function(
 
 check_indicator_call <- function(
     system_calls = sys.calls(),
-    caller       = match.call(envir = parent.frame())
-    ) {
+    caller       = match.call(envir = parent.frame())) {
 
   # 0) get the entire call stack
   # to determine the calling function
@@ -1110,9 +1103,11 @@ check_indicator_call <- function(
 
   # 1) get the calling calling
   # function, ie. SMA, EMA etc
+  calling_function <- sys.call(-1)
+
   calling_function <- as.character(
-    sys.call(-1)[[1]]
-  )
+    calling_function[[1]]
+    )[length(calling_function)]
 
   # 2) check the location
   # of chart

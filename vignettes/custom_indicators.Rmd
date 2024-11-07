@@ -1,9 +1,8 @@
 ---
-title: "A Guide on Custom Indicators"
-subtitle: "How to build and chart it"
+title: "A Guide on Charting and Custom Indicators"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{A Guide on Custom Indicators}
+  %\VignetteIndexEntry{A Guide on Charting and Custom Indicators}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,6 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse   = TRUE,
   message    = FALSE,
+  warning    = FALSE,
   comment    = "#>",
   out.width  = "100%",
   out.height = "620px" 
@@ -22,392 +22,175 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-Trading indicators comes in various forms. From the alignment of the moon relative to the sun, to sophisticated trading rules based on neural networks which incorporates classified features. It is not possible to cover them all in an `R` package.
+Trading indicators comes in various forms; from the alignment of the moon relative to the sun, to sophisticated trading rules based on neural networks which incorporates classified features; It is not possible to cover them all in an `R` package.
 
-In this `vignette` an introduction to the construction of charting indicators are given, and is recommended for those who would want to chart indicators not otherwise found in the `cryptoQuotes`-package.
+In this `vignette` an introduction to the construction of charts and chart indicators are given, and is recommended for those who would want to chart indicators not otherwise found in [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/). The `vignette` uses the built-in `BTC`-object.
 
 > **Note:** Feel free to make a `PR` with your indicators that you wish to share with the
 > rest of the community.
 
-## Charting indicators
+As the charts in [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) uses [{plotly}](https://github.com/plotly) as backend, the `chart`-objects complies with it's syntax.
 
-Below is a chart, with the indicators `macd()` and `bollinger_bands()`. Each indicator is created using the `TTR`-package.
+## Custom Indicators 
+
+We start by creating a simple `chart`-object with `volume` as it's only indicator,
 
 ```{r}
-chart(
-  ticker    = BTC,
-  main      = kline(),
-  sub       = list(
-    macd()
+# 1) create a simple chart
+# object
+# 
+# NOTE: The chart is wrapped in
+# plotly::layout() to avoid
+# duplicating xaxis when the
+# custom indicators are added
+chart_object <- plotly::layout(
+  chart(
+    ticker = BTC,
+    main   = kline(),
+    sub    = list(
+      volume()
     ),
-  indicator = list(
-    bollinger_bands()
-  ) 
-)
-```
-
-### The anatomy of indicators
-
-Each indicator is either a *main chart*- or *subchart*-indicator, lets call them `classes` for consistency. The source code for each `class` of indicator is given below,
-
-<details>
-<summary>Main chart indicator (Bollinger Bands)</summary>
-```{r, echo=FALSE}
-bollinger_bands
-```
-</details>
-
-<details>
-<summary>Subchart indicator (MACD)</summary>
-```{r, echo=FALSE}
-macd
-```
-</details>
-
-Common for both indicator `classes` is that they are wrapped in `structure`, with `class = c("plotly", "htmlwidget")`,
-
-```R
-structure(
-  .Data = {
-  
-  # Indicator Logic
-  
-  },
-  class = c(
-    yourclass,
-    "plotly", 
-    "htmlwidget"
-  )
-)
-```
-
-What differentiates the two `classes` of indicators, is the addition of `indicator` or `subchart` in the `yourclass`-placeholder.
-
-The indicator logic is important for the correct charting of your custom indicator. As the `cryptoQuotes`-package uses `plotly` as backend for charting, your `class` of indicator has to be consistent with the use of `plotly`-functions. More specifically; `subchart`-indicators uses `plotly::plot_ly()`-functions, while main chart `indicator` uses `add_*`-functions.
-
-When creating the custom indicators there is a couple of additional steps needed which will be covered in the examples.
-
-## Donchian Channels (Example)
-
-Assume a trading strategy based on Donchian Channels (`TTR::DonchianChannel()`) is needed to optimize your profits. This indicator is a main chart indicator, similar to that of `TTR::BBands()`,
-
-```{r}
-tail(
-  TTR::DonchianChannel(
-    HL = BTC[,c("high", "low")]
-  )
-)
-```
-
-This indicator has three features; `high`, `mid` and `low`. To chart this indicator, we would need to call the `plotly::add_lines()`-function three times to chart it properly. Each of these features are defined as `layers` in the `cryptoQuotes`-package. All layers get built with the `cryptoQuotes:::build()`-function.
-
-```{r}
-## define custom TA
-## donchian_channel
-donchian_channel <- function(
-    ## these arguments are the
-    ## available arguments in the TTR::DonchianChannel
-    ## function
-    n = 10,
-    include.lag = FALSE,
-    ## the ellipsis
-    ## is needed to interact with
-    ## the chart-function
-    ...
-) {
-  
-  structure(
-    .Data = {
-      
-      ## 1) define args
-      ## as a list from the ellipsis
-      ## which is how the chart-function
-      ## communicates with the indicators
-      args <- list(
-        ...
-      )
-      
-      ## 2) define the data, which in this
-      ## case is the indicator. The indicator
-      ## function streamlines the data so it works
-      ## with plotly
-      data <- cryptoQuotes:::indicator(
-        ## this is just the ticker
-        ## that is passed into the chart-function
-        x = args$data,
-        
-        ## columns are the columns of the ohlc
-        ## which the indicator is calculated on
-        columns = c("high", "low"),
-        
-        ## the function itself 
-        ## can be a custom function
-        ## too.
-        .f = TTR::DonchianChannel,
-        
-        ## all other arguments
-        ## passed into .f
-        n = n,
-        include.lag = FALSE
-      )
-      
-      ## each layer represents
-      ## each output from the indicator
-      ## in this case we have
-      ## high, mid and low.
-      ## 
-      ## The lists represents a plotly-function
-      ## and its associated parameters.
-      layers <- list(
-        ## high
-        list(
-          type = "add_lines",
-          params = list(
-            showlegend = FALSE,
-            legendgroup = "DC",
-            name = "high",
-            inherit = FALSE,
-            data = data,
-            x    = ~index,
-            y    = ~high,
-            line = list(
-              color = "#d38b68",
-              width = 0.9
-            )
-          )
-        ),
-        
-        ## mid
-        list(
-          type = "add_lines",
-          params = list(
-            showlegend = FALSE,
-            legendgroup = "DC",
-            name = "mid",
-            inherit = FALSE,
-            data = data,
-            x    = ~index,
-            y    = ~mid,
-            line = list(
-              color = "#d38b68",
-              dash ='dot',
-              width = 0.9
-            )
-          )
-        ),
-        
-        ## low
-        list(
-          type = "add_lines",
-          params = list(
-            showlegend = FALSE,
-            legendgroup = "DC",
-            name = "low",
-            inherit = FALSE,
-            data = data,
-            x    = ~index,
-            y    = ~low,
-            line = list(
-              color = "#d38b68",
-              width = 0.9
-            )
-          )
-        )
-      )
-      
-      ## we can add ribbons
-      ## to the main plot to give
-      ## it a more structured look.
-      plot <- plotly::add_ribbons(
-        showlegend = TRUE,
-        legendgroup = 'DC',
-        p = args$plot,
-        inherit = FALSE,
-        x = ~index,
-        ymin = ~low,
-        ymax = ~high,
-        data = data,
-        fillcolor = cryptoQuotes:::as_rgb(alpha = 0.1, hex_color = "#d38b68"),
-        line = list(
-          color = "transparent"
-        ),
-        name = paste0("DC(", paste(c(n), collapse = ", "), ")")
-      )
-      
-      ## the plot has to be build
-      ## using the cryptoQuotes::build-function
-      invisible(
-        cryptoQuotes:::build(
-          plot,
-          layers = layers
-        )
-      )
-      
-    }
-  )
-  
-}
-```
-
-The indicator function can be passed into the appropriate argument in the `chart()`-function, which will handle everything else,
-
-```{r}
-chart(
-  ticker = BTC,
-  main   = kline(),
-  sub    = list(
-    volume()
+    options = list(
+      dark = FALSE
+    )
   ),
-  indicator = list(
-    bollinger_bands(),
-    donchian_channel()
+  xaxis = list(
+    showticklabels = FALSE
   )
 )
 ```
 
-## Commodity Channel Index (Example)
+### Sine-oscillator
 
-Assume a trading strategy based on Commodity Channel Indices (`TTR::CCI()`) is needed to optimize your profits. This indicator is subchart indicator similar to that of `TTR::RSI()`,
+Assume a trading strategy that follows a `sin()`-curve throughout the period of interest. The starting point is generating the indicator,
 
 ```{r}
-tail(
-  TTR::CCI(
-    HLC = BTC[,c("high", "low", "close")]
-  )
+# 1) generate sin-indicator
+sin_indicator <- data.frame(
+    index         = zoo::index(BTC),
+    sin_indicator = sin(seq(0,8*pi,length.out=nrow(BTC)))
+  
 )
 ```
 
-This indicator has a single feature; `cci`. As this indicator is a subchart indicator with a single feature, we only need a single `layer` built with `plot_ly()`,
-
-
-```{r}
-## define custom TA
-## Commodity Channel Index (CCI)
-cc_index <- function(
-    ## these arguments are the
-    ## available arguments in the TTR::CCI
-    ## function
-    n = 20,
-    maType,
-    c = 0.015,
-    ## the ellipsis
-    ## is needed to interact with
-    ## the chart-function
-    ...
-) {
-  
-  structure(
-    .Data = {
-      
-      ## 1) define args
-      ## as a list from the ellipsis
-      ## which is how the chart-function
-      ## communicates with the indicators
-      args <- list(
-        ...
-      )
-      
-      ## 2) define the data, which in this
-      ## case is the indicator. The indicator
-      ## function streamlines the data so it works
-      ## with plotly
-      data <- cryptoQuotes:::indicator(
-        ## this is just the ticker
-        ## that is passed into the chart-function
-        x = args$data,
-        
-        ## columns are the columns of the ohlc
-        ## which the indicator is calculated on
-        columns = c("high", "low", "close"),
-        
-        ## the function itself 
-        ## can be a custom function
-        ## too.
-        .f = TTR::CCI,
-        
-        ## all other arguments
-        ## passed into .f
-        n = n,
-        maType = maType,
-        c      = c
-      )
-      
-      
-      layer <- list(
-        list(
-          type = "plot_ly",
-          params = list(
-            name = paste0("CCI(", n,")"),
-            data = data,
-            showlegend = TRUE,
-            x = ~index,
-            y = ~cci,
-            type = "scatter",
-            mode = "lines",
-            line = list(
-              color = cryptoQuotes:::as_rgb(alpha = 1, hex_color = "#d38b68"),
-              width = 0.9
-            )
-          )
-          
-        )
-      )
-      
-      cryptoQuotes:::build(
-        plot = args$plot,
-        layers = layer,
-        annotations = list(
-          list(
-            text = "Commodity Channel Index",
-            x = 0,
-            y = 1,
-            font = list(
-              size = 18
-            ),
-            xref = 'paper',
-            yref = 'paper',
-            showarrow = FALSE
-          )
-        )
-      )
-      
-      
-      
-    }
-  )
-  
-}
-```
-
+The `sin_indicator` in it's basic form can be charted as follows,
 
 ```{r}
-chart(
-  ticker = BTC,
-  main   = kline(),
-  sub    = list(
-    volume(),
-    cc_index()
+# 1) create a plotly-object
+# with the sin-indicator
+sin_indicator <- plotly::layout(
+   margin= list(l = 5, r = 5, b = 5),
+  p = plotly::plot_ly(
+    data = sin_indicator,
+    y    = ~sin_indicator,
+    x    = ~index,
+    type = "scatter",
+    mode = "lines",
+    name = "sin"
   ),
-  indicator = list(
-    bollinger_bands(),
-    donchian_channel()
+  yaxis = list(
+    title = NA
+  ),
+  xaxis = list(
+    title = NA
+  )
+)
+# 2) display the 
+# indicator
+sin_indicator
+```
+
+The `sin_indicator` can be added to the `chart_object` using `plotly::subplot` which also handles the theming,
+
+```{r}
+# 1) append the sin_indicator
+# to the chart object
+chart_object <- plotly::subplot(
+  # ensures that plots are 
+  # vertically aligned
+  nrows = 2,
+  heights = c(
+    0.7,
+    0.2
+  ),
+  chart_object,
+  sin_indicator,
+  shareX = FALSE,
+  titleY = FALSE
+)
+
+# 2) display the chart
+# object
+chart_object
+```
+
+### Linear Regression Line
+
+Assume a trading strategy that goes long (short) every time the price is below (above) the linear regression line. This indicator can be defined as follows,
+
+```{r}
+# 1) linear regression
+# line
+lm_indicator <- data.frame(
+  y = fitted(
+    lm(
+      close ~ time,
+      data = data.frame(
+        time = 1:nrow(BTC),
+        close = BTC$close
+      )
+    )
+  ),
+  index = zoo::index(BTC)
+)
+```
+
+The `lm_indicator` in it's basic form can be charted as follows,
+
+```{r}
+# 1) display the linear
+# regression line on
+# an empty chart
+plotly::add_lines(
+  p    = plotly::plotly_empty(),
+  data = lm_indicator,
+  y    = ~y,
+  x    = ~index,
+  inherit = FALSE,
+  xaxis = "x1",
+  yaxis = "y2",
+  name  = "regression"
+)
+```
+
+The `lm_indicator` can be added to the `chart_object` using `plotly::add_lines` which also handles the theming,
+
+```{r}
+# 1) add the regression
+# line to the chart_object
+plotly::layout(
+  margin = list(l = 5, r = 5, b = 5, t = 65),
+  plotly::add_lines(
+    p       = chart_object,
+    data    = lm_indicator,
+    y       = ~y,
+    x       = ~index,
+    inherit = FALSE,
+    xaxis   = "x1",
+    yaxis   = "y2",
+    name    = "regression"
+  ),
+  yaxis = list(
+    title = NA
+  ),
+  xaxis = list(
+    title = NA
   )
 )
 ```
 
 ## Summary
 
-Creating custom indicators for the `chart()`-functions can be daunting. Two examples of how these are developed in th e `cryptoQuotes`-packages have been covered.
+Creating custom indicators for the `chart()`-functions follows standard [{plotly}](https://github.com/plotly) syntax. Two examples of how these are charted in [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) have been covered.
 
 > **Note:** A full pipeline of charting indicators, custom and built-in, will be released sometime in the future.
-
-To summarise the example,
-
-1. Define the `indicator`-function (e.g `TTR::CCI()`)
-2. Define the `chart`-function for the indicator (e.g `cc_index()`)
-    1. Wrap the `indicator`-function in `cryptoQuotes:::indicator()`
-    2. Define the `layers` according to features, and wether its a subchart or main chart indicator
-    3. Build the chart using `cryptoQuotes:::build()`
-3. Add the `chart`-function for the indicator in the appropriate argument in the `chart()`-function
-
-

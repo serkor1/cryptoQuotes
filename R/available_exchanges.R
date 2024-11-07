@@ -67,14 +67,38 @@ available_exchanges <- function(
     )
   )
 
-  exchanges <- sort(
-    switch(
-      type,
-      ohlc        = c('binance', 'kucoin', 'kraken', 'bitmart', 'bybit'),
-      fundingrate = c('binance', 'bybit', 'kucoin'),
-      lsratio     = c('binance', 'bybit', 'kraken'),
-      interest    = c('binance', 'bybit', 'kraken')
-    )
+  exchanges <- sort(switch(
+    type,
+    fundingrate = c(
+      'binance',
+      'bybit',
+      'kucoin',
+      'crypto.com',
+      'mexc'
+    ),
+    lsratio     = c(
+      'binance',
+      'bybit',
+      'kraken'
+    ),
+    interest    = c(
+      'binance',
+      'bybit',
+      'kraken'
+    ),
+    {
+      c(
+        'binance',
+        'kucoin',
+        'kraken',
+        'bitmart',
+        'bybit',
+        'crypto.com',
+        'huobi',
+        'mexc'
+      )
+    }
+  )
   )
 
   # 1) retun a message

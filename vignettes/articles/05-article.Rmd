@@ -1,5 +1,5 @@
 ---
-title: "Cryptocurrency Market Data with quantmod and TTR"
+title: "Cryptocurrency Market Data with {quantmod} and {TTR}"
 ---
 
 ```{r, include = FALSE}
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-The `cryptoQuotes` were built with `quantmod` and `TTR` in mind. To demonstrate how `cryptoQuotes` works with these packages, we will use the following data,
+[{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) were built with [{quantmod}](https://github.com/joshuaulrich/quantmod) and [{TTR}](https://github.com/joshuaulrich/TTR) in mind. To demonstrate how [{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) works with these packages, we will use the following data,
 
 ```{r}
 ## Get daily 
@@ -40,8 +40,7 @@ The `BTC` can be passed into the charting functions, or be used in the `quantmod
 
 ### Building Cryptocurrency Trade Models
 
-Below is an example on how to use the `quantmod::tradeModel` with `BTC`,
-
+Below is an example on how to use the `quantmod::tradeModel()`-function with the `BTC`-object,
 
 ```{r}
 ## 1) specify
@@ -65,9 +64,9 @@ built_model <-  quantmod::buildModel(
 quantmod::tradeModel(built_model, leverage = 2)
 ```
 
-### Charting Cryptocurrency with quantmod
+### Charting Cryptocurrency with {quantmod}
 
-```{r}
+```{r, fig.alt="Cryptocurrency Market Data in Quantmod"}
 ## chart the
 ## BTC with candlesticks
 ## and Bollinger BAnds
@@ -80,9 +79,9 @@ quantmod::chartSeries(
 )
 ```
 
-## Cryptocurrency and TTR
+## Cryptocurrency and {TTR}
 
-Below is an example on how to use the `BBands()`-function from the `TTR`-package,
+Below is an example on how to use the `BBands()`-function from [{TTR}](https://github.com/joshuaulrich/TTR),
 
 ```{r}
 # 1) calculate
@@ -108,7 +107,7 @@ knitr::kable(
   table.attr = "style='width:100%;'",
   x = data.frame(
     cbind(
-      Index = paste(tail(zoo::index(BTC))),
+      index = paste(tail(zoo::index(BTC))),
       round(tail(zoo::coredata(BTC)),3)
     ),row.names = NULL
   ),

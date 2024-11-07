@@ -91,7 +91,7 @@ testthat::test_that(
     )
 
     # 2) check that there is no erros
-    testthat::expect_no_error(
+    testthat::expect_no_condition(
       test_chart
     )
 
@@ -143,7 +143,7 @@ testthat::test_that(
     )
 
     # 2) check that there is no erros
-    testthat::expect_no_error(
+    testthat::expect_no_condition(
       test_chart
     )
 

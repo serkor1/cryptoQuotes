@@ -4,11 +4,11 @@
 \name{cryptoQuotes-package}
 \alias{cryptoQuotes}
 \alias{cryptoQuotes-package}
-\title{cryptoQuotes: A Streamlined Access to Cryptocurrency OHLC-V Market Data and Sentiment Indicators}
+\title{cryptoQuotes: Open Access to Cryptocurrency Market Data, Sentiment Indicators and Interactive Charts}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-This high-level API client offers a streamlined access to public cryptocurrency market data and sentiment indicators. It features OHLC-V (Open, High, Low, Close, Volume) that comes with granularity ranging from seconds to months and essential sentiment indicators to develop and backtest trading strategies, or conduct detailed market analysis. By interacting directly with the major cryptocurrency exchanges this package ensures a reliable, and stable, flow of market information, eliminating the need for complex, low-level API interactions or webcrawlers.
+This high-level API client provides open access to cryptocurrency market data, sentiment indicators, and interactive charting tools. The data is sourced from major cryptocurrency exchanges via 'curl' and returned in 'xts'-format. The data comes in open, high, low, and close (OHLC) format with flexible granularity, ranging from seconds to months. This flexibility makes it ideal for developing and backtesting trading strategies or conducting detailed market analysis.
 }
 \seealso{
 Useful links:

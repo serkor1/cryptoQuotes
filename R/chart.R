@@ -31,7 +31,8 @@
 #'
 #' **Sample Output**
 #' \if{html}{
-#'   \out{<span style="text-align: center; display: block;">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</span>}
+#'   \out{<span style="text-align: center; display: block;">}
+#'   \figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</span>}
 #' }
 #' \if{latex}{
 #'   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
@@ -42,12 +43,27 @@
 #'
 #' * \code{dark} A <[logical]>-value of [length] 1. [TRUE] by default.
 #' Sets the overall theme of the [chart()]
+#'
 #' * \code{slider} A <[logical]>-value of [length] 1. [FALSE] by default.
-#' If [TRUE], a [plotly::rangeslider()] is added
+#' If [TRUE], a [plotly::rangeslider()] is added.
+#'
 #' * \code{deficiency}  A <[logical]>-value of [length] 1. [FALSE] by default.
 #' If [TRUE], all [chart()]-elements are colorblind friendly
+#'
 #' * \code{size} A <[numeric]>-value of [length] 1. The relative size of the
-#' main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
+#' main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
+#'
+#' * \code{scale} A <[numeric]>-value of [length] 1. 1 by default. Scales
+#' all fonts on the chart.
+#'
+#' * \code{width} A <[numeric]>-value of [length] 1. 0.9 by default. Sets
+#' the width of all line elements on the chart.
+#'
+#' * \code{static} A <[logical]>-value of [length] 1. [FALSE] by default. If [FALSE]
+#' the chart can be edited, annotated and explored interactively.
+#'
+#' * \code{palette} A <[character]>-vector of [length] 1. "hawaii" by default. See [hcl.pals()] for
+#' all possible color palettes.
 #'
 #' ## Charting Events
 #'
@@ -66,9 +82,7 @@
 #' @export
 chart <- function(
     ticker,
-    main = list(
-      kline()
-    ),
+    main = kline(),
     sub = list(),
     indicator = list(),
     event_data = NULL,
@@ -132,10 +146,14 @@ chart <- function(
   ## 1) set chart options
   ## globally (locally)
   default_options <- list(
+    static     = FALSE,
     dark       = TRUE,
     slider     = FALSE,
     deficiency = FALSE,
-    size       = 0.6
+    palette    = "hawaii",
+    scale      = 1,
+    size       = 0.6,
+    width      = 0.9
   )
 
   options <- utils::modifyList(
@@ -144,13 +162,68 @@ chart <- function(
     keep.null = TRUE
   )
 
-  dark <- options$dark
-  deficiency <- options$deficiency
-  slider <- options$slider
-  size   <- options$size
-
-
+  dark         <- options$dark
+  deficiency   <- options$deficiency
+  slider       <- options$slider
+  size         <- options$size
+  palette      <- options$palette
+  static       <- options$static
   candle_color <- movement_color(deficiency = deficiency)
+  scale        <- options$scale
+  width        <- options$width
+
+  if (static) {
+
+    # if the plot is static
+    # then turn off modebar
+    # slider and editable
+
+    modebar <- slider <- editable <- FALSE
+
+  } else {
+
+    # the modebar and editable
+    # part of the plot should
+    # always be set to true
+    # for "real" interactivitiy
+    modebar <- editable <- TRUE
+
+
+  }
+
+  # assert inputs and options
+  assert(
+    any(grepl(pattern = palette,x = grDevices::hcl.pals(),ignore.case = TRUE)),
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Palette {.val %s} is not valid.",
+        palette
+      ),
+      "i" = paste(
+        "Run",
+        cli::code_highlight(
+          code = "hcl.pals()",
+          code_theme = "chaos"
+        ),
+        "for valid values."
+      )
+    )
+  )
+
+  assert(
+    size > 0 & size < 1,
+    error_message = c(
+      "x" = sprintf(
+        fmt = "Got {.arg size} %s.",
+        size
+      ),
+      "i" = sprintf(
+        fmt = "{.arg size} has to be between 0 and 1, non-inclusive."
+      )
+    )
+  )
+
+
 
   # 1) generate list
   # of calls for lazy
@@ -171,6 +244,7 @@ chart <- function(
       .f$interval <- interval
       .f$candle_color <- candle_color
       .f$deficiency <- deficiency
+      .f$scale <- scale
       eval(.f)
     },
     flatten(list(call_list$main, call_list$sub))
@@ -184,7 +258,7 @@ chart <- function(
 
   if (!identical(call_list$indicator, list())) {
 
-     plot_list[1] <- list(Reduce(
+    plot_list[1] <- list(Reduce(
       f    = function(plot, .f) {
         # Modify the call list
         .f$data <- ticker
@@ -230,7 +304,11 @@ chart <- function(
   # hcl.colors are colorblind friendly. See:
   # https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible
   n_colors <- length(unlist(call_list))
-  colorway <- grDevices::hcl.colors(n = n_colors)
+  # colorway <- grDevices::hcl.colors(n = n_colors)
+  colorway <- grDevices::hcl.colors(
+    n       = n_colors,
+    palette = palette
+  )
 
   plot_list <- lapply(
     X = plot_list,
@@ -266,15 +344,54 @@ chart <- function(
 
       }
     )
+
   )
 
-  bar(
-    dark = dark,
-    plot = plot,
-    name = name,
-    market = market,
-    date_range = paste(range(zoo::index(ticker)), collapse = " - ")
+  scatter_indices <- which(
+    sapply(
+      X = plot$x$data,
+      FUN = function(x) {
+        x$type == "scatter"
+      }
+    )
   )
+
+  plot <- plotly::style(
+    p = plot,
+    line.width = width,
+    traces = scatter_indices
+  )
+
+
+  plot <- plotly::config(
+    p = bar(
+      dark = dark,
+      plot = plot,
+      name = name,
+      market = market,
+      date_range = paste(range(zoo::index(ticker)), collapse = " - "),
+      modebar = modebar,
+      scale = scale
+    ),
+    staticPlot     = static,
+    editable       = editable,
+    responsive     = TRUE,
+    displayModeBar = modebar,
+    modeBarButtonsToAdd = c(
+      "drawline",
+      "drawrect",
+      "eraseshape"
+    ),
+    toImageButtonOptions = list(
+      format   = "svg",
+      filename = "chart",
+      height   = 2160,
+      width    = 3840,
+      scale    = 1
+    )
+  )
+
+  plot
 
 }
 

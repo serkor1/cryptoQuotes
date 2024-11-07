@@ -149,7 +149,7 @@ macd <- function(
             x = 0,
             y = 1,
             font = list(
-              size = 16
+              size = 16  * args$scale
             ),
             xref = 'paper',
             yref = 'paper',

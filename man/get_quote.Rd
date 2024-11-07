@@ -33,7 +33,7 @@ See \code{\link[=available_intervals]{available_intervals()}} for available inte
 \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
-An \link{xts}-object containing,
+An <[\link[xts]{xts}]>-object containing,
 
 \item{index}{<\link{POSIXct}> The time-index}
 \item{open}{<\link{numeric}> Opening price}

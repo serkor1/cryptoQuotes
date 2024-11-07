@@ -11,17 +11,10 @@ kucoinUrl <- function(
 
   # 1) define baseURL
   # for each API
-  baseUrl <- base::ifelse(
-    test = futures,
-    yes  = 'https://api-futures.kucoin.com',
-    no   = 'https://api.kucoin.com'
-  )
-
-  # 2) return the
-  # baseURL
-  return(
-    baseUrl
-  )
+  if (futures)
+    'https://api-futures.kucoin.com'
+  else
+    'https://api.kucoin.com'
 
 }
 
@@ -30,25 +23,25 @@ kucoinEndpoint <- function(
     futures = TRUE,
     ...) {
 
-  endPoint <- switch(
+  switch(
     EXPR = type,
-    ohlc = {
-      if (futures) 'api/v1/kline/query' else
-        'api/v1/market/candles'
-    },
     ticker ={
-      if (futures) 'api/v1/contracts/active' else
+      if (futures)
+        'api/v1/contracts/active'
+      else
         'api/v1/market/allTickers'
     },
     fundingrate = {
       'api/v1/contract/funding-rates'
+    },
+    {
+      if (futures)
+        'api/v1/kline/query'
+      else
+        'api/v1/market/candles'
     }
   )
 
-  # 2) return endPoint url
-  return(
-    endPoint
-  )
 }
 
 # 2) Available intervals; #####
@@ -59,8 +52,8 @@ kucoinIntervals <- function(
     ...) {
 
   if (futures) {
-    allIntervals <- data.frame(
-      labels = c(
+
+      interval_label <- c(
         '1m',
         '5m',
         '15m',
@@ -72,12 +65,12 @@ kucoinIntervals <- function(
         '12h',
         '1d',
         '1w'
-      ),
-      values = c(1, 5, 15, 30, 60, 120, 240, 480, 720, 1440, 10080)
-    )
+      )
+      interval_actual <-  c(1, 5, 15, 30, 60, 120, 240, 480, 720, 1440, 10080)
+
   } else {
-    allIntervals <- data.frame(
-      labels = c(
+
+      interval_label <- c(
         '1m',
         '3m',
         '5m',
@@ -91,8 +84,9 @@ kucoinIntervals <- function(
         '12h',
         '1d',
         '1w'
-      ),
-      values = c(
+      )
+
+      interval_actual <- c(
         '1min',
         '3min',
         '5min',
@@ -107,21 +101,14 @@ kucoinIntervals <- function(
         '1day',
         '1week'
       )
-    )
+
   }
 
-  if (all) {
+  if (all) { return(interval_label) }
 
-    return(allIntervals$labels)
-
-  } else {
-    # Select the specified interval
-    selectedInterval <- allIntervals$values[
-      grepl(paste0('^', interval, '$'), allIntervals$labels, ignore.case = TRUE)
-    ]
-
-    return(selectedInterval)
-  }
+  interval_actual[
+    interval_label %in% interval
+  ]
 }
 
 # 3) define response object and format; ####
@@ -139,16 +126,6 @@ kucoinResponse <- function(
 
   switch(
     EXPR = type,
-    ohlc = {
-      list(
-        colum_names = if (futures)
-          c('open', 'high', 'low', 'close', 'volume')
-        else
-          c('open', 'close', 'high', 'low', 'volume'),
-        colum_location = 2:6,
-        index_location = 1
-      )
-    },
     ticker = {
       list(
         foo = function(response, futures) {
@@ -174,6 +151,16 @@ kucoinResponse <- function(
         index_location = c(3),
         colum_location = c(2)
       )
+    },
+    {
+      list(
+        colum_names = if (futures)
+          c('open', 'high', 'low', 'close', 'volume')
+        else
+          c('open', 'close', 'high', 'low', 'volume'),
+        colum_location = 2:6,
+        index_location = 1
+      )
     }
   )
 
@@ -188,7 +175,10 @@ kucoinDates <- function(
 
   # 0) set multiplier based
   # on market
-  multiplier <- if (futures) 1e3 else 1
+  multiplier <- if (futures)
+    1e3
+  else
+    1
 
   # 1) if its a response
   if (is_response) {
@@ -201,7 +191,6 @@ kucoinDates <- function(
 
   } else {
 
-
     # Convert dates and format
 
     dates <- convert_date(
@@ -209,25 +198,22 @@ kucoinDates <- function(
       multiplier = multiplier
     )
 
-    dates <- format(
-      dates,
-      scientific = FALSE
-    )
-
-
     if (!futures) {
       # Adjust for Kucoin spot and set names
       dates <- as.numeric(dates)
 
       dates[2] <- dates[2] + 15 * 60
       names(dates) <- c('startAt', 'endAt')
+
     } else {
       # Set names for futures
       names(dates) <- c('from', 'to')
     }
 
-
-
+    dates <- format(
+      dates,
+      scientific = FALSE
+    )
   }
 
   dates
@@ -254,7 +240,11 @@ kucoinParameters <- function(
     )
   )
   # Assign appropriate names based on the futures flag
-  interval_param_name <- if (futures) 'granularity' else 'type'
+  interval_param_name <- if (futures)
+    'granularity'
+  else
+    'type'
+
   names(params)[2] <- interval_param_name
 
   # Add date parameters
@@ -269,11 +259,11 @@ kucoinParameters <- function(
   # Return structured list with additional parameters
   return(
     list(
-      query = params,
-      path = NULL,
-      futures = futures,
-      source = 'kucoin',
-      ticker = ticker,
+      query    = params,
+      path     = NULL,
+      futures  = futures,
+      source   = 'kucoin',
+      ticker   = ticker,
       interval = interval
     )
   )

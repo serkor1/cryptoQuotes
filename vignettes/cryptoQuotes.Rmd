@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
-This `vignette`  is a short introduction to the `cryptoQuotes`-package, for a more extensive introduction on its usecase and limitations please refer to the [wiki](https://github.com/serkor1/cryptoQuotes/wiki).
+This `vignette` is a short introduction to [{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/), for a more extensive introduction on its usecase and limitations please refer to the [wiki](https://github.com/serkor1/cryptoQuotes/wiki).
 
 > **NOTE:** This `vignette` is limited by geolocation due to various country specific
 > cryptocurrency laws. The introduction, therefore, is limited to what is available in the US. 
@@ -96,7 +96,7 @@ LS_BTC <- try(
 )
 ```
 
-This gives an `error`. The source of the error is the ticker-naming convention; as the `long` to `short` ratio is specific to the perpetual futures market, and the current ticker is specific to the spot-market, the endpoint throws an error.
+This gives an `error`. The source of the error is the ticker-naming convention; as the *long-short ratio* is specific to the perpetual futures market, and the current ticker is specific to the spot-market, the endpoint throws an error.
 
 To circumvent this, we can either use perpetual futures throughout the `script`, or modify the `ticker`-argument as follows,
 
@@ -133,7 +133,7 @@ sample(
 
 ## Charting cryptocurrency market data
 
-The Bitcoin market data can be charted using the `chart()`-function, which uses `plotly` as backend,
+The Bitcoin market data can be charted using the `chart()`-function, which uses [{plotly}](https://github.com/plotly/plotly.R) as backend,
 
 ```{r, fig.alt="cryptocurrency market data with R"}
 # candlestick chart with
@@ -153,7 +153,7 @@ chart(
 
 ### Adding indicators
 
-The `cryptoQuotes`-package also acts as an API-client to the `TTR`-package, and supports most of its functions. We can add Moving Average indicators, and bollinger bands to the chart using the `indicator`-argument,
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) also acts as an API-client to [{TTR}](https://github.com/joshuaulrich/TTR), and supports most of its functions. We can add Moving Average indicators, and Bollinger Bands to the chart using the `indicator`-argument,
 
 ```{r, fig.alt="cryptocurrency market data with R"}
 # candlestick chart with

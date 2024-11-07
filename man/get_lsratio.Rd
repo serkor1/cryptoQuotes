@@ -33,7 +33,7 @@ See \code{\link[=available_exchanges]{available_exchanges()}} for available exch
 If \link{TRUE} it returns the top traders Long-Short ratios.}
 }
 \value{
-An \link{xts}-object containing,
+An \link[xts:xts]{xts::xts}-object containing,
 
 \item{index}{<\link{POSIXct}> the time-index}
 \item{long}{<\link{numeric}> the share of longs}

@@ -6,7 +6,7 @@
 \usage{
 chart(
   ticker,
-  main = list(kline()),
+  main = kline(),
   sub = list(),
   indicator = list(),
   event_data = NULL,
@@ -21,7 +21,7 @@ can be coerced to a \code{\link[xts:xts]{xts::xts()}}-object.}
 
 \item{sub}{An optional \link{list} of \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function(s).}
 
-\item{indicator}{An optional \link{list} of \code{\link[plotly:add_trace]{plotly::add_lines()}}-function(s).}
+\item{indicator}{An optional \link{list} of \code{\link[plotly:add_lines]{plotly::add_lines()}}-function(s).}
 
 \item{event_data}{An optional \link{data.frame} with event line(s) to be added
 to the \code{\link[=chart]{chart()}}. See \code{\link[=add_event]{add_event()}} for more details.}
@@ -33,7 +33,8 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}} object.
 
 \strong{Sample Output}
 \if{html}{
-  \out{<span style="text-align: center; display: block;">}\figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</span>}
+  \out{<span style="text-align: center; display: block;">}
+  \figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</span>}
 }
 \if{latex}{
   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
@@ -54,11 +55,19 @@ indicators like \link{sma} and \link{bollinger_bands}.
 \item \code{dark} A <\link{logical}>-value of \link{length} 1. \link{TRUE} by default.
 Sets the overall theme of the \code{\link[=chart]{chart()}}
 \item \code{slider} A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default.
-If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added
+If \link{TRUE}, a \code{\link[plotly:rangeslider]{plotly::rangeslider()}} is added.
 \item \code{deficiency}  A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default.
 If \link{TRUE}, all \code{\link[=chart]{chart()}}-elements are colorblind friendly
 \item \code{size} A <\link{numeric}>-value of \link{length} 1. The relative size of the
-main chart. 0.6 by default. Must be between 0 and 1, non-inclusive
+main chart. 0.6 by default. Must be between 0 and 1, non-inclusive.
+\item \code{scale} A <\link{numeric}>-value of \link{length} 1. 1 by default. Scales
+all fonts on the chart.
+\item \code{width} A <\link{numeric}>-value of \link{length} 1. 0.9 by default. Sets
+the width of all line elements on the chart.
+\item \code{static} A <\link{logical}>-value of \link{length} 1. \link{FALSE} by default. If \link{FALSE}
+the chart can be edited, annotated and explored interactively.
+\item \code{palette} A <\link{character}>-vector of \link{length} 1. "hawaii" by default. See \code{\link[=hcl.pals]{hcl.pals()}} for
+all possible color palettes.
 }
 }
 
@@ -99,7 +108,7 @@ cryptoQuotes::chart(
 # script end;
 }
 \seealso{
-Other chart indicators:
+Other chart indicators: 
 \code{\link{add_event}()},
 \code{\link{alma}()},
 \code{\link{bollinger_bands}()},
@@ -119,7 +128,7 @@ Other chart indicators:
 \code{\link{wma}()},
 \code{\link{zlema}()}
 
-Other price charts:
+Other price charts: 
 \code{\link{kline}()},
 \code{\link{ohlc}()},
 \code{\link{pline}()}

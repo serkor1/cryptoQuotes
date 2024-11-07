@@ -16,23 +16,26 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Open access to cryptocurrency market data in R <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="139" alt="cryptocurrency in R"/></a>
+# {cryptoQuotes}: Open access to cryptocurrency market data <a href="https://serkor1.github.io/cryptoQuotes/"><img src="man/figures/logo.png" align="right" height="154" alt="cryptocurrency in R"/></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/cryptoQuotes)](https://CRAN.R-project.org/package=cryptoQuotes)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/cryptoQuotes?color=blue)](https://r-pkg.org/pkg/cryptoQuotes)
 [![R-CMD-check](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://codecov.io/gh/serkor1/cryptoQuotes)
+[![codecov](https://codecov.io/gh/serkor1/cryptoQuotes/graph/badge.svg?token=D7NF1BPVL5)](https://app.codecov.io/gh/serkor1/cryptoQuotes)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/serkor1/cryptoQuotes/development)
 <!-- badges: end -->
 
-The `cryptoQuotes`-package is a high-level API client for accessing public market data endpoints on major cryptocurrency exchanges. It supports open, high, low, close and volume (OHLC-V) data and a variety of sentiment indicators; the market data is high quality and can be retrieved in intervals ranging from *seconds* to *months*. All the market data is accessed and processed without relying on crawlers, or API keys, ensuring an open, and reliable, access for researchers, traders and students alike. 
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) is a high-level API client for accessing public market data endpoints on major cryptocurrency exchanges. It supports open, high, low, close and volume (OHLC-V) data and a variety of sentiment indicators; the market data is high quality and can be retrieved in intervals ranging from *seconds* to *months*. 
 
-## Example: Bitcoin OHLC-V with Long-Short Ratios
+All the market data is accessed and processed without relying on crawlers, or API keys, ensuring an open, and reliable, access for researchers, traders and students alike.
 
-<div align="center">
-```{r print table, echo=FALSE, fig.alt="cryptocurrency prices in R"}
+## Basic usage
+
+Below is an example on retrieving OHLC-V data for Bitcoin in 30 minute intervals,
+
+```{r OHLC, echo=TRUE, fig.alt="cryptocurrency prices in R"}
 ## get OHLC-V in 30 minute intervals
 ## for Bitcoin from Binance
 ## futures market since yesterday
@@ -44,84 +47,10 @@ BTC <- cryptoQuotes::get_quote(
   from     = Sys.Date() - 1 
 )
 
-## get the Long-Short Ratios in 30 minute
-## intervals for Bitcoin from 
-## Binance since yesterday
-BTC_LSR <- cryptoQuotes::get_lsratio(
-  ticker   = 'BTCUSDT',
-  source   = 'binance',
-  interval = '30m',
-  from     = Sys.Date() - 1 
-)
-
-## merge the OHLC-B
-## and Long-Short Ratios
-BTC <- round(
-  merge(
-    BTC,
-    BTC_LSR
-  ),
-  digits = 3
-)
-
-
-
-kable_output <- kableExtra::kable_styling(
-  kable_input = knitr::kable(
-    caption = 'Bitcoin (BTC) in 30 minute intervals with Long-Short Ratios.',
-    align = 'lcccc',
-    table.attr = "style='width: fit-content;'",
-    x = data.frame(
-      cbind(
-        index = paste(tail(zoo::index(BTC))),
-        tail(zoo::coredata(BTC))
-      ),
-      row.names = NULL
-    ),
-    format = 'html'
-  ),
-  full_width = TRUE,
-  position = 'center',
-  bootstrap_options = c("responsive", "bordered"),
-  font_size = 14
-)
-
-kable_output
+## display latest
+## values
+tail(BTC)
 ```
-</div>
-
-<details>
-<summary>Source</summary>
-```{r cryptocurrency market data in R, eval=FALSE}
-## get OHLC-V in 30 minute intervals
-## for Bitcoin from Binance
-## futures market since yesterday
-BTC <- cryptoQuotes::get_quote(
-  ticker   = 'BTCUSDT',
-  source   = 'binance',
-  futures  = TRUE,
-  interval = '30m',
-  from     = Sys.Date() - 1 
-)
-
-## get the Long-Short Ratios in 30 minute
-## intervals for Bitcoin from 
-## Binance since yesterday
-BTC_LSR <- cryptoQuotes::get_lsratio(
-  ticker   = 'BTCUSDT',
-  source   = 'binance',
-  interval = '30m',
-  from     = Sys.Date() - 1 
-)
-
-## merge the OHLC-B
-## and Long-Short Ratios
-BTC <- merge(
-  BTC,
-  BTC_LSR
-)
-```
-</details>
 
 ## :information_source: Installation
 
@@ -145,4 +74,4 @@ devtools::install_github(
 
 ## :information_source: Code of Conduct
 
-Please note that the `cryptoQuotes` project is released with a [Contributor Code of Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the [{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) project is released with a [Contributor Code of Conduct](https://serkor1.github.io/cryptoQuotes/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

@@ -10,7 +10,7 @@ assert(..., error_message = NULL)
 \item{...}{expressions >= 1. If named the names are used
 as error messages, otherwise R's internal error-messages are thrown}
 
-\item{error_message}{character. An error message, supports \link{cli}-formatting.}
+\item{error_message}{character. An error message, supports \link[cli:cli]{cli::cli}-formatting.}
 }
 \value{
 \link{NULL} if all statements in ... are \link{TRUE}

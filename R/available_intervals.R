@@ -89,9 +89,9 @@ available_intervals <- function(
   # 0) extract available
   # intervals
   all_intervals <- get(paste0(source, 'Intervals'))(
-    type   = type,
-    futures = futures,
-    all = TRUE,
+    type     = type,
+    futures  = futures,
+    all      = TRUE,
     interval = NULL
   )
 

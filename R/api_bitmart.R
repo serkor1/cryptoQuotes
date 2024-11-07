@@ -11,15 +11,10 @@ bitmartUrl <- function(
 
   # 1) define baseURL
   # for each API
-  baseUrl <- base::ifelse(
-    test = futures,
-    yes  = 'https://api-cloud.bitmart.com',
-    no   = 'https://api-cloud.bitmart.com'
-  )
-
-  # 2) return the
-  # baseURL
-  baseUrl
+  if (futures)
+    'https://api-cloud-v2.bitmart.com'
+  else
+    'https://api-cloud.bitmart.com'
 
 }
 
@@ -28,21 +23,21 @@ bitmartEndpoint <- function(
     futures = TRUE,
     ...) {
 
+  if (type == "ohlc") {
 
-  endPoint <- switch(
-    EXPR = type,
-    ohlc = {
-      if (futures) 'contract/public/kline' else
-        'spot/quotation/v3/lite-klines'
-    },
-    ticker ={
-      if (futures) 'contract/public/details' else
-        'spot/v1/symbols'
-    }
-  )
+    if (futures)
+      'contract/public/kline'
+    else
+      'spot/quotation/v3/lite-klines'
 
-  # 2) return endPoint url
-  endPoint
+  } else {
+
+    if (futures)
+      'contract/public/details'
+    else
+      'spot/v1/symbols'
+
+  }
 
 }
 
@@ -54,8 +49,9 @@ bitmartIntervals <- function(
     ...) {
 
   # Define all intervals in a data frame
-  allIntervals <- data.frame(
-    labels = c(
+  if (futures) {
+
+    interval_label <- c(
       '1m',
       '3m',
       '5m',
@@ -69,8 +65,9 @@ bitmartIntervals <- function(
       '1d',
       '3d',
       '1w'
-    ),
-    values = c(
+    )
+
+    interval_actual <- c(
       1,
       3,
       5,
@@ -85,20 +82,49 @@ bitmartIntervals <- function(
       4320,
       10080
     )
-  )
-
-  if (all) {
-
-    return(allIntervals$labels)
 
   } else {
-    # Locate and return the chosen interval value
-    selectedInterval <- allIntervals$values[
-      allIntervals$labels == interval
-    ]
 
-    return(selectedInterval)
+    interval_label <- c(
+      '1m',
+      # '3m',
+      '5m',
+      '15m',
+      '30m',
+      '1h',
+      '2h',
+      '4h',
+      # '6h',
+      # '12h',
+      '1d',
+      # '3d',
+      '1w'
+    )
+
+    interval_actual <- c(
+      1,
+      # 3,
+      5,
+      15,
+      30,
+      60,
+      120,
+      240,
+      # 360,
+      # 720,
+      1440,
+      # 4320,
+      10080
+    )
+
   }
+
+  if (all) { return(interval_label) }
+
+  interval_actual[
+    interval_label %in% interval
+  ]
+
 }
 
 # 3) define response object and format; ####
@@ -107,46 +133,45 @@ bitmartResponse <- function(
     futures,
     ...) {
 
-  response <- NULL
-
   # mock response
   # to avoid check error in
   # unevaluated expressions
   response <- NULL
 
-  switch(
-    EXPR = type,
-    ohlc = {
+  if (type == "ohlc") {
+
+    if (futures) {
+
       list(
-
-        colum_names = if (futures)
-          c('low', 'high', 'open', 'close', 'volume')
-        else
-          c('open', 'high', 'low', 'close', 'volume'),
-
-        colum_location = if (futures)
-          1:5
-        else
-          c(2:5, 7),
-
-        index_location = if (futures)
-          6
-        else
-          1
+        colum_names = c('low', 'high', 'open', 'close', 'volume'),
+        colum_location = 1:5,
+        index_location = 6
       )
-    },
-    ticker = {
+
+    } else {
+
       list(
-        foo = function(response, futures){
-
-          if (futures) response$data$symbol$symbol else
-            response$data$symbols
-
-        }
+        colum_names = c('open', 'high', 'low', 'close', 'volume'),
+        colum_location = c(2:5,7),
+        index_location = 1
       )
+
     }
-  )
 
+  } else {
+
+    list(
+      foo = function(response, futures){
+
+        if (futures)
+          response$data$symbol$symbol
+        else
+          response$data$symbols
+
+      }
+    )
+
+  }
 
 }
 
@@ -166,16 +191,12 @@ bitmartDates <- function(
 
   } else {
 
-    dates <- convert_date(
-      x = dates,
-      multiplier = 1
-    )
-
-    dates <- vapply(
-      dates,
-      format,
-      scientific = FALSE,
-      FUN.VALUE = character(1)
+    dates <- format(
+      convert_date(
+        x = dates,
+        multiplier = 1
+      ),
+      scientific = FALSE
     )
 
     names(dates) <- if (futures)

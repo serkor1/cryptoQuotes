@@ -27,7 +27,7 @@
 #' @inheritParams get_quote
 #'
 #' @returns
-#' An [xts]-object containing,
+#' An <[\link[xts]{xts}]>-object containing,
 #'
 #' \item{index}{<[POSIXct]> the time-index}
 #' \item{open_interest}{<[numeric]> open perpetual contracts on both both sides}
@@ -107,28 +107,32 @@ get_openinterest <- function(
     )
   )
 
+  # 2) check wether the
+  # interval is supported by
+  # the exchange API
   assert(
     interval %in% suppressMessages(
       available_intervals(
-        type = 'interest',
-        source = source
-        )
+        source  = source,
+        futures = TRUE,
+        type    = 'interest'
+      )
     ),
     error_message = c(
       "x" = sprintf(
-        fmt = "Interval {.val %s} is not supported by {.val %s}.",
-        interval,
-        source
+        fmt = "Interval {.val %s} is not supported.",
+        interval
       ),
       "i" = paste(
         "Run",
         cli::code_highlight(
-          code = "
-          cryptoQuotes::available_intervals(type = 'interest', source = source)
-          ",
+          code = sprintf(
+            "cryptoQuotes::available_intervals(source = '%s', type = 'interest', futures = TRUE)",
+            source
+          ),
           code_theme = "Chaos"
         ),
-        "for supported intervals"
+        "for supported intervals."
       )
     )
   )
@@ -172,14 +176,18 @@ get_openinterest <- function(
     )
   }
 
-  output <- fetch(
-    ticker = ticker,
-    source = source,
-    futures= TRUE,
-    interval = interval,
-    type   = "interest",
-    to     = to,
-    from   = from
+  output <- stats::window(
+    x = fetch(
+      ticker = ticker,
+      source = source,
+      futures= TRUE,
+      interval = interval,
+      type   = "interest",
+      to     = to,
+      from   = from
+    ),
+    start = from,
+    end   = to
   )
 
   if (source %in% 'kraken') {

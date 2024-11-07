@@ -11,15 +11,10 @@ krakenUrl <- function(
 
   # 1) define baseURL
   # for each API
-  baseUrl <- base::ifelse(
-    test = futures,
-    yes  = 'https://futures.kraken.com',
-    no   = 'https://api.kraken.com'
-  )
-
-  # 2) return the
-  # baseURL
-  baseUrl
+  if (futures)
+    'https://futures.kraken.com'
+  else
+    'https://api.kraken.com'
 
 }
 
@@ -28,14 +23,12 @@ krakenEndpoint <- function(
     futures = TRUE,
     ...) {
 
-  endPoint <- switch(
+  switch(
     EXPR = type,
-    ohlc = {
-      if (futures) 'api/charts/v1/' else
-        '0/public/OHLC/'
-    },
     ticker ={
-      if (futures) 'derivatives/api/v3/instruments/' else
+      if (futures)
+        'derivatives/api/v3/instruments/'
+      else
         '0/public/AssetPairs/'
     },
     # Was lsratio
@@ -44,11 +37,14 @@ krakenEndpoint <- function(
     },
     interest = {
       'api/charts/v1/analytics/'
+    },
+    {
+      if (futures)
+        'api/charts/v1/'
+      else
+        '0/public/OHLC/'
     }
   )
-
-  # 2) return endPoint url
-  endPoint
 
 }
 
@@ -61,49 +57,31 @@ krakenIntervals <- function(
     ...) {
 
   # 0) construct intervals
-  all_intervals <- switch(
-    EXPR = type,
-    'ohlc' = {
-      if (futures) {
-        # For futures, labels and values are the same
-        data.frame(
-          labels = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w"),
-          values = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
-        )
-      } else {
-        # For non-futures, labels and values are different
-        data.frame(
-          labels = c("1m", "5m", "15m", "30m", "1h", "4h", "1d", "1w", "2w"),
-          values = c(1   ,5   ,15   ,30    ,60   ,240 , 1440,10080,21600)
-        )
-      }
-    },
-    data.frame(
-      labels = c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "2d", "8d"),
-      values = c(60, 300, 900, 1800, 3600, 14400, 43200, 86400, 604800)
-    )
-  )
+  switch(EXPR = type, 'ohlc' = {
+    if (futures) {
+      # For futures, labels and values are the same
 
-  # 2.1) if not ALL
-  # then return interval
-  # selected
-  if (all) {
+      interval_label <- c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
+      interval_actual <- c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "1d", "1w")
 
-    # 2) return all
-    # intervals
-    interval <- all_intervals$labels
+    } else {
+      # For non-futures, labels and values are different
 
+      interval_label <- c("1m", "5m", "15m", "30m", "1h", "4h", "1d", "1w", "2w")
+      interval_actual <-  c(1   , 5   , 15   , 30    , 60   , 240 , 1440, 10080, 21600)
 
+    }
+  }, # default values
+  {
+    interval_label <- c("1m", "5m", "15m", "30m", "1h", "4h", "12h", "2d", "8d")
+    interval_actual <- c(60, 300, 900, 1800, 3600, 14400, 43200, 86400, 604800)
+  })
 
-  } else {
+  if (all) { return(interval_label) }
 
-    interval <- all_intervals$values[
-      grepl(pattern = paste0('^', interval, '$'), x = all_intervals$labels)
-    ]
-
-  }
-
-  interval
+  interval_actual[
+    interval_label %in% interval
+  ]
 
 }
 
@@ -123,14 +101,8 @@ krakenResponse <- function(
     )
   }
 
-
   switch(
     EXPR = type,
-    ohlc = {
-      ohlc_structure(
-        volume_loc = if (!futures) 7 else 6
-      )
-    },
     ticker = {
       list(
         foo = function(response, futures) {
@@ -144,16 +116,14 @@ krakenResponse <- function(
 
           } else {
 
-            names(
-              lapply(
-                response$result,
-                function(x) {
-                  if (x$status == 'online'){
-                    x$altname
-                  }
-                }
-              )
-            )
+            unname(
+              obj = sapply(
+                response$result, function(x){
+                  x$altname},
+                simplify = TRUE,
+                USE.NAMES = FALSE),
+              force = TRUE)
+
           }
 
         }
@@ -174,6 +144,11 @@ krakenResponse <- function(
         colum_names     = c('open', 'high', 'low', "close"),
         index_location = c(1),
         colum_location = c(2,3,4,5)
+      )
+    },
+    {
+      ohlc_structure(
+        volume_loc = if (futures) 6 else 7
       )
     }
   )
@@ -211,7 +186,7 @@ krakenDates <- function(
         yes = 1,
         no  = 1
       )
-      )
+    )
 
     if (!futures) {
       # Adjust for Spot market
@@ -276,7 +251,20 @@ krakenParameters <- function(
         tick_type = "open-interest"
       )
     },
-    ohlc = {
+    lsratio = {
+      params$symbol <- params$ticker
+      params$resolution <- params$interval
+      params$query <- list(
+        interval = params$interval,
+        since    = date_params[1],
+        to       =  date_params[2]
+      )
+      params$path <-  list(
+        symbol = params$symbol,
+        tick_type = 'long-short-info'
+      )
+    },
+    {
       # Set specific parameters for futures or non-futures
       if (futures) {
         params$symbol <- params$ticker
@@ -302,22 +290,6 @@ krakenParameters <- function(
         )
         params$path <-  NULL
       }
-
-
-
-    },
-    lsratio = {
-      params$symbol <- params$ticker
-      params$resolution <- params$interval
-      params$query <- list(
-        interval = params$interval,
-        since    = date_params[1],
-        to       =  date_params[2]
-      )
-      params$path <-  list(
-        symbol = params$symbol,
-        tick_type = 'long-short-info'
-      )
     }
   )
 

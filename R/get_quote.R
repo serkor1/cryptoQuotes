@@ -30,7 +30,7 @@
 #' @param to An optional [character]-, [date]- or
 #' [POSIXct]-vector of [length] 1. [NULL] by default.
 #'
-#' @returns An [xts]-object containing,
+#' @returns An <[\link[xts]{xts}]>-object containing,
 #'
 #' \item{index}{<[POSIXct]> The time-index}
 #' \item{open}{<[numeric]> Opening price}
@@ -71,61 +71,53 @@ get_quote <- function(
     interval  = '1d',
     from      = NULL,
     to        = NULL) {
-  # This function returns
-  # the ticker with the desired intervals
-  # and such
-
-  # 0) check internet connection and passed
-  # argumnents before anything
+  # # This function returns
+  # # the ticker with the desired intervals
+  # # and such
+  #
+  # # 0) check internet connection and passed
+  # # argumnents before anything
   check_internet_connection()
 
   # 1) check all arguments
   # what are missing, and are
   # the classes correct?
-  {{
+  assert(
+    "
+    Argument {.arg ticker} is missing with no default
+    " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
 
-    assert(
-      "
-      Argument {.arg ticker} is missing with no default
-      " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+    "
+    Argument {.arg source} has to be {.cls character} of length {1}
+    " = (is.character(source) & length(source) == 1),
 
-      "
-      Argument {.arg source} has to be {.cls character} of length {1}
-      " = (is.character(source) & length(source) == 1),
+    "
+    Argument {.arg futures} has to be {.cls logical} of length {1}
+    " = (is.logical(futures) & length(futures) == 1),
 
-      "
-      Argument {.arg futures} has to be {.cls logical} of length {1}
-      " = (is.logical(futures) & length(futures) == 1),
+    "
+    Argument {.arg interval} has to be {.cls character} of length {1}
+    " = (is.character(interval) & length(interval) == 1),
 
-      "
-      Argument {.arg interval} has to be {.cls character} of length {1}
-      " = (is.character(interval) & length(interval) == 1),
+    "
+    Valid {.arg from} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(from) || (is.date(from) & length(from) == 1)),
 
-      "
-      Valid {.arg from} input is on the form
-      {.val {paste(as.character(Sys.Date()))}} or
-      {.val {as.character(format(Sys.time()))}}
-      " = (is.null(from) || (is.date(from) & length(from) == 1)),
-
-      "Valid {.arg to} input is on the form
-      {.val {paste(as.character(Sys.Date()))}} or
-      {.val {as.character(format(Sys.time()))}}
-      " = (is.null(to) || (is.date(to) & length(to) == 1))
-    )
-
-  }}
+    "
+    Valid {.arg to} input is on the form
+    {.val {paste(as.character(Sys.Date()))}} or
+    {.val {as.character(format(Sys.time()))}}
+    " = (is.null(to) || (is.date(to) & length(to) == 1))
+  )
 
   # recode the exchange
   # source to avoid errors
   # based on capitalization
   # and whitespace
-  source <- tolower(
-    trimws(source)
-  )
-  ticker <- toupper(
-    trimws(ticker)
-  )
-
+  source <- tolower(trimws(source))
+  ticker <- trimws(ticker)
 
   # 1) check wether
   # the chosen exchange
@@ -151,6 +143,7 @@ get_quote <- function(
       )
     )
   )
+
   # 2) check wether the
   # interval is supported by
   # the exchange API
@@ -171,17 +164,13 @@ get_quote <- function(
         "Run",
         cli::code_highlight(
           code = sprintf(
-            "cryptoQuotes::available_intervals(
-               source = '%s',
-               type = 'ohlc,
-               futures = '%s'
-            )",
+            "cryptoQuotes::available_intervals(source = '%s', type = 'ohlc', futures = %s)",
             source,
             futures
-            ),
+          ),
           code_theme = "Chaos"
         ),
-        "for supported intervals"
+        "for supported intervals."
       )
     )
   )
@@ -217,27 +206,28 @@ get_quote <- function(
 
   }
 
-  ohlc <- fetch(
-    ticker = ticker,
-    source = source,
-    futures= futures,
-    interval = interval,
-    type   = "ohlc",
-    to     = to,
-    from   = from
-  )[paste(c(from, to), collapse = "/")]
-
-  # Kraken doesnt have a to
-  # parameter on spot market
-  if (source == "kraken") {
-
-    ohlc <- ohlc[paste(c(from, to), collapse = "/")]
-
-  }
+  ohlc <- stats::window(
+    x = fetch(
+      ticker   = ticker,
+      source   = source,
+      futures  = futures,
+      interval = interval,
+      type     = "ohlc",
+      to       = to,
+      from     = from
+    ),
+    start = from,
+    end   = to
+  )
 
   attributes(ohlc)$source <- paste0(
     to_title(source), if (futures) " (PERPETUALS)" else " (SPOT)"
   )
+
+  ohlc <- ohlc[
+    ,
+    c("open", "high", "low", "close", "volume")
+  ]
 
   ohlc
 }

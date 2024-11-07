@@ -95,7 +95,7 @@ fgi <- function(
         annotations = list(
           text = "Fear and Greed Index",
           font = list(
-            size = 16
+            size = 16 * args$scale
           ),
           showarrow = FALSE,
           x = 0,

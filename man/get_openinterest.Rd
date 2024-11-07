@@ -29,7 +29,7 @@ See \code{\link[=available_exchanges]{available_exchanges()}} for available exch
 \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
-An \link{xts}-object containing,
+An <[\link[xts]{xts}]>-object containing,
 
 \item{index}{<\link{POSIXct}> the time-index}
 \item{open_interest}{<\link{numeric}> open perpetual contracts on both both sides}

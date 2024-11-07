@@ -18,7 +18,7 @@ get_fgindex(
 \link{POSIXct}-vector of \link{length} 1. \link{NULL} by default.}
 }
 \value{
-An \link{xts}-object containing,
+An <[\link[xts]{xts}]>-object containing,
 
 \item{index}{<\link{POSIXct}> the time-index}
 \item{fgi}{<\link{numeric}> the daily fear and greed index value}

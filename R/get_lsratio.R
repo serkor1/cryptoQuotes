@@ -27,7 +27,7 @@
 #' If [TRUE] it returns the top traders Long-Short ratios.
 #'
 #'
-#' @returns An [xts]-object containing,
+#' @returns An [xts::xts]-object containing,
 #'
 #' \item{index}{<[POSIXct]> the time-index}
 #' \item{long}{<[numeric]> the share of longs}
@@ -107,7 +107,7 @@ get_lsratio <- function(
       available_exchanges(
         type = 'lsratio'
       )
-      ),
+    ),
     error_message = c(
       "x" = sprintf(
         fmt = "Exchange {.val %s} is not supported.",
@@ -124,28 +124,32 @@ get_lsratio <- function(
     )
   )
 
+  # 2) check wether the
+  # interval is supported by
+  # the exchange API
   assert(
     interval %in% suppressMessages(
       available_intervals(
-        type = 'lsratio',
-        source = source
+        source  = source,
+        futures = TRUE,
+        type    = 'lsratio'
       )
     ),
     error_message = c(
       "x" = sprintf(
-        fmt = "Interval {.val %s} is not supported by {.val %s}.",
-        interval,
-        source
+        fmt = "Interval {.val %s} is not supported.",
+        interval
       ),
       "i" = paste(
         "Run",
         cli::code_highlight(
-          code = "cryptoQuotes::available_intervals(
-          type = 'lsratio', source = source
-          )",
+          code = sprintf(
+            "cryptoQuotes::available_intervals(source = '%s', type = 'lsratio', futures = TRUE)",
+            source
+          ),
           code_theme = "Chaos"
         ),
-        "for supported intervals"
+        "for supported intervals."
       )
     )
   )
@@ -201,27 +205,20 @@ get_lsratio <- function(
   }
 
 
-  response <- fetch(
-    ticker = ticker,
-    source = source,
-    futures= TRUE,
-    interval = interval,
-    type   = 'lsratio',
-    to    = to,
-    from  = from,
-    top   = top
+  response <- stats::window(
+    x = fetch(
+      ticker = ticker,
+      source = source,
+      futures= TRUE,
+      interval = interval,
+      type   = 'lsratio',
+      to    = to,
+      from  = from,
+      top   = top
+    ),
+    start = from,
+    end   = to
   )
-
-  # Bybit has no to or from
-  # parameter - so this have to be subsettet
-  # manually
-  if (source == "bybit") {
-
-    response <- response[
-      paste(c(from, to),collapse = "/")
-      ]
-
-  }
 
   # Calculate the long
   # short ratio as not
