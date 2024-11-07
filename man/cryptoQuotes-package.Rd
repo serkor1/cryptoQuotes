@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-This high-level API client provides open access to cryptocurrency market data, sentiment indicators, and interactive charting tools. The data is sourced from major cryptocurrency exchanges via cURL and processed using the xts package. The data comes in open, high, low, and close (OHLC) format with flexible granularity, ranging from seconds to months. This flexibility makes it ideal for developing and backtesting trading strategies or conducting detailed market analysis.
+This high-level API client provides open access to cryptocurrency market data, sentiment indicators, and interactive charting tools. The data is sourced from major cryptocurrency exchanges via 'curl' and returned in 'xts'-format. The data comes in open, high, low, and close (OHLC) format with flexible granularity, ranging from seconds to months. This flexibility makes it ideal for developing and backtesting trading strategies or conducting detailed market analysis.
 }
 \seealso{
 Useful links:

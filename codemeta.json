@@ -2,7 +2,7 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "cryptoQuotes",
-  "description": " This high-level API client provides open access to cryptocurrency market data, sentiment indicators, and interactive charting tools. The data is sourced from major cryptocurrency exchanges via cURL and processed using the xts package. The data comes in open, high, low, and close (OHLC) format with flexible granularity, ranging from seconds to months. This flexibility makes it ideal for developing and backtesting trading strategies or conducting detailed market analysis.",
+  "description": " This high-level API client provides open access to cryptocurrency market data, sentiment indicators, and interactive charting tools. The data is sourced from major cryptocurrency exchanges via 'curl' and returned in 'xts'-format. The data comes in open, high, low, and close (OHLC) format with flexible granularity, ranging from seconds to months. This flexibility makes it ideal for developing and backtesting trading strategies or conducting detailed market analysis.",
   "name": "cryptoQuotes: Open Access to Cryptocurrency Market Data, Sentiment Indicators and Interactive Charts",
   "relatedLink": ["https://serkor1.github.io/cryptoQuotes/", "https://CRAN.R-project.org/package=cryptoQuotes"],
   "codeRepository": "https://github.com/serkor1/cryptoQuotes",
@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
+  "runtimePlatform": "R version 4.4.2 (2024-10-31)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -257,7 +257,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1476.579KB",
+  "fileSize": "1455.164KB",
   "releaseNotes": "https://github.com/serkor1/cryptoQuotes/blob/master/NEWS.md",
   "readme": "https://github.com/serkor1/cryptoQuotes/blob/main/README.md",
   "contIntegration": ["https://github.com/serkor1/cryptoQuotes/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/serkor1/cryptoQuotes"],

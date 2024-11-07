@@ -30,8 +30,8 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that interacts
-with the \code{\link[TTR:bollingerBands]{TTR::BBands()}}-function. The function adds bollinger bands
+A high-level \code{\link[plotly:add_lines]{plotly::add_lines()}}-wrapper function that interacts
+with the \code{\link[TTR:BBands]{TTR::BBands()}}-function. The function adds bollinger bands
 to the main \code{\link[=chart]{chart()}}.
 }
 \examples{

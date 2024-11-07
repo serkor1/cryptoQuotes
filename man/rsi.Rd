@@ -43,7 +43,7 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_lines]{plotly::add_lines()}}-function that
 interacts with the \code{\link[TTR:RSI]{TTR::RSI()}}-function.
 The function adds a subchart with a \code{\link[TTR:RSI]{TTR::RSI()}}-indicator.
 }
