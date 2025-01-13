@@ -5,6 +5,9 @@ on:
     branches: [main, master, development, documentation]
   pull_request:
     branches: [main, master, development, documentation]
+  workflow_dispatch:
+    schedule:
+      - cron: '0 10 * * 1'
 
 name: R-CMD-check
 
