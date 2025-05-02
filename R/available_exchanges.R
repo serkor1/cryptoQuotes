@@ -95,7 +95,8 @@ available_exchanges <- function(
         'bybit',
         'crypto.com',
         'huobi',
-        'mexc'
+        'mexc',
+        'cmc'
       )
     }
   )
