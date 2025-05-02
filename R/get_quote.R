@@ -21,7 +21,7 @@
 #' See [available_tickers()] for available tickers.
 #' @param source A [character]-vector of [length] 1. \code{binance} by default.
 #' See [available_exchanges()] for available exchanges.
-#' @param interval A [character]-vector of [length] 1. ```1d``` by default.
+#' @param interval A [character]-vector of [length] 1. `1d` by default.
 #' See [available_intervals()] for available intervals.
 #' @param futures A [logical]-vector of [length] 1. [TRUE] by default.
 #' Returns futures market if [TRUE], spot market otherwise.
@@ -50,9 +50,9 @@
 #' @details
 #'
 #' ## On time-zones and dates
-#' Values passed to ``from`` or ``to`` must be coercible by [as.Date()],
-#' or [as.POSIXct()], with a format of either ```"%Y-%m-%d"``` or
-#' ```"%Y-%m-%d %H:%M:%S"```. By default all dates are passed and
+#' Values passed to `from`` or `to` must be coercible by [as.Date()],
+#' or [as.POSIXct()], with a format of either `"%Y-%m-%d"` or
+#' `"%Y-%m-%d %H:%M:%S"`. By default all dates are passed and
 #' returned with [Sys.timezone()].
 #'
 #' ## On returns
@@ -85,7 +85,7 @@ get_quote <- function(
   assert(
     "
     Argument {.arg ticker} is missing with no default
-    " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+    " =  !missing(ticker) & is.character(ticker) | is.factor(ticker) & length(ticker) == 1,
 
     "
     Argument {.arg source} has to be {.cls character} of length {1}
@@ -117,7 +117,7 @@ get_quote <- function(
   # based on capitalization
   # and whitespace
   source <- tolower(trimws(source))
-  ticker <- trimws(ticker)
+  #ticker <- trimws(ticker)
 
   # 1) check wether
   # the chosen exchange
