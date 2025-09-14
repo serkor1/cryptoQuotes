@@ -218,7 +218,7 @@ binanceResponse <- function(
       list(
         colum_names = "funding_rate",
         index_location = 2,
-        colum_location = 2
+        colum_location = 3
       )
     },
 
