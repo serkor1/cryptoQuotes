@@ -23,6 +23,10 @@ check: ## Check the R package
 test: ## Run tests
 	@Rscript --verbose -e "library(talib); testthat::test_dir('tests/testthat')"
 
+clean: ## Remove artifacts
+	@rm -rf $(tarball_location)
+	@rm -rf $(package_name).Rcheck
+	@Rscript -e "remove.packages('$(package_name)')"
 
 fmt: ## Format code
 	@air format .
