@@ -21,7 +21,7 @@ can be coerced to a \code{\link[xts:xts]{xts::xts()}}-object.}
 
 \item{sub}{An optional \link{list} of \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-function(s).}
 
-\item{indicator}{An optional \link{list} of \code{\link[plotly:add_lines]{plotly::add_lines()}}-function(s).}
+\item{indicator}{An optional \link{list} of \code{\link[plotly:add_trace]{plotly::add_lines()}}-function(s).}
 
 \item{event_data}{An optional \link{data.frame} with event line(s) to be added
 to the \code{\link[=chart]{chart()}}. See \code{\link[=add_event]{add_event()}} for more details.}
@@ -88,9 +88,9 @@ For more details please see \code{\link[=add_event]{add_event()}}.
 # BTC using candlesticks
 # and indicators
 cryptoQuotes::chart(
-  ticker     = BTC,
-  main       = cryptoQuotes::kline(),
-  sub        = list(
+  ticker = BTC,
+  main = cryptoQuotes::kline(),
+  sub = list(
     cryptoQuotes::volume(),
     cryptoQuotes::macd()
   ),
@@ -100,7 +100,7 @@ cryptoQuotes::chart(
     cryptoQuotes::alma()
   ),
   options = list(
-    dark       = TRUE,
+    dark = TRUE,
     deficiency = FALSE
   )
 )

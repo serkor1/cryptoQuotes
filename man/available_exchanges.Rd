@@ -42,7 +42,7 @@ the same as those available for \code{\link[=get_quote]{get_quote()}}
 # on ohlc-v endpoint
 cryptoQuotes::available_exchanges(
   type = "ohlc"
-  )
+)
 
 # 2) available exchanges
 # on long-short ratios

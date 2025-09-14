@@ -37,7 +37,7 @@ file
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-The \code{\link[=write_xts]{write_xts()}}- and \code{\link[=read_xts]{read_xts()}}-functions are  \code{\link[zoo:write.zoo]{zoo::write.zoo()}}- and \code{\link[zoo:read.zoo]{zoo::read.zoo()}}-wrapper functions.
+The \code{\link[=write_xts]{write_xts()}}- and \code{\link[=read_xts]{read_xts()}}-functions are  \code{\link[zoo:read.zoo]{zoo::write.zoo()}}- and \code{\link[zoo:read.zoo]{zoo::read.zoo()}}-wrapper functions.
 }
 \details{
 When reading and writing <[\link[xts]{xts}]>-objects the \link{attributes} does not follow the object.

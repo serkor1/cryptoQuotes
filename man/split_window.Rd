@@ -39,7 +39,7 @@ setequal(
 # by splitting the FGI by the BTC index.
 FGIndex <- cryptoQuotes::split_window(
   xts = cryptoQuotes::FGIndex,
-  by  = zoo::index(BTC),
+  by = zoo::index(BTC),
 
   # Remove upper bounds of the
   # index to avoid overlap between
@@ -63,7 +63,7 @@ FGIndex <- cryptoQuotes::calibrate_window(
   #
   # using xts::first gives the first element
   # of each list, along with its values
-  FUN  = xts::first
+  FUN = xts::first
 )
 
 
@@ -75,7 +75,6 @@ stopifnot(
     zoo::index(FGIndex)
   )
 )
-
 
 # script end;
 }

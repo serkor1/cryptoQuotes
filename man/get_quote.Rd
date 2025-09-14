@@ -63,9 +63,7 @@ actively traded \code{\link[=available_tickers]{available_tickers()}}.
 \details{
 \subsection{On time-zones and dates}{
 
-Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}},
-or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or
-\code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default all dates are passed and
+Values passed to \verb{from`` or }to\verb{must be coercible by [as.Date()], or [as.POSIXct()], with a format of either}"\%Y-\%m-\%d"\code{or}"\%Y-\%m-\%d \%H:\%M:\%S"`. By default all dates are passed and
 returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
 }
 
