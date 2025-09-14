@@ -11,7 +11,6 @@ help:
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[1;34m%-15s\033[m \xE2\x80\x94 %s\n", $$1, $$2}'
 
 build: ## Build the R package
-	@tools/generate_API.sh src/ src/api.h && tools/generate_FFI.sh src/api.h src/init.c && $(MAKE) fmt
 	@Rscript --verbose -e "devtools::document()"
 	@R CMD build . && R CMD INSTALL $(tarball_location)
 	@Rscript -e "rmarkdown::render('README.Rmd', output_format = rmarkdown::github_document(html_preview = FALSE), clean = TRUE)"
@@ -21,7 +20,7 @@ check: ## Check the R package
 	@R CMD build . && R CMD check $(tarball_location)
 
 test: ## Run tests
-	@Rscript --verbose -e "library(talib); testthat::test_dir('tests/testthat')"
+	@Rscript --verbose -e "library(cryptoQuotes); testthat::test_dir('tests/testthat')"
 
 clean: ## Remove artifacts
 	@rm -rf $(tarball_location)
