@@ -18,8 +18,8 @@
 #' @author Serkan Korkmaz
 #' @export
 kline <- function(
-    ...) {
-
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -28,7 +28,6 @@ kline <- function(
 
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(...)
@@ -60,8 +59,6 @@ kline <- function(
         name = "Border"
       )
 
-
-
       p <- plotly::add_trace(
         p,
         inherit = FALSE,
@@ -86,7 +83,6 @@ kline <- function(
         name = args$interval
       )
 
-
       invisible(
         {
           plotly::layout(
@@ -94,20 +90,15 @@ kline <- function(
             xaxis = list(
               rangeslider = list(
                 visible = args$slider,
-                thickness    = 0.05
+                thickness = 0.05
               )
             )
           )
         }
       )
-
-
-
-
     },
     class = c("pricechart", "plotly", "htmlwidget")
   )
-
 }
 
 
@@ -122,8 +113,8 @@ kline <- function(
 #' @author Serkan Korkmaz
 #' @export
 ohlc <- function(
-    ...) {
-
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -132,7 +123,6 @@ ohlc <- function(
 
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(...)
@@ -141,58 +131,58 @@ ohlc <- function(
       #   # 1) bottom trace
       bot <- 5
       p <- plotly::plot_ly(
-        data        = data,
-        x           = ~ index,
-        type        = 'ohlc',
-        open        = ~ open,
-        hoverinfo   = "none",
-        close       = ~ close,
-        high        = ~ high,
-        low         = ~ low,
-        increasing  = list(
+        data = data,
+        x = ~index,
+        type = 'ohlc',
+        open = ~open,
+        hoverinfo = "none",
+        close = ~close,
+        high = ~high,
+        low = ~low,
+        increasing = list(
           # Border color and width
-          line      = list(color = "black", width = bot),
+          line = list(color = "black", width = bot),
           fillcolor = "black"
         ),
-        decreasing  = list(
+        decreasing = list(
           # Border color and width
-          line      = list(color = "black", width = bot),
+          line = list(color = "black", width = bot),
           fillcolor = "black"
         ),
-        showlegend  = FALSE,
-        name        = "Border",
+        showlegend = FALSE,
+        name = "Border",
         legendgroup = "price"
       )
 
       p <- plotly::add_trace(
-        p           = p,
-        x           = ~ index,
-        inherit     = FALSE,
-        type        = "ohlc",
-        open        = ~ open,
-        close       = ~ close,
-        high        = ~ high,
-        low         = ~ low,
-        increasing  = list(
+        p = p,
+        x = ~index,
+        inherit = FALSE,
+        type = "ohlc",
+        open = ~open,
+        close = ~close,
+        high = ~high,
+        low = ~low,
+        increasing = list(
           # Main candle color and narrower width
-          line      = list(color = args$candle_color$bullish, width = bot - 3),
+          line = list(color = args$candle_color$bullish, width = bot - 3),
           fillcolor = args$candle_color$bullish
         ),
-        decreasing  = list(
+        decreasing = list(
           # Main candle color and narrower width
-          line      = list(color = args$candle_color$bearish, width = bot - 3),
+          line = list(color = args$candle_color$bearish, width = bot - 3),
           fillcolor = args$candle_color$bearish
         ),
-        showlegend  = TRUE,
+        showlegend = TRUE,
         name = args$interval,
         legendgroup = "price"
       )
 
       plotly::layout(
-        p     = p,
+        p = p,
         xaxis = list(
           rangeslider = list(
-            visible   = args$slider,
+            visible = args$slider,
             thickness = 0.05
           )
         )
@@ -216,9 +206,9 @@ ohlc <- function(
 #' @author Serkan Korkmaz
 #' @export
 pline <- function(
-    price = "close",
-    ...) {
-
+  price = "close",
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -227,7 +217,6 @@ pline <- function(
 
   structure(
     .Data = {
-
       # 0) arguments passed
       # via the chart function
       args <- list(...)
@@ -236,21 +225,23 @@ pline <- function(
 
       p <- plotly::plot_ly(
         data = data,
-        x    = ~index,
-        y    = stats::as.formula(
+        x = ~index,
+        y = stats::as.formula(
           paste("~", price)
         ),
         type = "scatter",
         mode = "lines",
         showlegend = TRUE,
         legendgroup = "price",
-        name        = paste0(
+        name = paste0(
           to_title(price),
-          " (", args$interval, ")"
+          " (",
+          args$interval,
+          ")"
         ),
         line = list(
           width = 1.2,
-          color = "#d38b68"# was: "#d3ba68"
+          color = "#d38b68" # was: "#d3ba68"
         )
       )
 
@@ -260,14 +251,12 @@ pline <- function(
           xaxis = list(
             rangeslider = list(
               visible = args$slider,
-              thickness    = 0.05
+              thickness = 0.05
             )
           )
         )
       })
-
     },
     class = c("pricechart", "plotly", "htmlwidget")
   )
-
 }

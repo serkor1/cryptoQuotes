@@ -28,61 +28,62 @@ cmcEndpoint <- function(
 }
 
 cmcIntervals <- function(
-  futures =FALSE,
+  futures = FALSE,
   interval,
   all = FALSE,
-  type =NULL,
-  ...) {
-  
-    interval_label <- c(
-      '5m',
-      '10m',
-      '15m',
-      '45m',
-      '1h',
-      '2h',
-      '3h',
-      '6h',
-      '12h',
-      '1d',
-      '2d',
-      '3d',
-      '7d',
-      '14d',
-      '15d',
-      '30d',
-      '60d',
-      '90d',
-      '365d'
-    )
+  type = NULL,
+  ...
+) {
+  interval_label <- c(
+    '5m',
+    '10m',
+    '15m',
+    '45m',
+    '1h',
+    '2h',
+    '3h',
+    '6h',
+    '12h',
+    '1d',
+    '2d',
+    '3d',
+    '7d',
+    '14d',
+    '15d',
+    '30d',
+    '60d',
+    '90d',
+    '365d'
+  )
 
-    interval_actual <- interval_label
-  
-    if (all) { return(interval_label) }
+  interval_actual <- interval_label
 
-    interval_actual[
-      interval_label %in% interval
-    ]
+  if (all) {
+    return(interval_label)
+  }
+
+  interval_actual[
+    interval_label %in% interval
+  ]
 }
 
 
 cmcResponse <- function(
   type = 'ohlc',
   futures = TRUE,
-  ...) {
-  
-  switch (EXPR = type,
+  ...
+) {
+  switch(
+    EXPR = type,
     ticker = {
       list(
         foo = function(response, futures = NULL) {
-
           # NOTE: It is returned in sorted order
           factor(
             x = response$data$symbol,
             levels = response$data$symbol,
             labels = response$data$symbol
           )
-          
         }
       )
     },
@@ -100,91 +101,82 @@ cmcDates <- function(
   futures = TRUE,
   dates,
   is_response = FALSE,
-  ...) {
+  ...
+) {
+  # 0) Set multiplier
+  multiplier <- 1e3
 
-# 0) Set multiplier
-multiplier <- 1e3
+  # 1) determine wether
+  # its a response or request
+  if (is_response) {
+    dates <- as.POSIXct(dates, format = "%Y-%m-%dT%H:%M:%OSZ", tz = "UTC")
+  } else {
+    dates <- format(
+      convert_date(
+        x = dates,
+        multiplier = multiplier
+      ),
+      scientific = FALSE
+    )
 
-# 1) determine wether
-# its a response or request
-if (is_response) {
-
-  dates <- as.POSIXct(dates,
-    format = "%Y-%m-%dT%H:%M:%OSZ",
-    tz = "UTC")
-
-} else {
-
-  dates <- format(
-    convert_date(
-      x = dates,
-      multiplier = multiplier
-    ),
-    scientific = FALSE
-  )
-
-  names(dates) <- c('startTime','endTime')
-
-}
+    names(dates) <- c('startTime', 'endTime')
+  }
   dates
 }
 
 cmcParameters <- function(
   futures = TRUE,
-  type   = 'ohlc',
+  type = 'ohlc',
   ticker,
   interval,
   from = NULL,
   to = NULL,
-  ...) {
-
-# Basic parameters common to both futures and non-futures
-params <- list(
-  id = as.integer(ticker),
-  interval = cmcIntervals(
-    interval = interval,
-    futures  = futures,
-    type     = type
+  ...
+) {
+  # Basic parameters common to both futures and non-futures
+  params <- list(
+    id = as.integer(ticker),
+    interval = cmcIntervals(
+      interval = interval,
+      futures = futures,
+      type = type
+    )
   )
-)
 
-# Add date parameters
-date_params <- cmcDates(
-  futures = futures,
-  dates   = c(
-    from = from,
-    to   = to
-  ),
-  is_response = FALSE
-)
+  # Add date parameters
+  date_params <- cmcDates(
+    futures = futures,
+    dates = c(
+      from = from,
+      to = to
+    ),
+    is_response = FALSE
+  )
 
+  if (type %in% c('lsratio', 'interest', 'fundingrate')) {
+    # 4.1) This is a standalone
+    # parameter; was called interval
+    # but is named period in the API calls
+    names(params)[2] <- 'period'
 
+    # 4.1) Return only
+    # 100 such that this function
+    # aligns with the remaining
+    # functions which
+    # also returns 100
+    params$limit <- 500
+  }
 
-if (type %in% c('lsratio', 'interest', 'fundingrate')) {
-  # 4.1) This is a standalone
-  # parameter; was called interval
-  # but is named period in the API calls
-  names(params)[2] <- 'period'
+  # Combine all parameters
+  params <- c(params, date_params)
 
-  # 4.1) Return only
-  # 100 such that this function
-  # aligns with the remaining
-  # functions which
-  # also returns 100
-  params$limit <- 500
-
-}
-
-# Combine all parameters
-params <- c(params, date_params)
-
-# Return a structured list with additional common parameters
-list(
-  query    = params,
-  path     = NULL,
-  futures  = futures,
-  source   = 'cmc',
-  ticker   = ticker,
-  interval = interval
-)
+  # Return a structured list with additional common parameters
+  list(
+    query = params,
+    path = NULL,
+    futures = futures,
+    source = 'cmc',
+    ticker = ticker,
+    interval = interval
+  )
 }

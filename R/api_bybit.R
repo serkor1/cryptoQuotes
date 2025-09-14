@@ -6,34 +6,36 @@
 # script start;
 # 1) URLs and Endpoint; ####
 bybitUrl <- function(
-    futures = TRUE,
-    ...) {
-
-  if (futures)
+  futures = TRUE,
+  ...
+) {
+  if (futures) {
     'https://api.bybit.com'
-  else
+  } else {
     'https://api.bybit.com'
-
+  }
 }
 
 bybitEndpoint <- function(
-    type = 'ohlc',
-    futures = TRUE,
-    top = FALSE) {
-
+  type = 'ohlc',
+  futures = TRUE,
+  top = FALSE
+) {
   endPoint <- switch(
     EXPR = type,
     ticker = {
-      if (futures)
+      if (futures) {
         'v5/market/instruments-info?category=linear'
-      else
+      } else {
         'v5/market/instruments-info?category=spot'
+      }
     },
     lsratio = {
-      if (top)
+      if (top) {
         'v5/market/account-ratio'
-      else
+      } else {
         'v5/market/account-ratio'
+      }
     },
     fundingrate = {
       'v5/market/funding/history'
@@ -42,10 +44,11 @@ bybitEndpoint <- function(
       '/v5/market/open-interest'
     },
     {
-      if (futures)
+      if (futures) {
         'v5/market/kline'
-      else
+      } else {
         'v5/market/kline'
+      }
     }
   )
 
@@ -53,20 +56,19 @@ bybitEndpoint <- function(
   return(
     endPoint
   )
-
 }
 
 # 2) Available intervals; #####
 bybitIntervals <- function(
-    type,
-    interval,
-    futures = NULL,
-    all = FALSE,
-    ...) {
-
+  type,
+  interval,
+  futures = NULL,
+  all = FALSE,
+  ...
+) {
   # 0) Define intervals
   if (type == "ohlc") {
-    interval_label  <-  c(
+    interval_label <- c(
       '1m',
       '3m',
       '5m',
@@ -83,7 +85,7 @@ bybitIntervals <- function(
     )
 
     interval_actual <- c(
-      "1" ,
+      "1",
       "3",
       "5",
       "15",
@@ -96,26 +98,28 @@ bybitIntervals <- function(
       "D",
       "M",
       "W"
-    ) } else {
-    interval_label  <- c('5m', '15m', '30m', '1h', '4h', '1d')
+    )
+  } else {
+    interval_label <- c('5m', '15m', '30m', '1h', '4h', '1d')
     interval_actual <- c("5min", "15min", "30min", "1h", "4h", "1d")
   }
 
-  if (all) { return(interval_label) }
+  if (all) {
+    return(interval_label)
+  }
 
   interval_actual[
     interval_label %in% interval
   ]
-
 }
 
 
 # 3) define response object and format; ####
 bybitResponse <- function(
-    type = 'ohlc',
-    futures,
-    ...) {
-
+  type = 'ohlc',
+  futures,
+  ...
+) {
   # mock response
   # to avoid check error in
   # unevaluated expressions
@@ -134,12 +138,11 @@ bybitResponse <- function(
         ),
         colum_location = 2:6,
         index_location = 1
-
       )
     },
     ticker = {
       list(
-        foo = function(response, futures = NULL){
+        foo = function(response, futures = NULL) {
           subset(
             response$result$list,
             response$result$list$status == 'Trading'
@@ -149,7 +152,7 @@ bybitResponse <- function(
     },
     interest = {
       list(
-        colum_names    = 'open_interest',
+        colum_names = 'open_interest',
         index_location = 2,
         colum_location = 1
       )
@@ -157,46 +160,39 @@ bybitResponse <- function(
 
     fundingrate = {
       list(
-        colum_names     = "funding_rate",
-        index_location  = 3,
-        colum_location  = 2
+        colum_names = "funding_rate",
+        index_location = 3,
+        colum_location = 2
       )
     },
     {
       list(
-        colum_names     = c('long', 'short'),
-        index_location  = 4,
-        colum_location  = 2:3
+        colum_names = c('long', 'short'),
+        index_location = 4,
+        colum_location = 2:3
       )
     }
-
-
   )
-
 }
 
 # 4) Dates passed to and from endpoints; ####
 bybitDates <- function(
-    futures,
-    dates,
-    is_response = FALSE,
-    ...) {
-
-
+  futures,
+  dates,
+  is_response = FALSE,
+  ...
+) {
   # 0) Set multiplier
   multiplier <- 1e3
 
   # 1) determine wether
   # its a response or request
   if (is_response) {
-
     dates <- convert_date(
       x = as.numeric(dates),
       multiplier = multiplier
     )
-
   } else {
-
     dates <- format(
       convert_date(
         x = dates,
@@ -205,31 +201,29 @@ bybitDates <- function(
       scientific = FALSE
     )
 
-    names(dates) <-c('start', 'end')
-
+    names(dates) <- c('start', 'end')
   }
 
   dates
-
 }
 
 # 5) Parameters passed to endpoints; ####
 bybitParameters <- function(
-    futures = TRUE,
-    type   = 'ohlc',
-    ticker,
-    interval,
-    from = NULL,
-    to = NULL,
-    ...) {
-
+  futures = TRUE,
+  type = 'ohlc',
+  ticker,
+  interval,
+  from = NULL,
+  to = NULL,
+  ...
+) {
   # Basic parameters common to both futures and non-futures
   params <- list(
     symbol = ticker,
     category = if (futures) 'linear' else 'spot',
     interval = bybitIntervals(
       interval = interval,
-      type    = type
+      type = type
     ),
     limit = 1000
   )
@@ -245,20 +239,15 @@ bybitParameters <- function(
   )
 
   if (type != "ohlc") {
-
     switch(
       EXPR = type,
       "fundingrate" = {
-
         names(date_params) <- c("startTime", "endTime")
-
       },
       "interest" = {
-
         names(params)[3] <- 'intervalTime'
         names(date_params) <- c("startTime", "endTime")
         params$limit <- 200
-
       },
       "lsratio" = {
         # 4.1) This is a standalone
@@ -274,7 +263,6 @@ bybitParameters <- function(
         params$limit <- 500
       }
     )
-
   }
 
   # Combine all parameters

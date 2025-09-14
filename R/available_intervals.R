@@ -39,10 +39,10 @@
 #' @author Serkan Korkmaz
 #' @export
 available_intervals <- function(
-    source = 'binance',
-    type   = 'ohlc',
-    futures = TRUE) {
-
+  source = 'binance',
+  type = 'ohlc',
+  futures = TRUE
+) {
   # 0) define available
   # exchanges
   assert(
@@ -55,9 +55,10 @@ available_intervals <- function(
       "i" = sprintf(
         "Has to be one of %s",
         paste(
-          paste0("{.val ",
-                 c("ohlc", "lsratio", "fundingrate", "interest")
-                 ,"}"
+          paste0(
+            "{.val ",
+            c("ohlc", "lsratio", "fundingrate", "interest"),
+            "}"
           ),
           collapse = ", "
         )
@@ -66,11 +67,12 @@ available_intervals <- function(
   )
 
   assert(
-    source %in% suppressMessages(
-      available_exchanges(
-        type = type
-      )
-    ),
+    source %in%
+      suppressMessages(
+        available_exchanges(
+          type = type
+        )
+      ),
     error_message = c(
       "x" = sprintf(
         fmt = "Exchange {.val %s} is not supported.",
@@ -89,9 +91,9 @@ available_intervals <- function(
   # 0) extract available
   # intervals
   all_intervals <- get(paste0(source, 'Intervals'))(
-    type     = type,
-    futures  = futures,
-    all      = TRUE,
+    type = type,
+    futures = futures,
+    all = TRUE,
     interval = NULL
   )
 
@@ -115,6 +117,4 @@ available_intervals <- function(
   invisible(
     all_intervals
   )
-
 }
-

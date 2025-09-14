@@ -5,7 +5,6 @@
 # date: 2024-10-03
 # start of script; ###
 
-
 #' @title Get the global market capitalization
 #'
 #' @description
@@ -29,31 +28,30 @@
 #'
 #' @export
 get_mktcap <- function(
-    interval = "1d",
-    from = NULL,
-    to = NULL,
-    altcoin = FALSE,
-    reported = FALSE) {
-
-  from <- coerce_date(from); to <- coerce_date(to)
+  interval = "1d",
+  from = NULL,
+  to = NULL,
+  altcoin = FALSE,
+  reported = FALSE
+) {
+  from <- coerce_date(from)
+  to <- coerce_date(to)
 
   if (is.null(from) | is.null(to)) {
-
     # to ensure consistency across
     # APIs if no date is set the output
     # is limited to 200 pips
     forced_dates <- default_dates(
       interval = interval,
-      from     = from,
-      to       = to,
-      limit    = NULL
+      from = from,
+      to = to,
+      limit = NULL
     )
 
     # generate from
     # to variables
     from <- forced_dates$from
-    to   <- forced_dates$to
-
+    to <- forced_dates$to
   }
 
   # x) get request
@@ -63,17 +61,17 @@ get_mktcap <- function(
     query = list(
       convertId = 2781,
       timeStart = from,
-      timeEnd   = to,
-      interval  = interval
+      timeEnd = to,
+      interval = interval
     )
   )
 
-
   request <- do.call(
-    rbind, request$data[[1]]$quote
-  )[
-    ,
-    c("timestamp",
+    rbind,
+    request$data[[1]]$quote
+  )[,
+    c(
+      "timestamp",
       grep(
         pattern = if (altcoin) "altcoin" else "total",
         x = colnames(request$data[[1]]$quote[[1]]),
@@ -83,11 +81,12 @@ get_mktcap <- function(
     )
   ]
 
-
   colnames(request) <- tolower(colnames(request))
 
   colnames(request) <- gsub(
-    pattern = "altcoin|[0-9]|total|h",replacement = "",x = colnames(request)
+    pattern = "altcoin|[0-9]|total|h",
+    replacement = "",
+    x = colnames(request)
   )
 
   request$timestamp <- convert_date(
@@ -101,10 +100,7 @@ get_mktcap <- function(
   )
 
   if (reported) {
-
-
-    request <- request[
-      ,
+    request <- request[,
       grep(
         pattern = "timestamp|marketcap|^volumereported",
         x = colnames(request),
@@ -112,11 +108,8 @@ get_mktcap <- function(
         perl = TRUE
       )
     ]
-
   } else {
-
-    request <- request[
-      ,
+    request <- request[,
       grep(
         pattern = "timestamp|marketcap|^volume(?![a-zA-Z0-9])",
         x = colnames(request),
@@ -124,13 +117,11 @@ get_mktcap <- function(
         perl = TRUE
       )
     ]
-
   }
 
   xts::as.xts(
-    request[,c("timestamp","marketcap", "volume")]
+    request[, c("timestamp", "marketcap", "volume")]
   )
-
 }
 
 # end of script; ###

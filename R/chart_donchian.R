@@ -35,7 +35,7 @@
 #' @author Serkan Korkmaz
 #' @export
 donchian_channel <- function(
-    ## these arguments are the
+  ## these arguments are the
   ## available arguments in the TTR::DonchianChannel
   ## function
   n = 10,
@@ -43,12 +43,10 @@ donchian_channel <- function(
   color = '#4682b4',
   ...
 ) {
-
   check_indicator_call()
 
   structure(
     .Data = {
-
       ## 1) define args
       ## as a list from the ellipsis
       ## which is how the chart-function
@@ -98,8 +96,8 @@ donchian_channel <- function(
             name = "high",
             inherit = FALSE,
             data = data,
-            x    = ~index,
-            y    = ~high,
+            x = ~index,
+            y = ~high,
             line = list(
               color = color,
               width = 0.9
@@ -116,11 +114,11 @@ donchian_channel <- function(
             name = "mid",
             inherit = FALSE,
             data = data,
-            x    = ~index,
-            y    = ~mid,
+            x = ~index,
+            y = ~mid,
             line = list(
               color = color,
-              dash ='dot',
+              dash = 'dot',
               width = 0.9
             )
           )
@@ -135,8 +133,8 @@ donchian_channel <- function(
             name = "low",
             inherit = FALSE,
             data = data,
-            x    = ~index,
-            y    = ~low,
+            x = ~index,
+            y = ~low,
             line = list(
               color = color,
               width = 0.9
@@ -172,11 +170,8 @@ donchian_channel <- function(
           layers = layers
         )
       )
-
     }
   )
-
 }
-
 
 # script end;
