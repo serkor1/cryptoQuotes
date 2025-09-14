@@ -34,7 +34,7 @@ cmcIntervals <- function(
   type = NULL,
   ...
 ) {
-  interval_label <- c(
+  interval_actual <- c(
     '5m',
     '10m',
     '15m',
@@ -50,13 +50,34 @@ cmcIntervals <- function(
     '7d',
     '14d',
     '15d',
-    '30d',
-    '60d',
-    '90d',
-    '365d'
+    '30d'
+    # ,
+    # '60d',
+    # '90d',
+    # '365d'
   )
 
-  interval_actual <- interval_label
+  interval_label <- c(
+    '5m',
+    '10m',
+    '15m',
+    '45m',
+    '1h',
+    '2h',
+    '3h',
+    '6h',
+    '12h',
+    '1d',
+    '2d',
+    '3d',
+    '1w',
+    '2w',
+    '15d',
+    '1M'
+    # '2M',
+    # '3M',
+    # '1Y'
+  )
 
   if (all) {
     return(interval_label)
