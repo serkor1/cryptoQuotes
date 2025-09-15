@@ -1,6 +1,36 @@
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+# Version 1.3.3
+
+## General
+
+### New features
+
+- The `get_mktcap()`-function returns the global market capitalization
+  of the cryptocurrency market. It also has the option to return altcoin
+  market capitalization.
+
+``` r
+# get market capitalization
+tail(
+  get_mktcap()
+)
+```
+
+    #>                        marketcap       volume
+    #> 2025-09-10 17:30:00 3.933023e+12 154222971777
+    #> 2025-09-11 17:30:00 3.966457e+12 152743254380
+    #> 2025-09-12 17:30:00 4.040573e+12 149974873486
+    #> 2025-09-13 17:30:00 4.046251e+12 171062754182
+    #> 2025-09-14 17:30:00 4.045036e+12 126573800409
+    #> 2025-09-15 17:30:00 3.978311e+12 165936753719
+
+## Bugfixes
+
+- A bug in the funding rates from Binance have been fixed. The returned
+  values was the time indices of the json-array, not the actual rates.
+
 # Version 1.3.2
 
 ## General
@@ -13,7 +43,7 @@
 
 ## Improvements
 
-## Read and Write `xts`-objects
+## \[NEW FEATURE\] Read and Write `xts`-objects
 
 - `read_xts()` and `write_xts()` reads and stores `xts`-objects. These
   functions are essentially just wrappers of `zoo::read.zoo()` and
@@ -62,7 +92,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 </details>
 <details>
 <summary>
@@ -86,7 +116,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 </details>
 
 ### Supported Exchanges (Issue [\#14](https://github.com/serkor1/cryptoQuotes/issues/14))
@@ -167,7 +197,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 </details>
 
 ### Expanded Support
@@ -190,12 +220,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-11-02 10:00:00      2394.876
-    #> 2024-11-02 11:00:00      2389.595
-    #> 2024-11-02 12:00:00      2396.225
-    #> 2024-11-02 13:00:00      2403.175
-    #> 2024-11-02 14:00:00      2418.193
-    #> 2024-11-02 15:00:00      2398.648
+    #> 2025-09-15 14:00:00      2758.383
+    #> 2025-09-15 15:00:00      2758.929
+    #> 2025-09-15 16:00:00      2756.115
+    #> 2025-09-15 17:00:00      2757.801
+    #> 2025-09-15 18:00:00      2763.799
+    #> 2025-09-15 19:00:00      2762.767
 
 </details>
 
@@ -233,7 +263,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 </details>
 
 ### Documentation
@@ -348,7 +378,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 ### Exchange Support
 
@@ -377,12 +407,12 @@ tail(
 ```
 
     #>                     funding_rate
-    #> 2024-10-31 17:00:00 1.730390e+12
-    #> 2024-11-01 01:00:00 1.730419e+12
-    #> 2024-11-01 09:00:00 1.730448e+12
-    #> 2024-11-01 17:00:00 1.730477e+12
-    #> 2024-11-02 01:00:00 1.730506e+12
-    #> 2024-11-02 09:00:00 1.730534e+12
+    #> 2025-09-14 02:00:00    8.182e-05
+    #> 2025-09-14 10:00:00    4.780e-05
+    #> 2025-09-14 18:00:00    3.115e-05
+    #> 2025-09-15 02:00:00    6.207e-05
+    #> 2025-09-15 10:00:00    8.259e-05
+    #> 2025-09-15 18:00:00    8.189e-05
 
 </details>
 
@@ -403,13 +433,7 @@ tail(
 )
 ```
 
-    #>                     open_interest
-    #> 2024-10-28 01:00:00      82206.35
-    #> 2024-10-29 01:00:00      89115.04
-    #> 2024-10-30 01:00:00      90242.98
-    #> 2024-10-31 01:00:00      89315.49
-    #> 2024-11-01 01:00:00      89544.93
-    #> 2024-11-02 01:00:00      84087.60
+    #>      open_interest
 
 </details>
 

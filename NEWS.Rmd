@@ -23,6 +23,25 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
+# Version 1.3.3
+
+## General
+
+### New features
+
+* The `get_mktcap()`-function returns the global market capitalization of the cryptocurrency market. It also has the option to return altcoin market capitalization.
+
+```{r}
+# get market capitalization
+tail(
+  get_mktcap()
+)
+```
+
+## Bugfixes
+
+* A bug in the funding rates from Binance have been fixed. The returned values was the time indices of the json-array, not the actual rates.
+
 # Version 1.3.2
 
 ## General
@@ -32,17 +51,6 @@ library(cryptoQuotes)
 * Unit-tests have been updated and now all `get_quote()`-functions are being tested for equality in passed and inferred interval.
 
 ## Improvements
-
-## [NEW FEATURE] Global Market Capitalization
-
-* The `get_mktcap()`-function returns the global market capitalization of the cryptocurrency market. It also has the option to return altcoin market capitalization.
-
-```{r}
-# get market
-# capitalization
-tail(get_mktcap())
-```
-
 
 ## [NEW FEATURE] Read and Write `xts`-objects
 
