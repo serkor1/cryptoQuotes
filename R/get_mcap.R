@@ -18,7 +18,7 @@
 #' @param reported A [logical]-vector of [length] 1. [FALSE] by default. Returns reported volume if [TRUE].
 #'
 #'
-#' @returns An [xts]-object containing,
+#' @returns An <[\link[xts]{xts}]>-object containing,
 #'
 #' \item{index}{<[POSIXct]> The time-index}
 #' \item{marketcap}{<[numeric]> Market capitalization}

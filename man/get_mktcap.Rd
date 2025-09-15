@@ -28,7 +28,7 @@ if \link{TRUE}}
 \item{reported}{A \link{logical}-vector of \link{length} 1. \link{FALSE} by default. Returns reported volume if \link{TRUE}.}
 }
 \value{
-An \link{xts}-object containing,
+An <[\link[xts]{xts}]>-object containing,
 
 \item{index}{<\link{POSIXct}> The time-index}
 \item{marketcap}{<\link{numeric}> Market capitalization}
