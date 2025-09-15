@@ -14,6 +14,7 @@ build: ## Build the R package
 	@Rscript --verbose -e "devtools::document()"
 	@R CMD build . && R CMD INSTALL $(tarball_location)
 	@Rscript -e "rmarkdown::render('README.Rmd', output_format = rmarkdown::github_document(html_preview = FALSE), clean = TRUE)"
+	@Rscript -e "rmarkdown::render('NEWS.Rmd', output_format = rmarkdown::github_document(html_preview = FALSE), clean = TRUE)"
 
 check: ## Check the R package
 	@Rscript --verbose -e "devtools::document()"
