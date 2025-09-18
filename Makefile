@@ -30,3 +30,12 @@ clean: ## Remove artifacts
 
 fmt: ## Format code
 	@air format .
+
+pkgdown-build: ## Build {pkgdown} documentation
+	@Rscript --verbose -e "devtools::document()"
+	@Rscript -e "pkgdown::clean_site()"
+	@Rscript -e "pkgdown::init_site()"
+	@Rscript -e "pkgdown::build_site()"
+
+pkgdown-preview: ## Preview {pkgdown} documetation
+	@Rscript -e "pkgdown::preview_site()"
