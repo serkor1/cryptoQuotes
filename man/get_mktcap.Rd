@@ -77,8 +77,10 @@ Other get-functions:
 \code{\link{get_fgindex}()},
 \code{\link{get_fundingrate}()},
 \code{\link{get_lsratio}()},
-\code{\link{get_openinterest}()}
+\code{\link{get_openinterest}()},
+\code{\link{get_quote}()}
 }
 \author{
 Serkan Korkmaz
 }
+\concept{get-functions}

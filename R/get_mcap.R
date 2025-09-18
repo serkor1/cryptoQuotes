@@ -24,8 +24,7 @@
 #' \item{marketcap}{<[numeric]> Market capitalization}
 #' \item{volume}{<[numeric]> Trading volume}
 #'
-#'
-#'
+#' @family get-functions
 #' @export
 get_mktcap <- function(
   interval = "1d",

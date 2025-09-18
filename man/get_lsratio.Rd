@@ -89,6 +89,7 @@ If only \code{to} is provided 200 pips up to the specified date is returned.
 Other get-functions: 
 \code{\link{get_fgindex}()},
 \code{\link{get_fundingrate}()},
+\code{\link{get_mktcap}()},
 \code{\link{get_openinterest}()},
 \code{\link{get_quote}()}
 }
