@@ -26,9 +26,9 @@
 #' @author Serkan Korkmaz
 #' @export
 fgi <- function(
-    index,
-    ...) {
-
+  index,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -37,7 +37,6 @@ fgi <- function(
 
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -49,7 +48,6 @@ fgi <- function(
       data <- zoo::fortify.zoo(index, names = "index")
       color_deficiency <- args$deficiency
 
-
       # 1.1) define available
       # colors
       color_scale <- grDevices::hcl.colors(
@@ -60,8 +58,8 @@ fgi <- function(
 
       data$color_scale <- normalize(
         x = data$fgi,
-        range = c(0,30),
-        value = c(0,100)
+        range = c(0, 30),
+        value = c(0, 100)
       )
 
       data$color_scale <- color_scale[
@@ -104,8 +102,6 @@ fgi <- function(
           yref = "paper"
         )
       )
-
-
     },
     class = c(
       "subchart",
@@ -113,6 +109,5 @@ fgi <- function(
       "htmlwidget"
     )
   )
-
 }
 # script end;

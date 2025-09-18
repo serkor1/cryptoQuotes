@@ -40,7 +40,7 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_lines]{plotly::add_lines()}}-function that
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that
 interacts with the \code{\link[TTR:MACD]{TTR::MACD()}}-function. The function adds subchart with a
 \code{\link[TTR:MACD]{TTR::MACD()}}-indicator.
 }
@@ -51,9 +51,9 @@ interacts with the \code{\link[TTR:MACD]{TTR::MACD()}}-function. The function ad
 # BTC using candlesticks
 # and indicators
 cryptoQuotes::chart(
-  ticker     = BTC,
-  main       = cryptoQuotes::kline(),
-  sub        = list(
+  ticker = BTC,
+  main = cryptoQuotes::kline(),
+  sub = list(
     cryptoQuotes::volume(),
     cryptoQuotes::macd()
   ),
@@ -63,7 +63,7 @@ cryptoQuotes::chart(
     cryptoQuotes::alma()
   ),
   options = list(
-    dark       = TRUE,
+    dark = TRUE,
     deficiency = FALSE
   )
 )

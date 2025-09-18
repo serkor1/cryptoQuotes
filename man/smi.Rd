@@ -42,10 +42,10 @@ calculation?}
 calculating FastK. See Details.}
 
 \item{upper_limit}{A \link{numeric}-vector of \link{length} 1. 40 by default.
-Sets the upper limit of the \link[TTR:SMI]{TTR::SMI}.}
+Sets the upper limit of the \link[TTR:stochastics]{TTR::SMI}.}
 
 \item{lower_limit}{A \link{numeric}-vector of \link{length} 1. -40 by default.
-Sets the lower limit of the \link[TTR:SMI]{TTR::SMI}.}
+Sets the lower limit of the \link[TTR:stochastics]{TTR::SMI}.}
 
 \item{color}{A \link{character}-vector of \link{length} 1. "#4682b4" by default.}
 
@@ -57,9 +57,9 @@ An \link{invisible} \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_lines]{plotly::add_lines()}}-function that
-interacts with the \code{\link[TTR:SMI]{TTR::SMI()}}-function.
-The function adds a subchart with a \code{\link[TTR:SMI]{TTR::SMI()}}-indicator.
+A high-level \code{\link[plotly:plot_ly]{plotly::plot_ly()}}- and \code{\link[plotly:add_trace]{plotly::add_lines()}}-function that
+interacts with the \code{\link[TTR:stochastics]{TTR::SMI()}}-function.
+The function adds a subchart with a \code{\link[TTR:stochastics]{TTR::SMI()}}-indicator.
 }
 \examples{
 # script start;
@@ -68,9 +68,9 @@ The function adds a subchart with a \code{\link[TTR:SMI]{TTR::SMI()}}-indicator.
 # BTC using candlesticks
 # and indicators
 cryptoQuotes::chart(
-  ticker     = BTC,
-  main       = cryptoQuotes::kline(),
-  sub        = list(
+  ticker = BTC,
+  main = cryptoQuotes::kline(),
+  sub = list(
     cryptoQuotes::volume(),
     cryptoQuotes::macd()
   ),
@@ -80,7 +80,7 @@ cryptoQuotes::chart(
     cryptoQuotes::alma()
   ),
   options = list(
-    dark       = TRUE,
+    dark = TRUE,
     deficiency = FALSE
   )
 )

@@ -28,8 +28,8 @@ Open, High, Low and Close prices.
 # as main chart
 cryptoQuotes::chart(
   ticker = BTC,
-  main   = cryptoQuotes::pline(),
-  sub    = list(
+  main = cryptoQuotes::pline(),
+  sub = list(
     cryptoQuotes::volume()
   )
 )

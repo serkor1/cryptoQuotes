@@ -28,10 +28,9 @@
 #' @author Serkan Korkmaz
 #' @keywords internal
 add_event <- function(
-    data,
-    ...
+  data,
+  ...
 ) {
-
   # check if the indicator is called
   # from the chart-function
   #
@@ -40,7 +39,6 @@ add_event <- function(
 
   structure(
     .Data = {
-
       # 0) check data validity
       # has to be of type data.frame and contain
       # event, color and index columns
@@ -62,11 +60,9 @@ add_event <- function(
         )
       )
 
-
       args <- list(
         ...
       )
-
 
       plotly::layout(
         p = args$plot,
@@ -75,13 +71,11 @@ add_event <- function(
           lapply(
             seq_len(nrow(data)),
             function(i) {
-
               annotations(
                 x = data$index[i],
                 text = data$event[i]
               )
             }
-
           )
         ),
         shapes = do.call(
@@ -89,20 +83,14 @@ add_event <- function(
           lapply(
             seq_len(nrow(data)),
             function(i) {
-
               vline(
                 x = data$index[i],
                 col = data$color[i]
               )
-
             }
-
           )
         )
       )
-
-
-
     },
     class = c(
       "indicator",
@@ -110,7 +98,6 @@ add_event <- function(
       "htmlwidget"
     )
   )
-
 }
 
 # end of script;

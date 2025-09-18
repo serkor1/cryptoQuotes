@@ -6,26 +6,26 @@
 # script start;
 # 1) URLs and Endpoint; ####
 crypto.comUrl <- function(
-    futures = TRUE,
-    ...) {
-
+  futures = TRUE,
+  ...
+) {
   # 1) define baseURL
   # for each API
-  if (futures)
+  if (futures) {
     'https://api.crypto.com/exchange/v1/public'
-  else
+  } else {
     'https://api.crypto.com/exchange/v1/public'
-
+  }
 }
 
 crypto.comEndpoint <- function(
-    type = 'ohlc',
-    futures = TRUE,
-    ...) {
-
+  type = 'ohlc',
+  futures = TRUE,
+  ...
+) {
   switch(
     EXPR = type,
-    ticker ={
+    ticker = {
       'get-instruments'
     },
     fundingrate = {
@@ -37,16 +37,15 @@ crypto.comEndpoint <- function(
       'get-candlestick'
     }
   )
-
 }
 
 # 2) Available intervals; #####
 crypto.comIntervals <- function(
-    interval,
-    futures,
-    all = FALSE,
-    ...) {
-
+  interval,
+  futures,
+  all = FALSE,
+  ...
+) {
   # interval labels
   # user-facing
   interval_label <- c(
@@ -80,21 +79,21 @@ crypto.comIntervals <- function(
     "1M"
   )
 
-
-  if (all) { return(interval_label) }
+  if (all) {
+    return(interval_label)
+  }
 
   interval_actual[
     interval_label %in% interval
   ]
-
 }
 
 # 3) define response object and format; ####
 crypto.comResponse <- function(
-    type = 'ohlc',
-    futures,
-    ...) {
-
+  type = 'ohlc',
+  futures,
+  ...
+) {
   # mock response
   # to avoid check error in
   # unevaluated expressions
@@ -105,16 +104,15 @@ crypto.comResponse <- function(
     ticker = {
       list(
         foo = function(response, futures) {
-
           subset(
             response$result$data,
             response$result$data$tradable == TRUE &
-              response$result$data$inst_type %in% ifelse(
-                futures,
-                c("PERPETUAL_SWAP", "FUTURE"),
-                "CCY_PAIR"
-
-              )
+              response$result$data$inst_type %in%
+                ifelse(
+                  futures,
+                  c("PERPETUAL_SWAP", "FUTURE"),
+                  "CCY_PAIR"
+                )
           )$symbol
         }
       )
@@ -122,7 +120,7 @@ crypto.comResponse <- function(
 
     fundingrate = {
       list(
-        colum_names    = "funding_rate",
+        colum_names = "funding_rate",
         index_location = c(2),
         colum_location = c(1)
       )
@@ -135,30 +133,26 @@ crypto.comResponse <- function(
       )
     }
   )
-
 }
 
 # 4) Dates passed to and from endpoints; ####
 crypto.comDates <- function(
-    futures,
-    dates,
-    is_response = FALSE,
-    ...) {
-
+  futures,
+  dates,
+  is_response = FALSE,
+  ...
+) {
   # 0) set multiplier based
   # on market
   multiplier <- 1e3
 
   # 1) if its a response
   if (is_response) {
-
     dates <- convert_date(
       x = as.numeric(dates),
       multiplier = multiplier
     )
-
   } else {
-
     # Convert dates and format
     dates <- format(
       convert_date(
@@ -169,23 +163,21 @@ crypto.comDates <- function(
     )
 
     names(dates) <- c('start_ts', 'end_ts')
-
   }
 
   dates
-
 }
 
 # 5) Parameters passed to endpoints; ####
 crypto.comParameters <- function(
-    futures = TRUE,
-    ticker,
-    type = NULL,
-    interval,
-    from = NULL,
-    to = NULL,
-    ...) {
-
+  futures = TRUE,
+  ticker,
+  type = NULL,
+  interval,
+  from = NULL,
+  to = NULL,
+  ...
+) {
   # Initial parameter setup
   params <- list(
     instrument_name = ticker,
@@ -196,7 +188,7 @@ crypto.comParameters <- function(
     count = 5000
   )
 
-  if (type == "fundingrate"){
+  if (type == "fundingrate") {
     params$valuation_type <- 'funding_hist'
   }
 
@@ -211,11 +203,11 @@ crypto.comParameters <- function(
 
   # Return structured list with additional parameters
   list(
-    query    = params,
-    path     = NULL,
-    futures  = futures,
-    source   = 'crypto.com',
-    ticker   = ticker,
+    query = params,
+    path = NULL,
+    futures = futures,
+    source = 'crypto.com',
+    ticker = ticker,
     interval = interval
   )
 }

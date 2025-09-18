@@ -20,11 +20,11 @@
 #'
 #' @returns A [list] crated by [jsonlite::fromJSON()]
 GET <- function(
-    url,
-    endpoint = NULL,
-    query = NULL,
-    path = NULL) {
-
+  url,
+  endpoint = NULL,
+  query = NULL,
+  path = NULL
+) {
   # 1) initialize
   # curl handle
   handle <- curl::new_handle()
@@ -48,9 +48,12 @@ GET <- function(
   url <- paste(
     paste0(
       paste(
-        url, endpoint, sep = "/"
+        url,
+        endpoint,
+        sep = "/"
       ),
-      path_string),
+      path_string
+    ),
     query_string,
     sep = if (!is.null(query)) '?' else ""
   )
@@ -78,42 +81,41 @@ GET <- function(
     simplifyVector = TRUE,
     flatten = TRUE
   )
-
 }
 
 
 source_parameters <- function(
-    source,
-    futures,
-    type,
-    ticker,
-    interval,
-    from,
-    to,
-    ...) {
-
+  source,
+  futures,
+  type,
+  ticker,
+  interval,
+  from,
+  to,
+  ...
+) {
   get(
     paste0(
-      source, 'Parameters'
+      source,
+      'Parameters'
     )
   )(
-    futures  = futures,
-    type     = type,
-    ticker   = ticker,
+    futures = futures,
+    type = type,
+    ticker = ticker,
     interval = interval,
-    from     = from,
-    to       = to,
+    from = from,
+    to = to,
     ...
   )
-
 }
 
 
 # base-url;
 baseUrl <- function(
-    source = 'binance',
-    futures,
-    ...
+  source = 'binance',
+  futures,
+  ...
 ) {
   # 1) construct function
   # based on source
@@ -130,12 +132,11 @@ baseUrl <- function(
 
 # endpoint
 endPoint <- function(
-    source,
-    type = 'ohlc',
-    futures,
-    ...
+  source,
+  type = 'ohlc',
+  futures,
+  ...
 ) {
-
   # 1) construct function
   # based on source
   endPoint <- get(paste0(source, 'Endpoint'))(
@@ -148,10 +149,7 @@ endPoint <- function(
   return(
     endPoint
   )
-
 }
-
-
 
 
 #' Fetch time-based API-endpoint responses
@@ -181,15 +179,15 @@ endPoint <- function(
 #'
 #' @author Serkan Korkmaz
 fetch <- function(
-    ticker,
-    source,
-    futures,
-    interval,
-    type,
-    to,
-    from,
-    ...){
-
+  ticker,
+  source,
+  futures,
+  interval,
+  type,
+  to,
+  from,
+  ...
+) {
   # 0) define error-message
   # NOTE: The only point of failure
   # is misspelled tickers
@@ -199,7 +197,9 @@ fetch <- function(
       "Run",
       cli::code_highlight(
         code = sprintf(
-          "available_tickers(source = '%s', futures = %s)", source, futures
+          "available_tickers(source = '%s', futures = %s)",
+          source,
+          futures
         ),
         code_theme = 'Chaos'
       ),
@@ -214,7 +214,6 @@ fetch <- function(
     )
   )
 
-
   # This is a high-level fetch-function
   # to get all values regardless of the
   # type
@@ -222,30 +221,30 @@ fetch <- function(
   # 1) extract parameters
   # from source and type
   parameters <- source_parameters(
-    type    = type,
-    source  = source,
+    type = type,
+    source = source,
     futures = futures,
-    ticker  = ticker,
-    interval= interval,
-    from    = from,
-    to      = to
+    ticker = ticker,
+    interval = interval,
+    from = from,
+    to = to
   )
 
   # 2) GET request
   response <- flatten(
     GET(
       url = baseUrl(
-        source  = source,
+        source = source,
         futures = futures
       ),
       endpoint = endPoint(
         source = source,
-        type   = type,
+        type = type,
         futures = futures,
         ...
       ),
       query = parameters$query,
-      path  = parameters$path
+      path = parameters$path
     )
   )
 
@@ -255,7 +254,6 @@ fetch <- function(
     !is.null(response),
     error_message = error_message
   )
-
 
   # 2.1) Locate the
   # data
@@ -278,7 +276,7 @@ fetch <- function(
   # maybe
   response <- tryCatch(
     expr = {
-      switch (
+      switch(
         source,
         kraken = {
           do.call(
@@ -287,7 +285,6 @@ fetch <- function(
           )
         },
         mexc = {
-
           tryCatch(
             response[[which(idx)]],
             error = function(error) {
@@ -301,11 +298,8 @@ fetch <- function(
                   )
                 ]
               )
-
             }
           )
-
-
         },
         response[[which(idx)]]
       )
@@ -318,12 +312,12 @@ fetch <- function(
     }
   )
 
-
   # 3) Extract source specific
   # response parameters
   parameters <- get(
     paste0(
-      source, 'Response'
+      source,
+      'Response'
     )
   )(
     type = type,
@@ -368,25 +362,24 @@ fetch <- function(
   # all to as.numeric
   core <- zoo::as.zoo(
     apply(
-      X = rbind(response[,parameters$colum_location]),
+      X = rbind(response[, parameters$colum_location]),
       MARGIN = 2,
       FUN = as.numeric
     )
   )
 
-
-
   # 3.1.3) convert dates
   # to positxct
   index <- get(
     paste0(
-      source, 'Dates'
+      source,
+      'Dates'
     )
   )(
     futures = futures,
-    dates   = response[, parameters$index_location],
+    dates = response[, parameters$index_location],
     is_response = TRUE,
-    type    = type
+    type = type
   )
 
   # 4) convert to xts
@@ -400,7 +393,6 @@ fetch <- function(
   # 4.1) set column
   # names
   colnames(response) <- parameters$colum_names
-
 
   response
 }

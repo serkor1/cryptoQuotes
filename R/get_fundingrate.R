@@ -43,11 +43,11 @@
 #' @author Serkan Korkmaz
 #' @export
 get_fundingrate <- function(
-    ticker,
-    source = "binance",
-    from = NULL,
-    to   = NULL){
-
+  ticker,
+  source = "binance",
+  from = NULL,
+  to = NULL
+) {
   # 0) check internet connection
   check_internet_connection()
 
@@ -56,7 +56,7 @@ get_fundingrate <- function(
   assert(
     "
     Argument {.arg ticker} is missing with no default
-    " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+    " = !missing(ticker) & is.character(ticker) & length(ticker) == 1,
 
     "
     Argument {.arg source} has to be {.cls character} of length {1}
@@ -87,14 +87,14 @@ get_fundingrate <- function(
     trimws(ticker)
   )
 
-  from <- coerce_date(from); to <- coerce_date(to)
+  from <- coerce_date(from)
+  to <- coerce_date(to)
 
   # 3) if either of the
   # date variables are NULL
   # pass them into the default_dates
   # function to extract 100 pips.
   if (is.null(from) | is.null(to)) {
-
     # to ensure consistency across
     # APIs if no date is set the output
     # is limited to 200 pips
@@ -103,32 +103,30 @@ get_fundingrate <- function(
       # it seems that all exchanges uses
       # 8 hours.
       interval = "8h",
-      from     = from,
-      to       = to,
-      length   = 101
+      from = from,
+      to = to,
+      length = 101
     )
 
     # generate from
     # to variables
     from <- forced_dates$from
-    to   <- forced_dates$to
-
+    to <- forced_dates$to
   }
 
   stats::window(
     x = fetch(
-      ticker   = ticker,
-      source   = source,
-      futures  = TRUE,
+      ticker = ticker,
+      source = source,
+      futures = TRUE,
       interval = '1d',
-      type     = "fundingrate",
-      to       = to,
-      from     = from
+      type = "fundingrate",
+      to = to,
+      from = from
     ),
     start = from,
-    end   = to
+    end = to
   )
-
 }
 
 # script end;

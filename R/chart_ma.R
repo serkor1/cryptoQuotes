@@ -6,31 +6,29 @@
 # script start;
 
 chart_ma <- function(
-    data,
-    plot,
-    name,
-    y
+  data,
+  plot,
+  name,
+  y
 ) {
-
   plotly::add_lines(
-    p    = plot,
+    p = plot,
     data = data,
     inherit = FALSE,
     showlegend = TRUE,
     name = name,
-    x    = ~index,
-    y    = stats::as.formula(
+    x = ~index,
+    y = stats::as.formula(
       # NOTE: to avoid possible naming
       # bugs in TTR use names(data)[2].
       # names(data)[1] is index as per
       # zoo.fortify
-      paste("~",names(data)[2])
-      ),
+      paste("~", names(data)[2])
+    ),
     line = list(
       width = 0.9
     )
   )
-
 }
 
 #' @title
@@ -67,10 +65,10 @@ chart_ma <- function(
 #' @author Serkan Korkmaz
 #' @export
 sma <- function(
-    price = "close",
-    n = 10,
-    ...) {
-
+  price = "close",
+  n = 10,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -79,7 +77,6 @@ sma <- function(
 
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -95,17 +92,13 @@ sma <- function(
         n = n
       )
 
-
       # 3) add ma chart
       chart_ma(
         data = data,
         plot = args$plot,
         name = paste0("SMA(", n, ")"),
-        y    = "sma"
-
+        y = "sma"
       )
-
-
     },
     class = c(
       "indicator",
@@ -113,7 +106,6 @@ sma <- function(
       "htmlwidget"
     )
   )
-
 }
 
 #' @title
@@ -140,12 +132,12 @@ sma <- function(
 #' @author Serkan Korkmaz
 #' @export
 ema <- function(
-    price = "close",
-    n = 10,
-    wilder = FALSE,
-    ratio = NULL,
-    ...) {
-
+  price = "close",
+  n = 10,
+  wilder = FALSE,
+  ratio = NULL,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -153,8 +145,7 @@ ema <- function(
   check_indicator_call()
 
   structure(
-    .Data  = {
-
+    .Data = {
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -177,12 +168,8 @@ ema <- function(
         data = data,
         plot = args$plot,
         name = paste0("EMA(", n, ")"),
-        y    = "ema"
-
+        y = "ema"
       )
-
-
-
     },
     class = c(
       "indicator",
@@ -190,7 +177,6 @@ ema <- function(
       "htmlwidget"
     )
   )
-
 }
 
 #' @title
@@ -218,13 +204,13 @@ ema <- function(
 #' @author Serkan Korkmaz
 #' @export
 dema <- function(
-    price = "close",
-    n = 10,
-    v = 1,
-    wilder = FALSE,
-    ratio = NULL,
-    ...) {
-
+  price = "close",
+  n = 10,
+  v = 1,
+  wilder = FALSE,
+  ratio = NULL,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -232,8 +218,7 @@ dema <- function(
   check_indicator_call()
 
   structure(
-    .Data  = {
-
+    .Data = {
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -257,12 +242,8 @@ dema <- function(
         data = data,
         plot = args$plot,
         name = paste0("DEMA(", n, ")"),
-        y    = "dema"
-
+        y = "dema"
       )
-
-
-
     },
     class = c(
       "indicator",
@@ -270,8 +251,6 @@ dema <- function(
       "htmlwidget"
     )
   )
-
-
 }
 
 
@@ -298,11 +277,11 @@ dema <- function(
 #' @author Serkan Korkmaz
 #' @export
 wma <- function(
-    price = "close",
-    n = 10,
-    wts = 1:n,
-    ...) {
-
+  price = "close",
+  n = 10,
+  wts = 1:n,
+  ...
+) {
   # TODO: Submit PR, WMA has an issue
   # too in the naming.
 
@@ -313,8 +292,7 @@ wma <- function(
   check_indicator_call()
 
   structure(
-    .Data  = {
-
+    .Data = {
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -336,12 +314,8 @@ wma <- function(
         data = data,
         plot = args$plot,
         name = paste0("WMA(", n, ")"),
-        y    = "wma"
-
+        y = "wma"
       )
-
-
-
     },
     class = c(
       "indicator",
@@ -349,7 +323,6 @@ wma <- function(
       "htmlwidget"
     )
   )
-
 }
 
 #' @title
@@ -374,10 +347,10 @@ wma <- function(
 #' @author Serkan Korkmaz
 #' @export
 evwma <- function(
-    price = "close",
-    n = 10,
-    ...) {
-
+  price = "close",
+  n = 10,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -385,8 +358,7 @@ evwma <- function(
   check_indicator_call()
 
   structure(
-    .Data  = {
-
+    .Data = {
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -408,10 +380,8 @@ evwma <- function(
         data = data,
         plot = args$plot,
         name = paste0("EVWMA(", n, ")"),
-        y    = "evwma"
-
+        y = "evwma"
       )
-
     },
     class = c(
       "indicator",
@@ -419,7 +389,6 @@ evwma <- function(
       "htmlwidget"
     )
   )
-
 }
 
 
@@ -446,11 +415,11 @@ evwma <- function(
 #' @author Serkan Korkmaz
 #' @export
 zlema <- function(
-    price = "close",
-    n = 10,
-    ratio = NULL,
-    ...) {
-
+  price = "close",
+  n = 10,
+  ratio = NULL,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -458,8 +427,7 @@ zlema <- function(
   check_indicator_call()
 
   structure(
-    .Data  = {
-
+    .Data = {
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -481,10 +449,8 @@ zlema <- function(
         data = data,
         plot = args$plot,
         name = paste0("ZLEMA(", n, ")"),
-        y    = "zlema"
-
+        y = "zlema"
       )
-
     },
     class = c(
       "indicator",
@@ -492,7 +458,6 @@ zlema <- function(
       "htmlwidget"
     )
   )
-
 }
 
 
@@ -519,11 +484,11 @@ zlema <- function(
 #' @author Serkan Korkmaz
 #' @export
 vwap <- function(
-    price = "close",
-    n = 10,
-    ratio = NULL,
-    ...) {
-
+  price = "close",
+  n = 10,
+  ratio = NULL,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -531,8 +496,7 @@ vwap <- function(
   check_indicator_call()
 
   structure(
-    .Data  = {
-
+    .Data = {
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -555,10 +519,8 @@ vwap <- function(
         data = data,
         plot = args$plot,
         name = paste0("VWAP(", n, ")"),
-        y    = "vwap"
-
+        y = "vwap"
       )
-
     },
     class = c(
       "indicator",
@@ -566,11 +528,7 @@ vwap <- function(
       "htmlwidget"
     )
   )
-
-
-
 }
-
 
 
 #' @title
@@ -595,10 +553,10 @@ vwap <- function(
 #' @author Serkan Korkmaz
 #' @export
 hma <- function(
-    price = "close",
-    n = 20,
-    ...) {
-
+  price = "close",
+  n = 20,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -606,8 +564,7 @@ hma <- function(
   check_indicator_call()
 
   structure(
-    .Data  = {
-
+    .Data = {
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -628,10 +585,8 @@ hma <- function(
         data = data,
         plot = args$plot,
         name = paste0("HMA(", n, ")"),
-        y    = "hma"
-
+        y = "hma"
       )
-
     },
     class = c(
       "indicator",
@@ -639,7 +594,6 @@ hma <- function(
       "htmlwidget"
     )
   )
-
 }
 
 #' @title
@@ -666,12 +620,12 @@ hma <- function(
 #' @author Serkan Korkmaz
 #' @export
 alma <- function(
-    price = "close",
-    n = 9,
-    offset = 0.85,
-    sigma  = 6,
-    ...) {
-
+  price = "close",
+  n = 9,
+  offset = 0.85,
+  sigma = 6,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -679,8 +633,7 @@ alma <- function(
   check_indicator_call()
 
   structure(
-    .Data  = {
-
+    .Data = {
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -695,7 +648,7 @@ alma <- function(
         .f = TTR::ALMA,
         n = n,
         offset = offset,
-        sigma  = sigma
+        sigma = sigma
       )
 
       # 2) add ma chart
@@ -703,10 +656,8 @@ alma <- function(
         data = data,
         plot = args$plot,
         name = paste0("ALMA(", n, ")"),
-        y    = "alma"
-
+        y = "alma"
       )
-
     },
     class = c(
       "indicator",
@@ -714,7 +665,6 @@ alma <- function(
       "htmlwidget"
     )
   )
-
 }
 
 # script end;

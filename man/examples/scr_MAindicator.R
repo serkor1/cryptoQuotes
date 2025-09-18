@@ -2,7 +2,7 @@
 
 cryptoQuotes::chart(
   ticker = BTC,
-  main   = kline(),
+  main = kline(),
   indicator = list(
     cryptoQuotes::ema(n = 7),
     cryptoQuotes::sma(n = 14),

@@ -4,7 +4,7 @@
 # on ohlc-v endpoint
 cryptoQuotes::available_exchanges(
   type = "ohlc"
-  )
+)
 
 # 2) available exchanges
 # on long-short ratios

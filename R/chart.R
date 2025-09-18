@@ -29,15 +29,6 @@
 #'
 #' @returns A [plotly::plot_ly()] object.
 #'
-#' **Sample Output**
-#' \if{html}{
-#'   \out{<span style="text-align: center; display: block;">}
-#'   \figure{README-chartquote-1.png}{options: style="width:750px;max-width:75\%;"}\out{</span>}
-#' }
-#' \if{latex}{
-#'   \out{\begin{center}}\figure{README-chartquote-1.png}\out{\end{center}}
-#' }
-#'
 #' @details
 #' ## Options
 #'
@@ -81,13 +72,13 @@
 #' @author Serkan Korkmaz
 #' @export
 chart <- function(
-    ticker,
-    main = kline(),
-    sub = list(),
-    indicator = list(),
-    event_data = NULL,
-    options = list()){
-
+  ticker,
+  main = kline(),
+  sub = list(),
+  indicator = list(),
+  event_data = NULL,
+  options = list()
+) {
   # 0) chart options and common
   # independent parameters
   name <- deparse(substitute(ticker))
@@ -115,19 +106,16 @@ chart <- function(
         labels = c("bear", "bull")
       )
 
-
       ticker
-
-
     },
     error = function(error) {
-
       assert(
         FALSE,
         error_message = c(
           "x" = "The {.arg ticker} could not be coerced to {.cls xts}-object",
           "v" = paste(
-            "See", cli::code_highlight(
+            "See",
+            cli::code_highlight(
               code = "xts::as.xts()",
               code_theme = "Chaos"
             ),
@@ -135,65 +123,64 @@ chart <- function(
           )
         )
       )
-
-
     }
   )
 
   interval <- infer_interval(ticker)
-  if (is.null(interval)) interval <- "Candle"
+  if (is.null(interval)) {
+    interval <- "Candle"
+  }
 
   ## 1) set chart options
   ## globally (locally)
   default_options <- list(
-    static     = FALSE,
-    dark       = TRUE,
-    slider     = FALSE,
+    static = FALSE,
+    dark = TRUE,
+    slider = FALSE,
     deficiency = FALSE,
-    palette    = "hawaii",
-    scale      = 1,
-    size       = 0.6,
-    width      = 0.9
+    palette = "hawaii",
+    scale = 1,
+    size = 0.6,
+    width = 0.9
   )
 
   options <- utils::modifyList(
-    x         = default_options,
-    val       = options,
+    x = default_options,
+    val = options,
     keep.null = TRUE
   )
 
-  dark         <- options$dark
-  deficiency   <- options$deficiency
-  slider       <- options$slider
-  size         <- options$size
-  palette      <- options$palette
-  static       <- options$static
+  dark <- options$dark
+  deficiency <- options$deficiency
+  slider <- options$slider
+  size <- options$size
+  palette <- options$palette
+  static <- options$static
   candle_color <- movement_color(deficiency = deficiency)
-  scale        <- options$scale
-  width        <- options$width
+  scale <- options$scale
+  width <- options$width
 
   if (static) {
-
     # if the plot is static
     # then turn off modebar
     # slider and editable
 
     modebar <- slider <- editable <- FALSE
-
   } else {
-
     # the modebar and editable
     # part of the plot should
     # always be set to true
     # for "real" interactivitiy
     modebar <- editable <- TRUE
-
-
   }
 
   # assert inputs and options
   assert(
-    any(grepl(pattern = palette,x = grDevices::hcl.pals(),ignore.case = TRUE)),
+    any(grepl(
+      pattern = palette,
+      x = grDevices::hcl.pals(),
+      ignore.case = TRUE
+    )),
     error_message = c(
       "x" = sprintf(
         fmt = "Palette {.val %s} is not valid.",
@@ -223,14 +210,12 @@ chart <- function(
     )
   )
 
-
-
   # 1) generate list
   # of calls for lazy
   # evaluation
   call_list <- list(
-    main      = substitute(main),
-    sub       = as.list(substitute(sub))[-1],
+    main = substitute(main),
+    sub = as.list(substitute(sub))[-1],
     indicator = as.list(substitute(indicator))[-1]
   )
 
@@ -257,24 +242,20 @@ chart <- function(
   )
 
   if (!identical(call_list$indicator, list())) {
-
     plot_list[1] <- list(Reduce(
-      f    = function(plot, .f) {
+      f = function(plot, .f) {
         # Modify the call list
         .f$data <- ticker
         .f$candle_color <- candle_color
         .f$plot <- plot
         eval(.f)
       },
-      x    = call_list$indicator,
+      x = call_list$indicator,
       init = plot_list[[1]]
     ))
-
   }
 
-
   if (!is.null(event_data)) {
-
     # 1) convert function
     # to call
     .f <- substitute(
@@ -285,17 +266,14 @@ chart <- function(
 
     plot_list <- Map(
       f = function(x) {
-
         # 1) add the plot to
         # the function
         .f$plot <- x
 
         eval(.f)
-
       },
       plot_list
     )
-
   }
 
   # apply colors to to all
@@ -306,7 +284,7 @@ chart <- function(
   n_colors <- length(unlist(call_list))
   # colorway <- grDevices::hcl.colors(n = n_colors)
   colorway <- grDevices::hcl.colors(
-    n       = n_colors,
+    n = n_colors,
     palette = palette
   )
 
@@ -320,7 +298,6 @@ chart <- function(
     }
   )
 
-
   plot <- suppressWarnings(
     plotly::subplot(
       plot_list,
@@ -329,22 +306,17 @@ chart <- function(
       titleY = FALSE,
       titleX = FALSE,
       heights = if (plot_list_length > 1) {
-
         c(
           size,
           rep(
-            x          = (1-size) / (plot_list_length - 1),
+            x = (1 - size) / (plot_list_length - 1),
             length.out = plot_list_length - 1
           )
         )
-
       } else {
-
         1
-
       }
     )
-
   )
 
   scatter_indices <- which(
@@ -362,7 +334,6 @@ chart <- function(
     traces = scatter_indices
   )
 
-
   plot <- plotly::config(
     p = bar(
       dark = dark,
@@ -373,9 +344,9 @@ chart <- function(
       modebar = modebar,
       scale = scale
     ),
-    staticPlot     = static,
-    editable       = editable,
-    responsive     = TRUE,
+    staticPlot = static,
+    editable = editable,
+    responsive = TRUE,
     displayModeBar = modebar,
     modeBarButtonsToAdd = c(
       "drawline",
@@ -383,17 +354,15 @@ chart <- function(
       "eraseshape"
     ),
     toImageButtonOptions = list(
-      format   = "svg",
+      format = "svg",
       filename = "chart",
-      height   = 2160,
-      width    = 3840,
-      scale    = 1
+      height = 2160,
+      width = 3840,
+      scale = 1
     )
   )
 
   plot
-
 }
 
 # script end;
-

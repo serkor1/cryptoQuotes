@@ -28,7 +28,7 @@ if \link{TRUE}}
 \item{reported}{A \link{logical}-vector of \link{length} 1. \link{FALSE} by default. Returns reported volume if \link{TRUE}.}
 }
 \value{
-An \link{xts}-object containing,
+An <[\link[xts]{xts}]>-object containing,
 
 \item{index}{<\link{POSIXct}> The time-index}
 \item{marketcap}{<\link{numeric}> Market capitalization}
@@ -40,9 +40,7 @@ The \code{\link[=get_mktcap]{get_mktcap()}}-functions returns the global cryptoc
 \details{
 \subsection{On time-zones and dates}{
 
-Values passed to \code{from} or \code{to} must be coercible by \code{\link[=as.Date]{as.Date()}},
-or \code{\link[=as.POSIXct]{as.POSIXct()}}, with a format of either \code{"\%Y-\%m-\%d"} or
-\code{"\%Y-\%m-\%d \%H:\%M:\%S"}. By default all dates are passed and
+Values passed to \verb{from`` or }to\verb{must be coercible by [as.Date()], or [as.POSIXct()], with a format of either}"\%Y-\%m-\%d"\code{or}"\%Y-\%m-\%d \%H:\%M:\%S"`. By default all dates are passed and
 returned with \code{\link[=Sys.timezone]{Sys.timezone()}}.
 }
 
@@ -79,8 +77,10 @@ Other get-functions:
 \code{\link{get_fgindex}()},
 \code{\link{get_fundingrate}()},
 \code{\link{get_lsratio}()},
-\code{\link{get_openinterest}()}
+\code{\link{get_openinterest}()},
+\code{\link{get_quote}()}
 }
 \author{
 Serkan Korkmaz
 }
+\concept{get-functions}

@@ -27,7 +27,7 @@ data is high quality and can be retrieved in intervals ranging from
 *seconds* to *months*. All the market data is accessed and processed
 without relying on crawlers, or API keys, ensuring an open, and
 reliable, access for researchers, traders and students alike. There are
-currently 8 supported cryptocurrency exchanges,
+currently 9 supported cryptocurrency exchanges,
 
 <div align="center">
 
@@ -47,10 +47,13 @@ BitMart
 Bybit
 </td>
 <td style="text-align:center;">
-Crypto.com
+CoinMarketCap
 </td>
 </tr>
 <tr>
+<td style="text-align:center;">
+Crypto.com
+</td>
 <td style="text-align:center;">
 Huobi (HTX)
 </td>
@@ -60,8 +63,18 @@ Kraken
 <td style="text-align:center;">
 KuCoin
 </td>
+</tr>
+<tr>
 <td style="text-align:center;">
 MEXC
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+Binance
+</td>
+<td style="text-align:center;">
+BitMart
 </td>
 </tr>
 </tbody>
@@ -107,7 +120,7 @@ exchanges,
 
 <div align="center">
 
-<div id="zmcqqglghu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yjgfjhxtmv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <caption>Supported exchanges by spot and futures markets with available intervals.</caption>
   <thead style="border-style: none;">
@@ -138,6 +151,12 @@ exchanges,
 <td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
 <td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">13</span></td>
 <td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">1 minute(s)</span></td>
+<td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">1 month(s)</span></td></tr>
+    <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><span class="gt_from_md">CoinMarketCap</span></td>
+<td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
+<td headers="Futures" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
+<td headers="Available.Intervals" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">16</span></td>
+<td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">5 minute(s)</span></td>
 <td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">1 month(s)</span></td></tr>
     <tr style="border-style: none;"><td headers="Exchange" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left"><span class="gt_from_md">Crypto.com</span></td>
 <td headers="Spot" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
@@ -228,122 +247,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-11-02 13:00:00
+2025-09-18 04:30:00
 </td>
 <td style="text-align:center;">
-69608
+116484.42
 </td>
 <td style="text-align:center;">
-69680
+116959.96
 </td>
 <td style="text-align:center;">
-69520
+116484.41
 </td>
 <td style="text-align:center;">
-69529.32
+116950.47
 </td>
 <td style="text-align:left;">
-111.56801
+206.1746
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 13:30:00
+2025-09-18 05:00:00
 </td>
 <td style="text-align:center;">
-69529.32
+116950.46
 </td>
 <td style="text-align:center;">
-69626
+117800
 </td>
 <td style="text-align:center;">
-69390.09
+116896.93
 </td>
 <td style="text-align:center;">
-69459.05
+117767.66
 </td>
 <td style="text-align:left;">
-373.18153
+1355.88159
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 14:00:00
+2025-09-18 05:30:00
 </td>
 <td style="text-align:center;">
-69459.05
+117767.66
 </td>
 <td style="text-align:center;">
-69711.59
+117896
 </td>
 <td style="text-align:center;">
-69393.22
+117543.15
 </td>
 <td style="text-align:center;">
-69679.99
+117581.66
 </td>
 <td style="text-align:left;">
-524.68007
+523.81901
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 14:30:00
+2025-09-18 06:00:00
 </td>
 <td style="text-align:center;">
-69679.99
+117581.67
 </td>
 <td style="text-align:center;">
-69680
+117750
 </td>
 <td style="text-align:center;">
-69358.87
+117364.45
 </td>
 <td style="text-align:center;">
-69365.99
+117372.7
 </td>
 <td style="text-align:left;">
-391.34893
+315.35698
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 15:00:00
+2025-09-18 06:30:00
 </td>
 <td style="text-align:center;">
-69366
+117372.7
 </td>
 <td style="text-align:center;">
-69437.85
+117616.29
 </td>
 <td style="text-align:center;">
-69099.96
+117219.5
 </td>
 <td style="text-align:center;">
-69151.19
+117605.16
 </td>
 <td style="text-align:left;">
-731.13778
+297.02472
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 15:30:00
+2025-09-18 07:00:00
 </td>
 <td style="text-align:center;">
-69151.2
+117605.16
 </td>
 <td style="text-align:center;">
-69253.16
+117605.16
 </td>
 <td style="text-align:center;">
-69112
+117605.15
 </td>
 <td style="text-align:center;">
-69112.01
+117605.15
 </td>
 <td style="text-align:left;">
-260.8502
+0.12083
 </td>
 </tr>
 </tbody>
@@ -375,7 +394,7 @@ indicators please refer to the documentation via
 
 <div align="center">
 
-<div id="qeyfoemsoo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bsshlayqqr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <caption>Available sentiment indicators by exchange</caption>
   <thead style="border-style: none;">
@@ -384,6 +403,7 @@ indicators please refer to the documentation via
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Binance" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Binance</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="BitMart" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">BitMart</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Bybit" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Bybit</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="CoinMarketCap" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">CoinMarketCap</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Crypto.com" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Crypto.com</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Huobi-(HTX)" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Huobi (HTX)</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Kraken" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: center;" bgcolor="#FFFFFF" valign="bottom" align="center">Kraken</th>
@@ -396,6 +416,7 @@ indicators please refer to the documentation via
 <td headers="Binance" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
 <td headers="BitMart" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Bybit" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
+<td headers="CoinMarketCap" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Crypto.com" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Huobi (HTX)" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Kraken" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
@@ -405,6 +426,7 @@ indicators please refer to the documentation via
 <td headers="Binance" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
 <td headers="BitMart" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Bybit" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
+<td headers="CoinMarketCap" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Crypto.com" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Huobi (HTX)" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Kraken" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
@@ -414,6 +436,7 @@ indicators please refer to the documentation via
 <td headers="Binance" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
 <td headers="BitMart" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Bybit" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
+<td headers="CoinMarketCap" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Crypto.com" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
 <td headers="Huobi (HTX)" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
 <td headers="Kraken" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:x:</span></td>
@@ -471,86 +494,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2024-11-02 13:00:00
+2025-09-18 04:30:00
 </td>
 <td style="text-align:center;">
-0.523
+0.541
 </td>
 <td style="text-align:center;">
-0.477
+0.459
 </td>
 <td style="text-align:center;">
-1.098
+1.181
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 13:30:00
+2025-09-18 05:00:00
 </td>
 <td style="text-align:center;">
-0.52
+0.537
 </td>
 <td style="text-align:center;">
-0.48
+0.463
 </td>
 <td style="text-align:center;">
-1.085
+1.16
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 14:00:00
+2025-09-18 05:30:00
 </td>
 <td style="text-align:center;">
-0.517
+0.511
 </td>
 <td style="text-align:center;">
-0.483
+0.489
 </td>
 <td style="text-align:center;">
-1.07
+1.044
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 14:30:00
+2025-09-18 06:00:00
 </td>
 <td style="text-align:center;">
-0.519
+0.494
 </td>
 <td style="text-align:center;">
-0.481
+0.506
 </td>
 <td style="text-align:center;">
-1.077
+0.977
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 15:00:00
+2025-09-18 06:30:00
 </td>
 <td style="text-align:center;">
-0.519
+0.49
 </td>
 <td style="text-align:center;">
-0.481
+0.51
 </td>
 <td style="text-align:center;">
-1.08
+0.961
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2024-11-02 15:30:00
+2025-09-18 07:00:00
 </td>
 <td style="text-align:center;">
-0.52
+0.49
 </td>
 <td style="text-align:center;">
-0.48
+0.51
 </td>
 <td style="text-align:center;">
-1.085
+0.961
 </td>
 </tr>
 </tbody>

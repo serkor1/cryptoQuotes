@@ -69,9 +69,9 @@
 #' @author Serkan Korkmaz
 #' @export
 get_fgindex <- function(
-    from = NULL,
-    to = NULL) {
-
+  from = NULL,
+  to = NULL
+) {
   # NOTE: This function
   # is a standalone function that only
   # depends on few internal functions.
@@ -96,29 +96,27 @@ get_fgindex <- function(
     " = (is.null(to) || (is.date(to) & length(to) == 1))
   )
 
-
-  from <- coerce_date(from); to <- coerce_date(to)
+  from <- coerce_date(from)
+  to <- coerce_date(to)
 
   # 3) if no from and to
   # are passed; construct
   # forced date intervals
   if (is.null(from) || is.null(to)) {
-
     # to ensure consistency across
     # APIs if no date is set the output
     # is limited to 200 pips
     forced_dates <- default_dates(
       interval = '1d',
-      from     = from,
-      to       = to,
-      length   = 201
+      from = from,
+      to = to,
+      length = 201
     )
 
     # generate from
     # to variables
     from <- forced_dates$from
-    to   <- forced_dates$to
-
+    to <- forced_dates$to
   }
 
   # 4) perform request and
@@ -128,14 +126,12 @@ get_fgindex <- function(
     limit = '0'
   )
 
-
   response <- GET(
     url = "https://api.alternative.me",
     endpoint = "fng",
-    query =  query,
+    query = query,
     path = "/"
   )$data
-
 
   assert(
     !is.null(response),
@@ -155,7 +151,6 @@ get_fgindex <- function(
     x = as.numeric(response$timestamp),
     multiplier = 1
   )
-
 
   # 7) order response timestamp and
   # convert to xts
@@ -179,7 +174,7 @@ get_fgindex <- function(
   response <- stats::window(
     x = response,
     start = from,
-    end   = to
+    end = to
   )
 
   response
