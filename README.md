@@ -120,7 +120,7 @@ exchanges,
 
 <div align="center">
 
-<div id="ajspttmhsz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yjgfjhxtmv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <caption>Supported exchanges by spot and futures markets with available intervals.</caption>
   <thead style="border-style: none;">
@@ -247,122 +247,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2025-09-14 09:30:00
+2025-09-18 04:30:00
 </td>
 <td style="text-align:center;">
-115774.23
+116484.42
 </td>
 <td style="text-align:center;">
-115838.41
+116959.96
 </td>
 <td style="text-align:center;">
-115744.95
+116484.41
 </td>
 <td style="text-align:center;">
-115805.39
+116950.47
 </td>
 <td style="text-align:left;">
-141.55232
+206.1746
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 10:00:00
+2025-09-18 05:00:00
 </td>
 <td style="text-align:center;">
-115805.39
+116950.46
 </td>
 <td style="text-align:center;">
-115874.96
+117800
 </td>
 <td style="text-align:center;">
-115759.44
+116896.93
 </td>
 <td style="text-align:center;">
-115874.95
+117767.66
 </td>
 <td style="text-align:left;">
-60.00318
+1355.88159
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 10:30:00
+2025-09-18 05:30:00
 </td>
 <td style="text-align:center;">
-115874.96
+117767.66
 </td>
 <td style="text-align:center;">
-115983.02
+117896
 </td>
 <td style="text-align:center;">
-115874.95
+117543.15
 </td>
 <td style="text-align:center;">
-115933.4
+117581.66
 </td>
 <td style="text-align:left;">
-77.30265
+523.81901
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 11:00:00
+2025-09-18 06:00:00
 </td>
 <td style="text-align:center;">
-115933.4
+117581.67
 </td>
 <td style="text-align:center;">
-116049.13
+117750
 </td>
 <td style="text-align:center;">
-115905.88
+117364.45
 </td>
 <td style="text-align:center;">
-116018.53
+117372.7
 </td>
 <td style="text-align:left;">
-130.65042
+315.35698
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 11:30:00
+2025-09-18 06:30:00
 </td>
 <td style="text-align:center;">
-116018.54
+117372.7
 </td>
 <td style="text-align:center;">
-116165.19
+117616.29
 </td>
 <td style="text-align:center;">
-116018.53
+117219.5
 </td>
 <td style="text-align:center;">
-116052.09
+117605.16
 </td>
 <td style="text-align:left;">
-141.00782
+297.02472
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 12:00:00
+2025-09-18 07:00:00
 </td>
 <td style="text-align:center;">
-116052.1
+117605.16
 </td>
 <td style="text-align:center;">
-116132.85
+117605.16
 </td>
 <td style="text-align:center;">
-116052.09
+117605.15
 </td>
 <td style="text-align:center;">
-116082.54
+117605.15
 </td>
 <td style="text-align:left;">
-26.00361
+0.12083
 </td>
 </tr>
 </tbody>
@@ -394,7 +394,7 @@ indicators please refer to the documentation via
 
 <div align="center">
 
-<div id="fbsnaphuwd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bsshlayqqr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <caption>Available sentiment indicators by exchange</caption>
   <thead style="border-style: none;">
@@ -494,86 +494,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2025-09-14 09:30:00
+2025-09-18 04:30:00
 </td>
 <td style="text-align:center;">
-0.509
+0.541
 </td>
 <td style="text-align:center;">
-0.491
+0.459
 </td>
 <td style="text-align:center;">
-1.036
+1.181
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 10:00:00
+2025-09-18 05:00:00
 </td>
 <td style="text-align:center;">
-0.508
+0.537
 </td>
 <td style="text-align:center;">
-0.492
+0.463
 </td>
 <td style="text-align:center;">
-1.035
+1.16
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 10:30:00
+2025-09-18 05:30:00
 </td>
 <td style="text-align:center;">
-0.509
+0.511
 </td>
 <td style="text-align:center;">
-0.491
+0.489
 </td>
 <td style="text-align:center;">
-1.037
+1.044
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 11:00:00
+2025-09-18 06:00:00
 </td>
 <td style="text-align:center;">
-0.508
+0.494
 </td>
 <td style="text-align:center;">
-0.492
+0.506
 </td>
 <td style="text-align:center;">
-1.034
+0.977
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 11:30:00
+2025-09-18 06:30:00
 </td>
 <td style="text-align:center;">
-0.507
+0.49
 </td>
 <td style="text-align:center;">
-0.493
+0.51
 </td>
 <td style="text-align:center;">
-1.028
+0.961
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-14 12:00:00
+2025-09-18 07:00:00
 </td>
 <td style="text-align:center;">
-0.504
+0.49
 </td>
 <td style="text-align:center;">
-0.496
+0.51
 </td>
 <td style="text-align:center;">
-1.017
+0.961
 </td>
 </tr>
 </tbody>
