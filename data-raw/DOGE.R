@@ -9,9 +9,8 @@ DOGE <- get_quote(
   ticker = "DOGEUSDT",
   source = "bybit",
   interval = "1m",
-  from =  as.POSIXct("2022-01-14 06:00:00", tz = "UTC"),
-  to   =  as.POSIXct("2022-01-14 07:00:00", tz = "UTC")
+  from = as.POSIXct("2022-01-14 06:00:00", tz = "UTC"),
+  to = as.POSIXct("2022-01-14 07:00:00", tz = "UTC")
 )
 
 usethis::use_data(DOGE, overwrite = TRUE)
-

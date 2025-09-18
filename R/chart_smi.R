@@ -44,17 +44,17 @@
 #' @author Serkan Korkmaz
 #' @export
 smi <- function(
-    nFastK = 14,
-    nFastD = 3,
-    nSlowD = 3,
-    maType,
-    bounded = TRUE,
-    smooth = 1,
-    upper_limit = 40,
-    lower_limit = -40,
-    color = "#4682b4",
-    ...) {
-
+  nFastK = 14,
+  nFastD = 3,
+  nSlowD = 3,
+  maType,
+  bounded = TRUE,
+  smooth = 1,
+  upper_limit = 40,
+  lower_limit = -40,
+  color = "#4682b4",
+  ...
+) {
   # check if function is called
   # outside of chart-function
   check_indicator_call()
@@ -63,7 +63,6 @@ smi <- function(
   # indicator
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -73,9 +72,9 @@ smi <- function(
       # 1) calculate indicator
       # using indicator-function
       data <- indicator(
-        x       = args$data,
+        x = args$data,
         columns = c("high", "low", "close"),
-        .f      = TTR::SMI,
+        .f = TTR::SMI,
         nFastK = nFastK,
         nFastD = nFastD,
         nSlowD = nSlowD,
@@ -94,8 +93,7 @@ smi <- function(
         mode = "lines",
         line = list(
           width = 0.9,
-          dash  = "dot"
-
+          dash = "dot"
         )
       )
 
@@ -126,7 +124,7 @@ smi <- function(
             line = list(
               width = 0.9,
               color = as_rgb(hex_color = color, alpha = 1),
-              dash  = "dot"
+              dash = "dot"
             )
           )
         ),
@@ -142,14 +140,14 @@ smi <- function(
             line = list(
               width = 0.9,
               color = as_rgb(hex_color = color, alpha = 1),
-              dash  = "dot"
+              dash = "dot"
             )
           )
         ),
         list(
           type = "add_ribbons",
           params = list(
-            data       = data,
+            data = data,
             inherit = FALSE,
             showlegend = FALSE,
             x = ~index,
@@ -158,10 +156,9 @@ smi <- function(
             fillcolor = as_rgb(alpha = 0.1, hex_color = color),
             line = list(
               color = 'transparent',
-              dash  = "dot"
+              dash = "dot"
             )
           )
-
         )
       )
 
@@ -171,7 +168,9 @@ smi <- function(
         annotations = list(
           list(
             text = paste0(
-              "SMI(",paste(c(nFastK, nFastD, nSlowD), collapse = ', '), ")"
+              "SMI(",
+              paste(c(nFastK, nFastD, nSlowD), collapse = ', '),
+              ")"
             ),
             x = 0,
             y = 1,
@@ -189,7 +188,6 @@ smi <- function(
       )
 
       p
-
     },
     class = c(
       "subchart",
@@ -197,7 +195,6 @@ smi <- function(
       "htmlwidget"
     )
   )
-
 }
 
 # script end;

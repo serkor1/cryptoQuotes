@@ -54,9 +54,9 @@ The function adds a subchart with a \code{\link[TTR:RSI]{TTR::RSI()}}-indicator.
 # BTC using candlesticks
 # and indicators
 cryptoQuotes::chart(
-  ticker     = BTC,
-  main       = cryptoQuotes::kline(),
-  sub        = list(
+  ticker = BTC,
+  main = cryptoQuotes::kline(),
+  sub = list(
     cryptoQuotes::volume(),
     cryptoQuotes::macd()
   ),
@@ -66,7 +66,7 @@ cryptoQuotes::chart(
     cryptoQuotes::alma()
   ),
   options = list(
-    dark       = TRUE,
+    dark = TRUE,
     deficiency = FALSE
   )
 )

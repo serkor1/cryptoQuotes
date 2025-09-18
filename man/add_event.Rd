@@ -79,27 +79,31 @@ event_data$event <- rep(
 event_data$color <- ifelse(
   event_data$event == 'Buy',
   yes = 'darkgrey',
-  no  = ifelse(
+  no = ifelse(
     test = subset(
-        x = event_data,
-        event == 'Buy')$close < subset(x = event_data, event == 'Sell')$close,
-    yes  = 'green',
-    no   = 'red'
+      x = event_data,
+      event == 'Buy'
+    )$close <
+      subset(x = event_data, event == 'Sell')$close,
+    yes = 'green',
+    no = 'red'
   )
 )
 
 # 1.6) modify the event to add
 # closing price at each event
 event_data$event <- paste0(
-  event_data$event, ' @', event_data$close
+  event_data$event,
+  ' @',
+  event_data$close
 )
 
 # 2) Chart the the klines
 # and add the buy and sell events
 cryptoQuotes::chart(
-  ticker     = cryptoQuotes::ATOM,
-  main       = cryptoQuotes::kline(),
-  sub        = list(
+  ticker = cryptoQuotes::ATOM,
+  main = cryptoQuotes::kline(),
+  sub = list(
     cryptoQuotes::volume()
   ),
   indicator = list(

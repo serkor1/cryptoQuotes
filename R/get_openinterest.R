@@ -48,12 +48,12 @@
 #' @author Serkan Korkmaz
 #' @export
 get_openinterest <- function(
-    ticker,
-    interval = '1d',
-    source   = 'binance',
-    from     = NULL,
-    to       = NULL) {
-
+  ticker,
+  interval = '1d',
+  source = 'binance',
+  from = NULL,
+  to = NULL
+) {
   # 0) check internet connection
   check_internet_connection()
 
@@ -62,7 +62,7 @@ get_openinterest <- function(
   assert(
     "
     Argument {.arg ticker} is missing with no default
-    " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+    " = !missing(ticker) & is.character(ticker) & length(ticker) == 1,
     "
     Argument {.arg source} has to be {.cls character} of length {1}
     " = (is.character(source) & length(source) == 1),
@@ -86,11 +86,12 @@ get_openinterest <- function(
   # 2) assert validity
   # of inputs
   assert(
-    source %in% suppressMessages(
-      available_exchanges(
-        type = 'interest'
-      )
-    ),
+    source %in%
+      suppressMessages(
+        available_exchanges(
+          type = 'interest'
+        )
+      ),
     error_message = c(
       "x" = sprintf(
         fmt = "Exchange {.val %s} is not supported.",
@@ -111,13 +112,14 @@ get_openinterest <- function(
   # interval is supported by
   # the exchange API
   assert(
-    interval %in% suppressMessages(
-      available_intervals(
-        source  = source,
-        futures = TRUE,
-        type    = 'interest'
-      )
-    ),
+    interval %in%
+      suppressMessages(
+        available_intervals(
+          source = source,
+          futures = TRUE,
+          type = 'interest'
+        )
+      ),
     error_message = c(
       "x" = sprintf(
         fmt = "Interval {.val %s} is not supported.",
@@ -137,34 +139,33 @@ get_openinterest <- function(
     )
   )
 
-  from <- coerce_date(from); to <- coerce_date(to)
+  from <- coerce_date(from)
+  to <- coerce_date(to)
 
   # 3) if either of the
   # date variables are NULL
   # pass them into the default_dates
   # function to extract 100 pips.
   if (is.null(from) | is.null(to)) {
-
     # to ensure consistency across
     # APIs if no date is set the output
     # is limited to 200 pips
     forced_dates <- default_dates(
       interval = interval,
-      from     = from,
-      to       = to,
-      length   = 200
+      from = from,
+      to = to,
+      length = 200
     )
 
     # generate from
     # to variables
     from <- forced_dates$from
-    to   <- forced_dates$to
+    to <- forced_dates$to
   }
 
   # NOTE: binance only supports
   # the last 30 days
   if (source %in% 'binance') {
-
     from <- max(
       from,
       as.POSIXct(
@@ -180,27 +181,23 @@ get_openinterest <- function(
     x = fetch(
       ticker = ticker,
       source = source,
-      futures= TRUE,
+      futures = TRUE,
       interval = interval,
-      type   = "interest",
-      to     = to,
-      from   = from
+      type = "interest",
+      to = to,
+      from = from
     ),
     start = from,
-    end   = to
+    end = to
   )
 
   if (source %in% 'kraken') {
-
     output <- output$high
 
     names(output)[1] <- "open_interest"
-
   }
 
   output
-
 }
-
 
 # script end;

@@ -51,9 +51,9 @@ interacts with the \code{\link[TTR:MACD]{TTR::MACD()}}-function. The function ad
 # BTC using candlesticks
 # and indicators
 cryptoQuotes::chart(
-  ticker     = BTC,
-  main       = cryptoQuotes::kline(),
-  sub        = list(
+  ticker = BTC,
+  main = cryptoQuotes::kline(),
+  sub = list(
     cryptoQuotes::volume(),
     cryptoQuotes::macd()
   ),
@@ -63,7 +63,7 @@ cryptoQuotes::chart(
     cryptoQuotes::alma()
   ),
   options = list(
-    dark       = TRUE,
+    dark = TRUE,
     deficiency = FALSE
   )
 )

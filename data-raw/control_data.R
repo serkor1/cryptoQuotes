@@ -25,7 +25,6 @@ funs <- c(
 control_data <- lapply(
   X = funs,
   FUN = function(FUN) {
-
     # 2.1) extract function
     # and store as foo
     foo <- get(
@@ -34,23 +33,16 @@ control_data <- lapply(
     )
 
     if (!(FUN == "fgindex")) {
-
       foo(
-        ticker   = "BTCUSDT",
-        source   = "binance",
-        from     = Sys.Date() - 100
+        ticker = "BTCUSDT",
+        source = "binance",
+        from = Sys.Date() - 100
       )
-
-
     } else {
-
       foo(
         from = Sys.Date() - 100
       )
-
     }
-
-
   }
 )
 
@@ -62,9 +54,7 @@ names(control_data) <- funs
 usethis::use_data(
   control_data,
   overwrite = TRUE,
-  internal  = TRUE
+  internal = TRUE
 )
 
 # script end;
-
-

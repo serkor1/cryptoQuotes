@@ -23,9 +23,9 @@
 #' @author Serkan Korkmaz
 #' @export
 lsr <- function(
-    ratio,
-    ...) {
-
+  ratio,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -34,7 +34,6 @@ lsr <- function(
 
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -46,7 +45,6 @@ lsr <- function(
       data <- zoo::fortify.zoo(ratio, names = "index")
       color_deficiency <- args$deficiency
 
-
       # 1.1) define available
       # colors
       color_scale <- grDevices::hcl.colors(
@@ -57,9 +55,9 @@ lsr <- function(
 
       data$color_scale <- normalize(
         x = data$ls_ratio,
-        range = c(0,30),
-        value = c(0,3)
-        )
+        range = c(0, 30),
+        value = c(0, 3)
+      )
 
       data$color_scale <- color_scale[
         data$color_scale
@@ -101,11 +99,6 @@ lsr <- function(
           yref = "paper"
         )
       )
-
-
-
-
-
     },
     class = c(
       "subchart",
@@ -113,12 +106,6 @@ lsr <- function(
       "htmlwidget"
     )
   )
-
-
-
-
-
 }
-
 
 # script end;

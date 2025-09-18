@@ -41,8 +41,8 @@ to the main \code{\link[=chart]{chart()}}.
 # chart
 cryptoQuotes::chart(
   ticker = BTC,
-  main   = cryptoQuotes::kline(),
-  sub    = list(
+  main = cryptoQuotes::kline(),
+  sub = list(
     cryptoQuotes::volume()
   )
 )

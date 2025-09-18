@@ -5,17 +5,16 @@
 # script start;
 
 .onAttach <- function(
-    libname,
-    pkgname,
-    ...) {
-
+  libname,
+  pkgname,
+  ...
+) {
   # 1) set options
   # for xts suppressing
   # timezone messages
   options(
     xts_check_TZ = FALSE
   )
-
 
   cli::cli_inform(
     message = pkg_header(
@@ -30,21 +29,18 @@
     ...,
     class = "packageStartupMessage"
   )
-
-
 }
 
 .onDetach <- function(
-    libpath,
-    ...) {
-
+  libpath,
+  ...
+) {
   # 1) reset options
   # for xts suppressing
   # timezone messages
   options(
     xts_check_TZ = TRUE
   )
-
 }
 
 # script end;

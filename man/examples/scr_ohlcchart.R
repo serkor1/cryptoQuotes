@@ -5,8 +5,8 @@
 # chart
 cryptoQuotes::chart(
   ticker = BTC,
-  main   = cryptoQuotes::ohlc(),
-  sub    = list(
+  main = cryptoQuotes::ohlc(),
+  sub = list(
     cryptoQuotes::volume()
   )
 )

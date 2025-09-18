@@ -38,13 +38,13 @@
 #' @author Serkan Korkmaz
 #' @export
 macd <- function(
-    nFast   = 12,
-    nSlow   = 26,
-    nSig    = 9,
-    maType  = "SMA",
-    percent = TRUE,
-    ...){
-
+  nFast = 12,
+  nSlow = 26,
+  nSig = 9,
+  maType = "SMA",
+  percent = TRUE,
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -53,8 +53,6 @@ macd <- function(
 
   structure(
     .Data = {
-
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -65,7 +63,6 @@ macd <- function(
       # of the args
       #data <- args$data
 
-
       # 0.4) linewidth
       linewidth <- 0.90
 
@@ -75,14 +72,12 @@ macd <- function(
         x = args$data,
         columns = "close",
         .f = TTR::MACD,
-        nFast    = nFast,
-        nSlow    = nSlow,
-        nSig     = nSig,
-        maType   = maType,
-        percent  = percent
-
+        nFast = nFast,
+        nSlow = nSlow,
+        nSig = nSig,
+        maType = maType,
+        percent = percent
       )
-
 
       data$direction <- as.logical(
         data$signal >= data$macd
@@ -91,22 +86,25 @@ macd <- function(
       # 2) create plot
       # without using pipes;
       p <- plotly::plot_ly(
-        data       = data,
+        data = data,
         showlegend = FALSE,
-        name       = 'MACD',
-        x          = ~ index,
-        y          = ~ (macd - signal),
-        color      = ~ direction,
-        colors     = c(
+        name = 'MACD',
+        x = ~index,
+        y = ~ (macd - signal),
+        color = ~direction,
+        colors = c(
           # The first color always
           # applies to the true condition
           args$candle_color$bullish,
-          args$candle_color$bearish),
-        type       = 'bar',
-        marker     = list(line = list(
-          color = "black",
-          width = 0.5
-        ))
+          args$candle_color$bearish
+        ),
+        type = 'bar',
+        marker = list(
+          line = list(
+            color = "black",
+            width = 0.5
+          )
+        )
       )
 
       layers <- list(
@@ -116,12 +114,11 @@ macd <- function(
             name = "MACD: Signal",
             data = data,
             showlegend = FALSE,
-            x = ~ index,
-            y = ~ signal,
+            x = ~index,
+            y = ~signal,
             inherit = FALSE,
             line = list(width = linewidth)
           )
-
         ),
         list(
           type = "add_lines",
@@ -129,12 +126,11 @@ macd <- function(
             name = "MACD: MACD",
             data = data,
             showlegend = FALSE,
-            x = ~ index,
-            y = ~ macd,
+            x = ~index,
+            y = ~macd,
             inherit = FALSE,
             line = list(width = linewidth)
           )
-
         )
       )
 
@@ -144,12 +140,14 @@ macd <- function(
         annotations = list(
           list(
             text = paste0(
-              "MACD(",paste(c(nFast, nSlow,nSig), collapse = ', '), ")"
-              ),
+              "MACD(",
+              paste(c(nFast, nSlow, nSig), collapse = ', '),
+              ")"
+            ),
             x = 0,
             y = 1,
             font = list(
-              size = 16  * args$scale
+              size = 16 * args$scale
             ),
             xref = 'paper',
             yref = 'paper',
@@ -161,20 +159,14 @@ macd <- function(
         )
       )
 
-
       p
-
-
-
-
     },
     class = c(
       "subchart",
       "plotly",
       "htmlwidget"
-      )
+    )
   )
-
 }
 
 # script end;

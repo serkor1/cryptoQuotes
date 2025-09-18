@@ -6,30 +6,31 @@
 # script start;
 # 1) URLs and Endpoint; ####
 mexcUrl <- function(
-    futures = TRUE,
-    ...) {
-
+  futures = TRUE,
+  ...
+) {
   # 1) define baseURL
   # for each API
-  if (futures)
+  if (futures) {
     'https://contract.mexc.com'
-  else
+  } else {
     'https://api.mexc.com'
-
+  }
 }
 
 mexcEndpoint <- function(
-    type = 'ohlc',
-    futures = TRUE,
-    ...) {
-
+  type = 'ohlc',
+  futures = TRUE,
+  ...
+) {
   switch(
     EXPR = type,
     ticker = {
-      if (futures)
+      if (futures) {
         'api/v1/contract/detail'
-      else
+      } else {
         'api/v3/exchangeInfo'
+      }
     },
     fundingrate = {
       'api/v1/contract/funding_rate/history'
@@ -37,24 +38,23 @@ mexcEndpoint <- function(
     # Default values is
     # the ohlc
     {
-      if (futures)
+      if (futures) {
         'api/v1/contract/kline/'
-      else
+      } else {
         'api/v3/klines'
+      }
     }
   )
-
 }
 
 # 2) Available intervals; #####
 mexcIntervals <- function(
-    interval,
-    futures,
-    all = FALSE,
-    ...) {
-
+  interval,
+  futures,
+  all = FALSE,
+  ...
+) {
   if (futures) {
-
     interval_label <- c(
       '1m',
       '5m',
@@ -80,9 +80,7 @@ mexcIntervals <- function(
       "Week1",
       "Month1"
     )
-
   } else {
-
     interval_label <- c(
       '1m',
       '5m',
@@ -106,10 +104,11 @@ mexcIntervals <- function(
       '1W',
       '1M'
     )
-
   }
 
-  if (all) { return(interval_label) }
+  if (all) {
+    return(interval_label)
+  }
 
   interval_actual[
     interval_label %in% interval
@@ -118,10 +117,10 @@ mexcIntervals <- function(
 
 # 3) define response object and format; ####
 mexcResponse <- function(
-    type = 'ohlc',
-    futures,
-    ...) {
-
+  type = 'ohlc',
+  futures,
+  ...
+) {
   # mock response
   # to avoid check error in
   # unevaluated expressions
@@ -134,14 +133,11 @@ mexcResponse <- function(
         foo = function(response, futures) {
           if (futures) {
             response$data$symbol
-
           } else {
             subset(
               x = response$symbols,
               response$symbols$status == "1"
             )$symbol
-
-
           }
         }
       )
@@ -149,32 +145,33 @@ mexcResponse <- function(
 
     fundingrate = {
       list(
-        colum_names    = "funding_rate",
+        colum_names = "funding_rate",
         index_location = c(3),
         colum_location = c(2)
       )
     },
     {
       list(
-        colum_names = if (futures)
+        colum_names = if (futures) {
           c('open', 'close', 'high', 'low', 'volume')
-        else
-          c('open', 'high', 'low', 'close', 'volume'),
+        } else {
+          c('open', 'high', 'low', 'close', 'volume')
+        },
         colum_location = c(2:6),
         index_location = 1
       )
     }
   )
-
 }
 
 # 4) Dates passed to and from endpoints; ####
 mexcDates <- function(
-    futures,
-    dates,
-    is_response = FALSE,
-    type = "ohlc",
-    ...) {
+  futures,
+  dates,
+  is_response = FALSE,
+  type = "ohlc",
+  ...
+) {
   # Set multiplier based on market
   # and type
   #
@@ -186,7 +183,7 @@ mexcDates <- function(
   dates <- convert_date(
     x = if (is_response) as.numeric(dates) else dates,
     multiplier = multiplier
-    )
+  )
 
   if (!is_response) {
     # Adjust for mexc spot and set names
@@ -194,33 +191,29 @@ mexcDates <- function(
     dates[2] <- dates[2] + 15 * 60
 
     if (!futures) {
-
       names(dates) <- c('startTime', 'endTime')
-
     } else {
       # Set names for futures
       names(dates) <- c('start', 'end')
     }
 
     dates <- format(dates, scientific = FALSE)
-
   }
 
   dates
 }
 
 
-
 # 5) Parameters passed to endpoints; ####
 mexcParameters <- function(
-    futures = TRUE,
-    ticker,
-    type = NULL,
-    interval,
-    from = NULL,
-    to = NULL,
-    ...) {
-
+  futures = TRUE,
+  ticker,
+  type = NULL,
+  interval,
+  from = NULL,
+  to = NULL,
+  ...
+) {
   # Set initial parameters with interval and assign appropriate name
   params <- list(
     interval = mexcIntervals(
@@ -247,7 +240,7 @@ mexcParameters <- function(
       params$path <- list(ticker)
     } else {
       params$symbol <- ticker
-      params$limit  <- 1000
+      params$limit <- 1000
     }
   }
 
@@ -269,9 +262,9 @@ mexcParameters <- function(
     ),
     # Default case to handle unexpected types
     list(
-      query    = params,
-      futures  = futures,
-      source   = 'mexc',
+      query = params,
+      futures = futures,
+      source = 'mexc',
       interval = interval
     )
   )
