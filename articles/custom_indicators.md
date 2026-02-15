@@ -1,0 +1,203 @@
+# A Guide on Charting and Custom Indicators
+
+``` r
+library(cryptoQuotes)
+```
+
+Trading indicators comes in various forms; from the alignment of the
+moon relative to the sun, to sophisticated trading rules based on neural
+networks which incorporates classified features; It is not possible to
+cover them all in an `R` package.
+
+In this `vignette` an introduction to the construction of charts and
+chart indicators are given, and is recommended for those who would want
+to chart indicators not otherwise found in
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/). The
+`vignette` uses the built-in `BTC`-object.
+
+> **Note:** Feel free to make a `PR` with your indicators that you wish
+> to share with the rest of the community.
+
+As the charts in
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) uses
+[{plotly}](https://github.com/plotly) as backend, the `chart`-objects
+complies with it’s syntax.
+
+## Custom Indicators
+
+We start by creating a simple `chart`-object with `volume` as it’s only
+indicator,
+
+``` r
+# 1) create a simple chart
+# object
+# 
+# NOTE: The chart is wrapped in
+# plotly::layout() to avoid
+# duplicating xaxis when the
+# custom indicators are added
+chart_object <- plotly::layout(
+  chart(
+    ticker = BTC,
+    main   = kline(),
+    sub    = list(
+      volume()
+    ),
+    options = list(
+      dark = FALSE
+    )
+  ),
+  xaxis = list(
+    showticklabels = FALSE
+  )
+)
+```
+
+### Sine-oscillator
+
+Assume a trading strategy that follows a
+[`sin()`](https://rdrr.io/r/base/Trig.html)-curve throughout the period
+of interest. The starting point is generating the indicator,
+
+``` r
+# 1) generate sin-indicator
+sin_indicator <- data.frame(
+    index         = zoo::index(BTC),
+    sin_indicator = sin(seq(0,8*pi,length.out=nrow(BTC)))
+  
+)
+```
+
+The `sin_indicator` in it’s basic form can be charted as follows,
+
+``` r
+# 1) create a plotly-object
+# with the sin-indicator
+sin_indicator <- plotly::layout(
+   margin= list(l = 5, r = 5, b = 5),
+  p = plotly::plot_ly(
+    data = sin_indicator,
+    y    = ~sin_indicator,
+    x    = ~index,
+    type = "scatter",
+    mode = "lines",
+    name = "sin"
+  ),
+  yaxis = list(
+    title = NA
+  ),
+  xaxis = list(
+    title = NA
+  )
+)
+# 2) display the 
+# indicator
+sin_indicator
+```
+
+The `sin_indicator` can be added to the `chart_object` using
+[`plotly::subplot`](https://rdrr.io/pkg/plotly/man/subplot.html) which
+also handles the theming,
+
+``` r
+# 1) append the sin_indicator
+# to the chart object
+chart_object <- plotly::subplot(
+  # ensures that plots are 
+  # vertically aligned
+  nrows = 2,
+  heights = c(
+    0.7,
+    0.2
+  ),
+  chart_object,
+  sin_indicator,
+  shareX = FALSE,
+  titleY = FALSE
+)
+
+# 2) display the chart
+# object
+chart_object
+```
+
+### Linear Regression Line
+
+Assume a trading strategy that goes long (short) every time the price is
+below (above) the linear regression line. This indicator can be defined
+as follows,
+
+``` r
+# 1) linear regression
+# line
+lm_indicator <- data.frame(
+  y = fitted(
+    lm(
+      close ~ time,
+      data = data.frame(
+        time = 1:nrow(BTC),
+        close = BTC$close
+      )
+    )
+  ),
+  index = zoo::index(BTC)
+)
+```
+
+The `lm_indicator` in it’s basic form can be charted as follows,
+
+``` r
+# 1) display the linear
+# regression line on
+# an empty chart
+plotly::add_lines(
+  p    = plotly::plotly_empty(),
+  data = lm_indicator,
+  y    = ~y,
+  x    = ~index,
+  inherit = FALSE,
+  xaxis = "x1",
+  yaxis = "y2",
+  name  = "regression"
+)
+```
+
+The `lm_indicator` can be added to the `chart_object` using
+[`plotly::add_lines`](https://rdrr.io/pkg/plotly/man/add_trace.html)
+which also handles the theming,
+
+``` r
+# 1) add the regression
+# line to the chart_object
+plotly::layout(
+  margin = list(l = 5, r = 5, b = 5, t = 65),
+  plotly::add_lines(
+    p       = chart_object,
+    data    = lm_indicator,
+    y       = ~y,
+    x       = ~index,
+    inherit = FALSE,
+    xaxis   = "x1",
+    yaxis   = "y2",
+    name    = "regression"
+  ),
+  yaxis = list(
+    title = NA
+  ),
+  xaxis = list(
+    title = NA
+  )
+)
+```
+
+## Summary
+
+Creating custom indicators for the
+[`chart()`](https://serkor1.github.io/cryptoQuotes/reference/chart.md)-functions
+follows standard [{plotly}](https://github.com/plotly) syntax. Two
+examples of how these are charted in
+[{cryptoQuotes}](https://serkor1.github.io/cryptoQuotes/) have been
+covered.
+
+> **Note:** A full pipeline of charting indicators, custom and built-in,
+> will be released sometime in the future.

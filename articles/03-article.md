@@ -1,0 +1,89 @@
+# Dealing with Time Zones
+
+``` r
+## load library
+library(cryptoQuotes)
+```
+
+By `default` all data from the `get_*`-family of functions is returned
+with [`Sys.timezone()`](https://rdrr.io/r/base/timezones.html) and, if
+not specified otherwise, all `dates` passed into the `from` and `to`
+parameters are assumed to be
+[`Sys.timezone()`](https://rdrr.io/r/base/timezones.html) too.
+
+> **NOTE:** As the
+> [{pkgdown}](https://github.com/r-lib/pkgdown)-documentation gets built
+> on Github-servers we manually specify the timezone of the `from` and
+> `to` parameters.
+
+In this article we will demonstrate the *time zone* aspect of
+[{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes).
+
+## Open, High, Low, Close and Volume (OHLC-V) with CET
+
+Assume that you are interested in the hourly `Bitcoin` price action from
+yesterday between 16.00 and 18.00 *central European time* (CET). We
+start the example by defining the `from` and `to` parameters,
+
+``` r
+# define from
+# and to
+from <- as.POSIXct(
+  x = paste(
+    Sys.Date() - 1, "16:00:00"
+  ),
+  tz = "CET"
+)
+
+to <- as.POSIXct(
+  x = paste(
+    Sys.Date() - 1, "18:00:00"
+  ),
+  tz = "CET"
+)
+```
+
+### OHLC-V
+
+As the *time zone* on Github servers are `CET`, the returned OHLC-V data
+is `UTC` as demonstrated below,
+
+``` r
+## Get hourly
+## BTC between
+## 16:00 and 18:00 from
+## yesterday
+xts::tzone(
+  BTC <- get_quote(
+    ticker   = "BTCUSD",
+    source   = "kraken",
+    interval = "1h",
+    futures  = FALSE,
+    from     = from,
+    to       = to
+  )
+)
+#> [1] "UTC"
+```
+
+All time zones can be converted using the
+[`xts::tzone()`](https://rdrr.io/pkg/xts/man/tzone.html)-function. Below
+is an example of converting the `BTC` to `CET`,
+
+``` r
+## 1) Change time
+## zone to CET
+BTC_CET <- BTC
+xts::tzone(BTC_CET) <- "CET"
+```
+
+Below is table with the original *index* in `UTC` and the converted
+*index* in `CET`,
+
+| Original Index      |     Converted Index |
+|:--------------------|--------------------:|
+| 2026-02-14 15:00:00 | 2026-02-14 16:00:00 |
+| 2026-02-14 16:00:00 | 2026-02-14 17:00:00 |
+| 2026-02-14 17:00:00 | 2026-02-14 18:00:00 |
+
+Time zone comparsion

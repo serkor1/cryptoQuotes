@@ -1,0 +1,184 @@
+# Interactive Cryptocurrency Charts in R
+
+``` r
+## load library
+library(cryptoQuotes)
+```
+
+As an `experimental` feature
+[{cryptoQuotes}](https://github.com/serkor1/cryptoQuotes) has a variety
+of `chart`-functions built on top of
+[{plotly}](https://github.com/plotly/plotly.R) and
+[{TTR}](https://github.com/joshuaulrich/TTR) to visualize cryptocurrency
+market data and trading indicators interactively.
+
+Throughout this article we will analyze Bitcoin on the hourly chart
+called by the `get_quotes()`-function,
+
+``` r
+## Get the
+## SPOT price of 
+## Bitcoin on the hourly
+BTC <- get_quote(
+  ticker   = "BTCUSD",
+  source   = "kraken",
+  futures  = FALSE,
+  interval = "1h",
+  from     = Sys.Date() - 7
+)
+```
+
+## Price charts
+
+There are two main price charts. The Japanese candlestick chart,
+[`kline()`](https://serkor1.github.io/cryptoQuotes/reference/kline.md),
+and the basic OHLC chart,
+[`ohlc()`](https://serkor1.github.io/cryptoQuotes/reference/ohlc.md),
+charts. A chart has to be wrapped in the
+[`chart()`](https://serkor1.github.io/cryptoQuotes/reference/chart.md)-function.
+
+### Candlestick charts
+
+``` r
+## chart BTC
+## with candlesticks
+chart(
+  ticker = BTC,
+  main   = kline()
+)
+```
+
+### OHLC charts
+
+``` r
+## chart BTC
+## with candlesticks
+chart(
+  ticker = BTC,
+  main   = ohlc()
+)
+```
+
+> The
+> [`chart()`](https://serkor1.github.io/cryptoQuotes/reference/chart.md)-function
+> comes with various `options` for color deficiency and themes. Use
+> [`?chart`](https://serkor1.github.io/cryptoQuotes/reference/chart.md)
+> for further details.
+
+## Charting indicators
+
+All the charts supports various indicators such as the *relative
+strenght index*
+([`rsi()`](https://serkor1.github.io/cryptoQuotes/reference/rsi.md))-,
+*Moving Average Convergence Divergence*
+([`macd()`](https://serkor1.github.io/cryptoQuotes/reference/macd.md))-
+and various *moving average* indicators. These can be passed into their
+respective arguments as follows,
+
+``` r
+## chart BTC
+## with candlesticks
+## and various indicators
+chart(
+  ticker = BTC,
+  main   = kline(),
+  sub    = list(
+    volume(),
+    rsi(),
+    macd()
+  ),
+  indicator = list(
+    sma(n = 7),
+    sma(n = 21),
+    bollinger_bands()
+  )
+)
+```
+
+## Charting events
+
+All charts supports passing `event_data`, which are any type of
+`data.frame`, that can be plotted on the chart. Below is an example of
+plotting the crossing of the `MA`,
+
+``` r
+## Calculate moving averages
+## SMA(7) and SMA(10)
+BTC$short_SMA <- TTR::SMA(
+  x = BTC$close,
+  n = 7
+)
+
+BTC$long_SMA <- TTR::SMA(
+  x = BTC$close,
+  n = 21
+)
+
+## Determine the cross
+## from below
+BTC$cross <- as.numeric(
+  lag(BTC$short_SMA) < BTC$long_SMA &
+    BTC$short_SMA > BTC$long_SMA 
+)
+```
+
+Based on the `cross` indicator, the `BTC` pair can now be subset, and
+processed accordingly.
+
+``` r
+## create event data
+## and store it as a data.rfrae
+event_data <- subset(
+  BTC,
+  cross == 1
+)
+
+# 1.1) Extract the index
+# from the event data
+index <- zoo::index(
+  event_data
+)
+
+# 1.2) Convert the coredata
+# into a data.frame
+event_data <- as.data.frame(
+  zoo::coredata(event_data)
+)
+
+# 1.3) Add the index into the data.frame
+# case insensitive
+event_data$index <- index
+
+# 1.4) add events to the data.
+# here we use Buys and Sells.
+event_data$event <- 'Bull Cross'
+event_data$color <- 'darkgray'
+```
+
+Finally, the crosses can be plotted using the
+[`chart()`](https://serkor1.github.io/cryptoQuotes/reference/chart.md)
+as follows,
+
+``` r
+## add the events
+## the chart, along
+## with Moving averages
+## and the Bollinger Bands
+## in a candlestick chart
+chart(
+  ticker    = BTC,
+  main      = kline(),
+  indicator = list(
+    bollinger_bands(),
+    sma(n = 7),
+    sma(n = 21)
+  ),
+  event_data = event_data
+)
+```
+
+## Limitations
+
+The charting functions are still at an `experimental`-phase as per
+version `1.3.0`, and might therefore include various bugs of all sizes
+and species.
