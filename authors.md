@@ -15,12 +15,12 @@ Source:
 
 Korkmaz S (2026). *cryptoQuotes: Open Access to Cryptocurrency Market
 Data, Sentiment Indicators and Interactive Charts*. R package version
-1.3.3, <https://serkor1.github.io/cryptoQuotes/>.
+1.3.4, <https://serkor1.github.io/cryptoQuotes/>.
 
     @Manual{,
       title = {cryptoQuotes: Open Access to Cryptocurrency Market Data, Sentiment Indicators and Interactive Charts},
       author = {Serkan Korkmaz},
       year = {2026},
-      note = {R package version 1.3.3},
+      note = {R package version 1.3.4},
       url = {https://serkor1.github.io/cryptoQuotes/},
     }

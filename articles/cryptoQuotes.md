@@ -129,7 +129,7 @@ LS_BTC <- get_lsratio(
     #> 2026-02-15 07:00:00 0.6384 0.3616 1.765487
     #> 2026-02-15 08:00:00 0.6398 0.3602 1.776235
     #> 2026-02-15 09:00:00 0.6387 0.3613 1.767783
-    #> 2026-02-15 10:00:00 0.6390 0.3610 1.770083
+    #> 2026-02-15 10:00:00 0.6378 0.3622 1.760906
 
 The `ticker` specific to the perpetual futures market can be extracted
 using the `available_tickers` with `futures = TRUE` as follows,

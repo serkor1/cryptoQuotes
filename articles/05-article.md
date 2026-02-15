@@ -56,7 +56,7 @@ built_model <-  quantmod::buildModel(
 ## 3) trade the model
 quantmod::tradeModel(built_model, leverage = 2)
 #> 
-#>   Model:  lm1771152661.32619 
+#>   Model:  lm1771152798.79261 
 #> 
 #>   C.A.G.R.:  -27.78%     H.P.R.:  -15.78% 
 #> 
