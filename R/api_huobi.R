@@ -6,48 +6,50 @@
 # script start;
 # 1) URLs and Endpoint; ####
 huobiUrl <- function(
-    futures = TRUE,
-    ...) {
-
+  futures = TRUE,
+  ...
+) {
   # 1) define baseURL
   # for each API
-  if (futures)
+  if (futures) {
     'https://api.hbdm.com'
-  else
+  } else {
     'https://api.huobi.pro'
-
+  }
 }
 
 huobiEndpoint <- function(
-    type    = 'ohlc',
-    futures = TRUE,
-    top     = FALSE) {
-
+  type = 'ohlc',
+  futures = TRUE,
+  top = FALSE
+) {
   switch(
     EXPR = type,
-    ticker ={
-      if (futures)
+    ticker = {
+      if (futures) {
         "linear-swap-api/v1/swap_api_state"
-      else
+      } else {
         "v2/settings/common/symbols"
+      }
     },
     {
-      if (futures)
+      if (futures) {
         'linear-swap-ex/market/history/kline'
-      else
+      } else {
         'market/history/kline'
+      }
     }
   )
 }
 
 # 2) Available intervals; #####
 huobiIntervals <- function(
-    futures,
-    interval,
-    all = FALSE,
-    type,
-    ...) {
-
+  futures,
+  interval,
+  all = FALSE,
+  type,
+  ...
+) {
   # 0) define intervals
   # NOTE: These are common for
   # both endpoints
@@ -64,7 +66,7 @@ huobiIntervals <- function(
     '1M'
   )
 
-  interval_actual <-  c(
+  interval_actual <- c(
     "1min",
     "5min",
     "15min",
@@ -76,22 +78,22 @@ huobiIntervals <- function(
     "1mon"
   )
 
-
-  if (all) { return(interval_label) }
+  if (all) {
+    return(interval_label)
+  }
 
   interval_actual[
     interval_label %in% interval
   ]
-
 }
 
 
 # 3) define response object and format; ####
 huobiResponse <- function(
-    type = 'ohlc',
-    futures,
-    ...) {
-
+  type = 'ohlc',
+  futures,
+  ...
+) {
   # mock response
   # to avoid check error in
   # unevaluated expressions
@@ -102,31 +104,25 @@ huobiResponse <- function(
     ticker = {
       list(
         foo = function(
-    response,
-    futures = NULL){
-
+          response,
+          futures = NULL
+        ) {
           if (futures) {
-
             subset(
               response$data
             )$contract_code
-
           } else {
-
             subset(
               response$data,
               response$data$state == "online" & response$data$te == TRUE
             )$sc
-
           }
-
         }
       )
     },
     {
-
       list(
-        colum_names = if (futures)
+        colum_names = if (futures) {
           c(
             'open',
             'close',
@@ -134,8 +130,7 @@ huobiResponse <- function(
             'low',
             'volume'
           )
-
-        else {
+        } else {
           c(
             'open',
             'close',
@@ -144,43 +139,37 @@ huobiResponse <- function(
             'volume'
           )
         },
-        colum_location = if (futures) c(2:5,7) else c(2:6),
+        colum_location = if (futures) c(2:5, 7) else c(2:6),
         index_location = c(
           1
         )
-
       )
-
     }
-
   )
-
 }
 
 # 4) Dates passed to and from endpoints; ####
 huobiDates <- function(
-    futures,
-    dates,
-    is_response = FALSE,
-    ...) {
-
+  futures,
+  dates,
+  is_response = FALSE,
+  ...
+) {
   # 0) Set multiplier
   multiplier <- 1
 
   # 1) determine wether
   # its a response or request
   if (is_response) {
-
     # NOTE: The API returns
     # in GMT+8 time and
     # convert_date assumes that its
     # UTC
     dates <- convert_date(
       x = as.numeric(dates),
-      multiplier = multiplier)
-
+      multiplier = multiplier
+    )
   } else {
-
     dates <- format(
       convert_date(
         x = dates,
@@ -190,35 +179,35 @@ huobiDates <- function(
     )
 
     names(dates) <- c('from', 'to')
-
   }
 
   dates
-
 }
 
 # 5) Parameters passed to endpoints; ####
 huobiParameters <- function(
-    futures = TRUE,
-    type   = 'ohlc',
-    ticker,
-    interval,
-    from = NULL,
-    to = NULL,
-    ...) {
-
+  futures = TRUE,
+  type = 'ohlc',
+  ticker,
+  interval,
+  from = NULL,
+  to = NULL,
+  ...
+) {
   # Basic parameters common to both futures and non-futures
   params <- list(
     symbol = ticker,
     period = huobiIntervals(
       interval = interval,
-      futures  = futures,
-      type     = type
+      futures = futures,
+      type = type
     ),
     size = 2000
   )
 
-  if (futures) names(params)[1] <- "contract_code"
+  if (futures) {
+    names(params)[1] <- "contract_code"
+  }
 
   # Add date parameters
   date_params <- huobiDates(
@@ -236,11 +225,11 @@ huobiParameters <- function(
   # Return a structured list with additional common parameters
   return(
     list(
-      query    = params,
-      path     = NULL,
-      futures  = futures,
-      source   = 'huobi',
-      ticker   = ticker,
+      query = params,
+      path = NULL,
+      futures = futures,
+      source = 'huobi',
+      ticker = ticker,
       interval = interval
     )
   )

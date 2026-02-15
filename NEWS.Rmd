@@ -23,6 +23,38 @@ knitr::opts_chunk$set(
 library(cryptoQuotes)
 ```
 
+# Version 1.3.4
+
+## General
+
+This update is focused on underlying API-changes. There is no user-facing changes in interface.
+
+## Deprecations
+
+* Kraken no longer supports open-interest. The underlying new data-structure is not properly documented, and given the time-constraints it has been deprecated. If there is any demand for it, it will be reintroduced.
+
+* The charting aspect of the package have been experimental for a long time. Ever since its inception actually. There is currently a new R package under development: {talib}. {cryptoQuotes} will in later versions take dependency on this package and use the function there for the charting interface.
+
+
+# Version 1.3.3
+
+## General
+
+### New features
+
+* The `get_mktcap()`-function returns the global market capitalization of the cryptocurrency market. It also has the option to return altcoin market capitalization.
+
+```{r}
+# get market capitalization
+tail(
+  get_mktcap()
+)
+```
+
+## Bugfixes
+
+* A bug in the funding rates from Binance have been fixed. The returned values was the time indices of the json-array, not the actual rates.
+
 # Version 1.3.2
 
 ## General
@@ -33,7 +65,7 @@ library(cryptoQuotes)
 
 ## Improvements
 
-## Read and Write `xts`-objects
+## [NEW FEATURE] Read and Write `xts`-objects
 
 * `read_xts()` and `write_xts()` reads and stores `xts`-objects. These functions are essentially just wrappers of `zoo::read.zoo()` and `zoo::write.zoo()`. Thank you @gokberkcan7 for the suggestion.
 

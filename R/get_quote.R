@@ -21,7 +21,7 @@
 #' See [available_tickers()] for available tickers.
 #' @param source A [character]-vector of [length] 1. \code{binance} by default.
 #' See [available_exchanges()] for available exchanges.
-#' @param interval A [character]-vector of [length] 1. ```1d``` by default.
+#' @param interval A [character]-vector of [length] 1. `1d` by default.
 #' See [available_intervals()] for available intervals.
 #' @param futures A [logical]-vector of [length] 1. [TRUE] by default.
 #' Returns futures market if [TRUE], spot market otherwise.
@@ -50,9 +50,9 @@
 #' @details
 #'
 #' ## On time-zones and dates
-#' Values passed to ``from`` or ``to`` must be coercible by [as.Date()],
-#' or [as.POSIXct()], with a format of either ```"%Y-%m-%d"``` or
-#' ```"%Y-%m-%d %H:%M:%S"```. By default all dates are passed and
+#' Values passed to `from`` or `to` must be coercible by [as.Date()],
+#' or [as.POSIXct()], with a format of either `"%Y-%m-%d"` or
+#' `"%Y-%m-%d %H:%M:%S"`. By default all dates are passed and
 #' returned with [Sys.timezone()].
 #'
 #' ## On returns
@@ -65,12 +65,13 @@
 #' @author Serkan Korkmaz
 #' @export
 get_quote <- function(
-    ticker,
-    source    = 'binance',
-    futures   = TRUE,
-    interval  = '1d',
-    from      = NULL,
-    to        = NULL) {
+  ticker,
+  source = 'binance',
+  futures = TRUE,
+  interval = '1d',
+  from = NULL,
+  to = NULL
+) {
   # # This function returns
   # # the ticker with the desired intervals
   # # and such
@@ -85,7 +86,9 @@ get_quote <- function(
   assert(
     "
     Argument {.arg ticker} is missing with no default
-    " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+    " = !missing(ticker) &
+      is.character(ticker) |
+      is.factor(ticker) & length(ticker) == 1,
 
     "
     Argument {.arg source} has to be {.cls character} of length {1}
@@ -117,17 +120,18 @@ get_quote <- function(
   # based on capitalization
   # and whitespace
   source <- tolower(trimws(source))
-  ticker <- trimws(ticker)
+  #ticker <- trimws(ticker)
 
   # 1) check wether
   # the chosen exchange
   # is supported by the library
   assert(
-    source %in% suppressMessages(
-      available_exchanges(
-        type = 'ohlc'
-      )
-    ),
+    source %in%
+      suppressMessages(
+        available_exchanges(
+          type = 'ohlc'
+        )
+      ),
     error_message = c(
       "x" = sprintf(
         fmt = "Exchange {.val %s} is not supported.",
@@ -148,13 +152,14 @@ get_quote <- function(
   # interval is supported by
   # the exchange API
   assert(
-    interval %in% suppressMessages(
-      available_intervals(
-        source  = source,
-        futures = futures,
-        type    = 'ohlc'
-      )
-    ),
+    interval %in%
+      suppressMessages(
+        available_intervals(
+          source = source,
+          futures = futures,
+          type = 'ohlc'
+        )
+      ),
     error_message = c(
       "x" = sprintf(
         fmt = "Interval {.val %s} is not supported.",
@@ -175,22 +180,22 @@ get_quote <- function(
     )
   )
 
-  from <- coerce_date(from); to <- coerce_date(to)
+  from <- coerce_date(from)
+  to <- coerce_date(to)
 
   # 3) if either of the
   # date variables are NULL
   # pass them into the default_dates
   # function to extract 100 pips.
   if (is.null(from) | is.null(to)) {
-
     # to ensure consistency across
     # APIs if no date is set the output
     # is limited to 200 pips
     forced_dates <- default_dates(
       interval = interval,
-      from     = from,
-      to       = to,
-      limit    = switch(
+      from = from,
+      to = to,
+      limit = switch(
         EXPR = source,
         'bitmart' = {
           if (futures) NULL else 200
@@ -202,30 +207,29 @@ get_quote <- function(
     # generate from
     # to variables
     from <- forced_dates$from
-    to   <- forced_dates$to
-
+    to <- forced_dates$to
   }
 
   ohlc <- stats::window(
     x = fetch(
-      ticker   = ticker,
-      source   = source,
-      futures  = futures,
+      ticker = ticker,
+      source = source,
+      futures = futures,
       interval = interval,
-      type     = "ohlc",
-      to       = to,
-      from     = from
+      type = "ohlc",
+      to = to,
+      from = from
     ),
     start = from,
-    end   = to
+    end = to
   )
 
   attributes(ohlc)$source <- paste0(
-    to_title(source), if (futures) " (PERPETUALS)" else " (SPOT)"
+    to_title(source),
+    if (futures) " (PERPETUALS)" else " (SPOT)"
   )
 
-  ohlc <- ohlc[
-    ,
+  ohlc <- ohlc[,
     c("open", "high", "low", "close", "volume")
   ]
 

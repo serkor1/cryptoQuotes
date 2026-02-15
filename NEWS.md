@@ -1,6 +1,36 @@
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
+# Version 1.3.3
+
+## General
+
+### New features
+
+- The `get_mktcap()`-function returns the global market capitalization
+  of the cryptocurrency market. It also has the option to return altcoin
+  market capitalization.
+
+``` r
+# get market capitalization
+tail(
+  get_mktcap()
+)
+```
+
+    #>                        marketcap       volume
+    #> 2026-01-31 22:15:00 2.638013e+12 174620475855
+    #> 2026-02-01 22:15:00 2.610109e+12 131569299731
+    #> 2026-02-02 22:15:00 2.649726e+12 213047787315
+    #> 2026-02-03 22:15:00 2.570898e+12 165843309387
+    #> 2026-02-04 22:15:00 2.449463e+12 162971002109
+    #> 2026-02-05 22:15:00 2.183401e+12 264076715964
+
+## Bugfixes
+
+- A bug in the funding rates from Binance have been fixed. The returned
+  values was the time indices of the json-array, not the actual rates.
+
 # Version 1.3.2
 
 ## General
@@ -13,7 +43,7 @@
 
 ## Improvements
 
-## Read and Write `xts`-objects
+## \[NEW FEATURE\] Read and Write `xts`-objects
 
 - `read_xts()` and `write_xts()` reads and stores `xts`-objects. These
   functions are essentially just wrappers of `zoo::read.zoo()` and
@@ -62,7 +92,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-3-1.png" alt="" style="display: block; margin: auto;" />
 </details>
 <details>
 <summary>
@@ -86,7 +116,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-4-1.png" alt="" style="display: block; margin: auto;" />
 </details>
 
 ### Supported Exchanges (Issue [\#14](https://github.com/serkor1/cryptoQuotes/issues/14))
@@ -167,7 +197,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-5-1.png" alt="" style="display: block; margin: auto;" />
 </details>
 
 ### Expanded Support
@@ -190,12 +220,12 @@ tail(
 ```
 
     #>                     open_interest
-    #> 2024-11-02 10:00:00      2394.876
-    #> 2024-11-02 11:00:00      2389.595
-    #> 2024-11-02 12:00:00      2396.225
-    #> 2024-11-02 13:00:00      2403.175
-    #> 2024-11-02 14:00:00      2418.193
-    #> 2024-11-02 15:00:00      2398.648
+    #> 2026-02-06 18:00:00      1804.811
+    #> 2026-02-06 19:00:00      1720.164
+    #> 2026-02-06 20:00:00      1704.200
+    #> 2026-02-06 21:00:00      1717.264
+    #> 2026-02-06 22:00:00      1697.977
+    #> 2026-02-06 23:00:00      1693.890
 
 </details>
 
@@ -233,7 +263,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 </details>
 
 ### Documentation
@@ -348,7 +378,7 @@ chart(
 )
 ```
 
-<img src="man/figures/NEWS-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/NEWS-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" />
 
 ### Exchange Support
 
@@ -377,12 +407,12 @@ tail(
 ```
 
     #>                     funding_rate
-    #> 2024-10-31 17:00:00 1.730390e+12
-    #> 2024-11-01 01:00:00 1.730419e+12
-    #> 2024-11-01 09:00:00 1.730448e+12
-    #> 2024-11-01 17:00:00 1.730477e+12
-    #> 2024-11-02 01:00:00 1.730506e+12
-    #> 2024-11-02 09:00:00 1.730534e+12
+    #> 2026-02-05 01:00:00   0.00009173
+    #> 2026-02-05 09:00:00   0.00000298
+    #> 2026-02-05 17:00:00  -0.00004957
+    #> 2026-02-06 01:00:00  -0.00001597
+    #> 2026-02-06 09:00:00  -0.00013688
+    #> 2026-02-06 17:00:00  -0.00013478
 
 </details>
 
@@ -403,13 +433,7 @@ tail(
 )
 ```
 
-    #>                     open_interest
-    #> 2024-10-28 01:00:00      82206.35
-    #> 2024-10-29 01:00:00      89115.04
-    #> 2024-10-30 01:00:00      90242.98
-    #> 2024-10-31 01:00:00      89315.49
-    #> 2024-11-01 01:00:00      89544.93
-    #> 2024-11-02 01:00:00      84087.60
+    #>      open_interest
 
 </details>
 

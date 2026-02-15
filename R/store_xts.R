@@ -37,10 +37,10 @@
 #'
 #' @export
 write_xts <- function(
-    x,
-    file,
-    ...) {
-
+  x,
+  file,
+  ...
+) {
   assert(
     inherits(x = x, what = "xts"),
     error_message = c(
@@ -56,14 +56,13 @@ write_xts <- function(
   )
 
   zoo::write.zoo(
-    x          = x,
-    file       = file,
+    x = x,
+    file = file,
     index.name = "index",
-    col.names  = TRUE,
-    row.names  = FALSE,
+    col.names = TRUE,
+    row.names = FALSE,
     ...
   )
-
 }
 
 #' @rdname
@@ -78,8 +77,8 @@ write_xts <- function(
 #' @family utility
 #' @export
 read_xts <- function(
-    file) {
-
+  file
+) {
   assert(
     is.character(file) & length(file == 1),
     error_message = c(
@@ -89,13 +88,11 @@ read_xts <- function(
 
   xts::as.xts(
     x = zoo::read.zoo(
-      file         = file,
+      file = file,
       index.column = 1,
-      header       = TRUE
+      header = TRUE
     )
   )
-
-
 }
 
 # script end;

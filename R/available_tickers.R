@@ -32,24 +32,29 @@
 #' @author Serkan Korkmaz
 #' @export
 available_tickers <- function(
-    source  = 'binance',
-    futures = TRUE) {
-
+  source = 'binance',
+  futures = TRUE
+) {
   # 0) Assert truthfulness
   # and validity of all inputs
   assert(
-    "Argument {.arg source} has to be {.cls character} of length {1}" =
-      (is.character(source) & length(source) == 1),
-    "Argument {.arg futures} has to be {.cls logical} of length {1}" =
-      (is.logical(futures) & length(futures) == 1)
+    "Argument {.arg source} has to be {.cls character} of length {1}" = (is.character(
+      source
+    ) &
+      length(source) == 1),
+    "Argument {.arg futures} has to be {.cls logical} of length {1}" = (is.logical(
+      futures
+    ) &
+      length(futures) == 1)
   )
 
   assert(
-    source %in% suppressMessages(
-      available_exchanges(
-        type = 'ohlc'
-      )
-    ),
+    source %in%
+      suppressMessages(
+        available_exchanges(
+          type = 'ohlc'
+        )
+      ),
     error_message = c(
       "x" = sprintf(
         fmt = "Exchange {.val %s} is not supported.",
@@ -84,7 +89,8 @@ available_tickers <- function(
   # objects
   source_response <- get(
     paste0(
-      source, 'Response'
+      source,
+      'Response'
     )
   )(
     type    = 'ticker',
@@ -94,10 +100,9 @@ available_tickers <- function(
   sort(
     source_response$foo(
       response = response,
-      futures  = futures
+      futures = futures
     )
   )
-
 }
 
 # script end;

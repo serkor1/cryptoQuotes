@@ -5,21 +5,18 @@
 # function
 # script start;
 indicator <- function(
-    x,
-    columns = NULL,
-    .f = NULL,
-    ...) {
-
+  x,
+  columns = NULL,
+  .f = NULL,
+  ...
+) {
   x <- tryCatch(
     expr = {
-
       xts::as.xts(
         x
       )
-
     },
     error = function(error) {
-
       assert(
         FALSE,
         error_message = c(
@@ -27,7 +24,6 @@ indicator <- function(
           "i" = error$message
         )
       )
-
     }
   )
 
@@ -41,19 +37,17 @@ indicator <- function(
         FUN = pull,
         from = x
       ),
-      nm = if (is.null(columns))  names(x) else columns
+      nm = if (is.null(columns)) names(x) else columns
     )
   )
 
   # 1) get the indicator function
   # for each
   if (!is.null(.f)) {
-
     x <- .f(
       x,
       ...
     )
-
   }
 
   names(x) <- tolower(names(x))
@@ -62,11 +56,10 @@ indicator <- function(
     x,
     names = "index"
   )
-
 }
 
 # var_ly <- function(
-    #     variable) {
+#     variable) {
 #
 #   # 0) extract variable
 #   # from the source
@@ -98,21 +91,16 @@ indicator <- function(
 #
 # }
 
-
-
-
 build <- function(
-    plot,
-    layers,
-    ...
+  plot,
+  layers,
+  ...
 ) {
-
   # 0) generate function
   apply_layer <- function(
     plot,
     layer
   ) {
-
     # Generalize function calling based on the 'type' attribute
 
     # The Plotly function to call, e.g., "add_lines", "add_ribbons"
@@ -133,40 +121,34 @@ build <- function(
       get(
         fun_name,
         envir = asNamespace('plotly')
-      ), args = layer$params
+      ),
+      args = layer$params
     )
-
   }
 
   plotly::layout(
-    p =  Reduce(
+    p = Reduce(
       f = apply_layer,
       x = layers,
       init = plot
     ),
     ...
   )
-
-
 }
-
-
 
 
 # converting Quotes to and from data.frames; ####
 
 to_title <- function(
-    x) {
-
+  x
+) {
   gsub("\\b(.)", "\\U\\1", tolower(x), perl = TRUE)
 }
 
 
-
-
 find_mode <- function(
-    x) {
-
+  x
+) {
   # 1) create a trable
   # of values
   frequency_table <- table(
@@ -180,14 +162,12 @@ find_mode <- function(
   )
 
   value
-
 }
 
 
 infer_interval <- function(
-    x) {
-
-
+  x
+) {
   # 0) extract
   # index
   index <- zoo::index(
@@ -216,23 +196,27 @@ infer_interval <- function(
 
   x <- find_mode(x)
 
-
   switch(
     x,
     "1" = "1s",
     "60" = "1m",
     "180" = "3m",
     "300" = "5m",
+    "600" = "10m",
     "900" = "15m",
     "1800" = "30m",
+    "2700" = "45m",
     "3600" = "1h",
     "7200" = "2h",
+    "10800" = "3h",
     "14400" = "4h",
     "21600" = "6h",
     "28800" = "8h",
     "43200" = "12h",
     "86400" = "1d",
+    "172800" = "2d",
     "259200" = "3d",
+    "1296000" = "15d",
     "604800" = "1w",
     "1209600" = "2w",
     "1296000" = "2w",
@@ -242,9 +226,6 @@ infer_interval <- function(
     "2505600" = "1M",
     NULL
   )
-
-
-
 }
 
 
@@ -261,40 +242,34 @@ infer_interval <- function(
 #' @family development tools
 #' @keywords internal
 #' @returns [TRUE] if its either POSIXct, POSIXt or Date. [FALSE] otherwise.
-is.date <- function(x){
-
+is.date <- function(x) {
   # check if its
   # a date
   indicator <- inherits(
     x = x,
-    what = c("Date","POSIXct","POSIXt")
+    what = c("Date", "POSIXct", "POSIXt")
   )
 
-
-  if (!indicator & is.character(x)){
-
-
+  if (!indicator & is.character(x)) {
     indicator <- tryCatch(
       expr = {
         # Either of these have to be
         # non-NA to work
-        !is.na(as.POSIXct(x)) | !is.na(
-          as.POSIXct(
-            x,
-            format = "%Y-%m-%d %H:%M:%S")
-        )
+        !is.na(as.POSIXct(x)) |
+          !is.na(
+            as.POSIXct(
+              x,
+              format = "%Y-%m-%d %H:%M:%S"
+            )
+          )
       },
-      error = function(error){
-
+      error = function(error) {
         FALSE
-
       }
     )
-
   }
 
   indicator
-
 }
 
 #' Assert truthfulness of conditions before evaluation
@@ -312,20 +287,17 @@ is.date <- function(x){
 #' @keywords internal
 #' @returns [NULL] if all statements in ... are [TRUE]
 assert <- function(..., error_message = NULL) {
-
   # 1) count number of expressions
   # in the ellipsis - this
   # is the basis for the error-handling
   number_expressions <- ...length()
-  named_expressions  <- ...names()
-
+  named_expressions <- ...names()
 
   # 2) if there is more than
   # one expression the condtions
   # will either be stored in an list
   # or pased directly into the tryCatch/stopifnot
-  if (number_expressions != 1 & !is.null(named_expressions)){
-
+  if (number_expressions != 1 & !is.null(named_expressions)) {
     # 2.1) store all conditions
     # in a list alongside its
     # names
@@ -339,14 +311,11 @@ assert <- function(..., error_message = NULL) {
     # the error messages written on lhs of the the assert
     # function
     if (all(conditions)) {
-
       # Stop the funciton
       # here if all conditions
       # are [TRUE]
       return(NULL)
-
     } else {
-
       cli::cli_abort(
         message = c(
           "x" = named_expressions[which.min(conditions)]
@@ -355,9 +324,7 @@ assert <- function(..., error_message = NULL) {
           1 - length(sys.calls())
         )
       )
-
     }
-
   }
 
   # 3) if there length(...) == 1 then
@@ -371,8 +338,7 @@ assert <- function(..., error_message = NULL) {
         )
       )
     },
-    error = function(error){
-
+    error = function(error) {
       # each error message
       # has a message and call
       #
@@ -386,30 +352,29 @@ assert <- function(..., error_message = NULL) {
         # is forced to be the internal otherwise
         # the assert function will throw the same error-message
         # for any error.
-        message = if (is.null(error_message) || number_expressions != 1)
-          error$message else
-            error_message,
-        call    = sys.call(
+        message = if (is.null(error_message) || number_expressions != 1) {
+          error$message
+        } else {
+          error_message
+        },
+        call = sys.call(
           1 - length(sys.calls())
         )
       )
-
     }
   )
-
 }
 
 
 pull <- function(
-    from,
-    what = "Open") {
-
-
+  from,
+  what = "Open"
+) {
   # 0) identify column
   # by name
   column <- grep(
     pattern = what,
-    x       = colnames(from),
+    x = colnames(from),
     ignore.case = TRUE,
     value = TRUE
   )
@@ -424,7 +389,6 @@ pull <- function(
     )
   )
 
-
   stats::setNames(
     do.call(
       what = `$`,
@@ -435,16 +399,14 @@ pull <- function(
     ),
     nm = tolower(what)
   )
-
 }
 
 
 # Plotly parameters; ####
 vline <- function(
-    x = 0,
-    col = 'steelblue'
+  x = 0,
+  col = 'steelblue'
 ) {
-
   list(
     type = "line",
     y0 = 0,
@@ -454,17 +416,15 @@ vline <- function(
     x1 = x,
     line = list(
       color = col,
-      dash="dot"
+      dash = "dot"
     )
   )
-
 }
 
 annotations <- function(
-    x = 0,
-    text = 'text'
+  x = 0,
+  text = 'text'
 ) {
-
   list(
     x = x,
     y = 1,
@@ -483,14 +443,10 @@ annotations <- function(
       angle = '90'
     )
   )
-
-
 }
 
 
-
 check_internet_connection <- function() {
-
   # 0) check internet connection
   # before anything
   assert(
@@ -499,26 +455,19 @@ check_internet_connection <- function() {
       "x" = "You are currently not connected to the internet."
     )
   )
-
 }
 
 
-coerce_date <- function(x){
-
+coerce_date <- function(x) {
   if (!is.null(x)) {
-
     as.POSIXct(
       x = x,
       tz = Sys.timezone(),
       origin = "1970-01-01"
     )
   } else {
-
     NULL
-
   }
-
-
 }
 
 # general helpers; ####
@@ -539,29 +488,26 @@ coerce_date <- function(x){
 #'
 #' @keywords internal
 flatten <- function(x) {
-
-  if (!inherits(x, "list"))
+  if (!inherits(x, "list")) {
     list(x)
-  else
+  } else {
     unlist(c(lapply(x, flatten)), recursive = FALSE)
+  }
 }
-
 
 
 # base-chart colors; ####
 movement_color <- function(
-    deficiency = FALSE) {
-
-  palette  <- c("#d3ba68","#d5695d","#5d8ca8","#65a479")
-  location <- if (deficiency) c(3,1) else c(4,2)
+  deficiency = FALSE
+) {
+  palette <- c("#d3ba68", "#d5695d", "#5d8ca8", "#65a479")
+  location <- if (deficiency) c(3, 1) else c(4, 2)
 
   list(
     bullish = palette[location[1]],
     bearish = palette[location[2]]
   )
-
 }
-
 
 
 #' Convert dates passed to UNIX
@@ -583,10 +529,9 @@ movement_color <- function(
 #' @keywords internal
 #' @returns A vector of same length as x.
 convert_date <- function(
-    x,
-    multiplier) {
-
-
+  x,
+  multiplier
+) {
   # NOTE: If its numeric its a return
   # value from the API
   is_numeric <- is.numeric(x)
@@ -597,10 +542,9 @@ convert_date <- function(
   # If the values are numeric
   # it is returned from the
   # API
-  scale_factor <- multiplier ** if (is_numeric) -1 else 1
+  scale_factor <- multiplier**if (is_numeric) -1 else 1
 
   if (is_numeric) {
-
     # NOTE: Only this part
     # needs to be in try
 
@@ -612,7 +556,7 @@ convert_date <- function(
           origin = "1970-01-01"
         )
       },
-      error = function(error){
+      error = function(error) {
         assert(
           FALSE,
           error_message = sprintf(
@@ -627,21 +571,16 @@ convert_date <- function(
         )
       }
     )
-
   } else {
-
     # NOTE: All dates passed into
     # this function from
     # the get_*-function are already
     # validated and checked so we
     # can just go ahead and make the numeric values
     x <- as.numeric(x) * scale_factor
-
-
   }
 
   x
-
 }
 
 
@@ -669,14 +608,13 @@ convert_date <- function(
 #' @keywords internal
 #' @author Serkan Korkmaz
 #'
-default_dates <-function(
-    interval,
-    from   = NULL,
-    to     = NULL,
-    length = 200,
-    limit  = NULL) {
-
-
+default_dates <- function(
+  interval,
+  from = NULL,
+  to = NULL,
+  length = 200,
+  limit = NULL
+) {
   # 1) Determine parameters
   # passed futher;
   current_time <- Sys.time()
@@ -691,7 +629,6 @@ default_dates <-function(
   # adding values
   operation <- if (is_from_provided) "+" else "-"
 
-
   # 1.3) determine starting point
   # if from is no provided
   # use Sys.time. Truncate to nearest
@@ -699,7 +636,7 @@ default_dates <-function(
   starting_point_time <- if (is_from_provided) from else current_time
 
   starting_point <- as.POSIXct(
-    trunc(as.double(starting_point_time)/(15*60))*(15*60),
+    trunc(as.double(starting_point_time) / (15 * 60)) * (15 * 60),
     tz = Sys.timezone(),
     origin = origin_date
   )
@@ -715,7 +652,7 @@ default_dates <-function(
   #
   # Returns either s, m, h, d, w, M
   # based on supplied intervals
-  granularity <-  gsub(
+  granularity <- gsub(
     pattern = "([0-9]*)",
     x = interval,
     replacement = ""
@@ -757,7 +694,9 @@ default_dates <-function(
     length.out = interval_length
   )
 
-  if (!is.null(limit)) interval_seq <-  utils::head(interval_seq, limit)
+  if (!is.null(limit)) {
+    interval_seq <- utils::head(interval_seq, limit)
+  }
 
   # 3) construct the interval
   # by extracing the min date (from)
@@ -767,7 +706,7 @@ default_dates <-function(
   # that havent been realized yet... for obvious reasons...
   interval <- list(
     from = min(interval_seq),
-    to   = min(
+    to = min(
       max(interval_seq),
       as.POSIXct(
         current_time,
@@ -780,7 +719,6 @@ default_dates <-function(
   # 4) return statement
   # as interval
   interval
-
 }
 
 
@@ -789,8 +727,7 @@ default_dates <-function(
 # This information contains
 # links to the development blog, github source code
 # and guides
-pkg_information <- function(){
-
+pkg_information <- function() {
   # 1) wrattep in format
   # inline to ensure that the
   # message be supressed at startup
@@ -836,7 +773,6 @@ pkg_information <- function(){
       )
     )
   )
-
 }
 
 
@@ -844,23 +780,19 @@ pkg_information <- function(){
 # header that prints the line
 # with pkgname and version
 pkg_header <- function(
-    pkgname) {
-
-
+  pkgname
+) {
   cli::cli(
     cli::cli_h1(
-      text =  paste(
+      text = paste(
         pkgname,
         utils::packageVersion(
           pkgname
         )
       )
     )
-
   )
-
 }
-
 
 
 #' Create a list of layout elements on subcharts
@@ -887,80 +819,76 @@ pkg_header <- function(
 #' @keywords internal
 #' @family development tools
 chart_layout <- function(
-    x,
-    layout_element,
-    layout_attribute) {
-
+  x,
+  layout_element,
+  layout_attribute
+) {
   stats::setNames(
     lapply(
       0:x,
-      function(i){
-
+      function(i) {
         layout_attribute
-
       }
-
-
     ),
     nm = paste0(layout_element, c("", 1:x))
   )
-
 }
 
 
 chart_theme <- function(
-    dark) {
-
+  dark
+) {
   if (dark) {
     list(
       paper_bgcolor = '#2b3139',
-      plot_bgcolor  = '#2b3139',
-      font_color    = '#848e9c',
-      grid_color    = '#40454c'
+      plot_bgcolor = '#2b3139',
+      font_color = '#848e9c',
+      grid_color = '#40454c'
     )
   } else {
     list(
       paper_bgcolor = '#E3E3E3',
-      plot_bgcolor  = '#E3E3E3',
-      font_color    = '#A3A3A3',
-      grid_color    = '#D3D3D3'
+      plot_bgcolor = '#E3E3E3',
+      font_color = '#A3A3A3',
+      grid_color = '#D3D3D3'
     )
   }
 }
 
 
 bar <- function(
-    dark,
-    plot,
-    name,
-    market,
-    date_range,
-    modebar,
-    scale,
-    ...) {
-
+  dark,
+  plot,
+  name,
+  market,
+  date_range,
+  modebar,
+  scale,
+  ...
+) {
   # 0) chart theme
   theme <- chart_theme(dark = dark)
 
-  title_text <- if (!is.null(market))
+  title_text <- if (!is.null(market)) {
     sprintf(
       "<b>Ticker:</b> %s <b>Market:</b> %s<br><sub><b>Period:</b> %s</sub>",
       name,
       market,
       date_range
     )
-  else
+  } else {
     sprintf(
       "<b>Ticker:</b> %s<br><sub><b>Period:</b> %s</sub>",
       name,
       date_range
     )
+  }
 
   plot <- plotly::layout(
     p = plot,
-    margin = list(l = 5, r = 5, b = 5, t = if(modebar) 85 else 55),
+    margin = list(l = 5, r = 5, b = 5, t = if (modebar) 85 else 55),
     paper_bgcolor = theme$paper_bgcolor,
-    plot_bgcolor  = theme$plot_bgcolor,
+    plot_bgcolor = theme$plot_bgcolor,
     font = list(
       size = 14 * scale,
       color = theme$font_color
@@ -970,7 +898,7 @@ bar <- function(
       orientation = 'h',
       x = 0,
       y = 100,
-      yref="container",
+      yref = "container",
       title = list(
         text = "<b>Indicators:</b>",
         font = list(
@@ -987,9 +915,7 @@ bar <- function(
       xref = "paper",
       xanchor = "right"
     )
-
   )
-
 
   do.call(
     what = plotly::layout,
@@ -1006,19 +932,18 @@ bar <- function(
         x = length(plot),
         layout_element = "xaxis",
         layout_attribute = list(
-          gridcolor = theme$grid_color# was C3
+          gridcolor = theme$grid_color # was C3
         )
       )
     )
   )
-
 }
 
 
 as_rgb <- function(
-    hex_color,
-    alpha = NULL) {
-
+  hex_color,
+  alpha = NULL
+) {
   # Remove the '#' if present and convert to RGB values
   rgb_values <- grDevices::col2rgb(hex_color)
 
@@ -1032,7 +957,6 @@ as_rgb <- function(
 
   # Check if alpha is provided
   if (!is.null(alpha)) {
-
     assert(
       alpha >= 0 & alpha <= 1,
       error_message = c(
@@ -1057,11 +981,10 @@ as_rgb <- function(
 }
 
 normalize <- function(
-    x,
-    range,
-    value
+  x,
+  range,
+  value
 ) {
-
   # 0) get the minimum/maximum
   # of the vector
   min_x <- min(value, na.rm = TRUE)
@@ -1087,14 +1010,13 @@ normalize <- function(
     ),
     30
   )
-
 }
 
 
 check_indicator_call <- function(
-    system_calls = sys.calls(),
-    caller       = match.call(envir = parent.frame())) {
-
+  system_calls = sys.calls(),
+  caller = match.call(envir = parent.frame())
+) {
   # 0) get the entire call stack
   # to determine the calling function
   call_stack <- as.character(
@@ -1107,13 +1029,12 @@ check_indicator_call <- function(
 
   calling_function <- as.character(
     calling_function[[1]]
-    )[length(calling_function)]
+  )[length(calling_function)]
 
   # 2) check the location
   # of chart
   location_chart <- which(call_stack == "chart")
   location_indicator <- which(call_stack == calling_function)
-
 
   # 3) assert that the indicator
   # is being called from the charting
@@ -1137,7 +1058,6 @@ check_indicator_call <- function(
       )
     )
   )
-
 }
 
 # script end;

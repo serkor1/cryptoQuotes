@@ -43,14 +43,14 @@
 #' @author Serkan Korkmaz
 #' @export
 rsi <- function(
-    price       = "close",
-    n           = 14,
-    maType      = "SMA",
-    upper_limit = 80,
-    lower_limit = 20,
-    color       = '#4682b4',
-    ...){
-
+  price = "close",
+  n = 14,
+  maType = "SMA",
+  upper_limit = 80,
+  lower_limit = 20,
+  color = '#4682b4',
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -59,7 +59,6 @@ rsi <- function(
 
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -81,12 +80,10 @@ rsi <- function(
       # 1.1) chart arguments
       linewidth <- 0.90
 
-
       layers <- list(
         list(
           type = "add_lines",
           params = list(
-
             showlegend = FALSE,
             name = "Upper Bound",
             y = ~upper_limit,
@@ -96,7 +93,6 @@ rsi <- function(
               width = linewidth
             )
           )
-
         ),
         list(
           type = "add_lines",
@@ -110,12 +106,11 @@ rsi <- function(
               width = linewidth
             )
           )
-
         ),
         list(
           type = "add_ribbons",
           params = list(
-            data       = data,
+            data = data,
             showlegend = FALSE,
             ymin = ~lower_limit,
             ymax = ~upper_limit,
@@ -124,7 +119,6 @@ rsi <- function(
               color = 'transparent'
             ) # Transparent line
           )
-
         )
       )
 
@@ -144,7 +138,7 @@ rsi <- function(
       )
 
       p <- build(
-        plot   = p,
+        plot = p,
         layers = layers,
         annotations = list(
           list(
@@ -163,16 +157,10 @@ rsi <- function(
           title = NA,
           range = c(0, 100)
         )
-
       )
-
 
       # Display the plot
       p
-
-
-
-
     },
     class = c(
       "subchart",
@@ -180,6 +168,5 @@ rsi <- function(
       "htmlwidget"
     )
   )
-
 }
 # script end;

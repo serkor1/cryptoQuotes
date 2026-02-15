@@ -22,9 +22,8 @@
 #' @author Serkan Korkmaz
 #' @export
 volume <- function(
-    ...){
-
-
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
@@ -33,7 +32,6 @@ volume <- function(
 
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -49,45 +47,43 @@ volume <- function(
 
       plot <- plotly::layout(
         plotly::plot_ly(
-        data = data,
-        name = "Volume",
-        x    = ~index,
-        y    = ~volume,
-        showlegend = FALSE,
-        color = ~ as.factor(candle),
-        type  = "bar",
-        colors = c(
-          args$candle_color$bearish,
-          args$candle_color$bullish
+          data = data,
+          name = "Volume",
+          x = ~index,
+          y = ~volume,
+          showlegend = FALSE,
+          color = ~ as.factor(candle),
+          type = "bar",
+          colors = c(
+            args$candle_color$bearish,
+            args$candle_color$bullish
+          ),
+          marker = list(
+            line = list(
+              color = "black",
+              width = 0.5
+            )
+          )
         ),
-        marker = list(
-          line = list(
-            color = "black",
-            width = 0.5)
+        annotations = list(
+          text = "Volume",
+          font = list(
+            size = 16 * args$scale
+          ),
+          showarrow = FALSE,
+          x = 0,
+          y = 1,
+          xref = "paper",
+          yref = "paper"
         )
-      ),
-      annotations = list(
-        text = "Volume",
-        font = list(
-          size = 16 * args$scale
-        ),
-        showarrow = FALSE,
-        x = 0,
-        y = 1,
-        xref = "paper",
-        yref = "paper"
       )
-      )
-
     },
     class = c(
       "subchart",
       "plotly",
       "htmlwidget"
-      )
-
+    )
   )
-
 }
 
 # script end;

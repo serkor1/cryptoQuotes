@@ -13,7 +13,7 @@ zlema(
 }
 \arguments{
 \item{price}{A \link{character}-vector of \link{length} 1. "close" by default.
-The name of the vector to passed into \code{\link[TTR:ZLEMA]{TTR::ZLEMA()}}.}
+The name of the vector to passed into \code{\link[TTR:MovingAverages]{TTR::ZLEMA()}}.}
 
 \item{n}{Number of periods to average over. Must be between 1 and
 \code{nrow(x)}, inclusive.}
@@ -29,7 +29,7 @@ A \code{\link[plotly:plot_ly]{plotly::plot_ly()}}-object
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-A high-level \code{\link[plotly:add_lines]{plotly::add_lines()}}-wrapper function that
+A high-level \code{\link[plotly:add_trace]{plotly::add_lines()}}-wrapper function that
 interacts with \{TTR\}'s moving average family of functions.
 The function adds moving average indicators to the main \code{\link[=chart]{chart()}}.
 }
@@ -38,7 +38,7 @@ The function adds moving average indicators to the main \code{\link[=chart]{char
 
 cryptoQuotes::chart(
   ticker = BTC,
-  main   = kline(),
+  main = kline(),
   indicator = list(
     cryptoQuotes::ema(n = 7),
     cryptoQuotes::sma(n = 14),

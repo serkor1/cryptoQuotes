@@ -89,6 +89,7 @@ and can be different from the one provided by
 Other get-functions: 
 \code{\link{get_fundingrate}()},
 \code{\link{get_lsratio}()},
+\code{\link{get_mktcap}()},
 \code{\link{get_openinterest}()},
 \code{\link{get_quote}()}
 }

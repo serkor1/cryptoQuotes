@@ -43,8 +43,8 @@
 #' @author Serkan Korkmaz
 #' @export
 available_exchanges <- function(
-    type = "ohlc"){
-
+  type = "ohlc"
+) {
   # 0) define available
   # exchanges
   assert(
@@ -59,7 +59,8 @@ available_exchanges <- function(
         paste(
           paste0(
             "{.val ",
-            c("ohlc", "lsratio", "fundingrate", "interest") ,"}"
+            c("ohlc", "lsratio", "fundingrate", "interest"),
+            "}"
           ),
           collapse = ", "
         )
@@ -76,15 +77,16 @@ available_exchanges <- function(
       'crypto.com',
       'mexc'
     ),
-    lsratio     = c(
+    lsratio = c(
       'binance',
       'bybit',
       'kraken'
     ),
-    interest    = c(
+    interest = c(
       'binance',
-      'bybit',
-      'kraken'
+      'bybit'
+      # ,
+      # 'kraken'
     ),
     {
       c(
@@ -95,11 +97,11 @@ available_exchanges <- function(
         'bybit',
         'crypto.com',
         'huobi',
-        'mexc'
+        'mexc',
+        'cmc'
       )
     }
-  )
-  )
+  ))
 
   # 1) retun a message
   # with all the available
@@ -117,8 +119,6 @@ available_exchanges <- function(
   invisible(
     exchanges
   )
-
 }
-
 
 # script end;

@@ -30,9 +30,9 @@
 #' @export
 
 remove_bound <- function(
-    xts,
-    bounds = c('upper')) {
-
+  xts,
+  bounds = c('upper')
+) {
   # check if bounds are correctly
   # specified
   # if (!grepl(x = bounds, pattern = 'upper|lower|both')) {
@@ -59,11 +59,10 @@ remove_bound <- function(
     bounds,
     upper = xts[-nrow(xts)],
     lower = xts[-1],
-    both  = xts[-c(1,nrow(xts))]
+    both = xts[-c(1, nrow(xts))]
   )
 
   xts
-
 }
 
 # split window; #####
@@ -90,10 +89,10 @@ remove_bound <- function(
 #'
 #' @export
 split_window <- function(
-    xts,
-    by,
-    bounds = 'upper') {
-
+  xts,
+  by,
+  bounds = 'upper'
+) {
   assert(
     inherits(xts, "xts"),
     error_message = c(
@@ -111,10 +110,9 @@ split_window <- function(
   lapply(
     X = seq_along(by),
     FUN = function(i) {
-
       # 1) extract both
       # indices
-      index <- by[i:(i+1)]
+      index <- by[i:(i + 1)]
 
       # 2) subset using
       # window and cut the upper
@@ -123,16 +121,14 @@ split_window <- function(
         xts = stats::window(
           x = xts,
           start = index[1],
-          end   = index[2]
+          end = index[2]
         ),
         bounds = bounds
       )
 
       xts
-
     }
   )
-
 }
 
 # calibrate window; ####
@@ -157,10 +153,10 @@ split_window <- function(
 #'
 #' @export
 calibrate_window <- function(
-    list,
-    FUN,
-    ...) {
-
+  list,
+  FUN,
+  ...
+) {
   assert(
     inherits(list, "list"),
     error_message = c(
@@ -185,7 +181,6 @@ calibrate_window <- function(
       ...
     )
   )
-
 }
 
 # script end;

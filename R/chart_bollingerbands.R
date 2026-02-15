@@ -33,22 +33,20 @@
 #' @author Serkan Korkmaz
 #' @export
 bollinger_bands <- function(
-    n = 20,
-    sd = 2,
-    maType = "SMA",
-    color  = '#4682b4',
-    ...){
-
+  n = 20,
+  sd = 2,
+  maType = "SMA",
+  color = '#4682b4',
+  ...
+) {
   # check if the indicator is called
   # from the chart-function
   #
   # stops the function if not
   check_indicator_call()
 
-
   structure(
     .Data = {
-
       # 0) construct arguments
       # via chart function
       args <- list(
@@ -85,12 +83,11 @@ bollinger_bands <- function(
             data = data,
             x = ~index,
             y = ~dn,
-            line =list(
+            line = list(
               color = color,
               width = linewidth
             )
           )
-
         ),
 
         list(
@@ -108,7 +105,6 @@ bollinger_bands <- function(
               width = linewidth
             )
           )
-
         ),
 
         list(
@@ -122,14 +118,12 @@ bollinger_bands <- function(
             x = ~index,
             y = ~mavg,
             line = list(
-              color =color,
-              dash ='dot',
+              color = color,
+              dash = 'dot',
               width = linewidth
             )
           )
-
         )
-
       )
 
       plot <- plotly::add_ribbons(
@@ -148,20 +142,14 @@ bollinger_bands <- function(
         name = paste0("BB(", paste(c(n, sd, maType), collapse = ", "), ")")
       )
 
-
       plot <- build(
         plot = plot,
         layers = layers
       )
 
-
       invisible(
         plot
       )
-
-
-
-
     },
     class = c(
       "indicator",
@@ -169,6 +157,5 @@ bollinger_bands <- function(
       "htmlwidget"
     )
   )
-
 }
 # script end;

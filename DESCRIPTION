@@ -1,6 +1,6 @@
 Package: cryptoQuotes
 Title: Open Access to Cryptocurrency Market Data, Sentiment Indicators and Interactive Charts
-Version: 1.3.2
+Version: 1.3.4
 Authors@R: c(
     person(
       given   = "Serkan", 

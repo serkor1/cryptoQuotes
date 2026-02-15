@@ -54,11 +54,11 @@ DT[
     value == "bitmart", "BitMart",
     value == "huobi", "Huobi (HTX)",
     value == "mexc", "MEXC",
-    value == "bybit", "Bybit"
+    value == "bybit", "Bybit",
+    value == "cmc", "CoinMarketCap"
   )
   ,
 ]
-
 ```
 
 
@@ -180,8 +180,6 @@ intervals <- sapply(
         
       }
     )
-    
-    
     
     length(union(futures, spot))
     

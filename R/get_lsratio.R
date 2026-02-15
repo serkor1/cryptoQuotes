@@ -50,13 +50,13 @@
 #' @author Jonas Cuzulan Hirani
 #' @export
 get_lsratio <- function(
-    ticker,
-    interval = '1d',
-    source   = 'binance',
-    from     = NULL,
-    to       = NULL,
-    top      = FALSE) {
-
+  ticker,
+  interval = '1d',
+  source = 'binance',
+  from = NULL,
+  to = NULL,
+  top = FALSE
+) {
   # 1) check internet
   # connection and interval validity
   check_internet_connection()
@@ -64,29 +64,29 @@ get_lsratio <- function(
   # 1) check all arguments
   # what are missing, and are
   # the classes correct?
-  {{
-
-    assert(
-      "
+  {
+    {
+      assert(
+        "
       Argument {.arg ticker} is missing with no default
-      " =  !missing(ticker) & is.character(ticker) & length(ticker) == 1,
-      "
+      " = !missing(ticker) & is.character(ticker) & length(ticker) == 1,
+        "
       Argument {.arg source} has to be {.cls character} of length {1}
       " = (is.character(source) & length(source) == 1),
-      "
+        "
       Argument {.arg interval} has to be {.cls character} of length {1}
       " = (is.character(interval) & length(interval) == 1),
-      "Valid {.arg from} input is on the form
+        "Valid {.arg from} input is on the form
       {.val {paste(as.character(Sys.Date()))}} or
       {.val {as.character(format(Sys.time()))}
       }" = (is.null(from) || (is.date(from) & length(from) == 1)),
-      "Valid {.arg to} input is on the form
+        "Valid {.arg to} input is on the form
       {.val {paste(as.character(Sys.Date()))}} or
       {.val {as.character(format(Sys.time()))}}
       " = (is.null(to) || (is.date(to) & length(to) == 1))
-    )
-
-  }}
+      )
+    }
+  }
 
   # recode the exchange
   # source to avoid errors
@@ -103,11 +103,12 @@ get_lsratio <- function(
   # the chosen exchange
   # is supported by the library
   assert(
-    source %in% suppressMessages(
-      available_exchanges(
-        type = 'lsratio'
-      )
-    ),
+    source %in%
+      suppressMessages(
+        available_exchanges(
+          type = 'lsratio'
+        )
+      ),
     error_message = c(
       "x" = sprintf(
         fmt = "Exchange {.val %s} is not supported.",
@@ -128,13 +129,14 @@ get_lsratio <- function(
   # interval is supported by
   # the exchange API
   assert(
-    interval %in% suppressMessages(
-      available_intervals(
-        source  = source,
-        futures = TRUE,
-        type    = 'lsratio'
-      )
-    ),
+    interval %in%
+      suppressMessages(
+        available_intervals(
+          source = source,
+          futures = TRUE,
+          type = 'lsratio'
+        )
+      ),
     error_message = c(
       "x" = sprintf(
         fmt = "Interval {.val %s} is not supported.",
@@ -161,36 +163,33 @@ get_lsratio <- function(
   # it will return the last
   # 100 available pips
   # closest to Sys.time()
-  from <- coerce_date(from); to <- coerce_date(to)
+  from <- coerce_date(from)
+  to <- coerce_date(to)
 
   # 3) if either of the
   # date variables are NULL
   # pass them into the default_dates
   # function to extract 100 pips.
   if (is.null(from) | is.null(to)) {
-
     # to ensure consistency across
     # APIs if no date is set the output
     # is limited to 200 pips
     forced_dates <- default_dates(
       interval = interval,
-      from     = from,
-      to       = to,
-      limit    = NULL
+      from = from,
+      to = to,
+      limit = NULL
     )
 
     # generate from
     # to variables
     from <- forced_dates$from
-    to   <- forced_dates$to
-
+    to <- forced_dates$to
   }
-
 
   # NOTE: binance only supports
   # the last 30 days
   if (source %in% 'binance') {
-
     from <- max(
       from,
       as.POSIXct(
@@ -199,25 +198,22 @@ get_lsratio <- function(
         ),
         tz = Sys.timezone()
       )
-
     )
-
   }
-
 
   response <- stats::window(
     x = fetch(
       ticker = ticker,
       source = source,
-      futures= TRUE,
+      futures = TRUE,
       interval = interval,
-      type   = 'lsratio',
-      to    = to,
-      from  = from,
-      top   = top
+      type = 'lsratio',
+      to = to,
+      from = from,
+      top = top
     ),
     start = from,
-    end   = to
+    end = to
   )
 
   # Calculate the long
@@ -226,15 +222,11 @@ get_lsratio <- function(
   response$ls_ratio <- response$long / response$short
 
   if (source == 'kraken') {
-
-    response$long <- response$long/100
-    response$short <- response$short/100
-
+    response$long <- response$long / 100
+    response$short <- response$short / 100
   }
 
   # return the
   # response
   response
-
 }
-
