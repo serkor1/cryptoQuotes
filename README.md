@@ -120,7 +120,7 @@ exchanges,
 
 <div align="center">
 
-<div id="yjgfjhxtmv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fhzloryozc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <caption>Supported exchanges by spot and futures markets with available intervals.</caption>
   <thead style="border-style: none;">
@@ -189,8 +189,7 @@ exchanges,
 <td headers="Smallest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">1 minute(s)</span></td>
 <td headers="Biggest.Interval" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">1 month(s)</span></td></tr>
   </tbody>
-  &#10;  
-</table>
+  &#10;</table>
 </div>
 
 </div>
@@ -247,122 +246,122 @@ volume
 <tbody>
 <tr>
 <td style="text-align:left;">
-2025-09-18 04:30:00
+2026-02-06 20:30:00
 </td>
 <td style="text-align:center;">
-116484.42
+70260.92
 </td>
 <td style="text-align:center;">
-116959.96
+70952
 </td>
 <td style="text-align:center;">
-116484.41
+70140
 </td>
 <td style="text-align:center;">
-116950.47
+70731.46
 </td>
 <td style="text-align:left;">
-206.1746
+925.7749
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 05:00:00
+2026-02-06 21:00:00
 </td>
 <td style="text-align:center;">
-116950.46
+70731.45
 </td>
 <td style="text-align:center;">
-117800
+70844.01
 </td>
 <td style="text-align:center;">
-116896.93
+70229.86
 </td>
 <td style="text-align:center;">
-117767.66
+70581.56
 </td>
 <td style="text-align:left;">
-1355.88159
+784.76199
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 05:30:00
+2026-02-06 21:30:00
 </td>
 <td style="text-align:center;">
-117767.66
+70581.57
 </td>
 <td style="text-align:center;">
-117896
+70996.77
 </td>
 <td style="text-align:center;">
-117543.15
+70000.12
 </td>
 <td style="text-align:center;">
-117581.66
+70000.13
 </td>
 <td style="text-align:left;">
-523.81901
+1058.1853
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 06:00:00
+2026-02-06 22:00:00
 </td>
 <td style="text-align:center;">
-117581.67
+70000.14
 </td>
 <td style="text-align:center;">
-117750
+70508.75
 </td>
 <td style="text-align:center;">
-117364.45
+69837.35
 </td>
 <td style="text-align:center;">
-117372.7
+70401.75
 </td>
 <td style="text-align:left;">
-315.35698
+718.33501
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 06:30:00
+2026-02-06 22:30:00
 </td>
 <td style="text-align:center;">
-117372.7
+70401.47
 </td>
 <td style="text-align:center;">
-117616.29
+70449.3
 </td>
 <td style="text-align:center;">
-117219.5
+70112.85
 </td>
 <td style="text-align:center;">
-117605.16
+70358.43
 </td>
 <td style="text-align:left;">
-297.02472
+361.65831
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 07:00:00
+2026-02-06 23:00:00
 </td>
 <td style="text-align:center;">
-117605.16
+70358.44
 </td>
 <td style="text-align:center;">
-117605.16
+70775.29
 </td>
 <td style="text-align:center;">
-117605.15
+70279.09
 </td>
 <td style="text-align:center;">
-117605.15
+70482
 </td>
 <td style="text-align:left;">
-0.12083
+321.68899
 </td>
 </tr>
 </tbody>
@@ -394,7 +393,7 @@ indicators please refer to the documentation via
 
 <div align="center">
 
-<div id="bsshlayqqr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="zdprbxrmsb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <caption>Available sentiment indicators by exchange</caption>
   <thead style="border-style: none;">
@@ -443,8 +442,7 @@ indicators please refer to the documentation via
 <td headers="KuCoin" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td>
 <td headers="MEXC" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center"><span class="gt_from_md">:white_check_mark:</span></td></tr>
   </tbody>
-  &#10;  
-</table>
+  &#10;</table>
 </div>
 
 </div>
@@ -494,86 +492,86 @@ ls_ratio
 <tbody>
 <tr>
 <td style="text-align:left;">
-2025-09-18 04:30:00
+2026-02-06 20:30:00
 </td>
 <td style="text-align:center;">
-0.541
+0.654
 </td>
 <td style="text-align:center;">
-0.459
+0.346
 </td>
 <td style="text-align:center;">
-1.181
+1.892
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 05:00:00
+2026-02-06 21:00:00
 </td>
 <td style="text-align:center;">
-0.537
+0.66
 </td>
 <td style="text-align:center;">
-0.463
+0.34
 </td>
 <td style="text-align:center;">
-1.16
+1.943
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 05:30:00
+2026-02-06 21:30:00
 </td>
 <td style="text-align:center;">
-0.511
+0.655
 </td>
 <td style="text-align:center;">
-0.489
+0.345
 </td>
 <td style="text-align:center;">
-1.044
+1.896
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 06:00:00
+2026-02-06 22:00:00
 </td>
 <td style="text-align:center;">
-0.494
+0.652
 </td>
 <td style="text-align:center;">
-0.506
+0.348
 </td>
 <td style="text-align:center;">
-0.977
+1.876
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 06:30:00
+2026-02-06 22:30:00
 </td>
 <td style="text-align:center;">
-0.49
+0.651
 </td>
 <td style="text-align:center;">
-0.51
+0.349
 </td>
 <td style="text-align:center;">
-0.961
+1.866
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2025-09-18 07:00:00
+2026-02-06 23:00:00
 </td>
 <td style="text-align:center;">
-0.49
+0.65
 </td>
 <td style="text-align:center;">
-0.51
+0.35
 </td>
 <td style="text-align:center;">
-0.961
+1.856
 </td>
 </tr>
 </tbody>
