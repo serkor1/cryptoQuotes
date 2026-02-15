@@ -21,7 +21,7 @@ check: ## Check the R package
 	@R CMD build . && R CMD check $(tarball_location)
 
 test: ## Run tests
-	@Rscript --verbose -e "library(cryptoQuotes); testthat::test_dir('tests/testthat')"
+	@Rscript --verbose -e "Sys.setenv(NOT_CRAN = 'true'); library(cryptoQuotes); testthat::test_dir('tests/testthat')"
 
 clean: ## Remove artifacts
 	@rm -rf $(tarball_location)
