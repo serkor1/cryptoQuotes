@@ -225,7 +225,7 @@ binanceResponse <- function(
     interest = {
       list(
         colum_names = "open_interest",
-        index_location = 4,
+        index_location = 5,
         colum_location = 2
       )
     },
@@ -248,20 +248,6 @@ binanceResponse <- function(
         ),
         colum_location = 2:6,
         index_location = 1
-      )
-    },
-    {
-      list(
-        colum_names = c(
-          'open',
-          'high',
-          'low',
-          'close',
-          'volume'
-        ),
-        colum_location = 2:6,
-        index_location = 1
-
       )
     }
   )
@@ -323,9 +309,9 @@ binanceParameters <- function(
   # Add date parameters
   date_params <- binanceDates(
     futures = futures,
-    dates   = c(
+    dates = c(
       from = from,
-      to   = to
+      to = to
     ),
     is_response = FALSE
   )

@@ -27,7 +27,7 @@ krakenEndpoint <- function(
     EXPR = type,
     ticker = {
       if (futures) {
-        'derivatives/api/v3/instruments/'
+        'derivatives/api/v3/tickers'
       } else {
         '0/public/AssetPairs/'
       }
@@ -160,10 +160,7 @@ krakenResponse <- function(
       list(
         foo = function(response, futures) {
           if (futures) {
-            subset(
-              response$instruments,
-              response$instruments$tradeable == 'TRUE'
-            )$symbol
+            response[["tickers"]]$symbol
           } else {
             unname(
               obj = sapply(
@@ -188,19 +185,14 @@ krakenResponse <- function(
         colum_location = c(4, 5)
       )
     },
-
-    interest = {
-      list(
-        colum_names = c('open', 'high', 'low', "close"),
-        index_location = c(1),
-        colum_location = c(2, 3, 4, 5)
-      )
-    },
-    {
-      ohlc_structure(
-        volume_loc = if (futures) 6 else 7
-      )
-    },
+    #
+    # interest = {
+    #   list(
+    #     colum_names = c('open', 'high', 'low', "close"),
+    #     index_location = c(1),
+    #     colum_location = c(2, 3, 4, 5)
+    #   )
+    # },
     {
       ohlc_structure(
         volume_loc = if (futures) 6 else 7
@@ -322,7 +314,7 @@ krakenParameters <- function(
           to = date_params[2]
         )
         params$path <- list(
-          tick_type = 'trade',
+          tick_type = 'mark',
           symbol = params$symbol,
           resolution = params$resolution
         )
