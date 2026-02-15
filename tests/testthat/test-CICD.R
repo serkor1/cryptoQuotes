@@ -236,46 +236,47 @@ testthat::test_that(desc = "Test get_fundingrate() on Github", code = {
   )
 })
 
-# 4) open interest
-testthat::test_that(desc = "Test open_interest() for Kraken (FUTURES)", code = {
-  # 0) skip if offline
-  # and on github
-  testthat::skip_if_offline()
+# Open interest is deprecated
+# # 4) open interest
+# testthat::test_that(desc = "Test open_interest() for Kraken (FUTURES)", code = {
+#   # 0) skip if offline
+#   # and on github
+#   testthat::skip_if_offline()
 
-  # 1) get available tickers
-  testthat::expect_no_condition(
-    ticker <- cryptoQuotes::available_tickers(
-      source = "kraken",
-      futures = TRUE
-    )
-  )
+#   # 1) get available tickers
+#   testthat::expect_no_condition(
+#     ticker <- cryptoQuotes::available_tickers(
+#       source = "kraken",
+#       futures = TRUE
+#     )
+#   )
 
-  # 2) get quote from kraken
-  testthat::expect_no_condition(
-    output <- get_openinterest(
-      ticker = sample(ticker, size = 1),
-      source = "kraken",
-      interval = "2d"
-    )
-  )
+#   # 2) get quote from kraken
+#   testthat::expect_no_condition(
+#     output <- get_openinterest(
+#       ticker = sample(ticker, size = 1),
+#       source = "kraken",
+#       interval = "2d"
+#     )
+#   )
 
-  # 3) test if dates are reasonable
-  # within range
-  date_range <- as.numeric(
-    format(
-      range(
-        zoo::index(output)
-      ),
-      format = "%Y"
-    )
-  )
+#   # 3) test if dates are reasonable
+#   # within range
+#   date_range <- as.numeric(
+#     format(
+#       range(
+#         zoo::index(output)
+#       ),
+#       format = "%Y"
+#     )
+#   )
 
-  testthat::expect_true(
-    object = all(
-      min(date_range) >= 2000,
-      max(date_range) <= as.numeric(format(Sys.Date(), "%Y"))
-    )
-  )
-})
+#   testthat::expect_true(
+#     object = all(
+#       min(date_range) >= 2000,
+#       max(date_range) <= as.numeric(format(Sys.Date(), "%Y"))
+#     )
+#   )
+# })
 
 # script end;

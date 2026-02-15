@@ -84,8 +84,9 @@ available_exchanges <- function(
     ),
     interest = c(
       'binance',
-      'bybit',
-      'kraken'
+      'bybit'
+      # ,
+      # 'kraken'
     ),
     {
       c(
